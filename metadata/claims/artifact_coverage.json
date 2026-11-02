@@ -1,0 +1,2008 @@
+{
+  "scope": "Read-only independent local audit of the PRO5000 high-concurrency stability and SM120 page-mask/page-split E2E +8.61% claims; no network check and no archive modification.",
+  "git": {
+    "head": "8036a44341b67f1caebb449750a7156689c709e7",
+    "clean": true,
+    "tracked_claim_files": 375,
+    "untracked_claim_files": []
+  },
+  "classifications": {
+    "结论/复现必要材料齐全": {
+      "assessment": "Conclusion evidence and reproduction code/configuration/commands/seeds are retained. Strict self-contained replay inputs are not all archived: model assets and the ShareGPT sampling dataset must be obtained separately; the original public dataset hash is not recorded. This does not mean every historical raw profiler trace is retained.",
+      "pro5000_stability": "Includes single-node8GPU and two-node16GPU performance/stress evidence, C512/C640/C1024 logs, KV capability / rebootstrap / graceful abort and page-alignment patches/tests. Stability means scheduler/service survival under overload; e.g. random-ID C512 run documents 504 normal completions and 8 graceful aborts, not 512 successful requests.",
+      "sm120_e2e": "All 6 non-profiler paired raw benchmark logs, identical seeds 1787127001/2/3, run/summary/paired CSV, benchmark command, summary script, TP0 kernel tables and ON/OFF lightweight Perfetto are present. Split ON mean Output TPS=38.36 vs OFF=35.32, improvement=8.6070%; paired median=4.50%, with only three pairs and substantial variation.",
+      "tracked_evidence": [
+        {
+          "path": "legacy_archive/artifacts/plan/deepseek-v4-decode-benchmark-and-fixes-script.md",
+          "exists": true,
+          "bytes": 7666,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/README.md",
+          "exists": true,
+          "bytes": 1294,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/launch.sh",
+          "exists": true,
+          "bytes": 1320,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/benchmark-c512-randomids-final.log",
+          "exists": true,
+          "bytes": 86,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/stress test/20260811_three_path_c512/server-c640-page-align-passed.log.gz",
+          "exists": true,
+          "bytes": 1276424,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/stress test/20260813_kv_only_c1024/server.log",
+          "exists": true,
+          "bytes": 8769,
+          "tracked_at_head": true
+        },
+        {
+          "path": "workspace/document/20260827_pd_rebootstrap_e2e/PD_DECODE_RETRACTION_FIX_REPORT.md",
+          "exists": true,
+          "bytes": 7570,
+          "tracked_at_head": true
+        },
+        {
+          "path": "workspace/document/20260827_pd_rebootstrap_e2e/README.md",
+          "exists": true,
+          "bytes": 6348,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+          "exists": true,
+          "bytes": 2864,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+          "exists": true,
+          "bytes": 2565,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+          "exists": true,
+          "bytes": 885,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+          "exists": true,
+          "bytes": 520,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+          "exists": true,
+          "bytes": 976,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+          "exists": true,
+          "bytes": 539,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+          "exists": true,
+          "bytes": 80867,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/metadata/CODE_STATE.md",
+          "exists": true,
+          "bytes": 1633,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/source/RESTORE.md",
+          "exists": true,
+          "bytes": 1532,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/source/sglang-all-refs.bundle.part-00",
+          "exists": true,
+          "bytes": 78643200,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/source/sglang-all-refs.bundle.part-01",
+          "exists": true,
+          "bytes": 26560279,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/source/kv-only-staged.patch.gz",
+          "exists": true,
+          "bytes": 15512,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/source/main-worktree-unstaged.patch.gz",
+          "exists": true,
+          "bytes": 521,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/source/llm-benchmark-online.bundle",
+          "exists": true,
+          "bytes": 149353,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/metadata/runtime-versions.txt",
+          "exists": true,
+          "bytes": 153,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/metadata/pip-freeze.txt",
+          "exists": true,
+          "bytes": 7641,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/metadata/constraints.txt",
+          "exists": true,
+          "bytes": 5660,
+          "tracked_at_head": true
+        },
+        {
+          "path": "tools/restore_offline_files.py",
+          "exists": true,
+          "bytes": 3433,
+          "tracked_at_head": true
+        },
+        {
+          "path": "metadata/workspace/offline_file_index.json.gz",
+          "exists": true,
+          "bytes": 3225388,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_1_seed_1787127001.log",
+          "exists": true,
+          "bytes": 5849,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_2_seed_1787127002.log",
+          "exists": true,
+          "bytes": 5779,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_3_seed_1787127003.log",
+          "exists": true,
+          "bytes": 5894,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_1_seed_1787127001.log",
+          "exists": true,
+          "bytes": 5983,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+          "exists": true,
+          "bytes": 5966,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_3_seed_1787127003.log",
+          "exists": true,
+          "bytes": 6067,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+          "exists": true,
+          "bytes": 265,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+          "exists": true,
+          "bytes": 8116243,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+          "exists": true,
+          "bytes": 84803,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+          "exists": true,
+          "bytes": 16680348,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+          "exists": true,
+          "bytes": 10559,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+          "exists": true,
+          "bytes": 267,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+          "exists": true,
+          "bytes": 8181554,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+          "exists": true,
+          "bytes": 83739,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+          "exists": true,
+          "bytes": 16747231,
+          "tracked_at_head": true
+        },
+        {
+          "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+          "exists": true,
+          "bytes": 10650,
+          "tracked_at_head": true
+        }
+      ]
+    },
+    "全量原始大trace原先未归档且当前不存在": {
+      "count": 48,
+      "bytes": 1880427160,
+      "groups": [
+        {
+          "manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "count": 32,
+          "bytes": 1578138410,
+          "present_source_count": 0,
+          "tracked": true
+        },
+        {
+          "manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "count": 16,
+          "bytes": 302288750,
+          "present_source_count": 0,
+          "tracked": true
+        }
+      ],
+      "files": [
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-0-DP-0-EP-0.trace.json.gz",
+          "size_bytes": 43212585,
+          "source_sha256": "151d32b45a9b7a6072d974cdc5fd0b43de7c6faaf0028adfdba936c7b4780546",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-1-DP-1-EP-1.trace.json.gz",
+          "size_bytes": 43062042,
+          "source_sha256": "569ef3ee614aa8197c7069d7a305cb799abf26e11b7daba1767c1cb2c3d8341b",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-2-DP-2-EP-2.trace.json.gz",
+          "size_bytes": 43198587,
+          "source_sha256": "e33e6434cfe4ad801051180e521f26584839d66831fba3bf4d195904be7afe76",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-3-DP-3-EP-3.trace.json.gz",
+          "size_bytes": 43486766,
+          "source_sha256": "060ea15310280cb3afd3c7a319e1bd2990206231708ce704d0c68ae5221868e8",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-4-DP-4-EP-4.trace.json.gz",
+          "size_bytes": 43352837,
+          "source_sha256": "c68bab1e3d6fbdf677b37281dcc2a2688ae916a1c818025f855a1d406099004f",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-5-DP-5-EP-5.trace.json.gz",
+          "size_bytes": 43270787,
+          "source_sha256": "851da1aadee5d363fd2b5fca00043a4f702ce2529a1c2156be923c067a11d5b4",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-6-DP-6-EP-6.trace.json.gz",
+          "size_bytes": 43135553,
+          "source_sha256": "3dd7fb6e0062c2043a1001dc0daf29fdac7c7746bce74b9ddf9134136f6e04c5",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-7-DP-7-EP-7.trace.json.gz",
+          "size_bytes": 43481157,
+          "source_sha256": "36805c9df31e2fb0fb39ce0248493c8a07d59525f801fc3c0f0751d692120ccb",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-0-DP-0-EP-0.trace.json.gz",
+          "size_bytes": 96536290,
+          "source_sha256": "512a47c2910d7d8e3663754fa76fd1c4c5afddf0e9c1648a11308451d0d21608",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-1-DP-1-EP-1.trace.json.gz",
+          "size_bytes": 97010712,
+          "source_sha256": "6974d9e5989a7352c21d8706cd39e63658f4d6417253407cfbc0a53cffc63ed6",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-2-DP-2-EP-2.trace.json.gz",
+          "size_bytes": 96320129,
+          "source_sha256": "9ea3ffef3a0ad22ee968e90d3646a242eb028d0017872e0f3c25a7e21d5f2b2c",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-3-DP-3-EP-3.trace.json.gz",
+          "size_bytes": 97786461,
+          "source_sha256": "7f7695b17fb319ca10bfd2606102b4c5906149174efb157e9ee9e58117dcf86a",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-4-DP-4-EP-4.trace.json.gz",
+          "size_bytes": 97086366,
+          "source_sha256": "7acf8ebcf916da2e909642aa45761f52fffa45eaa960abac923bc68ceef061f0",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-5-DP-5-EP-5.trace.json.gz",
+          "size_bytes": 97083419,
+          "source_sha256": "4c9db3280a978bc028ab9dd3957e337cce444c47933f7d2996c729b71c551961",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-6-DP-6-EP-6.trace.json.gz",
+          "size_bytes": 97136093,
+          "source_sha256": "67c62c7813ce93ac350f0c181722091a313c65ef275de0ffc09ac4a7eb111642",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-7-DP-7-EP-7.trace.json.gz",
+          "size_bytes": 96987041,
+          "source_sha256": "208bf3ea941b46f9df53069499f8aa2754289e84a36def2a336e30d20ead5d31",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-0-DP-0-EP-0.trace.json.gz",
+          "size_bytes": 29119206,
+          "source_sha256": "55d16f014d549463fe685f7554f299f8b09ed61864c6bd624469701d7b0785ca",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-1-DP-1-EP-1.trace.json.gz",
+          "size_bytes": 29280489,
+          "source_sha256": "81aaf0105ba136602a6c9e4bfcf8e0857333ef0e6bdffb5ceabbaa58301f49e8",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-2-DP-2-EP-2.trace.json.gz",
+          "size_bytes": 29262094,
+          "source_sha256": "a2c8251f96dc5d8a105cfce956a8afa65750d8fce189600fb081d69d18bd99c7",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-3-DP-3-EP-3.trace.json.gz",
+          "size_bytes": 29330348,
+          "source_sha256": "48f6210902a6ee4cb43e7df8acf5b2c88d17221cde2904f831be3fb0744d639f",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-4-DP-4-EP-4.trace.json.gz",
+          "size_bytes": 29267827,
+          "source_sha256": "d6344301b34fcc3a634ee17a007c2381080092910a01b5acb865fafe8b97e952",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-5-DP-5-EP-5.trace.json.gz",
+          "size_bytes": 29300656,
+          "source_sha256": "6ecb00948c2f034bf8d6042249e9c2719c3fb70c7a441a4376740c1bb7f1acb0",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-6-DP-6-EP-6.trace.json.gz",
+          "size_bytes": 29322776,
+          "source_sha256": "c1763fa1ae6597bbe21bd70ad58c9f500e745b75298c59be0a7567651b4fc5da",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-7-DP-7-EP-7.trace.json.gz",
+          "size_bytes": 29395774,
+          "source_sha256": "425572db941f0f6958a010b85e98e6dc50e48bd5aa7ddd54d86d76ccc13b386d",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-0-DP-0-EP-0.trace.json.gz",
+          "size_bytes": 27518759,
+          "source_sha256": "69f5384acf648666db33471163fd3221d8b690ebde7b692522c6d991493d5748",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-1-DP-1-EP-1.trace.json.gz",
+          "size_bytes": 27728457,
+          "source_sha256": "db71ee6a35ab954619ea8647aecbeb595671b9a809777759e33addb3f8a47eac",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-2-DP-2-EP-2.trace.json.gz",
+          "size_bytes": 27766614,
+          "source_sha256": "c329d3fed240a01f6bc6682841af4871b7b13da85bad285949db2d2897d4eed0",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-3-DP-3-EP-3.trace.json.gz",
+          "size_bytes": 27693847,
+          "source_sha256": "9069a4d4a8cbcb59e9a7c9c4f1da7d9a4a4fb401af3304f8244c04f7218ad51b",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-4-DP-4-EP-4.trace.json.gz",
+          "size_bytes": 27775247,
+          "source_sha256": "4095d8ca702163166ea7a37853804e94673364475a513f8e202275f7618ba4d8",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-5-DP-5-EP-5.trace.json.gz",
+          "size_bytes": 27683660,
+          "source_sha256": "f485c397eae688da5b5e618e53825d1e58b4bf2b9d5149dbc2b3ed80e4cfb20e",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-6-DP-6-EP-6.trace.json.gz",
+          "size_bytes": 27790526,
+          "source_sha256": "017378e66d84b6acd2287b4ae98202c67ed73aba7df8fd708041ac7de4b49c64",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-7-DP-7-EP-7.trace.json.gz",
+          "size_bytes": 27755305,
+          "source_sha256": "298e48f1dee85f9a7dbf08a8bced6429f11f05db97e35768937063b5a416b577",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-0-DP-0-EP-0.trace.json.gz",
+          "size_bytes": 24051919,
+          "source_sha256": "4035528ff37c910f92d18933ac4c93844fe624154f965b764af11bf82a411d4b",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-1-DP-1-EP-1.trace.json.gz",
+          "size_bytes": 24380073,
+          "source_sha256": "f464bb58d5f4216d55888efe2a3e081d99ac84dfc33699f47a918c004f7b1c67",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-2-DP-2-EP-2.trace.json.gz",
+          "size_bytes": 24695493,
+          "source_sha256": "468582f17bcd78d6b29b0bd85af839214913d235ada5bbbc4cfa8109bdde3374",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-3-DP-3-EP-3.trace.json.gz",
+          "size_bytes": 24645935,
+          "source_sha256": "007d63ba5dbfc9189ed7eff0f592309e98daa73772c2340777acca86d939e5cd",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-4-DP-4-EP-4.trace.json.gz",
+          "size_bytes": 13404998,
+          "source_sha256": "c36bebe7c98fc9fffe4d1f764f4fbc4b8de75699e4e69d17729d5c13144976bf",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-5-DP-5-EP-5.trace.json.gz",
+          "size_bytes": 13367368,
+          "source_sha256": "1565bb9bb56d930f96d2bd4cae914c77c8bcafc9d469a25e7a0dc0051097009b",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-6-DP-6-EP-6.trace.json.gz",
+          "size_bytes": 13363355,
+          "source_sha256": "bf232943b0592cb2f3b495204febc1d691a45c6dbeab6c7ae2341d60f3b2c6c5",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-7-DP-7-EP-7.trace.json.gz",
+          "size_bytes": 13346474,
+          "source_sha256": "be7a4684e40701a103623f4fc269b1e63bdca6766d117fc19d8d0e551406a412",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-0-DP-0-EP-0.trace.json.gz",
+          "size_bytes": 24140898,
+          "source_sha256": "1f0625b958b0ed389e972daf0058af0041b3df7ccea70b437363f389199c2645",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-1-DP-1-EP-1.trace.json.gz",
+          "size_bytes": 24482819,
+          "source_sha256": "270b8bf1b079242249914343cdeac980179d1a604342185c8f030d348383c6ae",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-2-DP-2-EP-2.trace.json.gz",
+          "size_bytes": 24833537,
+          "source_sha256": "ce276449114ee6be44d771969101d9b9ed4caeaf94b905e26cc1965c26d08990",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-3-DP-3-EP-3.trace.json.gz",
+          "size_bytes": 24681584,
+          "source_sha256": "3dfbfc1b730cbd403b5a4fb99bd87b51013562dd03d5be7b2ef9d39c74c0988f",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-4-DP-4-EP-4.trace.json.gz",
+          "size_bytes": 13255853,
+          "source_sha256": "acfcdf1942be47066946e9877041822808759da240243b384f378392c63fd087",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-5-DP-5-EP-5.trace.json.gz",
+          "size_bytes": 13212293,
+          "source_sha256": "bef656311a542ddf1b06bc83ae16899dfd62e36390adcd21d18207d46d85b23f",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-6-DP-6-EP-6.trace.json.gz",
+          "size_bytes": 13221445,
+          "source_sha256": "dd344188e0a6a630f376f5a9945f343e159854507af124fb604ff29af322d855",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        },
+        {
+          "source": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-7-DP-7-EP-7.trace.json.gz",
+          "size_bytes": 13204706,
+          "source_sha256": "98642e190e38746c90dabb3cecf4f985e4870bb3dd84be9ebc5d2c483c2d2b9c",
+          "exists_now": false,
+          "classification": "全量原始大trace原先未归档且当前不存在",
+          "reason": "Historical archive deliberately omitted full multi-rank raw traces; retained timeline CSV, aggregates, representative Perfetto and benchmark logs. Exact original path is absent now.",
+          "recovery": "Recover original traces from old machine/storage/backup and verify recorded SHA-256; otherwise repeat recorded profiling commands to generate new traces (not byte-identical).",
+          "evidence_manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "same_hash_archived_source_matches": []
+        }
+      ],
+      "additional_unenumerated_history_note": {
+        "source": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/",
+        "size_bytes": null,
+        "reason": "legacy_archive/README.md also states CPU-only and num_steps=1/10 comparison traces were not committed. Their original parent directory no longer exists; no complete sizes/hash list is available for those additional probes.",
+        "recovery": "Look for original machine/storage backups; otherwise repeat recorded safe profiling procedure."
+      },
+      "same_hash_renamed_archive_matches": []
+    },
+    "仍存在但漏同步": []
+  },
+  "current_source_coverage": [
+    {
+      "source_root": "/sgl-workspace/deepseek-v4-flash",
+      "files": 290,
+      "files_with_existing_tracked_outputs": 290
+    },
+    {
+      "source_root": "/sgl-workspace/workspace/document",
+      "files": 119,
+      "files_with_existing_tracked_outputs": 119
+    },
+    {
+      "source_root": "/sgl-workspace/workspace/graph",
+      "files": 16,
+      "files_with_existing_tracked_outputs": 16
+    }
+  ],
+  "surviving_source_trace_count": 31,
+  "source_restore_evidence": {
+    "historical_code_state": "legacy_archive/metadata/CODE_STATE.md",
+    "restore_instructions": "legacy_archive/source/RESTORE.md",
+    "bundle_header_key_refs": {
+      "upstream_0.5.16-pr-33407": "3cf4ce7dbe461c9b86447851ca4acef2caab1f37",
+      "fix/dsv4-pd-retraction-three-path": "a6b8fad83cc398017de43f9c4e3c51ee80653331",
+      "fix/dsv4-pd-retraction-kv-only": "48886803b94596884d737132a381bd5124ea1cfd"
+    },
+    "exact_uncommitted_changes": [
+      "legacy_archive/source/kv-only-staged.patch.gz",
+      "legacy_archive/source/main-worktree-unstaged.patch.gz"
+    ],
+    "later_source_state": "source/worktrees/*/metadata.json and files/patches preserve subsequent per-worktree state; these are separate from the August19 historical CODE_STATE snapshot.",
+    "split_off_parent_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89 (verified parent of archived split-ON 3cf4ce7)"
+  },
+  "metadata_gap": {
+    "path": "metadata/artifacts/missing_artifacts.json",
+    "finding": "This list only covers 9 temporary paths. It does not enumerate the 48 missing large traces; those are documented separately in the two historical RAW_TRACE_MANIFEST.tsv files. legacy_archive/README.md says raw traces still reside under workspace/profile, which is stale on this current machine.",
+    "recommendation": "State this distinction when answering whether everything was synchronized; optionally add a consolidated missing-data index in a separately authorized follow-up."
+  },
+  "temporary_missing_files": [
+    {
+      "source": "/tmp/ShareGPT_V3_unfiltered_cleaned_split.json",
+      "reason": "Benchmark input dataset referenced in PD testing; not present at archive time.",
+      "occurrences": 11
+    },
+    {
+      "source": "/tmp/decode_health_body",
+      "reason": "Referenced decode health response; not present at archive time.",
+      "occurrences": 2
+    },
+    {
+      "source": "/tmp/decode_health.out",
+      "reason": "Referenced decode health response; not present at archive time.",
+      "occurrences": 2
+    },
+    {
+      "source": "/tmp/h3-dp-0.mp4",
+      "reason": "Referenced MiniMax H3 video output; not present at archive time.",
+      "occurrences": 2
+    },
+    {
+      "source": "/tmp/h3-dp-1.mp4",
+      "reason": "Referenced MiniMax H3 video output; not present at archive time.",
+      "occurrences": 2
+    },
+    {
+      "source": "/tmp/fetch.log",
+      "reason": "Referenced download log; not present at archive time.",
+      "occurrences": 1
+    },
+    {
+      "source": "/tmp/multiturn_run_132.jsonl",
+      "reason": "Referenced accuracy/multiturn run output; not present at archive time.",
+      "occurrences": 1
+    },
+    {
+      "source": "/tmp/multiturn_run_131.jsonl",
+      "reason": "Referenced accuracy/multiturn run output; not present at archive time.",
+      "occurrences": 1
+    },
+    {
+      "source": "/tmp/multiturn_run_130.jsonl",
+      "reason": "Referenced accuracy/multiturn run output; not present at archive time.",
+      "occurrences": 1
+    }
+  ],
+  "limits": [
+    "Local HEAD/tracking only verified; remote GitHub HEAD was intentionally not checked.",
+    "No attempt to recover absent files or rerun GPU profiling was made."
+  ],
+  "conversation_original_path_crosscheck": {
+    "audit": "metadata/conversations/audit.json referenced_paths",
+    "notes": "Paths with rg-style :line:suffix were normalized; obsolete working/overall paths were matched to the surviving legacy_archive equivalent where available. Thus a missing original location alone does not imply an archive gap.",
+    "references": [
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "occurrences": 304,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv",
+        "occurrences": 82,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "occurrences": 39,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "occurrences": 13,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "occurrences": 13,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 12,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py",
+        "occurrences": 6,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 6,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+        "occurrences": 6,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md",
+        "occurrences": 5,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile",
+        "occurrences": 4,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab",
+        "occurrences": 4,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab",
+        "occurrences": 4,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 4,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md:45:Split",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md:45:结论：PR",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv:18:_page_mark_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv:19:_page_mark_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 4,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/no_dspark_benchmark/split_on",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/no_dspark_benchmark/split_on",
+        "occurrences": 3,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/no_dspark_benchmark/split_off",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/no_dspark_benchmark/split_off",
+        "occurrences": 3,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py:125:结论：三轮均值下",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md:23:不能用",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md:26:-",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md:29:原实现每个",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md:31:所以准确结论是：算子在",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md:16:结论：三轮均值下",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "occurrences": 3,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/README.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/README.md",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/SESSION_HANDOFF.md",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/SESSION_HANDOFF.md",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/SESSION_HANDOFF.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv",
+        "occurrences": 2,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace",
+        "occurrences": 2,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab",
+        "occurrences": 2,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "occurrences": 2,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+        "occurrences": 2,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+        "occurrences": 2,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+        "occurrences": 2,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-0-DP-0-EP-0.trace.json.gz",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-0-DP-0-EP-0.trace.json.gz",
+        "occurrences": 2,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-0-DP-0-EP-0.trace.json.gz",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-0-DP-0-EP-0.trace.json.gz",
+        "occurrences": 2,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+        "occurrences": 2,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-7-DP-7-EP-7.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-7-DP-7-EP-7.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-7-DP-7-EP-7.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-6-DP-6-EP-6.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-6-DP-6-EP-6.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-6-DP-6-EP-6.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-5-DP-5-EP-5.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-5-DP-5-EP-5.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-5-DP-5-EP-5.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-4-DP-4-EP-4.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-4-DP-4-EP-4.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-4-DP-4-EP-4.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-3-DP-3-EP-3.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-3-DP-3-EP-3.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-3-DP-3-EP-3.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-2-DP-2-EP-2.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-2-DP-2-EP-2.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-2-DP-2-EP-2.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-1-DP-1-EP-1.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-1-DP-1-EP-1.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-1-DP-1-EP-1.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-0-DP-0-EP-0.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-0-DP-0-EP-0.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-0-DP-0-EP-0.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-4-DP-4-EP-4-EXTEND.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-4-DP-4-EP-4-EXTEND.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-4-DP-4-EP-4-EXTEND.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-EXTEND.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-EXTEND.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-EXTEND.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-DECODE.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-DECODE.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-DECODE.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-EXTEND.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-EXTEND.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-EXTEND.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-DECODE.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-DECODE.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-DECODE.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-EXTEND.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-EXTEND.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-EXTEND.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-DECODE.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-DECODE.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-DECODE.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-EXTEND.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-EXTEND.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-EXTEND.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-DECODE.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-DECODE.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-DECODE.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid-attempt2.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid-attempt2.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid-attempt2.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-port30012.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-port30012.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-port30012.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-attempt2.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-attempt2.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-attempt2.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-cuda-graph-port30012.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-cuda-graph-port30012.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-cuda-graph-port30012.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/gpu_only_no_stack_no_shapes-c4x4.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/gpu_only_no_stack_no_shapes-c4x4.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/gpu_only_no_stack_no_shapes-c4x4.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_only_no_stack_no_shapes-c4x4.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_only_no_stack_no_shapes-c4x4.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_only_no_stack_no_shapes-c4x4.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps10_8k-c4x4.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps10_8k-c4x4.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps10_8k-c4x4.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps1-c1x1.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps1-c1x1.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps1-c1x1.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_no_stack_no_shapes-c4x4.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_no_stack_no_shapes-c4x4.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_no_stack_no_shapes-c4x4.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_by_stage_5_8k-c4x4.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_by_stage_5_8k-c4x4.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_by_stage_5_8k-c4x4.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-processes.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-processes.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-processes.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-xid.log",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-xid.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-xid.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/README.md",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/README.md",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/warmup_benchmark.jsonl",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/warmup_benchmark.jsonl",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/profile_request.json",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/profile_request.json",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log:1:benchmark_args=Namespace",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log:6:Namespace",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log:1:benchmark_args=Namespace",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log:6:Namespace",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh:8:exec",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh:8:exec",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/SESSION_HANDOFF.md",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/SESSION_HANDOFF.md",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "normalized_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "occurrences": 1,
+        "exists_now": false
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "occurrences": 1,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 1,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "occurrences": 1,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "occurrences": 1,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "normalized_path": "/sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "occurrences": 1,
+        "exists_now": false,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md:37:Decode",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md:25:-",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md:20:-",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md:16:-",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv:6:_page_split_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv:50:_page_mark_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv:6:_page_split_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv:17:_page_split_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv:11:_page_split_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv:49:_page_mark_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+        "archive_equivalent_exists": true
+      },
+      {
+        "referenced_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv:6:_page_split_kernel",
+        "normalized_path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "occurrences": 1,
+        "exists_now": true,
+        "archive_equivalent": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+        "archive_equivalent_exists": true
+      }
+    ]
+  },
+  "strict_self_contained_reproduction": false,
+  "reproduction_inputs_not_archived": [
+    {
+      "source_path": "/tmp/ShareGPT_V3_unfiltered_cleaned_split.json",
+      "original_bytes": null,
+      "current_exists": false,
+      "reason": "The published C8 command selects dataset-name random, whose implementation loads ShareGPT prompt token IDs. It automatically downloads the public dataset if absent. No original dataset SHA was saved, so byte-identical data recovery is not proven.",
+      "evidence": "workspace/llm-benchmark-online/bench_serving.py:1140-1168 and legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+      "recovery": "Acquire https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json or original dataset backup; record SHA for reruns."
+    },
+    {
+      "source_path": "/data/models/DeepSeek-V4-Flash-0731",
+      "original_bytes": null,
+      "current_exists": "not checked in model directories; deliberately outside archive scope",
+      "reason": "Model weights/tokenizer assets are deliberately excluded from this source/test/document archive. Hardware and runtime dependencies also must be supplied separately.",
+      "recovery": "Obtain the same published model/tokenizer release and use recorded runtime versions/configuration."
+    }
+  ],
+  "additional_storage_lookup": {
+    "scope": "Additional read-only basename lookup under /data (excluding model/cache/git directories)",
+    "directories_checked": 719301,
+    "matches": []
+  }
+}

@@ -1,0 +1,1033 @@
+{
+  "audit_at_utc": "2026-11-02T12:01:30.906340+00:00",
+  "audit_scope": "KV Page splitting coverage and performance attribution",
+  "pushed_commit_audited": "8036a44341b67f1caebb449750a7156689c709e7",
+  "conclusion": "The available original tested touched-page-mask code, tests, design material, ON/OFF raw benchmark logs, summaries and representative profile analysis are tracked at 8036a44. Full all-rank raw profile traces are not present; their old original source paths no longer exist. Later community blocked marking and uint64 code was preserved inside raw conversation tool outputs, and is now explicitly extracted with provenance pending parent commit. The +8.61% measurement belongs to the earlier mask implementation, not a combined mask+blocked-mark+uint64 optimization.",
+  "tracked_evidence_groups": {
+    "no_profiler_e2e_measurement": [
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_1_seed_1787127001.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_3_seed_1787127003.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_1_seed_1787127001.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_2_seed_1787127002.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_3_seed_1787127003.log"
+    ],
+    "e2e_profile_and_followup": [
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128001.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128002.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003_repeat.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_1_seed_1787128001.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_2_seed_1787128002.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_3_seed_1787128003.log",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py"
+    ],
+    "strict_decode_profile": [
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json",
+      "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json"
+    ],
+    "tested_code_and_tests": [
+      "source/worktrees/sglang-pr32320-inspect/committed.patch",
+      "source/worktrees/sglang-pr32320-inspect/committed_history.mbox",
+      "source/worktrees/sglang-pr32320-inspect/files/python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+      "source/worktrees/sglang-pr32320-inspect/files/test/registered/jit/test_flash_mla_sm120_topk_buckets.py",
+      "source/worktrees/sglang-pr32320-inspect/files/test/registered/kernels/test_flash_mla_backends.py",
+      "source/worktrees/sglang-pr32320-inspect/head_to_worktree.patch",
+      "source/worktrees/sglang-pr32320-inspect/metadata.json",
+      "source/worktrees/sglang-pr32320-inspect/staged.patch"
+    ],
+    "design_diagrams": [
+      "workspace/graph/deepseek-v4-swa-page-split-optimization-01-problem.excalidraw",
+      "workspace/graph/deepseek-v4-swa-page-split-optimization-01-problem.png",
+      "workspace/graph/deepseek-v4-swa-page-split-optimization-02-solution.excalidraw",
+      "workspace/graph/deepseek-v4-swa-page-split-optimization-02-solution.png",
+      "workspace/graph/deepseek-v4-swa-page-split-optimization-03-kernel.excalidraw",
+      "workspace/graph/deepseek-v4-swa-page-split-optimization-03-kernel.png"
+    ],
+    "conversations": [
+      "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+      "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "conversations/threads/019fd6e4-10ac-7611-b6e0-32143580ab3d.md",
+      "conversations/threads/01a02332-ca6d-7be1-a8ce-5b652cb93858.md"
+    ],
+    "restoration_environment_and_auxiliary": [
+      "legacy_archive/source/sglang-all-refs.bundle.part-00",
+      "legacy_archive/source/sglang-all-refs.bundle.part-01",
+      "legacy_archive/source/RESTORE.md",
+      "legacy_archive/source/main-worktree-unstaged.patch.gz",
+      "legacy_archive/source/llm-benchmark-online.bundle",
+      "legacy_archive/metadata/CODE_STATE.md",
+      "legacy_archive/metadata/runtime-versions.txt",
+      "legacy_archive/artifacts/profile/PROFILE_INDEX.md",
+      "legacy_archive/artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh",
+      "artifacts/tmp/pr32320.patch",
+      "artifacts/tmp/pr32320-only.patch",
+      "artifacts/tmp/flash_mla_sm120-pr32320.py",
+      "legacy_archive/artifacts/plan/03-page-and-dspark-ep-fixes.excalidraw",
+      "legacy_archive/artifacts/plan/03-page-and-dspark-ep-fixes.png"
+    ]
+  },
+  "tracked_evidence_count": 90,
+  "required_paths_untracked_at_audited_commit": [],
+  "measurement_8_61": {
+    "scope": "No-profiler end-to-end complete request lifetime with DSpark",
+    "model": "DeepSeek-V4-Flash-0731",
+    "input_tokens": 8192,
+    "output_tokens": 64,
+    "concurrency": 8,
+    "requests_per_run": 40,
+    "paired_seed_count": 3,
+    "seeds": [
+      1787127001,
+      1787127002,
+      1787127003
+    ],
+    "server_parallelism": {
+      "TP": 8,
+      "attention_DP": 8,
+      "EP": 8
+    },
+    "dspark_draft_tokens": 6,
+    "decode_cuda_graph": true,
+    "benchmark_warmup_requests": 0,
+    "on_commit": "3cf4ce7dbe461c9b86447851ca4acef2caab1f37",
+    "off_parent_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+    "parity_fix": "Both variants restore the same DSpark+EP num_token_non_padded metadata fix.",
+    "on_output_tps": [
+      38.25,
+      39.87,
+      36.96
+    ],
+    "off_output_tps": [
+      37.77,
+      32.82,
+      35.37
+    ],
+    "on_mean_output_tps": 38.36,
+    "off_mean_output_tps": 35.32,
+    "ratio_of_means_gain_pct": 8.607021517553793,
+    "paired_gains_pct": [
+      1.2708498808578161,
+      21.48080438756854,
+      4.495335029686176
+    ],
+    "paired_median_gain_pct": 4.495335029686176,
+    "caveat": "Three pairs only; the second OFF sample is slower and raises the mean gain. +8.61% is a valid measured ratio of means, not a guaranteed stable gain or the mean of paired percentages.",
+    "raw_log_verification": [
+      {
+        "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_1_seed_1787127001.log",
+        "tracked": true,
+        "success_requests": 40,
+        "generated_tokens": 2560,
+        "duration_s": 67.78,
+        "output_tps": 37.77,
+        "profile_false_in_log": true,
+        "warmup_zero_in_log": true
+      },
+      {
+        "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+        "tracked": true,
+        "success_requests": 40,
+        "generated_tokens": 2560,
+        "duration_s": 78.0,
+        "output_tps": 32.82,
+        "profile_false_in_log": true,
+        "warmup_zero_in_log": true
+      },
+      {
+        "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_3_seed_1787127003.log",
+        "tracked": true,
+        "success_requests": 40,
+        "generated_tokens": 2560,
+        "duration_s": 72.38,
+        "output_tps": 35.37,
+        "profile_false_in_log": true,
+        "warmup_zero_in_log": true
+      },
+      {
+        "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_1_seed_1787127001.log",
+        "tracked": true,
+        "success_requests": 40,
+        "generated_tokens": 2560,
+        "duration_s": 66.92,
+        "output_tps": 38.25,
+        "profile_false_in_log": true,
+        "warmup_zero_in_log": true
+      },
+      {
+        "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_2_seed_1787127002.log",
+        "tracked": true,
+        "success_requests": 40,
+        "generated_tokens": 2560,
+        "duration_s": 64.21,
+        "output_tps": 39.87,
+        "profile_false_in_log": true,
+        "warmup_zero_in_log": true
+      },
+      {
+        "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_3_seed_1787127003.log",
+        "tracked": true,
+        "success_requests": 40,
+        "generated_tokens": 2560,
+        "duration_s": 69.26,
+        "output_tps": 36.96,
+        "profile_false_in_log": true,
+        "warmup_zero_in_log": true
+      }
+    ],
+    "readme": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+    "commands": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+    "summary": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+    "paired_summary": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv"
+  },
+  "separate_profile_results": {
+    "single_profile_e2e": {
+      "C": 4,
+      "warmup_requests": 40,
+      "formal_requests": 4,
+      "input_output": [
+        8192,
+        64
+      ],
+      "output_tps_on": 50.34,
+      "output_tps_off": 46.98,
+      "output_tps_gain_pct": 7.151979565772693,
+      "split_ms_on": 37.18,
+      "mark_ms_on": 35.04,
+      "mark_plus_split_ms_on_rounded": 72.23,
+      "split_ms_off": 344.85,
+      "mark_plus_split_reduction_pct_rounded": 79.06,
+      "warning": "Single profiled run; throughput +7.15% is a different experiment from no-profiler +8.61%. GPU duration sums are not wall-clock latency."
+    },
+    "strict_decode": {
+      "C": 8,
+      "warmup_requests": 40,
+      "formal_requests": 80,
+      "input_output": [
+        1,
+        128
+      ],
+      "scheduler_steps": 12,
+      "split_ms_on": 7.576,
+      "mark_ms_on": 0.584,
+      "split_ms_off": 57.219,
+      "delivery": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/"
+    },
+    "no_dspark_followup": {
+      "output_tps_mean_on": 75.6,
+      "output_tps_mean_off": 65.16,
+      "paired_median_gain_pct": 14.35,
+      "path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/",
+      "warning": "Separate experiment with DSpark disabled."
+    }
+  },
+  "source_attribution": {
+    "original_tested_on": "Single index per program page-mark and uint8 copies; touched-page mask guards copy.",
+    "later_community": "Blocked 1024-index marking and uint64 lanes were present in community main fetched on 2026-09-08, referenced as PR #29927 and related open PR #35103.",
+    "later_source_not_found_in_bundle_or_standalone_snapshots": true,
+    "actual_later_source_preserved_in_raw_tool_output": {
+      "raw_path": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+      "call_record_line": 2342,
+      "output_record_line": 2344,
+      "source_numbered_lines": [
+        240,
+        620
+      ],
+      "complete_functions_lines": [
+        365,
+        551
+      ],
+      "fetched_at": "2026-09-08T09:08:33.070Z",
+      "commit_pinned": false
+    },
+    "community_merging_commit_from_raw_GitHub_history": "19c30dff56204d3c259410ae8819c8309e3985f5",
+    "warning": "The raw main URL was not pinned to that commit, so the excerpt is not claimed byte-identical to the PR merge commit."
+  },
+  "conversation_references": [
+    {
+      "path": "conversations/threads/019fd6e4-10ac-7611-b6e0-32143580ab3d.md",
+      "line": 34684,
+      "meaning": "Exact three-pair mean +8.61%, paired median +4.50% and slow second OFF sample."
+    },
+    {
+      "path": "conversations/threads/019fd6e4-10ac-7611-b6e0-32143580ab3d.md",
+      "line": 34783,
+      "meaning": "Conservative interpretation; avoid claiming stable +8.61%."
+    },
+    {
+      "path": "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "line": 17876,
+      "meaning": "Later community batch mark and uint64 already implemented."
+    },
+    {
+      "path": "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "line": 17902,
+      "meaning": "Community PR #29927 attribution."
+    },
+    {
+      "path": "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "line": 18654,
+      "meaning": "No isolated evidence for uint64 contribution."
+    },
+    {
+      "path": "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "line": 19359,
+      "meaning": "Later summary incorrectly groups all three optimizations with +8.61%."
+    },
+    {
+      "path": "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "line": 19414,
+      "meaning": "Later assistant wrongly claimed +8.61% lacked experimental support; archived no-profiler logs and CSV contradict this."
+    }
+  ],
+  "full_raw_rank_trace_gaps": [
+    {
+      "manifest": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+      "tracked": true,
+      "file_count": 16,
+      "bytes": 302288750,
+      "source_paths_existing": 0,
+      "tracked_files_with_same_basename": 0,
+      "files": [
+        {
+          "sha256": "4035528ff37c910f92d18933ac4c93844fe624154f965b764af11bf82a411d4b",
+          "size_bytes": "24051919",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-0-DP-0-EP-0.trace.json.gz"
+        },
+        {
+          "sha256": "f464bb58d5f4216d55888efe2a3e081d99ac84dfc33699f47a918c004f7b1c67",
+          "size_bytes": "24380073",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-1-DP-1-EP-1.trace.json.gz"
+        },
+        {
+          "sha256": "468582f17bcd78d6b29b0bd85af839214913d235ada5bbbc4cfa8109bdde3374",
+          "size_bytes": "24695493",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-2-DP-2-EP-2.trace.json.gz"
+        },
+        {
+          "sha256": "007d63ba5dbfc9189ed7eff0f592309e98daa73772c2340777acca86d939e5cd",
+          "size_bytes": "24645935",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-3-DP-3-EP-3.trace.json.gz"
+        },
+        {
+          "sha256": "c36bebe7c98fc9fffe4d1f764f4fbc4b8de75699e4e69d17729d5c13144976bf",
+          "size_bytes": "13404998",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-4-DP-4-EP-4.trace.json.gz"
+        },
+        {
+          "sha256": "1565bb9bb56d930f96d2bd4cae914c77c8bcafc9d469a25e7a0dc0051097009b",
+          "size_bytes": "13367368",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-5-DP-5-EP-5.trace.json.gz"
+        },
+        {
+          "sha256": "bf232943b0592cb2f3b495204febc1d691a45c6dbeab6c7ae2341d60f3b2c6c5",
+          "size_bytes": "13363355",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-6-DP-6-EP-6.trace.json.gz"
+        },
+        {
+          "sha256": "be7a4684e40701a103623f4fc269b1e63bdca6766d117fc19d8d0e551406a412",
+          "size_bytes": "13346474",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-7-DP-7-EP-7.trace.json.gz"
+        },
+        {
+          "sha256": "1f0625b958b0ed389e972daf0058af0041b3df7ccea70b437363f389199c2645",
+          "size_bytes": "24140898",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-0-DP-0-EP-0.trace.json.gz"
+        },
+        {
+          "sha256": "270b8bf1b079242249914343cdeac980179d1a604342185c8f030d348383c6ae",
+          "size_bytes": "24482819",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-1-DP-1-EP-1.trace.json.gz"
+        },
+        {
+          "sha256": "ce276449114ee6be44d771969101d9b9ed4caeaf94b905e26cc1965c26d08990",
+          "size_bytes": "24833537",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-2-DP-2-EP-2.trace.json.gz"
+        },
+        {
+          "sha256": "3dfbfc1b730cbd403b5a4fb99bd87b51013562dd03d5be7b2ef9d39c74c0988f",
+          "size_bytes": "24681584",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-3-DP-3-EP-3.trace.json.gz"
+        },
+        {
+          "sha256": "acfcdf1942be47066946e9877041822808759da240243b384f378392c63fd087",
+          "size_bytes": "13255853",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-4-DP-4-EP-4.trace.json.gz"
+        },
+        {
+          "sha256": "bef656311a542ddf1b06bc83ae16899dfd62e36390adcd21d18207d46d85b23f",
+          "size_bytes": "13212293",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-5-DP-5-EP-5.trace.json.gz"
+        },
+        {
+          "sha256": "dd344188e0a6a630f376f5a9945f343e159854507af124fb604ff29af322d855",
+          "size_bytes": "13221445",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-6-DP-6-EP-6.trace.json.gz"
+        },
+        {
+          "sha256": "98642e190e38746c90dabb3cecf4f985e4870bb3dd84be9ebc5d2c483c2d2b9c",
+          "size_bytes": "13204706",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-7-DP-7-EP-7.trace.json.gz"
+        }
+      ]
+    },
+    {
+      "manifest": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
+      "tracked": true,
+      "file_count": 32,
+      "bytes": 1578138410,
+      "source_paths_existing": 0,
+      "tracked_files_with_same_basename": 0,
+      "files": [
+        {
+          "sha256": "151d32b45a9b7a6072d974cdc5fd0b43de7c6faaf0028adfdba936c7b4780546",
+          "size_bytes": "43212585",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-0-DP-0-EP-0.trace.json.gz"
+        },
+        {
+          "sha256": "569ef3ee614aa8197c7069d7a305cb799abf26e11b7daba1767c1cb2c3d8341b",
+          "size_bytes": "43062042",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-1-DP-1-EP-1.trace.json.gz"
+        },
+        {
+          "sha256": "e33e6434cfe4ad801051180e521f26584839d66831fba3bf4d195904be7afe76",
+          "size_bytes": "43198587",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-2-DP-2-EP-2.trace.json.gz"
+        },
+        {
+          "sha256": "060ea15310280cb3afd3c7a319e1bd2990206231708ce704d0c68ae5221868e8",
+          "size_bytes": "43486766",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-3-DP-3-EP-3.trace.json.gz"
+        },
+        {
+          "sha256": "c68bab1e3d6fbdf677b37281dcc2a2688ae916a1c818025f855a1d406099004f",
+          "size_bytes": "43352837",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-4-DP-4-EP-4.trace.json.gz"
+        },
+        {
+          "sha256": "851da1aadee5d363fd2b5fca00043a4f702ce2529a1c2156be923c067a11d5b4",
+          "size_bytes": "43270787",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-5-DP-5-EP-5.trace.json.gz"
+        },
+        {
+          "sha256": "3dd7fb6e0062c2043a1001dc0daf29fdac7c7746bce74b9ddf9134136f6e04c5",
+          "size_bytes": "43135553",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-6-DP-6-EP-6.trace.json.gz"
+        },
+        {
+          "sha256": "36805c9df31e2fb0fb39ce0248493c8a07d59525f801fc3c0f0751d692120ccb",
+          "size_bytes": "43481157",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-7-DP-7-EP-7.trace.json.gz"
+        },
+        {
+          "sha256": "512a47c2910d7d8e3663754fa76fd1c4c5afddf0e9c1648a11308451d0d21608",
+          "size_bytes": "96536290",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-0-DP-0-EP-0.trace.json.gz"
+        },
+        {
+          "sha256": "6974d9e5989a7352c21d8706cd39e63658f4d6417253407cfbc0a53cffc63ed6",
+          "size_bytes": "97010712",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-1-DP-1-EP-1.trace.json.gz"
+        },
+        {
+          "sha256": "9ea3ffef3a0ad22ee968e90d3646a242eb028d0017872e0f3c25a7e21d5f2b2c",
+          "size_bytes": "96320129",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-2-DP-2-EP-2.trace.json.gz"
+        },
+        {
+          "sha256": "7f7695b17fb319ca10bfd2606102b4c5906149174efb157e9ee9e58117dcf86a",
+          "size_bytes": "97786461",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-3-DP-3-EP-3.trace.json.gz"
+        },
+        {
+          "sha256": "7acf8ebcf916da2e909642aa45761f52fffa45eaa960abac923bc68ceef061f0",
+          "size_bytes": "97086366",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-4-DP-4-EP-4.trace.json.gz"
+        },
+        {
+          "sha256": "4c9db3280a978bc028ab9dd3957e337cce444c47933f7d2996c729b71c551961",
+          "size_bytes": "97083419",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-5-DP-5-EP-5.trace.json.gz"
+        },
+        {
+          "sha256": "67c62c7813ce93ac350f0c181722091a313c65ef275de0ffc09ac4a7eb111642",
+          "size_bytes": "97136093",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-6-DP-6-EP-6.trace.json.gz"
+        },
+        {
+          "sha256": "208bf3ea941b46f9df53069499f8aa2754289e84a36def2a336e30d20ead5d31",
+          "size_bytes": "96987041",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-7-DP-7-EP-7.trace.json.gz"
+        },
+        {
+          "sha256": "55d16f014d549463fe685f7554f299f8b09ed61864c6bd624469701d7b0785ca",
+          "size_bytes": "29119206",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-0-DP-0-EP-0.trace.json.gz"
+        },
+        {
+          "sha256": "81aaf0105ba136602a6c9e4bfcf8e0857333ef0e6bdffb5ceabbaa58301f49e8",
+          "size_bytes": "29280489",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-1-DP-1-EP-1.trace.json.gz"
+        },
+        {
+          "sha256": "a2c8251f96dc5d8a105cfce956a8afa65750d8fce189600fb081d69d18bd99c7",
+          "size_bytes": "29262094",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-2-DP-2-EP-2.trace.json.gz"
+        },
+        {
+          "sha256": "48f6210902a6ee4cb43e7df8acf5b2c88d17221cde2904f831be3fb0744d639f",
+          "size_bytes": "29330348",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-3-DP-3-EP-3.trace.json.gz"
+        },
+        {
+          "sha256": "d6344301b34fcc3a634ee17a007c2381080092910a01b5acb865fafe8b97e952",
+          "size_bytes": "29267827",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-4-DP-4-EP-4.trace.json.gz"
+        },
+        {
+          "sha256": "6ecb00948c2f034bf8d6042249e9c2719c3fb70c7a441a4376740c1bb7f1acb0",
+          "size_bytes": "29300656",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-5-DP-5-EP-5.trace.json.gz"
+        },
+        {
+          "sha256": "c1763fa1ae6597bbe21bd70ad58c9f500e745b75298c59be0a7567651b4fc5da",
+          "size_bytes": "29322776",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-6-DP-6-EP-6.trace.json.gz"
+        },
+        {
+          "sha256": "425572db941f0f6958a010b85e98e6dc50e48bd5aa7ddd54d86d76ccc13b386d",
+          "size_bytes": "29395774",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-7-DP-7-EP-7.trace.json.gz"
+        },
+        {
+          "sha256": "69f5384acf648666db33471163fd3221d8b690ebde7b692522c6d991493d5748",
+          "size_bytes": "27518759",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-0-DP-0-EP-0.trace.json.gz"
+        },
+        {
+          "sha256": "db71ee6a35ab954619ea8647aecbeb595671b9a809777759e33addb3f8a47eac",
+          "size_bytes": "27728457",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-1-DP-1-EP-1.trace.json.gz"
+        },
+        {
+          "sha256": "c329d3fed240a01f6bc6682841af4871b7b13da85bad285949db2d2897d4eed0",
+          "size_bytes": "27766614",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-2-DP-2-EP-2.trace.json.gz"
+        },
+        {
+          "sha256": "9069a4d4a8cbcb59e9a7c9c4f1da7d9a4a4fb401af3304f8244c04f7218ad51b",
+          "size_bytes": "27693847",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-3-DP-3-EP-3.trace.json.gz"
+        },
+        {
+          "sha256": "4095d8ca702163166ea7a37853804e94673364475a513f8e202275f7618ba4d8",
+          "size_bytes": "27775247",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-4-DP-4-EP-4.trace.json.gz"
+        },
+        {
+          "sha256": "f485c397eae688da5b5e618e53825d1e58b4bf2b9d5149dbc2b3ed80e4cfb20e",
+          "size_bytes": "27683660",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-5-DP-5-EP-5.trace.json.gz"
+        },
+        {
+          "sha256": "017378e66d84b6acd2287b4ae98202c67ed73aba7df8fd708041ac7de4b49c64",
+          "size_bytes": "27790526",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-6-DP-6-EP-6.trace.json.gz"
+        },
+        {
+          "sha256": "298e48f1dee85f9a7dbf08a8bced6429f11f05db97e35768937063b5a416b577",
+          "size_bytes": "27755305",
+          "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-7-DP-7-EP-7.trace.json.gz"
+        }
+      ]
+    }
+  ],
+  "trace_gap_interpretation": "Both manifests total 48 traces/1,880,427,160 bytes. Of these, 32 are PageSplit ON/OFF traces (16 strict Decode plus 16 C4 E2E), and 16 are baseline Prefill/Decode traces. All source paths are currently missing; this is inherited original archive unavailability, not a newly omitted available file. TP0 lite traces, timelines, aggregates and raw benchmark logs remain archived.",
+  "comparison_with_original_available_profile_files": [
+    {
+      "original_prefix": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab",
+      "source_file_count": 42,
+      "all_available_files_covered": true,
+      "files": [
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/README.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128001.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128001.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128002.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128002.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003_repeat.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003_repeat.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_1_seed_1787128001.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_1_seed_1787128001.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_2_seed_1787128002.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_2_seed_1787128002.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_3_seed_1787128003.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_3_seed_1787128003.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_1_seed_1787127001.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_1_seed_1787127001.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_3_seed_1787127003.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_3_seed_1787127003.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_1_seed_1787127001.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_1_seed_1787127001.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_2_seed_1787127002.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_2_seed_1787127002.log",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_3_seed_1787127003.log",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_3_seed_1787127003.log",
+          "tracked": true
+        }
+      ]
+    },
+    {
+      "original_prefix": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab",
+      "source_file_count": 16,
+      "all_available_files_covered": true,
+      "files": [
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/README.md",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+          "tracked": true
+        },
+        {
+          "source": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+          "target": "legacy_archive/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+          "tracked": true
+        }
+      ]
+    }
+  ],
+  "new_readability_exports_pending_parent_commit": {
+    "files": [
+      "source/claims/page_split/community_main_20260908_excerpt.py.txt",
+      "source/claims/page_split/experiment_split_off.py",
+      "source/claims/page_split/experiment_split_on.py",
+      "source/claims/page_split/experiment_split_on_vs_off.patch",
+      "source/claims/page_split/provenance.json"
+    ],
+    "not_in_8036a44": true,
+    "provenance": {
+      "generated_at_utc": "2026-11-02T11:57:38.793653+00:00",
+      "scope": "Existing source and conversation evidence only; no new performance run.",
+      "experiment": {
+        "on_commit": "3cf4ce7dbe461c9b86447851ca4acef2caab1f37",
+        "off_parent_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+        "commit_title": "[SM120] Only split touched SWA pages in FlashMLA page-split kernel (#32320)",
+        "source_path": "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+        "bundle_parts": [
+          "legacy_archive/source/sglang-all-refs.bundle.part-00",
+          "legacy_archive/source/sglang-all-refs.bundle.part-01"
+        ],
+        "restore_instructions": "legacy_archive/source/RESTORE.md",
+        "same_dspark_ep_metadata_fix": "legacy_archive/source/main-worktree-unstaged.patch.gz",
+        "interpretation": "The measured +8.61% no-profiler result compares this touched-page-mask ON implementation against its OFF parent, with the same DSpark+EP metadata fix. This ON implementation marks one index per program and copies uint8 bytes. It does not contain the later 1024-index batch marking or uint64 copy.",
+        "measurement_readme": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+        "measurement_commands": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md"
+      },
+      "community_excerpt": {
+        "raw_conversation": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+        "raw_call_record_line": 2342,
+        "raw_output_record_line": 2344,
+        "raw_output_record_timestamp": "2026-09-08T09:08:33.070Z",
+        "raw_output_record_sha256": "4b291d5c1d67191fb566fd39f726291d4b727aa731eefb944524520422f47c88",
+        "source_url": "https://raw.githubusercontent.com/sgl-project/sglang/main/python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+        "source_ref": "main",
+        "source_commit": null,
+        "commit_pinned": false,
+        "original_command": "curl -L --fail --silent 'https://raw.githubusercontent.com/sgl-project/sglang/main/python/sglang/kernels/ops/attention/flash_mla_sm120.py' | nl -ba | sed -n '240,620p'",
+        "format": "Original numbered lines 240-620 inclusive; an excerpt, not an importable complete Python module.",
+        "uint64_copy_original_lines": [
+          398,
+          422
+        ],
+        "blocked_mark_original_lines": [
+          425,
+          445
+        ],
+        "mark_launch_original_lines": [
+          519,
+          525
+        ],
+        "performance_attribution": "Later community reference only. No local A/B run of this newer code was found; +8.61% must not be attributed jointly to mask + blocked mark + uint64."
+      },
+      "validation": {
+        "sanitizer": "metadata/workspace/pro5k_archive_common.py",
+        "sanitizer_sha256": "4083ae9402cb02b919857076ad498a164d6f1ebebf23de84b077d6314d35e563",
+        "all_source_exports_byte_identical": true,
+        "redactions": {
+          "private_key": 0,
+          "github_token": 0,
+          "api_token": 0,
+          "aws_access_key": 0,
+          "jwt": 0
+        },
+        "full_on_off_ast_passed": true,
+        "community_complete_functions_ast_passed": true
+      },
+      "files": [
+        {
+          "path": "source/claims/page_split/experiment_split_on.py",
+          "bytes": 23086,
+          "source_sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310",
+          "output_sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310",
+          "sanitizer_changed_bytes": false,
+          "ast_parse_passed": true,
+          "ast_top_level_nodes": 35,
+          "source_commit": "3cf4ce7dbe461c9b86447851ca4acef2caab1f37",
+          "source_path": "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+          "source_git_blob": "16c610ef92a06b08865f8e745124f7a471d31b0d"
+        },
+        {
+          "path": "source/claims/page_split/experiment_split_off.py",
+          "bytes": 20190,
+          "source_sha256": "cd22c026cd98ab58cbfe7707a04f9db14854d43c70ac9857c3ed34a7ac2d19a9",
+          "output_sha256": "cd22c026cd98ab58cbfe7707a04f9db14854d43c70ac9857c3ed34a7ac2d19a9",
+          "sanitizer_changed_bytes": false,
+          "ast_parse_passed": true,
+          "ast_top_level_nodes": 33,
+          "source_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+          "source_path": "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+          "source_git_blob": "7224a27f858c5769baac8a4352f901ec90fe5edd"
+        },
+        {
+          "path": "source/claims/page_split/experiment_split_on_vs_off.patch",
+          "bytes": 6307,
+          "source_sha256": "c8067646ae5a0b046c5271be5963c085fad2413625aaef85899ef90b6a9b011d",
+          "output_sha256": "c8067646ae5a0b046c5271be5963c085fad2413625aaef85899ef90b6a9b011d",
+          "sanitizer_changed_bytes": false,
+          "ast_parse_passed": null,
+          "ast_top_level_nodes": null
+        },
+        {
+          "path": "source/claims/page_split/community_main_20260908_excerpt.py.txt",
+          "bytes": 15653,
+          "source_sha256": "48156a02d95348fe99e9eeea5ace0af1c6863fb713e49a4c842276280279e310",
+          "output_sha256": "48156a02d95348fe99e9eeea5ace0af1c6863fb713e49a4c842276280279e310",
+          "sanitizer_changed_bytes": false,
+          "ast_parse_passed": null,
+          "ast_top_level_nodes": null,
+          "source_line_range": [
+            240,
+            620
+          ],
+          "source_line_count": 381,
+          "complete_function_ast_range": [
+            365,
+            551
+          ],
+          "complete_function_ast_parse_passed": true,
+          "complete_function_names": [
+            "_page_split_kernel",
+            "_page_mark_kernel",
+            "_split_kv_pages_to_64"
+          ]
+        }
+      ]
+    }
+  },
+  "no_new_experiments_run": true,
+  "original_profile_logical_content_verification": {
+    "source_files_checked": 58,
+    "missing_files": 0,
+    "unexpected_content_mismatches": 0,
+    "gzip_transforms": 8,
+    "tar_gzip_metadata_transforms": 1,
+    "tar_member_contents_byte_identical": true,
+    "sanitizer": "metadata/workspace/pro5k_archive_common.py",
+    "interpretation": "All 58 locally available original PageSplit profile files are archived with equal logical content. Four large timeline CSV files are gzip-compressed; four existing gzip lite traces are deterministically recompressed; the delivery tar.gz changes container metadata only."
+  }
+}

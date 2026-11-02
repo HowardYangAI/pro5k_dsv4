@@ -1,18 +1,18 @@
 {
   "ok": true,
   "archive_root": "/sgl-workspace/pro5k_dsv4",
-  "elapsed_seconds": 22.582,
+  "elapsed_seconds": 22.431,
   "counts": {
-    "files": 7069,
-    "stored_bytes": 617219752,
-    "json_files": 144,
+    "files": 7081,
+    "stored_bytes": 617948351,
+    "json_files": 150,
     "gzip_files": 151,
     "gzip_uncompressed_bytes": 4046415737,
     "jsonl_files": 43,
     "jsonl_records": 48677,
-    "manifest_documents": 7,
-    "manifest_output_references": 56483,
-    "unique_manifest_outputs": 7017,
+    "manifest_documents": 8,
+    "manifest_output_references": 56496,
+    "unique_manifest_outputs": 7030,
     "accepted_source_format_exceptions": 0,
     "issues": 0
   },
@@ -22,6 +22,7 @@
     "conversations/databases/manifest.json",
     "metadata/artifacts/summary.json",
     "metadata/artifacts/tmp_manifest.json",
+    "metadata/claims/evidence_manifest.json",
     "metadata/workspace/export_manifest.json",
     "metadata/workspace/offline_file_index.json.gz"
   ],

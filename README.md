@@ -6,6 +6,7 @@
 
 | 内容 | 入口 |
 | --- | --- |
+| PRO5000 高并发稳定性、SM120 KV Page 切分两项成果的逐项证据 | [成果证据索引与边界](CLAIM_EVIDENCE.md) |
 | 所有历史对话，按线程阅读 | [对话索引](conversations/README.md) |
 | Codex 原始事件和数据库导出 | [原始事件](conversations/raw/) · [数据库投影](conversations/databases/) |
 | PD、SWA、CR6647271、accuracy 等测试报告与日志 | [实验文档](workspace/document/) |
@@ -40,7 +41,7 @@ python3 tools/restore_offline_files.py --repo sglang-dsv4-fixed --dest /tmp/sgla
 
 大文本文件在原扩展名后增加 `.gz`，可用 `gzip -dc 文件.gz` 阅读。早期 Git bundle 的分片按文件名顺序连接后使用，见 [旧归档恢复说明](legacy_archive/source/RESTORE.md)。源文件与归档文件在压缩、脱敏后可能具有不同的 SHA-256，逐项转换记录保存在各分类 manifest 中。
 
-本次没有归档认证配置、私钥、模型权重、安装包、容器镜像、编译缓存和重复的公共参考仓库。对话中提及但本机已不存在的产物见 [缺失文件清单](metadata/artifacts/missing_artifacts.json)；仅有数据库元数据、原始 rollout 不存在的线程已在对话索引注明。
+本次没有归档认证配置、私钥、模型权重、安装包、容器镜像、编译缓存和重复的公共参考仓库。对话中提及但本机已不存在的产物见 [临时文件缺失清单](metadata/artifacts/missing_artifacts.json) 和 [48 份全量 Trace 缺失清单](metadata/claims/missing_full_traces.json)；仅有数据库元数据、原始 rollout 不存在的线程已在对话索引注明。历史文档中“全量 Trace 仍在本机”的陈述已过时，见 [2026-11-02 核对说明](legacy_archive/20261102_AUDIT_NOTE.md)。
 
 运行完整校验：
 

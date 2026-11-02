@@ -1,0 +1,72 @@
+{
+  "generated_at_utc": "2026-11-02T12:05:01.443278+00:00",
+  "base_archive_commit": "8036a44341b67f1caebb449750a7156689c709e7",
+  "scope": "Claim evidence index, extracted source snapshots, independent coverage reports and missing full trace inventory. The original conversation snapshot and historical artifact exports are unchanged.",
+  "outputs": [
+    {
+      "path": "README.md",
+      "bytes": 3956,
+      "sha256": "40e48d01ae278e7ba1a0cf40ee1c61e240ed70d3eacd12b3c7379e4af1e3814a"
+    },
+    {
+      "path": "CLAIM_EVIDENCE.md",
+      "bytes": 12272,
+      "sha256": "9156eb6543068b0adc0a5f135c2a1f634499668884acde5538c45a6dc07cbf87"
+    },
+    {
+      "path": "legacy_archive/20261102_AUDIT_NOTE.md",
+      "bytes": 1261,
+      "sha256": "4ab7f5bcb00bd62d7028fc522d85416094e86aa2a06dad163bca12fb34059f74"
+    },
+    {
+      "path": "metadata/archive_summary.json",
+      "bytes": 2040,
+      "sha256": "755b0cff6049d78b09422469890ffa8cbe5a1e96b669d94a967d9b4d114f4d3e"
+    },
+    {
+      "path": "source/claims/page_split/community_main_20260908_excerpt.py.txt",
+      "bytes": 15653,
+      "sha256": "48156a02d95348fe99e9eeea5ace0af1c6863fb713e49a4c842276280279e310"
+    },
+    {
+      "path": "source/claims/page_split/experiment_split_off.py",
+      "bytes": 20190,
+      "sha256": "cd22c026cd98ab58cbfe7707a04f9db14854d43c70ac9857c3ed34a7ac2d19a9"
+    },
+    {
+      "path": "source/claims/page_split/experiment_split_on.py",
+      "bytes": 23086,
+      "sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310"
+    },
+    {
+      "path": "source/claims/page_split/experiment_split_on_vs_off.patch",
+      "bytes": 6307,
+      "sha256": "c8067646ae5a0b046c5271be5963c085fad2413625aaef85899ef90b6a9b011d"
+    },
+    {
+      "path": "source/claims/page_split/provenance.json",
+      "bytes": 5483,
+      "sha256": "ac0789b467443555298bccf15b5cdafe66a5bac8b8defcd51ce74981d2edcd7f"
+    },
+    {
+      "path": "metadata/claims/artifact_coverage.json",
+      "bytes": 138010,
+      "sha256": "0cc371cf04444d01204b3640efc78511dc4fa48e8c4f9e144c3e8bfab6fab84d"
+    },
+    {
+      "path": "metadata/claims/missing_full_traces.json",
+      "bytes": 47375,
+      "sha256": "f9fe17862d37de05c0a76a789f8124a2d87453694015b67a8d27df35b13acaae"
+    },
+    {
+      "path": "metadata/claims/page_split_coverage.json",
+      "bytes": 60540,
+      "sha256": "4db34f7ecbb214da1967f638752314b26fb5a7bc48f22b41c564f35fd20ecb06"
+    },
+    {
+      "path": "metadata/claims/stability_coverage.json",
+      "bytes": 394609,
+      "sha256": "df6adf1b07c922de2c496d07269af4039e68c1a7b569e611f272476dea09b265"
+    }
+  ]
+}

@@ -25,5 +25,16 @@
     "Public upstream tests and docs are content-deduplicated with full path mappings.",
     "Credentials, private keys, model weights, install packages, container images, and compilation caches are excluded.",
     "Existing source files and Git worktrees were not changed."
-  ]
+  ],
+  "claim_evidence_index": "CLAIM_EVIDENCE.md",
+  "claim_audit": {
+    "audited_base_commit": "8036a44341b67f1caebb449750a7156689c709e7",
+    "audit_date_utc": "2026-11-02",
+    "reports_directory": "metadata/claims/",
+    "missing_full_traces": "metadata/claims/missing_full_traces.json",
+    "missing_full_trace_count": 48,
+    "missing_full_trace_original_bytes": 1880427160,
+    "interpretation": "Available claim evidence is archived. Historical full traces, some standalone service logs and self-contained model/dataset replay inputs are incomplete; see the claim evidence index.",
+    "performance_attribution": "+8.61% is the ratio of means from three local paired E2E runs of the earlier page-mask implementation, not a measured combined batch-mark/uint64 optimization."
+  }
 }

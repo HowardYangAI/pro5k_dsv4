@@ -1,0 +1,118 @@
+{
+  "generated_at_utc": "2026-11-02T11:57:38.793653+00:00",
+  "scope": "Existing source and conversation evidence only; no new performance run.",
+  "experiment": {
+    "on_commit": "3cf4ce7dbe461c9b86447851ca4acef2caab1f37",
+    "off_parent_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+    "commit_title": "[SM120] Only split touched SWA pages in FlashMLA page-split kernel (#32320)",
+    "source_path": "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+    "bundle_parts": [
+      "legacy_archive/source/sglang-all-refs.bundle.part-00",
+      "legacy_archive/source/sglang-all-refs.bundle.part-01"
+    ],
+    "restore_instructions": "legacy_archive/source/RESTORE.md",
+    "same_dspark_ep_metadata_fix": "legacy_archive/source/main-worktree-unstaged.patch.gz",
+    "interpretation": "The measured +8.61% no-profiler result compares this touched-page-mask ON implementation against its OFF parent, with the same DSpark+EP metadata fix. This ON implementation marks one index per program and copies uint8 bytes. It does not contain the later 1024-index batch marking or uint64 copy.",
+    "measurement_readme": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md",
+    "measurement_commands": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md"
+  },
+  "community_excerpt": {
+    "raw_conversation": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+    "raw_call_record_line": 2342,
+    "raw_output_record_line": 2344,
+    "raw_output_record_timestamp": "2026-09-08T09:08:33.070Z",
+    "raw_output_record_sha256": "4b291d5c1d67191fb566fd39f726291d4b727aa731eefb944524520422f47c88",
+    "source_url": "https://raw.githubusercontent.com/sgl-project/sglang/main/python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+    "source_ref": "main",
+    "source_commit": null,
+    "commit_pinned": false,
+    "original_command": "curl -L --fail --silent 'https://raw.githubusercontent.com/sgl-project/sglang/main/python/sglang/kernels/ops/attention/flash_mla_sm120.py' | nl -ba | sed -n '240,620p'",
+    "format": "Original numbered lines 240-620 inclusive; an excerpt, not an importable complete Python module.",
+    "uint64_copy_original_lines": [
+      398,
+      422
+    ],
+    "blocked_mark_original_lines": [
+      425,
+      445
+    ],
+    "mark_launch_original_lines": [
+      519,
+      525
+    ],
+    "performance_attribution": "Later community reference only. No local A/B run of this newer code was found; +8.61% must not be attributed jointly to mask + blocked mark + uint64."
+  },
+  "validation": {
+    "sanitizer": "metadata/workspace/pro5k_archive_common.py",
+    "sanitizer_sha256": "4083ae9402cb02b919857076ad498a164d6f1ebebf23de84b077d6314d35e563",
+    "all_source_exports_byte_identical": true,
+    "redactions": {
+      "private_key": 0,
+      "github_token": 0,
+      "api_token": 0,
+      "aws_access_key": 0,
+      "jwt": 0
+    },
+    "full_on_off_ast_passed": true,
+    "community_complete_functions_ast_passed": true
+  },
+  "files": [
+    {
+      "path": "source/claims/page_split/experiment_split_on.py",
+      "bytes": 23086,
+      "source_sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310",
+      "output_sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310",
+      "sanitizer_changed_bytes": false,
+      "ast_parse_passed": true,
+      "ast_top_level_nodes": 35,
+      "source_commit": "3cf4ce7dbe461c9b86447851ca4acef2caab1f37",
+      "source_path": "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+      "source_git_blob": "16c610ef92a06b08865f8e745124f7a471d31b0d"
+    },
+    {
+      "path": "source/claims/page_split/experiment_split_off.py",
+      "bytes": 20190,
+      "source_sha256": "cd22c026cd98ab58cbfe7707a04f9db14854d43c70ac9857c3ed34a7ac2d19a9",
+      "output_sha256": "cd22c026cd98ab58cbfe7707a04f9db14854d43c70ac9857c3ed34a7ac2d19a9",
+      "sanitizer_changed_bytes": false,
+      "ast_parse_passed": true,
+      "ast_top_level_nodes": 33,
+      "source_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+      "source_path": "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+      "source_git_blob": "7224a27f858c5769baac8a4352f901ec90fe5edd"
+    },
+    {
+      "path": "source/claims/page_split/experiment_split_on_vs_off.patch",
+      "bytes": 6307,
+      "source_sha256": "c8067646ae5a0b046c5271be5963c085fad2413625aaef85899ef90b6a9b011d",
+      "output_sha256": "c8067646ae5a0b046c5271be5963c085fad2413625aaef85899ef90b6a9b011d",
+      "sanitizer_changed_bytes": false,
+      "ast_parse_passed": null,
+      "ast_top_level_nodes": null
+    },
+    {
+      "path": "source/claims/page_split/community_main_20260908_excerpt.py.txt",
+      "bytes": 15653,
+      "source_sha256": "48156a02d95348fe99e9eeea5ace0af1c6863fb713e49a4c842276280279e310",
+      "output_sha256": "48156a02d95348fe99e9eeea5ace0af1c6863fb713e49a4c842276280279e310",
+      "sanitizer_changed_bytes": false,
+      "ast_parse_passed": null,
+      "ast_top_level_nodes": null,
+      "source_line_range": [
+        240,
+        620
+      ],
+      "source_line_count": 381,
+      "complete_function_ast_range": [
+        365,
+        551
+      ],
+      "complete_function_ast_parse_passed": true,
+      "complete_function_names": [
+        "_page_split_kernel",
+        "_page_mark_kernel",
+        "_split_kv_pages_to_64"
+      ]
+    }
+  ]
+}
