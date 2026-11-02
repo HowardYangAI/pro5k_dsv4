@@ -26,8 +26,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 2,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:2",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-1-DP-1-EP-1.trace.json.gz",
@@ -38,8 +40,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 3,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:3",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-2-DP-2-EP-2.trace.json.gz",
@@ -50,8 +54,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 4,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:4",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-3-DP-3-EP-3.trace.json.gz",
@@ -62,8 +68,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 5,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:5",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-4-DP-4-EP-4.trace.json.gz",
@@ -74,8 +82,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 6,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:6",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-5-DP-5-EP-5.trace.json.gz",
@@ -86,8 +96,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 7,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:7",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-6-DP-6-EP-6.trace.json.gz",
@@ -98,8 +110,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 8,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:8",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-7-DP-7-EP-7.trace.json.gz",
@@ -110,8 +124,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 9,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:9",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-0-DP-0-EP-0.trace.json.gz",
@@ -122,8 +138,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 10,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:10",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-1-DP-1-EP-1.trace.json.gz",
@@ -134,8 +152,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 11,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:11",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-2-DP-2-EP-2.trace.json.gz",
@@ -146,8 +166,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 12,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:12",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-3-DP-3-EP-3.trace.json.gz",
@@ -158,8 +180,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 13,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:13",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-4-DP-4-EP-4.trace.json.gz",
@@ -170,8 +194,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 14,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:14",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-5-DP-5-EP-5.trace.json.gz",
@@ -182,8 +208,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 15,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:15",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-6-DP-6-EP-6.trace.json.gz",
@@ -194,8 +222,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 16,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:16",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-7-DP-7-EP-7.trace.json.gz",
@@ -206,8 +236,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 17,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:17",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-0-DP-0-EP-0.trace.json.gz",
@@ -218,8 +250,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 18,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:18",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-1-DP-1-EP-1.trace.json.gz",
@@ -230,8 +264,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 19,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:19",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-2-DP-2-EP-2.trace.json.gz",
@@ -242,8 +278,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 20,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:20",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-3-DP-3-EP-3.trace.json.gz",
@@ -254,8 +292,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 21,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:21",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-4-DP-4-EP-4.trace.json.gz",
@@ -266,8 +306,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 22,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:22",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-5-DP-5-EP-5.trace.json.gz",
@@ -278,8 +320,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 23,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:23",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-6-DP-6-EP-6.trace.json.gz",
@@ -290,8 +334,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 24,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:24",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-7-DP-7-EP-7.trace.json.gz",
@@ -302,8 +348,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 25,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:25",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-0-DP-0-EP-0.trace.json.gz",
@@ -314,8 +362,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 26,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:26",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-1-DP-1-EP-1.trace.json.gz",
@@ -326,8 +376,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 27,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:27",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-2-DP-2-EP-2.trace.json.gz",
@@ -338,8 +390,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 28,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:28",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-3-DP-3-EP-3.trace.json.gz",
@@ -350,8 +404,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 29,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:29",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-4-DP-4-EP-4.trace.json.gz",
@@ -362,8 +418,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 30,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:30",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-5-DP-5-EP-5.trace.json.gz",
@@ -374,8 +432,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 31,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:31",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-6-DP-6-EP-6.trace.json.gz",
@@ -386,8 +446,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 32,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:32",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-7-DP-7-EP-7.trace.json.gz",
@@ -398,8 +460,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 33,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv:33",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-0-DP-0-EP-0.trace.json.gz",
@@ -410,8 +474,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 2,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:2",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-1-DP-1-EP-1.trace.json.gz",
@@ -422,8 +488,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 3,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:3",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-2-DP-2-EP-2.trace.json.gz",
@@ -434,8 +502,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 4,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:4",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-3-DP-3-EP-3.trace.json.gz",
@@ -446,8 +516,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 5,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:5",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-4-DP-4-EP-4.trace.json.gz",
@@ -458,8 +530,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 6,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:6",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-5-DP-5-EP-5.trace.json.gz",
@@ -470,8 +544,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 7,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:7",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-6-DP-6-EP-6.trace.json.gz",
@@ -482,8 +558,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 8,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:8",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-7-DP-7-EP-7.trace.json.gz",
@@ -494,8 +572,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 9,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:9",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-0-DP-0-EP-0.trace.json.gz",
@@ -506,8 +586,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 10,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:10",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-1-DP-1-EP-1.trace.json.gz",
@@ -518,8 +600,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 11,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:11",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-2-DP-2-EP-2.trace.json.gz",
@@ -530,8 +614,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 12,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:12",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-3-DP-3-EP-3.trace.json.gz",
@@ -542,8 +628,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 13,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:13",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-4-DP-4-EP-4.trace.json.gz",
@@ -554,8 +642,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 14,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:14",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-5-DP-5-EP-5.trace.json.gz",
@@ -566,8 +656,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 15,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:15",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-6-DP-6-EP-6.trace.json.gz",
@@ -578,8 +670,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 16,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:16",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     },
     {
       "source_path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-7-DP-7-EP-7.trace.json.gz",
@@ -590,8 +684,10 @@
       "manifest_relative_path": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv",
       "manifest_line": 17,
       "manifest_location": "legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv:17",
-      "reason": "Historical archive explicitly omitted full multi-rank raw trace; the original current-machine path no longer exists.",
-      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes."
+      "reason": "Historical Git archive omitted this full multi-rank trace from the old experiment environment; no matching current local copy or recorded later transfer has been found.",
+      "recovery": "Recover original storage/backup and verify SHA-256, or rerun recorded profiling to produce new traces with new hashes.",
+      "last_known_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+      "current_exists_scope": "Current archive environment ser187; not a statement that the original ser171 copy was deleted."
     }
   ],
   "additional_unmanifested_probes": [
@@ -614,11 +710,35 @@
   "notes": [
     "All 48 source paths were checked locally; no network operation was performed.",
     "Surviving representative lightweight Perfetto traces, kernel/timeline CSV, all six no-profiler benchmark raw logs, scripts, commands, seeds and conclusions remain in tracked archive files.",
-    "This inventory distinguishes historically omitted raw data from files that still exist but were omitted by the current synchronization. No latter gap was found in 425 currently surviving source archive/document/graph files."
+    "This inventory distinguishes historically omitted raw data from files that still exist but were omitted by the current synchronization. No latter gap was found in 425 currently surviving source archive/document/graph files.",
+    "Cross-conversation follow-up identified a different original node, ser171. Current ser187 path absence does not prove deletion on ser171; see RELOCATION_AUDIT.md."
   ],
   "additional_storage_lookup": {
     "scope": "Additional read-only basename lookup under /data (excluding model/cache/git directories)",
     "directories_checked": 719301,
     "matches": []
+  },
+  "last_known_original_environment": {
+    "hostname": "ml-pro5000-ser171.qgz02",
+    "ip": "10.207.193.139",
+    "evidence": "metadata/recovery/trace_moves_audit.json",
+    "certainty": "Recorded hostname/IP on Aug6-10; Aug19 runtime peer IP and session continuity support the same old environment. Exact Aug19 container identity and later disk retention are unconfirmed."
+  },
+  "current_archive_environment": "ml-pro5000-ser187.qgz02",
+  "relocation_followup": {
+    "audited_at_utc": "2026-11-02T12:39:44.059272+00:00",
+    "index": "RELOCATION_AUDIT.md",
+    "full_traces_recovered": 0,
+    "recorded_later_transfer_found": false,
+    "recorded_deletion_found": false,
+    "deletion_status": "unconfirmed",
+    "old_node_access_status": "No validated accessible endpoint for the original trace container is available in this environment.",
+    "partial_tp0_bundle": {
+      "historical_path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle.tar.gz",
+      "sha256": "b239e19c7507c09a4185681ab7d37e999d793958491b304fb33a1c2eafbddcee",
+      "found_in_current_environment": false
+    },
+    "ser237_trace_probe": "metadata/recovery/ser237_trace_probe.json",
+    "ser237_original_path_matches": 0
   }
 }

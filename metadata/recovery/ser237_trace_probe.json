@@ -1,0 +1,331 @@
+{
+  "audit_kind": "read_only_targeted_original_trace_path_probe",
+  "manifest": "/sgl-workspace/pro5k_dsv4/metadata/claims/missing_full_traces.json",
+  "manifest_count": 48,
+  "ssh_alias": "deepseek-v4-flash-237",
+  "requested_host": "10.207.193.166:8015",
+  "method": "Exact-path os.stat only; no directory walking; SSH BatchMode, ConnectTimeout=8, ConnectionAttempts=1, StrictHostKeyChecking=yes.",
+  "local_audit_utc": "2026-11-02T12:41:38.651048+00:00",
+  "ssh_exit_code": 0,
+  "remote": {
+    "hostname": "ml-pro5000-ser237.qgz02.diditaxi.com",
+    "checked_utc": "2026-11-02T12:41:38.645894+00:00",
+    "paths": [
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-0-DP-0-EP-0.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-1-DP-1-EP-1.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-2-DP-2-EP-2.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-3-DP-3-EP-3.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-4-DP-4-EP-4.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-5-DP-5-EP-5.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-6-DP-6-EP-6.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-7-DP-7-EP-7.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-0-DP-0-EP-0.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-1-DP-1-EP-1.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-2-DP-2-EP-2.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-3-DP-3-EP-3.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-4-DP-4-EP-4.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-5-DP-5-EP-5.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-6-DP-6-EP-6.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/prefill/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-7-DP-7-EP-7.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-0-DP-0-EP-0.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-1-DP-1-EP-1.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-2-DP-2-EP-2.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-3-DP-3-EP-3.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-4-DP-4-EP-4.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-5-DP-5-EP-5.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-6-DP-6-EP-6.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_off/decode/dsv4-split-off-c8-w40-n80-decode-1787125268.685384-TP-7-DP-7-EP-7.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-0-DP-0-EP-0.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-1-DP-1-EP-1.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-2-DP-2-EP-2.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-3-DP-3-EP-3.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-4-DP-4-EP-4.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-5-DP-5-EP-5.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-6-DP-6-EP-6.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_ab/split_on/decode/dsv4-split-on-c8-w40-n80-decode-1787124772.5090497-TP-7-DP-7-EP-7.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-0-DP-0-EP-0.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-1-DP-1-EP-1.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-2-DP-2-EP-2.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-3-DP-3-EP-3.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-4-DP-4-EP-4.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-5-DP-5-EP-5.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-6-DP-6-EP-6.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_off/trace_c4_8k64/dsv4-split-off-c4-w40-n4-8k-64-e2e-1787129322.555108-TP-7-DP-7-EP-7.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-0-DP-0-EP-0.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-1-DP-1-EP-1.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-2-DP-2-EP-2.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-3-DP-3-EP-3.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-4-DP-4-EP-4.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-5-DP-5-EP-5.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-6-DP-6-EP-6.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64/dsv4-split-on-c4-w40-n4-8k-64-e2e-1787128659.5243871-TP-7-DP-7-EP-7.trace.json.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      },
+      {
+        "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle.tar.gz",
+        "exists": false,
+        "error_class": "FileNotFoundError",
+        "errno": 2
+      }
+    ]
+  },
+  "trace_exists_count": 0,
+  "extra_paths": [
+    {
+      "path": "/sgl-workspace/workspace/profile",
+      "exists": false,
+      "error_class": "FileNotFoundError",
+      "errno": 2
+    },
+    {
+      "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle.tar.gz",
+      "exists": false,
+      "error_class": "FileNotFoundError",
+      "errno": 2
+    }
+  ]
+}

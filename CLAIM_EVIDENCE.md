@@ -59,8 +59,8 @@ Output TPS 三轮均值为 ON **38.36 tok/s**、OFF **35.32 tok/s**，相对差�
 
 ## 3. 保存范围和现有缺口
 
-1. **48 份全量多 Rank 原始 Trace 未保存**：两个历史 manifest 共列出 1,880,427,160 字节；当时明确没有提交，这次检查原路径及补查存储也未找到。保存的是路径、大小、SHA-256、CSV、分析报告及轻量 Trace。见 [逐项缺失清单](metadata/claims/missing_full_traces.json)、[原 manifest 之一](legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv)、[E2E manifest](legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv)。此外，旧 README 提及但未逐项列出的 CPU-only / num_steps=1/10 探索性 Trace 也不能宣称齐全。
-2. **部分运行日志只存在于历史工具输出或远端引用**：对话仍保留，但不能当作本地完整原始日志。早期 C1024 的上述边界以及后续实存日志见第 1 节。
+1. **48 份全量多 Rank 原始 Trace 尚未找回**：两个历史 manifest 共列出 1,880,427,160 字节；当时明确没有提交。追查其他对话后，最后已知生成环境指向旧节点 `ml-pro5000-ser171.qgz02`（`10.207.193.139`）；当前节点为 `ser187`，同名路径及补查存储均未找到。未发现后续迁移或删除的执行记录；原节点是否仍留存尚未确认。保存的是路径、大小、SHA-256、CSV、分析报告及轻量 Trace。见[搬运追查](RELOCATION_AUDIT.md)、[逐项缺失清单](metadata/claims/missing_full_traces.json)、[原 manifest 之一](legacy_archive/artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv)、[E2E manifest](legacy_archive/artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv)。此外，旧 README 提及但未逐项列出的 CPU-only / num_steps=1/10 探索性 Trace 也不能宣称齐全。
+2. **三份远端独立日志已找回**：进一步搜索其他对话并访问原 Decode 节点 `ser237` 后，取回了 8/29 的 `decode_fixed.log`、`decode_first_start_num_token_crash.log` 和 8/30 的 `healthfix_c1024/decode.log`；下载原件均与远端 SHA-256 相同，已压缩补入对应文档目录。见[恢复索引](RELOCATION_AUDIT.md)。其中 healthfix 日志记录的是 Page 对齐修复前的失败，不能替代最终成功测试。8/13 C1024 的完整运行期独立日志仍未找回，工具输出保留在会话中。`decode_batch_usage.log` 只见文档建议生成的命令，未找到实际创建证据，不应据此认定丢失了一个曾存在的原件。
 3. **离线复跑输入不齐全**：模型权重没有归档；历史 `/tmp/ShareGPT_V3_unfiltered_cleaned_split.json` 已不存在。这一版本 `bench_serving.py` 的 `--dataset-name random` 仍会借助 ShareGPT 采样数据，复跑需重新取得模型和公开数据，且历史数据原件哈希未记录。其余临时文件缺失见[原清单](metadata/artifacts/missing_artifacts.json)。
 4. **代码、测试和文档可按版本恢复**：原始工作树路径映射在 [offline_file_index.json.gz](metadata/workspace/offline_file_index.json.gz)，恢复命令见[仓库 README](README.md)。本页的实测 ON/OFF 源码从已归档 Git bundle 精确提取，字节与原 Git 对象一致；两个完整 Python 文件已做 AST 检查。
 

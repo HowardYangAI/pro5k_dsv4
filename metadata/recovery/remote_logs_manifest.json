@@ -1,0 +1,60 @@
+{
+  "recovered_at_utc": "2026-11-02T12:35:02.585334+00:00",
+  "source_ssh_alias": "deepseek-v4-flash-237",
+  "source_endpoint": "10.207.193.166:8015",
+  "source_hostname": "ml-pro5000-ser237.qgz02",
+  "remote_checked_at_utc": "2026-11-02T12:33:52.188824+00:00",
+  "destination_hostname": "ml-pro5000-ser187.qgz02",
+  "method": "Read-only SCP of three exact historical logs; raw download hashes matched remote SHA-256 before credential redaction and deterministic gzip. No remote files or services changed.",
+  "note": "These logs were generated on the Decode node and had not been copied locally. The healthfix_c1024 log includes historical failures before the later page-aligned fix; it is not evidence of a successful final run.",
+  "files": [
+    {
+      "remote_path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+      "source_bytes": 1544364,
+      "source_sha256": "c695d3906aff6cf1d105c16c91ceaca3fca60b0d9d3780eeba97d16ea8dbf8d6",
+      "source_mtime_utc": "2026-08-29T09:53:06.630771+00:00",
+      "download_matches_remote_sha256": true,
+      "content_sha256_after_redaction": "c695d3906aff6cf1d105c16c91ceaca3fca60b0d9d3780eeba97d16ea8dbf8d6",
+      "redactions": {},
+      "outputs": [
+        {
+          "path": "workspace/document/20260829_swa_eviction_e2e/decode_fixed.log.gz",
+          "bytes": 106467,
+          "sha256": "c6b90c13d57ab97317c6011f5f4184abc86844857d3d5c312d1feb124124cb14"
+        }
+      ]
+    },
+    {
+      "remote_path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+      "source_bytes": 155235,
+      "source_sha256": "af62c012352c1e78f04a8a8a84226140b7b3b38fe62a38f1a15ac88b367968d7",
+      "source_mtime_utc": "2026-08-29T08:52:58.402053+00:00",
+      "download_matches_remote_sha256": true,
+      "content_sha256_after_redaction": "af62c012352c1e78f04a8a8a84226140b7b3b38fe62a38f1a15ac88b367968d7",
+      "redactions": {},
+      "outputs": [
+        {
+          "path": "workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log.gz",
+          "bytes": 14895,
+          "sha256": "aa7c722e798e185014feb9dc957f94d5c1d60854effb896edf65d2a18b5804b1"
+        }
+      ]
+    },
+    {
+      "remote_path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+      "source_bytes": 35953944,
+      "source_sha256": "6f9a00a3d28e04bf59a8c0342069f4184de8307e1bb5d418b1366629743e98ce",
+      "source_mtime_utc": "2026-08-30T09:43:28.721327+00:00",
+      "download_matches_remote_sha256": true,
+      "content_sha256_after_redaction": "6f9a00a3d28e04bf59a8c0342069f4184de8307e1bb5d418b1366629743e98ce",
+      "redactions": {},
+      "outputs": [
+        {
+          "path": "workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log.gz",
+          "bytes": 1116172,
+          "sha256": "787a543f56269a493090d27338bbea72358d9c982ba78bebb95051aaa7c69ed9"
+        }
+      ]
+    }
+  ]
+}

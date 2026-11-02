@@ -1,0 +1,237 @@
+{
+  "audit_date_utc": "2026-11-02",
+  "scope": "Read-only search of other archived Codex conversations for transfer, repackaging or deletion of the 48 full multi-rank traces; actual tool calls and corresponding outputs were prioritized.",
+  "corpus": {
+    "roots": [
+      "conversations/raw",
+      "legacy_archive/session"
+    ],
+    "jsonl_files_scanned": 23,
+    "note": "Duplicated snapshots were deduplicated by tool-call text; thread Markdown was additionally searched."
+  },
+  "search_terms": [
+    "20260819_dsv4_ep8_dspark_c8",
+    "20260819_dsv4_split_ab",
+    "20260819_dsv4_split_e2e_ab",
+    "RAW_TRACE_MANIFEST",
+    "cp",
+    "mv",
+    "rsync",
+    "scp",
+    "tar",
+    "rclone",
+    "shutil.copytree",
+    "shutil.move",
+    "profile",
+    "overall",
+    "deepseek-v4-flash",
+    "迁移",
+    "搬运",
+    "删除"
+  ],
+  "conclusion": {
+    "confirmed_full_trace_move_to_another_machine": false,
+    "confirmed_deletion_command_found": false,
+    "confirmed_partial_full_trace_bundle_created": true,
+    "limits": "Absence of a recorded command does not prove files were never moved outside Codex. The current machine may differ from the original experiment environment."
+  },
+  "events": [
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 9707,
+      "timestamp_utc": "2026-08-19T07:14:27.704Z",
+      "summary": "Two TP0 full traces copied into a delivery bundle directory. zip command failed; preceding cp commands produced no reported errors.",
+      "excerpts": [
+        "cp .../prefill/*TP-0-DP-0-EP-0.trace.json.gz .../delivery/perfetto_tp0_bundle/",
+        "cp .../decode/*TP-0-DP-0-EP-0.trace.json.gz .../delivery/perfetto_tp0_bundle/",
+        "output line 9708: /bin/bash: line 11: zip: command not found; exit_code 127"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 9715,
+      "timestamp_utc": "2026-08-19T07:15:06.315Z",
+      "summary": "The TP0 bundle was successfully packed with tar.",
+      "excerpts": [
+        "tar -czf /sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle.tar.gz perfetto_tp0_bundle",
+        "output line 9716: exit_code 0"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 9720,
+      "timestamp_utc": "2026-08-19T07:15:49.841Z",
+      "summary": "tar listing confirmed two full TP0 trace members; bundle size shown as 127M.",
+      "excerpts": [
+        "perfetto_tp0_bundle/dsv4-ep8-dspark-c8-decode-1787122755.7801342-TP-0-DP-0-EP-0.trace.json.gz",
+        "perfetto_tp0_bundle/dsv4-ep8-dspark-c8-prefill-dsv4-ep8-dspark-c8-prefill-TP-0-DP-0-EP-0.trace.json.gz"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 9724,
+      "timestamp_utc": "2026-08-19T07:16:17.505Z",
+      "summary": "The full TP0 bundle SHA256 was printed.",
+      "excerpts": [
+        "b239e19c7507c09a4185681ab7d37e999d793958491b304fb33a1c2eafbddcee  /sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle.tar.gz"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 10074,
+      "timestamp_utc": "2026-08-19T07:56:33.351Z",
+      "summary": "Selected C8 and Decode-only A/B deliverables copied to overall; commands include CSV, Markdown, scripts, lightweight traces, lightweight bundle and profile requests. The full TP0 bundle and 32 original traces were not among these cp sources.",
+      "excerpts": [
+        "destination root: /sgl-workspace/workspace/overall/artifacts/profile/",
+        "output line 10075: completed, no error text"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 10079,
+      "timestamp_utc": "2026-08-19T07:56:52.872Z",
+      "summary": "32 original full traces were only represented in a manifest.",
+      "excerpts": [
+        "raw_trace_count=32 total_bytes=1578138410 total_GiB=1.470"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 10560,
+      "timestamp_utc": "2026-08-19T08:57:10.514Z",
+      "summary": "E2E delivery copied to overall and a separate manifest generated for 16 full traces. The recorded output lists lightweight traces, CSV, reports and scripts; no multi-rank original files.",
+      "excerpts": [
+        "cp -a /sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/delivery/. /sgl-workspace/workspace/overall/artifacts/profile/20260819_dsv4_split_e2e_ab/",
+        "manifest sources: split_on/trace_c4_8k64 and split_off/trace_c4_8k64",
+        "output line 10561 lists 03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz and no original multi-rank traces"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 37,
+      "timestamp_utc": "2026-08-06T11:48:38.758Z",
+      "summary": "Original experiment session ran on ser171 at least on August 6.",
+      "excerpts": [
+        "Linux ml-pro5000-ser171.qgz02"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 1149,
+      "timestamp_utc": "2026-08-07T08:58:42.674Z",
+      "summary": "Original host identity was printed August 7.",
+      "excerpts": [
+        "ml-pro5000-ser171.qgz02",
+        "eth0 10.207.193.139/21"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 2097,
+      "timestamp_utc": "2026-08-10T03:55:38.742Z",
+      "summary": "Original session was still on ser171 August 10.",
+      "excerpts": [
+        "LOCAL",
+        "ml-pro5000-ser171.qgz02"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 8574,
+      "timestamp_utc": "2026-08-19T03:54:00.393Z",
+      "summary": "User explicitly requested portable backup because machine would be reclaimed.",
+      "excerpts": [
+        "因为这个机器要被回收了，我要git做个备份"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 11127,
+      "timestamp_utc": "2026-08-19T11:40:07.175Z",
+      "summary": "User again stated machine was about to be returned.",
+      "excerpts": [
+        "都同步了吧，我要还机器了"
+      ]
+    },
+    {
+      "source": "legacy_archive/session/primary-session.jsonl.gz",
+      "jsonl_line": 9304,
+      "timestamp_utc": "2026-08-19T06:29:25.864Z",
+      "summary": "A real Gloo runtime error in the August 19 profiling session references the original node IP. This supports continuity with ser171 but is not a fresh hostname command.",
+      "excerpts": [
+        "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:547] Connection closed by peer [10.207.193.139]:54979"
+      ]
+    }
+  ],
+  "later_conversation_evidence": [
+    {
+      "source": "conversations/threads/01a022bb-b813-7c43-b6da-467e265a35eb.md",
+      "markdown_line": 81,
+      "timestamp_utc": "2026-08-21T05:17:32.008Z",
+      "summary": "By August 21 the portable archive was present at /sgl-workspace/deepseek-v4-flash; branch backup-20260819 HEAD 63a288f matched remote. This supports archive transfer, not full profile directory transfer."
+    },
+    {
+      "source": "conversations/raw/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl.gz",
+      "jsonl_line": 29,
+      "timestamp_utc": "2026-08-21T05:15:14.235Z",
+      "summary": "Actual read of /sgl-workspace/deepseek-v4-flash README shows 32 full traces explicitly not in Git, paths in RAW_TRACE_MANIFEST, lightweight deliverables archived."
+    },
+    {
+      "source": "conversations/raw/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl.gz",
+      "jsonl_line": 77,
+      "timestamp_utc": "2026-08-21T05:17:13.108Z",
+      "summary": "Actual git output confirms current portable archive matches origin/backup-20260819 at 63a288f. This is not evidence that full trace directory was copied.",
+      "excerpts": [
+        "## backup-20260819...origin/backup-20260819",
+        "63a288f (HEAD -> backup-20260819, origin/backup-20260819, origin/HEAD) finalize session archive before machine handoff"
+      ]
+    }
+  ],
+  "followup_targets": [
+    {
+      "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle.tar.gz",
+      "kind": "Candidate full TP0-only repackaging, not all 48 full traces",
+      "sha256": "b239e19c7507c09a4185681ab7d37e999d793958491b304fb33a1c2eafbddcee"
+    },
+    {
+      "path": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_tp0_bundle/",
+      "kind": "Directory with two full TP0 trace copies"
+    },
+    {
+      "host": "ml-pro5000-ser171.qgz02",
+      "kind": "Original recorded experiment environment; check original container or backing disk if different from current host",
+      "certainty": "Host confirmed Aug 6,7,10; Aug19 path continuity inferred from same primary session, not a new hostname command"
+    },
+    {
+      "path": "/sgl-workspace/workspace/overall/artifacts/profile/",
+      "kind": "Confirmed transfer destination for selected deliverables; full traces intentionally excluded from recorded copies"
+    },
+    {
+      "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/",
+      "kind": "Later portable Git archive present Aug21; contains lightweight results and manifests"
+    }
+  ],
+  "negative_search_evidence": {
+    "exact_path_events": 556,
+    "unique_profile_workspace_move_related_calls": 66,
+    "unique_scp_rsync_rclone_or_broad_mv_calls": 28,
+    "interpretation": "Reviewed all exact-directory matches and movement-related tool calls. No surviving Codex record shows the 48 full traces moved, uploaded or deleted after Aug19. Transfer calls mainly concern model files, source code, cubin installations and later PD logs."
+  },
+  "evidence_chain": [
+    "Recorded primary-session environment is ml-pro5000-ser171.qgz02, IP 10.207.193.139; full trace generation and archive commands ran in that session under /sgl-workspace/workspace/profile on August 19.",
+    "At August 19 03:54 UTC and 11:40 UTC the user explicitly said the machine would be reclaimed/returned and requested a Git backup.",
+    "Recorded copies to overall saved selected CSV, scripts, logs, lightweight traces, and manifests; the 32+16 original multi-rank files were deliberately omitted from the recorded Git archive.",
+    "A 127M TP0 full tar did exist temporarily in the original profile delivery tree; actual tar success, member listing and SHA are captured. No record shows its later transfer.",
+    "By August 21 the portable archive is present at /sgl-workspace/deepseek-v4-flash, at remote-matching backup commit63a288f. The archived README still says full files are outside Git on the original paths.",
+    "No later preserved tool call establishes relocation or deletion of the 48 full traces; any out-of-band movement remains possible and cannot be ruled out."
+  ],
+  "client_download_lead": {
+    "source": "legacy_archive/session/primary-session.jsonl.gz",
+    "jsonl_line": 9743,
+    "timestamp_utc": "2026-08-19T07:23:15.259Z",
+    "evidence": "User reported Perfetto NotReadableError from Mac Chrome immediately after the original full TP0 bundle was delivered.",
+    "candidate": "perfetto_tp0_bundle.tar.gz or the two original TP0 trace members on the then-used Mac",
+    "confirmed_successful_download": false,
+    "current_client_copy_status": "unverified"
+  }
+}

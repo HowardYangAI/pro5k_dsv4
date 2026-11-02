@@ -1,0 +1,198 @@
+{
+  "audit_utc": "2026-11-02T12:30:54.552312+00:00",
+  "scope": "Read-only review of archived Codex conversations for relocations of independent Decode logs and profile artifacts, plus one targeted read-only SSH verification.",
+  "conclusion": "Three previously local-missing independent Decode logs still exist at their original paths on the historical Decode node. No relocation is needed to explain their local absence: those logs were created remotely and not found copied locally in the archived tool calls.",
+  "reviewed_roots": [
+    "conversations/raw",
+    "conversations/threads",
+    "legacy_archive/session"
+  ],
+  "command_candidate_file": "/tmp/pro5k_log_move_candidates.json",
+  "candidate_call_count_including_legacy_duplicates": 49,
+  "remote_verification": {
+    "ssh_alias": "deepseek-v4-flash-237",
+    "historical_endpoint": "root@10.207.193.166:8015",
+    "hostname": "ml-pro5000-ser237.qgz02",
+    "method": "One successful SSH BatchMode, ConnectTimeout=8, ConnectionAttempts=1, StrictHostKeyChecking=yes; hostname and stat only.",
+    "tool_chunk_id": "9247fe",
+    "exit_code": 0,
+    "files": [
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+        "exists": true,
+        "size_bytes": 1544364,
+        "mtime": "2026-08-29T09:53:06.630771112+00:00"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+        "exists": true,
+        "size_bytes": 155235,
+        "mtime": "2026-08-29T08:52:58.402052769+00:00"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_batch_usage.log",
+        "exists": false,
+        "interpretation": "Only a suggested grep-derived log in historical README; no execution found creating it."
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+        "exists": true,
+        "size_bytes": 35953944,
+        "mtime": "2026-08-30T09:43:28.721327314+00:00"
+      }
+    ],
+    "evidence_note": "Current endpoint has existing authentication; no credentials or private-key contents were read or emitted."
+  },
+  "historical_evidence": [
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 5839,
+      "timestamp": "2026-08-29T08:54:23.656Z",
+      "payload_type": "custom_tool_call",
+      "call_id": "call_SmiiRz1abnyDvnYvh3mFZnnm",
+      "excerpt": "ssh deepseek-v4-flash-237 'mv /sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log /sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log 2>/dev/null || true'; then remote tmux restarts decode into decode_fixed.log"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 5841,
+      "timestamp": "2026-08-29T08:54:28.254Z",
+      "payload_type": "custom_tool_call_output",
+      "call_id": "call_SmiiRz1abnyDvnYvh3mFZnnm",
+      "excerpt": "Tool output: restarted"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 5856,
+      "timestamp": "2026-08-29T08:56:27.523Z",
+      "payload_type": "custom_tool_call_output",
+      "call_id": "call_5lB3gnnLHR2geE4tIXHZWiSa",
+      "excerpt": "Tool output: 08:56:08 prefill=000 decode=200; 08:56:21 prefill=000 decode=200"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 6257,
+      "timestamp": "2026-08-29T10:00:15.783Z",
+      "payload_type": "custom_tool_call",
+      "call_id": "call_pgK4paCqZPcViHUHn3DO1rS9",
+      "excerpt": "ssh deepseek-v4-flash-237 grep/tail of 20260829_swa_eviction_e2e/decode_fixed.log; confirms continued remote location."
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 7135,
+      "timestamp": "2026-08-30T06:19:15.660Z",
+      "payload_type": "custom_tool_call",
+      "call_id": "call_wnvbCqutzzqwnhzAbQETFrrn",
+      "excerpt": "Remote tmux healthfix-decode launch writes tee /sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 7450,
+      "timestamp": "2026-08-30T09:47:08.764Z",
+      "payload_type": "custom_tool_call",
+      "call_id": "call_acvfrrWwcAoXBA0BbJF9hCed",
+      "excerpt": "ssh deepseek-v4-flash-237 tail -n 220 /sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 7455,
+      "timestamp": "2026-08-30T09:47:27.337Z",
+      "payload_type": "custom_tool_call_output",
+      "call_id": "call_Qq36oWcbGWrqTf1GrcpbcUsl",
+      "excerpt": "Tool output: abort_lines=109; kvfull_lines=106; cpu_copy_notimpl=0; prealloc_assert=2; health=000"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 7695,
+      "timestamp": "2026-08-30T10:06:49.444Z",
+      "payload_type": "custom_tool_call",
+      "call_id": "call_Tq5j8UhOhLqEXoftxjn0wn8G",
+      "excerpt": "Local find of healthfix_c1024 directory plus remote README/server_args inspection"
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 7696,
+      "timestamp": "2026-08-30T10:06:49.685Z",
+      "payload_type": "custom_tool_call_output",
+      "call_id": "call_Tq5j8UhOhLqEXoftxjn0wn8G",
+      "excerpt": "Local file listing: prefill.log; router.log; health_watch.log. Decode log was then queried remotely."
+    },
+    {
+      "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "jsonl_line": 7703,
+      "timestamp": "2026-08-30T10:07:10.744Z",
+      "payload_type": "custom_tool_call",
+      "call_id": "call_P1OzubNM4iGk6budT5QsD82P",
+      "excerpt": "ssh deepseek-v4-flash-237 head -n 35 /sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log"
+    }
+  ],
+  "related_successful_transfers_for_comparison": [
+    {
+      "source_node": "deepseek-v4-flash-237",
+      "source_path": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/decode.log",
+      "destination_path": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/decode.log",
+      "command": "scp -q",
+      "evidence": {
+        "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "jsonl_line": 6417,
+        "timestamp": "2026-08-30T04:04:43.650Z",
+        "payload_type": "custom_tool_call",
+        "call_id": "call_d9La4Vtsy5p38QLnnhwP8cq4",
+        "excerpt": "scp remote decode.log to local same-named directory, then sha256sum"
+      },
+      "local_destination_exists": true,
+      "archived_path": "workspace/document/20260830_full_kv_retraction_repro/decode.log"
+    },
+    {
+      "source_node": "deepseek-v4-flash-237",
+      "source_path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+      "destination_path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_real_snapshot.log",
+      "command": "rsync -a",
+      "evidence": {
+        "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "jsonl_line": 9159,
+        "timestamp": "2026-08-30T13:39:42.316Z",
+        "payload_type": "custom_tool_call",
+        "call_id": "call_QlhhGOev8ZxSp65E2gkuqQHd",
+        "excerpt": "rsync remote decode.log to local decode_real_snapshot.log"
+      },
+      "local_destination_exists": true,
+      "archived_path": "workspace/document/20260830_swa_common_force_e2e/decode_real_snapshot.log.gz"
+    },
+    {
+      "source_node": "deepseek-v4-flash-237",
+      "source_path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+      "destination_path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake_snapshot.log",
+      "command": "rsync -a",
+      "evidence": {
+        "archive_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "jsonl_line": 9294,
+        "timestamp": "2026-08-30T14:35:23.187Z",
+        "payload_type": "custom_tool_call",
+        "call_id": "call_87sHhMRoNORRazotaLbTRlu6",
+        "excerpt": "rsync remote decode_fake.log to local decode_fake_snapshot.log"
+      },
+      "local_destination_exists": true,
+      "archived_path": "workspace/document/20260830_swa_common_force_e2e/decode_fake_snapshot.log.gz"
+    }
+  ],
+  "profile_transfer_observations": {
+    "summary": "Old primary session has executed copies from workspace/profile delivery directories into workspace/overall/artifacts/profile. These are delivery/lite traces, aggregate CSVs, markdown/scripts; this log-focused audit did not establish transfer of the 48 full traces.",
+    "primary_session_raw_lines": [
+      10074,
+      10560,
+      10768,
+      10944,
+      10953,
+      11057
+    ],
+    "source_file": "legacy_archive/session/primary-session.jsonl.gz",
+    "candidate_details": "/tmp/pro5k_log_move_candidates.json"
+  },
+  "limits": [
+    "No repository or source files modified.",
+    "No remote services, configuration, credentials, or files modified.",
+    "No download or push performed by this subagent.",
+    "No archived tool evidence of deleting or moving these three remote Decode logs to a third destination was found.",
+    "The absence of a recorded transfer does not prove that no out-of-band manual transfer occurred."
+  ]
+}

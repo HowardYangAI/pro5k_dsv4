@@ -36,5 +36,17 @@
     "missing_full_trace_original_bytes": 1880427160,
     "interpretation": "Available claim evidence is archived. Historical full traces, some standalone service logs and self-contained model/dataset replay inputs are incomplete; see the claim evidence index.",
     "performance_attribution": "+8.61% is the ratio of means from three local paired E2E runs of the earlier page-mask implementation, not a measured combined batch-mark/uint64 optimization."
+  },
+  "relocation_followup": {
+    "updated_at_utc": "2026-11-02T12:39:44.059272+00:00",
+    "index": "RELOCATION_AUDIT.md",
+    "recovered_remote_log_files": 3,
+    "recovered_remote_source_bytes": 37653543,
+    "remote_source_hostname": "ml-pro5000-ser237.qgz02",
+    "recovery_manifest": "metadata/recovery/remote_logs_manifest.json",
+    "last_known_full_trace_environment": "ml-pro5000-ser171.qgz02 (10.207.193.139)",
+    "current_archive_environment": "ml-pro5000-ser187.qgz02",
+    "full_traces_recovered": 0,
+    "full_trace_deletion_confirmed": false
   }
 }

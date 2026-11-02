@@ -1,0 +1,48 @@
+{
+  "audit_utc": "2026-11-02T12:36:59.316628+00:00",
+  "target": {
+    "hostname": "ml-pro5000-ser171.qgz02",
+    "ip": "10.207.193.139"
+  },
+  "current_ssh_config_target_alias": null,
+  "current_saved_known_host_match": null,
+  "known_hosts_files_checked": [
+    "/root/.ssh/known_hosts",
+    "/root/.ssh/known_hosts.old"
+  ],
+  "lookup_targets": [
+    "10.207.193.139",
+    "ml-pro5000-ser171.qgz02",
+    "[10.207.193.139]:8010",
+    "[10.207.193.139]:17897",
+    "[ml-pro5000-ser171.qgz02]:8010"
+  ],
+  "historical_user_config": {
+    "alias": "ser171",
+    "hostname": "10.207.193.139",
+    "port": 8010,
+    "user": "root",
+    "identityfile_on_user_client": "~/.ssh/id_ed25519",
+    "source": "conversations/threads/019fd684-b350-7471-8274-e5bf3f8f91d9.md:353",
+    "raw_source": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl:433",
+    "container": "yanghaoxiang_sglang_0515",
+    "relation_to_trace_container": "Explicitly a different same-host container; not established as the container producing target traces."
+  },
+  "historical_authentication": {
+    "raw_line_848": "Endpoint [10.207.193.139]:8010 ED25519 known host added, then publickey authentication denied.",
+    "raw_line_853": "Attempted current-at-the-time id_ed25519_xiaojukeji for same endpoint.",
+    "no_saved_actual_host_fingerprint_found": true,
+    "current_user_client_privatekey_not_present": true
+  },
+  "host_access_history": {
+    "source_host": "op-sven-opsec01.gz01",
+    "source_user": "yanghaoxiang_i",
+    "command": "dssh 10.207.193.139",
+    "target_user": "yanghaoxiang_i",
+    "source": "legacy_archive/session/primary-session.jsonl.gz:1780",
+    "current_source_identity_available": false
+  },
+  "conclusion": "No currently verified SSH identity or stored host fingerprint was found for the original trace-producing container. Known 8010 endpoint is a different container; do not treat it as direct trace-source access.",
+  "network_attempts_performed": false,
+  "privatekey_contents_read_or_printed": false
+}

@@ -1,0 +1,43 @@
+{
+  "generated_at_utc": "2026-11-02T12:39:44.059272+00:00",
+  "base_commit": "221d53e45b7f47581c9f68df3b4a5a8d3a7d7de4",
+  "scope": "Cross-conversation relocation audit and recovered remote log provenance; actual log outputs are hashed by remote_logs_manifest.json.",
+  "outputs": [
+    {
+      "path": "RELOCATION_AUDIT.md",
+      "bytes": 5996,
+      "sha256": "3c710a5f61d1d80e84f015fc158a5a98759887bfaa2dca1e2e29119cd4cb409b"
+    },
+    {
+      "path": "metadata/recovery/local_backup_audit.json",
+      "bytes": 78898,
+      "sha256": "809b34c05f8a4df2be0a890df36055e20c4021e3f78595bd3a7707bd667fd654"
+    },
+    {
+      "path": "metadata/recovery/log_moves_audit.json",
+      "bytes": 10447,
+      "sha256": "51bdd2833f8257febe3733e1bd1f99ace370c4061b3fc53c458cbebc487bff1b"
+    },
+    {
+      "path": "metadata/recovery/remote_logs_manifest.json",
+      "bytes": 2988,
+      "sha256": "dc07b0365200431740860b6f672c8c69f438718a4fbf1ae4595e5c41d1ee2447"
+    },
+    {
+      "path": "metadata/recovery/ser171_connection_audit.json",
+      "bytes": 2077,
+      "sha256": "44b1cef98d44e1f197c31f1221bcdd7db8cd267c2bd9575ae972e007f99d94ce"
+    },
+    {
+      "path": "metadata/recovery/ser237_trace_probe.json",
+      "bytes": 14805,
+      "sha256": "bbd3dc2e11ac934920f29d44fdd5036b2ab0d3f492c406685d3add0b4a60bbca"
+    },
+    {
+      "path": "metadata/recovery/trace_moves_audit.json",
+      "bytes": 11655,
+      "sha256": "2ac46cf1846c9ab85fccdfeaca766f7674543243b64147ce98df77cd613e5e73"
+    }
+  ],
+  "last_updated_at_utc": "2026-11-02T12:42:40.270638+00:00"
+}

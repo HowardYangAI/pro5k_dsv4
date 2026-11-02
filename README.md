@@ -7,6 +7,7 @@
 | 内容 | 入口 |
 | --- | --- |
 | PRO5000 高并发稳定性、SM120 KV Page 切分两项成果的逐项证据 | [成果证据索引与边界](CLAIM_EVIDENCE.md) |
+| 其他对话中的搬运记录、旧 Trace 所在节点及找回的远端日志 | [搬运追查与日志恢复](RELOCATION_AUDIT.md) |
 | 所有历史对话，按线程阅读 | [对话索引](conversations/README.md) |
 | Codex 原始事件和数据库导出 | [原始事件](conversations/raw/) · [数据库投影](conversations/databases/) |
 | PD、SWA、CR6647271、accuracy 等测试报告与日志 | [实验文档](workspace/document/) |
