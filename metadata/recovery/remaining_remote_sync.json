@@ -1,0 +1,1590 @@
+{
+  "generated_at_utc": "2026-11-02T13:27:15.186794+00:00",
+  "scope": "Classify all 19 historical missing source references from stability coverage, inspect 9 missing /tmp references on the original Decode node, and inventory its exact /sgl-workspace/workspace/document experiment directory.",
+  "remote_endpoint": {
+    "ssh_alias": "deepseek-v4-flash-237",
+    "hostname": "ml-pro5000-ser237.qgz02",
+    "endpoint": "root@10.207.193.166:8015"
+  },
+  "read_only_remote_method": "Two successful SSH BatchMode/ConnectTimeout=8/ConnectionAttempts=1/StrictHostKeyChecking=yes calls. Exact 28-path stat/hash probe, then os.walk of only workspace/document regular files; skip hidden dirs/files, __pycache__, node_modules and symlinks. No files, services, configuration or credentials changed.",
+  "summary": {
+    "historical_references_reviewed": 19,
+    "document_regular_files": 39,
+    "document_total_bytes": 648591582,
+    "document_already_archived_content_files": 7,
+    "additional_log_files_to_sync": 31,
+    "additional_log_original_bytes": 553106070,
+    "pid_metadata_only": 1,
+    "missing_tmp_candidates_checked": 9,
+    "tmp_nonempty_files_found": 0,
+    "tmp_empty_file_found": "/tmp/decode_health.out",
+    "old_historical_test_snapshot_recovered": true
+  },
+  "historical_path_classifications": [
+    {
+      "historical_item": 1,
+      "path": "/sgl-workspace/sglang/test/registered/unit/managers/test_retraction_cpu_copy_capability.py",
+      "remote_probe": {
+        "path": "/sgl-workspace/sglang/test/registered/unit/managers/test_retraction_cpu_copy_capability.py",
+        "exists": false
+      },
+      "classification": "readable_source_recovered_from_archived_tool_output",
+      "evidence": {
+        "raw_file": "legacy_archive/session/primary-session.jsonl.gz",
+        "creation_call_line": 4200,
+        "update_call_line": 4311,
+        "last_full_command_line": 4807,
+        "last_full_output_line": 4808
+      },
+      "archive_outputs": [
+        "source/claims/stability_history/test_retraction_cpu_copy_capability.py",
+        "source/claims/stability_history/provenance.json"
+      ],
+      "note": "Original source existed; test source restored as a separate 105-line historical snapshot. AST passed; no historical tests rerun."
+    },
+    {
+      "historical_item": 2,
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode.log",
+        "exists": false
+      },
+      "classification": "diagnostic_candidate_path_not_proven_created",
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "line": 7057
+      },
+      "note": "Only guarded [ -f ] diagnostic grep found. Actual archived output filename is decode_mf055_trace.log / decode_mf055_trace_post_drain.log, not decode.log. Remote exact candidate does not exist."
+    },
+    {
+      "historical_item": 3,
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf055_trace.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf055_trace.log",
+        "exists": true,
+        "size_bytes": 6389939,
+        "mtime_utc": "2026-08-27T06:03:34.140306+00:00",
+        "is_file": true,
+        "sha256": "ef1b98223c6e2b1f31ef690ce8a8c02e4527a03c79c99bb3544f11ba76403971"
+      },
+      "classification": "remote_final_log_differs_from_archived_earlier_snapshot",
+      "recommended": "sync without overwriting the historical snapshot",
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "copy_lines": [
+          4869,
+          4916,
+          5003
+        ]
+      }
+    },
+    {
+      "historical_item": 4,
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_baseline_mf055.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_baseline_mf055.log",
+        "exists": true,
+        "size_bytes": 140927,
+        "mtime_utc": "2026-08-27T06:05:53.033089+00:00",
+        "is_file": true,
+        "sha256": "44cff6df4221f802f4a49003a5289c99d5faf1ac49f41be117307e857fc63c26"
+      },
+      "classification": "same_content_already_archived_under_different_name",
+      "archive_content_matches": [
+        {
+          "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0604_unfixed_baseline_startup_crash/decode_unfixed_startup.log",
+          "outputs": [
+            {
+              "path": "workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0604_unfixed_baseline_startup_crash/decode_unfixed_startup.log",
+              "bytes": 140927,
+              "sha256": "44cff6df4221f802f4a49003a5289c99d5faf1ac49f41be117307e857fc63c26"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "copy_line": 5073
+      },
+      "note": "Remote SHA equals original source SHA in initial export manifest; no new download necessary."
+    },
+    {
+      "historical_item": 5,
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_fake_mf055.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_fake_mf055.log",
+        "exists": true,
+        "size_bytes": 53686811,
+        "mtime_utc": "2026-08-27T07:13:11.323994+00:00",
+        "is_file": true,
+        "sha256": "c024ca5909670b48906cebc43bd9946e75a6d710dc69c3b4d6f7c6baecc82f26"
+      },
+      "classification": "same_content_already_archived_under_different_name",
+      "archive_content_matches": [
+        {
+          "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log",
+          "outputs": [
+            {
+              "path": "workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log.gz",
+              "bytes": 2604064,
+              "sha256": "c9f80544a3b8dfff141a7317ecd89cf1efd7cc5ad10d0a2fde0b30b76a807937"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "copy_line": 5325
+      },
+      "note": "Remote SHA equals original source SHA in initial export manifest; no new download necessary."
+    },
+    {
+      "historical_item": 6,
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_retraction_mf055.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_retraction_mf055.log",
+        "exists": true,
+        "size_bytes": 3742380,
+        "mtime_utc": "2026-08-27T06:55:53.468290+00:00",
+        "is_file": true,
+        "sha256": "4f8f7a931729a8e27ca0b466b5b834acae7d48d33140b90515f40b202fbe8ef5"
+      },
+      "classification": "same_content_already_archived_under_different_name",
+      "archive_content_matches": [
+        {
+          "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/decode_unfixed_retraction_mf055.log",
+          "outputs": [
+            {
+              "path": "workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/decode_unfixed_retraction_mf055.log.gz",
+              "bytes": 212846,
+              "sha256": "25c530b580a03192a6dfe8407311bb4ee5d6b57f03dedb44bbc73cf5f7a2d5c0"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "copy_line": 5205
+      },
+      "note": "Remote SHA equals original source SHA in initial export manifest; no new download necessary."
+    },
+    {
+      "historical_item": 7,
+      "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_batch_usage.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_batch_usage.log",
+        "exists": false
+      },
+      "classification": "suggested_derived_file_no_creation_evidence",
+      "note": "README recommends grep-derived decode_batch_usage.log; earlier relocation audit found no executed creation, exact remote path absent."
+    },
+    {
+      "historical_item": 8,
+      "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+        "exists": true,
+        "size_bytes": 155235,
+        "mtime_utc": "2026-08-29T08:52:58.402053+00:00",
+        "is_file": true,
+        "sha256": "af62c012352c1e78f04a8a8a84226140b7b3b38fe62a38f1a15ac88b367968d7"
+      },
+      "classification": "already_recovered_and_synced_a61594b",
+      "archive_outputs": [
+        {
+          "path": "workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log.gz",
+          "bytes": 14895,
+          "sha256": "aa7c722e798e185014feb9dc957f94d5c1d60854effb896edf65d2a18b5804b1"
+        }
+      ]
+    },
+    {
+      "historical_item": 9,
+      "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+        "exists": true,
+        "size_bytes": 1544364,
+        "mtime_utc": "2026-08-29T09:53:06.630771+00:00",
+        "is_file": true,
+        "sha256": "c695d3906aff6cf1d105c16c91ceaca3fca60b0d9d3780eeba97d16ea8dbf8d6"
+      },
+      "classification": "already_recovered_and_synced_a61594b",
+      "archive_outputs": [
+        {
+          "path": "workspace/document/20260829_swa_eviction_e2e/decode_fixed.log.gz",
+          "bytes": 106467,
+          "sha256": "c6b90c13d57ab97317c6011f5f4184abc86844857d3d5c312d1feb124124cb14"
+        }
+      ]
+    },
+    {
+      "historical_item": 10,
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/README.md",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/README.md",
+        "exists": false
+      },
+      "classification": "diagnostic_candidate_path_not_proven_created",
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "line": 7695
+      },
+      "note": "A sed-if-present diagnostic attempted local/remote README; no Add File/create/write evidence found. Exact remote path absent."
+    },
+    {
+      "historical_item": 11,
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+        "exists": true,
+        "size_bytes": 35953944,
+        "mtime_utc": "2026-08-30T09:43:28.721327+00:00",
+        "is_file": true,
+        "sha256": "6f9a00a3d28e04bf59a8c0342069f4184de8307e1bb5d418b1366629743e98ce"
+      },
+      "classification": "already_recovered_and_synced_a61594b",
+      "archive_outputs": [
+        {
+          "path": "workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log.gz",
+          "bytes": 1116172,
+          "sha256": "787a543f56269a493090d27338bbea72358d9c982ba78bebb95051aaa7c69ed9"
+        }
+      ]
+    },
+    {
+      "historical_item": 12,
+      "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+        "exists": true,
+        "size_bytes": 15271745,
+        "mtime_utc": "2026-08-30T13:41:36.541953+00:00",
+        "is_file": true,
+        "sha256": "fc180853ec793f50a299cf6347a52bf8df7c0a9214db66fd36227d7290f1e257"
+      },
+      "classification": "remote_final_log_differs_from_archived_earlier_snapshot",
+      "recommended": "sync without overwriting the historical snapshot",
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "copy_lines": [
+          9159
+        ]
+      }
+    },
+    {
+      "historical_item": 13,
+      "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+        "exists": true,
+        "size_bytes": 17196604,
+        "mtime_utc": "2026-08-30T14:40:00.869016+00:00",
+        "is_file": true,
+        "sha256": "1ce23366858f8eb2929aa5cf044b756c1b4c685501c6ff35fa98a589fc3efa43"
+      },
+      "classification": "remote_final_log_differs_from_archived_earlier_snapshot",
+      "recommended": "sync without overwriting the historical snapshot",
+      "evidence": {
+        "raw_file": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+        "copy_lines": [
+          9294
+        ]
+      }
+    },
+    {
+      "historical_item": 14,
+      "path": "/sgl-workspace/workspace/plan/deepseek-v4-pd-decode-kv-retraction-fix-plan.md",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/plan/deepseek-v4-pd-decode-kv-retraction-fix-plan.md",
+        "exists": false
+      },
+      "classification": "historical_plan_archived_at_relocated_path",
+      "archive_outputs": [
+        "legacy_archive/artifacts/plan/deepseek-v4-pd-decode-kv-retraction-fix-plan.md"
+      ],
+      "evidence": {
+        "raw_file": "legacy_archive/session/primary-session.jsonl.gz",
+        "create_line": 3717,
+        "final_implementation_append_line": 4802
+      },
+      "note": "Plan content and implementation final section already in legacy archive; old workspace directory need not survive."
+    },
+    {
+      "historical_item": 15,
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/launch_server.py",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/launch_server.py",
+        "exists": false
+      },
+      "classification": "historical_source_path_restorable_from_archived_bundle",
+      "source_relative_path": "python/sglang/launch_server.py",
+      "baseline_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+      "git_blob": "8091692fdfc5bb41f94b3734d182f068bb572300",
+      "archive_outputs": [
+        "legacy_archive/source/sglang-all-refs.bundle.part-00",
+        "legacy_archive/source/sglang-all-refs.bundle.part-01",
+        "legacy_archive/source/kv-only-staged.patch.gz",
+        "legacy_archive/source/RESTORE.md"
+      ],
+      "note": "Historical worktree path no longer present; baseline source Git blob and complete staged repair patch are saved. Not a distinct missing remote experiment result."
+    },
+    {
+      "historical_item": 16,
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/entrypoints/engine.py",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/entrypoints/engine.py",
+        "exists": false
+      },
+      "classification": "historical_source_path_restorable_from_archived_bundle",
+      "source_relative_path": "python/sglang/srt/entrypoints/engine.py",
+      "baseline_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+      "git_blob": "5c158535e5daa138160ed60df4a8db045932cffb",
+      "archive_outputs": [
+        "legacy_archive/source/sglang-all-refs.bundle.part-00",
+        "legacy_archive/source/sglang-all-refs.bundle.part-01",
+        "legacy_archive/source/kv-only-staged.patch.gz",
+        "legacy_archive/source/RESTORE.md"
+      ],
+      "note": "Historical worktree path no longer present; baseline source Git blob and complete staged repair patch are saved. Not a distinct missing remote experiment result."
+    },
+    {
+      "historical_item": 17,
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/entrypoints/http_server.py",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/entrypoints/http_server.py",
+        "exists": false
+      },
+      "classification": "historical_source_path_restorable_from_archived_bundle",
+      "source_relative_path": "python/sglang/srt/entrypoints/http_server.py",
+      "baseline_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+      "git_blob": "51c85e63023f15333544453e8d7b94c4ccde2dd8",
+      "archive_outputs": [
+        "legacy_archive/source/sglang-all-refs.bundle.part-00",
+        "legacy_archive/source/sglang-all-refs.bundle.part-01",
+        "legacy_archive/source/kv-only-staged.patch.gz",
+        "legacy_archive/source/RESTORE.md"
+      ],
+      "note": "Historical worktree path no longer present; baseline source Git blob and complete staged repair patch are saved. Not a distinct missing remote experiment result."
+    },
+    {
+      "historical_item": 18,
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/server_args.py",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/server_args.py",
+        "exists": false
+      },
+      "classification": "historical_source_path_restorable_from_archived_bundle",
+      "source_relative_path": "python/sglang/srt/server_args.py",
+      "baseline_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+      "git_blob": "c866d543bfecf48dcc8e3146d6329b37d7a8457c",
+      "archive_outputs": [
+        "legacy_archive/source/sglang-all-refs.bundle.part-00",
+        "legacy_archive/source/sglang-all-refs.bundle.part-01",
+        "legacy_archive/source/kv-only-staged.patch.gz",
+        "legacy_archive/source/RESTORE.md"
+      ],
+      "note": "Historical worktree path no longer present; baseline source Git blob and complete staged repair patch are saved. Not a distinct missing remote experiment result."
+    },
+    {
+      "historical_item": 19,
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/utils/network.py",
+      "remote_probe": {
+        "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/utils/network.py",
+        "exists": false
+      },
+      "classification": "historical_source_path_restorable_from_archived_bundle",
+      "source_relative_path": "python/sglang/srt/utils/network.py",
+      "baseline_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+      "git_blob": "cec89c715c2695711c4376c0f70c6404297f861c",
+      "archive_outputs": [
+        "legacy_archive/source/sglang-all-refs.bundle.part-00",
+        "legacy_archive/source/sglang-all-refs.bundle.part-01",
+        "legacy_archive/source/kv-only-staged.patch.gz",
+        "legacy_archive/source/RESTORE.md"
+      ],
+      "note": "Historical worktree path no longer present; baseline source Git blob and complete staged repair patch are saved. Not a distinct missing remote experiment result."
+    }
+  ],
+  "additional_log_files_to_sync": [
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode.log",
+      "bytes": 8600630,
+      "mtime_utc": "2026-08-27T04:49:40.411639+00:00",
+      "sha256": "1f7d466b9ecb4408d7af236abdfdfefe98ebb3849229a5deece4dd213849cf51",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": true,
+      "local_original_sha256": "115a28ec45bfb295c8af14636313144067ace2b62d3d2a6629bbfdf221df453d",
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf05.log",
+      "bytes": 5128010,
+      "mtime_utc": "2026-08-27T05:29:04.377021+00:00",
+      "sha256": "1cadbfe8ae34f27ab0df8e15e31d3a3ac8a3cfcaee773bf48ba2346a110bd93a",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": true,
+      "local_original_sha256": "556be740eaa90d4285472a7a2061df1f510bc9169d2190fe1667c53de58cfbf5",
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf055_trace.log",
+      "bytes": 6389939,
+      "mtime_utc": "2026-08-27T06:03:34.140306+00:00",
+      "sha256": "ef1b98223c6e2b1f31ef690ce8a8c02e4527a03c79c99bb3544f11ba76403971",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/decode.log",
+      "bytes": 34754625,
+      "mtime_utc": "2026-08-30T06:15:41.964489+00:00",
+      "sha256": "23da42adf41b67a7d26acc5b0dd9f0f038d8b91fd947d3adc6a2b7741e40fe44",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/decode.log",
+      "bytes": 16671496,
+      "mtime_utc": "2026-08-30T10:30:48.461384+00:00",
+      "sha256": "e524fbea9e5d0a3dbcece2e7d91d1f88f019c83bae05ecbf09eeba3297b34858",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": true,
+      "local_original_sha256": "41d156c64298dfe39f1c2f5d961b41f8830ca5a97473af67796e197f82c07c89",
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/decode.log",
+      "bytes": 11107233,
+      "mtime_utc": "2026-08-30T11:47:58.485993+00:00",
+      "sha256": "fcd0b9c6fc47641f35edbf7c334c83500411b93769882f4402815a414e00fb81",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": true,
+      "local_original_sha256": "e18d8e501a6aba8f529da6b5adbcb72e89c9b2b4e7098142968899c8422a2a63",
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_official_pr36185_e2e/baseline_decode.log",
+      "bytes": 2698,
+      "mtime_utc": "2026-08-30T11:50:22.671921+00:00",
+      "sha256": "f92b0891d22df1ed739210b77cc31f5f85ddb7a95e096093da2d5154f6a0526d",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+      "bytes": 15271745,
+      "mtime_utc": "2026-08-30T13:41:36.541953+00:00",
+      "sha256": "fc180853ec793f50a299cf6347a52bf8df7c0a9214db66fd36227d7290f1e257",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+      "bytes": 17196604,
+      "mtime_utc": "2026-08-30T14:40:00.869016+00:00",
+      "sha256": "1ce23366858f8eb2929aa5cf044b756c1b4c685501c6ff35fa98a589fc3efa43",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode.log",
+      "bytes": 130394,
+      "mtime_utc": "2026-09-01T11:56:12.113203+00:00",
+      "sha256": "192a72436d915143b87228758367524c5f9540b2520d580b2bd00a91f4652b1c",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode_restart_20260902.log",
+      "bytes": 108132484,
+      "mtime_utc": "2026-09-02T05:14:47.706204+00:00",
+      "sha256": "bb707efa0870570f229d4451f22d91398f262ed0f11238da784a8022a18f93ab",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode_runnable.log",
+      "bytes": 127774,
+      "mtime_utc": "2026-09-01T15:11:59.810456+00:00",
+      "sha256": "2eb76445ec77f860b76f6542ca7d82d76601b62ff7493f85bae8c2daea99b4aa",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode.log",
+      "bytes": 106665391,
+      "mtime_utc": "2026-09-01T05:59:17.638232+00:00",
+      "sha256": "c2fa5c407a2f57144f5d0ada8e6593336805fd1e05bb5c32ad5f2450648c078a",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode_startup_misconfigured.log",
+      "bytes": 101345,
+      "mtime_utc": "2026-09-01T03:45:26.809411+00:00",
+      "sha256": "2af64bcd9265cbe320d14ba11e2ed5d4a336a85152d8c018eec09351ef644eb1",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode_startup_unpinned_defaults.log",
+      "bytes": 81851,
+      "mtime_utc": "2026-09-01T03:49:14.353191+00:00",
+      "sha256": "4cb53f4e95868eca9bf44ae537bec4ffb0306beeb74e05b1ea7b2571fdca4b09",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed_with_parsers/decode.log",
+      "bytes": 32733135,
+      "mtime_utc": "2026-09-01T11:53:21.891380+00:00",
+      "sha256": "a208703b427b09c1be5a8d48ae431bb35fd673c549addbc965f16a52c07388c2",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/decode.log",
+      "bytes": 40450361,
+      "mtime_utc": "2026-09-02T12:00:50.538014+00:00",
+      "sha256": "7e9f14237830a92b34b49f7db62ddc4719b9eeca67619a468e3b9152e7f1d114",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260902_cr6647271_perf_accuracy/baseline_no_ep_no_fix/decode.log",
+      "bytes": 46555,
+      "mtime_utc": "2026-09-02T11:17:28.012921+00:00",
+      "sha256": "a97ab1993317aaedad754af6ca89d4933ec4fdb456c3a4387d1ebabc663f4f2e",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_compat_with_parsers/decode.log",
+      "bytes": 764244,
+      "mtime_utc": "2026-09-03T11:05:52.806921+00:00",
+      "sha256": "ca151578af157f10297f8c4377685f6119cd46d63f8abe131c9cc81a4fc99c0b",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_with_parsers/decode.log",
+      "bytes": 125287,
+      "mtime_utc": "2026-09-03T09:56:00.215356+00:00",
+      "sha256": "7a412ba7f77d92e8e5c5e5c012acef7bc5862f367ec597c713c3ed98e618ce7c",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_no_ep_with_parsers/decode.log",
+      "bytes": 672336,
+      "mtime_utc": "2026-09-03T09:53:00.400203+00:00",
+      "sha256": "e5bb4564cd2b43844ea9f7ea36f94a5ffb006f599aacf63edbc9bbeed8e8f429",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults/decode.log",
+      "bytes": 1274642,
+      "mtime_utc": "2026-09-03T06:38:18.511091+00:00",
+      "sha256": "f7dd1422ddf2c7c4d003f12c4ffc819b583009165d475ae3a4e2511c885f5740",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults_with_parsers/decode.log",
+      "bytes": 2076854,
+      "mtime_utc": "2026-09-03T07:51:19.387084+00:00",
+      "sha256": "9bf2d90675fc9de5e1086a24a05985a47eaad31a8a1da7c53523fa4f1acb20f1",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_forced_temp0_with_parsers/decode.log",
+      "bytes": 824176,
+      "mtime_utc": "2026-09-03T11:37:01.917955+00:00",
+      "sha256": "c17507bca6451a2ec938b96b53306c37e800209cc90257d694a36b389020428c",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_with_parsers/decode.log",
+      "bytes": 745605,
+      "mtime_utc": "2026-09-03T09:35:28.892185+00:00",
+      "sha256": "20c145cfbd365c90356918a85e3875206868a34c0e21a85c205e2781167c64af",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_no_ep_with_parsers/decode.log",
+      "bytes": 783356,
+      "mtime_utc": "2026-09-03T09:04:22.985250+00:00",
+      "sha256": "26eaf4d86ccfadf3f8111b88b505d7296f44a4623d15a5d517830be35b2a1e11",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_no_ep_no_dspark_with_parsers/decode.log",
+      "bytes": 1525111,
+      "mtime_utc": "2026-09-03T08:35:24.298705+00:00",
+      "sha256": "09c1f8c0692e05e557a716f9696fcebab7ca2676497f0a4c9556e0371dfcb193",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/decode.log",
+      "bytes": 37957624,
+      "mtime_utc": "2026-09-03T12:49:01.350904+00:00",
+      "sha256": "2a4dd739c294aa3abcb1a3cc807b5f4c6d09a9de2442b92ce216bdc33c7e354b",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/decode.log",
+      "bytes": 52195396,
+      "mtime_utc": "2026-09-05T04:31:12.145812+00:00",
+      "sha256": "ab5b348eab1cc32faa6ba24e13a6dc801d5be206b4fde1c863b584db9d4fc86e",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/decode.log",
+      "bytes": 50516671,
+      "mtime_utc": "2026-09-05T05:08:40.395865+00:00",
+      "sha256": "98a4f788bd14c2a76dc8554fa90745e7c80b4acaf8b104902ffebfc2ef4ed068",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/repro_6647_exact_defaults/decode.log",
+      "bytes": 52498,
+      "mtime_utc": "2026-09-05T05:14:25.389694+00:00",
+      "sha256": "c9c537aa4c34234cfb96ba73c6de138da54fcaf221d7f90f353179e0cd91f5a1",
+      "archive_same_original_path": false,
+      "archive_content_matches": [],
+      "local_original_exists": false,
+      "archived_same_content_any_path": false
+    }
+  ],
+  "tmp_probe": [
+    {
+      "path": "/tmp/ShareGPT_V3_unfiltered_cleaned_split.json",
+      "exists": false
+    },
+    {
+      "path": "/tmp/decode_health_body",
+      "exists": false
+    },
+    {
+      "path": "/tmp/decode_health.out",
+      "exists": true,
+      "size_bytes": 0,
+      "mtime_utc": "2026-09-03T06:13:20.696812+00:00",
+      "is_file": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/h3-dp-0.mp4",
+      "exists": false
+    },
+    {
+      "path": "/tmp/h3-dp-1.mp4",
+      "exists": false
+    },
+    {
+      "path": "/tmp/fetch.log",
+      "exists": false
+    },
+    {
+      "path": "/tmp/multiturn_run_132.jsonl",
+      "exists": false
+    },
+    {
+      "path": "/tmp/multiturn_run_131.jsonl",
+      "exists": false
+    },
+    {
+      "path": "/tmp/multiturn_run_130.jsonl",
+      "exists": false
+    }
+  ],
+  "remote_document_inventory": {
+    "hostname": "ml-pro5000-ser237.qgz02",
+    "checked_at_utc": "2026-11-02T13:25:04.175914+00:00",
+    "base": "/sgl-workspace/workspace/document",
+    "files": [
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode.log",
+        "bytes": 8600630,
+        "mtime_utc": "2026-08-27T04:49:40.411639+00:00",
+        "sha256": "1f7d466b9ecb4408d7af236abdfdfefe98ebb3849229a5deece4dd213849cf51",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": true,
+        "local_original_sha256": "115a28ec45bfb295c8af14636313144067ace2b62d3d2a6629bbfdf221df453d",
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf05.log",
+        "bytes": 5128010,
+        "mtime_utc": "2026-08-27T05:29:04.377021+00:00",
+        "sha256": "1cadbfe8ae34f27ab0df8e15e31d3a3ac8a3cfcaee773bf48ba2346a110bd93a",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": true,
+        "local_original_sha256": "556be740eaa90d4285472a7a2061df1f510bc9169d2190fe1667c53de58cfbf5",
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf055_trace.log",
+        "bytes": 6389939,
+        "mtime_utc": "2026-08-27T06:03:34.140306+00:00",
+        "sha256": "ef1b98223c6e2b1f31ef690ce8a8c02e4527a03c79c99bb3544f11ba76403971",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_baseline_mf055.log",
+        "bytes": 140927,
+        "mtime_utc": "2026-08-27T06:05:53.033089+00:00",
+        "sha256": "44cff6df4221f802f4a49003a5289c99d5faf1ac49f41be117307e857fc63c26",
+        "archive_same_original_path": false,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0604_unfixed_baseline_startup_crash/decode_unfixed_startup.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0604_unfixed_baseline_startup_crash/decode_unfixed_startup.log",
+                "bytes": 140927,
+                "sha256": "44cff6df4221f802f4a49003a5289c99d5faf1ac49f41be117307e857fc63c26"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": false,
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_fake_mf055.log",
+        "bytes": 53686811,
+        "mtime_utc": "2026-08-27T07:13:11.323994+00:00",
+        "sha256": "c024ca5909670b48906cebc43bd9946e75a6d710dc69c3b4d6f7c6baecc82f26",
+        "archive_same_original_path": false,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log.gz",
+                "bytes": 2604064,
+                "sha256": "c9f80544a3b8dfff141a7317ecd89cf1efd7cc5ad10d0a2fde0b30b76a807937"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": false,
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_retraction_mf055.log",
+        "bytes": 3742380,
+        "mtime_utc": "2026-08-27T06:55:53.468290+00:00",
+        "sha256": "4f8f7a931729a8e27ca0b466b5b834acae7d48d33140b90515f40b202fbe8ef5",
+        "archive_same_original_path": false,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/decode_unfixed_retraction_mf055.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/decode_unfixed_retraction_mf055.log.gz",
+                "bytes": 212846,
+                "sha256": "25c530b580a03192a6dfe8407311bb4ee5d6b57f03dedb44bbc73cf5f7a2d5c0"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": false,
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+        "bytes": 155235,
+        "mtime_utc": "2026-08-29T08:52:58.402053+00:00",
+        "sha256": "af62c012352c1e78f04a8a8a84226140b7b3b38fe62a38f1a15ac88b367968d7",
+        "archive_same_original_path": false,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log.gz",
+                "bytes": 14895,
+                "sha256": "aa7c722e798e185014feb9dc957f94d5c1d60854effb896edf65d2a18b5804b1"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": false,
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+        "bytes": 1544364,
+        "mtime_utc": "2026-08-29T09:53:06.630771+00:00",
+        "sha256": "c695d3906aff6cf1d105c16c91ceaca3fca60b0d9d3780eeba97d16ea8dbf8d6",
+        "archive_same_original_path": false,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260829_swa_eviction_e2e/decode_fixed.log.gz",
+                "bytes": 106467,
+                "sha256": "c6b90c13d57ab97317c6011f5f4184abc86844857d3d5c312d1feb124124cb14"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": false,
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/decode.log",
+        "bytes": 34754625,
+        "mtime_utc": "2026-08-30T06:15:41.964489+00:00",
+        "sha256": "23da42adf41b67a7d26acc5b0dd9f0f038d8b91fd947d3adc6a2b7741e40fe44",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+        "bytes": 35953944,
+        "mtime_utc": "2026-08-30T09:43:28.721327+00:00",
+        "sha256": "6f9a00a3d28e04bf59a8c0342069f4184de8307e1bb5d418b1366629743e98ce",
+        "archive_same_original_path": false,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log.gz",
+                "bytes": 1116172,
+                "sha256": "787a543f56269a493090d27338bbea72358d9c982ba78bebb95051aaa7c69ed9"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": false,
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/decode.log",
+        "bytes": 16671496,
+        "mtime_utc": "2026-08-30T10:30:48.461384+00:00",
+        "sha256": "e524fbea9e5d0a3dbcece2e7d91d1f88f019c83bae05ecbf09eeba3297b34858",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": true,
+        "local_original_sha256": "41d156c64298dfe39f1c2f5d961b41f8830ca5a97473af67796e197f82c07c89",
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/decode.log",
+        "bytes": 11107233,
+        "mtime_utc": "2026-08-30T11:47:58.485993+00:00",
+        "sha256": "fcd0b9c6fc47641f35edbf7c334c83500411b93769882f4402815a414e00fb81",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": true,
+        "local_original_sha256": "e18d8e501a6aba8f529da6b5adbcb72e89c9b2b4e7098142968899c8422a2a63",
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/decode.log",
+        "bytes": 261845,
+        "mtime_utc": "2026-08-30T03:42:00.856281+00:00",
+        "sha256": "df2c1203fdfcfb802f53da71f71e42841dcadbfd7481daaeb51553db650b0489",
+        "archive_same_original_path": true,
+        "archive_content_matches": [
+          {
+            "source": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/decode.log",
+            "outputs": [
+              {
+                "path": "workspace/document/20260830_full_kv_retraction_repro/decode.log",
+                "bytes": 261845,
+                "sha256": "df2c1203fdfcfb802f53da71f71e42841dcadbfd7481daaeb51553db650b0489"
+              }
+            ]
+          }
+        ],
+        "local_original_exists": true,
+        "local_original_sha256": "df2c1203fdfcfb802f53da71f71e42841dcadbfd7481daaeb51553db650b0489",
+        "archived_same_content_any_path": true
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_official_pr36185_e2e/baseline_decode.log",
+        "bytes": 2698,
+        "mtime_utc": "2026-08-30T11:50:22.671921+00:00",
+        "sha256": "f92b0891d22df1ed739210b77cc31f5f85ddb7a95e096093da2d5154f6a0526d",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+        "bytes": 15271745,
+        "mtime_utc": "2026-08-30T13:41:36.541953+00:00",
+        "sha256": "fc180853ec793f50a299cf6347a52bf8df7c0a9214db66fd36227d7290f1e257",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+        "bytes": 17196604,
+        "mtime_utc": "2026-08-30T14:40:00.869016+00:00",
+        "sha256": "1ce23366858f8eb2929aa5cf044b756c1b4c685501c6ff35fa98a589fc3efa43",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode.log",
+        "bytes": 130394,
+        "mtime_utc": "2026-09-01T11:56:12.113203+00:00",
+        "sha256": "192a72436d915143b87228758367524c5f9540b2520d580b2bd00a91f4652b1c",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode_restart_20260902.log",
+        "bytes": 108132484,
+        "mtime_utc": "2026-09-02T05:14:47.706204+00:00",
+        "sha256": "bb707efa0870570f229d4451f22d91398f262ed0f11238da784a8022a18f93ab",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode_runnable.log",
+        "bytes": 127774,
+        "mtime_utc": "2026-09-01T15:11:59.810456+00:00",
+        "sha256": "2eb76445ec77f860b76f6542ca7d82d76601b62ff7493f85bae8c2daea99b4aa",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode.log",
+        "bytes": 106665391,
+        "mtime_utc": "2026-09-01T05:59:17.638232+00:00",
+        "sha256": "c2fa5c407a2f57144f5d0ada8e6593336805fd1e05bb5c32ad5f2450648c078a",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode.pid",
+        "bytes": 6,
+        "mtime_utc": "2026-09-01T03:50:07.737016+00:00",
+        "sha256": "3530f97133d54e3ffd1905e92b984152ff67d656f7f0c1b6e87c12d13bb726c8",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode_startup_misconfigured.log",
+        "bytes": 101345,
+        "mtime_utc": "2026-09-01T03:45:26.809411+00:00",
+        "sha256": "2af64bcd9265cbe320d14ba11e2ed5d4a336a85152d8c018eec09351ef644eb1",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode_startup_unpinned_defaults.log",
+        "bytes": 81851,
+        "mtime_utc": "2026-09-01T03:49:14.353191+00:00",
+        "sha256": "4cb53f4e95868eca9bf44ae537bec4ffb0306beeb74e05b1ea7b2571fdca4b09",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed_with_parsers/decode.log",
+        "bytes": 32733135,
+        "mtime_utc": "2026-09-01T11:53:21.891380+00:00",
+        "sha256": "a208703b427b09c1be5a8d48ae431bb35fd673c549addbc965f16a52c07388c2",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/decode.log",
+        "bytes": 40450361,
+        "mtime_utc": "2026-09-02T12:00:50.538014+00:00",
+        "sha256": "7e9f14237830a92b34b49f7db62ddc4719b9eeca67619a468e3b9152e7f1d114",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260902_cr6647271_perf_accuracy/baseline_no_ep_no_fix/decode.log",
+        "bytes": 46555,
+        "mtime_utc": "2026-09-02T11:17:28.012921+00:00",
+        "sha256": "a97ab1993317aaedad754af6ca89d4933ec4fdb456c3a4387d1ebabc663f4f2e",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_compat_with_parsers/decode.log",
+        "bytes": 764244,
+        "mtime_utc": "2026-09-03T11:05:52.806921+00:00",
+        "sha256": "ca151578af157f10297f8c4377685f6119cd46d63f8abe131c9cc81a4fc99c0b",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_with_parsers/decode.log",
+        "bytes": 125287,
+        "mtime_utc": "2026-09-03T09:56:00.215356+00:00",
+        "sha256": "7a412ba7f77d92e8e5c5e5c012acef7bc5862f367ec597c713c3ed98e618ce7c",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_no_ep_with_parsers/decode.log",
+        "bytes": 672336,
+        "mtime_utc": "2026-09-03T09:53:00.400203+00:00",
+        "sha256": "e5bb4564cd2b43844ea9f7ea36f94a5ffb006f599aacf63edbc9bbeed8e8f429",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults/decode.log",
+        "bytes": 1274642,
+        "mtime_utc": "2026-09-03T06:38:18.511091+00:00",
+        "sha256": "f7dd1422ddf2c7c4d003f12c4ffc819b583009165d475ae3a4e2511c885f5740",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults_with_parsers/decode.log",
+        "bytes": 2076854,
+        "mtime_utc": "2026-09-03T07:51:19.387084+00:00",
+        "sha256": "9bf2d90675fc9de5e1086a24a05985a47eaad31a8a1da7c53523fa4f1acb20f1",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_forced_temp0_with_parsers/decode.log",
+        "bytes": 824176,
+        "mtime_utc": "2026-09-03T11:37:01.917955+00:00",
+        "sha256": "c17507bca6451a2ec938b96b53306c37e800209cc90257d694a36b389020428c",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_with_parsers/decode.log",
+        "bytes": 745605,
+        "mtime_utc": "2026-09-03T09:35:28.892185+00:00",
+        "sha256": "20c145cfbd365c90356918a85e3875206868a34c0e21a85c205e2781167c64af",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_no_ep_with_parsers/decode.log",
+        "bytes": 783356,
+        "mtime_utc": "2026-09-03T09:04:22.985250+00:00",
+        "sha256": "26eaf4d86ccfadf3f8111b88b505d7296f44a4623d15a5d517830be35b2a1e11",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_no_ep_no_dspark_with_parsers/decode.log",
+        "bytes": 1525111,
+        "mtime_utc": "2026-09-03T08:35:24.298705+00:00",
+        "sha256": "09c1f8c0692e05e557a716f9696fcebab7ca2676497f0a4c9556e0371dfcb193",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/decode.log",
+        "bytes": 37957624,
+        "mtime_utc": "2026-09-03T12:49:01.350904+00:00",
+        "sha256": "2a4dd739c294aa3abcb1a3cc807b5f4c6d09a9de2442b92ce216bdc33c7e354b",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/decode.log",
+        "bytes": 52195396,
+        "mtime_utc": "2026-09-05T04:31:12.145812+00:00",
+        "sha256": "ab5b348eab1cc32faa6ba24e13a6dc801d5be206b4fde1c863b584db9d4fc86e",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/decode.log",
+        "bytes": 50516671,
+        "mtime_utc": "2026-09-05T05:08:40.395865+00:00",
+        "sha256": "98a4f788bd14c2a76dc8554fa90745e7c80b4acaf8b104902ffebfc2ef4ed068",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/repro_6647_exact_defaults/decode.log",
+        "bytes": 52498,
+        "mtime_utc": "2026-09-05T05:14:25.389694+00:00",
+        "sha256": "c9c537aa4c34234cfb96ba73c6de138da54fcaf221d7f90f353179e0cd91f5a1",
+        "archive_same_original_path": false,
+        "archive_content_matches": [],
+        "local_original_exists": false,
+        "archived_same_content_any_path": false
+      }
+    ],
+    "skipped_nonregular": [],
+    "errors": [],
+    "summary": {
+      "remote_file_count": 39,
+      "remote_total_bytes": 648591582,
+      "not_archived_same_content": [
+        {
+          "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode.log",
+          "bytes": 8600630,
+          "mtime_utc": "2026-08-27T04:49:40.411639+00:00",
+          "sha256": "1f7d466b9ecb4408d7af236abdfdfefe98ebb3849229a5deece4dd213849cf51",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": true,
+          "local_original_sha256": "115a28ec45bfb295c8af14636313144067ace2b62d3d2a6629bbfdf221df453d",
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf05.log",
+          "bytes": 5128010,
+          "mtime_utc": "2026-08-27T05:29:04.377021+00:00",
+          "sha256": "1cadbfe8ae34f27ab0df8e15e31d3a3ac8a3cfcaee773bf48ba2346a110bd93a",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": true,
+          "local_original_sha256": "556be740eaa90d4285472a7a2061df1f510bc9169d2190fe1667c53de58cfbf5",
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf055_trace.log",
+          "bytes": 6389939,
+          "mtime_utc": "2026-08-27T06:03:34.140306+00:00",
+          "sha256": "ef1b98223c6e2b1f31ef690ce8a8c02e4527a03c79c99bb3544f11ba76403971",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/decode.log",
+          "bytes": 34754625,
+          "mtime_utc": "2026-08-30T06:15:41.964489+00:00",
+          "sha256": "23da42adf41b67a7d26acc5b0dd9f0f038d8b91fd947d3adc6a2b7741e40fe44",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/decode.log",
+          "bytes": 16671496,
+          "mtime_utc": "2026-08-30T10:30:48.461384+00:00",
+          "sha256": "e524fbea9e5d0a3dbcece2e7d91d1f88f019c83bae05ecbf09eeba3297b34858",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": true,
+          "local_original_sha256": "41d156c64298dfe39f1c2f5d961b41f8830ca5a97473af67796e197f82c07c89",
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/decode.log",
+          "bytes": 11107233,
+          "mtime_utc": "2026-08-30T11:47:58.485993+00:00",
+          "sha256": "fcd0b9c6fc47641f35edbf7c334c83500411b93769882f4402815a414e00fb81",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": true,
+          "local_original_sha256": "e18d8e501a6aba8f529da6b5adbcb72e89c9b2b4e7098142968899c8422a2a63",
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260830_official_pr36185_e2e/baseline_decode.log",
+          "bytes": 2698,
+          "mtime_utc": "2026-08-30T11:50:22.671921+00:00",
+          "sha256": "f92b0891d22df1ed739210b77cc31f5f85ddb7a95e096093da2d5154f6a0526d",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+          "bytes": 15271745,
+          "mtime_utc": "2026-08-30T13:41:36.541953+00:00",
+          "sha256": "fc180853ec793f50a299cf6347a52bf8df7c0a9214db66fd36227d7290f1e257",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+          "bytes": 17196604,
+          "mtime_utc": "2026-08-30T14:40:00.869016+00:00",
+          "sha256": "1ce23366858f8eb2929aa5cf044b756c1b4c685501c6ff35fa98a589fc3efa43",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode.log",
+          "bytes": 130394,
+          "mtime_utc": "2026-09-01T11:56:12.113203+00:00",
+          "sha256": "192a72436d915143b87228758367524c5f9540b2520d580b2bd00a91f4652b1c",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode_restart_20260902.log",
+          "bytes": 108132484,
+          "mtime_utc": "2026-09-02T05:14:47.706204+00:00",
+          "sha256": "bb707efa0870570f229d4451f22d91398f262ed0f11238da784a8022a18f93ab",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/decode_runnable.log",
+          "bytes": 127774,
+          "mtime_utc": "2026-09-01T15:11:59.810456+00:00",
+          "sha256": "2eb76445ec77f860b76f6542ca7d82d76601b62ff7493f85bae8c2daea99b4aa",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode.log",
+          "bytes": 106665391,
+          "mtime_utc": "2026-09-01T05:59:17.638232+00:00",
+          "sha256": "c2fa5c407a2f57144f5d0ada8e6593336805fd1e05bb5c32ad5f2450648c078a",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode.pid",
+          "bytes": 6,
+          "mtime_utc": "2026-09-01T03:50:07.737016+00:00",
+          "sha256": "3530f97133d54e3ffd1905e92b984152ff67d656f7f0c1b6e87c12d13bb726c8",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode_startup_misconfigured.log",
+          "bytes": 101345,
+          "mtime_utc": "2026-09-01T03:45:26.809411+00:00",
+          "sha256": "2af64bcd9265cbe320d14ba11e2ed5d4a336a85152d8c018eec09351ef644eb1",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/decode_startup_unpinned_defaults.log",
+          "bytes": 81851,
+          "mtime_utc": "2026-09-01T03:49:14.353191+00:00",
+          "sha256": "4cb53f4e95868eca9bf44ae537bec4ffb0306beeb74e05b1ea7b2571fdca4b09",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed_with_parsers/decode.log",
+          "bytes": 32733135,
+          "mtime_utc": "2026-09-01T11:53:21.891380+00:00",
+          "sha256": "a208703b427b09c1be5a8d48ae431bb35fd673c549addbc965f16a52c07388c2",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/decode.log",
+          "bytes": 40450361,
+          "mtime_utc": "2026-09-02T12:00:50.538014+00:00",
+          "sha256": "7e9f14237830a92b34b49f7db62ddc4719b9eeca67619a468e3b9152e7f1d114",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260902_cr6647271_perf_accuracy/baseline_no_ep_no_fix/decode.log",
+          "bytes": 46555,
+          "mtime_utc": "2026-09-02T11:17:28.012921+00:00",
+          "sha256": "a97ab1993317aaedad754af6ca89d4933ec4fdb456c3a4387d1ebabc663f4f2e",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_compat_with_parsers/decode.log",
+          "bytes": 764244,
+          "mtime_utc": "2026-09-03T11:05:52.806921+00:00",
+          "sha256": "ca151578af157f10297f8c4377685f6119cd46d63f8abe131c9cc81a4fc99c0b",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_with_parsers/decode.log",
+          "bytes": 125287,
+          "mtime_utc": "2026-09-03T09:56:00.215356+00:00",
+          "sha256": "7a412ba7f77d92e8e5c5e5c012acef7bc5862f367ec597c713c3ed98e618ce7c",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_no_ep_with_parsers/decode.log",
+          "bytes": 672336,
+          "mtime_utc": "2026-09-03T09:53:00.400203+00:00",
+          "sha256": "e5bb4564cd2b43844ea9f7ea36f94a5ffb006f599aacf63edbc9bbeed8e8f429",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults/decode.log",
+          "bytes": 1274642,
+          "mtime_utc": "2026-09-03T06:38:18.511091+00:00",
+          "sha256": "f7dd1422ddf2c7c4d003f12c4ffc819b583009165d475ae3a4e2511c885f5740",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults_with_parsers/decode.log",
+          "bytes": 2076854,
+          "mtime_utc": "2026-09-03T07:51:19.387084+00:00",
+          "sha256": "9bf2d90675fc9de5e1086a24a05985a47eaad31a8a1da7c53523fa4f1acb20f1",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_forced_temp0_with_parsers/decode.log",
+          "bytes": 824176,
+          "mtime_utc": "2026-09-03T11:37:01.917955+00:00",
+          "sha256": "c17507bca6451a2ec938b96b53306c37e800209cc90257d694a36b389020428c",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_with_parsers/decode.log",
+          "bytes": 745605,
+          "mtime_utc": "2026-09-03T09:35:28.892185+00:00",
+          "sha256": "20c145cfbd365c90356918a85e3875206868a34c0e21a85c205e2781167c64af",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_no_ep_with_parsers/decode.log",
+          "bytes": 783356,
+          "mtime_utc": "2026-09-03T09:04:22.985250+00:00",
+          "sha256": "26eaf4d86ccfadf3f8111b88b505d7296f44a4623d15a5d517830be35b2a1e11",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_no_ep_no_dspark_with_parsers/decode.log",
+          "bytes": 1525111,
+          "mtime_utc": "2026-09-03T08:35:24.298705+00:00",
+          "sha256": "09c1f8c0692e05e557a716f9696fcebab7ca2676497f0a4c9556e0371dfcb193",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/decode.log",
+          "bytes": 37957624,
+          "mtime_utc": "2026-09-03T12:49:01.350904+00:00",
+          "sha256": "2a4dd739c294aa3abcb1a3cc807b5f4c6d09a9de2442b92ce216bdc33c7e354b",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/decode.log",
+          "bytes": 52195396,
+          "mtime_utc": "2026-09-05T04:31:12.145812+00:00",
+          "sha256": "ab5b348eab1cc32faa6ba24e13a6dc801d5be206b4fde1c863b584db9d4fc86e",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/decode.log",
+          "bytes": 50516671,
+          "mtime_utc": "2026-09-05T05:08:40.395865+00:00",
+          "sha256": "98a4f788bd14c2a76dc8554fa90745e7c80b4acaf8b104902ffebfc2ef4ed068",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        },
+        {
+          "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/repro_6647_exact_defaults/decode.log",
+          "bytes": 52498,
+          "mtime_utc": "2026-09-05T05:14:25.389694+00:00",
+          "sha256": "c9c537aa4c34234cfb96ba73c6de138da54fcaf221d7f90f353179e0cd91f5a1",
+          "archive_same_original_path": false,
+          "archive_content_matches": [],
+          "local_original_exists": false,
+          "archived_same_content_any_path": false
+        }
+      ]
+    }
+  },
+  "local_added_files": [
+    "source/claims/stability_history/test_retraction_cpu_copy_capability.py",
+    "source/claims/stability_history/provenance.json",
+    "source/claims/stability_history/README.md"
+  ],
+  "limits": [
+    "No remote disk-wide scan or model/cache/credential content read.",
+    "The remote experiment logs were only inventoried and hashed by this agent; root coordinates download, redaction and publication.",
+    "A later full log may contain a short tail absent from a previously archived stable snapshot; retain both and avoid replacing historical reported metrics.",
+    "The empty decode_health.out has no response body to recover. The public dataset was absent at /tmp path on this node.",
+    "This report makes no new claim about the 48 missing full traces or inaccessible old ser171 environment."
+  ]
+}

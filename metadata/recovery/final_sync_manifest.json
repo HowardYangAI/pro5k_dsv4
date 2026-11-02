@@ -1,0 +1,57 @@
+{
+  "generated_at_utc": "2026-11-02T13:33:11.396775+00:00",
+  "base_commit": "a61594bf19db620b232791cb581b25a7a279f37a",
+  "scope": "Final available-local-source audit, whole ser237 experiment document comparison, 31 recovered complete logs and readable historical regression-test snapshot. Original research conversation cutoff remains frozen.",
+  "outputs": [
+    {
+      "path": "SYNC_STATUS.md",
+      "bytes": 8948,
+      "sha256": "a3fd7bde4519d1cbea3c71c3e04af6a229d9cbcdcc23c1c07142c1a633393cf3"
+    },
+    {
+      "path": "source/claims/stability_history/README.md",
+      "bytes": 743,
+      "sha256": "1358ac14d9f5b83ff3930c73777137f78a0b094fa71e1f4901d2d08dc7b7b9d0"
+    },
+    {
+      "path": "source/claims/stability_history/provenance.json",
+      "bytes": 1929,
+      "sha256": "e72628ffa892dac3abbb0f6197f4d9ded053882eebd1e71a59c2f19066cc24d6"
+    },
+    {
+      "path": "source/claims/stability_history/test_retraction_cpu_copy_capability.py",
+      "bytes": 3490,
+      "sha256": "f2403a3a5196c1f8e6afc79c947a0b4ee55ca483edc43d58a5b2085ca46cf2bc"
+    },
+    {
+      "path": "metadata/recovery/remaining_local_sync.json",
+      "bytes": 33516,
+      "sha256": "54430c28e24c0d8fdb41ca0baf38b6013e8518196bde23b9705d93ef2e211e2a"
+    },
+    {
+      "path": "metadata/recovery/remaining_conversation_sync.json",
+      "bytes": 35547,
+      "sha256": "02491a94703c4eccb119f3d56a91e6a8150e60b37fff1fa8b8a4913d322639ca"
+    },
+    {
+      "path": "metadata/recovery/remaining_remote_sync.json",
+      "bytes": 75553,
+      "sha256": "6f66b57568679beea4120bc7fe9a1b82aa8c4906838244976b73900f9473c38c"
+    },
+    {
+      "path": "metadata/recovery/remaining_remote_probe.json",
+      "bytes": 5449,
+      "sha256": "5316b6444e055ef01101ef901cd715076ed61c046ed8400ee09f25e59ede067e"
+    },
+    {
+      "path": "metadata/recovery/remote_document_inventory.json",
+      "bytes": 37542,
+      "sha256": "20b800ff4fee630a20322b5ee4b06d08279c508c6ee1ca87c3497f1fcf18da47"
+    },
+    {
+      "path": "metadata/recovery/remote_document_manifest.json",
+      "bytes": 25191,
+      "sha256": "be4600064032732e7b395a739431199a766d2b67986b25d45b38be63b95e1481"
+    }
+  ]
+}

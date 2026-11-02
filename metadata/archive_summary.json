@@ -48,5 +48,19 @@
     "current_archive_environment": "ml-pro5000-ser187.qgz02",
     "full_traces_recovered": 0,
     "full_trace_deletion_confirmed": false
+  },
+  "final_sync_audit": {
+    "updated_at_utc": "2026-11-02T13:33:11.396775+00:00",
+    "status_index": "SYNC_STATUS.md",
+    "local_new_omissions_found": 0,
+    "new_research_conversation_omissions_found": 0,
+    "remote_document_files_compared": 39,
+    "remote_final_logs_added": 31,
+    "remote_final_log_source_bytes": 553106070,
+    "remote_final_log_stored_bytes": 14975417,
+    "remote_document_manifest": "metadata/recovery/remote_document_manifest.json",
+    "old_test_readable_snapshot": "source/claims/stability_history/",
+    "conversation_cutoff_unchanged": true,
+    "remaining_full_trace_count": 48
   }
 }

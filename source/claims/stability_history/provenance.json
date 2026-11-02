@@ -1,0 +1,38 @@
+{
+  "generated_at_utc": "2026-11-02T13:25:58.059059+00:00",
+  "original_path": "/sgl-workspace/sglang/test/registered/unit/managers/test_retraction_cpu_copy_capability.py",
+  "status": "Recovered readable historical source from already-archived actual tool output; original standalone file is no longer present locally and was not found at the same path on ser237.",
+  "archive_raw_file": "legacy_archive/session/primary-session.jsonl.gz",
+  "archive_raw_file_sha256": "bc993fbe615ec31a18d8829326524694b94f7a9e862cdfbe2b20a63638d5505c",
+  "command_jsonl_line": 4807,
+  "output_jsonl_line": 4808,
+  "call_id": "call_FRJKj0KE11LBIs9HmoJS40ni",
+  "captured_at_utc": "2026-08-11T08:49:08.812Z",
+  "original_command": "nl -ba test/registered/unit/managers/test_retraction_cpu_copy_capability.py | sed -n '1,115p'",
+  "reconstruction": "Extract consecutive numbered lines 1 through 105 from actual captured output, remove only nl -ba line-number prefix, retain source text, append final newline. The requested 1..115 print ended at 105, before a separate plan file print.",
+  "source_history": [
+    {
+      "jsonl_line": 4200,
+      "action": "Add File initial 3 tests"
+    },
+    {
+      "jsonl_line": 4311,
+      "action": "Add fourth scheduler abort finalization test"
+    }
+  ],
+  "output": {
+    "path": "source/claims/stability_history/test_retraction_cpu_copy_capability.py",
+    "bytes": 3490,
+    "lines": 105,
+    "sha256": "f2403a3a5196c1f8e6afc79c947a0b4ee55ca483edc43d58a5b2085ca46cf2bc"
+  },
+  "validation": {
+    "ast_parse": "passed",
+    "historical_tests_reexecuted": false
+  },
+  "limits": [
+    "A recovered historical snapshot; not installed into or applied onto the current SGLang worktree.",
+    "The original standalone file byte hash was not recorded; this SHA-256 identifies the recovered readable file.",
+    "No new test pass is claimed; historical test output remains in the archived conversation."
+  ]
+}

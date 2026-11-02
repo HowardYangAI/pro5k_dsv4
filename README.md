@@ -6,6 +6,7 @@
 
 | 内容 | 入口 |
 | --- | --- |
+| 最后同步核对、补齐的 31 份远端原始日志及剩余缺口 | [同步状态](SYNC_STATUS.md) |
 | PRO5000 高并发稳定性、SM120 KV Page 切分两项成果的逐项证据 | [成果证据索引与边界](CLAIM_EVIDENCE.md) |
 | 其他对话中的搬运记录、旧 Trace 所在节点及找回的远端日志 | [搬运追查与日志恢复](RELOCATION_AUDIT.md) |
 | 所有历史对话，按线程阅读 | [对话索引](conversations/README.md) |

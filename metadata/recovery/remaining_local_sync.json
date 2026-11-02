@@ -1,0 +1,675 @@
+{
+  "audited_at_utc": "2026-11-02T13:21:29.455393+00:00",
+  "repository_head": "a61594b",
+  "scope": "Read-only audit of surviving local /sgl-workspace source materials, against original export. Current archive operation conversations and archive-process temporary reports intentionally excluded.",
+  "true_missing_sync_candidates": [],
+  "conclusion": "No additional extant local experiment/test/document/source material requiring sync was identified in the audited scope.",
+  "tree_scan": {
+    "summary": [
+      {
+        "root": "/sgl-workspace/workspace/document",
+        "current_files": 119,
+        "original_audit_files": 119
+      },
+      {
+        "root": "/sgl-workspace/workspace/graph",
+        "current_files": 16,
+        "original_audit_files": 16
+      },
+      {
+        "root": "/sgl-workspace/deepseek-v4-flash",
+        "current_files": 290,
+        "original_audit_files": 290
+      },
+      {
+        "root": "/sgl-workspace/pd-dcl-6565881-launch",
+        "current_files": 2,
+        "original_audit_files": 2
+      },
+      {
+        "root": "/sgl-workspace/llm-benchmark-online",
+        "current_files": 39,
+        "original_audit_files": 39
+      },
+      {
+        "root": "/sgl-workspace/DeepEP",
+        "current_files": 34,
+        "original_audit_files": 34
+      }
+    ],
+    "candidates": [
+      {
+        "path": "/sgl-workspace/llm-benchmark-online/benchmark.db",
+        "bytes": 1130496,
+        "prior_bytes": 998160,
+        "reason": "source_size_changed",
+        "resolution": "No change; SQL byte comparison matches archived output."
+      }
+    ]
+  },
+  "offline_index_scan": {
+    "mapped_paths": 42522,
+    "missing_mapped": [],
+    "size_changed": [],
+    "mtime_after_export": [],
+    "current_selection": 41830,
+    "new_selected_paths": [],
+    "repository_count": 14
+  },
+  "git_worktree_comparison": [
+    {
+      "head": "63a288fe9673d068c68650369138ba75cb81094e",
+      "status": "?? artifacts/plan/request-to-real-pd-decode-flow.excalidraw\n?? artifacts/plan/request-to-real-pd-decode-flow.png\n?? artifacts/plan/request-to-real-pd-decode-swimlane.excalidraw\n?? artifacts/plan/request-to-real-pd-decode-swimlane.png\n",
+      "root": "/sgl-workspace/deepseek-v4-flash",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": "?? artifacts/plan/request-to-real-pd-decode-flow.excalidraw\n?? artifacts/plan/request-to-real-pd-decode-flow.png\n?? artifacts/plan/request-to-real-pd-decode-swimlane.excalidraw\n?? artifacts/plan/request-to-real-pd-decode-swimlane.png\n"
+    },
+    {
+      "head": "76334d9c95794e3e76f75816f24ac3f64ed6b35e",
+      "status": " M runner.py\n?? benchmark.db-shm\n?? benchmark.db-wal\n",
+      "root": "/sgl-workspace/llm-benchmark-online",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": " M runner.py\n?? benchmark.db-shm\n?? benchmark.db-wal\n"
+    },
+    {
+      "head": "5b2ef6ea9d407f851752c816c59b5bacd5351e3b",
+      "status": "",
+      "root": "/sgl-workspace/sglang",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "d07dd66fb75e9382e8455d1e40adc6e06a4feb89",
+      "status": "",
+      "root": "/sgl-workspace/sglang-cr6647271-baseline",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "d07dd66fb75e9382e8455d1e40adc6e06a4feb89",
+      "status": " M python/sglang/srt/speculative/dspark_components/dspark_draft.py\n",
+      "root": "/sgl-workspace/sglang-cr6647271-baseline-dspark-ep-compat",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": " M python/sglang/srt/speculative/dspark_components/dspark_draft.py\n"
+    },
+    {
+      "head": "48886803b94596884d737132a381bd5124ea1cfd",
+      "status": " M python/sglang/srt/disaggregation/common/conn.py\nMM python/sglang/srt/disaggregation/decode.py\nM  python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py\nM  python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py\nM  python/sglang/srt/managers/schedule_batch.py\nM  python/sglang/srt/managers/schedule_policy.py\nMM python/sglang/srt/managers/scheduler.py\nM  python/sglang/srt/managers/tokenizer_manager.py\nM  python/sglang/srt/mem_cache/allocator/base.py\nM  python/sglang/srt/mem_cache/hisparse_memory_pool.py\nM  python/sglang/srt/mem_cache/memory_pool.py\nM  python/sglang/srt/mem_cache/swa_memory_pool.py\nM  python/sglang/srt/mem_cache/unified_memory_pool.py\nM  python/sglang/srt/observability/req_time_stats.py\nM  python/sglang/srt/speculative/dspark_components/dspark_draft.py\nM  test/registered/disaggregation/test_specv2_kvcache_offloading.py\nA  test/registered/spec/dspark/test_dspark_dp_moe_metadata.py\nM  test/registered/unit/disaggregation/test_decode_queue_cleanup.py\nM  test/registered/unit/managers/test_hisparse_unit.py\nM  test/registered/unit/managers/test_prefill_adder.py\nM  test/registered/unit/managers/test_priority_scheduling_disaggregation.py\nA  test/registered/unit/managers/test_retraction_cpu_copy.py\nM  test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py\nM  test/registered/unit/mem_cache/test_decode_radix_lock_ref.py\nM  test/registered/unit/mem_cache/test_hisparse_allocator.py\n",
+      "root": "/sgl-workspace/sglang-dcl-6565881-pd-test",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": " M python/sglang/srt/disaggregation/common/conn.py\nMM python/sglang/srt/disaggregation/decode.py\nM  python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py\nM  python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py\nM  python/sglang/srt/managers/schedule_batch.py\nM  python/sglang/srt/managers/schedule_policy.py\nMM python/sglang/srt/managers/scheduler.py\nM  python/sglang/srt/managers/tokenizer_manager.py\nM  python/sglang/srt/mem_cache/allocator/base.py\nM  python/sglang/srt/mem_cache/hisparse_memory_pool.py\nM  python/sglang/srt/mem_cache/memory_pool.py\nM  python/sglang/srt/mem_cache/swa_memory_pool.py\nM  python/sglang/srt/mem_cache/unified_memory_pool.py\nM  python/sglang/srt/observability/req_time_stats.py\nM  python/sglang/srt/speculative/dspark_components/dspark_draft.py\nM  test/registered/disaggregation/test_specv2_kvcache_offloading.py\nA  test/registered/spec/dspark/test_dspark_dp_moe_metadata.py\nM  test/registered/unit/disaggregation/test_decode_queue_cleanup.py\nM  test/registered/unit/managers/test_hisparse_unit.py\nM  test/registered/unit/managers/test_prefill_adder.py\nM  test/registered/unit/managers/test_priority_scheduling_disaggregation.py\nA  test/registered/unit/managers/test_retraction_cpu_copy.py\nM  test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py\nM  test/registered/unit/mem_cache/test_decode_radix_lock_ref.py\nM  test/registered/unit/mem_cache/test_hisparse_allocator.py\n"
+    },
+    {
+      "head": "dbd56954514ff714329cc62ffda3162758672a41",
+      "status": "",
+      "root": "/sgl-workspace/sglang-dsv4-fixed",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "e51a3ae65e3401b21de860c90a64102133d2d6a6",
+      "status": "",
+      "root": "/sgl-workspace/sglang-official-main",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "eee13f4a19392d58b7d770a669a3f18bb5c4ec5f",
+      "status": "",
+      "root": "/sgl-workspace/sglang-official-pr36185",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+      "status": "M  python/sglang/kernels/ops/attention/flash_mla_sm120.py\nM  test/registered/kernels/test_flash_mla_backends.py\n",
+      "root": "/sgl-workspace/sglang-pr32320-inspect",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": "M  python/sglang/kernels/ops/attention/flash_mla_sm120.py\nM  test/registered/kernels/test_flash_mla_backends.py\n"
+    },
+    {
+      "head": "5a1b58fedf08e99ffe9b09c7e517d28e725729c3",
+      "status": "",
+      "root": "/sgl-workspace/sglang-swa-evict-fixed",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "5a1b58fedf08e99ffe9b09c7e517d28e725729c3",
+      "status": " M python/sglang/srt/entrypoints/openai/serving_chat.py\n",
+      "root": "/sgl-workspace/sglang-swa-evict-fixed-temp0",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": " M python/sglang/srt/entrypoints/openai/serving_chat.py\n"
+    },
+    {
+      "head": "dc80d7da1632dd0af9996ef9e6ce01427c88e19b",
+      "status": "",
+      "root": "/sgl-workspace/sglang-upstream-main",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    },
+    {
+      "head": "3ec22948c122f99f742b1c1c0921893b6c7de958",
+      "status": "",
+      "root": "/sgl-workspace/sglang-upstream-main-baseline",
+      "head_changed": false,
+      "status_changed": false,
+      "prior_status": ""
+    }
+  ],
+  "source_hash_scan": {
+    "small_existing_source_hashes_checked": 6696,
+    "mismatches": [],
+    "tmp_sources_missing": [],
+    "large_source_hashes_skipped": 95,
+    "large_sources": [
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode_mf055_trace.log",
+        "bytes": 4288764,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode_mf055_trace_post_drain.log",
+        "bytes": 4494161,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/prefill.log",
+        "bytes": 56649282,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0551_fake_decode_mf055/decode_fake_full.log",
+        "bytes": 6359677,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/decode_unfixed_retraction_mf055.log",
+        "bytes": 3742380,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log",
+        "bytes": 53686811,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf05_pressure.log",
+        "bytes": 5125034,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf07_phase_a.log",
+        "bytes": 8590848,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/prefill.log",
+        "bytes": 69208826,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_fixed.log",
+        "bytes": 13547588,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/router_fixed.log",
+        "bytes": 6128675,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/prefill.log",
+        "bytes": 9011398,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/router.log",
+        "bytes": 6002751,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/prefill.log",
+        "bytes": 9151391,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/router.log",
+        "bytes": 3817560,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/decode.log",
+        "bytes": 15489976,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/prefill.log",
+        "bytes": 10850984,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/decode.log",
+        "bytes": 11097803,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/prefill.log",
+        "bytes": 2738452,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/router.log",
+        "bytes": 6919128,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake_snapshot.log",
+        "bytes": 17149972,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_real_snapshot.log",
+        "bytes": 15228048,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/prefill.log",
+        "bytes": 11221417,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/prefill_real_snapshot.log",
+        "bytes": 11090577,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/prefill_restart_20260902.log",
+        "bytes": 24986728,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/prefill.log",
+        "bytes": 11103469,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed_with_parsers/prefill.log",
+        "bytes": 9960685,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/prefill.log",
+        "bytes": 2567133,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_compat_with_parsers/router.log",
+        "bytes": 4522824,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_no_ep_with_parsers/router.log",
+        "bytes": 4575859,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults/router.log",
+        "bytes": 2993137,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults_with_parsers/router.log",
+        "bytes": 4634961,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_forced_temp0_with_parsers/router.log",
+        "bytes": 4505774,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_with_parsers/router.log",
+        "bytes": 4608135,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_no_ep_with_parsers/router.log",
+        "bytes": 4604774,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_no_ep_no_dspark_with_parsers/router.log",
+        "bytes": 4545733,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/prefill.log",
+        "bytes": 12075439,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/router.log",
+        "bytes": 5029071,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/prefill.log",
+        "bytes": 6280138,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/router.log",
+        "bytes": 4432433,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/prefill.log",
+        "bytes": 3148241,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/router.log",
+        "bytes": 4442715,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/workspace/graph/deepseek-v4-flash-single-request-shapes.png",
+        "bytes": 2804993,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-0-DP-0.trace.json.gz",
+        "bytes": 4941677,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-1-DP-1.trace.json.gz",
+        "bytes": 4957364,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-2-DP-2.trace.json.gz",
+        "bytes": 5025369,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-3-DP-3.trace.json.gz",
+        "bytes": 5033241,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-4-DP-4.trace.json.gz",
+        "bytes": 5034277,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-5-DP-5.trace.json.gz",
+        "bytes": 5018841,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-6-DP-6.trace.json.gz",
+        "bytes": 4967610,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-7-DP-7.trace.json.gz",
+        "bytes": 4961148,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/01_decode_timeline_tp0.csv",
+        "bytes": 13201872,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/01_operator_timeline_tp0.csv",
+        "bytes": 23907546,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/01_prefill_timeline_tp0.csv",
+        "bytes": 10382648,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite_bundle.tar.gz",
+        "bytes": 6055496,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite/dsv4_ep8_dspark_c8_decode_tp0_perfetto_lite.trace.json.gz",
+        "bytes": 2517068,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite/dsv4_ep8_dspark_c8_prefill_tp0_perfetto_lite.trace.json.gz",
+        "bytes": 3788683,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv",
+        "bytes": 20085910,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv",
+        "bytes": 20342694,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz",
+        "bytes": 8375805,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz",
+        "bytes": 2877503,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz",
+        "bytes": 2855861,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "bytes": 108190675,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "bytes": 16747282,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv",
+        "bytes": 105837159,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz",
+        "bytes": 16680399,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-EXTEND.trace.json.gz",
+        "bytes": 4557031,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-EXTEND.trace.json.gz",
+        "bytes": 4573848,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-EXTEND.trace.json.gz",
+        "bytes": 4580790,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-EXTEND.trace.json.gz",
+        "bytes": 4577533,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_034600/gpu-dmon-attempt-2.log",
+        "bytes": 8204812,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_064500/gpu-dmon.log.gz",
+        "bytes": 2238909,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_064500/vmstat.log.gz",
+        "bytes": 4105056,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_065608/gpu-dmon.log.gz",
+        "bytes": 2188062,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_065608/server.log",
+        "bytes": 15423488,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_065608/vmstat.log.gz",
+        "bytes": 4091908,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260807_092330/vmstat.log.gz",
+        "bytes": 3922323,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260810_tcp16_mem07/gpu-dmon-rank0.log",
+        "bytes": 19790232,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260810_tcp16_mem07/server-rank0-attempt2.log.gz",
+        "bytes": 2190763,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260810_tcp16_mem07/vmstat-rank0.log",
+        "bytes": 2578395,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/gpu-dmon.log",
+        "bytes": 4745048,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_three_path_c512/server-c512-passed.log.gz",
+        "bytes": 2238692,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/gpu-dmon.log.gz",
+        "bytes": 6829090,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/server-final.log",
+        "bytes": 3846802,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/server.log",
+        "bytes": 3871490,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/vmstat.log.gz",
+        "bytes": 11583465,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_tp8_dp8_ep4_mf06/gpu-dmon.log",
+        "bytes": 8774751,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/artifacts/stress test/20260811_tp8_dp8_ep4_mf06/server.log.gz",
+        "bytes": 2120790,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/session/primary-session.jsonl",
+        "bytes": 50331286,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl",
+        "bytes": 50331286,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl",
+        "bytes": 2281341,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/source/sglang-all-refs.bundle.part-00",
+        "bytes": 78643200,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/sgl-workspace/deepseek-v4-flash/source/sglang-all-refs.bundle.part-01",
+        "bytes": 26560279,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/tmp/openai-chatgpt-gallery.json",
+        "bytes": 5352422,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      },
+      {
+        "path": "/tmp/sglang-main-tree.json",
+        "bytes": 3133738,
+        "reason": "large_historical_artifact_size_and_mtime_checked"
+      }
+    ]
+  },
+  "benchmark_database_check": {
+    "path": "/sgl-workspace/llm-benchmark-online/benchmark.db",
+    "archived_as": "workspace/llm-benchmark-online/benchmark.db.sql",
+    "raw_sql_dump_bytes": 998160,
+    "current_dump_sha256": "d1e6da1989267e6ada7904eeedbce12808aa01cf7bc92da2bb8ea25e5b092ab7",
+    "archived_dump_sha256": "d1e6da1989267e6ada7904eeedbce12808aa01cf7bc92da2bb8ea25e5b092ab7",
+    "bytes_equal": true,
+    "false_candidate_resolution": "Native SQLite size 1130496 is not comparable to source_bytes998160 for generated SQL dump. SQL data has not changed. Universal-newline text reads alter CR bytes embedded in original SQL values; byte comparison confirms equality."
+  },
+  "root_file_inventory": {
+    "constraints.txt": "mapped and unchanged",
+    "libglib2.0-0t64_2.80.0-6ubuntu3.8_amd64.deb": "Excluded runtime installation package",
+    "empty_curl_option_files": "Excluded empty accidental command argument artifacts"
+  },
+  "limitations": [
+    "No repeated global /data scan or comparison of every Git tracked source byte was performed. Existing missing full traces and old remote logs remain governed by metadata/claims and metadata/recovery.",
+    "All 42522 mapped source paths were checked for presence, size and export-relative mtime. Existing source records up to 2MiB were hashed (6696 records); 95 larger records were not rehashed in this pass.",
+    "Current active archive conversation was intentionally not recursively re-exported."
+  ]
+}

@@ -5,13 +5,13 @@
   "outputs": [
     {
       "path": "README.md",
-      "bytes": 4093,
-      "sha256": "7599c51d0670865d8743821699a630773c0fea3b01f1da4d9617e155989fd6f6"
+      "bytes": 4201,
+      "sha256": "e372f8fdeb3ed652f216857f8069e1898948b2f27954006bab24616c4791d58e"
     },
     {
       "path": "CLAIM_EVIDENCE.md",
-      "bytes": 13022,
-      "sha256": "312c2ed714d13eadf9a5f3faa73208f7f30b39e50e0272a801f66f7d4ebbc1ae"
+      "bytes": 13392,
+      "sha256": "ff80fdc7e5e20251a09143207a4ed15be721875e180f59ee3c72af170023ab16"
     },
     {
       "path": "legacy_archive/20261102_AUDIT_NOTE.md",
@@ -20,8 +20,8 @@
     },
     {
       "path": "metadata/archive_summary.json",
-      "bytes": 2601,
-      "sha256": "be47c64ec5f39ffecf94c97b8e5a35c3c7accc2dd92ac1fa3c44c4036dfb0f0b"
+      "bytes": 3219,
+      "sha256": "80d7dc28a3f1d44eb087fd95a3ca60886514ce799c0d80636bbfd3296a5d54f6"
     },
     {
       "path": "source/claims/page_split/community_main_20260908_excerpt.py.txt",
@@ -69,5 +69,5 @@
       "sha256": "df6adf1b07c922de2c496d07269af4039e68c1a7b569e611f272476dea09b265"
     }
   ],
-  "last_updated_at_utc": "2026-11-02T12:42:40.270638+00:00"
+  "last_updated_at_utc": "2026-11-02T13:33:11.396775+00:00"
 }

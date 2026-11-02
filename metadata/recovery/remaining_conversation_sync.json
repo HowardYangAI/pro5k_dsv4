@@ -1,0 +1,818 @@
+{
+  "audit_version": 1,
+  "generated_at_utc": "2026-11-02T13:22:02.553875+00:00",
+  "scope": {
+    "repository": "/sgl-workspace/pro5k_dsv4",
+    "conversation_cutoff_utc": "2026-11-02T09:55:04.617618+00:00",
+    "source_roots": [
+      {
+        "path": "/root/.codex",
+        "exists": true,
+        "resolved_path": "/root/.codex",
+        "rollout_files": 27,
+        "attachment_files": 41
+      },
+      {
+        "path": "/tmp/.codex",
+        "exists": true,
+        "resolved_path": "/tmp/.codex",
+        "rollout_files": 0,
+        "attachment_files": 0
+      },
+      {
+        "path": "/sgl-workspace/.codex",
+        "exists": true,
+        "resolved_path": "/sgl-workspace/.codex",
+        "rollout_files": 0,
+        "attachment_files": 0
+      }
+    ],
+    "legacy_root": "/sgl-workspace/deepseek-v4-flash/session",
+    "source_coverage_reference": "metadata/conversations/source_coverage.json",
+    "archive_task_root_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+    "mode": "Read-only comparison of existing conversation archive against local original rollouts, session index, state DB thread IDs/spawn edges, attachment files and attachment DB counts. No exports or repository writes."
+  },
+  "conclusion": {
+    "new_research_rollout_candidates": 0,
+    "historical_rollouts_with_appended_research_events": 0,
+    "new_or_changed_attachment_candidates": 0,
+    "missing_old_rollout_sources": 0,
+    "recommendation": "No additional local historical conversation or attachment export is needed. Preserve the original snapshot. Current sync/recovery conversations are intentionally not recursively archived.",
+    "historical_snapshot_prefix_hash_mismatches": 0,
+    "current_archive_task_snapshot_prefix_hash_mismatches": 4
+  },
+  "counts": {
+    "archive_index_threads": 22,
+    "known_source_paths_checked": 22,
+    "current_state_threads": 26,
+    "new_rollout_paths_since_snapshot": 11,
+    "current_archive_task_rollout_paths_excluded": 15,
+    "historical_rollouts_with_metadata_only_append": 1,
+    "original_attachment_manifest_entries": 41,
+    "current_attachment_files_checked": 41,
+    "current_attachment_db_rows": 0,
+    "historical_source_paths_with_snapshot_prefix_sha256_match": 18
+  },
+  "known_source_checks": [
+    {
+      "source_path": "/root/.codex/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl",
+      "thread_id": "01a022bb-b813-7c43-b6da-467e265a35eb",
+      "exists": true,
+      "snapshot_bytes": 7870161,
+      "archive_destination": "conversations/raw/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl.gz",
+      "current_bytes": 7870161,
+      "snapshot_prefix_sha256": "a9d9d99719db4bb4df5df41d3a8ba6403c598a60380211c74acce22f9e10f903",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/archived_sessions/rollout-2026-08-21T07-40-37-01a02343-c01b-7f51-8d67-f37a68d49505.jsonl",
+      "thread_id": "01a02343-c01b-7f51-8d67-f37a68d49505",
+      "exists": true,
+      "snapshot_bytes": 57580,
+      "archive_destination": "conversations/raw/archived_sessions/rollout-2026-08-21T07-40-37-01a02343-c01b-7f51-8d67-f37a68d49505.jsonl.gz",
+      "current_bytes": 57580,
+      "snapshot_prefix_sha256": "ea93a984e0dc8cddc99b334b100bb18b1077354847b58b5447ddc2af51758257",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl",
+      "thread_id": "01a02332-ca6d-7be1-a8ce-5b652cb93858",
+      "exists": true,
+      "snapshot_bytes": 37186313,
+      "archive_destination": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "current_bytes": 37186313,
+      "snapshot_prefix_sha256": "86c9347f8835bf10030ee352d1f27da3175c4ac8ffae6e56026f50bf51269a0d",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/23/rollout-2026-08-23T02-46-28-01a02c83-281d-7751-95f7-678490ab1c02.jsonl",
+      "thread_id": "01a02c83-281d-7751-95f7-678490ab1c02",
+      "exists": true,
+      "snapshot_bytes": 1567141,
+      "archive_destination": "conversations/raw/sessions/2026/08/23/rollout-2026-08-23T02-46-28-01a02c83-281d-7751-95f7-678490ab1c02.jsonl.gz",
+      "current_bytes": 1567141,
+      "snapshot_prefix_sha256": "673d5418def306554ba1308d3668f731ac81c4f54430cd0e8f6ba8297f5ef97f",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl",
+      "thread_id": "01a0466f-37e1-7b11-83d6-bb8ea61ae9d5",
+      "exists": true,
+      "snapshot_bytes": 30094043,
+      "archive_destination": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+      "current_bytes": 30096017,
+      "snapshot_prefix_sha256": "c6afc02fe082ddd33040a66443d4ddb6a55a91315e78e960fb76a73e09299500",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 1974,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T06-01-53-01a046f5-de72-7011-ad77-6f429bb71576.jsonl",
+      "thread_id": "01a046f5-de72-7011-ad77-6f429bb71576",
+      "exists": true,
+      "snapshot_bytes": 123293,
+      "archive_destination": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T06-01-53-01a046f5-de72-7011-ad77-6f429bb71576.jsonl.gz",
+      "current_bytes": 123293,
+      "snapshot_prefix_sha256": "4bb9694c1bd29f0138ec83037ee4bc15f9d286b90255060162866b9c477e868b",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/01/rollout-2026-09-01T09-37-34-01a05c54-c622-78b3-9644-ca704e76df17.jsonl",
+      "thread_id": "01a05c54-c622-78b3-9644-ca704e76df17",
+      "exists": true,
+      "snapshot_bytes": 1344676,
+      "archive_destination": "conversations/raw/sessions/2026/09/01/rollout-2026-09-01T09-37-34-01a05c54-c622-78b3-9644-ca704e76df17.jsonl.gz",
+      "current_bytes": 1344676,
+      "snapshot_prefix_sha256": "00e14d9a627e952407a544bb875b6e45c2a671c54dad00196edfa51ef88f2c32",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-31-41-01a08024-f733-7443-9cde-80c32bdbf7fc.jsonl",
+      "thread_id": "01a08024-f733-7443-9cde-80c32bdbf7fc",
+      "exists": true,
+      "snapshot_bytes": 7957395,
+      "archive_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-31-41-01a08024-f733-7443-9cde-80c32bdbf7fc.jsonl.gz",
+      "current_bytes": 7957395,
+      "snapshot_prefix_sha256": "426d0b9291fb5a415fa377d40131606e9ac7d70f0cef67086b0b63d14e1edc6e",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-38-38-01a0802b-53db-75f2-9f81-1922375d5f84.jsonl",
+      "thread_id": "01a0802b-53db-75f2-9f81-1922375d5f84",
+      "exists": true,
+      "snapshot_bytes": 7740420,
+      "archive_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-38-38-01a0802b-53db-75f2-9f81-1922375d5f84.jsonl.gz",
+      "current_bytes": 7740420,
+      "snapshot_prefix_sha256": "95af49c270495653040733c4ae2ea1453f3f55c6003239deb3f6a169775d7a39",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-51-11-01a08036-d1e9-7160-b3d5-07c46362bc06.jsonl",
+      "thread_id": "01a08036-d1e9-7160-b3d5-07c46362bc06",
+      "exists": true,
+      "snapshot_bytes": 143496,
+      "archive_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-51-11-01a08036-d1e9-7160-b3d5-07c46362bc06.jsonl.gz",
+      "current_bytes": 143496,
+      "snapshot_prefix_sha256": "daf26127b9051405335c6fa83cf608e77ea51c1661b2fcb488c221dcfb376750",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T12-58-39-01a08119-6186-7f73-b5bd-b04c2093edc7.jsonl",
+      "thread_id": "01a08119-6186-7f73-b5bd-b04c2093edc7",
+      "exists": true,
+      "snapshot_bytes": 1119630,
+      "archive_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T12-58-39-01a08119-6186-7f73-b5bd-b04c2093edc7.jsonl.gz",
+      "current_bytes": 1119630,
+      "snapshot_prefix_sha256": "54103f67b31efca818a19160fbed9d99d04dcf7cf686801e0c6354461f8e6cf7",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/09/rollout-2026-09-09T08-24-35-01a08119-6186-7f73-b5bd-b04c2093edc7_01a08544-d4e6-7801-bd76-e2da2c8fcea0.jsonl",
+      "thread_id": "01a08119-6186-7f73-b5bd-b04c2093edc7",
+      "exists": true,
+      "snapshot_bytes": 263213,
+      "archive_destination": "conversations/raw/sessions/2026/09/09/rollout-2026-09-09T08-24-35-01a08119-6186-7f73-b5bd-b04c2093edc7_01a08544-d4e6-7801-bd76-e2da2c8fcea0.jsonl.gz",
+      "current_bytes": 263213,
+      "snapshot_prefix_sha256": "cd8f11fb6ff8d7163ad4f42f6559098f00325546e7fed106fd76fea0697f0bf0",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-27d8-7021-989a-6cfd99b81fb2.jsonl",
+      "thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+      "exists": true,
+      "snapshot_bytes": 98164,
+      "archive_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-27d8-7021-989a-6cfd99b81fb2.jsonl.gz",
+      "current_bytes": 3209981,
+      "snapshot_prefix_sha256": "372566b7d8fded9cfd9fb1bb483066c3a3948d8f631b3b488fa86fdbaa0180d5",
+      "snapshot_prefix_matches": false,
+      "appended_bytes": 3111817,
+      "archive_task_thread": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-6544-7fc1-8031-0441755f24e3.jsonl",
+      "thread_id": "01a19bae-6544-7fc1-8031-0441755f24e3",
+      "exists": true,
+      "snapshot_bytes": 104235,
+      "archive_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-6544-7fc1-8031-0441755f24e3.jsonl.gz",
+      "current_bytes": 2357842,
+      "snapshot_prefix_sha256": "a6e97e161018f480ab3ffb36500d7b40176e8b68e71a638fdc80d3d690e462e7",
+      "snapshot_prefix_matches": false,
+      "appended_bytes": 2253607,
+      "archive_task_thread": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-40-01a19bae-b53e-7051-80bb-e0108675f76c.jsonl",
+      "thread_id": "01a19bae-b53e-7051-80bb-e0108675f76c",
+      "exists": true,
+      "snapshot_bytes": 96103,
+      "archive_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-40-01a19bae-b53e-7051-80bb-e0108675f76c.jsonl.gz",
+      "current_bytes": 1777154,
+      "snapshot_prefix_sha256": "3ff737bd5541f5e2cec04e73b65f07beb373533bcce8ac5058d994155b672817",
+      "snapshot_prefix_matches": false,
+      "appended_bytes": 1681051,
+      "archive_task_thread": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-56-01a19bae-f31a-7a33-9054-6fc246bc7af6.jsonl",
+      "thread_id": "01a19bae-f31a-7a33-9054-6fc246bc7af6",
+      "exists": true,
+      "snapshot_bytes": 86876,
+      "archive_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-56-01a19bae-f31a-7a33-9054-6fc246bc7af6.jsonl.gz",
+      "current_bytes": 1421412,
+      "snapshot_prefix_sha256": "049ce5e27c8caa18255fcf83b0aaacfc57aa042a6e3bce5eb827b5b9b6595c0d",
+      "snapshot_prefix_matches": false,
+      "appended_bytes": 1334536,
+      "archive_task_thread": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl",
+      "thread_id": "019fd684-b350-7471-8274-e5bf3f8f91d9",
+      "exists": true,
+      "snapshot_bytes": 2069247,
+      "archive_destination": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl",
+      "current_bytes": 2069247,
+      "snapshot_prefix_sha256": "ef1956ead91bb697c6c1e9f077227f461799280b0f0c065787f36806d396d700",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl",
+      "thread_id": "019fd6e4-10ac-7611-b6e0-32143580ab3d",
+      "exists": true,
+      "snapshot_bytes": 50331286,
+      "archive_destination": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl.gz",
+      "current_bytes": 50331286,
+      "snapshot_prefix_sha256": "5321fd26ab586c117d734246f0b5478bb9a24393393e8eb3db8227a5b4f00edd",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl",
+      "thread_id": "019fdae9-b489-7b72-be97-9e0ea12785bf",
+      "exists": true,
+      "snapshot_bytes": 2281341,
+      "archive_destination": "legacy_archive/session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl.gz",
+      "current_bytes": 2281341,
+      "snapshot_prefix_sha256": "89c9a5c09d88ceaa5d9badb717b6775450046004fd2f5427685cf4e1f165baba",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/10/rollout-2026-08-10T02-03-24-019fe969-1146-76d2-956f-d391a4ddd5d1.jsonl",
+      "thread_id": "019fe969-1146-76d2-956f-d391a4ddd5d1",
+      "exists": true,
+      "snapshot_bytes": 241117,
+      "archive_destination": "legacy_archive/session/all-sessions/2026/08/10/rollout-2026-08-10T02-03-24-019fe969-1146-76d2-956f-d391a4ddd5d1.jsonl",
+      "current_bytes": 241117,
+      "snapshot_prefix_sha256": "ece50618a9b4bc7277b03a2262ce02a764f825842e494a03f387dff0ba21bc5b",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/12/rollout-2026-08-12T03-45-08-019ff412-ece1-7101-95cd-64058149b2b5.jsonl",
+      "thread_id": "019ff412-ece1-7101-95cd-64058149b2b5",
+      "exists": true,
+      "snapshot_bytes": 237640,
+      "archive_destination": "legacy_archive/session/all-sessions/2026/08/12/rollout-2026-08-12T03-45-08-019ff412-ece1-7101-95cd-64058149b2b5.jsonl",
+      "current_bytes": 237640,
+      "snapshot_prefix_sha256": "e3a2b1189c9d8184fe9dacc72425c601edcb1203dc398e2daa60c96b58e98fc3",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/primary-session.jsonl",
+      "thread_id": "019fd6e4-10ac-7611-b6e0-32143580ab3d",
+      "exists": true,
+      "snapshot_bytes": 50331286,
+      "archive_destination": "legacy_archive/session/primary-session.jsonl.gz",
+      "current_bytes": 50331286,
+      "snapshot_prefix_sha256": "5321fd26ab586c117d734246f0b5478bb9a24393393e8eb3db8227a5b4f00edd",
+      "snapshot_prefix_matches": true,
+      "appended_bytes": 0,
+      "archive_task_thread": false
+    }
+  ],
+  "historical_metadata_only_changes": [
+    {
+      "source_path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl",
+      "thread_id": "01a0466f-37e1-7b11-83d6-bb8ea61ae9d5",
+      "appended_bytes": 1974,
+      "added_records": [
+        {
+          "timestamp": "2026-11-02T11:43:56.072Z",
+          "record_type": "event_msg",
+          "event_type": "thread_settings_applied",
+          "ordinal": 2785
+        }
+      ],
+      "research_content": false,
+      "sync_recommended": false,
+      "reason": "One runtime thread_settings_applied event only; no user, assistant or tool research content."
+    }
+  ],
+  "new_rollouts_excluded": [
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-280a-70d3-b914-df8a270eac29.jsonl",
+      "bytes_observed": 456729,
+      "thread_id": "01a19bad-280a-70d3-b914-df8a270eac29",
+      "metadata_thread_id": "01a19bad-280a-70d3-b914-df8a270eac29",
+      "database_source": {
+        "subagent": {
+          "other": "guardian"
+        }
+      },
+      "agent_path": null,
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-657a-75a1-b7cc-1bc76f663f21.jsonl",
+      "bytes_observed": 72705,
+      "thread_id": "01a19bae-657a-75a1-b7cc-1bc76f663f21",
+      "metadata_thread_id": "01a19bae-657a-75a1-b7cc-1bc76f663f21",
+      "database_source": {
+        "subagent": {
+          "other": "guardian"
+        }
+      },
+      "agent_path": null,
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T12-05-42-01a19c26-aa97-7193-a60d-5c2cf6e44ef8.jsonl",
+      "bytes_observed": 367409,
+      "thread_id": "01a19c26-aa97-7193-a60d-5c2cf6e44ef8",
+      "metadata_thread_id": "01a19c26-aa97-7193-a60d-5c2cf6e44ef8",
+      "database_source": {
+        "subagent": {
+          "other": "guardian"
+        }
+      },
+      "agent_path": null,
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T12-23-18-01a19c36-c962-7ca0-982d-88be330941ac.jsonl",
+      "bytes_observed": 1161486,
+      "thread_id": "01a19c36-c962-7ca0-982d-88be330941ac",
+      "metadata_thread_id": "01a19c36-c962-7ca0-982d-88be330941ac",
+      "database_source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+            "depth": 1,
+            "agent_path": "/root/trace_move_search",
+            "agent_nickname": "Descartes",
+            "agent_role": null
+          }
+        }
+      },
+      "agent_path": "/root/trace_move_search",
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T12-23-48-01a19c37-3d09-7e42-914a-ab7139a77058.jsonl",
+      "bytes_observed": 826917,
+      "thread_id": "01a19c37-3d09-7e42-914a-ab7139a77058",
+      "metadata_thread_id": "01a19c37-3d09-7e42-914a-ab7139a77058",
+      "database_source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+            "depth": 1,
+            "agent_path": "/root/log_move_search",
+            "agent_nickname": "Rawls",
+            "agent_role": null
+          }
+        }
+      },
+      "agent_path": "/root/log_move_search",
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T12-23-48-01a19c37-3d16-7ce1-9ee0-1f2034d1f28e.jsonl",
+      "bytes_observed": 154773,
+      "thread_id": "01a19c37-3d16-7ce1-9ee0-1f2034d1f28e",
+      "metadata_thread_id": "01a19c37-3d16-7ce1-9ee0-1f2034d1f28e",
+      "database_source": {
+        "subagent": {
+          "other": "guardian"
+        }
+      },
+      "agent_path": null,
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T12-24-10-01a19c37-9227-70f0-83ca-e4ea12353b9d.jsonl",
+      "bytes_observed": 1044372,
+      "thread_id": "01a19c37-9227-70f0-83ca-e4ea12353b9d",
+      "metadata_thread_id": "01a19c37-9227-70f0-83ca-e4ea12353b9d",
+      "database_source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+            "depth": 1,
+            "agent_path": "/root/backup_container_search",
+            "agent_nickname": "Euler",
+            "agent_role": null
+          }
+        }
+      },
+      "agent_path": "/root/backup_container_search",
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T13-17-26-01a19c68-5772-70d0-b0ae-123b4140bb6f.jsonl",
+      "bytes_observed": 396770,
+      "thread_id": "01a19c68-5772-70d0-b0ae-123b4140bb6f",
+      "metadata_thread_id": "01a19c68-5772-70d0-b0ae-123b4140bb6f",
+      "database_source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+            "depth": 1,
+            "agent_path": "/root/remaining_local_sync",
+            "agent_nickname": "Heisenberg",
+            "agent_role": null
+          }
+        }
+      },
+      "agent_path": "/root/remaining_local_sync",
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T13-18-32-01a19c69-5915-7592-8e8c-97c4d97d1afb.jsonl",
+      "bytes_observed": 638211,
+      "thread_id": "01a19c69-5915-7592-8e8c-97c4d97d1afb",
+      "metadata_thread_id": "01a19c69-5915-7592-8e8c-97c4d97d1afb",
+      "database_source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+            "depth": 1,
+            "agent_path": "/root/remaining_remote_sync",
+            "agent_nickname": "Singer",
+            "agent_role": null
+          }
+        }
+      },
+      "agent_path": "/root/remaining_remote_sync",
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T13-18-32-01a19c69-5923-7b90-94fa-e98b2b8c0678.jsonl",
+      "bytes_observed": 108793,
+      "thread_id": "01a19c69-5923-7b90-94fa-e98b2b8c0678",
+      "metadata_thread_id": "01a19c69-5923-7b90-94fa-e98b2b8c0678",
+      "database_source": {
+        "subagent": {
+          "other": "guardian"
+        }
+      },
+      "agent_path": null,
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T13-18-47-01a19c69-95e6-7880-8241-e1b3b7862db3.jsonl",
+      "bytes_observed": 420373,
+      "thread_id": "01a19c69-95e6-7880-8241-e1b3b7862db3",
+      "metadata_thread_id": "01a19c69-95e6-7880-8241-e1b3b7862db3",
+      "database_source": {
+        "subagent": {
+          "thread_spawn": {
+            "parent_thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+            "depth": 1,
+            "agent_path": "/root/remaining_conversation_sync",
+            "agent_nickname": "Ohm",
+            "agent_role": null
+          }
+        }
+      },
+      "agent_path": "/root/remaining_conversation_sync",
+      "archive_task_thread": true,
+      "sync_recommended": false,
+      "reason": "Current archival, recovery or audit task / guardian; intentionally excluded to keep initial conversation snapshot fixed."
+    }
+  ],
+  "attachment_checks": [
+    {
+      "source_path": "/root/.codex/attachments/088b6e24-1135-42ea-a6de-285a7d0af145/pasted-text.txt",
+      "bytes": 6319,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/09f6dbd3-b54d-45c7-aad7-6239e2174257/pasted-text.txt",
+      "bytes": 22913,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/11e34533-734d-4e5b-956d-6e3fca45c6ab/pasted-text.txt",
+      "bytes": 10339,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/2f756231-f41f-4555-8a63-5319ae0089da/pasted-text.txt",
+      "bytes": 17150,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/2fca5258-82d1-4cfa-8840-1b78e737a2e6/pasted-text.txt",
+      "bytes": 11620,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/317a0da3-c804-4e99-a77d-35432ecc9d19/pasted-text.txt",
+      "bytes": 6436,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/33897ac1-4fc9-43c0-98a5-20f7bc7870a9/pasted-text.txt",
+      "bytes": 5236,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/3b971584-2c5a-4f6f-8356-c887d83afbe0/pasted-text.txt",
+      "bytes": 105023,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/3dc34b5b-0538-4599-a54f-6af49719ebc1/pasted-text.txt",
+      "bytes": 14952,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/4baa4cbf-891d-469a-a0f5-7048ad8c02e6/pasted-text.txt",
+      "bytes": 38765,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/55abaa1b-e9fa-467e-95e4-a602e23a8398/pasted-text.txt",
+      "bytes": 104522,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/55d5843b-c77a-42bc-8300-c0650f0966e7/pasted-text.txt",
+      "bytes": 5442,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/58f80d66-c2d8-4fa8-958a-834454411d93/pasted-text.txt",
+      "bytes": 98890,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/5d491394-11e3-45a6-b9f3-d6de204c5891/pasted-text.txt",
+      "bytes": 98890,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/5f8e6e63-5763-4245-b911-8d7c7b81a248/pasted-text.txt",
+      "bytes": 17258,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/639d989a-6b79-410d-9d2e-bbae41c63caa/pasted-text.txt",
+      "bytes": 15724,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/692c8861-745d-4f50-8f03-312eb41741bd/pasted-text.txt",
+      "bytes": 6320,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/6feb4159-5475-44ac-8020-95376dba605b/pasted-text.txt",
+      "bytes": 8148,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/75e1f172-9f8a-4ab5-83f2-939cbb022463/pasted-text.txt",
+      "bytes": 72342,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/75f5e8d2-51a7-4813-a3d9-1288fd8fe76d/pasted-text.txt",
+      "bytes": 170521,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/85471966-98ed-4024-b100-ccc701fd5449/pasted-text.txt",
+      "bytes": 15724,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/856af96b-0d9c-476c-ab22-7b9b44e3f8b2/pasted-text.txt",
+      "bytes": 42062,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/87fb44b8-96f2-4c54-b04c-8b9d291897ce/pasted-text.txt",
+      "bytes": 6698,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/960a14e1-d054-411c-81b6-2730834741ed/pasted-text.txt",
+      "bytes": 17163,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/9abd37bd-96a0-4be2-b5b5-4e024051dbfd/pasted-text.txt",
+      "bytes": 11685,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/a51791a3-6a00-47e5-b0be-a9111487accb/pasted-text.txt",
+      "bytes": 12841,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/a5db9728-7caf-400d-9384-0a783a99b97f/pasted-text.txt",
+      "bytes": 8291,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/a8134a1f-05b3-4326-a119-affb4cc888c2/pasted-text.txt",
+      "bytes": 14911,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/aedf8309-8bbb-4865-8728-5a9c7ac17b94/pasted-text.txt",
+      "bytes": 185432,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/af5956f8-3276-4966-a18c-301dae490448/pasted-text.txt",
+      "bytes": 8119,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/bc7fdf6d-7faf-4369-b2ee-94e3a05e26c1/pasted-text.txt",
+      "bytes": 19981,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/bec685ef-624a-47b7-8100-e84649cf0349/pasted-text.txt",
+      "bytes": 6239,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/c9044c5b-a732-437e-995e-2de124eb4acf/pasted-text.txt",
+      "bytes": 6902,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/e32caa45-5ccd-4833-93be-a5c65ad33ca9/pasted-text.txt",
+      "bytes": 11318,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/e64e91ca-934e-4827-b377-e08ed7e5f659/pasted-text.txt",
+      "bytes": 139871,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/e87d9679-98e0-4668-b9e9-4eefcd87fac4/pasted-text.txt",
+      "bytes": 49228,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/e9b922c1-45af-4ba2-8d0b-3dc773f206a2/pasted-text.txt",
+      "bytes": 12888,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/f4062b8c-d1b5-4763-a311-5deadbb02f64/pasted-text.txt",
+      "bytes": 6495,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/f5d7b9d8-62d4-4ab4-bac6-27e0604bccf6/pasted-text.txt",
+      "bytes": 15724,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/f64052e5-b2e7-4e2e-9e51-167ed142ba23/pasted-text.txt",
+      "bytes": 18692,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    },
+    {
+      "source_path": "/root/.codex/attachments/pasted-text-attachments.json",
+      "bytes": 92435,
+      "known": true,
+      "source_snapshot_sha256_matches": true
+    }
+  ],
+  "session_index_audit": {
+    "entries": 19,
+    "unique_ids": 15,
+    "uncovered_non_task_ids": []
+  },
+  "state_db_audit": {
+    "uncovered_non_task_thread_ids": [],
+    "new_task_thread_ids": [
+      "01a19c26-aa97-7193-a60d-5c2cf6e44ef8",
+      "01a19c36-c962-7ca0-982d-88be330941ac",
+      "01a19c37-3d09-7e42-914a-ab7139a77058",
+      "01a19c37-3d16-7ce1-9ee0-1f2034d1f28e",
+      "01a19c37-9227-70f0-83ca-e4ea12353b9d",
+      "01a19c68-5772-70d0-b0ae-123b4140bb6f",
+      "01a19c69-5915-7592-8e8c-97c4d97d1afb",
+      "01a19c69-5923-7b90-94fa-e98b2b8c0678",
+      "01a19c69-95e6-7880-8241-e1b3b7862db3"
+    ],
+    "archived_thread_attachment_rows": 0
+  },
+  "limits": [
+    "Only local filesystem roots previously identified as actual Codex data roots and the legacy workspace session export were compared. This does not assert that other machines, detached disks, deleted files, or old containers have no conversations.",
+    "Current archival/recovery task, subagents and guardian conversations intentionally continue after the frozen snapshot and are not recursively exported. Rollout sizes for those active files are momentary observations.",
+    "A single post-cutoff settings event exists in one older research thread, but adds no research discussion or result.",
+    "No credentials, auth files, SSH material or model-provider secrets were read or copied by this audit.",
+    "Four ongoing archival-task rollout byte prefixes do not match the recorded source snapshot hash. Those are the intentionally frozen current task and its initial agents; all 18 non-task historical source paths match. This audit does not replace, amend or re-export those four active snapshots."
+  ]
+}

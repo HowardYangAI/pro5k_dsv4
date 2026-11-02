@@ -1,0 +1,158 @@
+{
+  "hostname": "ml-pro5000-ser237.qgz02",
+  "checked_at_utc": "2026-11-02T13:22:05.800140+00:00",
+  "files": [
+    {
+      "path": "/sgl-workspace/sglang/test/registered/unit/managers/test_retraction_cpu_copy_capability.py",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode.log",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf055_trace.log",
+      "exists": true,
+      "size_bytes": 6389939,
+      "mtime_utc": "2026-08-27T06:03:34.140306+00:00",
+      "is_file": true,
+      "sha256": "ef1b98223c6e2b1f31ef690ce8a8c02e4527a03c79c99bb3544f11ba76403971"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_baseline_mf055.log",
+      "exists": true,
+      "size_bytes": 140927,
+      "mtime_utc": "2026-08-27T06:05:53.033089+00:00",
+      "is_file": true,
+      "sha256": "44cff6df4221f802f4a49003a5289c99d5faf1ac49f41be117307e857fc63c26"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_fake_mf055.log",
+      "exists": true,
+      "size_bytes": 53686811,
+      "mtime_utc": "2026-08-27T07:13:11.323994+00:00",
+      "is_file": true,
+      "sha256": "c024ca5909670b48906cebc43bd9946e75a6d710dc69c3b4d6f7c6baecc82f26"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_unfixed_retraction_mf055.log",
+      "exists": true,
+      "size_bytes": 3742380,
+      "mtime_utc": "2026-08-27T06:55:53.468290+00:00",
+      "is_file": true,
+      "sha256": "4f8f7a931729a8e27ca0b466b5b834acae7d48d33140b90515f40b202fbe8ef5"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_batch_usage.log",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_first_start_num_token_crash.log",
+      "exists": true,
+      "size_bytes": 155235,
+      "mtime_utc": "2026-08-29T08:52:58.402053+00:00",
+      "is_file": true,
+      "sha256": "af62c012352c1e78f04a8a8a84226140b7b3b38fe62a38f1a15ac88b367968d7"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/decode_fixed.log",
+      "exists": true,
+      "size_bytes": 1544364,
+      "mtime_utc": "2026-08-29T09:53:06.630771+00:00",
+      "is_file": true,
+      "sha256": "c695d3906aff6cf1d105c16c91ceaca3fca60b0d9d3780eeba97d16ea8dbf8d6"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/README.md",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/decode.log",
+      "exists": true,
+      "size_bytes": 35953944,
+      "mtime_utc": "2026-08-30T09:43:28.721327+00:00",
+      "is_file": true,
+      "sha256": "6f9a00a3d28e04bf59a8c0342069f4184de8307e1bb5d418b1366629743e98ce"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode.log",
+      "exists": true,
+      "size_bytes": 15271745,
+      "mtime_utc": "2026-08-30T13:41:36.541953+00:00",
+      "is_file": true,
+      "sha256": "fc180853ec793f50a299cf6347a52bf8df7c0a9214db66fd36227d7290f1e257"
+    },
+    {
+      "path": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake.log",
+      "exists": true,
+      "size_bytes": 17196604,
+      "mtime_utc": "2026-08-30T14:40:00.869016+00:00",
+      "is_file": true,
+      "sha256": "1ce23366858f8eb2929aa5cf044b756c1b4c685501c6ff35fa98a589fc3efa43"
+    },
+    {
+      "path": "/sgl-workspace/workspace/plan/deepseek-v4-pd-decode-kv-retraction-fix-plan.md",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/launch_server.py",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/entrypoints/engine.py",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/entrypoints/http_server.py",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/server_args.py",
+      "exists": false
+    },
+    {
+      "path": "/sgl-workspace/workspace/sglang-dsv4-pd-retraction-kv-only/python/sglang/srt/utils/network.py",
+      "exists": false
+    },
+    {
+      "path": "/tmp/ShareGPT_V3_unfiltered_cleaned_split.json",
+      "exists": false
+    },
+    {
+      "path": "/tmp/decode_health_body",
+      "exists": false
+    },
+    {
+      "path": "/tmp/decode_health.out",
+      "exists": true,
+      "size_bytes": 0,
+      "mtime_utc": "2026-09-03T06:13:20.696812+00:00",
+      "is_file": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/h3-dp-0.mp4",
+      "exists": false
+    },
+    {
+      "path": "/tmp/h3-dp-1.mp4",
+      "exists": false
+    },
+    {
+      "path": "/tmp/fetch.log",
+      "exists": false
+    },
+    {
+      "path": "/tmp/multiturn_run_132.jsonl",
+      "exists": false
+    },
+    {
+      "path": "/tmp/multiturn_run_131.jsonl",
+      "exists": false
+    },
+    {
+      "path": "/tmp/multiturn_run_130.jsonl",
+      "exists": false
+    }
+  ]
+}
