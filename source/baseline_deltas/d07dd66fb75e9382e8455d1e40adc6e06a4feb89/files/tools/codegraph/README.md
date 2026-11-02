@@ -1,0 +1,235 @@
+# CodeGraph 本地使用指南（sglang 仓库）
+
+给 AI 编码助手（Claude Code、Cursor、Codex 等）提供 sglang 代码语义知识图谱，减少 grep/read 文件次数。
+
+## db 的管理方式
+
+索引 db（`.codegraph/codegraph.db`，约 420MB 二进制）**不进 git**——LFS 在公司内网 GitLab 不可用（单文件超 nginx 请求体上限返回 413），git 直接跟踪会撑爆历史。
+
+db 通过**内网网盘**共享基线快照，团队成员用脚本一键下载。日常改动的增量更新由 codegraph 本地 watcher 自动完成。
+
+---
+
+## 一、当前状态速查
+
+| 项 | 值 |
+|---|---|
+| codegraph 版本 | 1.5.0 |
+| 项目 db | `.codegraph/codegraph.db`（约 420MB，**网盘共享 / git 忽略**） |
+| 索引规模 | 5997 文件 / 137,578 节点 / 410,841 边 |
+| 启动方式 | `codegraph serve --mcp`（本地 stdio，纯本地无外传） |
+
+---
+
+## 二、安装 codegraph
+
+### 环境要求
+
+- Linux x86_64（macOS 同理，换对应 release 包）
+- `~/.local/bin` 在 `PATH` 中
+
+### 方式一：官方脚本（需能访问 GitHub）
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+codegraph --version   # 应输出 1.5.0
+```
+
+### 方式二：手动下载安装（网络受限环境）
+
+```bash
+# set your favorite proxy
+curl -fSL --retry 8 --retry-delay 3 --retry-all-errors \
+  -o /tmp/codegraph-linux-x64.tar.gz \
+  "https://github.com/colbymchenry/codegraph/releases/download/v1.5.0/codegraph-linux-x64.tar.gz"
+
+gzip -t /tmp/codegraph-linux-x64.tar.gz && echo "OK"   # 校验完整性
+mkdir -p /tmp/cg_extract && tar -xzf /tmp/codegraph-linux-x64.tar.gz -C /tmp/cg_extract
+DEST="$HOME/.codegraph/versions/v1.5.0"
+mkdir -p "$DEST" ~/.local/bin
+cp -r /tmp/cg_extract/codegraph-linux-x64/* "$DEST/"
+ln -sf "$DEST/bin/codegraph" ~/.local/bin/codegraph
+ln -sfn "$DEST" "$HOME/.codegraph/current"
+codegraph --version   # 1.5.0
+```
+
+### 关闭遥测（可选）
+
+```bash
+codegraph telemetry off
+```
+
+---
+
+## 三、获取索引 db（网盘下载）
+
+不用自己建索引，直接从内网网盘拉基线 db：
+
+```bash
+bash tools/codegraph/fetch_codegraph_index.sh
+```
+
+脚本做的事：
+1. 从内网 http 直链下载 `codegraph.db` 到 `.codegraph/`
+2. 校验大小（预期约 420MB，过小说明地址错误或下载不全）
+3. 调 `codegraph status` 验证索引可用
+
+选项：
+- `-f` / `--force`：覆盖已有 db
+- `INDEX_URL=... bash tools/codegraph_index.sh`：临时换下载地址
+
+> 下载地址写在脚本顶部 `INDEX_URL` 常量。网盘地址变更时改这一处即可。
+
+下载完成后 db 即可用，无需 `codegraph init`。
+
+---
+
+## 四、db 维护策略
+
+### MCP 模式下 db 自动同步，无需手动维护
+
+`codegraph serve --mcp` 默认开启**文件监听器**（file watcher）：你改代码，它自动增量更新本地 db。日常开发**不需要手动跑 `codegraph sync`**，本地 db 会自己保持最新。
+
+> 除非用 `--no-watch` 关闭监听（慢盘 / WSL2 场景），才需手动 `codegraph sync`。
+
+### 何时更新网盘上的基线 db
+
+网盘里的 db 是一个**团队共享的基线快照**，不必跟每次提交同步。只在**大的结构改动**后重新上传一次：
+
+- 大规模重构、新增 / 删除整个子系统
+- rebase 到新的 upstream 版本后
+- 目的是让其他人下载后直接拿到与代码大致匹配的索引，省去各自全量重建
+
+更新基线 db 的流程（由维护者执行）：
+
+```bash
+codegraph index                     # 全量重建,确保 db 与当前代码一致
+# 然后手动把 .codegraph/codegraph.db 上传到网盘,覆盖旧文件
+# (具体上传方式取决于网盘,如 webdav 客户端 / 网页上传)
+```
+
+日常小改动的增量更新由各自本地 watcher 完成，**不要每次小改动都重传网盘**——420MB 上传也耗时。
+
+### 全新机器 / 想自己建索引（不走网盘）
+
+```bash
+cd /path/to/sglang
+codegraph init
+codegraph status
+```
+
+### CLI 用户的维护（未接 MCP 时）
+
+| 场景 | 命令 |
+|---|---|
+| 改了代码后增量更新 | `codegraph sync` |
+| 全量重建（大改动后） | `codegraph index` |
+| 索引卡住（lock 残留） | `codegraph unlock` |
+| 查看索引健康 | `codegraph status` |
+
+### 多分支
+
+codegraph 索引基于文件目录，不是 git 分支。要用 worktree 给不同分支各自建索引：
+
+```bash
+git worktree add /path/sglang-feature ../sglang-feature feature-branch
+cd /path/sglang-feature && codegraph init
+# MCP 配置里 cwd 指向对应 worktree 即用对应索引
+```
+
+---
+
+## 五、本地启动 MCP 服务
+
+### 原理
+
+`codegraph serve --mcp` 是 **stdio 模式**的本地服务进程：通过 stdin/stdout 收发 JSON-RPC，**不监听网络端口，不外传数据**。
+
+> 在终端直接跑会「卡住」——这是正常的，它在等 JSON-RPC 请求。**不需要手动运行它**，AI 客户端会自动管理其生命周期。
+
+### 提供的 MCP 工具
+
+codegraph 1.5.0 的 MCP server **只暴露一个工具**（实测，非文档臆测）：
+
+| 工具 | 作用 |
+|---|---|
+| `codegraph_explore` | 一次调用返回相关符号的**源码 + 调用路径**。query 可传符号名 / 文件名 / 自然语言问题。是 PRIMARY 工具，几乎所有问题（怎么实现、在哪、影响范围、改前调研）都先调它 |
+
+> 它是「全能」工具：返回的源码等同已 Read（不要重复 Read 那些文件），调用路径覆盖 caller / callee 关系。`codegraph_query / callers / callees / impact / node` 是 **CLI 子命令**（见下方），不是 MCP 工具——1.5.0 把这些能力合并进了 `explore`。
+
+### CLI 子命令（不启 MCP 时直接用）
+
+CLI 子命令和 MCP 工具是两套接口，CLI 提供更细粒度的查询：
+
+```bash
+codegraph query "Scheduler"              # 搜索符号
+codegraph callers "run_batch"            # 谁调用了它
+codegraph callees "run_batch"            # 它调用了谁
+codegraph impact "run_batch"             # 修改影响范围
+codegraph explore "Scheduler run_batch"  # 一次返回源码 + 调用路径(同 MCP 工具)
+```
+
+---
+
+## 六、Claude Code 接入 MCP
+
+### 项目级配置（本仓库采用）
+
+在仓库根目录创建 `.mcp.json`：
+
+```json
+{
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "/home/luban/.local/bin/codegraph",
+      "args": ["serve", "--mcp"],
+      "cwd": "/home/luban/sglang"
+    }
+  }
+}
+```
+
+> `command` 用**绝对路径**；`cwd` 指向 sglang 仓库根（codegraph 靠它定位 `.codegraph/`）。
+
+**`.mcp.json` 不提交进 git**——`command` / `cwd` 是本机绝对路径，因人而异。仓库 `.gitignore` 已排除 `.mcp.json`，每人各自创建一份。
+
+项目目录下执行 `claude` 自动加载，首次提示信任该 server，选 yes。
+
+### 验证接入
+
+会话里输入 `/mcp`，应看到 `codegraph` 为 connected，并暴露 `codegraph_explore` 工具。
+
+---
+
+## 七、验证示例（复制此 prompt 验证协作效果）
+
+接入 MCP 后，把下面这段直接发给 Claude Code，它会自动调用 codegraph 工具，**无需自己 grep / read**：
+
+---
+
+> 我要理解 sglang 的请求调度核心流程。请用 `codegraph_explore` 工具帮我：
+>
+> 1. 传 `"Scheduler run_batch event_loop_normal"` 探索调度核心符号，拿到源码 + 调用路径
+> 2. 传 `"run_batch model_runner detokenizer"` 探索 `run_batch` 的下游调用链
+> 3. 传 `"event_loop_normal Scheduler"` 理清调度入口谁触发 `run_batch`
+>
+> 基于这些调用的返回，给我一个简明调度数据流图：req 入口 → Scheduler → run_batch → 下游。结论用 codegraph 返回的源码和调用边支撑，不要凭记忆猜测，也不要重复 Read explore 已展示的文件。
+
+---
+
+### 预期表现
+
+- Claude Code 调用 `codegraph_explore`（通常 2~3 次），**不发起 grep / Glob / Read**
+- 返回的是结构化的符号源码 + 调用路径，而非全文搜索
+- 输出有 `file_path:line` 引用，可点击跳转
+- 不接 codegraph 时会退回 grep / read，明显更慢、工具调用更多
+
+---
+
+## 八、相关文件
+
+- `.codegraph/codegraph.db` — 索引数据库（**git 忽略**，网盘共享，见第三节）
+- `.codegraph/.gitignore` — codegraph 自动生成，忽略整个 `.codegraph/` 内容
+- `tools/codegraph/fetch_codegraph_index.sh` — 一键从网盘下载 db
+- `.mcp.json`（项目级配置，不提交）— Claude Code MCP 接入，`.gitignore` 已排除

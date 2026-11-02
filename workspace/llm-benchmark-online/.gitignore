@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+benchmark.db.backup_*
+eval_outputs/

@@ -1,0 +1,6 @@
+metric,split_on_mean,split_on_stdev,split_off_mean,split_off_stdev,notes
+benchmark_duration_s,33.8767,0.9471,39.4200,2.8319,primary three paired runs
+output_tps_tok_s,75.6033,2.0963,65.1567,4.4918,primary three paired runs
+mean_e2e_ms,6762.0200,188.2624,7806.6533,467.9455,primary three paired runs
+mean_ttft_ms,5199.3633,177.2097,5305.7133,154.9837,primary three paired runs
+mean_tpot_ms,24.8033,1.3812,39.7000,9.8833,primary three paired runs

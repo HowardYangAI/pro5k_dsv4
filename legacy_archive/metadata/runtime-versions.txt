@@ -1,0 +1,6 @@
+Python 3.12.3
+torch=2.11.0+cu129
+cuda=12.9
+cuda_available=True
+flashinfer=0.6.15.post1
+      8 NVIDIA RTX PRO 5000 72GB Blackwell, 580.126.09, 73415 MiB

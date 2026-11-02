@@ -1,0 +1,444 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "type": "text", "id": "hero_title", "x": 55, "y": 35, "width": 1100, "height": 60,
+      "text": "DeepSeek-V4-Flash Decode 压测与稳定性修复", "originalText": "DeepSeek-V4-Flash Decode 压测与稳定性修复",
+      "fontSize": 44, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100001,
+      "version": 1, "versionNonce": 100002, "isDeleted": false, "groupIds": [], "boundElements": null,
+      "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "hero_subtitle", "x": 58, "y": 104, "width": 1450, "height": 35,
+      "text": "性能矩阵 → 高并发复现 → 根因拆解 → 三项补丁 → C640 / C1024 验收", "originalText": "性能矩阵 → 高并发复现 → 根因拆解 → 三项补丁 → C640 / C1024 验收",
+      "fontSize": 22, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100003,
+      "version": 1, "versionNonce": 100004, "isDeleted": false, "groupIds": [], "boundElements": null,
+      "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "line", "id": "summary_spine", "x": 145, "y": 178, "width": 1510, "height": 0,
+      "strokeColor": "#1e3a5f", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100005,
+      "version": 1, "versionNonce": 100006, "isDeleted": false, "groupIds": [], "boundElements": null,
+      "link": null, "locked": false, "points": [[0, 0], [1510, 0]]
+    },
+    {
+      "type": "ellipse", "id": "summary_dot_1", "x": 137, "y": 170, "width": 16, "height": 16,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#3b82f6", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100007,
+      "version": 1, "versionNonce": 100008, "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "summary_dot_2", "x": 507, "y": 170, "width": 16, "height": 16,
+      "strokeColor": "#c2410c", "backgroundColor": "#fed7aa", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100009,
+      "version": 1, "versionNonce": 100010, "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "summary_dot_3", "x": 877, "y": 170, "width": 16, "height": 16,
+      "strokeColor": "#b91c1c", "backgroundColor": "#fecaca", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100011,
+      "version": 1, "versionNonce": 100012, "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "summary_dot_4", "x": 1247, "y": 170, "width": 16, "height": 16,
+      "strokeColor": "#6d28d9", "backgroundColor": "#ddd6fe", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100013,
+      "version": 1, "versionNonce": 100014, "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "summary_dot_5", "x": 1647, "y": 170, "width": 16, "height": 16,
+      "strokeColor": "#047857", "backgroundColor": "#a7f3d0", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100015,
+      "version": 1, "versionNonce": 100016, "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "text", "id": "summary_label_1", "x": 82, "y": 195, "width": 150, "height": 28,
+      "text": "性能矩阵", "originalText": "性能矩阵", "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100017, "version": 1, "versionNonce": 100018,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "summary_label_2", "x": 442, "y": 195, "width": 160, "height": 28,
+      "text": "高并发复现", "originalText": "高并发复现", "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#c2410c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100019, "version": 1, "versionNonce": 100020,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "summary_label_3", "x": 822, "y": 195, "width": 130, "height": 28,
+      "text": "根因拆解", "originalText": "根因拆解", "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100021, "version": 1, "versionNonce": 100022,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "summary_label_4", "x": 1192, "y": 195, "width": 130, "height": 28,
+      "text": "三项补丁", "originalText": "三项补丁", "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#6d28d9", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100023, "version": 1, "versionNonce": 100024,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "summary_label_5", "x": 1592, "y": 195, "width": 130, "height": 28,
+      "text": "稳定验收", "originalText": "稳定验收", "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100025, "version": 1, "versionNonce": 100026,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "line", "id": "divider_left_center", "x": 610, "y": 250, "width": 0, "height": 825,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "dashed", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100027,
+      "version": 1, "versionNonce": 100028, "isDeleted": false, "groupIds": [], "boundElements": null,
+      "link": null, "locked": false, "points": [[0, 0], [0, 825]]
+    },
+    {
+      "type": "line", "id": "divider_center_right", "x": 1210, "y": 250, "width": 0, "height": 825,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1,
+      "strokeStyle": "dashed", "roughness": 0, "opacity": 100, "angle": 0, "seed": 100029,
+      "version": 1, "versionNonce": 100030, "isDeleted": false, "groupIds": [], "boundElements": null,
+      "link": null, "locked": false, "points": [[0, 0], [0, 825]]
+    },
+    {
+      "type": "text", "id": "section_perf_title", "x": 55, "y": 250, "width": 300, "height": 40,
+      "text": "01  压测证据", "originalText": "01  压测证据", "fontSize": 28, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100031, "version": 1, "versionNonce": 100032,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "section_bug_title", "x": 655, "y": 250, "width": 300, "height": 40,
+      "text": "02  问题定位", "originalText": "02  问题定位", "fontSize": 28, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100033, "version": 1, "versionNonce": 100034,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "section_fix_title", "x": 1255, "y": 250, "width": 360, "height": 40,
+      "text": "03  补丁与验收", "originalText": "03  补丁与验收", "fontSize": 28, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top", "lineHeight": 1.25,
+      "strokeColor": "#6d28d9", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 100035, "version": 1, "versionNonce": 100036,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "text", "id": "perf_setup", "x": 60, "y": 310, "width": 520, "height": 55,
+      "text": "Decode-only · DSpark · input 8K / output 2K\nRTX PRO 5000 72GB：单机 8 卡 vs 双机 16 卡 TCP", "originalText": "Decode-only · DSpark · input 8K / output 2K\nRTX PRO 5000 72GB：单机 8 卡 vs 双机 16 卡 TCP",
+      "fontSize": 18, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top", "lineHeight": 1.35,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200001, "version": 1, "versionNonce": 200002,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "single_node_box", "x": 55, "y": 395, "width": 250, "height": 185,
+      "strokeColor": "#047857", "backgroundColor": "#a7f3d0", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200003, "version": 1, "versionNonce": 200004,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "single_node_text", "x": 78, "y": 420, "width": 205, "height": 135,
+      "text": "单机 8 卡\nTP8 · DP8 · EP4\n\nC384\nOutput TPS  10,754\nMean TPOT   33.17 ms", "originalText": "单机 8 卡\nTP8 · DP8 · EP4\n\nC384\nOutput TPS  10,754\nMean TPOT   33.17 ms",
+      "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200005, "version": 1, "versionNonce": 200006,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "dual_node_box", "x": 335, "y": 395, "width": 250, "height": 185,
+      "strokeColor": "#dc2626", "backgroundColor": "#fee2e2", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200007, "version": 1, "versionNonce": 200008,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "dual_node_text", "x": 358, "y": 420, "width": 205, "height": 135,
+      "text": "双机 16 卡 · TCP\nTP16 · DP16 · EP16\n\nC384\nOutput TPS  1,385\nMean TPOT   259.40 ms", "originalText": "双机 16 卡 · TCP\nTP16 · DP16 · EP16\n\nC384\nOutput TPS  1,385\nMean TPOT   259.40 ms",
+      "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200009, "version": 1, "versionNonce": 200010,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "arrow", "id": "single_to_conclusion", "x": 180, "y": 582, "width": 70, "height": 85,
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200011, "version": 1, "versionNonce": 200012,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [0, 40], [70, 85]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "dual_to_conclusion", "x": 460, "y": 582, "width": 210, "height": 85,
+      "strokeColor": "#dc2626", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200013, "version": 1, "versionNonce": 200014,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [0, 40], [-210, 85]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "diamond", "id": "perf_conclusion", "x": 145, "y": 660, "width": 350, "height": 190,
+      "strokeColor": "#b45309", "backgroundColor": "#fef3c7", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200015, "version": 1, "versionNonce": 200016,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "text", "id": "perf_conclusion_text", "x": 205, "y": 705, "width": 230, "height": 105,
+      "text": "核心判断\n单机可扩展\n双机 TCP collective\n成为 Decode 主瓶颈", "originalText": "核心判断\n单机可扩展\n双机 TCP collective\n成为 Decode 主瓶颈",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200017, "version": 1, "versionNonce": 200018,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "perf_evidence_box", "x": 85, "y": 900, "width": 470, "height": 125,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#1e293b", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200019, "version": 1, "versionNonce": 200020,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "perf_evidence_text", "x": 112, "y": 925, "width": 415, "height": 80,
+      "text": "同为 C384 / 8K→2K\nOutput TPS  -87.1%\nMean TPOT   7.8×", "originalText": "同为 C384 / 8K→2K\nOutput TPS  -87.1%\nMean TPOT   7.8×",
+      "fontSize": 20, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 200021, "version": 1, "versionNonce": 200022,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "ellipse", "id": "bug_trigger", "x": 725, "y": 315, "width": 380, "height": 90,
+      "strokeColor": "#c2410c", "backgroundColor": "#fed7aa", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300001, "version": 1, "versionNonce": 300002,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "text", "id": "bug_trigger_text", "x": 770, "y": 338, "width": 290, "height": 44,
+      "text": "高并发 / EP 开启\n暴露稳定性边界", "originalText": "高并发 / EP 开启\n暴露稳定性边界",
+      "fontSize": 20, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.2,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300003, "version": 1, "versionNonce": 300004,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "line", "id": "bug_fan_spine", "x": 680, "y": 440, "width": 0, "height": 430,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300005, "version": 1, "versionNonce": 300006,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "points": [[0, 0], [0, 430]]
+    },
+    {
+      "type": "arrow", "id": "trigger_to_spine", "x": 915, "y": 405, "width": 235, "height": 35,
+      "strokeColor": "#c2410c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300007, "version": 1, "versionNonce": 300008,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [0, 25], [-235, 35]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "spine_to_bug_a", "x": 680, "y": 490, "width": 65, "height": 0,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300009, "version": 1, "versionNonce": 300010,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [65, 0]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "spine_to_bug_b", "x": 680, "y": 665, "width": 65, "height": 0,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300011, "version": 1, "versionNonce": 300012,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [65, 0]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "spine_to_bug_c", "x": 680, "y": 840, "width": 65, "height": 0,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300013, "version": 1, "versionNonce": 300014,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [65, 0]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "rectangle", "id": "bug_a_box", "x": 745, "y": 435, "width": 410, "height": 135,
+      "strokeColor": "#b91c1c", "backgroundColor": "#fecaca", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300015, "version": 1, "versionNonce": 300016,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "bug_a_text", "x": 770, "y": 452, "width": 360, "height": 100,
+      "text": "Bug A · SWA KV 耗尽\nRetraction 默认执行 CPU KV offload/copy\nDeepSeek-V4 pool 不支持\n→ NotImplementedError / 服务退出", "originalText": "Bug A · SWA KV 耗尽\nRetraction 默认执行 CPU KV offload/copy\nDeepSeek-V4 pool 不支持\n→ NotImplementedError / 服务退出",
+      "fontSize": 17, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300017, "version": 1, "versionNonce": 300018,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "bug_b_box", "x": 745, "y": 610, "width": 410, "height": 135,
+      "strokeColor": "#dc2626", "backgroundColor": "#fee2e2", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300019, "version": 1, "versionNonce": 300020,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "bug_b_text", "x": 770, "y": 626, "width": 360, "height": 102,
+      "text": "Bug B · 分页容量估算偏差\n需要 257 tokens · page_size=256\n原估算 257，实际分配 512\n→ 预估放得下，实际分配失败", "originalText": "Bug B · 分页容量估算偏差\n需要 257 tokens · page_size=256\n原估算 257，实际分配 512\n→ 预估放得下，实际分配失败",
+      "fontSize": 17, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300021, "version": 1, "versionNonce": 300022,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "bug_c_box", "x": 745, "y": 785, "width": 410, "height": 135,
+      "strokeColor": "#b91c1c", "backgroundColor": "#fecaca", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300023, "version": 1, "versionNonce": 300024,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "bug_c_text", "x": 770, "y": 801, "width": 360, "height": 102,
+      "text": "Bug C · DSpark + EP CUDA Graph\n手工构造 ForwardBatch(...)\n漏填 num_token_non_padded\n→ None - int / EP 路径报错", "originalText": "Bug C · DSpark + EP CUDA Graph\n手工构造 ForwardBatch(...)\n漏填 num_token_non_padded\n→ None - int / EP 路径报错",
+      "fontSize": 17, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300025, "version": 1, "versionNonce": 300026,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "bug_evidence_box", "x": 745, "y": 950, "width": 410, "height": 75,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#1e293b", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300027, "version": 1, "versionNonce": 300028,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "bug_evidence_text", "x": 765, "y": 965, "width": 370, "height": 43,
+      "text": "check_decode_mem() → retract_decode()\n容量边界同时暴露恢复路径缺口", "originalText": "check_decode_mem() → retract_decode()\n容量边界同时暴露恢复路径缺口",
+      "fontSize": 16, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.25,
+      "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 300029, "version": 1, "versionNonce": 300030,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "arrow", "id": "bug_a_to_patch_1", "x": 1155, "y": 500, "width": 95, "height": 85,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400001, "version": 1, "versionNonce": 400002,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [35, 0], [95, -85]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "bug_b_to_patch_2", "x": 1155, "y": 675, "width": 95, "height": 95,
+      "strokeColor": "#dc2626", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400003, "version": 1, "versionNonce": 400004,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [35, 0], [95, -95]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "bug_c_to_patch_3", "x": 1155, "y": 850, "width": 95, "height": 115,
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400005, "version": 1, "versionNonce": 400006,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [35, 0], [95, -115]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "rectangle", "id": "patch_1_box", "x": 1250, "y": 315, "width": 520, "height": 175,
+      "strokeColor": "#6d28d9", "backgroundColor": "#ddd6fe", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400007, "version": 1, "versionNonce": 400008,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "patch_1_text", "x": 1275, "y": 329, "width": 470, "height": 58,
+      "text": "Patch 1 · 能力判断 + 三路径恢复\nsupports_cpu_copy()", "originalText": "Patch 1 · 能力判断 + 三路径恢复\nsupports_cpu_copy()",
+      "fontSize": 18, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400009, "version": 1, "versionNonce": 400010,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "patch_1_code_box", "x": 1275, "y": 392, "width": 470, "height": 78,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#1e293b", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400011, "version": 1, "versionNonce": 400012,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "patch_1_code_text", "x": 1290, "y": 402, "width": 440, "height": 57,
+      "text": "支持 copy → CPU offload / resume\n真实 PD → Prefill rebootstrap / 重算\nFake PD → graceful abort 超载请求", "originalText": "支持 copy → CPU offload / resume\n真实 PD → Prefill rebootstrap / 重算\nFake PD → graceful abort 超载请求",
+      "fontSize": 15, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.25,
+      "strokeColor": "#22c55e", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400013, "version": 1, "versionNonce": 400014,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "patch_2_box", "x": 1250, "y": 520, "width": 520, "height": 125,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#93c5fd", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400015, "version": 1, "versionNonce": 400016,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "patch_2_text", "x": 1275, "y": 538, "width": 470, "height": 90,
+      "text": "Patch 2 · Paged SWA 对齐（PR #33794）\nFull / SWA 分别 ceil_align(..., page_size)\n准入估算 = 实际 Page 分配", "originalText": "Patch 2 · Paged SWA 对齐（PR #33794）\nFull / SWA 分别 ceil_align(..., page_size)\n准入估算 = 实际 Page 分配",
+      "fontSize": 17, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400017, "version": 1, "versionNonce": 400018,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "rectangle", "id": "patch_3_box", "x": 1250, "y": 675, "width": 520, "height": 125,
+      "strokeColor": "#6d28d9", "backgroundColor": "#ddd6fe", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400019, "version": 1, "versionNonce": 400020,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "patch_3_text", "x": 1275, "y": 690, "width": 470, "height": 95,
+      "text": "Patch 3 · 补齐 DSpark batch 元数据\nnum_tokens = input_ids.numel()\n设置 num_token_non_padded / _cpu", "originalText": "Patch 3 · 补齐 DSpark batch 元数据\nnum_tokens = input_ids.numel()\n设置 num_token_non_padded / _cpu",
+      "fontSize": 17, "fontFamily": 3, "textAlign": "left", "verticalAlign": "middle", "lineHeight": 1.3,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400021, "version": 1, "versionNonce": 400022,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null
+    },
+    {
+      "type": "line", "id": "patch_converge_spine", "x": 1810, "y": 400, "width": 0, "height": 420,
+      "strokeColor": "#6d28d9", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400023, "version": 1, "versionNonce": 400024,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "points": [[0, 0], [0, 420]]
+    },
+    {
+      "type": "arrow", "id": "patch_1_to_spine", "x": 1770, "y": 400, "width": 40, "height": 0,
+      "strokeColor": "#6d28d9", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400025, "version": 1, "versionNonce": 400026,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [40, 0]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "patch_2_to_spine", "x": 1770, "y": 582, "width": 40, "height": 0,
+      "strokeColor": "#1e3a5f", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400027, "version": 1, "versionNonce": 400028,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [40, 0]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "patch_3_to_spine", "x": 1770, "y": 737, "width": 40, "height": 0,
+      "strokeColor": "#6d28d9", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400029, "version": 1, "versionNonce": 400030,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [40, 0]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow", "id": "spine_to_validation", "x": 1810, "y": 820, "width": 50, "height": 45,
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 3, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400031, "version": 1, "versionNonce": 400032,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [0, 20], [-50, 45]], "startBinding": null, "endBinding": null, "startArrowhead": null, "endArrowhead": "arrow"
+    },
+    {
+      "type": "rectangle", "id": "validation_box", "x": 1250, "y": 855, "width": 520, "height": 180,
+      "strokeColor": "#047857", "backgroundColor": "#a7f3d0", "fillStyle": "solid", "strokeWidth": 3, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400033, "version": 1, "versionNonce": 400034,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text", "id": "validation_text", "x": 1275, "y": 872, "width": 470, "height": 145,
+      "text": "验收结果 · C640 / C1024\nSWA pool 达到 100%，服务未再崩溃\nFake PD 超载请求 graceful abort\n28 tests + 13 subtests passed\n内部 CR 6565881", "originalText": "验收结果 · C640 / C1024\nSWA pool 达到 100%，服务未再崩溃\nFake PD 超载请求 graceful abort\n28 tests + 13 subtests passed\n内部 CR 6565881",
+      "fontSize": 18, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle", "lineHeight": 1.35,
+      "strokeColor": "#374151", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0, "seed": 400035, "version": 1, "versionNonce": 400036,
+      "isDeleted": false, "groupIds": [], "boundElements": null, "link": "https://kunpeng.xiaojukeji.com/view/revision/6565881", "locked": false, "containerId": null
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": 20
+  },
+  "files": {}
+}

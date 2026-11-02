@@ -1,0 +1,139 @@
+{
+  "cutoff_utc": "2026-11-02T09:55:04.617618+00:00",
+  "roots": {
+    "/root/.codex": {
+      "exists": true,
+      "resolved": "/root/.codex"
+    },
+    "/tmp/.codex": {
+      "exists": true,
+      "resolved": "/tmp/.codex"
+    },
+    "/sgl-workspace/.codex": {
+      "exists": true,
+      "resolved": "/sgl-workspace/.codex"
+    }
+  },
+  "files": [
+    {
+      "path": "/root/.codex/state_5.sqlite",
+      "size": 249856,
+      "mtime_ns": 1789043954068991452
+    },
+    {
+      "path": "/root/.codex/logs_2.sqlite",
+      "size": 24248320,
+      "mtime_ns": 1793613109136883740
+    },
+    {
+      "path": "/root/.codex/goals_1.sqlite",
+      "size": 32768,
+      "mtime_ns": 1792654129324791898
+    },
+    {
+      "path": "/root/.codex/memories_1.sqlite",
+      "size": 40960,
+      "mtime_ns": 1789011554014099251
+    },
+    {
+      "path": "/root/.codex/queue_1.sqlite",
+      "size": 4096,
+      "mtime_ns": 1787289104581899346
+    },
+    {
+      "path": "/root/.codex/session_index.jsonl",
+      "size": 1853,
+      "mtime_ns": 1793613194571109601
+    },
+    {
+      "path": "/root/.codex/thread_history_1.sqlite",
+      "size": 10035200,
+      "mtime_ns": 1789011569569681285
+    },
+    {
+      "path": "/root/.codex/archived_sessions/rollout-2026-08-21T07-40-37-01a02343-c01b-7f51-8d67-f37a68d49505.jsonl",
+      "size": 57580,
+      "mtime_ns": 1787298122682753073
+    },
+    {
+      "path": "/root/.codex/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl",
+      "size": 7870161,
+      "mtime_ns": 1787299551672277475
+    },
+    {
+      "path": "/root/.codex/.tmp/plugins/plugins/plugin-eval/fixtures/observed-usage/responses.jsonl",
+      "size": 667,
+      "mtime_ns": 1792653535168306953
+    },
+    {
+      "path": "/root/.codex/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl",
+      "size": 37186313,
+      "mtime_ns": 1793613001840832601
+    },
+    {
+      "path": "/root/.codex/sessions/2026/08/23/rollout-2026-08-23T02-46-28-01a02c83-281d-7751-95f7-678490ab1c02.jsonl",
+      "size": 1567141,
+      "mtime_ns": 1788870140280396840
+    },
+    {
+      "path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl",
+      "size": 30094043,
+      "mtime_ns": 1793612993175505377
+    },
+    {
+      "path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T06-01-53-01a046f5-de72-7011-ad77-6f429bb71576.jsonl",
+      "size": 123293,
+      "mtime_ns": 1787897338904356314
+    },
+    {
+      "path": "/root/.codex/sessions/2026/09/01/rollout-2026-09-01T09-37-34-01a05c54-c622-78b3-9644-ca704e76df17.jsonl",
+      "size": 1344676,
+      "mtime_ns": 1788256701546189664
+    },
+    {
+      "path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-31-41-01a08024-f733-7443-9cde-80c32bdbf7fc.jsonl",
+      "size": 7957395,
+      "mtime_ns": 1788857807341325776
+    },
+    {
+      "path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-38-38-01a0802b-53db-75f2-9f81-1922375d5f84.jsonl",
+      "size": 7740420,
+      "mtime_ns": 1788857318741895955
+    },
+    {
+      "path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-51-11-01a08036-d1e9-7160-b3d5-07c46362bc06.jsonl",
+      "size": 143496,
+      "mtime_ns": 1788857566111226785
+    },
+    {
+      "path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T12-58-39-01a08119-6186-7f73-b5bd-b04c2093edc7.jsonl",
+      "size": 1119630,
+      "mtime_ns": 1788941642099381671
+    },
+    {
+      "path": "/root/.codex/sessions/2026/09/09/rollout-2026-09-09T08-24-35-01a08119-6186-7f73-b5bd-b04c2093edc7_01a08544-d4e6-7801-bd76-e2da2c8fcea0.jsonl",
+      "size": 263213,
+      "mtime_ns": 1793613024140674580
+    },
+    {
+      "path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-27d8-7021-989a-6cfd99b81fb2.jsonl",
+      "size": 98164,
+      "mtime_ns": 1793613296463953181
+    },
+    {
+      "path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-6544-7fc1-8031-0441755f24e3.jsonl",
+      "size": 104235,
+      "mtime_ns": 1793613304460255036
+    },
+    {
+      "path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-40-01a19bae-b53e-7051-80bb-e0108675f76c.jsonl",
+      "size": 96103,
+      "mtime_ns": 1793613304192244920
+    },
+    {
+      "path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-56-01a19bae-f31a-7a33-9054-6fc246bc7af6.jsonl",
+      "size": 86876,
+      "mtime_ns": 1793613296466953294
+    }
+  ]
+}

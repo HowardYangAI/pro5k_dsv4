@@ -1,0 +1,87 @@
+==============================================
+Running benchmark with:
+ --max-concurrency: 1
+ --num-prompts: 10
+==============================================
+python3 bench_serving.py --backend sglang-oai-chat --dataset-path /home/luban/ShareGPT_V3_unfiltered_cleaned_split.json --dataset-name random --random-input-len 8192 --random-output-len 2048 --random-range-ratio 1 --extra-request-body {"stream_options": {"include_usage": true}} --seed 1786075679 --host 10.207.193.139 --port 30002 --model /nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash --model-name DeepSeek-V4-Flash-0731 --max-concurrency 1 --num-prompts 10 --request-rate inf --enable-test-pd-without-transfer
+----------------------------------------------
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash', model_name='DeepSeek-V4-Flash-0731', num_prompts=10, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=2048, random_range_ratio=1.0, request_rate=inf, max_concurrency=1, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1786075679, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=True)
+Fail to load tokenizer config with error=Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash'. Use `repo_type` argument if needed.
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash', model_name='DeepSeek-V4-Flash-0731', num_prompts=10, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=2048, random_range_ratio=1.0, request_rate=inf, max_concurrency=1, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1786075679, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=True)
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 419, in cached_files
+    hf_hub_download(
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py", line 85, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py", line 133, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash'. Use `repo_type` argument if needed.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/tokenization_auto.py", line 624, in from_pretrained
+    config = AutoConfig.from_pretrained(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/configuration_auto.py", line 1403, in from_pretrained
+    config_dict, unused_kwargs = PreTrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 572, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 627, in _get_config_dict
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 276, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 468, in cached_files
+    raise OSError(f"{e}") from e
+OSError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash'. Use `repo_type` argument if needed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 419, in cached_files
+    hf_hub_download(
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py", line 85, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py", line 133, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash'. Use `repo_type` argument if needed.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2301, in <module>
+    run_benchmark(args)
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2017, in run_benchmark
+    tokenizer = get_tokenizer(args.model)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 676, in get_tokenizer
+    return AutoTokenizer.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/tokenization_auto.py", line 628, in from_pretrained
+    config = PreTrainedConfig.from_pretrained(pretrained_model_name_or_path, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 531, in from_pretrained
+    config_dict, kwargs = cls.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 572, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/configuration_utils.py", line 627, in _get_config_dict
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 276, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 468, in cached_files
+    raise OSError(f"{e}") from e
+OSError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash'. Use `repo_type` argument if needed.
+All benchmark tests completed!

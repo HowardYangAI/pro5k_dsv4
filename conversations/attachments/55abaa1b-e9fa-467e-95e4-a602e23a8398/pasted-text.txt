@@ -1,0 +1,1274 @@
+2026-09-01 20:12:07 - evalscope - [32mINFO[0m: Args: Task config is provided with TaskConfig type.[0m
+2026-09-01 20:12:07 - evalscope - [32mINFO[0m: Running with native backend[0m
+2026-09-01 20:12:07 - evalscope - [32mINFO[0m: Dump task config to /tmp-data/ifx-llm-cache/eval_outputs/20260901_201207/configs/task_config.yaml[0m
+2026-09-01 20:12:07 - evalscope - [32mINFO[0m: {
+    "model": "/data1/deepseek-ai/DeepSeek-V4-Flash-0731/",
+    "model_id": "untitled",
+    "model_args": {},
+    "model_task": "text_generation",
+    "chat_template": null,
+    "datasets": [
+        "mmlu"
+    ],
+    "dataset_args": {
+        "mmlu": {
+            "name": "mmlu",
+            "dataset_id": "cais/mmlu",
+            "output_types": [
+                "generation"
+            ],
+            "subset_list": [
+                "abstract_algebra",
+                "anatomy",
+                "astronomy",
+                "business_ethics",
+                "clinical_knowledge",
+                "college_biology",
+                "college_chemistry",
+                "college_computer_science",
+                "college_mathematics",
+                "college_medicine",
+                "college_physics",
+                "computer_security",
+                "conceptual_physics",
+                "econometrics",
+                "electrical_engineering",
+                "elementary_mathematics",
+                "formal_logic",
+                "global_facts",
+                "high_school_biology",
+                "high_school_chemistry",
+                "high_school_computer_science",
+                "high_school_european_history",
+                "high_school_geography",
+                "high_school_government_and_politics",
+                "high_school_macroeconomics",
+                "high_school_mathematics",
+                "high_school_microeconomics",
+                "high_school_physics",
+                "high_school_psychology",
+                "high_school_statistics",
+                "high_school_us_history",
+                "high_school_world_history",
+                "human_aging",
+                "human_sexuality",
+                "international_law",
+                "jurisprudence",
+                "logical_fallacies",
+                "machine_learning",
+                "management",
+                "marketing",
+                "medical_genetics",
+                "miscellaneous",
+                "moral_disputes",
+                "moral_scenarios",
+                "nutrition",
+                "philosophy",
+                "prehistory",
+                "professional_accounting",
+                "professional_law",
+                "professional_medicine",
+                "professional_psychology",
+                "public_relations",
+                "security_studies",
+                "sociology",
+                "us_foreign_policy",
+                "virology",
+                "world_religions"
+            ],
+            "default_subset": "all",
+            "few_shot_num": 5,
+            "few_shot_random": false,
+            "train_split": "dev",
+            "eval_split": "test",
+            "prompt_template": "Answer the following multiple choice question. The last line of your response should be of the following format: 'ANSWER: [LETTER]' (without quotes) where [LETTER] is one of {letters}. Think step by step before answering.\n\n{question}\n\n{choices}",
+            "few_shot_prompt_template": null,
+            "system_prompt": null,
+            "query_template": null,
+            "pretty_name": "MMLU",
+            "description": "\n## Overview\n\nMMLU (Massive Multitask Language Understanding) is a comprehensive evaluation benchmark designed to measure knowledge acquired during pretraining. It covers 57 subjects across STEM, humanities, social sciences, and other domains, ranging from elementary to professional difficulty levels.\n\n## Task Description\n\n- **Task Type**: Multiple-Choice Question Answering\n- **Input**: Question with four answer choices (A, B, C, D)\n- **Output**: Single correct answer letter\n- **Subjects**: 57 subjects organized into 4 categories (STEM, Humanities, Social Sciences, Other)\n\n## Key Features\n\n- Covers diverse knowledge domains from elementary to advanced professional levels\n- Tests both factual knowledge and reasoning abilities\n- Includes subjects like abstract algebra, anatomy, astronomy, business ethics, and more\n- Standard benchmark for measuring LLM knowledge breadth\n\n## Evaluation Notes\n\n- Default configuration uses **5-shot** examples from the dev split\n- Supports Chain-of-Thought (CoT) prompting for improved reasoning\n- Results can be aggregated by subject or category (STEM, Humanities, Social Sciences, Other)\n- Use `subset_list` parameter to evaluate specific subjects\n",
+            "paper_url": null,
+            "data_statistics": null,
+            "sample_example": null,
+            "tags": [
+                "Knowledge",
+                "MCQ"
+            ],
+            "filters": null,
+            "metric_list": [
+                "acc"
+            ],
+            "aggregation": "mean",
+            "shuffle": false,
+            "shuffle_choices": false,
+            "force_redownload": false,
+            "review_timeout": null,
+            "extra_params": {},
+            "sandbox_config": {}
+        }
+    },
+    "dataset_dir": "/home/luban/ifx_llm_dist_auto_test/dataset",
+    "dataset_hub": "modelscope",
+    "repeats": 1,
+    "generation_config": {
+        "batch_size": 128,
+        "max_tokens": 8192,
+        "top_p": 0.95,
+        "temperature": 0.7
+    },
+    "eval_type": "openai_api",
+    "eval_backend": "Native",
+    "eval_config": null,
+    "limit": null,
+    "eval_batch_size": 128,
+    "use_cache": null,
+    "rerun_review": false,
+    "work_dir": "/tmp-data/ifx-llm-cache/eval_outputs/20260901_201207",
+    "no_timestamp": false,
+    "enable_progress_tracker": false,
+    "ignore_errors": true,
+    "debug": false,
+    "seed": 42,
+    "api_url": "http://10.93.165.26:8030/v1/chat/completions",
+    "timeout": null,
+    "stream": null,
+    "judge_strategy": "auto",
+    "judge_worker_num": null,
+    "judge_model_args": {},
+    "analysis_report": false,
+    "collect_perf": true,
+    "use_sandbox": false,
+    "sandbox_type": "docker",
+    "sandbox_manager_config": {},
+    "evalscope_version": "1.7.0"
+}[0m
+
+============================================================
+Starting eval: datasets=['mmlu'], model=/data1/deepseek-ai/DeepSeek-V4-Flash-0731/
+api_url=http://10.93.165.26:8030/v1/chat/completions, limit=None, batch_size=128
+============================================================
+
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+                                                           
+2026-09-01 20:12:07 - evalscope - [32mINFO[0m: Start loading benchmark dataset: mmlu[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Processing records:   0%|          | 0/14042 [00:00<?, ?it/s][A
+
+Processing records:  24%|██▍       | 3390/14042 [00:00<00:00, 24916.26it/s][A
+Processing records: 100%|██████████| 14042/14042 [00:00<00:00, 71934.99it/s]
+
+
+Processing records:   0%|          | 0/285 [00:00<?, ?it/s][A
+Processing records: 100%|██████████| 285/285 [00:00<00:00, 221243.13it/s]
+
+                                                           
+2026-09-01 20:12:09 - evalscope - [32mINFO[0m: Start evaluating 57 subsets of mmlu: ['abstract_algebra', 'anatomy', 'astronomy', 'business_ethics', 'clinical_knowledge', 'college_biology', 'college_chemistry', 'college_computer_science', 'college_mathematics', 'college_medicine', 'college_physics', 'computer_security', 'conceptual_physics', 'econometrics', 'electrical_engineering', 'elementary_mathematics', 'formal_logic', 'global_facts', 'high_school_biology', 'high_school_chemistry', 'high_school_computer_science', 'high_school_european_history', 'high_school_geography', 'high_school_government_and_politics', 'high_school_macroeconomics', 'high_school_mathematics', 'high_school_microeconomics', 'high_school_physics', 'high_school_psychology', 'high_school_statistics', 'high_school_us_history', 'high_school_world_history', 'human_aging', 'human_sexuality', 'international_law', 'jurisprudence', 'logical_fallacies', 'machine_learning', 'management', 'marketing', 'medical_genetics', 'miscellaneous', 'moral_disputes', 'moral_scenarios', 'nutrition', 'philosophy', 'prehistory', 'professional_accounting', 'professional_law', 'professional_medicine', 'professional_psychology', 'public_relations', 'security_studies', 'sociology', 'us_foreign_policy', 'virology', 'world_religions'][0m
+
+Running[eval]:   0%|          | 0/1 [00:02<?, ?benchmark/s]
+                                                           
+2026-09-01 20:12:09 - evalscope - [32mINFO[0m: Unified pool: 14042 items to process, 0 already fully cached (14042 total across all subsets).[0m
+
+Running[eval]:   0%|          | 0/1 [00:02<?, ?benchmark/s]
+
+Evaluating[mmlu]:   0%|          | 0/14042 [00:00<?, ?it/s][A
+                                                           
+
+                                                           
+[A2026-09-01 20:12:09 - evalscope - [32mINFO[0m: Loading model for prediction...[0m
+
+Running[eval]:   0%|          | 0/1 [00:02<?, ?benchmark/s]
+
+Evaluating[mmlu]:   0%|          | 0/14042 [00:00<?, ?it/s][A
+                                                           
+
+                                                           
+[A2026-09-01 20:12:09 - evalscope - [32mINFO[0m: Creating model /data1/deepseek-ai/DeepSeek-V4-Flash-0731/ with eval_type=openai_api base_url=http://10.93.165.26:8030/v1/chat/completions, config={'retries': 5, 'retry_interval': 10, 'batch_size': 128, 'max_tokens': 8192, 'top_p': 0.95, 'temperature': 0.7}, model_args={}[0m
+
+Running[eval]:   0%|          | 0/1 [00:02<?, ?benchmark/s]
+
+Evaluating[mmlu]:   0%|          | 0/14042 [00:00<?, ?it/s][A
+                                                           
+
+                                                           
+[A2026-09-01 20:12:09 - evalscope - [32mINFO[0m: Model loaded successfully.[0m
+
+Running[eval]:   0%|          | 0/1 [00:02<?, ?benchmark/s]
+
+Evaluating[mmlu]:   0%|          | 0/14042 [00:00<?, ?it/s][A
+
+Evaluating[mmlu]:   0%|          | 1/14042 [00:06<23:30:36,  6.03s/it][A
+
+Evaluating[mmlu]:   0%|          | 2/14042 [00:07<11:58:59,  3.07s/it][A
+
+Evaluating[mmlu]:   0%|          | 57/14042 [00:08<19:57, 11.67it/s]  [A
+
+Evaluating[mmlu]:   1%|          | 122/14042 [00:09<10:03, 23.05it/s][A
+
+Evaluating[mmlu]:   1%|          | 158/14042 [00:14<17:33, 13.18it/s][A
+
+Evaluating[mmlu]:   2%|▏         | 215/14042 [00:15<11:59, 19.22it/s][A
+
+Evaluating[mmlu]:   2%|▏         | 257/14042 [00:16<10:06, 22.71it/s][A
+
+Evaluating[mmlu]:   2%|▏         | 293/14042 [00:22<18:02, 12.70it/s][A
+
+Evaluating[mmlu]:   3%|▎         | 382/14042 [00:24<10:40, 21.34it/s][A
+
+Evaluating[mmlu]:   3%|▎         | 422/14042 [00:28<13:41, 16.58it/s][A
+
+Evaluating[mmlu]:   4%|▎         | 495/14042 [00:29<09:47, 23.06it/s][A
+
+Evaluating[mmlu]:   4%|▍         | 535/14042 [00:33<12:50, 17.53it/s][A
+
+Evaluating[mmlu]:   5%|▍         | 645/14042 [00:34<08:07, 27.46it/s][A
+
+Evaluating[mmlu]:   5%|▍         | 689/14042 [00:36<07:36, 29.26it/s][A
+
+Evaluating[mmlu]:   5%|▌         | 761/14042 [00:37<06:17, 35.16it/s][A
+
+Evaluating[mmlu]:   6%|▌         | 809/14042 [00:38<06:00, 36.68it/s][A
+
+Evaluating[mmlu]:   6%|▌         | 868/14042 [00:39<05:28, 40.11it/s][A
+
+Evaluating[mmlu]:   7%|▋         | 916/14042 [00:40<05:21, 40.85it/s][A
+
+Evaluating[mmlu]:   7%|▋         | 963/14042 [00:42<06:31, 33.37it/s][A
+
+Evaluating[mmlu]:   7%|▋         | 1017/14042 [00:43<05:54, 36.74it/s][A
+
+Evaluating[mmlu]:   8%|▊         | 1059/14042 [00:45<05:49, 37.10it/s][A
+
+Evaluating[mmlu]:   8%|▊         | 1100/14042 [00:46<05:49, 37.07it/s][A
+
+Evaluating[mmlu]:   8%|▊         | 1141/14042 [00:47<05:47, 37.14it/s][A
+
+Evaluating[mmlu]:   9%|▊         | 1194/14042 [00:48<05:21, 39.92it/s][A
+
+Evaluating[mmlu]:   9%|▉         | 1236/14042 [00:57<16:33, 12.89it/s][A
+
+Evaluating[mmlu]:   9%|▉         | 1267/14042 [00:58<14:30, 14.67it/s][A
+
+Evaluating[mmlu]:   9%|▉         | 1332/14042 [00:59<10:10, 20.81it/s][A
+
+Evaluating[mmlu]:  10%|▉         | 1371/14042 [01:00<09:05, 23.24it/s][A
+                                                           
+
+                                                                      
+[A2026-09-01 20:13:10 - evalscope - [32mINFO[0m: Evaluating[mmlu]  10%| 1371/14042 [Elapsed: 01:00 < Remaining: 09:05, 23.24it/s][0m
+
+Running[eval]:   0%|          | 0/1 [01:03<?, ?benchmark/s]
+
+Evaluating[mmlu]:  10%|▉         | 1371/14042 [01:00<09:05, 23.24it/s][A
+
+Evaluating[mmlu]:  10%|█         | 1417/14042 [01:02<07:52, 26.71it/s][A
+
+Evaluating[mmlu]:  11%|█         | 1483/14042 [01:03<06:15, 33.48it/s][A
+
+Evaluating[mmlu]:  11%|█         | 1533/14042 [01:04<05:46, 36.07it/s][A
+
+Evaluating[mmlu]:  11%|█▏        | 1611/14042 [01:05<04:46, 43.32it/s][A
+
+Evaluating[mmlu]:  12%|█▏        | 1661/14042 [01:08<06:55, 29.79it/s][A
+
+Evaluating[mmlu]:  12%|█▏        | 1750/14042 [01:10<05:18, 38.63it/s][A
+
+Evaluating[mmlu]:  13%|█▎        | 1799/14042 [01:11<05:21, 38.11it/s][A
+
+Evaluating[mmlu]:  13%|█▎        | 1874/14042 [01:12<04:35, 44.17it/s][A
+
+Evaluating[mmlu]:  14%|█▎        | 1925/14042 [01:15<06:34, 30.71it/s][A
+
+Evaluating[mmlu]:  14%|█▍        | 1996/14042 [01:16<05:28, 36.65it/s][A
+
+Evaluating[mmlu]:  15%|█▍        | 2042/14042 [01:17<05:18, 37.70it/s][A
+
+Evaluating[mmlu]:  15%|█▍        | 2087/14042 [01:19<05:13, 38.18it/s][A
+
+Evaluating[mmlu]:  15%|█▌        | 2143/14042 [01:20<04:50, 40.97it/s][A
+
+Evaluating[mmlu]:  16%|█▌        | 2188/14042 [01:21<04:49, 40.90it/s][A
+
+Evaluating[mmlu]:  16%|█▌        | 2232/14042 [01:22<04:55, 40.02it/s][A
+
+Evaluating[mmlu]:  16%|█▋        | 2305/14042 [01:23<04:15, 46.01it/s][A
+
+Evaluating[mmlu]:  17%|█▋        | 2353/14042 [01:25<05:25, 35.91it/s][A
+
+Evaluating[mmlu]:  17%|█▋        | 2449/14042 [01:27<04:09, 46.37it/s][A
+
+Evaluating[mmlu]:  18%|█▊        | 2500/14042 [01:28<04:11, 45.85it/s][A
+
+Evaluating[mmlu]:  18%|█▊        | 2549/14042 [01:29<04:13, 45.27it/s][A
+
+Evaluating[mmlu]:  18%|█▊        | 2597/14042 [01:30<04:16, 44.61it/s][A
+
+Evaluating[mmlu]:  19%|█▉        | 2653/14042 [01:31<04:08, 45.92it/s][A
+
+Evaluating[mmlu]:  19%|█▉        | 2714/14042 [01:32<03:56, 47.96it/s][A
+
+Evaluating[mmlu]:  20%|█▉        | 2763/14042 [01:33<04:02, 46.59it/s][A
+
+Evaluating[mmlu]:  20%|██        | 2842/14042 [01:35<03:34, 52.17it/s][A
+
+Evaluating[mmlu]:  21%|██        | 2895/14042 [01:36<03:41, 50.33it/s][A
+
+Evaluating[mmlu]:  21%|██        | 2965/14042 [01:37<03:29, 52.89it/s][A
+
+Evaluating[mmlu]:  21%|██▏       | 3018/14042 [01:38<03:35, 51.11it/s][A
+
+Evaluating[mmlu]:  22%|██▏       | 3070/14042 [01:40<03:54, 46.81it/s][A
+
+Evaluating[mmlu]:  22%|██▏       | 3118/14042 [01:41<03:59, 45.53it/s][A
+
+Evaluating[mmlu]:  23%|██▎       | 3179/14042 [01:42<03:48, 47.58it/s][A
+
+Evaluating[mmlu]:  23%|██▎       | 3235/14042 [01:43<03:46, 47.81it/s][A
+
+Evaluating[mmlu]:  23%|██▎       | 3283/14042 [01:44<03:52, 46.25it/s][A
+
+Evaluating[mmlu]:  24%|██▎       | 3330/14042 [01:46<05:00, 35.59it/s][A
+
+Evaluating[mmlu]:  24%|██▍       | 3370/14042 [01:47<04:59, 35.58it/s][A
+
+Evaluating[mmlu]:  25%|██▍       | 3448/14042 [01:49<04:07, 42.84it/s][A
+
+Evaluating[mmlu]:  25%|██▍       | 3493/14042 [01:50<04:10, 42.13it/s][A
+
+Evaluating[mmlu]:  26%|██▌       | 3582/14042 [01:51<03:28, 50.05it/s][A
+
+Evaluating[mmlu]:  26%|██▌       | 3633/14042 [01:52<03:34, 48.54it/s][A
+
+Evaluating[mmlu]:  26%|██▋       | 3711/14042 [01:54<03:16, 52.70it/s][A
+
+Evaluating[mmlu]:  27%|██▋       | 3764/14042 [01:55<03:21, 50.93it/s][A
+
+Evaluating[mmlu]:  27%|██▋       | 3832/14042 [01:56<03:14, 52.63it/s][A
+
+Evaluating[mmlu]:  28%|██▊       | 3885/14042 [01:57<03:19, 50.87it/s][A
+
+Evaluating[mmlu]:  28%|██▊       | 3959/14042 [01:58<03:06, 54.04it/s][A
+
+Evaluating[mmlu]:  29%|██▊       | 4013/14042 [01:59<03:12, 52.16it/s][A
+
+Evaluating[mmlu]:  29%|██▉       | 4083/14042 [02:01<03:03, 54.15it/s][A
+                                                           
+
+                                                                      
+[A2026-09-01 20:14:10 - evalscope - [32mINFO[0m: Evaluating[mmlu]  29%| 4083/14042 [Elapsed: 02:01 < Remaining: 03:03, 54.15it/s][0m
+
+Running[eval]:   0%|          | 0/1 [02:03<?, ?benchmark/s]
+
+Evaluating[mmlu]:  29%|██▉       | 4083/14042 [02:01<03:03, 54.15it/s][A
+
+Evaluating[mmlu]:  29%|██▉       | 4138/14042 [02:02<03:08, 52.45it/s][A
+
+Evaluating[mmlu]:  30%|██▉       | 4206/14042 [02:03<03:01, 54.06it/s][A
+
+Evaluating[mmlu]:  30%|███       | 4260/14042 [02:04<03:07, 52.14it/s][A
+
+Evaluating[mmlu]:  31%|███       | 4313/14042 [02:05<03:12, 50.41it/s][A
+
+Evaluating[mmlu]:  31%|███       | 4364/14042 [02:06<03:18, 48.85it/s][A
+
+Evaluating[mmlu]:  31%|███▏      | 4413/14042 [02:08<04:16, 37.49it/s][A
+
+Evaluating[mmlu]:  32%|███▏      | 4455/14042 [02:09<04:15, 37.52it/s][A
+
+Evaluating[mmlu]:  32%|███▏      | 4517/14042 [02:11<04:02, 39.30it/s][A
+
+Evaluating[mmlu]:  33%|███▎      | 4570/14042 [02:12<03:49, 41.25it/s][A
+
+Evaluating[mmlu]:  33%|███▎      | 4637/14042 [02:13<03:25, 45.72it/s][A
+
+Evaluating[mmlu]:  33%|███▎      | 4693/14042 [02:14<03:20, 46.73it/s][A
+
+Evaluating[mmlu]:  34%|███▍      | 4746/14042 [02:15<03:18, 46.72it/s][A
+
+Evaluating[mmlu]:  34%|███▍      | 4794/14042 [02:17<03:23, 45.54it/s][A
+
+Evaluating[mmlu]:  34%|███▍      | 4841/14042 [02:18<03:27, 44.35it/s][A
+
+Evaluating[mmlu]:  35%|███▍      | 4902/14042 [02:19<03:15, 46.84it/s][A
+
+Evaluating[mmlu]:  35%|███▌      | 4950/14042 [02:20<03:20, 45.41it/s][A
+
+Evaluating[mmlu]:  36%|███▌      | 5021/14042 [02:21<03:00, 49.93it/s][A
+
+Evaluating[mmlu]:  36%|███▌      | 5071/14042 [02:24<04:44, 31.48it/s][A
+
+Evaluating[mmlu]:  37%|███▋      | 5144/14042 [02:26<03:53, 38.16it/s][A
+
+Evaluating[mmlu]:  37%|███▋      | 5191/14042 [02:27<03:48, 38.76it/s][A
+
+Evaluating[mmlu]:  37%|███▋      | 5247/14042 [02:28<03:33, 41.24it/s][A
+
+Evaluating[mmlu]:  38%|███▊      | 5294/14042 [02:29<03:30, 41.48it/s][A
+
+Evaluating[mmlu]:  38%|███▊      | 5371/14042 [02:30<03:01, 47.78it/s][A
+
+Evaluating[mmlu]:  39%|███▊      | 5422/14042 [02:31<03:03, 46.95it/s][A
+
+Evaluating[mmlu]:  39%|███▉      | 5471/14042 [02:34<03:53, 36.71it/s][A
+
+Evaluating[mmlu]:  39%|███▉      | 5531/14042 [02:35<03:30, 40.46it/s][A
+
+Evaluating[mmlu]:  40%|███▉      | 5579/14042 [02:36<03:26, 41.03it/s][A
+
+Evaluating[mmlu]:  40%|████      | 5623/14042 [02:37<03:27, 40.60it/s][A
+
+Evaluating[mmlu]:  40%|████      | 5666/14042 [02:39<04:21, 32.05it/s][A
+
+Evaluating[mmlu]:  41%|████      | 5702/14042 [02:41<05:14, 26.49it/s][A
+
+Evaluating[mmlu]:  41%|████      | 5733/14042 [02:42<05:09, 26.86it/s][A
+
+Evaluating[mmlu]:  41%|████      | 5769/14042 [02:43<04:53, 28.23it/s][A
+
+Evaluating[mmlu]:  42%|████▏     | 5835/14042 [02:45<03:50, 35.54it/s][A
+
+Evaluating[mmlu]:  42%|████▏     | 5873/14042 [02:47<05:01, 27.12it/s][A
+
+Evaluating[mmlu]:  42%|████▏     | 5905/14042 [02:48<04:55, 27.58it/s][A
+
+Evaluating[mmlu]:  43%|████▎     | 5974/14042 [02:49<03:48, 35.37it/s][A
+
+Evaluating[mmlu]:  43%|████▎     | 6019/14042 [02:50<03:39, 36.63it/s][A
+
+Evaluating[mmlu]:  43%|████▎     | 6073/14042 [02:52<03:25, 38.70it/s][A
+
+Evaluating[mmlu]:  44%|████▍     | 6145/14042 [02:53<02:56, 44.67it/s][A
+
+Evaluating[mmlu]:  44%|████▍     | 6203/14042 [02:54<02:49, 46.28it/s][A
+
+Evaluating[mmlu]:  45%|████▍     | 6274/14042 [02:55<02:34, 50.20it/s][A
+
+Evaluating[mmlu]:  45%|████▌     | 6331/14042 [02:56<02:34, 50.00it/s][A
+
+Evaluating[mmlu]:  46%|████▌     | 6399/14042 [02:57<02:26, 52.21it/s][A
+
+Evaluating[mmlu]:  46%|████▌     | 6457/14042 [02:59<02:26, 51.68it/s][A
+
+Evaluating[mmlu]:  46%|████▋     | 6521/14042 [03:00<02:24, 52.21it/s][A
+
+Evaluating[mmlu]:  47%|████▋     | 6581/14042 [03:01<02:22, 52.21it/s][A
+                                                           
+
+                                                                      
+[A2026-09-01 20:15:11 - evalscope - [32mINFO[0m: Evaluating[mmlu]  47%| 6581/14042 [Elapsed: 03:01 < Remaining: 02:22, 52.21it/s][0m
+
+Running[eval]:   0%|          | 0/1 [03:03<?, ?benchmark/s]
+
+Evaluating[mmlu]:  47%|████▋     | 6581/14042 [03:01<02:22, 52.21it/s][A
+
+Evaluating[mmlu]:  47%|████▋     | 6647/14042 [03:02<02:18, 53.35it/s][A
+
+Evaluating[mmlu]:  48%|████▊     | 6709/14042 [03:03<02:17, 53.20it/s][A
+
+Evaluating[mmlu]:  48%|████▊     | 6770/14042 [03:04<02:17, 53.04it/s][A
+
+Evaluating[mmlu]:  49%|████▊     | 6831/14042 [03:06<02:16, 52.81it/s][A
+
+Evaluating[mmlu]:  49%|████▉     | 6887/14042 [03:07<02:19, 51.45it/s][A
+
+Evaluating[mmlu]:  49%|████▉     | 6948/14042 [03:08<02:17, 51.69it/s][A
+
+Evaluating[mmlu]:  50%|████▉     | 7012/14042 [03:09<02:13, 52.50it/s][A
+
+Evaluating[mmlu]:  50%|█████     | 7073/14042 [03:10<02:12, 52.56it/s][A
+
+Evaluating[mmlu]:  51%|█████     | 7137/14042 [03:11<02:10, 52.73it/s][A
+
+Evaluating[mmlu]:  51%|█████▏    | 7198/14042 [03:13<02:10, 52.47it/s][A
+
+Evaluating[mmlu]:  52%|█████▏    | 7263/14042 [03:14<02:07, 53.12it/s][A
+
+Evaluating[mmlu]:  52%|█████▏    | 7324/14042 [03:15<02:07, 52.81it/s][A
+
+Evaluating[mmlu]:  53%|█████▎    | 7388/14042 [03:17<02:18, 47.88it/s][A
+
+Evaluating[mmlu]:  53%|█████▎    | 7480/14042 [03:18<02:00, 54.49it/s][A
+
+Evaluating[mmlu]:  54%|█████▎    | 7536/14042 [03:19<02:03, 52.70it/s][A
+
+Evaluating[mmlu]:  54%|█████▍    | 7608/14042 [03:20<01:57, 54.53it/s][A
+
+Evaluating[mmlu]:  55%|█████▍    | 7663/14042 [03:22<02:02, 52.03it/s][A
+
+Evaluating[mmlu]:  55%|█████▌    | 7743/14042 [03:23<01:53, 55.72it/s][A
+
+Evaluating[mmlu]:  56%|█████▌    | 7800/14042 [03:24<01:56, 53.62it/s][A
+
+Evaluating[mmlu]:  56%|█████▌    | 7874/14042 [03:25<01:51, 55.22it/s][A
+
+Evaluating[mmlu]:  57%|█████▋    | 7941/14042 [03:26<01:51, 54.96it/s][A
+
+Evaluating[mmlu]:  57%|█████▋    | 8005/14042 [03:28<01:51, 54.15it/s][A
+
+Evaluating[mmlu]:  58%|█████▊    | 8080/14042 [03:29<01:46, 56.23it/s][A
+
+Evaluating[mmlu]:  58%|█████▊    | 8137/14042 [03:30<01:49, 54.12it/s][A
+
+Evaluating[mmlu]:  58%|█████▊    | 8203/14042 [03:31<01:46, 54.66it/s][A
+
+Evaluating[mmlu]:  59%|█████▉    | 8258/14042 [03:32<01:50, 52.57it/s][A
+
+Evaluating[mmlu]:  59%|█████▉    | 8327/14042 [03:34<01:45, 54.25it/s][A
+
+Evaluating[mmlu]:  60%|█████▉    | 8382/14042 [03:35<01:47, 52.43it/s][A
+
+Evaluating[mmlu]:  60%|██████    | 8442/14042 [03:36<01:47, 52.20it/s][A
+
+Evaluating[mmlu]:  61%|██████    | 8505/14042 [03:37<01:45, 52.72it/s][A
+
+Evaluating[mmlu]:  61%|██████    | 8560/14042 [03:38<01:46, 51.34it/s][A
+
+Evaluating[mmlu]:  61%|██████▏   | 8621/14042 [03:39<01:44, 51.65it/s][A
+
+Evaluating[mmlu]:  62%|██████▏   | 8680/14042 [03:41<01:44, 51.48it/s][A
+
+Evaluating[mmlu]:  62%|██████▏   | 8741/14042 [03:42<01:42, 51.82it/s][A
+
+Evaluating[mmlu]:  63%|██████▎   | 8802/14042 [03:43<01:40, 52.04it/s][A
+
+Evaluating[mmlu]:  63%|██████▎   | 8860/14042 [03:44<01:40, 51.50it/s][A
+
+Evaluating[mmlu]:  64%|██████▎   | 8922/14042 [03:45<01:38, 51.95it/s][A
+
+Evaluating[mmlu]:  64%|██████▍   | 8981/14042 [03:46<01:38, 51.58it/s][A
+
+Evaluating[mmlu]:  64%|██████▍   | 9045/14042 [03:48<01:46, 47.10it/s][A
+
+Evaluating[mmlu]:  65%|██████▍   | 9121/14042 [03:49<01:35, 51.49it/s][A
+
+Evaluating[mmlu]:  65%|██████▌   | 9174/14042 [03:50<01:37, 50.12it/s][A
+
+Evaluating[mmlu]:  66%|██████▌   | 9243/14042 [03:51<01:31, 52.26it/s][A
+
+Evaluating[mmlu]:  66%|██████▌   | 9302/14042 [03:53<01:31, 51.88it/s][A
+
+Evaluating[mmlu]:  67%|██████▋   | 9367/14042 [03:54<01:28, 52.82it/s][A
+
+Evaluating[mmlu]:  67%|██████▋   | 9426/14042 [03:55<01:28, 52.22it/s][A
+
+Evaluating[mmlu]:  68%|██████▊   | 9496/14042 [03:56<01:23, 54.17it/s][A
+
+Evaluating[mmlu]:  68%|██████▊   | 9552/14042 [03:57<01:25, 52.56it/s][A
+
+Evaluating[mmlu]:  68%|██████▊   | 9613/14042 [03:59<01:24, 52.44it/s][A
+
+Evaluating[mmlu]:  69%|██████▉   | 9675/14042 [04:00<01:22, 52.63it/s][A
+
+Evaluating[mmlu]:  69%|██████▉   | 9737/14042 [04:01<01:21, 52.76it/s][A
+                                                           
+
+                                                                      
+[A2026-09-01 20:16:11 - evalscope - [32mINFO[0m: Evaluating[mmlu]  70%| 9763/14042 [Elapsed: 04:01 < Remaining: 01:21, 52.76it/s][0m
+
+Running[eval]:   0%|          | 0/1 [04:03<?, ?benchmark/s]
+
+Evaluating[mmlu]:  70%|██████▉   | 9763/14042 [04:01<01:21, 52.76it/s][A
+
+Evaluating[mmlu]:  70%|██████▉   | 9801/14042 [04:02<01:19, 53.32it/s][A
+
+Evaluating[mmlu]:  70%|███████   | 9862/14042 [04:03<01:18, 53.03it/s][A
+
+Evaluating[mmlu]:  71%|███████   | 9925/14042 [04:04<01:17, 53.34it/s][A
+
+Evaluating[mmlu]:  71%|███████   | 9990/14042 [04:06<01:15, 53.98it/s][A
+
+Evaluating[mmlu]:  72%|███████▏  | 10052/14042 [04:07<01:14, 53.81it/s][A
+
+Evaluating[mmlu]:  72%|███████▏  | 10106/14042 [04:08<01:16, 51.72it/s][A
+
+Evaluating[mmlu]:  72%|███████▏  | 10178/14042 [04:09<01:11, 54.31it/s][A
+
+Evaluating[mmlu]:  73%|███████▎  | 10233/14042 [04:10<01:12, 52.47it/s][A
+
+Evaluating[mmlu]:  73%|███████▎  | 10297/14042 [04:11<01:10, 52.95it/s][A
+
+Evaluating[mmlu]:  74%|███████▎  | 10354/14042 [04:12<01:10, 51.96it/s][A
+
+Evaluating[mmlu]:  74%|███████▍  | 10415/14042 [04:14<01:09, 52.12it/s][A
+
+Evaluating[mmlu]:  75%|███████▍  | 10474/14042 [04:15<01:08, 51.81it/s][A
+
+Evaluating[mmlu]:  75%|███████▌  | 10533/14042 [04:16<01:08, 51.50it/s][A
+
+Evaluating[mmlu]:  75%|███████▌  | 10590/14042 [04:17<01:08, 50.76it/s][A
+
+Evaluating[mmlu]:  76%|███████▌  | 10641/14042 [04:18<01:09, 48.84it/s][A
+
+Evaluating[mmlu]:  76%|███████▌  | 10690/14042 [04:20<01:29, 37.40it/s][A
+
+Evaluating[mmlu]:  76%|███████▋  | 10732/14042 [04:22<01:28, 37.45it/s][A
+
+Evaluating[mmlu]:  77%|███████▋  | 10790/14042 [04:23<01:26, 37.60it/s][A
+
+Evaluating[mmlu]:  77%|███████▋  | 10835/14042 [04:24<01:23, 38.18it/s][A
+
+Evaluating[mmlu]:  78%|███████▊  | 10889/14042 [04:25<01:17, 40.60it/s][A
+
+Evaluating[mmlu]:  78%|███████▊  | 10931/14042 [04:26<01:18, 39.78it/s][A
+
+Evaluating[mmlu]:  78%|███████▊  | 10975/14042 [04:28<01:17, 39.56it/s][A
+
+Evaluating[mmlu]:  79%|███████▊  | 11030/14042 [04:29<01:11, 41.97it/s][A
+
+Evaluating[mmlu]:  79%|███████▉  | 11075/14042 [04:30<01:11, 41.43it/s][A
+
+Evaluating[mmlu]:  79%|███████▉  | 11122/14042 [04:31<01:10, 41.46it/s][A
+
+Evaluating[mmlu]:  80%|███████▉  | 11164/14042 [04:32<01:11, 40.28it/s][A
+
+Evaluating[mmlu]:  80%|███████▉  | 11209/14042 [04:33<01:10, 40.24it/s][A
+
+Evaluating[mmlu]:  80%|████████  | 11262/14042 [04:34<01:06, 41.75it/s][A
+
+Evaluating[mmlu]:  81%|████████  | 11304/14042 [04:36<01:07, 40.59it/s][A
+
+Evaluating[mmlu]:  81%|████████  | 11345/14042 [04:37<01:08, 39.47it/s][A
+
+Evaluating[mmlu]:  81%|████████  | 11396/14042 [04:38<01:04, 41.03it/s][A
+
+Evaluating[mmlu]:  82%|████████▏ | 11448/14042 [04:39<01:01, 42.34it/s][A
+
+Evaluating[mmlu]:  82%|████████▏ | 11492/14042 [04:40<01:01, 41.41it/s][A
+
+Evaluating[mmlu]:  82%|████████▏ | 11539/14042 [04:41<01:00, 41.39it/s][A
+
+Evaluating[mmlu]:  83%|████████▎ | 11590/14042 [04:42<00:57, 42.42it/s][A
+
+Evaluating[mmlu]:  83%|████████▎ | 11640/14042 [04:43<00:56, 42.89it/s][A
+
+Evaluating[mmlu]:  83%|████████▎ | 11683/14042 [04:45<00:56, 41.53it/s][A
+
+Evaluating[mmlu]:  84%|████████▎ | 11731/14042 [04:46<00:55, 41.74it/s][A
+
+Evaluating[mmlu]:  84%|████████▍ | 11784/14042 [04:47<00:52, 43.11it/s][A
+
+Evaluating[mmlu]:  84%|████████▍ | 11829/14042 [04:48<00:52, 42.09it/s][A
+
+Evaluating[mmlu]:  85%|████████▍ | 11872/14042 [04:49<00:53, 40.84it/s][A
+
+Evaluating[mmlu]:  85%|████████▍ | 11923/14042 [04:50<00:50, 41.98it/s][A
+
+Evaluating[mmlu]:  85%|████████▌ | 11970/14042 [04:51<00:49, 41.81it/s][A
+
+Evaluating[mmlu]:  86%|████████▌ | 12017/14042 [04:53<00:48, 41.70it/s][A
+
+Evaluating[mmlu]:  86%|████████▌ | 12068/14042 [04:54<00:46, 42.60it/s][A
+
+Evaluating[mmlu]:  86%|████████▌ | 12111/14042 [04:55<00:46, 41.33it/s][A
+
+Evaluating[mmlu]:  87%|████████▋ | 12165/14042 [04:56<00:45, 41.01it/s][A
+
+Evaluating[mmlu]:  87%|████████▋ | 12221/14042 [04:57<00:43, 41.68it/s][A
+
+Evaluating[mmlu]:  87%|████████▋ | 12284/14042 [04:59<00:38, 45.26it/s][A
+
+Evaluating[mmlu]:  88%|████████▊ | 12330/14042 [05:00<00:38, 44.06it/s][A
+
+Evaluating[mmlu]:  88%|████████▊ | 12375/14042 [05:01<00:38, 42.94it/s][A
+                                                           
+
+                                                                       
+[A2026-09-01 20:17:11 - evalscope - [32mINFO[0m: Evaluating[mmlu]  88%| 12400/14042 [Elapsed: 05:01 < Remaining: 00:38, 42.94it/s][0m
+
+Running[eval]:   0%|          | 0/1 [05:03<?, ?benchmark/s]
+
+Evaluating[mmlu]:  88%|████████▊ | 12400/14042 [05:01<00:38, 42.94it/s][A
+
+Evaluating[mmlu]:  88%|████████▊ | 12423/14042 [05:02<00:37, 42.90it/s][A
+
+Evaluating[mmlu]:  89%|████████▉ | 12491/14042 [05:03<00:32, 47.28it/s][A
+
+Evaluating[mmlu]:  89%|████████▉ | 12548/14042 [05:05<00:35, 42.27it/s][A
+
+Evaluating[mmlu]:  90%|████████▉ | 12631/14042 [05:06<00:28, 49.19it/s][A
+
+Evaluating[mmlu]:  90%|█████████ | 12682/14042 [05:07<00:28, 48.04it/s][A
+
+Evaluating[mmlu]:  91%|█████████ | 12739/14042 [05:08<00:26, 48.43it/s][A
+
+Evaluating[mmlu]:  91%|█████████ | 12802/14042 [05:10<00:24, 50.11it/s][A
+
+Evaluating[mmlu]:  92%|█████████▏| 12859/14042 [05:11<00:23, 50.03it/s][A
+
+Evaluating[mmlu]:  92%|█████████▏| 12925/14042 [05:12<00:21, 51.90it/s][A
+
+Evaluating[mmlu]:  92%|█████████▏| 12978/14042 [05:13<00:21, 50.44it/s][A
+
+Evaluating[mmlu]:  93%|█████████▎| 13044/14042 [05:14<00:19, 52.13it/s][A
+
+Evaluating[mmlu]:  93%|█████████▎| 13104/14042 [05:15<00:18, 51.97it/s][A
+
+Evaluating[mmlu]:  94%|█████████▍| 13168/14042 [05:16<00:16, 52.84it/s][A
+
+Evaluating[mmlu]:  94%|█████████▍| 13221/14042 [05:18<00:16, 50.90it/s][A
+
+Evaluating[mmlu]:  95%|█████████▍| 13272/14042 [05:19<00:15, 49.19it/s][A
+
+Evaluating[mmlu]:  95%|█████████▍| 13322/14042 [05:20<00:15, 47.76it/s][A
+
+Evaluating[mmlu]:  95%|█████████▌| 13379/14042 [05:21<00:13, 48.19it/s][A
+
+Evaluating[mmlu]:  96%|█████████▌| 13443/14042 [05:22<00:11, 50.17it/s][A
+
+Evaluating[mmlu]:  96%|█████████▌| 13505/14042 [05:23<00:10, 51.22it/s][A
+
+Evaluating[mmlu]:  97%|█████████▋| 13569/14042 [05:25<00:09, 52.00it/s][A
+
+Evaluating[mmlu]:  97%|█████████▋| 13634/14042 [05:26<00:07, 53.04it/s][A
+
+Evaluating[mmlu]:  98%|█████████▊| 13696/14042 [05:27<00:06, 53.11it/s][A
+
+Evaluating[mmlu]:  98%|█████████▊| 13754/14042 [05:28<00:05, 52.28it/s][A
+
+Evaluating[mmlu]:  98%|█████████▊| 13817/14042 [05:29<00:04, 52.86it/s][A
+
+Evaluating[mmlu]:  99%|█████████▉| 13880/14042 [05:30<00:03, 53.19it/s][A
+
+Evaluating[mmlu]:  99%|█████████▉| 13934/14042 [05:38<00:05, 20.05it/s][A
+
+Evaluating[mmlu]: 100%|█████████▉| 13980/14042 [05:39<00:02, 23.24it/s][A
+                                                           
+
+                                                                       
+[A2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Evaluating[mmlu] 100%| 14042/14042 [Elapsed: 05:39 < Remaining: 00:00, 23.24it/s][0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+
+Evaluating[mmlu]: 100%|██████████| 14042/14042 [05:39<00:00, 23.24it/s][A
+Evaluating[mmlu]: 100%|██████████| 14042/14042 [05:39<00:00, 41.32it/s]
+
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Unified pool finished for mmlu.[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: abstract_algebra[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: anatomy[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: astronomy[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: business_ethics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: clinical_knowledge[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_biology[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_chemistry[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_computer_science[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_mathematics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_medicine[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_physics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: computer_security[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: conceptual_physics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: econometrics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: electrical_engineering[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: elementary_mathematics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: formal_logic[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: global_facts[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_biology[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_chemistry[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_computer_science[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_european_history[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_geography[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_government_and_politics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_macroeconomics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_mathematics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_microeconomics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_physics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_psychology[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_statistics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_us_history[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_world_history[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: human_aging[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: human_sexuality[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: international_law[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: jurisprudence[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: logical_fallacies[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: machine_learning[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: management[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: marketing[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: medical_genetics[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: miscellaneous[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: moral_disputes[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: moral_scenarios[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: nutrition[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: philosophy[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: prehistory[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_accounting[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_law[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_medicine[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_psychology[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: public_relations[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: security_studies[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: sociology[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: us_foreign_policy[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: virology[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Aggregating scores for subset: world_religions[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Generating report...[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: 
+mmlu report table:
+┌──────────┬───────────┬──────────┬─────────────────────────────────────┬───────┬─────────┬────────────────┐
+│ Model    │ Dataset   │ Metric   │ Subset                              │   Num │   Score │ Cat.0          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ formal_logic                        │   126 │  0.9286 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_european_history        │   165 │  0.8727 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_us_history              │   204 │  0.9412 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_world_history           │   237 │  0.9494 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ international_law                   │   121 │  0.9256 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ jurisprudence                       │   108 │  0.9074 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ logical_fallacies                   │   163 │  0.8589 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ moral_disputes                      │   346 │  0.8671 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ moral_scenarios                     │   895 │  0.8458 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ philosophy                          │   311 │  0.9132 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ prehistory                          │   324 │  0.9352 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_law                    │  1534 │  0.7764 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ world_religions                     │   171 │  0.9181 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ anatomy                             │   135 │  0.8889 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ business_ethics                     │   100 │  0.82   │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ clinical_knowledge                  │   265 │  0.917  │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_medicine                    │   173 │  0.8844 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ global_facts                        │   100 │  0.74   │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ human_aging                         │   223 │  0.852  │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ management                          │   103 │  0.8835 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ marketing                           │   234 │  0.9786 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ medical_genetics                    │   100 │  0.97   │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ miscellaneous                       │   783 │  0.9732 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ nutrition                           │   306 │  0.9379 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_accounting             │   282 │  0.9752 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_medicine               │   272 │  0.9449 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ virology                            │   166 │  0.5602 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ abstract_algebra                    │   100 │  0.94   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ astronomy                           │   152 │  0.9474 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_biology                     │   144 │  0.9792 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_chemistry                   │   100 │  0.74   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_computer_science            │   100 │  0.96   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_mathematics                 │   100 │  0.98   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_physics                     │   102 │  0.9706 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ computer_security                   │   100 │  0.88   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ conceptual_physics                  │   235 │  0.9617 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ electrical_engineering              │   145 │  0.8897 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ elementary_mathematics              │   378 │  0.9815 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_biology                 │   310 │  0.9452 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_chemistry               │   203 │  0.9261 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_computer_science        │   100 │  0.98   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_mathematics             │   270 │  0.9889 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_physics                 │   151 │  0.9536 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_statistics              │   216 │  0.9491 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ machine_learning                    │   112 │  0.8839 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ econometrics                        │   114 │  0.8772 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_geography               │   198 │  0.9343 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_government_and_politics │   193 │  0.9845 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_macroeconomics          │   390 │  0.9359 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_microeconomics          │   238 │  0.9874 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_psychology              │   545 │  0.9706 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ human_sexuality                     │   131 │  0.916  │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_psychology             │   612 │  0.9085 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ public_relations                    │   110 │  0.7909 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ security_studies                    │   245 │  0.8531 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ sociology                           │   201 │  0.9453 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ us_foreign_policy                   │   100 │  0.94   │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ OVERALL                             │ 14042 │  0.9035 │ -              │
+└──────────┴───────────┴──────────┴─────────────────────────────────────┴───────┴─────────┴────────────────┘ 
+[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Skipping report analysis (`analysis_report=False`).[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Dump report to: /tmp-data/ifx-llm-cache/eval_outputs/20260901_201207/reports/untitled/mmlu.json 
+[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: 
+mmlu perf table:
+Model     Dataset      Num    Avg Lat  Avg TTFT    Avg TPOT      Avg Thpt    Avg In    Avg Out
+                                  (s)  (ms)        (ms)           (tok/s)       Tok        Tok
+--------  ---------  -----  ---------  ----------  ----------  ----------  --------  ---------
+untitled  mmlu       14042       2.39  -           -                41.42   727.261    98.9854
+[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Benchmark mmlu evaluation finished.[0m
+
+Running[eval]:   0%|          | 0/1 [05:42<?, ?benchmark/s]
+Running[eval]: 100%|██████████| 1/1 [05:42<00:00, 342.52s/benchmark]
+                                                                    
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Running[eval] 100%| 1/1 [Elapsed: 05:42 < Remaining: 00:00, 342.52s/benchmark][0m
+
+Running[eval]: 100%|██████████| 1/1 [05:42<00:00, 342.52s/benchmark]
+Running[eval]: 100%|██████████| 1/1 [05:42<00:00, 342.52s/benchmark]
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Overall report table: 
+┌──────────┬───────────┬──────────┬─────────────────────────────────────┬───────┬─────────┬────────────────┐
+│ Model    │ Dataset   │ Metric   │ Subset                              │   Num │   Score │ Cat.0          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ formal_logic                        │   126 │  0.9286 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_european_history        │   165 │  0.8727 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_us_history              │   204 │  0.9412 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_world_history           │   237 │  0.9494 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ international_law                   │   121 │  0.9256 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ jurisprudence                       │   108 │  0.9074 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ logical_fallacies                   │   163 │  0.8589 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ moral_disputes                      │   346 │  0.8671 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ moral_scenarios                     │   895 │  0.8458 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ philosophy                          │   311 │  0.9132 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ prehistory                          │   324 │  0.9352 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_law                    │  1534 │  0.7764 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ world_religions                     │   171 │  0.9181 │ Humanities     │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ anatomy                             │   135 │  0.8889 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ business_ethics                     │   100 │  0.82   │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ clinical_knowledge                  │   265 │  0.917  │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_medicine                    │   173 │  0.8844 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ global_facts                        │   100 │  0.74   │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ human_aging                         │   223 │  0.852  │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ management                          │   103 │  0.8835 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ marketing                           │   234 │  0.9786 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ medical_genetics                    │   100 │  0.97   │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ miscellaneous                       │   783 │  0.9732 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ nutrition                           │   306 │  0.9379 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_accounting             │   282 │  0.9752 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_medicine               │   272 │  0.9449 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ virology                            │   166 │  0.5602 │ Other          │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ abstract_algebra                    │   100 │  0.94   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ astronomy                           │   152 │  0.9474 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_biology                     │   144 │  0.9792 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_chemistry                   │   100 │  0.74   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_computer_science            │   100 │  0.96   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_mathematics                 │   100 │  0.98   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ college_physics                     │   102 │  0.9706 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ computer_security                   │   100 │  0.88   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ conceptual_physics                  │   235 │  0.9617 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ electrical_engineering              │   145 │  0.8897 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ elementary_mathematics              │   378 │  0.9815 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_biology                 │   310 │  0.9452 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_chemistry               │   203 │  0.9261 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_computer_science        │   100 │  0.98   │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_mathematics             │   270 │  0.9889 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_physics                 │   151 │  0.9536 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_statistics              │   216 │  0.9491 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ machine_learning                    │   112 │  0.8839 │ STEM           │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ econometrics                        │   114 │  0.8772 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_geography               │   198 │  0.9343 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_government_and_politics │   193 │  0.9845 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_macroeconomics          │   390 │  0.9359 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_microeconomics          │   238 │  0.9874 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ high_school_psychology              │   545 │  0.9706 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ human_sexuality                     │   131 │  0.916  │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ professional_psychology             │   612 │  0.9085 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ public_relations                    │   110 │  0.7909 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ security_studies                    │   245 │  0.8531 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ sociology                           │   201 │  0.9453 │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ us_foreign_policy                   │   100 │  0.94   │ Social Science │
+├──────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ untitled │ mmlu      │ mean_acc │ OVERALL                             │ 14042 │  0.9035 │ -              │
+└──────────┴───────────┴──────────┴─────────────────────────────────────┴───────┴─────────┴────────────────┘ 
+[0m
+2026-09-01 20:17:49 - evalscope - [32mINFO[0m: Overall perf table: 
+Model     Dataset      Num    Avg Lat  Avg TTFT    Avg TPOT      Avg Thpt    Avg In    Avg Out
+                                  (s)  (ms)        (ms)           (tok/s)       Tok        Tok
+--------  ---------  -----  ---------  ----------  ----------  ----------  --------  ---------
+untitled  mmlu       14042       2.39  -           -                41.42   727.261    98.9854 
+[0m
+2026-09-01 20:17:50 - evalscope - [32mINFO[0m: HTML report generated: /tmp-data/ifx-llm-cache/eval_outputs/20260901_201207/reports/report.html[0m
+2026-09-01 20:17:50 - evalscope - [32mINFO[0m: Finished evaluation for untitled on ['mmlu'][0m
+2026-09-01 20:17:50 - evalscope - [32mINFO[0m: Output directory: /tmp-data/ifx-llm-cache/eval_outputs/20260901_201207[0m
+
+============================================================
+Evaluation completed in 343.7s
+============================================================
+
+===EVAL_RESULT===
+{"model_id": "/data1/deepseek-ai/DeepSeek-V4-Flash-0731/", "duration_sec": 343.7, "datasets": {"mmlu": {"score": 0.9035, "metric_name": "mean_acc", "categories": [{"name": "Humanities", "score": 0.8544, "num": 4705}, {"name": "Other", "score": 0.9109, "num": 3242}, {"name": "STEM", "score": 0.9457, "num": 3018}, {"name": "Social Science", "score": 0.9295, "num": 3077}]}}}
+===EVAL_RESULT_END===

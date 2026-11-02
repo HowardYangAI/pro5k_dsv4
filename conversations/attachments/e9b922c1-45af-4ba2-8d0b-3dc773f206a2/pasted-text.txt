@@ -1,0 +1,174 @@
+[48:15<11:00,  2.22s/it]
+ 93%|█████████▎| 3800/4096 [48:17<08:30,  1.72s/it]
+ 93%|█████████▎| 3802/4096 [48:22<09:10,  1.87s/it]
+ 93%|█████████▎| 3805/4096 [48:28<09:21,  1.93s/it]
+ 93%|█████████▎| 3806/4096 [48:31<10:11,  2.11s/it]
+ 93%|█████████▎| 3807/4096 [48:31<08:28,  1.76s/it]
+ 93%|█████████▎| 3809/4096 [48:34<07:46,  1.62s/it]
+ 93%|█████████▎| 3810/4096 [48:35<07:48,  1.64s/it]
+ 93%|█████████▎| 3812/4096 [48:36<05:43,  1.21s/it]
+ 93%|█████████▎| 3814/4096 [48:44<10:07,  2.15s/it]
+ 93%|█████████▎| 3815/4096 [48:54<17:26,  3.72s/it]
+ 93%|█████████▎| 3817/4096 [48:54<11:12,  2.41s/it]
+ 93%|█████████▎| 3818/4096 [48:55<09:28,  2.05s/it]
+ 93%|█████████▎| 3819/4096 [49:00<12:58,  2.81s/it]
+ 93%|█████████▎| 3820/4096 [49:04<13:47,  3.00s/it]
+ 93%|█████████▎| 3821/4096 [49:04<10:33,  2.30s/it]
+ 93%|█████████▎| 3822/4096 [49:08<12:17,  2.69s/it]
+ 93%|█████████▎| 3824/4096 [49:10<08:20,  1.84s/it]
+ 93%|█████████▎| 3826/4096 [49:12<07:15,  1.61s/it]
+ 93%|█████████▎| 3828/4096 [49:12<04:53,  1.10s/it]
+ 93%|█████████▎| 3829/4096 [49:18<08:46,  1.97s/it]
+ 94%|█████████▎| 3831/4096 [49:21<08:01,  1.82s/it]
+ 94%|█████████▎| 3834/4096 [49:24<06:16,  1.44s/it]
+ 94%|█████████▎| 3835/4096 [49:31<10:44,  2.47s/it]
+ 94%|█████████▎| 3839/4096 [49:31<05:25,  1.26s/it]
+ 94%|█████████▍| 3841/4096 [49:34<05:38,  1.33s/it]
+ 94%|█████████▍| 3843/4096 [49:35<04:17,  1.02s/it]
+ 94%|█████████▍| 3844/4096 [49:39<06:35,  1.57s/it]
+ 94%|█████████▍| 3846/4096 [49:44<07:45,  1.86s/it]
+ 94%|█████████▍| 3848/4096 [49:46<06:17,  1.52s/it]
+ 94%|█████████▍| 3850/4096 [49:47<04:56,  1.20s/it]
+ 94%|█████████▍| 3852/4096 [49:47<03:35,  1.13it/s]
+ 94%|█████████▍| 3853/4096 [49:49<04:13,  1.04s/it]
+ 94%|█████████▍| 3854/4096 [49:49<03:27,  1.17it/s]
+ 94%|█████████▍| 3856/4096 [49:49<02:20,  1.71it/s]
+ 94%|█████████▍| 3858/4096 [49:55<05:29,  1.38s/it]
+ 94%|█████████▍| 3859/4096 [49:59<07:18,  1.85s/it]
+ 94%|█████████▍| 3861/4096 [49:59<04:43,  1.21s/it]
+ 94%|█████████▍| 3863/4096 [50:00<03:52,  1.00it/s]
+ 94%|█████████▍| 3865/4096 [50:01<03:18,  1.17it/s]
+ 94%|█████████▍| 3867/4096 [50:02<02:33,  1.49it/s]
+ 94%|█████████▍| 3868/4096 [50:03<02:42,  1.40it/s]
+ 94%|█████████▍| 3870/4096 [50:03<02:20,  1.61it/s]
+ 95%|█████████▍| 3878/4096 [50:04<00:59,  3.68it/s]
+ 95%|█████████▌| 3898/4096 [50:05<00:18, 10.92it/s]
+ 95%|█████████▌| 3905/4096 [50:06<00:19,  9.58it/s]
+ 97%|█████████▋| 3960/4096 [50:20<00:14,  9.58it/s]
+ 97%|█████████▋| 3961/4096 [51:40<02:54,  1.29s/it]
+ 97%|█████████▋| 3962/4096 [51:43<02:55,  1.31s/it]
+ 97%|█████████▋| 3964/4096 [51:55<03:24,  1.55s/it]
+ 97%|█████████▋| 3965/4096 [52:03<03:52,  1.78s/it]
+ 97%|█████████▋| 3966/4096 [52:07<04:04,  1.88s/it]
+ 97%|█████████▋| 3968/4096 [52:12<04:15,  2.00s/it]
+ 97%|█████████▋| 3969/4096 [52:13<03:59,  1.88s/it]
+ 97%|█████████▋| 3971/4096 [52:17<03:55,  1.88s/it]
+ 97%|█████████▋| 3972/4096 [52:31<06:49,  3.31s/it]
+ 97%|█████████▋| 3974/4096 [52:32<05:20,  2.63s/it]
+ 97%|█████████▋| 3976/4096 [52:37<05:15,  2.63s/it]
+ 97%|█████████▋| 3978/4096 [52:39<04:19,  2.20s/it]
+ 97%|█████████▋| 3980/4096 [52:42<03:47,  1.96s/it]
+ 97%|█████████▋| 3982/4096 [52:43<02:53,  1.52s/it]
+ 97%|█████████▋| 3984/4096 [52:43<02:07,  1.13s/it]
+ 97%|█████████▋| 3986/4096 [52:44<01:35,  1.15it/s]
+ 97%|█████████▋| 3987/4096 [52:48<02:35,  1.42s/it]
+ 97%|█████████▋| 3989/4096 [52:49<02:00,  1.13s/it]
+ 97%|█████████▋| 3990/4096 [52:49<01:42,  1.04it/s]
+ 97%|█████████▋| 3992/4096 [52:59<04:10,  2.41s/it]
+ 97%|█████████▋| 3993/4096 [53:09<06:51,  3.99s/it]
+ 98%|█████████▊| 3994/4096 [53:12<06:09,  3.63s/it]
+ 98%|█████████▊| 3995/4096 [53:14<05:39,  3.37s/it]
+ 98%|█████████▊| 3997/4096 [53:15<03:39,  2.21s/it]
+ 98%|█████████▊| 3999/4096 [53:17<02:47,  1.73s/it]
+ 98%|█████████▊| 4001/4096 [53:22<02:57,  1.87s/it]
+ 98%|█████████▊| 4004/4096 [53:28<02:57,  1.93s/it]
+ 98%|█████████▊| 4005/4096 [53:31<03:11,  2.11s/it]
+ 98%|█████████▊| 4006/4096 [53:31<02:38,  1.76s/it]
+ 98%|█████████▊| 4008/4096 [53:34<02:23,  1.63s/it]
+ 98%|█████████▊| 4009/4096 [53:35<02:22,  1.64s/it]
+ 98%|█████████▊| 4011/4096 [53:36<01:42,  1.21s/it]
+ 98%|█████████▊| 4013/4096 [53:44<02:58,  2.15s/it]
+ 98%|█████████▊| 4014/4096 [53:54<05:05,  3.72s/it]
+ 98%|█████████▊| 4016/4096 [53:54<03:12,  2.41s/it]
+ 98%|█████████▊| 4017/4096 [53:55<02:41,  2.04s/it]
+ 98%|█████████▊| 4018/4096 [54:01<03:39,  2.82s/it]
+ 98%|█████████▊| 4019/4096 [54:04<03:51,  3.00s/it]
+ 98%|█████████▊| 4020/4096 [54:04<02:54,  2.30s/it]
+ 98%|█████████▊| 4021/4096 [54:08<03:21,  2.68s/it]
+ 98%|█████████▊| 4023/4096 [54:10<02:14,  1.84s/it]
+ 98%|█████████▊| 4025/4096 [54:12<01:54,  1.61s/it]
+ 98%|█████████▊| 4027/4096 [54:12<01:15,  1.09s/it]
+ 98%|█████████▊| 4028/4096 [54:18<02:13,  1.97s/it]
+ 98%|█████████▊| 4030/4096 [54:21<02:00,  1.82s/it]
+ 98%|█████████▊| 4033/4096 [54:24<01:30,  1.44s/it]
+ 98%|█████████▊| 4034/4096 [54:31<02:33,  2.47s/it]
+ 99%|█████████▊| 4038/4096 [54:31<01:13,  1.26s/it]
+ 99%|█████████▊| 4040/4096 [54:34<01:14,  1.33s/it]
+ 99%|█████████▊| 4043/4096 [54:35<00:47,  1.11it/s]
+ 99%|█████████▊| 4044/4096 [54:39<01:13,  1.41s/it]
+ 99%|█████████▉| 4046/4096 [54:44<01:26,  1.73s/it]
+ 99%|█████████▉| 4048/4096 [54:46<01:09,  1.44s/it]
+ 99%|█████████▉| 4050/4096 [54:47<00:53,  1.16s/it]
+ 99%|█████████▉| 4052/4096 [54:47<00:37,  1.17it/s]
+ 99%|█████████▉| 4053/4096 [54:49<00:44,  1.03s/it]
+ 99%|█████████▉| 4054/4096 [54:49<00:35,  1.19it/s]
+ 99%|█████████▉| 4056/4096 [54:49<00:23,  1.73it/s]
+ 99%|█████████▉| 4058/4096 [54:55<00:52,  1.38s/it]
+ 99%|█████████▉| 4059/4096 [54:59<01:08,  1.84s/it]
+ 99%|█████████▉| 4061/4096 [54:59<00:41,  1.20s/it]
+ 99%|█████████▉| 4063/4096 [55:00<00:32,  1.00it/s]
+ 99%|█████████▉| 4065/4096 [55:01<00:26,  1.16it/s]
+ 99%|█████████▉| 4066/4096 [55:02<00:23,  1.26it/s]
+ 99%|█████████▉| 4067/4096 [55:04<00:29,  1.01s/it]
+ 99%|█████████▉| 4074/4096 [55:04<00:08,  2.51it/s]
+100%|█████████▉| 4087/4096 [55:05<00:01,  6.39it/s]
+100%|█████████▉| 4092/4096 [55:06<00:00,  5.98it/s]
+100%|██████████| 4096/4096 [55:06<00:00,  1.24it/s]
+
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang-oai-chat
+Traffic request rate:                    inf       
+Max request concurrency:                 1024      
+Successful requests:                     1855      
+Benchmark duration (s):                  3306.56   
+Total input tokens:                      60784640  
+Total cached tokens:                     0         
+Cache hit rate:                          0.00      
+Total generated tokens:                  3916465   
+Total generated tokens (retokenized):    3898993   
+Request throughput (req/s):              0.56      
+Input token throughput (tok/s):          18383.05  
+Output token throughput (tok/s):         1184.45   
+Total token throughput (tok/s):          19567.50  
+Concurrency:                             733.98    
+Accept length:                           5.37      
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   1308323.59
+Median E2E Latency (ms):                 1489697.26
+---------------Time to First Token----------------
+Mean TTFT (ms):                          31135.55  
+Median TTFT (ms):                        0.00      
+P95 TTFT (ms):                           296794.89 
+P99 TTFT (ms):                           528893.85 
+--------------Time Per Output Token---------------
+Mean TPOT (ms):                          17.58     
+Median TPOT (ms):                        14.78     
+P95 TPOT (ms):                           32.73     
+P99 TPOT (ms):                           40.90     
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           79.11     
+Median ITL (ms):                         81.17     
+P95 ITL (ms):                            100.13    
+P99 ITL (ms):                            168.04    
+Max ITL (ms):                            1815.48   
+==================================================
+All benchmark tests completed!

@@ -1,0 +1,9 @@
+{
+  "output_dir": "/sgl-workspace/workspace/profile/20260819_dsv4_ep8_dspark_c8/decode",
+  "activities": ["CPU", "GPU"],
+  "with_stack": false,
+  "record_shapes": false,
+  "profile_by_stage": false,
+  "num_steps": 8,
+  "profile_prefix": "dsv4-ep8-dspark-c8-decode"
+}

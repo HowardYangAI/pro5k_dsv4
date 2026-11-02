@@ -1,0 +1,360 @@
+{% extends "base.html" %}
+{% block title %}新建兼容性测试 — LLM Benchmark{% endblock %}
+{% block warning %}<div class="info-banner">ℹ 兼容性测试用于检测推理引擎对 OpenAI API 参数的支持情况，生成兼容性报告。</div>{% endblock %}
+{% block content %}
+<h1>新建 OpenAI API 兼容性测试</h1>
+
+<form id="compat-test-form" class="card-form">
+    <fieldset>
+        <legend>基本信息</legend>
+        <div class="form-group">
+            <label for="name">任务名称 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="例如: sglang-compat-test">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>连接配置</legend>
+        <div class="form-group">
+            <label for="connection_mode">连接模式</label>
+            <select id="connection_mode" name="connection_mode">
+                <option value="host_port">Host:Port</option>
+                <option value="base_url">Base URL + Token</option>
+            </select>
+        </div>
+
+        <div id="host-port-group">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="host">Host</label>
+                    <input type="text" id="host" name="host" value="localhost" placeholder="localhost">
+                </div>
+                <div class="form-group">
+                    <label for="port">Port</label>
+                    <input type="number" id="port" name="port" value="58888" placeholder="58888">
+                </div>
+            </div>
+        </div>
+
+        <div id="base-url-group" style="display:none">
+            <div class="form-group">
+                <label for="base_url">Base URL</label>
+                <input type="text" id="base_url" name="base_url" placeholder="http://localhost:58888">
+            </div>
+            <div class="form-group">
+                <label for="api_key">API Key</label>
+                <input type="password" id="api_key" name="api_key" placeholder="sk-...">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>模型配置</legend>
+        <div class="form-group">
+            <label for="model">Model Name</label>
+            <input type="text" id="model" name="model" placeholder="例如: Qwen/Qwen2-1.5B-Instruct">
+            <small>发送给 API 的模型名称，留空则使用 default</small>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>测试级别</legend>
+        <div class="level-grid">
+            <label class="level-option">
+                <input type="radio" name="test_level" value="quick">
+                <div class="level-card">
+                    <div class="level-name">Quick</div>
+                    <div class="level-stats">~50-100 测试</div>
+                    <div class="level-time">5-10 分钟</div>
+                </div>
+            </label>
+            <label class="level-option">
+                <input type="radio" name="test_level" value="standard" checked>
+                <div class="level-card">
+                    <div class="level-name">Standard</div>
+                    <div class="level-stats">~200-300 测试</div>
+                    <div class="level-time">20-40 分钟</div>
+                </div>
+            </label>
+            <label class="level-option">
+                <input type="radio" name="test_level" value="comprehensive">
+                <div class="level-card">
+                    <div class="level-name">Comprehensive</div>
+                    <div class="level-stats">~700 测试</div>
+                    <div class="level-time">1-2 小时</div>
+                </div>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>框架配置</legend>
+        <div class="form-group">
+            <label for="framework">框架类型</label>
+            <select id="framework" name="framework">
+                <option value="standard">Standard (仅 OpenAI 标准参数)</option>
+                <option value="sglang">SGLang (含扩展参数)</option>
+                <option value="vllm">vLLM (含扩展参数)</option>
+            </select>
+            <small>选择 sglang/vllm 后可启用扩展参数测试</small>
+        </div>
+        <div class="test-option-row" id="extensions-row" style="display:none;">
+            <div class="test-option-check">
+                <input type="checkbox" id="include_extensions" name="include_extensions">
+                <span class="test-option-label">包含框架扩展参数</span>
+            </div>
+            <span class="test-option-desc" id="extensions-desc">测试框架特有的扩展参数</span>
+        </div>
+        <div class="test-option-row">
+            <div class="test-option-check">
+                <input type="checkbox" id="enable_dangerous" name="enable_dangerous">
+                <span class="test-option-label">启用危险测试</span>
+            </div>
+            <span class="test-option-desc">可能导致服务崩溃的测试（含自动恢复机制）</span>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>高级配置</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="timeout_seconds">请求超时 (秒)</label>
+                <input type="number" id="timeout_seconds" name="timeout_seconds" value="30" min="5" max="300">
+            </div>
+            <div class="form-group">
+                <label for="max_retries">最大重试次数</label>
+                <input type="number" id="max_retries" name="max_retries" value="3" min="0" max="10">
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" style="background:#6c5ce7;">创建兼容性测试</button>
+        <a href="/" class="btn btn-secondary">取消</a>
+    </div>
+</form>
+
+<style>
+.info-banner {
+    background: #6c5ce7;
+    color: #fff;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 测试级别选择样式 */
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 12px 0;
+}
+.level-option {
+    cursor: pointer;
+}
+.level-option input {
+    display: none;
+}
+.level-card {
+    padding: 16px 12px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s;
+}
+.level-option input:checked + .level-card {
+    background: #f0f0ff;
+    border-color: #6c5ce7;
+}
+.level-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #2d3436;
+    margin-bottom: 4px;
+}
+.level-stats {
+    font-size: 13px;
+    color: #636e72;
+}
+.level-time {
+    font-size: 12px;
+    color: #b2bec3;
+    margin-top: 4px;
+}
+
+/* 测试选项样式 */
+.test-option-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+.test-option-row:last-child { margin-bottom: 0; }
+.test-option-check {
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+}
+.test-option-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.test-option-label {
+    font-weight: 500;
+    color: #2d3436;
+}
+.test-option-desc {
+    font-size: 13px;
+    color: #636e72;
+    margin-left: 12px;
+}
+</style>
+
+<script>
+var STORAGE_KEY = 'compat_test_last_params';
+
+function getExtensionsDesc() {
+    var fw = document.getElementById('framework').value;
+    if (fw === 'sglang') return '测试 SGLang 扩展参数: top_k, min_p, repetition_penalty 等';
+    if (fw === 'vllm') return '测试 vLLM 扩展参数: top_k, min_p, use_beam_search 等';
+    return '';
+}
+
+function updateExtensionsRow() {
+    var fw = document.getElementById('framework').value;
+    var row = document.getElementById('extensions-row');
+    var desc = document.getElementById('extensions-desc');
+    if (fw !== 'standard') {
+        row.style.display = '';
+        desc.textContent = getExtensionsDesc();
+    } else {
+        row.style.display = 'none';
+        document.getElementById('include_extensions').checked = false;
+    }
+}
+
+function saveParams() {
+    var data = {};
+    ['name','connection_mode','host','port','base_url','api_key','model','framework','timeout_seconds','max_retries'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) data[id] = el.value;
+    });
+    var levelEl = document.querySelector('input[name="test_level"]:checked');
+    if (levelEl) data['test_level'] = levelEl.value;
+    data.include_extensions = document.getElementById('include_extensions').checked;
+    data.enable_dangerous = document.getElementById('enable_dangerous').checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadParams() {
+    try {
+        var rerunRaw = localStorage.getItem('compat_test_rerun_config');
+        var data = null;
+        if (rerunRaw) {
+            data = JSON.parse(rerunRaw);
+            localStorage.removeItem('compat_test_rerun_config');
+        } else {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            data = JSON.parse(raw);
+        }
+        ['name','connection_mode','host','port','base_url','api_key','model','framework','timeout_seconds','max_retries'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && data[id] !== undefined) el.value = data[id];
+        });
+        document.getElementById('connection_mode').dispatchEvent(new Event('change'));
+        if (data['test_level']) {
+            var radio = document.querySelector('input[name="test_level"][value="' + data['test_level'] + '"]');
+            if (radio) radio.checked = true;
+        }
+        updateExtensionsRow();
+        if (data.include_extensions) document.getElementById('include_extensions').checked = true;
+        if (data.enable_dangerous) document.getElementById('enable_dangerous').checked = true;
+    } catch(e) {}
+}
+
+// ── Init ───────────────────────────────────────────────────
+document.getElementById('connection_mode').addEventListener('change', function() {
+    var isHost = this.value === 'host_port';
+    document.getElementById('host-port-group').style.display = isHost ? '' : 'none';
+    document.getElementById('base-url-group').style.display = isHost ? 'none' : '';
+});
+
+document.getElementById('framework').addEventListener('change', function() {
+    updateExtensionsRow();
+    saveParams();
+});
+
+['name','connection_mode','host','port','base_url','api_key','model','timeout_seconds','max_retries'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', saveParams);
+});
+
+document.querySelectorAll('input[name="test_level"]').forEach(function(el) {
+    el.addEventListener('change', saveParams);
+});
+
+document.getElementById('include_extensions').addEventListener('change', saveParams);
+document.getElementById('enable_dangerous').addEventListener('change', saveParams);
+
+document.getElementById('compat-test-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var form = this;
+    saveParams();
+
+    if (!form.name.value.trim()) {
+        alert('请填写任务名称');
+        return;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = '创建中...';
+
+    var body = {
+        name: form.name.value.trim(),
+        connection_mode: form.connection_mode.value,
+        host: form.host.value.trim(),
+        port: parseInt(form.port.value) || 0,
+        base_url: form.base_url.value.trim(),
+        api_key: form.api_key.value.trim(),
+        model: form.model.value.trim(),
+        test_level: document.querySelector('input[name="test_level"]:checked').value,
+        framework: form.framework.value,
+        include_extensions: form.include_extensions.checked,
+        enable_dangerous: form.enable_dangerous.checked,
+        timeout_seconds: parseInt(form.timeout_seconds.value) || 30,
+        max_retries: parseInt(form.max_retries.value) || 3,
+    };
+
+    try {
+        var resp = await fetch('/api/compat-test/task', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body),
+        });
+        var data = await resp.json();
+        if (!resp.ok) {
+            alert('创建失败: ' + (data.detail || resp.statusText));
+            btn.disabled = false;
+            btn.textContent = '创建兼容性测试';
+            return;
+        }
+        window.location.href = '/compat-test/' + data.task_id;
+    } catch(err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '创建兼容性测试';
+    }
+});
+
+loadParams();
+</script>
+{% endblock %}

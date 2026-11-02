@@ -1,0 +1,2 @@
+2026-09-01 10:22:41 ERROR sglang_router_rs::routers::pd_router: src/routers/pd_router.rs:641: Decode server returned error status server_url=http://10.207.193.166:30002 status=400 Bad Request
+2026-09-01 10:22:41  WARN sglang_router_rs::response: src/middleware.rs:127: request failed with client error method=POST uri=/v1/chat/completions status=400 Bad Request latency=745.60456ms

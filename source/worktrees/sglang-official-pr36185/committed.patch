@@ -1,0 +1,912 @@
+diff --git a/python/sglang/srt/disaggregation/decode.py b/python/sglang/srt/disaggregation/decode.py
+index 033726ddac8..d2e7a21af3f 100644
+--- a/python/sglang/srt/disaggregation/decode.py
++++ b/python/sglang/srt/disaggregation/decode.py
+@@ -95,11 +95,7 @@ from sglang.srt.observability.req_time_stats import (
+     set_schedule_time_batch,
+     set_time_batch,
+ )
+-from sglang.srt.runtime_context import (
+-    get_disagg,
+-    get_memory,
+-    get_parallel,
+-)
++from sglang.srt.runtime_context import get_disagg, get_memory, get_parallel
+ from sglang.srt.utils import ceil_align, get_num_new_pages, is_npu
+ from sglang.srt.utils.network import NetworkAddress
+ from sglang.srt.utils.nvtx_utils import scheduler_nvtx_method
+@@ -836,24 +832,34 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+             if uses_swa_tail_prealloc and swa_required > swa_allocatable_tokens:
+                 break
+ 
+-            resumed_reqs.append(req)
+-            indices_to_remove.add(i)
+             req.is_retracted = False
+             self._pre_alloc(req)
+-            full_allocatable_tokens -= full_required
+-            if uses_swa_tail_prealloc:
+-                swa_allocatable_tokens = self._swa_tail_allocatable_token_budget(
+-                    count_retracted=False,
+-                    extra_reserved_reqs=len(resumed_reqs),
+-                )
+-
+-            retraction_restore(
++            restored = retraction_restore(
+                 req,
+                 self.tree_cache,
+                 self.req_to_token_pool,
+                 self.token_to_kv_pool_allocator,
+                 get_disagg().disaggregation_decode_retraction_backup,
+             )
++            indices_to_remove.add(i)
++            if not restored:
++                error_message = "Retraction KV restore failed. Aborting the request."
++                prepare_abort(
++                    req,
++                    error_message,
++                    status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
++                )
++                self.scheduler.output_streamer.stream_output([req], req.return_logprob)
++                release_kv_cache(req, self.tree_cache, is_insert=False)
++                continue
++
++            resumed_reqs.append(req)
++            full_allocatable_tokens -= full_required
++            if uses_swa_tail_prealloc:
++                swa_allocatable_tokens = self._swa_tail_allocatable_token_budget(
++                    count_retracted=False,
++                    extra_reserved_reqs=len(resumed_reqs),
++                )
+ 
+         self.retracted_queue = [
+             entry
+diff --git a/python/sglang/srt/hardware_backend/npu/dsv4/dsv4_memory_pool.py b/python/sglang/srt/hardware_backend/npu/dsv4/dsv4_memory_pool.py
+index eddda0412d3..308c6037ecb 100644
+--- a/python/sglang/srt/hardware_backend/npu/dsv4/dsv4_memory_pool.py
++++ b/python/sglang/srt/hardware_backend/npu/dsv4/dsv4_memory_pool.py
+@@ -236,6 +236,10 @@ class DSV4NPUTokenToKVPool(DeepSeekV4TokenToKVPool):
+     accessors instead).
+     """
+ 
++    def supports_host_pool_retraction(self, is_speculative: bool = False) -> bool:
++        # Generic V4 HostPool sidecars do not implement kernel_ascend transfers.
++        return False
++
+     def __init__(self, *args, **kwargs):
+         c128_page_size = get_schedule().c128_page_size
+         if c128_page_size <= 0 or c128_page_size % 16 != 0:
+diff --git a/python/sglang/srt/managers/schedule_batch.py b/python/sglang/srt/managers/schedule_batch.py
+index 7f4733887a1..a0d7802ecd5 100755
+--- a/python/sglang/srt/managers/schedule_batch.py
++++ b/python/sglang/srt/managers/schedule_batch.py
+@@ -100,10 +100,7 @@ from sglang.srt.managers.embed_types import PositionalEmbeds
+ from sglang.srt.managers.scheduler_components.new_token_ratio_tracker import (
+     NewTokenRatioTracker,
+ )
+-from sglang.srt.mem_cache.allocation import (
+-    alloc_for_decode,
+-    alloc_for_extend,
+-)
++from sglang.srt.mem_cache.allocation import alloc_for_decode, alloc_for_extend
+ from sglang.srt.mem_cache.allocation_sizing import get_alloc_reserve_per_decode
+ from sglang.srt.mem_cache.allocator import BaseTokenToKVPoolAllocator
+ from sglang.srt.mem_cache.base_prefix_cache import (
+@@ -2961,16 +2958,15 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+             if self.release_req(idx, len(sorted_indices)):
+                 retracted_reqs.append(req)
+             else:
+-                # The retraction host pool could not hold the backup and the
+-                # device KV is already freed, so the request cannot resume.
++                # The device KV is already freed and the backup was not
++                # resumable, so the request cannot continue.
+                 req.to_finish = FINISH_ABORT(
+-                    "Retraction host KV pool exhausted. Aborting the request.",
++                    "Retraction KV backup failed. Aborting the request.",
+                     status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                 )
+                 reqs_to_abort.append(req)
+                 logger.warning(
+-                    "retract_decode: aborted request %s, retraction host pool "
+-                    "exhausted",
++                    "retract_decode: aborted request %s, KV backup failed",
+                     req.rid,
+                 )
+ 
+diff --git a/python/sglang/srt/mem_cache/base_swa_memory_pool.py b/python/sglang/srt/mem_cache/base_swa_memory_pool.py
+index 06ff43984c2..91e1cbabcba 100644
+--- a/python/sglang/srt/mem_cache/base_swa_memory_pool.py
++++ b/python/sglang/srt/mem_cache/base_swa_memory_pool.py
+@@ -16,6 +16,10 @@ class BaseSWAKVPool(KVCache):
+ 
+     swa_kv_pool: KVCache
+ 
++    def supports_host_pool_retraction(self, is_speculative: bool = False) -> bool:
++        """Whether the pool's complete live state is represented in HiCache."""
++        return False
++
+     @abc.abstractmethod
+     def register_mapping(self, full_to_swa_index_mapping: torch.Tensor) -> None:
+         raise NotImplementedError()
+diff --git a/python/sglang/srt/mem_cache/common.py b/python/sglang/srt/mem_cache/common.py
+index 93d814f38e9..9bef437cd67 100644
+--- a/python/sglang/srt/mem_cache/common.py
++++ b/python/sglang/srt/mem_cache/common.py
+@@ -37,6 +37,7 @@ class RetractionBackup(NamedTuple):
+     pool_transfers: Optional[list[PoolTransfer]] = None
+     # Set when the KV pool leaves the recurrent state to the caller.
+     mamba_cpu: Any = None
++    swa_window_start: Optional[int] = None
+ 
+ 
+ def kv_to_page_indices(kv_indices: torch.Tensor, page_size: int) -> np.ndarray:
+@@ -151,7 +152,16 @@ def retraction_backup(
+     """Returns False when the host pool cannot hold the backup; the caller
+     aborts the request since its KV cannot be preserved."""
+     if backend == "cpu_tensor":
+-        req.offload_kv_cache(req_to_token_pool, token_to_kv_pool_allocator)
++        try:
++            req.offload_kv_cache(req_to_token_pool, token_to_kv_pool_allocator)
++        except NotImplementedError:
++            req.retraction_backup = None
++            logger.error(
++                "CPU-tensor retraction backup is unsupported for request %s; "
++                "aborting the request instead of crashing the scheduler.",
++                req.rid,
++            )
++            return False
+         return True
+     if backend != "host_pool":
+         raise ValueError(f"Unknown retraction backup backend: {backend}")
+@@ -169,19 +179,20 @@ def retraction_restore(
+     req_to_token_pool: ReqToTokenPool,
+     token_to_kv_pool_allocator: BaseTokenToKVPoolAllocator,
+     backend: str,
+-) -> None:
++) -> bool:
+     if backend == "cpu_tensor":
+         req.load_kv_cache(req_to_token_pool, token_to_kv_pool_allocator)
+-        return
++        return True
+     if backend != "host_pool":
+         raise ValueError(f"Unknown retraction backup backend: {backend}")
+     if req.seqlen <= 1:
+-        return
++        return True
+ 
+     unified_cache = cast("UnifiedRadixCache", tree_cache)
+     assert req.retraction_backup is not None
+-    unified_cache.retraction_restore(req, req.retraction_backup)
++    restored = unified_cache.retraction_restore(req, req.retraction_backup)
+     req.retraction_backup = None
++    return restored
+ 
+ 
+ def retraction_discard(req: Req, tree_cache: BasePrefixCache, backend: str) -> None:
+diff --git a/python/sglang/srt/mem_cache/deepseek_v4_memory_pool.py b/python/sglang/srt/mem_cache/deepseek_v4_memory_pool.py
+index 54eabcb7e87..8ee2dceb32c 100644
+--- a/python/sglang/srt/mem_cache/deepseek_v4_memory_pool.py
++++ b/python/sglang/srt/mem_cache/deepseek_v4_memory_pool.py
+@@ -664,6 +664,16 @@ class DeepSeekV4TokenToKVPool(BaseSWAKVPool):
+     def register_mapping(self, full_to_swa_index_mapping: torch.Tensor):
+         self.full_to_swa_index_mapping = full_to_swa_index_mapping
+ 
++    def supports_host_pool_retraction(self, is_speculative: bool = False) -> bool:
++        # Unified KV has no separate SWA host entry. HiSparse owns most C4
++        # state outside the HiCache group. Speculative request-indexed state has
++        # not yet been admitted to the retraction transfer contract.
++        return (
++            not is_speculative
++            and self.swa_kv_pool is not None
++            and not isinstance(self.c4_kv_pool, HiSparseC4DevicePool)
++        )
++
+     def get_ring_size(self, compress_ratio: int) -> int:
+         is_speculative = get_spec().speculative_algorithm is not None
+         return get_compress_state_ring_size(compress_ratio, is_speculative)
+diff --git a/python/sglang/srt/mem_cache/kv_cache_builder.py b/python/sglang/srt/mem_cache/kv_cache_builder.py
+index 18acefeb831..83cf9a24347 100644
+--- a/python/sglang/srt/mem_cache/kv_cache_builder.py
++++ b/python/sglang/srt/mem_cache/kv_cache_builder.py
+@@ -35,10 +35,10 @@ from sglang.srt.configs.model_config import ModelImpl, is_deepseek_dsa
+ from sglang.srt.environ import envs
+ from sglang.srt.hardware_backend.mlx.runtime import use_mlx
+ from sglang.srt.managers.mm_schedule import init_mm_embedding_cache
++from sglang.srt.mem_cache.base_swa_memory_pool import BaseSWAKVPool
+ from sglang.srt.mem_cache.cache_init_params import CacheInitParams
+-from sglang.srt.mem_cache.memory_pool import MHATokenToKVPool
++from sglang.srt.mem_cache.memory_pool import KVCache, MHATokenToKVPool
+ from sglang.srt.mem_cache.registry import TreeCacheBuildContext, create_tree_cache
+-from sglang.srt.mem_cache.swa_memory_pool import SWAKVPool
+ from sglang.srt.mem_cache.unified_radix_cache import UnifiedRadixCache
+ from sglang.srt.model_loader.utils import get_resolved_model_impl
+ from sglang.srt.runtime_context import (
+@@ -47,6 +47,7 @@ from sglang.srt.runtime_context import (
+     get_memory,
+     get_parallel,
+     get_schedule,
++    get_spec,
+ )
+ from sglang.srt.utils import is_hip
+ 
+@@ -131,6 +132,21 @@ def uses_ssm_state(model_config) -> bool:
+     )
+ 
+ 
++def _supports_host_pool_retraction(
++    kv_cache: KVCache,
++    full_tokens_per_layer: Optional[int],
++    is_speculative: bool = False,
++) -> bool:
++    if isinstance(kv_cache, MHATokenToKVPool):
++        return True
++    return (
++        isinstance(kv_cache, BaseSWAKVPool)
++        and full_tokens_per_layer is not None
++        and full_tokens_per_layer > 0
++        and kv_cache.supports_host_pool_retraction(is_speculative)
++    )
++
++
+ def resolve_decode_retraction_backup(*, tp_worker: BaseTpWorker) -> str:
+     """Resolve the retraction backend onto the config bags and return it.
+ 
+@@ -151,12 +167,13 @@ def resolve_decode_retraction_backup(*, tp_worker: BaseTpWorker) -> str:
+             else None
+         )
+         # Host-pool retraction transfers full and sliding-window components
+-        # only, so a model with recurrent state stays on cpu_tensor.
++        # and DSV4 sidecars only, so recurrent state stays on cpu_tensor.
+         supports_host_pool = not uses_ssm_state(
+             tp_worker.model_runner.model_config
+-        ) and (
+-            isinstance(kv_cache, MHATokenToKVPool)
+-            or (isinstance(kv_cache, SWAKVPool) and full_tokens_per_layer > 0)
++        ) and _supports_host_pool_retraction(
++            kv_cache,
++            full_tokens_per_layer,
++            get_spec().speculative_algorithm is not None,
+         )
+         schedule = get_schedule()
+         priority_preemption = (
+diff --git a/python/sglang/srt/mem_cache/swa_memory_pool.py b/python/sglang/srt/mem_cache/swa_memory_pool.py
+index e934baf6daf..bb54ad2259e 100644
+--- a/python/sglang/srt/mem_cache/swa_memory_pool.py
++++ b/python/sglang/srt/mem_cache/swa_memory_pool.py
+@@ -123,6 +123,9 @@ class SWAKVPool(BaseSWAKVPool):
+             f"SWAKVPool {'VA upper bound' if self.post_capture_active else 'mem usage'}: {self.mem_usage:.2f} GB, swa size: {self.size_swa}, full size: {self.size}"
+         )
+ 
++    def supports_host_pool_retraction(self, is_speculative: bool = False) -> bool:
++        return self.swa_kv_pool is not None
++
+     @property
+     def post_capture_active(self) -> bool:
+         """True iff the sub-pools took the post-capture VA-backed path (both share the flag)."""
+diff --git a/python/sglang/srt/mem_cache/unified_radix_cache.py b/python/sglang/srt/mem_cache/unified_radix_cache.py
+index f4371bb41b7..8087220cc43 100644
+--- a/python/sglang/srt/mem_cache/unified_radix_cache.py
++++ b/python/sglang/srt/mem_cache/unified_radix_cache.py
+@@ -26,6 +26,7 @@ from sglang.srt.mem_cache.base_prefix_cache import (
+     MatchPrefixParams,
+     MatchResult,
+ )
++from sglang.srt.mem_cache.base_swa_memory_pool import BaseSWAKVPool
+ from sglang.srt.mem_cache.buffer_mode.pipeline import (
+     BufferModePipeline,
+     validate_buffer_only_stack,
+@@ -44,7 +45,6 @@ from sglang.srt.mem_cache.hybrid_cache.hybrid_cache_controller import (
+ )
+ from sglang.srt.mem_cache.memory_pool import MHATokenToKVPool
+ from sglang.srt.mem_cache.radix_cache import RadixKey
+-from sglang.srt.mem_cache.swa_memory_pool import SWAKVPool
+ from sglang.srt.mem_cache.unified_cache.cache_action import (
+     BackupKV,
+     CacheAction,
+@@ -86,6 +86,7 @@ from sglang.srt.runtime_context import (
+     get_memory,
+     get_model,
+     get_observability,
++    get_spec,
+ )
+ from sglang.srt.session.streaming_session import StreamingSession
+ from sglang.srt.utils.common import ceil_align
+@@ -150,6 +151,11 @@ class _OngoingPrefetch(NamedTuple):
+     comp_xfers: dict[ComponentType, list[PoolTransfer]]
+ 
+ 
++class RetractionTransferUnsupportedError(RuntimeError):
++    """The retraction transfer invariants do not hold for this request; the
++    backup path aborts the request instead of crashing or corrupting."""
++
++
+ class UnifiedRadixCache(BasePrefixCache):
+     def __init__(
+         self,
+@@ -782,7 +788,11 @@ class UnifiedRadixCache(BasePrefixCache):
+ 
+     def _dec_req_lock(self, req: Req, *, skip_swa: bool = False) -> None:
+         """Release the tree lock a request holds on its last_node, honoring the
+-        components it skipped locking so it never drops a lock it never took."""
++        components it skipped locking so it never drops a lock it never took.
++        A retracted request has no lock until it is matched into the tree again."""
++        if req.last_node is None:
++            return
++
+         self.dec_lock_ref(
+             req.last_node,
+             DecLockRefParams(
+@@ -1108,7 +1118,11 @@ class UnifiedRadixCache(BasePrefixCache):
+             return False
+ 
+         kv_cache = self.token_to_kv_pool_allocator.get_kvcache()
+-        if isinstance(kv_cache, SWAKVPool):
++        if isinstance(kv_cache, BaseSWAKVPool) and (
++            kv_cache.supports_host_pool_retraction(
++                get_spec().speculative_algorithm is not None
++            )
++        ):
+             return (
+                 self.supports_swa()
+                 and {
+@@ -1147,16 +1161,45 @@ class UnifiedRadixCache(BasePrefixCache):
+         aligned_len = ceil_align(len(indices), page_size)
+         if aligned_len == len(indices):
+             return indices
++
++        pad_len = aligned_len - len(indices)
++        # Paged allocators reserve the whole final page for one request. The
++        # synthetic tail is safe only while it remains inside that page.
++        last_page_offset = int(indices[-1].item()) % page_size
++        if last_page_offset + pad_len >= page_size:
++            raise RetractionTransferUnsupportedError(
++                "retraction padding would cross a device-page boundary"
++            )
++
+         tail = indices[-1] + torch.arange(
+             1,
+-            aligned_len - len(indices) + 1,
++            pad_len + 1,
+             dtype=torch.int64,
+             device=indices.device,
+         )
+         return torch.cat([indices, tail])
+ 
++    def _retraction_swa_window_start(self, req: Req, kv_cache: BaseSWAKVPool) -> int:
++        assert self.sliding_window_size is not None
++        swa_page_size = kv_cache.swa_kv_pool.page_size
++        swa_evicted_seqlen = req.kv.swa_evicted_seqlen if req.kv else 0
++        if swa_evicted_seqlen % swa_page_size != 0:
++            raise RetractionTransferUnsupportedError(
++                f"unaligned SWA eviction frontier for request {req.rid}: "
++                f"frontier={swa_evicted_seqlen}, page_size={swa_page_size}"
++            )
++        num_tokens = req.seqlen - 1
++        window_start = max(0, num_tokens - self.sliding_window_size)
++        window_start = window_start // swa_page_size * swa_page_size
++        window_start = max(window_start, swa_evicted_seqlen)
++        if window_start >= num_tokens:
++            raise RetractionTransferUnsupportedError(
++                f"no live SWA window positions for request {req.rid}"
++            )
++        return window_start
++
+     def _retraction_device_transfers(
+-        self, req: Req
++        self, req: Req, *, expected_swa_window_start: Optional[int] = None
+     ) -> tuple[torch.Tensor, list[PoolTransfer]]:
+         num_tokens = req.seqlen - 1
+         full_indices = self.req_to_token_pool.req_to_token[
+@@ -1167,21 +1210,30 @@ class UnifiedRadixCache(BasePrefixCache):
+         component_transfers: dict[ComponentType, list[PoolTransfer]] = {}
+         if self.supports_swa():
+             kv_cache = self.token_to_kv_pool_allocator.get_kvcache()
+-            assert self.sliding_window_size is not None
+-            window_start = max(0, num_tokens - self.sliding_window_size)
+-            window_start = window_start // self.page_size * self.page_size
++            swa_page_size = kv_cache.swa_kv_pool.page_size
++            window_start = self._retraction_swa_window_start(req, kv_cache)
++            if (
++                expected_swa_window_start is not None
++                and window_start != expected_swa_window_start
++            ):
++                raise RetractionTransferUnsupportedError(
++                    f"SWA window changed for request {req.rid}: "
++                    f"backup_start={expected_swa_window_start}, "
++                    f"restore_start={window_start}"
++                )
+             window_indices = self.req_to_token_pool.req_to_token[
+                 req.req_pool_idx, window_start:num_tokens
+             ].to(torch.int64)
+             swa_indices = kv_cache.translate_loc_from_full_to_swa(window_indices)
+-            assert bool(
+-                (swa_indices > 0).all()
+-            ), f"unmapped SWA window positions for request {req.rid}"
++            if not bool((swa_indices > 0).all()):
++                raise RetractionTransferUnsupportedError(
++                    f"unmapped SWA window positions for request {req.rid}"
++                )
+             component_transfers[ComponentType.SWA] = [
+                 PoolTransfer(
+                     name=PoolName.SWA,
+                     device_indices=self._pad_retraction_indices(
+-                        swa_indices, self.page_size
++                        swa_indices, swa_page_size
+                     ),
+                 )
+             ]
+@@ -1210,7 +1262,25 @@ class UnifiedRadixCache(BasePrefixCache):
+         """Back up device KV to the host pool; None when it cannot fit after reclaim."""
+         assert req.seqlen > 1
+ 
+-        device_indices, extra_transfers = self._retraction_device_transfers(req)
++        try:
++            swa_window_start = (
++                self._retraction_swa_window_start(
++                    req, self.token_to_kv_pool_allocator.get_kvcache()
++                )
++                if self.supports_swa()
++                else None
++            )
++            device_indices, extra_transfers = self._retraction_device_transfers(
++                req, expected_swa_window_start=swa_window_start
++            )
++        except RetractionTransferUnsupportedError as exc:
++            logger.error(
++                "Host-pool retraction backup is unsupported for request %s: %s; "
++                "aborting the request.",
++                req.rid,
++                exc,
++            )
++            return None
+         host_indices = self.host_pool_group.alloc(len(device_indices))
+         if host_indices is None:
+             self._reclaim_retraction_host(len(device_indices))
+@@ -1231,6 +1301,7 @@ class UnifiedRadixCache(BasePrefixCache):
+             host_indices=host_indices,
+             pool_transfers=[replace(x, device_indices=None) for x in resolved or []]
+             or None,
++            swa_window_start=swa_window_start,
+         )
+         operation = CacheOperation(
+             host_indices,
+@@ -1253,34 +1324,64 @@ class UnifiedRadixCache(BasePrefixCache):
+             raise
+         return backup
+ 
+-    def retraction_restore(self, req: Req, backup: RetractionBackup) -> None:
+-        device_indices, current_transfers = self._retraction_device_transfers(req)
+-        assert len(backup.host_indices) == len(device_indices), (
+-            f"Host backup has {len(backup.host_indices)} slots, but restore has "
+-            f"{len(device_indices)}"
+-        )
++    def retraction_restore(self, req: Req, backup: RetractionBackup) -> bool:
++        try:
++            device_indices, current_transfers = self._retraction_device_transfers(
++                req, expected_swa_window_start=backup.swa_window_start
++            )
++            if backup.host_indices is None or len(backup.host_indices) != len(
++                device_indices
++            ):
++                raise RetractionTransferUnsupportedError(
++                    f"FULL transfer length changed for request {req.rid}"
++                )
+ 
+-        current_by_name = {transfer.name: transfer for transfer in current_transfers}
+-        saved_by_name = {
+-            transfer.name: transfer for transfer in backup.pool_transfers or []
+-        }
+-        assert current_by_name.keys() == saved_by_name.keys(), (
+-            f"Host backup pools {set(saved_by_name)} do not match restore pools "
+-            f"{set(current_by_name)}"
+-        )
+-        restored_transfers = [
+-            replace(
+-                saved,
+-                device_indices=current_by_name[name].device_indices,
++            current_by_name = {
++                transfer.name: transfer for transfer in current_transfers
++            }
++            saved_by_name = {
++                transfer.name: transfer for transfer in backup.pool_transfers or []
++            }
++            if current_by_name.keys() != saved_by_name.keys():
++                raise RetractionTransferUnsupportedError(
++                    f"transfer pools changed for request {req.rid}: "
++                    f"backup={set(saved_by_name)}, restore={set(current_by_name)}"
++                )
++            restored_transfers = [
++                replace(
++                    saved,
++                    device_indices=current_by_name[name].device_indices,
++                )
++                for name, saved in saved_by_name.items()
++            ]
++            resolved = self.cache_controller._resolve_device_transfers(
++                restored_transfers or None,
++                kv_device_indices=device_indices,
++                kv_host_indices=backup.host_indices,
+             )
+-            for name, saved in saved_by_name.items()
+-        ]
+-        resolved = self.cache_controller._resolve_device_transfers(
+-            restored_transfers or None,
+-            kv_device_indices=device_indices,
+-            kv_host_indices=backup.host_indices,
+-        )
+-        assert resolved is not None or not restored_transfers
++            if resolved is None and restored_transfers:
++                raise RetractionTransferUnsupportedError(
++                    f"restore transfer allocation failed for request {req.rid}"
++                )
++            for transfer in resolved or []:
++                if (
++                    transfer.host_indices is None
++                    or transfer.device_indices is None
++                    or len(transfer.host_indices) != len(transfer.device_indices)
++                ):
++                    raise RetractionTransferUnsupportedError(
++                        f"{transfer.name} transfer length changed for request "
++                        f"{req.rid}"
++                    )
++        except RetractionTransferUnsupportedError as exc:
++            logger.error(
++                "Host-pool retraction restore is unsupported for request %s: %s; "
++                "aborting the request.",
++                req.rid,
++                exc,
++            )
++            self.retraction_discard(backup)
++            return False
+ 
+         operation = CacheOperation(
+             backup.host_indices,
+@@ -1299,9 +1400,11 @@ class UnifiedRadixCache(BasePrefixCache):
+         )
+         completion.finish_event.synchronize()
+         self.retraction_discard(backup)
++        return True
+ 
+     def retraction_discard(self, backup: RetractionBackup) -> None:
+-        self.host_pool_group.free(backup.host_indices)
++        if backup.host_indices is not None:
++            self.host_pool_group.free(backup.host_indices)
+         self.host_pool_group.release_transfers(backup.pool_transfers)
+ 
+     # ---- HiCache: Backup / LoadBack ----
+diff --git a/test/registered/unit/disaggregation/test_decode_queue_cleanup.py b/test/registered/unit/disaggregation/test_decode_queue_cleanup.py
+index 7b5b9f8a06a..a865e468bf8 100644
+--- a/test/registered/unit/disaggregation/test_decode_queue_cleanup.py
++++ b/test/registered/unit/disaggregation/test_decode_queue_cleanup.py
+@@ -32,6 +32,45 @@ class FakeReceiver:
+ 
+ 
+ class TestDecodeQueueCleanup(CustomTestCase):
++    @patch("sglang.srt.disaggregation.decode.release_kv_cache")
++    @patch("sglang.srt.disaggregation.decode.prepare_abort")
++    @patch("sglang.srt.disaggregation.decode.retraction_restore", return_value=False)
++    def test_restore_failure_releases_preallocation_and_aborts_request(
++        self, mock_restore, mock_prepare_abort, mock_release_kv_cache
++    ):
++        override = get_context().override_server_args(
++            disaggregation_decode_retraction_backup="host_pool"
++        )
++        override.install()
++        self.addCleanup(override.restore)
++
++        req = SimpleNamespace(
++            rid="restore-failed",
++            is_retracted=True,
++            return_logprob=False,
++        )
++        queue = DecodePreallocQueue.__new__(DecodePreallocQueue)
++        queue.retracted_queue = [req]
++        queue.req_to_token_pool = SimpleNamespace(available_size=lambda: 1)
++        queue.token_to_kv_pool_allocator = MagicMock()
++        queue.tree_cache = MagicMock()
++        queue.scheduler = SimpleNamespace(output_streamer=MagicMock())
++        queue._uses_swa_tail_prealloc = lambda: False
++        queue._allocatable_token_budgets = lambda **_kwargs: 16
++        queue._prealloc_required_tokens = lambda _req: (4, 4)
++        queue._pre_alloc = MagicMock()
++
++        self.assertEqual(queue.resume_retracted_reqs(), [])
++        self.assertEqual(queue.retracted_queue, [])
++        mock_restore.assert_called_once()
++        mock_release_kv_cache.assert_called_once_with(
++            req, queue.tree_cache, is_insert=False
++        )
++        mock_prepare_abort.assert_called_once()
++        queue.scheduler.output_streamer.stream_output.assert_called_once_with(
++            [req], False
++        )
++
+     def test_paged_swa_retraction_resume_uses_physical_page_budget(self):
+         # resume_retracted_reqs reads the retraction backend off the disagg
+         # bag, so the case publishes a config instead of injecting one.
+diff --git a/test/registered/unit/mem_cache/test_dsv4_retraction_backup_capability.py b/test/registered/unit/mem_cache/test_dsv4_retraction_backup_capability.py
+new file mode 100644
+index 00000000000..06ef1f304e8
+--- /dev/null
++++ b/test/registered/unit/mem_cache/test_dsv4_retraction_backup_capability.py
+@@ -0,0 +1,281 @@
++import unittest
++from types import SimpleNamespace
++from unittest.mock import MagicMock, patch
++
++import torch
++
++from sglang.srt.managers.schedule_batch import ReqKvInfo
++from sglang.srt.mem_cache.base_swa_memory_pool import BaseSWAKVPool
++from sglang.srt.mem_cache.common import (
++    RetractionBackup,
++    release_kv_cache,
++    retraction_backup,
++)
++from sglang.srt.mem_cache.deepseek_v4_memory_pool import (
++    DeepSeekV4TokenToKVPool,
++    HiSparseC4DevicePool,
++)
++from sglang.srt.mem_cache.hicache_storage import PoolName, PoolTransfer
++from sglang.srt.mem_cache.kv_cache_builder import _supports_host_pool_retraction
++from sglang.srt.mem_cache.memory_pool import MHATokenToKVPool
++from sglang.srt.mem_cache.swa_memory_pool import SWAKVPool
++from sglang.srt.mem_cache.unified_radix_cache import UnifiedRadixCache
++from sglang.test.ci.ci_register import register_cpu_ci
++
++register_cpu_ci(est_time=1, suite="base-a-test-cpu")
++
++
++class TestDSV4RetractionBackupCapability(unittest.TestCase):
++    @staticmethod
++    def _make_dsv4_pool(
++        *,
++        with_separate_swa_pool: bool,
++        hisparse: bool = False,
++    ):
++        pool = object.__new__(DeepSeekV4TokenToKVPool)
++        pool.swa_kv_pool = object() if with_separate_swa_pool else None
++        pool.c4_kv_pool = object.__new__(HiSparseC4DevicePool) if hisparse else object()
++        return pool
++
++    def test_dsv4_separate_swa_pool_selects_host_pool(self):
++        pool = self._make_dsv4_pool(with_separate_swa_pool=True)
++        self.assertIsInstance(pool, BaseSWAKVPool)
++        self.assertTrue(_supports_host_pool_retraction(pool, 32))
++        self.assertFalse(_supports_host_pool_retraction(pool, 0))
++
++    def test_mha_pool_selection_is_unchanged(self):
++        pool = object.__new__(MHATokenToKVPool)
++        self.assertTrue(_supports_host_pool_retraction(pool, None))
++
++    def test_standard_swa_pool_selection_is_unchanged(self):
++        pool = object.__new__(SWAKVPool)
++        pool.swa_kv_pool = object()
++        self.assertTrue(_supports_host_pool_retraction(pool, 32))
++
++    def test_dsv4_unified_pool_does_not_select_unsupported_host_path(self):
++        pool = self._make_dsv4_pool(with_separate_swa_pool=False)
++        self.assertFalse(_supports_host_pool_retraction(pool, 32))
++
++    def test_dsv4_hisparse_does_not_select_incomplete_host_path(self):
++        pool = self._make_dsv4_pool(with_separate_swa_pool=True, hisparse=True)
++        self.assertFalse(_supports_host_pool_retraction(pool, 32))
++
++    def test_dsv4_speculative_state_fails_closed(self):
++        pool = self._make_dsv4_pool(with_separate_swa_pool=True)
++        self.assertFalse(_supports_host_pool_retraction(pool, 32, True))
++
++    @patch("sglang.srt.mem_cache.unified_radix_cache.get_spec")
++    def test_unified_cache_accepts_dsv4_host_pool_group(self, mock_get_spec):
++        mock_get_spec.return_value = SimpleNamespace(speculative_algorithm=None)
++        pool = self._make_dsv4_pool(with_separate_swa_pool=True)
++        cache = self._make_cache(pool)
++        self.assertTrue(cache.supports_retraction_backup())
++
++    @patch("sglang.srt.mem_cache.unified_radix_cache.get_spec")
++    def test_unified_cache_rejects_incomplete_hisparse_host_group(self, mock_get_spec):
++        mock_get_spec.return_value = SimpleNamespace(speculative_algorithm=None)
++        pool = self._make_dsv4_pool(with_separate_swa_pool=True, hisparse=True)
++        cache = self._make_cache(pool)
++        self.assertFalse(cache.supports_retraction_backup())
++
++    @staticmethod
++    def _make_cache(pool):
++        cache = object.__new__(UnifiedRadixCache)
++        cache.cache_controller = object()
++        cache.host_pool_group = SimpleNamespace(
++            entry_map={PoolName.KV: object(), PoolName.SWA: object()}
++        )
++        cache.token_to_kv_pool_allocator = SimpleNamespace(get_kvcache=lambda: pool)
++        cache.supports_mamba = lambda: False
++        cache.supports_swa = lambda: True
++        return cache
++
++    def test_unsupported_cpu_snapshot_aborts_request_without_escaping(self):
++        class UnsupportedReq:
++            rid = "unsupported"
++
++            @staticmethod
++            def offload_kv_cache(*_args):
++                raise NotImplementedError
++
++        req = UnsupportedReq()
++        self.assertFalse(
++            retraction_backup(
++                req,
++                tree_cache=SimpleNamespace(),
++                req_to_token_pool=SimpleNamespace(),
++                token_to_kv_pool_allocator=SimpleNamespace(),
++                backend="cpu_tensor",
++            )
++        )
++        self.assertIsNone(req.retraction_backup)
++
++    @patch("sglang.srt.mem_cache.common.get_serving")
++    @patch("sglang.srt.mem_cache.common.get_spec")
++    def test_restore_failure_releases_kv_without_a_radix_lock(
++        self, mock_get_spec, mock_get_serving
++    ):
++        mock_get_spec.return_value = SimpleNamespace(speculative_algorithm=None)
++        mock_get_serving.return_value = SimpleNamespace(strip_thinking_cache=False)
++
++        req = SimpleNamespace(
++            req_pool_idx=0,
++            is_holding_kv=True,
++            kv=ReqKvInfo(kv_allocated_len=4, kv_committed_len=4),
++            kv_committed_len=4,
++            cache_protected_len=0,
++            last_node=None,
++            swa_uuid_for_lock=None,
++            swa_prefix_lock_released=False,
++            skip_lock_node_ids={},
++            origin_input_ids=[1, 2, 3, 4],
++            output_ids=[],
++            effective_kv_committed_len=lambda: 4,
++        )
++        allocator = SimpleNamespace(page_size=1, free_segment=MagicMock())
++
++        def free_req_slot(finished_req):
++            finished_req.req_pool_idx = None
++
++        req_to_token_pool = SimpleNamespace(
++            req_to_token=torch.tensor([[11, 12, 13, 14]]),
++            free=MagicMock(side_effect=free_req_slot),
++        )
++        tree_core = SimpleNamespace(dec_lock_ref=MagicMock(side_effect=KeyError(None)))
++        cache = object.__new__(UnifiedRadixCache)
++        cache.session = SimpleNamespace(
++            try_cache_finished_req=lambda *_args, **_kwargs: False,
++            try_dec_lock_ref=lambda *_args, **_kwargs: None,
++        )
++        cache.disable = False
++        cache.tree_core = tree_core
++        cache.req_to_token_pool = req_to_token_pool
++        cache.token_to_kv_pool_allocator = allocator
++        cache._components_tuple = ()
++        cache.enable_session_radix_cache = False
++        cache.supports_mamba = lambda: False
++
++        release_kv_cache(req, cache, is_insert=False)
++
++        allocator.free_segment.assert_called_once()
++        tree_core.dec_lock_ref.assert_not_called()
++        req_to_token_pool.free.assert_called_once_with(req)
++        self.assertIsNone(req.req_pool_idx)
++        self.assertTrue(req.kv.is_released)
++
++    def test_retraction_uses_live_swa_frontier_for_unaligned_sequence(self):
++        page_size = 256
++        full_page_start = 1024
++        swa_page_start = 2048
++        num_tokens = 300
++        full_indices = torch.arange(
++            full_page_start, full_page_start + num_tokens, dtype=torch.int64
++        )
++
++        def translate_live_swa(indices):
++            logical = indices - full_page_start
++            translated = torch.zeros_like(logical)
++            live = logical >= page_size
++            translated[live] = swa_page_start + logical[live] - page_size
++            return translated
++
++        cache = self._make_retraction_cache(
++            full_indices=full_indices,
++            translate_live_swa=translate_live_swa,
++            page_size=page_size,
++            sliding_window_size=128,
++        )
++        req = SimpleNamespace(
++            rid="unaligned",
++            req_pool_idx=0,
++            seqlen=num_tokens + 1,
++            kv=SimpleNamespace(swa_evicted_seqlen=page_size),
++        )
++
++        full_padded, transfers = cache._retraction_device_transfers(req)
++        self.assertEqual(len(full_padded), 2 * page_size)
++        self.assertEqual(len(transfers), 1)
++        self.assertEqual(transfers[0].name, PoolName.SWA)
++        self.assertEqual(len(transfers[0].device_indices), page_size)
++        self.assertEqual(int(transfers[0].device_indices[0]), swa_page_start)
++        self.assertEqual(
++            int(transfers[0].device_indices[-1]), swa_page_start + page_size - 1
++        )
++        with self.assertRaisesRegex(RuntimeError, "SWA window changed"):
++            cache._retraction_device_transfers(req, expected_swa_window_start=0)
++
++    def test_unmapped_live_swa_aborts_backup_without_asserting(self):
++        page_size = 4
++        full_indices = torch.arange(8, 14, dtype=torch.int64)
++        cache = self._make_retraction_cache(
++            full_indices=full_indices,
++            translate_live_swa=lambda indices: torch.zeros_like(indices),
++            page_size=page_size,
++            sliding_window_size=4,
++        )
++        req = SimpleNamespace(
++            rid="unmapped",
++            req_pool_idx=0,
++            seqlen=len(full_indices) + 1,
++            kv=SimpleNamespace(swa_evicted_seqlen=0),
++        )
++
++        cache.host_pool_group = SimpleNamespace()
++        self.assertIsNone(cache.retraction_backup(req))
++
++    def test_padding_never_crosses_into_the_next_device_page(self):
++        self.assertTrue(
++            torch.equal(
++                UnifiedRadixCache._pad_retraction_indices(torch.tensor([512, 513]), 4),
++                torch.tensor([512, 513, 514, 515]),
++            )
++        )
++        with self.assertRaisesRegex(RuntimeError, "device-page boundary"):
++            UnifiedRadixCache._pad_retraction_indices(torch.tensor([513, 514]), 4)
++
++    def test_restore_rejects_extra_pool_length_mismatch(self):
++        cache = object.__new__(UnifiedRadixCache)
++        cache._retraction_device_transfers = lambda _req, **_kwargs: (
++            torch.arange(4),
++            [PoolTransfer(name=PoolName.SWA, device_indices=torch.arange(4))],
++        )
++        cache.cache_controller = SimpleNamespace(
++            _resolve_device_transfers=lambda transfers, **_kwargs: transfers
++        )
++        cache.retraction_discard = MagicMock()
++        backup = RetractionBackup(
++            host_indices=torch.arange(4),
++            pool_transfers=[
++                PoolTransfer(name=PoolName.SWA, host_indices=torch.arange(8))
++            ],
++            swa_window_start=0,
++        )
++
++        self.assertFalse(
++            cache.retraction_restore(SimpleNamespace(rid="mismatch"), backup)
++        )
++        cache.retraction_discard.assert_called_once_with(backup)
++
++    @staticmethod
++    def _make_retraction_cache(
++        *, full_indices, translate_live_swa, page_size, sliding_window_size
++    ):
++        cache = object.__new__(UnifiedRadixCache)
++        cache.tree_core = SimpleNamespace(page_size=page_size)
++        cache.page_size = page_size
++        cache._sliding_window_size = sliding_window_size
++        cache.req_to_token_pool = SimpleNamespace(
++            req_to_token=full_indices.unsqueeze(0)
++        )
++        kv_cache = SimpleNamespace(
++            swa_kv_pool=SimpleNamespace(page_size=page_size),
++            translate_loc_from_full_to_swa=translate_live_swa,
++        )
++        cache.token_to_kv_pool_allocator = SimpleNamespace(get_kvcache=lambda: kv_cache)
++        cache.supports_swa = lambda: True
++        cache.sidecar_pool_specs = []
++        return cache
++
++
++if __name__ == "__main__":
++    unittest.main()

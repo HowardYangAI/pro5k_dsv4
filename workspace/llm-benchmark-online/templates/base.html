@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LLM Benchmark Platform{% endblock %}</title>
+    <link rel="icon" href="/static/favicon-64.png" type="image/png" sizes="64x64">
+    <link rel="stylesheet" href="/static/style.css?v=3">
+</head>
+<body>
+    <nav class="topbar">
+        <a href="/" class="brand">LLM Benchmark</a>
+        <div class="nav-links">
+            <div class="nav-dropdown">
+                <span class="nav-dropdown-label">性能测试 ▾</span>
+                <div class="nav-dropdown-menu">
+                    <a href="/task/create">新建测试</a>
+                    <a href="/history">历史记录</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <span class="nav-dropdown-label">精度测试 ▾</span>
+                <div class="nav-dropdown-menu">
+                    <a href="/eval/create">新建测试</a>
+                    <a href="/eval/history">历史记录</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <span class="nav-dropdown-label">接口测试 ▾</span>
+                <div class="nav-dropdown-menu">
+                    <a href="/api-test/create">新建测试</a>
+                    <a href="/api-test/history">历史记录</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <span class="nav-dropdown-label">兼容性测试 ▾</span>
+                <div class="nav-dropdown-menu">
+                    <a href="/compat-test/create">新建测试</a>
+                    <a href="/compat-test/history">历史记录</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% block warning %}<div class="warning-banner">⚠ 测试前务必确认目标服务非线上环境！Benchmark 会以高并发请求施压，直接影响线上服务可用性。</div>{% endblock %}
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

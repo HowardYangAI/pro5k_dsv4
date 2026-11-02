@@ -1,0 +1,4 @@
+          5,405   0%    0.00kB/s    0:00:00            5,405   0%    0.00kB/s    0:00:00 (xfr#1, to-chk=68/70)          6,489   0%    1.03MB/s    0:00:00 (xfr#2, to-chk=67/70)          8,377   0%    2.83MB/s    0:00:00 (xfr#3, to-chk=66/70)          8,403   0%    2.86MB/s    0:00:00 (xfr#4, to-chk=65/70)          8,573   0%    3.02MB/s    0:00:00 (xfr#5, to-chk=64/70)    852,205,949   0%  812.72MB/s    0:03:19    1,059,070,429   0%  815.83MB/s    0:00:01 (xfr#6, to-chk=63/70)rsync_exit=0 bytes=165839562817
+local_manifest=ad9a8af929435a0d1ac45ebed55861f411ac8a0f7be19eb3c20b441920781b2a
+remote_manifest=ad9a8af929435a0d1ac45ebed55861f411ac8a0f7be19eb3c20b441920781b2a
+local_shards=48 remote_shards=48

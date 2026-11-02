@@ -1,0 +1,202 @@
+usage: launch_router.py [-h] [--host HOST] [--port PORT]
+                        [--worker-urls [WORKER_URLS ...]]
+                        [--policy {random,round_robin,cache_aware,power_of_two}]
+                        [--prefill-policy {random,round_robin,cache_aware,power_of_two}]
+                        [--decode-policy {random,round_robin,cache_aware,power_of_two}]
+                        [--pd-disaggregation]
+                        [--prefill PREFILL [PREFILL ...]] [--decode URL]
+                        [--worker-startup-timeout-secs WORKER_STARTUP_TIMEOUT_SECS]
+                        [--worker-startup-check-interval WORKER_STARTUP_CHECK_INTERVAL]
+                        [--cache-threshold CACHE_THRESHOLD]
+                        [--balance-abs-threshold BALANCE_ABS_THRESHOLD]
+                        [--balance-rel-threshold BALANCE_REL_THRESHOLD]
+                        [--eviction-interval EVICTION_INTERVAL]
+                        [--max-tree-size MAX_TREE_SIZE]
+                        [--max-payload-size MAX_PAYLOAD_SIZE] [--dp-aware]
+                        [--api-key API_KEY] [--log-dir LOG_DIR]
+                        [--log-level {debug,info,warning,error,critical}]
+                        [--service-discovery]
+                        [--selector SELECTOR [SELECTOR ...]]
+                        [--service-discovery-port SERVICE_DISCOVERY_PORT]
+                        [--service-discovery-namespace SERVICE_DISCOVERY_NAMESPACE]
+                        [--prefill-selector PREFILL_SELECTOR [PREFILL_SELECTOR ...]]
+                        [--decode-selector DECODE_SELECTOR [DECODE_SELECTOR ...]]
+                        [--prometheus-port PROMETHEUS_PORT]
+                        [--prometheus-host PROMETHEUS_HOST]
+                        [--request-id-headers [REQUEST_ID_HEADERS ...]]
+                        [--request-timeout-secs REQUEST_TIMEOUT_SECS]
+                        [--retry-max-retries RETRY_MAX_RETRIES]
+                        [--retry-initial-backoff-ms RETRY_INITIAL_BACKOFF_MS]
+                        [--retry-max-backoff-ms RETRY_MAX_BACKOFF_MS]
+                        [--retry-backoff-multiplier RETRY_BACKOFF_MULTIPLIER]
+                        [--retry-jitter-factor RETRY_JITTER_FACTOR]
+                        [--disable-retries]
+                        [--cb-failure-threshold CB_FAILURE_THRESHOLD]
+                        [--cb-success-threshold CB_SUCCESS_THRESHOLD]
+                        [--cb-timeout-duration-secs CB_TIMEOUT_DURATION_SECS]
+                        [--cb-window-duration-secs CB_WINDOW_DURATION_SECS]
+                        [--disable-circuit-breaker]
+                        [--health-failure-threshold HEALTH_FAILURE_THRESHOLD]
+                        [--health-success-threshold HEALTH_SUCCESS_THRESHOLD]
+                        [--health-check-timeout-secs HEALTH_CHECK_TIMEOUT_SECS]
+                        [--health-check-interval-secs HEALTH_CHECK_INTERVAL_SECS]
+                        [--health-check-endpoint HEALTH_CHECK_ENDPOINT]
+                        [--max-concurrent-requests MAX_CONCURRENT_REQUESTS]
+                        [--cors-allowed-origins [CORS_ALLOWED_ORIGINS ...]]
+
+SGLang Router - High-performance request distribution across worker nodes
+
+Usage:
+This launcher enables starting a router with individual worker instances. It is useful for
+multi-node setups or when you want to start workers and router separately.
+
+Examples:
+  # Regular mode
+  python -m sglang_router.launch_router --worker-urls http://worker1:8000 http://worker2:8000
+
+  # PD disaggregated mode with same policy for both
+  python -m sglang_router.launch_router --pd-disaggregation \
+    --prefill http://prefill1:8000 9000 --prefill http://prefill2:8000 \
+    --decode http://decode1:8001 --decode http://decode2:8001 \
+    --policy cache_aware
+
+  # PD mode with optional bootstrap ports
+  python -m sglang_router.launch_router --pd-disaggregation \
+    --prefill http://prefill1:8000 9000 \    # With bootstrap port
+    --prefill http://prefill2:8000 none \    # Explicitly no bootstrap port
+    --prefill http://prefill3:8000 \         # Defaults to no bootstrap port
+    --decode http://decode1:8001 --decode http://decode2:8001
+
+  # PD mode with different policies for prefill and decode
+  python -m sglang_router.launch_router --pd-disaggregation \
+    --prefill http://prefill1:8000 --prefill http://prefill2:8000 \
+    --decode http://decode1:8001 --decode http://decode2:8001 \
+    --prefill-policy cache_aware --decode-policy power_of_two
+
+    
+
+options:
+  -h, --help            show this help message and exit
+  --host HOST           Host address to bind the router server (default:
+                        127.0.0.1)
+  --port PORT           Port number to bind the router server (default: 30000)
+  --worker-urls [WORKER_URLS ...]
+                        List of worker URLs (e.g., http://worker1:8000
+                        http://worker2:8000) (default: [])
+  --policy {random,round_robin,cache_aware,power_of_two}
+                        Load balancing policy to use. In PD mode, this is used
+                        for both prefill and decode unless overridden
+                        (default: cache_aware)
+  --prefill-policy {random,round_robin,cache_aware,power_of_two}
+                        Specific policy for prefill nodes in PD mode. If not
+                        specified, uses the main policy (default: None)
+  --decode-policy {random,round_robin,cache_aware,power_of_two}
+                        Specific policy for decode nodes in PD mode. If not
+                        specified, uses the main policy (default: None)
+  --pd-disaggregation   Enable PD (Prefill-Decode) disaggregated mode
+                        (default: False)
+  --prefill PREFILL [PREFILL ...]
+                        Prefill server URL and optional bootstrap port. Can be
+                        specified multiple times. Format: --prefill URL
+                        [BOOTSTRAP_PORT]. BOOTSTRAP_PORT can be a port number,
+                        'none', or omitted (defaults to none). (default: None)
+  --decode URL          Decode server URL. Can be specified multiple times.
+                        (default: None)
+  --worker-startup-timeout-secs WORKER_STARTUP_TIMEOUT_SECS
+                        Timeout in seconds for worker startup (default: 600)
+  --worker-startup-check-interval WORKER_STARTUP_CHECK_INTERVAL
+                        Interval in seconds between checks for worker startup
+                        (default: 30)
+  --cache-threshold CACHE_THRESHOLD
+                        Cache threshold (0.0-1.0) for cache-aware routing
+                        (default: 0.3)
+  --balance-abs-threshold BALANCE_ABS_THRESHOLD
+                        Load balancing is triggered when (max_load - min_load)
+                        > abs_threshold AND max_load > min_load *
+                        rel_threshold. Otherwise, use cache aware (default:
+                        64)
+  --balance-rel-threshold BALANCE_REL_THRESHOLD
+                        Load balancing is triggered when (max_load - min_load)
+                        > abs_threshold AND max_load > min_load *
+                        rel_threshold. Otherwise, use cache aware (default:
+                        1.5)
+  --eviction-interval EVICTION_INTERVAL
+                        Interval in seconds between cache eviction operations
+                        (default: 120)
+  --max-tree-size MAX_TREE_SIZE
+                        Maximum size of the approximation tree for cache-aware
+                        routing (default: 67108864)
+  --max-payload-size MAX_PAYLOAD_SIZE
+                        Maximum payload size in bytes (default: 536870912)
+  --dp-aware            Enable data parallelism aware schedule (default:
+                        False)
+  --api-key API_KEY     The api key used for the authorization with the
+                        worker. Useful when the dp aware scheduling strategy
+                        is enaled. (default: None)
+  --log-dir LOG_DIR     Directory to store log files. If not specified, logs
+                        are only output to console. (default: None)
+  --log-level {debug,info,warning,error,critical}
+                        Set the logging level. If not specified, defaults to
+                        INFO. (default: info)
+  --service-discovery   Enable Kubernetes service discovery (default: False)
+  --selector SELECTOR [SELECTOR ...]
+                        Label selector for Kubernetes service discovery
+                        (format: key1=value1 key2=value2) (default: None)
+  --service-discovery-port SERVICE_DISCOVERY_PORT
+                        Port to use for discovered worker pods (default: 80)
+  --service-discovery-namespace SERVICE_DISCOVERY_NAMESPACE
+                        Kubernetes namespace to watch for pods. If not
+                        provided, watches all namespaces (requires cluster-
+                        wide permissions) (default: None)
+  --prefill-selector PREFILL_SELECTOR [PREFILL_SELECTOR ...]
+                        Label selector for prefill server pods in PD mode
+                        (format: key1=value1 key2=value2) (default: None)
+  --decode-selector DECODE_SELECTOR [DECODE_SELECTOR ...]
+                        Label selector for decode server pods in PD mode
+                        (format: key1=value1 key2=value2) (default: None)
+  --prometheus-port PROMETHEUS_PORT
+                        Port to expose Prometheus metrics. If not specified,
+                        Prometheus metrics are disabled (default: 29000)
+  --prometheus-host PROMETHEUS_HOST
+                        Host address to bind the Prometheus metrics server
+                        (default: 127.0.0.1)
+  --request-id-headers [REQUEST_ID_HEADERS ...]
+                        Custom HTTP headers to check for request IDs (e.g.,
+                        x-request-id x-trace-id). If not specified, uses
+                        common defaults. (default: None)
+  --request-timeout-secs REQUEST_TIMEOUT_SECS
+                        Request timeout in seconds (default: 1800)
+  --retry-max-retries RETRY_MAX_RETRIES
+  --retry-initial-backoff-ms RETRY_INITIAL_BACKOFF_MS
+  --retry-max-backoff-ms RETRY_MAX_BACKOFF_MS
+  --retry-backoff-multiplier RETRY_BACKOFF_MULTIPLIER
+  --retry-jitter-factor RETRY_JITTER_FACTOR
+  --disable-retries     Disable retries (equivalent to setting
+                        retry_max_retries=1) (default: False)
+  --cb-failure-threshold CB_FAILURE_THRESHOLD
+  --cb-success-threshold CB_SUCCESS_THRESHOLD
+  --cb-timeout-duration-secs CB_TIMEOUT_DURATION_SECS
+  --cb-window-duration-secs CB_WINDOW_DURATION_SECS
+  --disable-circuit-breaker
+                        Disable circuit breaker (equivalent to setting
+                        cb_failure_threshold to u32::MAX) (default: False)
+  --health-failure-threshold HEALTH_FAILURE_THRESHOLD
+                        Number of consecutive health check failures before
+                        marking worker unhealthy (default: 3)
+  --health-success-threshold HEALTH_SUCCESS_THRESHOLD
+                        Number of consecutive health check successes before
+                        marking worker healthy (default: 2)
+  --health-check-timeout-secs HEALTH_CHECK_TIMEOUT_SECS
+                        Timeout in seconds for health check requests (default:
+                        5)
+  --health-check-interval-secs HEALTH_CHECK_INTERVAL_SECS
+                        Interval in seconds between runtime health checks
+                        (default: 60)
+  --health-check-endpoint HEALTH_CHECK_ENDPOINT
+                        Health check endpoint path (default: /health)
+  --max-concurrent-requests MAX_CONCURRENT_REQUESTS
+                        Maximum number of concurrent requests allowed (for
+                        rate limiting) (default: 256)
+  --cors-allowed-origins [CORS_ALLOWED_ORIGINS ...]
+                        CORS allowed origins (e.g., http://localhost:3000
+                        https://example.com) (default: [])

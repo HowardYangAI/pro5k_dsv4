@@ -1,0 +1,69 @@
+[local object]
+commit
+[remote object]
+fatal: git cat-file: could not get object info
+Preparing worktree (detached HEAD 48886803b)
+HEAD is now at 48886803b [feat] support dspark in SM120
+[local prepared]
+48886803b94596884d737132a381bd5124ea1cfd
+24
+ python/sglang/srt/disaggregation/decode.py         |  60 ++-
+ .../decode_kvcache_offload_manager.py              |  14 +-
+ .../disaggregation/decode_schedule_batch_mixin.py  |   2 +-
+ python/sglang/srt/managers/schedule_batch.py       |  78 +++-
+ python/sglang/srt/managers/schedule_policy.py      |   8 +-
+ python/sglang/srt/managers/scheduler.py            |  62 ++-
+ python/sglang/srt/managers/tokenizer_manager.py    |  18 +
+ python/sglang/srt/mem_cache/allocator/base.py      |   4 +
+ .../sglang/srt/mem_cache/hisparse_memory_pool.py   |   3 +
+ python/sglang/srt/mem_cache/memory_pool.py         |  50 +++
+ python/sglang/srt/mem_cache/swa_memory_pool.py     |   6 +
+ python/sglang/srt/mem_cache/unified_memory_pool.py |   3 +
+ python/sglang/srt/observability/req_time_stats.py  |   7 +
+ .../speculative/dspark_components/dspark_draft.py  |  10 +
+ .../test_specv2_kvcache_offloading.py              |  44 +-
+ .../spec/dspark/test_dspark_dp_moe_metadata.py     |  41 ++
+ .../disaggregation/test_decode_queue_cleanup.py    |  46 +++
+ .../registered/unit/managers/test_hisparse_unit.py |   1 +
+ .../registered/unit/managers/test_prefill_adder.py |   8 +-
+ .../test_priority_scheduling_disaggregation.py     |   1 +
+ .../unit/managers/test_retraction_cpu_copy.py      | 454 +++++++++++++++++++++
+ .../managers/test_tokenizer_manager_rid_cleanup.py |  22 +
+ .../unit/mem_cache/test_decode_radix_lock_ref.py   |   1 +
+ .../unit/mem_cache/test_hisparse_allocator.py      |   1 +
+ 24 files changed, 889 insertions(+), 55 deletions(-)
+From https://git.xiaojukeji.com/IFX-Group/sglang
+ * branch                upstream_0.5.16 -> FETCH_HEAD
+ * [new branch]          upstream_0.5.16 -> ifx/upstream_0.5.16
+Preparing worktree (detached HEAD 48886803b)
+HEAD is now at 48886803b [feat] support dspark in SM120
+[remote prepared]
+48886803b94596884d737132a381bd5124ea1cfd
+24
+ python/sglang/srt/disaggregation/decode.py         |  60 ++-
+ .../decode_kvcache_offload_manager.py              |  14 +-
+ .../disaggregation/decode_schedule_batch_mixin.py  |   2 +-
+ python/sglang/srt/managers/schedule_batch.py       |  78 +++-
+ python/sglang/srt/managers/schedule_policy.py      |   8 +-
+ python/sglang/srt/managers/scheduler.py            |  62 ++-
+ python/sglang/srt/managers/tokenizer_manager.py    |  18 +
+ python/sglang/srt/mem_cache/allocator/base.py      |   4 +
+ .../sglang/srt/mem_cache/hisparse_memory_pool.py   |   3 +
+ python/sglang/srt/mem_cache/memory_pool.py         |  50 +++
+ python/sglang/srt/mem_cache/swa_memory_pool.py     |   6 +
+ python/sglang/srt/mem_cache/unified_memory_pool.py |   3 +
+ python/sglang/srt/observability/req_time_stats.py  |   7 +
+ .../speculative/dspark_components/dspark_draft.py  |  10 +
+ .../test_specv2_kvcache_offloading.py              |  44 +-
+ .../spec/dspark/test_dspark_dp_moe_metadata.py     |  41 ++
+ .../disaggregation/test_decode_queue_cleanup.py    |  46 +++
+ .../registered/unit/managers/test_hisparse_unit.py |   1 +
+ .../registered/unit/managers/test_prefill_adder.py |   8 +-
+ .../test_priority_scheduling_disaggregation.py     |   1 +
+ .../unit/managers/test_retraction_cpu_copy.py      | 454 +++++++++++++++++++++
+ .../managers/test_tokenizer_manager_rid_cleanup.py |  22 +
+ .../unit/mem_cache/test_decode_radix_lock_ref.py   |   1 +
+ .../unit/mem_cache/test_hisparse_allocator.py      |   1 +
+ 24 files changed, 889 insertions(+), 55 deletions(-)
+local_index_tree=ea224ea881bd7725aeed18834e8edd89b35d13a5
+remote_index_tree=ea224ea881bd7725aeed18834e8edd89b35d13a5

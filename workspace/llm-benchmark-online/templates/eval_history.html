@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}精度测试历史 — LLM Benchmark{% endblock %}
+{% block content %}
+<h1>精度测试历史记录 (EvalScope)</h1>
+
+{% if tasks %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>连接方式</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in tasks %}
+        <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.name }}</td>
+            <td>{{ t.connection_mode }}</td>
+            <td><span class="status status-{{ t.status }}">{{ t.status }}</span></td>
+            <td>{{ t.created_at|beijing_time }}</td>
+            <td>
+                <a href="/task/{{ t.id }}" class="btn btn-sm">查看</a>
+                <button class="btn btn-sm btn-danger" onclick="deleteTask({{ t.id }})"
+                        style="background:#e74c3c; margin-left:4px;"
+                        {% if t.status == 'running' %}disabled title="运行中的任务无法删除"{% endif %}>
+                    删除
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {% if page > 1 %}
+    <a href="?page={{ page - 1 }}">&laquo; 上一页</a>
+    {% endif %}
+    <span>第 {{ page }} 页 (共 {{ (total + per_page - 1) // per_page if total > 0 else 1 }} 页)</span>
+    {% if total > page * per_page %}
+    <a href="?page={{ page + 1 }}">下一页 &raquo;</a>
+    {% endif %}
+</div>
+{% else %}
+<p>暂无精度测试记录，<a href="/eval/create">点击创建第一个精度测试任务</a>。</p>
+{% endif %}
+
+<script>
+async function deleteTask(taskId) {
+    if (!confirm('确定要删除该测试记录吗？此操作不可恢复！')) {
+        return;
+    }
+
+    try {
+        const resp = await fetch(`/api/task/${taskId}`, {
+            method: 'DELETE',
+        });
+        const data = await resp.json();
+
+        if (!resp.ok) {
+            alert('删除失败: ' + (data.detail || resp.statusText));
+            return;
+        }
+
+        alert('删除成功');
+        window.location.reload();
+    } catch (err) {
+        alert('网络请求失败: ' + err.message);
+    }
+}
+</script>
+{% endblock %}

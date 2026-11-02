@@ -1,0 +1,206 @@
+op name	调用次数	总时间(ms)	平均时间(ms)	时间占比(%)	累计占比(%)	SUM(ms)	Python源码										
+ncclDevKernel_AllReduce_Sum_f16_RING_LL(ncclDevKernelArgsStorage<4096ul>)	16250	1119.98682	0.068922	48.044334	48.044334	2331.152746	python/sglang/srt/distributed/parallel_state.py:786 (_all_reduce_in_place)										
+fused_moe_kernel	16120	471.960533	0.029278	20.2458	68.290135		python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py:420 (_fused_moe_kernel_sequence)										
+_w8a8_block_fp8_matmul	16120	200.935703	0.012465	8.619585	76.90972		python/sglang/srt/layers/quantization/fp8_kernel.py:876 (_w8a8_block_fp8_matmul)										
+ncclDevKernel_AllReduce_Sum_f32_RING_LL(ncclDevKernelArgsStorage<4096ul>)	8060	141.586233	0.017567	6.073657	82.983378		python/sglang/srt/distributed/parallel_state.py:786 (_all_reduce_in_place)										
+void flashinfer::BatchPrefillWithPagedKVCacheKernel<flashinfer::KernelTraits<(flashinfer::MaskMode)0, 16u, 1u, 1u, 8u, 8u, 1u, 4u, (flashinfer::PosEncodingMode)0, __half, __half, __half, float, int, flashinfer::DefaultAttention<false, false, false, false> >, PagedParams>	7936	44.082748	0.005555	1.891028	84.874406		python/sglang/srt/layers/attention/flashinfer_backend.py:1233 (forward_decode)										
+kernel_cutlass_kernel_flashinfernormkernelsfused_add_rmsnormFusedAddRMSNormKernel_object_at__tensorptrf16gmemalign128o307230721_tensorptrf16gmemalign128o307230721_tensorptrf16gmemalign16o_0	16120	41.492183	0.002574	1.7799	86.654305		python/sglang/srt/layers/layernorm.py:251 (forward_cuda)										
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_64x64_16x6_tn_align4>	8060	39.198475	0.004863	1.681506	88.335811		unmapped										
+void (anonymous namespace)::per_token_group_quant_8bit_v2_kernel<(anonymous namespace)::NaiveScheduler, 128, 8, __half, __nv_fp8_e4m3, false, false, false, true, float>	32240	39.122592	0.001213	1.678251	90.014062		python/sglang/jit_kernel/per_token_group_quant_8bit_v2.py:101 (per_token_group_quant_8bit_v2)										
+void moe_align_block_size_small_batch_expert_kernel<int, 256>	8060	29.524522	0.003663	1.26652	91.280583		python/sglang/srt/layers/moe/moe_runner/triton_utils/moe_align_block_size.py:22 (moe_align_block_size)										
+void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>	16249	26.426075	0.001626	1.133605	92.414188		unmapped										
+_router_triton_kernel	8060	19.69033	0.002443	0.844661	93.258849		unmapped										
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >	8190	17.625593	0.002152	0.756089	94.014938		unmapped										
+void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_16x16_128x2_tn_align8>	129	16.754802	0.129882	0.718735	94.733672		unmapped										
+void (anonymous namespace)::act_and_mul_kernel<__half, ((anonymous namespace)::ActivationKind)0, true, true>	8060	16.511625	0.002049	0.708303	95.441975		unmapped										
+void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>	8060	12.635542	0.001568	0.54203	95.984005		unmapped										
+ncclDevKernel_AllGather_RING_LL(ncclDevKernelArgsStorage<4096ul>)	130	11.854926	0.091192	0.508543	96.492549		python/sglang/srt/distributed/parallel_state.py:1054 (all_gather)										
+void cublasLt::splitKreduce_kernel<32, 16, int, float, float, float, float, false, float, float, float, true, false, false, false>	8060	11.786613	0.001462	0.505613	96.998162		unmapped										
+void flashinfer::PersistentVariableLengthMergeStatesKernel<8u, 16u, 8u, 4u, __half, __half, int>	7936	11.361075	0.001432	0.487359	97.48552		unmapped										
+void (anonymous namespace)::fused_rope_kernel<true, 64l, true, __half, long, 8u>	8060	9.814907	0.001218	0.421032	97.906553		unmapped										
+void (anonymous namespace)::store_kvcache<256l, 1, true, long>	8060	9.776581	0.001213	0.419388	98.325941		unmapped										
+rmsnorm_apply_kernel_serial	8060	8.984538	0.001115	0.385412	98.711353		unmapped										
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >	8080	8.555018	0.001059	0.366987	99.07834		unmapped										
+rmsnorm_sumsq_kernel_serial	8060	8.149033	0.001011	0.349571	99.42791		unmapped										
+triton_per_fused_copy__mul_sum_0	8060	7.763231	0.000963	0.333021	99.760932		unmapped										
+void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::ArgMaxOps<float>, unsigned int, long, 4, 4> >	130	0.729483	0.005611	0.031293	99.792224		unmapped										
+void flashinfer::BatchPrefillWithRaggedKVCacheKernel<flashinfer::KernelTraits<(flashinfer::MaskMode)1, 16u, 1u, 1u, 8u, 8u, 1u, 4u, (flashinfer::PosEncodingMode)0, __half, __half, __half, float, int, flashinfer::DefaultAttention<false, false, false, false> >, RaggedParams>	124	0.415278	0.003349	0.017814	99.810039		python/sglang/srt/layers/attention/flashinfer_backend.py:1099 (forward_extend)										
+void at::native::(anonymous namespace)::indexSelectSmallIndex<c10::Half, long, unsigned int, 2, 2, -2>	130	0.408369	0.003141	0.017518	99.827557		unmapped										
+Memcpy DtoD (Device -> Device)	396	0.401599	0.001014	0.017227	99.844784		unmapped										
+void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<8> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<8> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>	260	0.396446	0.001525	0.017006	99.86179		unmapped										
+void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#3}::operator()() const::{lambda(int)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >	264	0.328632	0.001245	0.014097	99.875888		unmapped										
+void at::native::vectorized_elementwise_kernel<2, at::native::CUDAFunctorOnSelf_add<long>, std::array<char*, 2ul> >	262	0.316227	0.001207	0.013565	99.889453		unmapped										
+void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#11}::operator()() const::{lambda(c10::Half, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#11}::operator()() const::{lambda(c10::Half, bool)#1} const&)::{lambda(int)#1}>	130	0.286712	0.002205	0.012299	99.901752		unmapped										
+kernel_cutlass_kernel_flashinfernormkernelsrmsnormRMSNormKernel_object_at__tensorptrf16gmemalign128o307230721_tensorptrf16gmemalign16o30721_tensorptrf16gmemalign128o307230721___True_4_307_0	130	0.285929	0.002199	0.012266	99.914018		unmapped										
+void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_put_kernel_impl<at::native::OpaqueType<4> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_put_kernel_impl<at::native::OpaqueType<4> >(at::TensorIterator&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&, bool)::{lambda(int)#1}>	128	0.257039	0.002008	0.011026	99.925044		unmapped										
+																	
+																	
+																	
+输入：
+Warmup：4条，1→16
+采集：4条，1→128，输入 1 token、输出 128 token，用于观察 Decode
+
+
+统计的是 TP0/EP0
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	

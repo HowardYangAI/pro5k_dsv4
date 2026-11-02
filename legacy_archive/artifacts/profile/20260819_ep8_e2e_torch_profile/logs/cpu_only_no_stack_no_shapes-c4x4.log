@@ -1,0 +1,49 @@
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url=None, host='127.0.0.1', port=30002, dataset_name='random', dataset_path='/tmp/ShareGPT_V3_unfiltered_cleaned_split.json', model='/data/models/DeepSeek-V4-Flash-0731', model_name='DeepSeek-V4-Flash-0731', num_prompts=4, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=64, random_range_ratio=1.0, request_rate=inf, max_concurrency=4, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787110561, disable_ignore_eos=False, extra_request_body='{"stream_options":{"include_usage":true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=0, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url=None, host='127.0.0.1', port=30002, dataset_name='random', dataset_path='/tmp/ShareGPT_V3_unfiltered_cleaned_split.json', model='/data/models/DeepSeek-V4-Flash-0731', model_name='DeepSeek-V4-Flash-0731', num_prompts=4, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=64, random_range_ratio=1.0, request_rate=inf, max_concurrency=4, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787110561, disable_ignore_eos=False, extra_request_body='{"stream_options":{"include_usage":true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=0, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+#Input tokens: 32768
+#Output tokens: 256
+Starting warmup with 0 sequences...
+Warmup completed with 0 sequences. Starting main benchmark run...
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:04<00:13,  4.65s/it] 75%|███████▌  | 3/4 [00:05<00:01,  1.37s/it]100%|██████████| 4/4 [00:05<00:00,  1.29s/it]
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang-oai-chat
+Traffic request rate:                    inf       
+Max request concurrency:                 4         
+Successful requests:                     4         
+Benchmark duration (s):                  5.20      
+Total input tokens:                      32768     
+Total cached tokens:                     0         
+Cache hit rate:                          0.00      
+Total generated tokens:                  256       
+Total generated tokens (retokenized):    256       
+Request throughput (req/s):              0.77      
+Input token throughput (tok/s):          6304.84   
+Output token throughput (tok/s):         49.26     
+Total token throughput (tok/s):          6354.09   
+Concurrency:                             3.78      
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   4905.71   
+Median E2E Latency (ms):                 4917.01   
+---------------Time to First Token----------------
+Mean TTFT (ms):                          4003.51   
+Median TTFT (ms):                        4003.70   
+P95 TTFT (ms):                           4061.10   
+P99 TTFT (ms):                           4061.15   
+--------------Time Per Output Token---------------
+Mean TPOT (ms):                          14.32     
+Median TPOT (ms):                        13.76     
+P95 TPOT (ms):                           18.62     
+P99 TPOT (ms):                           18.93     
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           48.12     
+Median ITL (ms):                         44.91     
+P95 ITL (ms):                            48.27     
+P99 ITL (ms):                            158.36    
+Max ITL (ms):                            158.42    
+==================================================

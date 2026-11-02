@@ -1,0 +1,90 @@
+表号	CFG-002															
+机器	8 x NVIDIA RTX PRO 5000 72GB Blackwell															
+代码版本	镜像：ml-registry.xiaojukeji.com/ddl-serving/llm-prod:sglang-0.5.16.preview1 + https://github.com/sgl-project/sglang/pull/33407															
+模型	/data/models/DeepSeek-V4-Flash-0731															
+备注	Decode-only；--enable-test-pd-without-transfer															
+配置	TP = 8，Attention DP = 8，EP = 8，DSpark，6 draft tokens，最大并发 512，MF = 0.6															
+显存	[Host] Checkpoint filesystem: XFS. Checkpoint directory size: 155.44 GiB.Physical RAM: 1.45 TiB. Available RAM before startup: 1.42 TiB.
+[2026-08-07 09:25:09 DP0 TP0 EP0] Target weight: 26.87 GB/GPU.Available GPU memory after loading: 43.66 GB.
+[2026-08-07 09:25:28 DP0 TP0 EP0] DSpark draft weight: 2.05 GB/GPU.Available GPU memory after loading: 41.61 GB.
+[2026-08-07 09:25:28 DP0 TP0 EP0] DSV4 pool sizes:full=1402112, swa=140032, c4=350528, c128=10954,c4_state=17504, c128_state=0.
+[2026-08-07 09:25:28 DP0 TP0 EP0] DSV4 memory calculation:bytes_per_full_token=9259.90, available_bytes=13.39 GB,c128_state_fixed=1.30 GB, full_token=1402112.
+[2026-08-07 09:26:03 DP0 TP0 EP0] Target verify CUDA graph:1.63 GB, available GPU memory after capture: 25.78 GB.
+[2026-08-07 09:26:08 DP0 TP0 EP0] Draft verify CUDA graph:0.89 GB, available GPU memory after capture: 24.89 GB.
+[2026-08-07 09:26:08 DP0 TP0 EP0] Runtime:max_total_num_tokens=1402112, context_len=131072,max_running_requests=64/DP rank, available_gpu_mem=24.89 GB.															
+																
+Traffic request
+rate	Successful
+requests	Max request
+concurrency	Mean TTFT
+(ms)	Median TTFT
+(ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT
+(ms)	Median TPOT
+(ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request
+throughput
+(req/s)	Input token
+throughput
+(tok/s)	Output token
+throughput
+(tok/s)	Concurrency	Accept length	DSpark accept
+rate
+input 8k
+output 2k																
+INF	10	1	259.51	261.33	314.47	314.84	10.68	10.01	13.98	15.41	0.05	369.44	92.36	1	5.52	82.80%
+INF	20	2	385.24	387.24	480.02	502.32	10.54	9.96	12.46	15.66	0.09	728.79	182.2	1.95	4.4	79.64%
+INF	40	4	377.78	366.11	503.11	528.94	12.91	11.37	22.8	25.11	0.14	1,137.10	284.28	3.72	4.57	70.65%
+INF	80	8	444.71	380.59	880.16	1,040.43	13.16	11.39	23.06	26.84	0.28	2,298.38	574.59	7.68	4.66	72.56%
+INF	160	16	425.34	386.70	671.20	1,323.20	12.32	11.02	20	33.09	0.53	4,358.95	1,089.74	13.65	4.95	74.61%
+INF	320	32	466.02	420.83	904.28	1,189.91	12.88	11.64	19.47	30.54	1.11	9,075.53	2,268.88	29.73	4.83	77.14%
+INF	640	64	546.00	459.77	1,009.67	1,498.33	15.92	14.5	22.9	39.43	1.86	15,269.45	3,817.36	61.78	5.05	81.73%
+INF	960	96	571.49	473.14	1441.14	1582.27	19.04	16.8	30.95	53.13	2.07	16920.41	4230.1	81.67	5.02	77.06%
+INF	1280	128	677.37	505.92	2208.97	2423.6	18.71	17.43	24.4	43.64	3.05	25,004.57	6251.14	118.94	5.09	86.87%
+INF	2560	256	902.03	596.95	3427.96	3502.86	25.84	24.75	31.6	52.62	4.16	34,043.12	8510.78	223.56	5.22	91.03%
+INF	3840	384	1052.68	605.36	4943.13	5010.11	35.13	31.66	55.47	92.82	4.68	38,350.58	9587.64	341.6	4.91	81.99%
+																
+注意	512并发会因为耗尽较小的SWA pool容量而服务崩溃，崩溃前日志：DP1: #running-req: 64，swa token usage: 0.94，其他 rank 最高也到了：swa token usage: 0.97，512 / 8 = 64 个请求持续生成 2k token 时，大致需要：64 × 2048 = 131,072 SWA tokens，非常接近 140,032 的总容量，
+调度器触发 retraction，尝试把 KV cache offload/copy 到 CPU，但是目前deepseek-v4的cpu kv copy暂未实现，所以导致NotImplementedError															
+																
+																
+表号	CFG-003															
+机器	2 台 8 x NVIDIA RTX PRO 5000 72GB Blackwell ，共16卡															
+代码版本	镜像：ml-registry.xiaojukeji.com/ddl-serving/llm-prod:sglang-0.5.16.preview1 + https://github.com/sgl-project/sglang/pull/33407															
+模型	/data/models/DeepSeek-V4-Flash-0731															
+备注	Decode-only；--enable-test-pd-without-transfer															
+配置	TP = 16，Attention DP = 16，EP = 16，DSpark，6 draft tokens，最大并发 1024，机子间 TCP 通信，MF = 0.7															
+显存	[Host] Checkpoint filesystem: XFS. Checkpoint directory size: 155.44 GiB. Physical RAM: 1.45 TiB. Available RAM before startup: approximately 1.42 TiB.
+[2026-08-10 04:31:43 DP0 TP0 EP0] Target weight: 18.24 GB/GPU. Available GPU memory after loading: 52.27 GB.
+[2026-08-10 04:31:59 DP0 TP0 EP0] DSpark draft weight: 1.44 GB/GPU. Available GPU memory after loading: 50.83 GB.
+[2026-08-10 04:32:01 DP0 TP0 EP0] DSV4 pool sizes: full=3290112, swa=328960, c4=822528, c128=25704, c4_state=41120, c128_state=0.
+[2026-08-10 04:32:01 DP0 TP0 EP0] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=29.67 GB, c128_state_fixed=1.30 GB, full_token=3290112.
+[2026-08-10 04:33:18 DP0 TP0 EP0] Target verify CUDA graph: 2.01 GB. Available GPU memory after capture: 18.50 GB.
+[2026-08-10 04:33:28 DP0 TP0 EP0] Draft verify CUDA graph: 1.06 GB. Available GPU memory after capture: 17.44 GB.
+[2026-08-10 04:33:28 DP0 TP0 EP0] Runtime: max_total_num_tokens=3290112, context_len=131072, max_running_requests=64/DP rank, available_gpu_mem=17.44 GB.															
+																
+Traffic request
+rate	Successful
+requests	Max request
+concurrency	Mean TTFT
+(ms)	Median TTFT
+(ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT
+(ms)	Median TPOT
+(ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request
+throughput
+(req/s)	Input token
+throughput
+(tok/s)	Output token
+throughput
+(tok/s)	Concurrency	Accept length	DSpark accept
+rate
+input 8k
+output 2k																
+INF	10	1	304.16	291.18	340.18	340.82	26	25.23	30.74	30.94	0.02	152.93	38.23	1	5.19	83.74%
+INF	40	4	527.07	560.86	571.37	574.77	33.68	27.6	46.79	111.32	0.05	447.39	111.85	3.79	4.96	79.20%
+INF	80	8	518.46	531.33	566.41	575.03	29.13	25.12	49.02	75.88	0.12	998.31	249.58	7.33	4.97	79.40%
+INF	160	16	580.26	582.57	727.74	782.23	40.04	34.55	78.63	109.06	0.18	1,455.25	363.81	14.66	4.57	71.40%
+INF	640	64	1,013.20	971.95	1,248.05	1,477.40	69.74	63.37	110	153.33	0.43	3,493.65	873.41	61.31	4.54	70.80%
+INF	1280	128	1748.1	1720.08	2044.08	2811.75	124.58	114.09	193.92	296.63	0.48	3895.49	973.87	122.1	4.57	72.31%
+INF	256	256	2263.09	2967.93	3015.45	3030.32	155.51	143.13	229.9	287.49	0.41	1,048.15	838.52	131.26	4.67	68.01%
+																
+																
+注意	CustomAllreduce is disabled because this process group spans across nodes，CustomAllreduce 是 sglang 针对单机 GPU 之间通信的优化，跨节点只能走普通 NCCL Collective															

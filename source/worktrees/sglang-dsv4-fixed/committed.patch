@@ -1,0 +1,1502 @@
+diff --git a/python/sglang/srt/disaggregation/decode.py b/python/sglang/srt/disaggregation/decode.py
+index 497bfa998ea..18f7e6fcd22 100644
+--- a/python/sglang/srt/disaggregation/decode.py
++++ b/python/sglang/srt/disaggregation/decode.py
+@@ -88,7 +88,7 @@ from sglang.srt.observability.req_time_stats import (
+     set_time_batch,
+ )
+ from sglang.srt.runtime_context import get_parallel
+-from sglang.srt.utils import get_num_new_pages
++from sglang.srt.utils import ceil_align, get_num_new_pages
+ from sglang.srt.utils.network import NetworkAddress
+ from sglang.srt.utils.nvtx_utils import scheduler_nvtx_method
+ from sglang.srt.utils.torch_memory_saver_adapter import TorchMemorySaverAdapter
+@@ -102,6 +102,14 @@ if TYPE_CHECKING:
+ CLIP_MAX_NEW_TOKEN = envs.SGLANG_CLIP_MAX_NEW_TOKENS_ESTIMATION.get()
+ 
+ 
++def prepare_pd_rebootstrap(req: Req) -> None:
++    """Prepare a released decode request for prefix recomputation by prefill."""
++    if req.output_ids:
++        req.pd_rebootstrap_forced_output_id = req.output_ids.pop()
++    req.pd_rebootstrap_in_progress = True
++    req.time_stats.set_retract_time()
++
++
+ def _bootstrap_addr(req: Req) -> str:
+     # FIXME: make a property of a req
+     # `bootstrap_host` is None for fake-transfer requests that arrive via plain
+@@ -404,6 +412,11 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+ 
+     def _prealloc_required_tokens(self, req: Req) -> Tuple[int, int]:
+         full_len, swa_len = self._prealloc_kv_lens(req)
++        page_size = self.token_to_kv_pool_allocator.page_size
++        if page_size > 1:
++            # Match the allocator, which charges whole pages for both pools.
++            full_len = ceil_align(full_len, page_size)
++            swa_len = ceil_align(swa_len, page_size)
+         swa_reserved = self.num_reserved_decode_tokens
+         if self.scheduler.server_args.disable_radix_cache:
+             swa_reserved = 0
+@@ -516,6 +529,9 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+         if self._check_if_req_exceed_kv_capacity(req):
+             return
+ 
++        if is_rebootstrap:
++            req.time_stats.set_decode_rebootstrap_prealloc_queue_entry_time()
++
+         if is_retracted:
+             req.retraction_mb_id = None
+             self.retracted_queue.append(req)
+@@ -619,19 +635,19 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+ 
+     @staticmethod
+     def _rebootstrap_prefill_len(req: Req) -> int:
+-        if getattr(req, "pd_rebootstrap_in_progress", False):
++        if req.pd_rebootstrap_in_progress:
+             return len(req.origin_input_ids) + len(req.output_ids)
+         return len(req.origin_input_ids)
+ 
+     @staticmethod
+     def _pre_alloc_fill_len(req: Req) -> int:
+-        if getattr(req, "pd_rebootstrap_in_progress", False):
+-            # pause_generation(retract) already popped the boundary token out of
++        if req.pd_rebootstrap_in_progress:
++            # Rebootstrap preparation already popped the boundary token out of
+             # output_ids (it is replayed via the decode-side override at commit
+-            # time), so output_ids here is prompt + emitted-tokens-minus-boundary,
+-            # i.e. the original seqlen - 1. The prefill recomputes KV for *all* of
+-            # these tokens, leaving no just-sampled "pending" token in the list, so
+-            # we allocate exactly len(origin)+len(output_ids) with no -1 (unlike
++            # time), so output_ids here is emitted-tokens-minus-boundary, i.e. the
++            # original seqlen - 1. The prefill recomputes KV for *all* of these
++            # tokens, leaving no just-sampled "pending" token in the list, so we
++            # allocate exactly len(origin)+len(output_ids) with no -1 (unlike
+             # normal decode, where the last token's KV has not been written yet).
+             # This is the same token count as offloading-based retraction, where
+             # offload_kv_cache saves seqlen-1 tokens; the boundary token's KV is
+@@ -1070,8 +1086,8 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+                 hicache_reserved_tokens=reserved_restore_tokens,
+             )
+             if uses_swa_tail_prealloc:
+-                # SWA budget uses simple decrement (no radix cache eviction in
+-                # the SWA pool, so page-rounding drift is negligible).
++                # SWA has no radix cache eviction, so decrement its
++                # page-aligned requirement directly.
+                 swa_allocatable_tokens -= swa_required
+             decode_req.req.cache_protected_len = total_prefix_len
+ 
+@@ -1187,10 +1203,7 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+                 decode_prefix_len=total_prefix_len,
+             )
+             if decode_req.is_rebootstrap:
+-                self.kv_manager.submit_prefill_recompute(
+-                    decode_req.kv_receiver,
+-                    decode_req.req.build_rebootstrap_payload(),
+-                )
++                self._submit_prefill_recompute(decode_req)
+             if (
+                 self.transfer_queue.enable_staging
+                 and hasattr(decode_req.kv_receiver, "require_staging")
+@@ -1209,6 +1222,25 @@ class DecodePreallocQueue(DecodeHiCachePreallocMixin):
+ 
+         return preallocated_reqs, failed_reqs
+ 
++    def _submit_prefill_recompute(self, decode_req: DecodeRequest) -> None:
++        """Dispatch rebootstrap only through a real transfer connection."""
++        if (
++            self.scheduler.server_args.disaggregation_transfer_backend == "fake"
++            or _is_fake_transfer(decode_req.req, self.scheduler.server_args)
++        ):
++            logger.error(
++                "PD rebootstrap requires a real transfer backend; aborting "
++                "request %s before prefill recompute dispatch.",
++                decode_req.req.rid,
++            )
++            decode_req.kv_receiver.abort()
++            return
++
++        self.kv_manager.submit_prefill_recompute(
++            decode_req.kv_receiver,
++            decode_req.req.build_rebootstrap_payload(),
++        )
++
+     @property
+     def num_tokens_pre_allocated(self):
+         return sum(
+diff --git a/python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py b/python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py
+index b73eea2e9b7..49ab73e0ed3 100644
+--- a/python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py
++++ b/python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py
+@@ -249,10 +249,12 @@ class DecodeKVCacheOffloadManager:
+ 
+     def _release_finished_req(self, req: Req, start_offset: int):
+         # Defensive guard: ReqToTokenPool.free sets req_pool_idx to None,
+-        # so a previously-released request must be skipped here to avoid
+-        # non-idempotent side effects (e.g. tree_cache.protected_size_
+-        # double-decrement, host pool double-free).
++        # so a previously-released request must skip resource release here to
++        # avoid non-idempotent side effects. Once all asynchronous writes have
++        # completed, its per-request bookkeeping can still be discarded.
+         if req.req_pool_idx is None or req.req_pool_idx == -1:
++            if not self._has_inflight_offload(req.rid):
++                self.offloaded_state.pop(req.rid, None)
+             return
+ 
+         kv_committed_len = req.effective_kv_committed_len()
+@@ -330,8 +332,12 @@ class DecodeKVCacheOffloadManager:
+     def finalize_release_on_finish(self, req: Req):
+         """Free any remaining tail KV that was not offloaded due to non-aligned length."""
+         # ReqToTokenPool.free sets req_pool_idx to None on release, so
+-        # guard against both sentinels here.
++        # guard against both sentinels here. Retain state while an asynchronous
++        # write is outstanding because its acknowledgement still needs the
++        # previous hash to continue the backup chain.
+         if req.req_pool_idx is None or req.req_pool_idx == -1:
++            if not self._has_inflight_offload(req.rid):
++                self.offloaded_state.pop(req.rid, None)
+             return
+         state = self.offloaded_state.get(req.rid)
+         if state is None:
+diff --git a/python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py b/python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py
+index 9eaedb980a8..e389f1ddaea 100644
+--- a/python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py
++++ b/python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py
+@@ -72,7 +72,7 @@ class ScheduleBatchDisaggregationDecodeMixin:
+                 req.cached_tokens_device += delta
+                 req.already_computed = seq_len
+             req.is_retracted = False
+-            if getattr(req, "pd_rebootstrap_in_progress", False):
++            if req.pd_rebootstrap_in_progress:
+                 req.pd_rebootstrap_in_progress = False
+             pre_lens.append(pre_len)
+ 
+diff --git a/python/sglang/srt/managers/schedule_batch.py b/python/sglang/srt/managers/schedule_batch.py
+index a8cea65ec91..500f7999e3e 100755
+--- a/python/sglang/srt/managers/schedule_batch.py
++++ b/python/sglang/srt/managers/schedule_batch.py
+@@ -67,7 +67,11 @@ from sglang.srt.disaggregation.base import BaseKVSender
+ from sglang.srt.disaggregation.decode_schedule_batch_mixin import (
+     ScheduleBatchDisaggregationDecodeMixin,
+ )
+-from sglang.srt.disaggregation.utils import FAKE_BOOTSTRAP_HOST, DisaggregationMode
++from sglang.srt.disaggregation.utils import (
++    FAKE_BOOTSTRAP_HOST,
++    DisaggregationMode,
++    _is_fake_transfer,
++)
+ from sglang.srt.dllm.mixin.req import ReqDllmMixin
+ from sglang.srt.environ import envs
+ from sglang.srt.hardware_backend.npu.dsv4.dsv4_common_hooks import (
+@@ -1045,9 +1049,11 @@ class Req(ReqDllmMixin):
+         self.bootstrap_port: Optional[int] = bootstrap_port
+         self.bootstrap_room: Optional[int] = bootstrap_room
+         # Decode-local: the already-emitted boundary token to replay when a
+-        # retracted request is rebootstrapped. Set in pause_generation(retract)
+-        # and consumed in the decode transfer commit; never plumbed to prefill.
++        # retracted request is rebootstrapped. Set by the generic rebootstrap
++        # preparation step and consumed in the decode transfer commit; never
++        # plumbed to prefill.
+         self.pd_rebootstrap_forced_output_id: Optional[int] = None
++        self.pd_rebootstrap_in_progress: bool = False
+         self.skip_radix_cache_insert = bootstrap_host == FAKE_BOOTSTRAP_HOST
+         self.disagg_kv_sender: Optional[BaseKVSender] = None
+ 
+@@ -1620,6 +1626,20 @@ class Req(ReqDllmMixin):
+             "disagg_prefill_dp_rank": self.disagg_prefill_dp_rank,
+         }
+ 
++    def supports_pd_rebootstrap(self, server_args: ServerArgs) -> bool:
++        """Whether token-only prefill recomputation can reproduce this request."""
++        return (
++            server_args.disaggregation_transfer_backend != "fake"
++            and not _is_fake_transfer(self, server_args)
++            and self.multimodal_inputs is None
++            and self.input_embeds is None
++            and self.positional_embed_overrides is None
++            and self.token_type_ids is None
++            and self.lora_id is None
++            and self.session is None
++            and self.session_id is None
++        )
++
+     def log_time_stats(self):
+         # If overlap schedule, we schedule one decode batch ahead so this gets called twice.
+         if self.has_log_time_stats:
+@@ -2598,7 +2618,7 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+ 
+     def retract_decode(
+         self, server_args: ServerArgs
+-    ) -> Tuple[List[Req], float, List[Req]]:
++    ) -> Tuple[List[Req], List[Req], float, List[Req]]:
+         """Retract the decoding requests when there is not enough memory."""
+         sorted_indices = self._get_decode_retraction_order(
+             self.reqs,
+@@ -2608,7 +2628,13 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+             ),
+         )
+ 
++        retracted_reqs_use_cpu_copy = (
++            server_args.disaggregation_mode != "decode"
++            or self.token_to_kv_pool_allocator.supports_cpu_copy()
++        )
+         retracted_reqs = []
++        rebootstrap_reqs = []
++        reqs_to_abort: List[Req] = []
+         first_iter = True
+         while first_iter or (
+             not self.check_decode_mem(selected_indices=sorted_indices)
+@@ -2620,11 +2646,33 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+             first_iter = False
+             idx = sorted_indices.pop()
+             req = self.reqs[idx]
+-            retracted_reqs.append(req)
+             # release memory and don't insert into the tree because we need the space instantly
+-            self.release_req(idx, len(sorted_indices), server_args)
++            self.release_req(
++                idx,
++                len(sorted_indices),
++                server_args,
++                offload_kv=retracted_reqs_use_cpu_copy,
++            )
++            if retracted_reqs_use_cpu_copy:
++                retracted_reqs.append(req)
++            elif req.supports_pd_rebootstrap(server_args):
++                rebootstrap_reqs.append(req)
++            else:
++                req.to_finish = FINISH_ABORT(
++                    "Request was retracted due to out-of-memory and cannot be "
++                    "resumed because this KV cache does not support synchronous "
++                    "CPU save and restore and this request cannot be safely "
++                    "recomputed by PD rebootstrap.",
++                    status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
++                    err_type="InternalServerError",
++                )
++                reqs_to_abort.append(req)
++                logger.warning(
++                    "retract_decode: aborted request %s (KV cache does not "
++                    "support synchronous CPU save and restore)",
++                    req.rid,
++                )
+ 
+-        reqs_to_abort: List[Req] = []
+         if len(sorted_indices) <= 1 and not self.check_decode_mem(
+             selected_indices=sorted_indices
+         ):
+@@ -2633,12 +2681,13 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+             last_idx = sorted_indices.pop()
+             last_req = self.reqs[last_idx]
+             last_req.to_finish = FINISH_ABORT(
+-                "Out of memory even after retracting all other requests "
++                "Out of memory even after releasing all other requests "
+                 "in the decode batch. Aborting the last request.",
+                 status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
++                err_type="InternalServerError",
+             )
+             reqs_to_abort.append(last_req)
+-            self.release_req(last_idx, 0, server_args)
++            self.release_req(last_idx, 0, server_args, offload_kv=False)
+             logger.warning(
+                 "retract_decode: aborted last request %s due to OOM", last_req.rid
+             )
+@@ -2650,7 +2699,7 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+             NewTokenRatioTracker.estimate_new_token_ratio_after_retract(self.reqs)
+         )
+ 
+-        return retracted_reqs, new_estimate_ratio, reqs_to_abort
++        return retracted_reqs, rebootstrap_reqs, new_estimate_ratio, reqs_to_abort
+ 
+     @staticmethod
+     def _get_decode_retraction_order(
+@@ -2698,7 +2747,13 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+         )
+         return sorted_indices
+ 
+-    def release_req(self, idx: int, remaing_req_count: int, server_args: ServerArgs):
++    def release_req(
++        self,
++        idx: int,
++        remaing_req_count: int,
++        server_args: ServerArgs,
++        offload_kv: bool = True,
++    ):
+         release_req(
+             req=self.reqs[idx],
+             remaing_req_count=remaing_req_count,
+@@ -2707,6 +2762,7 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
+             token_to_kv_pool_allocator=self.token_to_kv_pool_allocator,
+             tree_cache=self.tree_cache,
+             hisparse_coordinator=self.hisparse_coordinator,
++            offload_kv=offload_kv,
+         )
+ 
+     def prepare_encoder_info_decode(self):
+diff --git a/python/sglang/srt/managers/schedule_policy.py b/python/sglang/srt/managers/schedule_policy.py
+index 0e6d0f214ee..53e36fb320d 100644
+--- a/python/sglang/srt/managers/schedule_policy.py
++++ b/python/sglang/srt/managers/schedule_policy.py
+@@ -1247,8 +1247,14 @@ class PrefillAdder:
+                     self._get_running_request_total_token_offset(running_req)
+                 )
+                 release_counter += 1
++                # Priority-preempted requests re-enter the normal scheduling
++                # path and rebuild/receive their KV rather than resuming from a
++                # synchronous CPU copy.
+                 self.running_batch.release_req(
+-                    i, len(self.running_batch.reqs) - release_counter, server_args
++                    i,
++                    len(self.running_batch.reqs) - release_counter,
++                    server_args,
++                    offload_kv=False,
+                 )
+             else:
+                 keep_indices.append(i)
+diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
+index c46a8c59681..443002c20ec 100644
+--- a/python/sglang/srt/managers/scheduler.py
++++ b/python/sglang/srt/managers/scheduler.py
+@@ -48,6 +48,7 @@ from sglang.srt.disaggregation.decode import (
+     DecodePreallocQueue,
+     DecodeTransferQueue,
+     SchedulerDisaggregationDecodeMixin,
++    prepare_pd_rebootstrap,
+ )
+ from sglang.srt.disaggregation.decode_kvcache_offload_manager import (
+     DecodeKVCacheOffloadManager,
+@@ -3137,6 +3138,29 @@ class Scheduler(
+                 new_lora_set
+             )
+ 
++    def _finalize_retraction_abort(self, req: Req) -> None:
++        abort_reason: FINISH_ABORT = req.to_finish
++        prepare_abort(req, abort_reason.message, status_code=abort_reason.status_code)
++        req.finished_reason = abort_reason
++        req.to_finish = None
++        req.time_stats.trace_ctx.abort(abort_info=abort_reason)
++        req.time_stats.set_completion_time()
++
++        if self.decode_offload_manager is not None:
++            self.decode_offload_manager.finalize_release_on_finish(req)
++
++        self.ipc_channels.send_to_tokenizer.send_output(
++            AbortReq(
++                finished_reason=req.finished_reason.to_json(),
++                rid=req.rid,
++            ),
++            req,
++        )
++
++    def _enqueue_pd_rebootstrap(self, req: Req) -> None:
++        prepare_pd_rebootstrap(req)
++        self.disagg_decode_prealloc_queue.add(req, is_rebootstrap=True)
++
+     def update_running_batch(self, batch: ScheduleBatch) -> Optional[ScheduleBatch]:
+         """Update the current running decoding batch."""
+         initial_bs = batch.batch_size()
+@@ -3165,9 +3189,13 @@ class Scheduler(
+                 if mamba_allocator is not None
+                 else None
+             )
+-            retracted_reqs, new_token_ratio, reqs_to_abort = batch.retract_decode(
+-                self.server_args
+-            )
++            (
++                retracted_reqs,
++                rebootstrap_reqs,
++                new_token_ratio,
++                reqs_to_abort,
++            ) = batch.retract_decode(self.server_args)
++            all_retracted_reqs = retracted_reqs + rebootstrap_reqs
+             new_available_tokens = self.token_to_kv_pool_allocator.available_size()
+             new_token_gained = new_available_tokens - old_available_tokens
+             mamba_num_gained = (
+@@ -3176,34 +3204,27 @@ class Scheduler(
+                 else None
+             )
+ 
+-            self.metrics_reporter.num_retracted_reqs = len(retracted_reqs)
+-            if self.metrics_reporter.enable_metrics and len(retracted_reqs) > 0:
++            self.metrics_reporter.num_retracted_reqs = len(all_retracted_reqs)
++            if self.metrics_reporter.enable_metrics and all_retracted_reqs:
+                 self.metrics_reporter.metrics_collector.increment_retracted_reqs(
+-                    num_retracted_reqs=len(retracted_reqs),
++                    num_retracted_reqs=len(all_retracted_reqs),
+                     num_retracted_input_tokens=sum(
+-                        len(r.origin_input_ids) for r in retracted_reqs
++                        len(r.origin_input_ids) for r in all_retracted_reqs
+                     ),
+                     num_retracted_output_tokens=sum(
+-                        len(r.output_ids) for r in retracted_reqs
++                        len(r.output_ids) for r in all_retracted_reqs
+                     ),
+                 )
+             self.new_token_ratio_tracker.current = new_token_ratio
+             for req in reqs_to_abort:
+-                abort_reason: FINISH_ABORT = req.to_finish
+-                self.ipc_channels.send_to_tokenizer.send_output(
+-                    AbortReq(
+-                        finished_reason=abort_reason.to_json(),
+-                        rid=req.rid,
+-                    ),
+-                    req,
+-                )
++                self._finalize_retraction_abort(req)
+ 
+             msg_prefix = (
+                 "KV cache pool is full. Retract requests. "
+                 if kv_full_retract_flag
+                 else "Testing retraction. "
+             )
+-            msg_details = f"#retracted_reqs: {len(retracted_reqs)}, #new_tokens_gained: {new_token_gained}"
++            msg_details = f"#retracted_reqs: {len(all_retracted_reqs)}, #new_tokens_gained: {new_token_gained}"
+             if mamba_num_gained is not None:
+                 msg_details += f", #mamba_num_gained: {mamba_num_gained}"
+             if kv_full_retract_flag:
+@@ -3214,6 +3235,8 @@ class Scheduler(
+ 
+             for req in retracted_reqs:
+                 self._add_request_to_queue(req, is_retracted=True)
++            for req in rebootstrap_reqs:
++                self._enqueue_pd_rebootstrap(req)
+         else:
+             self.new_token_ratio_tracker.decay_step()
+ 
+@@ -4221,10 +4244,7 @@ class Scheduler(
+         self.running_batch.reqs = []
+         for req in retract_reqs:
+             if self.disaggregation_mode == DisaggregationMode.DECODE:
+-                if req.output_ids:
+-                    req.pd_rebootstrap_forced_output_id = req.output_ids.pop()
+-                req.pd_rebootstrap_in_progress = True
+-                req.time_stats.set_retract_time()
++                prepare_pd_rebootstrap(req)
+                 self.disagg_decode_prealloc_queue.hold_rebootstrap(req)
+             else:
+                 self._add_request_to_queue(req)
+diff --git a/python/sglang/srt/managers/tokenizer_manager.py b/python/sglang/srt/managers/tokenizer_manager.py
+index 60b35ea021d..acd7355bbb6 100644
+--- a/python/sglang/srt/managers/tokenizer_manager.py
++++ b/python/sglang/srt/managers/tokenizer_manager.py
+@@ -445,6 +445,10 @@ class TokenizerManager(TokenizerControlMixin, TokenizerManagerScoreMixin):
+     def init_running_status(self):
+         # Request states
+         self.rid_to_state: Dict[str, ReqState] = {}
++        # Abort notifications bypass the detokenizer, so they can overtake a
++        # token batch that was already in that pipeline. Keep a bounded set of
++        # aborted request IDs to recognize and discard those late outputs.
++        self.recently_aborted_rids: Dict[str, None] = {}
+         self.event_loop = None
+         self.asyncio_tasks = set()
+ 
+@@ -1917,6 +1921,11 @@ class TokenizerManager(TokenizerControlMixin, TokenizerManagerScoreMixin):
+                 # Known race: /health_generate pops its rid as soon as ANY message bumps last_receive_tstamp.
+                 if rid.startswith(HEALTH_CHECK_RID_PREFIX):
+                     continue
++                if rid in getattr(self, "recently_aborted_rids", {}):
++                    logger.debug(
++                        "Discarding output for recently aborted request %s.", rid
++                    )
++                    continue
+                 logger.error(
+                     f"Received output for {rid=} but the state was deleted in TokenizerManager."
+                 )
+@@ -2824,6 +2833,12 @@ class TokenizerManager(TokenizerControlMixin, TokenizerManagerScoreMixin):
+             "output_ids": output_ids,
+             "meta_info": meta_info,
+         }
++        recently_aborted_rids = getattr(self, "recently_aborted_rids", None)
++        if recently_aborted_rids is None:
++            recently_aborted_rids = self.recently_aborted_rids = {}
++        recently_aborted_rids[recv_obj.rid] = None
++        if len(recently_aborted_rids) > 4096:
++            recently_aborted_rids.pop(next(iter(recently_aborted_rids)))
+         del self.rid_to_state[recv_obj.rid]
+ 
+         state.out_list.append(out)
+@@ -3018,6 +3033,9 @@ class TokenizerManager(TokenizerControlMixin, TokenizerManagerScoreMixin):
+         for rid, sub_obj, bootstrap_room in items:
+             if rid in self.rid_to_state:
+                 raise ValueError(f"Duplicate request ID detected: {rid}")
++            # Request IDs may be reused after completion. A new request must
++            # not inherit the late-output tombstone of an older request.
++            getattr(self, "recently_aborted_rids", {}).pop(rid, None)
+             time_stats = APIServerReqTimeStats(disagg_mode=self.disaggregation_mode)
+             state = ReqState([], False, asyncio.Event(), sub_obj, time_stats)
+             self.rid_to_state[rid] = state
+diff --git a/python/sglang/srt/mem_cache/allocator/base.py b/python/sglang/srt/mem_cache/allocator/base.py
+index 7b6151dda9a..dce2e98cc91 100644
+--- a/python/sglang/srt/mem_cache/allocator/base.py
++++ b/python/sglang/srt/mem_cache/allocator/base.py
+@@ -60,6 +60,10 @@ class BaseTokenToKVPoolAllocator(abc.ABC):
+     def get_kvcache(self):
+         return self._kvcache
+ 
++    def supports_cpu_copy(self) -> bool:
++        """Whether the backing KV pool supports a CPU save/restore round trip."""
++        return self._kvcache.supports_cpu_copy()
++
+     def restore_state(self, state):
+         self.free_pages, self.release_pages = state
+ 
+diff --git a/python/sglang/srt/mem_cache/hisparse_memory_pool.py b/python/sglang/srt/mem_cache/hisparse_memory_pool.py
+index 1bf865ca227..0922b577980 100644
+--- a/python/sglang/srt/mem_cache/hisparse_memory_pool.py
++++ b/python/sglang/srt/mem_cache/hisparse_memory_pool.py
+@@ -115,6 +115,9 @@ class HiSparseDSATokenToKVPool(DSATokenToKVPool):
+             num_layers=self.layer_num,
+         )
+ 
++    def supports_cpu_copy(self) -> bool:
++        return False
++
+     def get_cpu_copy(self, indices, mamba_indices=None):
+         raise NotImplementedError("HiSparseDevicePool does not support get_cpu_copy")
+ 
+diff --git a/python/sglang/srt/mem_cache/memory_pool.py b/python/sglang/srt/mem_cache/memory_pool.py
+index 5c951f81120..83aea44d34c 100644
+--- a/python/sglang/srt/mem_cache/memory_pool.py
++++ b/python/sglang/srt/mem_cache/memory_pool.py
+@@ -950,6 +950,10 @@ class MambaPool:
+         current_platform.synchronize()
+         return conv_cpu, temporal_cpu
+ 
++    def supports_cpu_copy(self) -> bool:
++        """Whether the Mamba state supports a CPU save/restore round trip."""
++        return True
++
+     def load_cpu_copy(self, mamba_cache_cpu, indices):
+         # Accept both the legacy 2-tuple (conv, temporal) and the 3-tuple that also
+         # carries the ReplaySSM spec-verify cursors.
+@@ -1652,6 +1656,10 @@ class KVCache(abc.ABC):
+     def register_layer_transfer_counter(self, layer_transfer_counter: LayerDoneCounter):
+         self.layer_transfer_counter = layer_transfer_counter
+ 
++    def supports_cpu_copy(self) -> bool:
++        """Whether get_cpu_copy/load_cpu_copy form a supported round trip."""
++        return False
++
+     def get_cpu_copy(self, indices, mamba_indices=None):
+         raise NotImplementedError()
+ 
+@@ -1776,6 +1784,11 @@ class MHATokenToKVPool(KVCache):
+             quant_method if quant_method is not None else UnquantizedKVCacheMethod()
+         )
+ 
++        # Subclasses may provide their own buffer layout without using the base
++        # _create_buffers implementation. Keep the optional scale-buffer state
++        # defined so the inherited CPU-copy capability check remains safe.
++        self.k_scale_buffer = None
++        self.v_scale_buffer = None
+         self._create_buffers()
+ 
+         self.device_module = torch.get_device_module(self.device)
+@@ -1800,6 +1813,17 @@ class MHATokenToKVPool(KVCache):
+         self.row_dim = self.head_num * self.head_dim
+         self.same_kv_dim = self.head_dim == self.v_head_dim
+ 
++    def supports_cpu_copy(self) -> bool:
++        # get_cpu_copy/load_cpu_copy index the leading dimension with logical
++        # token ids and only transfer k_buffer/v_buffer. Therefore they are a
++        # complete round trip only for token-major NHD pools without separate
++        # per-token scale buffers.
++        return (
++            self.kv_cache_layout == "nhd"
++            and self.k_scale_buffer is None
++            and self.v_scale_buffer is None
++        )
++
+     def _init_kv_copy_and_warmup(self):
+         # Zero-layer pool (e.g. all-SWA model's full sub-pool) has no buffers.
+         if self.layer_num == 0:
+@@ -2840,6 +2864,9 @@ class NoOpMHATokenToKVPool(MHATokenToKVPool):
+             device=self.device,
+         )
+ 
++    def supports_cpu_copy(self) -> bool:
++        return False
++
+     def _finalize_allocation_log(self, num_tokens: int):
+         self.mem_usage = 0.0
+         placeholder_bytes = (
+@@ -2887,6 +2914,10 @@ class NoOpMHATokenToKVPool(MHATokenToKVPool):
+ 
+ 
+ class MHATokenToKVPoolFP4(MHATokenToKVPool):
++    def supports_cpu_copy(self) -> bool:
++        # The inherited copy path does not transfer k/v scale buffers.
++        return False
++
+     def _create_buffers(self):
+         with self.memory_saver_adapter.region(GPU_MEMORY_TYPE_KV_CACHE):
+             with (
+@@ -3168,6 +3199,9 @@ class PageMajorMHATokenToKVPool(MHATokenToKVPool):
+     # interleaved layer-major within each page) and index page-major, not
+     # token-major. Inheriting them would silently mis-index; fail loudly instead.
+ 
++    def supports_cpu_copy(self) -> bool:
++        return False
++
+     def get_contiguous_buf_infos(self):
+         raise NotImplementedError(
+             "page-major layout has no per-layer contiguous regions; KV transfer / "
+@@ -3450,6 +3484,9 @@ class MHATokenToKVPoolMXFP8(MHATokenToKVPool):
+ 
+     # These paths copy k/v buffers without the scale buffers; fail loudly
+     # instead of silently corrupting dequantization.
++    def supports_cpu_copy(self) -> bool:
++        return False
++
+     def get_cpu_copy(self, indices, mamba_indices=None):
+         raise NotImplementedError("CPU offloading is unsupported for MXFP8 KV cache.")
+ 
+@@ -3754,6 +3791,12 @@ class HybridLinearKVPool(KVCache):
+     def move_kv_cache(self, tgt_loc: torch.Tensor, src_loc: torch.Tensor):
+         self.full_kv_pool.move_kv_cache(tgt_loc, src_loc)
+ 
++    def supports_cpu_copy(self) -> bool:
++        return (
++            self.full_kv_pool.supports_cpu_copy()
++            and self.mamba_pool.supports_cpu_copy()
++        )
++
+     def get_cpu_copy(self, indices, mamba_indices=None):
+         kv_cpu = self.full_kv_pool.get_cpu_copy(indices)
+         # mamba_pool stores PHYSICAL ids; translate the (unified-pool virtual) ids first.
+@@ -4039,6 +4082,9 @@ class MLATokenToKVPool(KVCache):
+         for kv_cache in self.kv_buffer:
+             kv_cache[tgt_loc_flat] = kv_cache[src_loc_flat]
+ 
++    def supports_cpu_copy(self) -> bool:
++        return True
++
+     def get_cpu_copy(self, indices, mamba_indices=None):
+         current_platform.synchronize()
+         kv_cache_cpu = []
+@@ -4068,6 +4114,10 @@ class MLATokenToKVPool(KVCache):
+ 
+ 
+ class MLATokenToKVPoolFP4(MLATokenToKVPool):
++    def supports_cpu_copy(self) -> bool:
++        # The inherited copy path does not transfer kv_scale_buffer.
++        return False
++
+     def _create_buffers(self):
+         with self.memory_saver_adapter.region(GPU_MEMORY_TYPE_KV_CACHE):
+             with (
+diff --git a/python/sglang/srt/mem_cache/swa_memory_pool.py b/python/sglang/srt/mem_cache/swa_memory_pool.py
+index c621e8e69b1..6c03bbdc5e2 100644
+--- a/python/sglang/srt/mem_cache/swa_memory_pool.py
++++ b/python/sglang/srt/mem_cache/swa_memory_pool.py
+@@ -249,6 +249,12 @@ class SWAKVPool(BaseSWAKVPool):
+             filtered.append(filtered_layer)
+         return filtered
+ 
++    def supports_cpu_copy(self) -> bool:
++        return (
++            self.full_kv_pool.supports_cpu_copy()
++            and self.swa_kv_pool.supports_cpu_copy()
++        )
++
+     def get_cpu_copy(self, indices, mamba_indices=None):
+         # For SWA, we need to copy KV cache from both full and SWA pools
+         # The indices are for the full pool, and we use mapping to get SWA indices
+diff --git a/python/sglang/srt/mem_cache/unified_memory_pool.py b/python/sglang/srt/mem_cache/unified_memory_pool.py
+index bef6ff73dfb..5926885b643 100644
+--- a/python/sglang/srt/mem_cache/unified_memory_pool.py
++++ b/python/sglang/srt/mem_cache/unified_memory_pool.py
+@@ -413,6 +413,9 @@ class UnifiedMHATokenToKVPool(MHATokenToKVPool):
+         # Lifetime owned by UnifiedKVPool; do not delete the views.
+         pass
+ 
++    def supports_cpu_copy(self) -> bool:
++        return False
++
+     def move_kv_cache(self, tgt_loc: torch.Tensor, src_loc: torch.Tensor):
+         # tgt_loc/src_loc are PHYSICAL slot ids; native move only (strided views).
+         if tgt_loc.numel() == 0:
+diff --git a/python/sglang/srt/observability/req_time_stats.py b/python/sglang/srt/observability/req_time_stats.py
+index 8e03bcaeab6..7bf05109019 100644
+--- a/python/sglang/srt/observability/req_time_stats.py
++++ b/python/sglang/srt/observability/req_time_stats.py
+@@ -991,6 +991,13 @@ class SchedulerReqTimeStats(ReqTimeStatsBase):
+         self.observe_per_stage_req_latency(stage, ts - self.scheduler_recv_time)
+         self.trace_slice(stage, self.scheduler_recv_time, ts)
+ 
++    def set_decode_rebootstrap_prealloc_queue_entry_time(self, ts=None):
++        """Start a new decode preallocation cycle without replaying admission."""
++        ts = ts or time.perf_counter()
++        self.decode_prealloc_queue_entry_time = ts
++        self.decode_transfer_queue_entry_time = 0.0
++        self.bootstrap_done_time = 0.0
++
+     def set_decode_transfer_queue_entry_time(self, ts=None):
+         ts = ts or time.perf_counter()
+         self.decode_transfer_queue_entry_time = ts
+diff --git a/python/sglang/srt/speculative/dspark_components/dspark_draft.py b/python/sglang/srt/speculative/dspark_components/dspark_draft.py
+index 34b1db90325..0ae9a135b57 100644
+--- a/python/sglang/srt/speculative/dspark_components/dspark_draft.py
++++ b/python/sglang/srt/speculative/dspark_components/dspark_draft.py
+@@ -409,6 +409,16 @@ class DraftBlockProposer:
+     ) -> None:
+         if not self._dp_moe_sync or batch.global_num_tokens is None:
+             return
++
++        # Hand-built DSpark batches bypass ForwardBatch.init_new(), which normally
++        # records the real token count before DP/EP padding. CUDA graph replay uses
++        # this value to derive the rank-local count for gathered DP buffers.
++        num_tokens = forward_batch.input_ids.numel()
++        forward_batch.num_token_non_padded = torch.tensor(
++            num_tokens, dtype=torch.int32, device=self.draft_model_runner.device
++        )
++        forward_batch.num_token_non_padded_cpu = num_tokens
++
+         gnt, gnt_logprob = spec_scale_global_num_tokens(
+             self._draft_block_spec_info,
+             batch.global_num_tokens,
+diff --git a/test/registered/disaggregation/test_specv2_kvcache_offloading.py b/test/registered/disaggregation/test_specv2_kvcache_offloading.py
+index 5f739bed3e6..377f99e3b2b 100644
+--- a/test/registered/disaggregation/test_specv2_kvcache_offloading.py
++++ b/test/registered/disaggregation/test_specv2_kvcache_offloading.py
+@@ -19,6 +19,7 @@ from sglang.srt.disaggregation.decode_kvcache_offload_manager import (
+ from sglang.srt.disaggregation.kv_events import OffloadedState
+ from sglang.srt.managers.cache_controller import HiCacheAck
+ from sglang.test.ci.ci_register import register_amd_ci, register_cuda_ci
++from sglang.test.test_utils import CustomTestCase
+ 
+ register_cuda_ci(est_time=8, stage="base-b", runner_config="1-gpu-small")
+ register_amd_ci(est_time=8, suite="stage-b-test-1-gpu-small-amd")
+@@ -79,7 +80,7 @@ class _FinishedEvent:
+         pass
+ 
+ 
+-class TestReleaseFinishedReq(unittest.TestCase):
++class TestReleaseFinishedReq(CustomTestCase):
+     """Tests for _release_finished_req overallocation cleanup."""
+ 
+     def test_no_overallocation(self):
+@@ -343,6 +344,47 @@ class TestReleaseFinishedReq(unittest.TestCase):
+         manager.req_to_token_pool.free.assert_not_called()
+         self.assertIn(req.rid, manager.offloaded_state)
+ 
++    def test_finalize_already_released_req_drops_state(self):
++        manager, freed = _make_manager(pool_size=32)
++        req = _make_mock_req(
++            req_pool_idx=None,
++            kv_committed_len=20,
++            kv_allocated_len=20,
++            rid="released",
++        )
++        manager.offloaded_state[req.rid] = OffloadedState(
++            prefill_len=4, inc_len=8, last_hash="hash"
++        )
++
++        manager.finalize_release_on_finish(req)
++
++        self.assertEqual(freed, [])
++        manager.req_to_token_pool.free.assert_not_called()
++        self.assertNotIn(req.rid, manager.offloaded_state)
++
++    def test_released_req_keeps_state_until_last_offload_finishes(self):
++        manager, freed = _make_manager(pool_size=32)
++        req = _make_mock_req(
++            req_pool_idx=None,
++            kv_committed_len=20,
++            kv_allocated_len=20,
++            rid="released-inflight",
++        )
++        manager.offloaded_state[req.rid] = OffloadedState(
++            prefill_len=4, inc_len=8, last_hash="hash"
++        )
++        manager.offload_inflight[req.rid] = 1
++
++        manager.finalize_release_on_finish(req)
++        self.assertIn(req.rid, manager.offloaded_state)
++
++        manager._mark_offload_finished(req.rid)
++        manager._release_finished_req(req, start_offset=4)
++
++        self.assertEqual(freed, [])
++        manager.req_to_token_pool.free.assert_not_called()
++        self.assertNotIn(req.rid, manager.offloaded_state)
++
+     def test_finished_offload_ack_waits_for_other_inflight_writes(self):
+         manager, freed = _make_manager(pool_size=32)
+         req = _make_mock_req(
+diff --git a/test/registered/spec/dspark/test_dspark_dp_moe_metadata.py b/test/registered/spec/dspark/test_dspark_dp_moe_metadata.py
+new file mode 100644
+index 00000000000..29ea4a1305e
+--- /dev/null
++++ b/test/registered/spec/dspark/test_dspark_dp_moe_metadata.py
+@@ -0,0 +1,41 @@
++import unittest
++from types import SimpleNamespace
++
++import torch
++
++from sglang.srt.speculative.dspark_components.dspark_draft import DraftBlockProposer
++from sglang.test.ci.ci_register import register_cpu_ci
++from sglang.test.test_utils import CustomTestCase
++
++register_cpu_ci(est_time=5, suite="base-a-test-cpu")
++
++
++class TestDsparkDpMoeMetadata(CustomTestCase):
++    def test_real_token_count_is_set_for_hand_built_draft_batch(self):
++        proposer = DraftBlockProposer.__new__(DraftBlockProposer)
++        proposer._dp_moe_sync = True
++        proposer._draft_block_spec_info = SimpleNamespace(
++            num_tokens_per_req=4,
++            num_tokens_for_logprob_per_req=3,
++        )
++        proposer.draft_model_runner = SimpleNamespace(device="cpu")
++
++        forward_batch = SimpleNamespace(input_ids=torch.arange(12))
++        schedule_batch = SimpleNamespace(
++            global_num_tokens=[3, 1],
++            global_num_tokens_for_logprob=[2, 1],
++            can_run_dp_cuda_graph=True,
++        )
++
++        proposer._fill_dp_moe_sync_metadata(forward_batch, schedule_batch)
++
++        self.assertEqual(forward_batch.num_token_non_padded.item(), 12)
++        self.assertEqual(forward_batch.num_token_non_padded.dtype, torch.int32)
++        self.assertEqual(forward_batch.num_token_non_padded_cpu, 12)
++        self.assertEqual(forward_batch.global_num_tokens_cpu, [12, 4])
++        self.assertEqual(forward_batch.global_num_tokens_for_logprob_cpu, [6, 3])
++        self.assertTrue(forward_batch.can_run_dp_cuda_graph)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/test/registered/unit/disaggregation/test_decode_queue_cleanup.py b/test/registered/unit/disaggregation/test_decode_queue_cleanup.py
+index e136befc4d5..a6bc38259da 100644
+--- a/test/registered/unit/disaggregation/test_decode_queue_cleanup.py
++++ b/test/registered/unit/disaggregation/test_decode_queue_cleanup.py
+@@ -30,6 +30,52 @@ class FakeReceiver:
+ 
+ 
+ class TestDecodeQueueCleanup(CustomTestCase):
++    def test_paged_swa_retraction_resume_uses_physical_page_budget(self):
++        page_size = 128
++        fill_len = 574
++        physical_tokens_per_req = 5 * page_size
++        physical_available = 18 * page_size
++
++        reqs = [
++            SimpleNamespace(
++                rid=f"req-{i}",
++                origin_input_ids=[0] * fill_len,
++                output_ids=[],
++                is_retracted=True,
++                pd_rebootstrap_in_progress=False,
++                load_kv_cache=MagicMock(),
++            )
++            for i in range(4)
++        ]
++
++        queue = DecodePreallocQueue.__new__(DecodePreallocQueue)
++        queue.retracted_queue = reqs.copy()
++        queue.num_reserved_decode_tokens = 0
++        queue.req_to_token_pool = SimpleNamespace(available_size=lambda: len(reqs))
++        queue.token_to_kv_pool_allocator = SimpleNamespace(page_size=page_size)
++        queue.scheduler = SimpleNamespace(
++            sliding_window_size=2047,
++            server_args=SimpleNamespace(disable_radix_cache=True),
++        )
++        queue._uses_swa_tail_prealloc = MagicMock(return_value=True)
++        queue._swa_aware_allocatable_token_budgets = MagicMock(
++            return_value=(physical_available, physical_available)
++        )
++
++        def pre_alloc(_req):
++            nonlocal physical_available
++            self.assertGreaterEqual(physical_available, physical_tokens_per_req)
++            physical_available -= physical_tokens_per_req
++
++        queue._pre_alloc = MagicMock(side_effect=pre_alloc)
++
++        resumed = queue.resume_retracted_reqs()
++
++        self.assertEqual(resumed, reqs[:3])
++        self.assertEqual(queue.retracted_queue, reqs[3:])
++        self.assertEqual(physical_available, 3 * page_size)
++        self.assertEqual(queue._pre_alloc.call_count, 3)
++
+     def test_prealloc_abort_clears_receiver_before_removing_request(self):
+         receiver = FakeReceiver()
+         req = SimpleNamespace(
+diff --git a/test/registered/unit/managers/test_hisparse_unit.py b/test/registered/unit/managers/test_hisparse_unit.py
+index 7fbafbae658..d16ce407c48 100644
+--- a/test/registered/unit/managers/test_hisparse_unit.py
++++ b/test/registered/unit/managers/test_hisparse_unit.py
+@@ -56,6 +56,7 @@ def _make_req(rid="test-req-0", origin_input_ids=None, output_ids=None):
+         hisparse_staging=False,
+         staging=False,
+         inflight_middle_chunks=0,
++        pd_rebootstrap_in_progress=False,
+     )
+     req.finished = lambda: req.finished_reason is not None
+     req.set_extend_range = lambda start, end: setattr(
+diff --git a/test/registered/unit/managers/test_prefill_adder.py b/test/registered/unit/managers/test_prefill_adder.py
+index 501a65d5e53..052a071f3c8 100644
+--- a/test/registered/unit/managers/test_prefill_adder.py
++++ b/test/registered/unit/managers/test_prefill_adder.py
+@@ -132,7 +132,9 @@ class TestPrefillAdder(CustomTestCase):
+         self.assertTrue(success)
+         self.assertIn(running_reqs[0], adder.preempt_list)
+         self.assertEqual(adder.rem_total_token_offset, 175)  # 50 + 75 + 100 - 50 = 175
+-        running_batch.release_req.assert_called_once()
++        running_batch.release_req.assert_called_once_with(
++            0, 2, mock_server_args, offload_kv=False
++        )
+ 
+     def test_preempt_success_low_priority_values_first(self):
+         params = [
+@@ -164,7 +166,9 @@ class TestPrefillAdder(CustomTestCase):
+         self.assertTrue(success)
+         self.assertIn(running_reqs[2], adder.preempt_list)
+         self.assertEqual(adder.rem_total_token_offset, 125)  # 50 + 75 + 100 - 100 = 125
+-        running_batch.release_req.assert_called_once()
++        running_batch.release_req.assert_called_once_with(
++            2, 2, mock_server_args, offload_kv=False
++        )
+ 
+     def test_preempt_fail_low_priority_values_first(self):
+         params = [
+diff --git a/test/registered/unit/managers/test_priority_scheduling_disaggregation.py b/test/registered/unit/managers/test_priority_scheduling_disaggregation.py
+index 1da0fa0cc8c..d5ac29c39e2 100644
+--- a/test/registered/unit/managers/test_priority_scheduling_disaggregation.py
++++ b/test/registered/unit/managers/test_priority_scheduling_disaggregation.py
+@@ -92,6 +92,7 @@ class TestDecodePreallocQueuePriority(unittest.TestCase):
+             return_logprob=False,
+             sampling_params=SimpleNamespace(max_new_tokens=8),
+             cache_protected_len=0,
++            pd_rebootstrap_in_progress=False,
+             time_stats=MagicMock(),
+         )
+         return SimpleNamespace(
+diff --git a/test/registered/unit/managers/test_retraction_cpu_copy.py b/test/registered/unit/managers/test_retraction_cpu_copy.py
+new file mode 100644
+index 00000000000..f1a752e7f53
+--- /dev/null
++++ b/test/registered/unit/managers/test_retraction_cpu_copy.py
+@@ -0,0 +1,454 @@
++import unittest
++from types import SimpleNamespace
++from unittest.mock import Mock, patch
++
++import torch
++
++from sglang.srt.disaggregation.base import KVPoll
++from sglang.srt.disaggregation.decode import DecodePreallocQueue, DecodeRequest
++from sglang.srt.disaggregation.fake.conn import FakeKVManager, FakeKVReceiver
++from sglang.srt.disaggregation.utils import (
++    FAKE_BOOTSTRAP_HOST,
++    DisaggregationMode,
++)
++from sglang.srt.hardware_backend.npu.memory_pool_npu import NPUMHATokenToKVPool
++from sglang.srt.managers.schedule_batch import FINISH_ABORT, Req, ScheduleBatch
++from sglang.srt.managers.scheduler import Scheduler
++from sglang.srt.mem_cache.deepseek_v4_memory_pool import DeepSeekV4TokenToKVPool
++from sglang.srt.mem_cache.hisparse_memory_pool import HiSparseDSATokenToKVPool
++from sglang.srt.mem_cache.memory_pool import (
++    HybridLinearKVPool,
++    MHATokenToKVPool,
++    MHATokenToKVPoolFP4,
++    MHATokenToKVPoolMXFP8,
++    MLATokenToKVPool,
++    MLATokenToKVPoolFP4,
++    NoOpMHATokenToKVPool,
++    PageMajorMHATokenToKVPool,
++)
++from sglang.srt.mem_cache.swa_memory_pool import SWAKVPool
++from sglang.srt.mem_cache.unified_memory_pool import UnifiedMHATokenToKVPool
++from sglang.srt.observability.req_time_stats import SchedulerReqTimeStats
++from sglang.test.ci.ci_register import register_cpu_ci
++from sglang.test.test_utils import CustomTestCase
++
++register_cpu_ci(est_time=2, suite="base-a-test-cpu")
++
++
++def _req(rid: str):
++    req = SimpleNamespace(
++        rid=rid,
++        origin_input_ids=[1],
++        output_ids=[2],
++        priority=None,
++        to_finish=None,
++        return_logprob=False,
++        multimodal_inputs=None,
++        input_embeds=None,
++        positional_embed_overrides=None,
++        token_type_ids=None,
++        lora_id=None,
++        session=None,
++        session_id=None,
++        bootstrap_host="127.0.0.1",
++        pd_rebootstrap_forced_output_id=None,
++        pd_rebootstrap_in_progress=False,
++        time_stats=SimpleNamespace(
++            set_retract_time=Mock(),
++            set_decode_rebootstrap_prealloc_queue_entry_time=Mock(),
++        ),
++    )
++    req.supports_pd_rebootstrap = lambda server_args: Req.supports_pd_rebootstrap(
++        req, server_args
++    )
++    return req
++
++
++def _server_args(transfer_backend: str = "mooncake"):
++    return SimpleNamespace(
++        disaggregation_mode="decode",
++        disaggregation_transfer_backend=transfer_backend,
++    )
++
++
++def _batch(cpu_copy_supported: bool, req_count: int = 2):
++    batch = ScheduleBatch(reqs=[_req(str(i)) for i in range(req_count)])
++    batch.token_to_kv_pool_allocator = SimpleNamespace(
++        supports_cpu_copy=Mock(return_value=cpu_copy_supported)
++    )
++    batch._get_decode_retraction_order = Mock(return_value=list(range(req_count)))
++    batch.check_decode_mem = Mock(return_value=True)
++    batch.release_req = Mock()
++    batch.filter_batch = Mock()
++    return batch
++
++
++class TestKVCacheCPUCopyCapability(CustomTestCase):
++    def test_mha_support_depends_on_layout(self):
++        pool = object.__new__(MHATokenToKVPool)
++        pool.kv_cache_layout = "nhd"
++        pool.k_scale_buffer = None
++        pool.v_scale_buffer = None
++        self.assertTrue(pool.supports_cpu_copy())
++
++        pool.kv_cache_layout = "hnd"
++        self.assertFalse(pool.supports_cpu_copy())
++
++        pool.kv_cache_layout = "vectorized_5d"
++        self.assertFalse(pool.supports_cpu_copy())
++
++    def test_mha_with_separate_scale_buffers_is_unsupported(self):
++        pool = object.__new__(MHATokenToKVPool)
++        pool.kv_cache_layout = "nhd"
++        pool.k_scale_buffer = object()
++        pool.v_scale_buffer = object()
++        self.assertFalse(pool.supports_cpu_copy())
++
++    def test_unsupported_mha_variants_report_false(self):
++        self.assertFalse(object.__new__(PageMajorMHATokenToKVPool).supports_cpu_copy())
++        self.assertFalse(object.__new__(MHATokenToKVPoolFP4).supports_cpu_copy())
++        self.assertFalse(object.__new__(MHATokenToKVPoolMXFP8).supports_cpu_copy())
++        self.assertFalse(object.__new__(NoOpMHATokenToKVPool).supports_cpu_copy())
++        self.assertFalse(object.__new__(UnifiedMHATokenToKVPool).supports_cpu_copy())
++
++    def test_npu_mha_defines_optional_scale_state(self):
++        pool = NPUMHATokenToKVPool(
++            size=4,
++            page_size=1,
++            dtype=torch.float16,
++            head_num=1,
++            head_dim=2,
++            layer_num=1,
++            device="cpu",
++            enable_memory_saver=False,
++            enable_alt_stream=False,
++        )
++
++        self.assertIsNone(pool.k_scale_buffer)
++        self.assertIsNone(pool.v_scale_buffer)
++        self.assertTrue(pool.supports_cpu_copy())
++
++    def test_mla_variants_and_hisparse_report_distinct_capabilities(self):
++        self.assertTrue(object.__new__(MLATokenToKVPool).supports_cpu_copy())
++        self.assertFalse(object.__new__(MLATokenToKVPoolFP4).supports_cpu_copy())
++        self.assertFalse(object.__new__(HiSparseDSATokenToKVPool).supports_cpu_copy())
++
++    def test_deepseek_v4_pool_requires_rebootstrap_or_abort(self):
++        self.assertFalse(object.__new__(DeepSeekV4TokenToKVPool).supports_cpu_copy())
++
++    def test_swa_requires_both_subpools_to_support_cpu_copy(self):
++        pool = object.__new__(SWAKVPool)
++        pool.full_kv_pool = SimpleNamespace(supports_cpu_copy=lambda: True)
++        pool.swa_kv_pool = SimpleNamespace(supports_cpu_copy=lambda: True)
++        self.assertTrue(pool.supports_cpu_copy())
++
++        pool.swa_kv_pool = SimpleNamespace(supports_cpu_copy=lambda: False)
++        self.assertFalse(pool.supports_cpu_copy())
++
++    def test_hybrid_requires_attention_and_mamba_cpu_copy(self):
++        pool = object.__new__(HybridLinearKVPool)
++        pool.full_kv_pool = SimpleNamespace(supports_cpu_copy=lambda: True)
++        pool.mamba_pool = SimpleNamespace(supports_cpu_copy=lambda: True)
++        self.assertTrue(pool.supports_cpu_copy())
++
++        pool.mamba_pool = SimpleNamespace(supports_cpu_copy=lambda: False)
++        self.assertFalse(pool.supports_cpu_copy())
++
++
++class TestPDDecodeRetractionCPUCopy(CustomTestCase):
++    def test_rebootstrap_requires_token_only_base_request(self):
++        req = _req("eligibility")
++        args = _server_args()
++        self.assertTrue(req.supports_pd_rebootstrap(args))
++
++        unsupported_fields = {
++            "multimodal_inputs": object(),
++            "input_embeds": [[0.0]],
++            "positional_embed_overrides": object(),
++            "token_type_ids": [0],
++            "lora_id": "adapter",
++            "session": object(),
++            "session_id": "session",
++        }
++        for field, value in unsupported_fields.items():
++            with self.subTest(field=field):
++                setattr(req, field, value)
++                self.assertFalse(req.supports_pd_rebootstrap(args))
++                setattr(req, field, None)
++
++    @patch(
++        "sglang.srt.managers.schedule_batch."
++        "NewTokenRatioTracker.estimate_new_token_ratio_after_retract",
++        return_value=0.5,
++    )
++    def test_fake_transfer_cannot_rebootstrap(self, _estimate):
++        """Fake transfer has no prefill-recompute dispatch implementation."""
++        cases = (
++            ("fake", None),
++            ("fake", "127.0.0.1"),
++            ("mooncake", FAKE_BOOTSTRAP_HOST),
++        )
++        for transfer_backend, bootstrap_host in cases:
++            with self.subTest(
++                transfer_backend=transfer_backend,
++                bootstrap_host=bootstrap_host,
++            ):
++                batch = _batch(cpu_copy_supported=False)
++                batch.reqs[1].bootstrap_host = bootstrap_host
++                args = _server_args(transfer_backend)
++
++                retracted, rebootstrap, _, aborted = batch.retract_decode(args)
++
++                self.assertEqual(retracted, [])
++                self.assertEqual(rebootstrap, [])
++                self.assertEqual([req.rid for req in aborted], ["1"])
++                self.assertIn(
++                    "cannot be safely recomputed", aborted[0].to_finish.message
++                )
++
++    @patch(
++        "sglang.srt.managers.schedule_batch."
++        "NewTokenRatioTracker.estimate_new_token_ratio_after_retract",
++        return_value=0.5,
++    )
++    def test_supported_pool_retracts_and_resumes(self, _estimate):
++        batch = _batch(cpu_copy_supported=True)
++        args = _server_args()
++
++        retracted, rebootstrap, ratio, aborted = batch.retract_decode(args)
++
++        self.assertEqual([req.rid for req in retracted], ["1"])
++        self.assertEqual(rebootstrap, [])
++        self.assertEqual(aborted, [])
++        self.assertEqual(ratio, 0.5)
++        batch.release_req.assert_called_once_with(1, 1, args, offload_kv=True)
++
++    @patch(
++        "sglang.srt.managers.schedule_batch."
++        "NewTokenRatioTracker.estimate_new_token_ratio_after_retract",
++        return_value=0.5,
++    )
++    def test_unsupported_pool_rebootstraps_retracted_request(self, _estimate):
++        batch = _batch(cpu_copy_supported=False)
++        args = _server_args()
++
++        retracted, rebootstrap, _, aborted = batch.retract_decode(args)
++
++        self.assertEqual(retracted, [])
++        self.assertEqual([req.rid for req in rebootstrap], ["1"])
++        self.assertEqual(aborted, [])
++        batch.release_req.assert_called_once_with(1, 1, args, offload_kv=False)
++
++    @patch(
++        "sglang.srt.managers.schedule_batch."
++        "NewTokenRatioTracker.estimate_new_token_ratio_after_retract",
++        return_value=0.5,
++    )
++    def test_incomplete_round_trip_pools_rebootstrap_without_offload(self, _estimate):
++        vectorized = object.__new__(MHATokenToKVPool)
++        vectorized.kv_cache_layout = "vectorized_5d"
++        vectorized.k_scale_buffer = None
++        vectorized.v_scale_buffer = None
++
++        for pool in (
++            vectorized,
++            object.__new__(MHATokenToKVPoolFP4),
++            object.__new__(MLATokenToKVPoolFP4),
++        ):
++            with self.subTest(pool=type(pool).__name__):
++                batch = _batch(cpu_copy_supported=pool.supports_cpu_copy())
++                args = _server_args()
++
++                retracted, rebootstrap, _, aborted = batch.retract_decode(args)
++
++                self.assertEqual(retracted, [])
++                self.assertEqual([req.rid for req in rebootstrap], ["1"])
++                self.assertEqual(aborted, [])
++                batch.release_req.assert_called_once_with(1, 1, args, offload_kv=False)
++
++    @patch(
++        "sglang.srt.managers.schedule_batch."
++        "NewTokenRatioTracker.estimate_new_token_ratio_after_retract",
++        return_value=0.5,
++    )
++    def test_request_that_cannot_rebootstrap_is_aborted(self, _estimate):
++        batch = _batch(cpu_copy_supported=False)
++        batch.reqs[1].multimodal_inputs = object()
++        args = _server_args()
++
++        retracted, rebootstrap, _, aborted = batch.retract_decode(args)
++
++        self.assertEqual(retracted, [])
++        self.assertEqual(rebootstrap, [])
++        self.assertEqual([req.rid for req in aborted], ["1"])
++        self.assertIsInstance(aborted[0].to_finish, FINISH_ABORT)
++        self.assertIn("cannot be safely recomputed", aborted[0].to_finish.message)
++        self.assertEqual(aborted[0].to_finish.err_type, "InternalServerError")
++        batch.release_req.assert_called_once_with(1, 1, args, offload_kv=False)
++
++    @patch(
++        "sglang.srt.managers.schedule_batch."
++        "NewTokenRatioTracker.estimate_new_token_ratio_after_retract",
++        return_value=0.5,
++    )
++    def test_last_request_abort_never_wastes_cpu_copy(self, _estimate):
++        batch = _batch(cpu_copy_supported=True, req_count=1)
++        batch.check_decode_mem = Mock(return_value=False)
++        args = _server_args()
++
++        retracted, rebootstrap, _, aborted = batch.retract_decode(args)
++
++        self.assertEqual(retracted, [])
++        self.assertEqual(rebootstrap, [])
++        self.assertEqual([req.rid for req in aborted], ["0"])
++        batch.release_req.assert_called_once_with(0, 0, args, offload_kv=False)
++
++
++class TestSchedulerRetractionAbort(CustomTestCase):
++    def test_memory_pressure_routes_rebootstrap_result_to_prefill(self):
++        req = _req("rebootstrap")
++        batch = Mock()
++        batch.batch_size.return_value = 1
++        batch.is_empty.return_value = False
++        batch.check_decode_mem.return_value = False
++        batch.retract_decode.return_value = ([], [req], 0.5, [])
++
++        scheduler = object.__new__(Scheduler)
++        scheduler.forward_ct = 1
++        scheduler.enable_hierarchical_cache = False
++        scheduler.server_args = _server_args()
++        scheduler.token_to_kv_pool_allocator = Mock()
++        scheduler.token_to_kv_pool_allocator.available_size.side_effect = [0, 1]
++        scheduler.tree_cache = SimpleNamespace(req_to_token_pool=SimpleNamespace())
++        scheduler.new_token_ratio_tracker = SimpleNamespace(current=0.8)
++        scheduler.metrics_reporter = SimpleNamespace(
++            num_retracted_reqs=0,
++            enable_metrics=False,
++        )
++        scheduler._enqueue_pd_rebootstrap = Mock()
++
++        result = scheduler.update_running_batch(batch)
++
++        self.assertIs(result, batch)
++        scheduler._enqueue_pd_rebootstrap.assert_called_once_with(req)
++        self.assertEqual(scheduler.metrics_reporter.num_retracted_reqs, 1)
++        batch.prepare_for_decode.assert_called_once_with()
++
++    def test_rebootstrap_replays_boundary_and_enters_prealloc_queue(self):
++        req = _req("rebootstrap")
++        req.output_ids = [2, 3]
++        scheduler = object.__new__(Scheduler)
++        scheduler.disagg_decode_prealloc_queue = Mock()
++
++        scheduler._enqueue_pd_rebootstrap(req)
++
++        self.assertEqual(req.output_ids, [2])
++        self.assertEqual(req.pd_rebootstrap_forced_output_id, 3)
++        self.assertTrue(req.pd_rebootstrap_in_progress)
++        req.time_stats.set_retract_time.assert_called_once_with()
++        scheduler.disagg_decode_prealloc_queue.add.assert_called_once_with(
++            req, is_rebootstrap=True
++        )
++
++    def test_rebootstrap_restarts_timing_at_concrete_prealloc_admission(self):
++        """A second admission must not reuse the first bootstrap timestamps."""
++        req = _req("timing")
++        receiver = Mock()
++        decode_req = DecodeRequest(req=req, kv_receiver=receiver)
++        queue = object.__new__(DecodePreallocQueue)
++        queue.scheduler = SimpleNamespace(server_args=_server_args())
++        queue.retracted_queue = []
++        queue.pending_reqs = []
++        queue._check_if_req_exceed_kv_capacity = Mock(return_value=False)
++        queue._create_receiver_and_enqueue = Mock(return_value=decode_req)
++        queue._resolve_prefill_dp_rank = Mock(return_value=0)
++
++        queue.add(req, is_rebootstrap=True)
++
++        req.time_stats.set_decode_rebootstrap_prealloc_queue_entry_time.assert_called_once_with()
++        receiver.init.assert_called_once_with(0)
++
++    def test_fake_rebootstrap_is_stopped_at_concrete_dispatch_boundary(self):
++        """A fake receiver must be aborted before recompute dispatch."""
++        req = _req("fake-dispatch")
++        req.bootstrap_host = None
++        fake_manager = object.__new__(FakeKVManager)
++        receiver = FakeKVReceiver(
++            mgr=fake_manager,
++            bootstrap_addr="2.2.2.2:0",
++            bootstrap_room=1,
++        )
++        decode_req = DecodeRequest(
++            req=req,
++            kv_receiver=receiver,
++            is_rebootstrap=True,
++        )
++        queue = object.__new__(DecodePreallocQueue)
++        queue.scheduler = SimpleNamespace(server_args=_server_args("fake"))
++        queue.kv_manager = fake_manager
++
++        queue._submit_prefill_recompute(decode_req)
++
++        self.assertEqual(receiver.conclude_state, KVPoll.Failed)
++
++    def test_abort_finalizes_request_and_async_offload_state(self):
++        req = _req("abort")
++        abort_reason = FINISH_ABORT(
++            "KV cache cannot be restored",
++            status_code=500,
++        )
++        req.to_finish = abort_reason
++        req.time_stats = SimpleNamespace(
++            trace_ctx=SimpleNamespace(abort=Mock()),
++            set_completion_time=Mock(),
++        )
++
++        scheduler = object.__new__(Scheduler)
++        scheduler.decode_offload_manager = Mock()
++        scheduler.ipc_channels = SimpleNamespace(
++            send_to_tokenizer=SimpleNamespace(send_output=Mock())
++        )
++
++        scheduler._finalize_retraction_abort(req)
++
++        self.assertIsNone(req.to_finish)
++        self.assertIs(req.finished_reason, abort_reason)
++        req.time_stats.trace_ctx.abort.assert_called_once_with(abort_info=abort_reason)
++        req.time_stats.set_completion_time.assert_called_once_with()
++        scheduler.decode_offload_manager.finalize_release_on_finish.assert_called_once_with(
++            req
++        )
++        send_output = scheduler.ipc_channels.send_to_tokenizer.send_output
++        send_output.assert_called_once()
++        abort_req, sent_req = send_output.call_args.args
++        self.assertIs(sent_req, req)
++        self.assertEqual(abort_req.finished_reason, req.finished_reason.to_json())
++
++
++class TestPDRebootstrapTiming(CustomTestCase):
++    def test_second_bootstrap_uses_second_admission_interval(self):
++        """Bootstrap/allocator metrics must describe the rebootstrap cycle."""
++        collector = Mock()
++        stats = SchedulerReqTimeStats(disagg_mode=DisaggregationMode.DECODE)
++        stats.set_metrics_collector(collector)
++        stats.decode_prealloc_queue_entry_time = 10.0
++        stats.decode_transfer_queue_entry_time = 12.0
++        stats.bootstrap_done_time = 11.0
++
++        stats.set_decode_rebootstrap_prealloc_queue_entry_time(ts=20.0)
++        self.assertEqual(stats.decode_transfer_queue_entry_time, 0.0)
++        self.assertEqual(stats.bootstrap_done_time, 0.0)
++
++        stats.set_bootstrap_done_time(ts=21.0)
++        stats.set_decode_transfer_queue_entry_time(ts=22.0)
++
++        self.assertEqual(stats.decode_prealloc_queue_entry_time, 20.0)
++        self.assertEqual(stats.bootstrap_done_time, 21.0)
++        collector.observe_kv_transfer_bootstrap.assert_called_once_with(
++            bootstrap_ms=1000.0,
++            alloc_ms=1000.0,
++        )
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py b/test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py
+index b023a22bcdd..1e2a823b4e1 100644
+--- a/test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py
++++ b/test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py
+@@ -109,6 +109,7 @@ def _make_tokenizer_manager() -> TokenizerManager:
+     tm.server_args.dp_size = 1
+     tm.disaggregation_mode = "none"
+     tm.rid_to_state = {}
++    tm.recently_aborted_rids = {}
+     tm.enable_metrics = False
+     tm.enable_trace = False
+     tm.enable_lora = False
+@@ -231,6 +232,27 @@ class TestRidToStateCleanupOnAbort(CustomTestCase):
+         tm._init_req_state(obj)
+ 
+         self.assertIn(rid, tm.rid_to_state)
++        self.assertNotIn(rid, tm.recently_aborted_rids)
++
++    def test_late_batch_output_after_abort_is_silently_discarded(self):
++        """An abort can overtake an already queued detokenizer output."""
++        tm = _make_tokenizer_manager()
++        rid = "abort_with_late_output_rid"
++        tm.rid_to_state[rid] = _make_req_state(rid)
++
++        tm._handle_abort_req(_make_abort_req(rid))
++
++        with self.assertLogs(
++            "sglang.srt.managers.tokenizer_manager", level="DEBUG"
++        ) as logs:
++            asyncio.run(tm._handle_batch_output(_make_batch_str_output(rid)))
++
++        self.assertTrue(
++            any(
++                "Discarding output for recently aborted request" in x
++                for x in logs.output
++            )
++        )
+ 
+     def test_abort_sets_finished_and_notifies(self):
+         """_handle_abort_req should mark state as finished and set the event."""
+diff --git a/test/registered/unit/mem_cache/test_decode_radix_lock_ref.py b/test/registered/unit/mem_cache/test_decode_radix_lock_ref.py
+index 7cba0af202b..d7ed0ed84f3 100644
+--- a/test/registered/unit/mem_cache/test_decode_radix_lock_ref.py
++++ b/test/registered/unit/mem_cache/test_decode_radix_lock_ref.py
+@@ -302,6 +302,7 @@ class TestDecodeLockRefScenarios(unittest.TestCase):
+         req.last_node = object()
+         req.finished_reason = None
+         req.cache_protected_len = 0
++        req.pd_rebootstrap_in_progress = False
+         req.sampling_params.max_new_tokens = 16
+ 
+         decode_req = MagicMock()
+diff --git a/test/registered/unit/mem_cache/test_hisparse_allocator.py b/test/registered/unit/mem_cache/test_hisparse_allocator.py
+index 592a5d528a1..214bf9865e2 100644
+--- a/test/registered/unit/mem_cache/test_hisparse_allocator.py
++++ b/test/registered/unit/mem_cache/test_hisparse_allocator.py
+@@ -86,6 +86,7 @@ class TestDeepSeekV4HiSparseAllocator(CustomTestCase):
+             origin_input_ids=list(range(fill_len)),
+             output_ids=[],
+             kv=None,
++            pd_rebootstrap_in_progress=False,
+         )
+ 
+         def set_extend_range(start, end):

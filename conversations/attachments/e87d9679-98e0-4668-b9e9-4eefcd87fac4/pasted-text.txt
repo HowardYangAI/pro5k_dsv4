@@ -1,0 +1,414 @@
+2026-09-03 14:20:04 - evalscope - [32mINFO[0m: Args: Task config is provided with TaskConfig type.[0m
+2026-09-03 14:20:04 - evalscope - [32mINFO[0m: Running with native backend[0m
+2026-09-03 14:20:04 - evalscope - [32mINFO[0m: Dump task config to /tmp-data/ifx-llm-cache/eval_outputs/20260903_142004/configs/task_config.yaml[0m
+2026-09-03 14:20:04 - evalscope - [32mINFO[0m: {
+    "model": "DeepSeek-V4-Flash-0731",
+    "model_id": "DeepSeek-V4-Flash-0731",
+    "model_args": {},
+    "model_task": "text_generation",
+    "chat_template": null,
+    "datasets": [
+        "mmlu"
+    ],
+    "dataset_args": {
+        "mmlu": {
+            "name": "mmlu",
+            "dataset_id": "cais/mmlu",
+            "output_types": [
+                "generation"
+            ],
+            "subset_list": [
+                "abstract_algebra",
+                "anatomy",
+                "astronomy",
+                "business_ethics",
+                "clinical_knowledge",
+                "college_biology",
+                "college_chemistry",
+                "college_computer_science",
+                "college_mathematics",
+                "college_medicine",
+                "college_physics",
+                "computer_security",
+                "conceptual_physics",
+                "econometrics",
+                "electrical_engineering",
+                "elementary_mathematics",
+                "formal_logic",
+                "global_facts",
+                "high_school_biology",
+                "high_school_chemistry",
+                "high_school_computer_science",
+                "high_school_european_history",
+                "high_school_geography",
+                "high_school_government_and_politics",
+                "high_school_macroeconomics",
+                "high_school_mathematics",
+                "high_school_microeconomics",
+                "high_school_physics",
+                "high_school_psychology",
+                "high_school_statistics",
+                "high_school_us_history",
+                "high_school_world_history",
+                "human_aging",
+                "human_sexuality",
+                "international_law",
+                "jurisprudence",
+                "logical_fallacies",
+                "machine_learning",
+                "management",
+                "marketing",
+                "medical_genetics",
+                "miscellaneous",
+                "moral_disputes",
+                "moral_scenarios",
+                "nutrition",
+                "philosophy",
+                "prehistory",
+                "professional_accounting",
+                "professional_law",
+                "professional_medicine",
+                "professional_psychology",
+                "public_relations",
+                "security_studies",
+                "sociology",
+                "us_foreign_policy",
+                "virology",
+                "world_religions"
+            ],
+            "default_subset": "all",
+            "few_shot_num": 5,
+            "few_shot_random": false,
+            "train_split": "dev",
+            "eval_split": "test",
+            "prompt_template": "Answer the following multiple choice question. The last line of your response should be of the following format: 'ANSWER: [LETTER]' (without quotes) where [LETTER] is one of {letters}. Think step by step before answering.\n\n{question}\n\n{choices}",
+            "few_shot_prompt_template": null,
+            "system_prompt": null,
+            "query_template": null,
+            "pretty_name": "MMLU",
+            "description": "\n## Overview\n\nMMLU (Massive Multitask Language Understanding) is a comprehensive evaluation benchmark designed to measure knowledge acquired during pretraining. It covers 57 subjects across STEM, humanities, social sciences, and other domains, ranging from elementary to professional difficulty levels.\n\n## Task Description\n\n- **Task Type**: Multiple-Choice Question Answering\n- **Input**: Question with four answer choices (A, B, C, D)\n- **Output**: Single correct answer letter\n- **Subjects**: 57 subjects organized into 4 categories (STEM, Humanities, Social Sciences, Other)\n\n## Key Features\n\n- Covers diverse knowledge domains from elementary to advanced professional levels\n- Tests both factual knowledge and reasoning abilities\n- Includes subjects like abstract algebra, anatomy, astronomy, business ethics, and more\n- Standard benchmark for measuring LLM knowledge breadth\n\n## Evaluation Notes\n\n- Default configuration uses **5-shot** examples from the dev split\n- Supports Chain-of-Thought (CoT) prompting for improved reasoning\n- Results can be aggregated by subject or category (STEM, Humanities, Social Sciences, Other)\n- Use `subset_list` parameter to evaluate specific subjects\n",
+            "paper_url": null,
+            "data_statistics": null,
+            "sample_example": null,
+            "tags": [
+                "Knowledge",
+                "MCQ"
+            ],
+            "filters": null,
+            "metric_list": [
+                "acc"
+            ],
+            "aggregation": "mean",
+            "shuffle": false,
+            "shuffle_choices": false,
+            "force_redownload": false,
+            "review_timeout": null,
+            "extra_params": {},
+            "sandbox_config": {}
+        }
+    },
+    "dataset_dir": "/home/luban/ifx_llm_dist_auto_test/dataset",
+    "dataset_hub": "modelscope",
+    "repeats": 1,
+    "generation_config": {
+        "batch_size": 128,
+        "max_tokens": 8192,
+        "top_p": 0.95,
+        "temperature": 0.7
+    },
+    "eval_type": "openai_api",
+    "eval_backend": "Native",
+    "eval_config": null,
+    "limit": 20,
+    "eval_batch_size": 128,
+    "use_cache": null,
+    "rerun_review": false,
+    "work_dir": "/tmp-data/ifx-llm-cache/eval_outputs/20260903_142004",
+    "no_timestamp": false,
+    "enable_progress_tracker": false,
+    "ignore_errors": true,
+    "debug": false,
+    "seed": 42,
+    "api_url": "http://10.207.193.156:30000/v1/chat/completions",
+    "timeout": null,
+    "stream": null,
+    "judge_strategy": "auto",
+    "judge_worker_num": null,
+    "judge_model_args": {},
+    "analysis_report": false,
+    "collect_perf": true,
+    "use_sandbox": false,
+    "sandbox_type": "docker",
+    "sandbox_manager_config": {},
+    "evalscope_version": "1.7.0"
+}[0m
+
+============================================================
+Starting eval: datasets=['mmlu'], model=DeepSeek-V4-Flash-0731
+api_url=http://10.207.193.156:30000/v1/chat/completions, limit=20, batch_size=128
+============================================================
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]                                                           2026-09-03 14:20:04 - evalscope - [32mINFO[0m: Start loading benchmark dataset: mmlu[0m
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+Processing records:   0%|          | 0/14042 [00:00<?, ?it/s][A
+Processing records:  24%|██▍       | 3390/14042 [00:00<00:00, 24747.09it/s][AProcessing records: 100%|██████████| 14042/14042 [00:00<00:00, 71333.91it/s]
+
+Processing records:   0%|          | 0/285 [00:00<?, ?it/s][AProcessing records: 100%|██████████| 285/285 [00:00<00:00, 206633.82it/s]
+                                                           2026-09-03 14:20:06 - evalscope - [32mINFO[0m: Start evaluating 57 subsets of mmlu: ['abstract_algebra', 'anatomy', 'astronomy', 'business_ethics', 'clinical_knowledge', 'college_biology', 'college_chemistry', 'college_computer_science', 'college_mathematics', 'college_medicine', 'college_physics', 'computer_security', 'conceptual_physics', 'econometrics', 'electrical_engineering', 'elementary_mathematics', 'formal_logic', 'global_facts', 'high_school_biology', 'high_school_chemistry', 'high_school_computer_science', 'high_school_european_history', 'high_school_geography', 'high_school_government_and_politics', 'high_school_macroeconomics', 'high_school_mathematics', 'high_school_microeconomics', 'high_school_physics', 'high_school_psychology', 'high_school_statistics', 'high_school_us_history', 'high_school_world_history', 'human_aging', 'human_sexuality', 'international_law', 'jurisprudence', 'logical_fallacies', 'machine_learning', 'management', 'marketing', 'medical_genetics', 'miscellaneous', 'moral_disputes', 'moral_scenarios', 'nutrition', 'philosophy', 'prehistory', 'professional_accounting', 'professional_law', 'professional_medicine', 'professional_psychology', 'public_relations', 'security_studies', 'sociology', 'us_foreign_policy', 'virology', 'world_religions'][0m
+Running[eval]:   0%|          | 0/1 [00:01<?, ?benchmark/s]                                                           2026-09-03 14:20:06 - evalscope - [32mINFO[0m: Unified pool: 1140 items to process, 0 already fully cached (1140 total across all subsets).[0m
+Running[eval]:   0%|          | 0/1 [00:01<?, ?benchmark/s]
+Evaluating[mmlu]:   0%|          | 0/1140 [00:00<?, ?it/s][A                                                           
+                                                          [A2026-09-03 14:20:06 - evalscope - [32mINFO[0m: Loading model for prediction...[0m
+Running[eval]:   0%|          | 0/1 [00:01<?, ?benchmark/s]
+Evaluating[mmlu]:   0%|          | 0/1140 [00:00<?, ?it/s][A                                                           
+                                                          [A2026-09-03 14:20:06 - evalscope - [32mINFO[0m: Creating model DeepSeek-V4-Flash-0731 with eval_type=openai_api base_url=http://10.207.193.156:30000/v1/chat/completions, config={'retries': 5, 'retry_interval': 10, 'batch_size': 128, 'max_tokens': 8192, 'top_p': 0.95, 'temperature': 0.7}, model_args={}[0m
+Running[eval]:   0%|          | 0/1 [00:01<?, ?benchmark/s]
+Evaluating[mmlu]:   0%|          | 0/1140 [00:00<?, ?it/s][A                                                           
+                                                          [A2026-09-03 14:20:06 - evalscope - [32mINFO[0m: Model loaded successfully.[0m
+Running[eval]:   0%|          | 0/1 [00:01<?, ?benchmark/s]
+Evaluating[mmlu]:   0%|          | 0/1140 [00:00<?, ?it/s][A
+Evaluating[mmlu]:   0%|          | 1/1140 [00:06<1:54:28,  6.03s/it][A
+Evaluating[mmlu]:   0%|          | 2/1140 [00:07<58:17,  3.07s/it]  [A
+Evaluating[mmlu]:   0%|          | 5/1140 [00:08<21:03,  1.11s/it][A
+Evaluating[mmlu]:   1%|          | 11/1140 [00:09<09:00,  2.09it/s][A
+Evaluating[mmlu]:   2%|▏         | 26/1140 [00:10<03:31,  5.28it/s][A
+Evaluating[mmlu]:   4%|▍         | 48/1140 [00:11<01:54,  9.54it/s][A
+Evaluating[mmlu]:   6%|▌         | 70/1140 [00:12<01:23, 12.74it/s][A
+Evaluating[mmlu]:   7%|▋         | 85/1140 [00:13<01:19, 13.24it/s][A
+Evaluating[mmlu]:   9%|▉         | 100/1140 [00:14<01:16, 13.60it/s][A
+Evaluating[mmlu]:  10%|█         | 115/1140 [00:16<01:34, 10.81it/s][A
+Evaluating[mmlu]:  11%|█         | 128/1140 [00:17<01:29, 11.25it/s][A
+Evaluating[mmlu]:  12%|█▏        | 141/1140 [00:18<01:26, 11.61it/s][A
+Evaluating[mmlu]:  14%|█▎        | 154/1140 [00:20<01:44,  9.42it/s][A
+Evaluating[mmlu]:  15%|█▍        | 168/1140 [00:21<01:33, 10.40it/s][A
+Evaluating[mmlu]:  16%|█▌        | 180/1140 [00:22<01:29, 10.72it/s][A
+Evaluating[mmlu]:  17%|█▋        | 193/1140 [00:23<01:24, 11.22it/s][A
+Evaluating[mmlu]:  18%|█▊        | 205/1140 [00:24<01:22, 11.32it/s][A
+Evaluating[mmlu]:  19%|█▉        | 217/1140 [00:25<01:21, 11.39it/s][A
+Evaluating[mmlu]:  20%|██        | 229/1140 [00:26<01:19, 11.47it/s][A
+Evaluating[mmlu]:  21%|██        | 241/1140 [00:27<01:17, 11.53it/s][A
+Evaluating[mmlu]:  22%|██▏       | 253/1140 [00:28<01:16, 11.58it/s][A
+Evaluating[mmlu]:  23%|██▎       | 265/1140 [00:29<01:15, 11.62it/s][A
+Evaluating[mmlu]:  24%|██▍       | 277/1140 [00:30<01:14, 11.64it/s][A
+Evaluating[mmlu]:  25%|██▌       | 289/1140 [00:31<01:12, 11.66it/s][A
+Evaluating[mmlu]:  26%|██▋       | 301/1140 [00:33<01:32,  9.04it/s][A
+Evaluating[mmlu]:  27%|██▋       | 311/1140 [00:34<01:29,  9.22it/s][A
+Evaluating[mmlu]:  28%|██▊       | 321/1140 [00:35<01:27,  9.35it/s][A
+Evaluating[mmlu]:  29%|██▉       | 331/1140 [00:36<01:25,  9.47it/s][A
+Evaluating[mmlu]:  30%|██▉       | 341/1140 [00:37<01:23,  9.56it/s][A
+Evaluating[mmlu]:  31%|███       | 351/1140 [00:38<01:22,  9.61it/s][A
+Evaluating[mmlu]:  32%|███▏      | 361/1140 [00:39<01:20,  9.66it/s][A
+Evaluating[mmlu]:  33%|███▎      | 372/1140 [00:40<01:16,  9.98it/s][A
+Evaluating[mmlu]:  34%|███▍      | 386/1140 [00:41<01:08, 11.04it/s][A
+Evaluating[mmlu]:  35%|███▍      | 398/1140 [00:42<01:06, 11.24it/s][A
+Evaluating[mmlu]:  36%|███▌      | 410/1140 [00:44<01:22,  8.81it/s][A
+Evaluating[mmlu]:  37%|███▋      | 420/1140 [00:45<01:19,  9.05it/s][A
+Evaluating[mmlu]:  38%|███▊      | 430/1140 [00:47<01:16,  9.25it/s][A
+Evaluating[mmlu]:  39%|███▊      | 440/1140 [00:48<01:14,  9.40it/s][A
+Evaluating[mmlu]:  39%|███▉      | 450/1140 [00:49<01:12,  9.51it/s][A
+Evaluating[mmlu]:  40%|████      | 460/1140 [00:51<01:30,  7.49it/s][A
+Evaluating[mmlu]:  41%|████      | 469/1140 [00:52<01:25,  7.81it/s][A
+Evaluating[mmlu]:  42%|████▏     | 478/1140 [00:53<01:22,  8.07it/s][A
+Evaluating[mmlu]:  43%|████▎     | 487/1140 [00:55<01:39,  6.55it/s][A
+Evaluating[mmlu]:  44%|████▎     | 498/1140 [00:56<01:25,  7.52it/s][A
+Evaluating[mmlu]:  44%|████▍     | 507/1140 [00:57<01:20,  7.84it/s][A
+Evaluating[mmlu]:  45%|████▌     | 516/1140 [00:58<01:17,  8.09it/s][A
+Evaluating[mmlu]:  46%|████▌     | 525/1140 [00:59<01:14,  8.29it/s][A
+Evaluating[mmlu]:  47%|████▋     | 535/1140 [01:00<01:09,  8.71it/s][A                                                           
+                                                                    [A2026-09-03 14:21:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  47%| 535/1140 [Elapsed: 01:00 < Remaining: 01:09,  8.71it/s][0m
+Running[eval]:   0%|          | 0/1 [01:01<?, ?benchmark/s]
+Evaluating[mmlu]:  47%|████▋     | 535/1140 [01:00<01:09,  8.71it/s][A
+Evaluating[mmlu]:  48%|████▊     | 545/1140 [01:01<01:06,  9.01it/s][A
+Evaluating[mmlu]:  49%|████▉     | 561/1140 [01:02<00:53, 10.90it/s][A
+Evaluating[mmlu]:  50%|█████     | 573/1140 [01:03<00:50, 11.13it/s][A
+Evaluating[mmlu]:  51%|█████▏    | 585/1140 [01:04<00:49, 11.29it/s][A
+Evaluating[mmlu]:  52%|█████▏    | 597/1140 [01:05<00:47, 11.41it/s][A
+Evaluating[mmlu]:  53%|█████▎    | 609/1140 [01:06<00:46, 11.50it/s][A
+Evaluating[mmlu]:  54%|█████▍    | 621/1140 [01:07<00:44, 11.56it/s][A
+Evaluating[mmlu]:  56%|█████▌    | 633/1140 [01:08<00:43, 11.59it/s][A
+Evaluating[mmlu]:  57%|█████▋    | 645/1140 [01:09<00:42, 11.62it/s][A
+Evaluating[mmlu]:  58%|█████▊    | 657/1140 [01:10<00:41, 11.64it/s][A
+Evaluating[mmlu]:  59%|█████▊    | 669/1140 [01:11<00:40, 11.66it/s][A
+Evaluating[mmlu]:  60%|█████▉    | 681/1140 [01:12<00:39, 11.67it/s][A
+Evaluating[mmlu]:  61%|██████    | 693/1140 [01:13<00:38, 11.68it/s][A
+Evaluating[mmlu]:  62%|██████▏   | 705/1140 [01:14<00:37, 11.69it/s][A
+Evaluating[mmlu]:  63%|██████▎   | 717/1140 [01:15<00:36, 11.69it/s][A
+Evaluating[mmlu]:  64%|██████▍   | 729/1140 [01:16<00:35, 11.69it/s][A
+Evaluating[mmlu]:  65%|██████▌   | 741/1140 [01:17<00:34, 11.69it/s][A
+Evaluating[mmlu]:  66%|██████▌   | 753/1140 [01:18<00:33, 11.69it/s][A
+Evaluating[mmlu]:  67%|██████▋   | 765/1140 [01:19<00:32, 11.70it/s][A
+Evaluating[mmlu]:  68%|██████▊   | 780/1140 [01:20<00:28, 12.55it/s][A
+Evaluating[mmlu]:  70%|██████▉   | 793/1140 [01:22<00:35,  9.73it/s][A
+Evaluating[mmlu]:  71%|███████   | 807/1140 [01:23<00:31, 10.69it/s][A
+Evaluating[mmlu]:  72%|███████▏  | 823/1140 [01:24<00:26, 11.96it/s][A
+Evaluating[mmlu]:  73%|███████▎  | 836/1140 [01:25<00:25, 12.14it/s][A
+Evaluating[mmlu]:  74%|███████▍  | 849/1140 [01:26<00:23, 12.28it/s][A
+Evaluating[mmlu]:  76%|███████▌  | 862/1140 [01:29<00:34,  7.95it/s][A
+Evaluating[mmlu]:  77%|███████▋  | 873/1140 [01:31<00:31,  8.53it/s][A
+Evaluating[mmlu]:  78%|███████▊  | 884/1140 [01:32<00:28,  9.03it/s][A
+Evaluating[mmlu]:  79%|███████▊  | 895/1140 [01:33<00:25,  9.45it/s][A
+Evaluating[mmlu]:  79%|███████▉  | 906/1140 [01:34<00:24,  9.40it/s][A
+Evaluating[mmlu]:  80%|████████  | 917/1140 [01:36<00:28,  7.76it/s][A
+Evaluating[mmlu]:  81%|████████  | 926/1140 [01:37<00:26,  8.00it/s][A
+Evaluating[mmlu]:  82%|████████▏ | 935/1140 [01:38<00:24,  8.20it/s][A
+Evaluating[mmlu]:  83%|████████▎ | 948/1140 [01:39<00:20,  9.37it/s][A
+Evaluating[mmlu]:  84%|████████▍ | 959/1140 [01:40<00:18,  9.74it/s][A
+Evaluating[mmlu]:  85%|████████▌ | 970/1140 [01:42<00:21,  7.87it/s][A
+Evaluating[mmlu]:  86%|████████▌ | 979/1140 [01:43<00:19,  8.10it/s][A
+Evaluating[mmlu]:  87%|████████▋ | 988/1140 [01:44<00:18,  8.28it/s][A
+Evaluating[mmlu]:  89%|████████▊ | 1010/1140 [01:45<00:11, 11.71it/s][A
+Evaluating[mmlu]:  90%|████████▉ | 1023/1140 [01:46<00:09, 12.01it/s][A
+Evaluating[mmlu]:  91%|█████████ | 1036/1140 [01:47<00:08, 12.25it/s][A
+Evaluating[mmlu]:  92%|█████████▏| 1049/1140 [01:49<00:09,  9.69it/s][A
+Evaluating[mmlu]:  93%|█████████▎| 1060/1140 [01:50<00:08,  9.98it/s][A
+Evaluating[mmlu]:  94%|█████████▍| 1072/1140 [01:51<00:06, 10.47it/s][A
+Evaluating[mmlu]:  95%|█████████▌| 1084/1140 [01:52<00:05, 10.85it/s][A                                                           
+                                                                     [A2026-09-03 14:22:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  95%| 1088/1140 [Elapsed: 02:00 < Remaining: 00:04, 10.85it/s][0m
+Running[eval]:   0%|          | 0/1 [02:02<?, ?benchmark/s]
+Evaluating[mmlu]:  95%|█████████▌| 1088/1140 [02:00<00:04, 10.85it/s][A
+Evaluating[mmlu]:  95%|█████████▌| 1088/1140 [02:08<00:04, 10.85it/s][A
+Evaluating[mmlu]:  96%|█████████▌| 1089/1140 [02:15<00:38,  1.31it/s][A                                                           
+                                                                     [A2026-09-03 14:23:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  96%| 1089/1140 [Elapsed: 03:00 < Remaining: 00:38,  1.31it/s][0m
+Running[eval]:   0%|          | 0/1 [03:02<?, ?benchmark/s]
+Evaluating[mmlu]:  96%|█████████▌| 1089/1140 [03:00<00:38,  1.31it/s][A                                                           
+                                                                     [A2026-09-03 14:24:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  96%| 1089/1140 [Elapsed: 04:00 < Remaining: 00:38,  1.31it/s][0m
+Running[eval]:   0%|          | 0/1 [04:02<?, ?benchmark/s]
+Evaluating[mmlu]:  96%|█████████▌| 1089/1140 [04:00<00:38,  1.31it/s][A                                                           
+                                                                     [A2026-09-03 14:25:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  96%| 1089/1140 [Elapsed: 05:00 < Remaining: 00:38,  1.31it/s][0m
+Running[eval]:   0%|          | 0/1 [05:02<?, ?benchmark/s]
+Evaluating[mmlu]:  96%|█████████▌| 1089/1140 [05:00<00:38,  1.31it/s][A                                                           
+                                                                     [A2026-09-03 14:26:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  96%| 1089/1140 [Elapsed: 06:00 < Remaining: 00:38,  1.31it/s][0m
+Running[eval]:   0%|          | 0/1 [06:02<?, ?benchmark/s]
+Evaluating[mmlu]:  96%|█████████▌| 1089/1140 [06:00<00:38,  1.31it/s][A                                                           
+                                                                     [A2026-09-03 14:27:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  96%| 1089/1140 [Elapsed: 07:00 < Remaining: 00:38,  1.31it/s][0m
+Running[eval]:   0%|          | 0/1 [07:02<?, ?benchmark/s]
+Evaluating[mmlu]:  96%|█████████▌| 1089/1140 [07:00<00:38,  1.31it/s][A
+Evaluating[mmlu]:  96%|█████████▌| 1090/1140 [07:48<11:55, 14.31s/it][A
+Evaluating[mmlu]:  96%|█████████▌| 1093/1140 [07:49<09:34, 12.23s/it][A
+Evaluating[mmlu]:  97%|█████████▋| 1102/1140 [07:52<04:48,  7.60s/it][A
+Evaluating[mmlu]:  97%|█████████▋| 1110/1140 [07:55<02:36,  5.21s/it][A
+Evaluating[mmlu]:  98%|█████████▊| 1116/1140 [07:56<01:33,  3.89s/it][A
+Evaluating[mmlu]:  98%|█████████▊| 1122/1140 [07:57<00:51,  2.88s/it][A                                                           
+                                                                     [A2026-09-03 14:28:06 - evalscope - [32mINFO[0m: Evaluating[mmlu]  99%| 1127/1140 [Elapsed: 08:00 < Remaining: 00:37,  2.88s/it][0m
+Running[eval]:   0%|          | 0/1 [08:02<?, ?benchmark/s]
+Evaluating[mmlu]:  99%|█████████▉| 1127/1140 [08:00<00:37,  2.88s/it][A
+Evaluating[mmlu]:  99%|█████████▉| 1128/1140 [08:01<00:27,  2.26s/it][A
+Evaluating[mmlu]:  99%|█████████▉| 1133/1140 [08:03<00:12,  1.80s/it][A
+Evaluating[mmlu]: 100%|█████████▉| 1137/1140 [08:05<00:04,  1.51s/it][A
+Evaluating[mmlu]: 100%|█████████▉| 1139/1140 [08:18<00:01,  1.51s/it][A
+Evaluating[mmlu]: 100%|██████████| 1140/1140 [08:29<00:00,  2.76s/it][A                                                           
+                                                                     [A2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Evaluating[mmlu] 100%| 1140/1140 [Elapsed: 08:29 < Remaining: 00:00,  2.76s/it][0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]
+Evaluating[mmlu]: 100%|██████████| 1140/1140 [08:29<00:00,  2.76s/it][AEvaluating[mmlu]: 100%|██████████| 1140/1140 [08:29<00:00,  2.24it/s]
+                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Unified pool finished for mmlu.[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: abstract_algebra[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: anatomy[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: astronomy[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: business_ethics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: clinical_knowledge[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_biology[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_chemistry[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_computer_science[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_mathematics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_medicine[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: college_physics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: computer_security[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: conceptual_physics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: econometrics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: electrical_engineering[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: elementary_mathematics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: formal_logic[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: global_facts[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_biology[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_chemistry[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_computer_science[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_european_history[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_geography[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_government_and_politics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_macroeconomics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_mathematics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_microeconomics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_physics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_psychology[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_statistics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_us_history[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: high_school_world_history[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: human_aging[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: human_sexuality[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: international_law[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: jurisprudence[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: logical_fallacies[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: machine_learning[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: management[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: marketing[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: medical_genetics[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: miscellaneous[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: moral_disputes[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: moral_scenarios[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: nutrition[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: philosophy[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: prehistory[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_accounting[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_law[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_medicine[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: professional_psychology[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: public_relations[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: security_studies[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: sociology[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: us_foreign_policy[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: virology[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Aggregating scores for subset: world_religions[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: Generating report...[0m
+Running[eval]:   0%|          | 0/1 [08:31<?, ?benchmark/s]                                                           2026-09-03 14:28:36 - evalscope - [32mINFO[0m: 
+mmlu report table:
+┌────────────────────────┬───────────┬──────────┬─────────────────────────────────────┬───────┬─────────┬────────────────┐
+│ Model                  │ Dataset   │ Metric   │ Subset                              │   Num │   Score │ Cat.0          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ formal_logic                        │    20 │  0.75   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ high_school_european_history        │    20 │  0.85   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ high_school_us_history              │    20 │  0.85   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ high_school_world_history           │    20 │  0.9    │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ international_law                   │    20 │  0.95   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ jurisprudence                       │    20 │  0.85   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ logical_fallacies                   │    20 │  0.85   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ moral_disputes                      │    20 │  0.8    │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ moral_scenarios                     │    20 │  0.85   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ philosophy                          │    20 │  1      │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ prehistory                          │    20 │  0.95   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ professional_law                    │    20 │  0.9    │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ world_religions                     │    20 │  0.95   │ Humanities     │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ anatomy                             │    20 │  0.9    │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ business_ethics                     │    20 │  0.85   │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ clinical_knowledge                  │    20 │  0.7    │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ college_medicine                    │    20 │  0.75   │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ global_facts                        │    20 │  0.7    │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ human_aging                         │    20 │  0.9    │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ management                          │    20 │  0.95   │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ marketing                           │    20 │  0.9    │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ medical_genetics                    │    20 │  0.95   │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ miscellaneous                       │    20 │  0.9    │ Other          │
+├────────────────────────┼───────────┼──────────┼─────────────────────────────────────┼───────┼─────────┼────────────────┤
+│ DeepSeek-V4-Flash-0731 │ mmlu      │ mean_acc │ nutrition                           │    20 │  0.95   │ Other          │
+├────────────────────────┼───────────┼──────────┼──────────────────

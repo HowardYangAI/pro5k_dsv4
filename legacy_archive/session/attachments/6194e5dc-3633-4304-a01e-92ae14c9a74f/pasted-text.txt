@@ -1,0 +1,85 @@
+==============================================
+Running benchmark with:
+ --max-concurrency: 4
+ --num-prompts: 40
+==============================================
+python3 bench_serving.py --backend sglang-oai-chat --dataset-path /home/luban/ShareGPT_V3_unfiltered_cleaned_split.json --dataset-name random --random-input-len 8192 --random-output-len 1 --random-range-ratio 1 --extra-request-body {"stream_options": {"include_usage": true}} --seed 1787120026 --host 10.207.193.139 --port 30002 --model /nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8 --model-name default --max-concurrency 4 --num-prompts 40 --request-rate inf --profile
+----------------------------------------------
+You are using a model of type `deepseek_v4` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+You are using a model of type `deepseek_v4` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8', model_name='default', num_prompts=40, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=1, random_range_ratio=1.0, request_rate=inf, max_concurrency=4, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787120026, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=True, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8', model_name='default', num_prompts=40, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=1, random_range_ratio=1.0, request_rate=inf, max_concurrency=4, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787120026, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=True, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+#Input tokens: 327680
+#Output tokens: 40
+Starting warmup with 1 sequences...
+Traceback (most recent call last):
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2301, in <module>
+    run_benchmark(args)
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2029, in run_benchmark
+    return asyncio.run(
+           ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 1620, in benchmark
+    raise ValueError(
+ValueError: Warmup failed - Please make sure benchmark arguments are correctly specified. Error: Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1298, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohappyeyeballs/impl.py", line 122, in start_connection
+    raise first_exception
+  File "/usr/local/lib/python3.12/dist-packages/aiohappyeyeballs/impl.py", line 73, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohappyeyeballs/impl.py", line 208, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 651, in sock_connect
+    return await fut
+           ^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 691, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 111] Connect call failed ('10.207.193.139', 30002)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 342, in async_request_openai_chat_completions
+    async with session.post(
+               ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1611, in _create_direct_connection
+    raise last_exc
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1580, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1321, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host 10.207.193.139:30002 ssl:default [Connect call failed ('10.207.193.139', 30002)]
+
+All benchmark tests completed!

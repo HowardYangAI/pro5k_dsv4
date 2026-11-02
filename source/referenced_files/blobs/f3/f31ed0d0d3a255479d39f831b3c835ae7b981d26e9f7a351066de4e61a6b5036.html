@@ -1,0 +1,434 @@
+{% extends "base.html" %}
+{% block title %}接口测试详情 — {{ task.name }} — LLM Benchmark{% endblock %}
+{% block content %}
+
+<div class="card">
+    <h2>{{ task.name }}</h2>
+    <table class="info-table">
+        <tr><th>状态</th><td><span class="status status-{{ task.status }}">{{ task.status }}</span></td></tr>
+        <tr><th>连接方式</th><td>{% if task.connection_mode == 'base_url' %}{{ task.base_url }}{% else %}{{ task.host }}:{{ task.port }}{% endif %}</td></tr>
+        <tr><th>创建时间</th><td>{{ task.created_at|beijing_time }}</td></tr>
+    </table>
+</div>
+
+{% if task.status == 'pending' %}
+<div class="card" style="margin-bottom: 16px;">
+    <button id="btn-run" onclick="startTask()" class="btn btn-primary" style="background:#00b894;">开始测试</button>
+</div>
+{% endif %}
+
+{% if task.status == 'running' %}
+<div class="card" style="margin-bottom: 16px;">
+    <button id="btn-kill" onclick="killTask()" class="btn btn-danger">终止测试</button>
+    <span id="running-hint" style="margin-left:12px; color:#666;">测试运行中...</span>
+</div>
+{% endif %}
+
+{% if task.status in ('done', 'failed', 'abort') %}
+<div class="card" style="margin-bottom: 16px;">
+    <a href="#" onclick="rerunTask(); return false;" class="btn btn-primary" style="background: #6c5ce7;">再测一次</a>
+</div>
+{% endif %}
+
+<!-- 进度方块：仅在 running 状态显示 -->
+<div id="progress-section" class="card" style="margin-bottom: 16px; {% if task.status != 'running' %}display:none;{% endif %}">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="margin:0;">测试进度</h3>
+        <span id="progress-percent" style="font-size:14px; color:#666;"></span>
+    </div>
+    <div id="progress-blocks" class="progress-blocks"></div>
+    <div id="progress-stats" class="progress-stats"></div>
+</div>
+
+<!-- 统计汇总：仅在完成后显示 -->
+<div id="summary-section" class="card" style="margin-bottom: 16px; {% if task.status not in ('done', 'failed', 'abort') %}display:none;{% endif %}">
+    <h3 style="margin:0 0 12px 0;">测试汇总</h3>
+    <div id="summary-stats" class="summary-stats"></div>
+</div>
+
+<div id="results-section">
+    <h2>测试结果详情</h2>
+    <div id="results-container">
+        <p style="color:#666;">等待测试完成...</p>
+    </div>
+</div>
+
+<!-- 详情弹窗 -->
+<div id="detail-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box" style="max-width:800px;">
+        <h3 id="modal-title">测试详情</h3>
+        <p><strong>分类:</strong> <span id="modal-category"></span></p>
+        <p><strong>状态:</strong> <span id="modal-status"></span></p>
+        <p><strong>HTTP码:</strong> <span id="modal-http"></span></p>
+        <p><strong>耗时:</strong> <span id="modal-time"></span></p>
+        <hr style="margin:12px 0;">
+        <h4>断言详情</h4>
+        <p id="modal-assertion"></p>
+        <h4>响应内容</h4>
+        <pre id="modal-response" style="max-height:400px; overflow:auto; background:#f8f9fa; padding:12px; border-radius:4px; white-space:pre-wrap; word-break:break-all;"></pre>
+        <div id="modal-error-section" style="display:none;">
+            <h4 style="color:#e74c3c;">错误信息</h4>
+            <p id="modal-error" style="color:#e74c3c;"></p>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-primary" onclick="closeDetailModal()">关闭</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.progress-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 12px 0;
+}
+.progress-block {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.progress-block.pending { background: #dfe6e9; }
+.progress-block.running { background: #fdcb6e; animation: pulse 1s infinite; }
+.progress-block.pass { background: #00b894; }
+.progress-block.fail { background: #e74c3c; }
+.progress-block.error { background: #fd79a8; }
+.progress-block:hover { transform: scale(1.2); }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.progress-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+.progress-stats span { display: flex; align-items: center; gap: 4px; }
+.progress-stats .dot { width: 12px; height: 12px; border-radius: 2px; }
+.progress-stats .dot.pass { background: #00b894; }
+.progress-stats .dot.fail { background: #e74c3c; }
+.progress-stats .dot.error { background: #fd79a8; }
+.progress-stats .dot.pending { background: #dfe6e9; }
+
+/* 统计汇总样式 */
+.summary-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 24px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    min-width: 80px;
+}
+.summary-item.pass { background: #d4edda; }
+.summary-item.fail { background: #f8d7da; }
+.summary-item.error { background: #fff3cd; }
+.summary-item.highlight { background: #e8f4fd; border: 2px solid #74b9ff; }
+.summary-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+.summary-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d3436;
+}
+.summary-item.pass .summary-value { color: #00b894; }
+.summary-item.fail .summary-value { color: #e74c3c; }
+.summary-item.error .summary-value { color: #fd79a8; }
+.summary-item.highlight .summary-value { color: #0984e3; }
+
+.result-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.result-table th, .result-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+.result-table th { background: #f8f9fa; font-weight: 600; }
+.result-table tr.row-pass { background: #f0fff4; }
+.result-table tr.row-fail { background: #fff0f0; }
+.result-table tr.row-error { background: #fffaf0; }
+</style>
+
+<script>
+var TASK_ID = {{ task.id }};
+var TASK_STATUS = '{{ task.status }}';
+var RUN_ID = {% if runs %}{{ runs[0].id }}{% else %}0{% endif %};
+var cachedResults = null;
+var testNames = [];  // 存储测试名称列表
+
+function renderProgressBlocks(results) {
+    var progressSection = document.getElementById('progress-section');
+    var resultsSection = document.getElementById('results-section');
+
+    // 如果没有结果或测试未开始，显示灰色方块
+    if (!results || results.length === 0) {
+        var html = '';
+        for (var i = 0; i < 27; i++) {
+            html += '<div class="progress-block pending" title="等待测试"></div>';
+        }
+        document.getElementById('progress-blocks').innerHTML = html;
+        document.getElementById('progress-stats').innerHTML = '<span>准备测试...</span>';
+        document.getElementById('progress-percent').textContent = '';
+        return;
+    }
+
+    // 渲染进度方块
+    var html = '';
+    var stats = {pass: 0, fail: 0, error: 0};
+    var total = results.length;
+
+    results.forEach(function(r, idx) {
+        stats[r.status]++;
+        testNames[idx] = r.test_name;
+        var statusText = r.status === 'pass' ? '通过' : (r.status === 'fail' ? '失败' : '错误');
+        html += '<div class="progress-block ' + r.status + '" title="' + r.test_name + ' (' + statusText + ')" onclick="showDetail(' + idx + ')"></div>';
+    });
+
+    document.getElementById('progress-blocks').innerHTML = html;
+    document.getElementById('progress-stats').innerHTML =
+        '<span><div class="dot pass"></div> 通过 ' + stats.pass + '</span>' +
+        '<span><div class="dot fail"></div> 失败 ' + stats.fail + '</span>' +
+        '<span><div class="dot error"></div> 错误 ' + stats.error + '</span>';
+
+    // 显示进度百分比
+    document.getElementById('progress-percent').textContent = total + '/27 已完成';
+}
+
+function renderResultsTable(results) {
+    if (!results || results.length === 0) {
+        return '<p style="color:#666;">暂无结果</p>';
+    }
+
+    var html = '<table class="result-table"><thead><tr>';
+    html += '<th>分类</th><th>测试名称</th><th>状态</th><th>HTTP码</th><th>耗时</th><th>操作</th>';
+    html += '</tr></thead><tbody>';
+
+    results.forEach(function(r, idx) {
+        var rowClass = 'row-' + r.status;
+        var statusText = r.status === 'pass' ? '✓ 通过' : (r.status === 'fail' ? '✗ 失败' : '⚠ 错误');
+        html += '<tr class="' + rowClass + '">';
+        html += '<td>' + r.category + '</td>';
+        html += '<td>' + r.test_name + '</td>';
+        html += '<td>' + statusText + '</td>';
+        html += '<td>' + r.http_code + '</td>';
+        html += '<td>' + r.response_time_ms + 'ms</td>';
+        html += '<td><button onclick="showDetail(' + idx + ')" class="btn btn-secondary" style="padding:4px 8px; font-size:12px;">详情</button></td>';
+        html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    return html;
+}
+
+function renderSummary(summary) {
+    if (!summary) return '';
+    var html = '<div class="summary-grid">';
+    html += '<div class="summary-item"><span class="summary-label">总计</span><span class="summary-value">' + (summary.total || 0) + '</span></div>';
+    html += '<div class="summary-item pass"><span class="summary-label">通过</span><span class="summary-value">' + (summary.passed || 0) + '</span></div>';
+    html += '<div class="summary-item fail"><span class="summary-label">失败</span><span class="summary-value">' + (summary.failed || 0) + '</span></div>';
+    html += '<div class="summary-item error"><span class="summary-label">错误</span><span class="summary-value">' + (summary.error || 0) + '</span></div>';
+    html += '<div class="summary-item highlight"><span class="summary-label">通过率</span><span class="summary-value">' + (summary.pass_rate || '0%') + '</span></div>';
+    html += '</div>';
+    return html;
+}
+
+function showDetail(idx) {
+    if (!cachedResults || !cachedResults.results) {
+        console.error('No cached results');
+        alert('测试结果尚未加载，请稍后重试');
+        return;
+    }
+    if (!cachedResults.results[idx]) {
+        console.error('Result index not found:', idx);
+        alert('无法找到该测试结果');
+        return;
+    }
+    var r = cachedResults.results[idx];
+    document.getElementById('modal-title').textContent = r.test_name;
+    document.getElementById('modal-category').textContent = r.category;
+    document.getElementById('modal-status').textContent = r.status === 'pass' ? '✓ 通过' : (r.status === 'fail' ? '✗ 失败' : '⚠ 错误');
+    document.getElementById('modal-http').textContent = r.http_code || '-';
+    document.getElementById('modal-time').textContent = r.response_time_ms ? r.response_time_ms + 'ms' : '-';
+    document.getElementById('modal-assertion').textContent = r.assertion_details || '-';
+
+    // 格式化 JSON 响应
+    var responseText = r.response_body || '(空)';
+    try {
+        var jsonObj = JSON.parse(responseText);
+        responseText = JSON.stringify(jsonObj, null, 2);
+    } catch(e) {
+        // 不是有效 JSON，保持原样
+    }
+    document.getElementById('modal-response').textContent = responseText;
+
+    if (r.error_message) {
+        document.getElementById('modal-error-section').style.display = '';
+        document.getElementById('modal-error').textContent = r.error_message;
+    } else {
+        document.getElementById('modal-error-section').style.display = 'none';
+    }
+
+    document.getElementById('detail-modal').style.display = 'flex';
+}
+
+function closeDetailModal() {
+    document.getElementById('detail-modal').style.display = 'none';
+}
+
+async function loadResults() {
+    if (!RUN_ID) {
+        console.log('No RUN_ID');
+        return;
+    }
+    try {
+        // 从 run 获取结果
+        var runResp = await fetch('/api/run/' + RUN_ID);
+        var runData = await runResp.json();
+        console.log('Run data:', runData);
+
+        if (runData.parsed_result) {
+            try {
+                cachedResults = JSON.parse(runData.parsed_result);
+            } catch(e) {
+                console.error('Parse parsed_result error:', e);
+            }
+        }
+        if (!cachedResults && runData.raw_output) {
+            try {
+                cachedResults = JSON.parse(runData.raw_output);
+            } catch(e) {
+                console.error('Parse raw_output error:', e);
+                cachedResults = {results: [], total: 0, passed: 0, failed: 0, error: 0, pass_rate: '0%'};
+            }
+        }
+
+        console.log('Cached results:', cachedResults);
+        var results = cachedResults ? cachedResults.results : null;
+
+        // 根据测试状态决定显示方式
+        if (TASK_STATUS === 'running') {
+            // 运行中：显示进度方块，实时更新
+            document.getElementById('progress-section').style.display = '';
+            document.getElementById('summary-section').style.display = 'none';
+            renderProgressBlocks(results);
+            if (results && results.length > 0) {
+                document.getElementById('results-container').innerHTML = renderResultsTable(results);
+            }
+        } else if (TASK_STATUS === 'done' || TASK_STATUS === 'failed' || TASK_STATUS === 'abort') {
+            // 已完成：隐藏进度方块，显示统计汇总和结果表格
+            document.getElementById('progress-section').style.display = 'none';
+            document.getElementById('summary-section').style.display = '';
+            if (cachedResults) {
+                document.getElementById('summary-stats').innerHTML = renderSummary(cachedResults);
+            }
+            if (results && results.length > 0) {
+                document.getElementById('results-container').innerHTML = renderResultsTable(results);
+            }
+        }
+    } catch(e) {
+        console.error('加载结果失败:', e);
+    }
+}
+
+async function startTask() {
+    var btn = document.getElementById('btn-run');
+    btn.disabled = true;
+    btn.textContent = '启动中...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/run', {method: 'POST'});
+        var data = await resp.json();
+        if (!resp.ok) {
+            alert('启动失败: ' + (data.detail || resp.statusText));
+            btn.disabled = false;
+            btn.textContent = '开始测试';
+            return;
+        }
+        location.reload();
+    } catch(err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '开始测试';
+    }
+}
+
+async function killTask() {
+    if (!confirm('确定要终止测试吗？')) return;
+    var btn = document.getElementById('btn-kill');
+    btn.disabled = true;
+    btn.textContent = '终止中...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/kill', {method: 'POST'});
+        location.reload();
+    } catch(err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '终止测试';
+    }
+}
+
+async function rerunTask() {
+    var btn = event.target;
+    btn.disabled = true;
+    btn.textContent = '加载配置...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/rerun-config');
+        if (!resp.ok) {
+            alert('获取配置失败');
+            btn.disabled = false;
+            btn.textContent = '再测一次';
+            return;
+        }
+        var config = await resp.json();
+        localStorage.setItem('api_test_rerun_config', JSON.stringify(config));
+        window.location.href = '/api-test/create';
+    } catch(err) {
+        alert('请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '再测一次';
+    }
+}
+
+// 轮询状态
+async function poll() {
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID);
+        var data = await resp.json();
+        if (data.task.status !== TASK_STATUS) {
+            // 状态变化时刷新页面
+            location.reload();
+            return;
+        }
+        // 运行中持续加载结果更新进度
+        if (data.task.status === 'running') {
+            loadResults();
+        }
+    } catch(e) {}
+    setTimeout(poll, 1500);
+}
+
+// 初始化
+loadResults();
+
+if (TASK_STATUS === 'running') {
+    poll();
+}
+
+// 点击弹窗外部关闭
+document.getElementById('detail-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeDetailModal();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,88 @@
+Name	算子说明	Duration(ms)	百分比(%)	Shape	FLOP 公式	GFLOP	实测 FLOPS (T/s)	算力利用率	访存量 公式	访存量 (GB)	实测带宽 (GB/s)	带宽利用率	 计算密度(AI)	 gemm 提升M(x2)	
+flashinfer::norm::FusedAddRMSNormKernel	x norm	0.123136	0.51%	8192x7168	4*M*N	0.11	0.89	0.04%	(2*M*N + N) 	0.22	1,776.49	0.37	0.50		
+per_token_group_quant_8bit_kernel	x quant	0.06832	0.28%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	proj q,k	0.23168	0.95%	8192x7168x(1536+576)	2*M*N*D	231.00	997.06	50.38%	(M*N+M*D+N*D)	0.08	366.45	0.08	2,720.85		提升18%
+flashinfer::norm::RMSNormKernel	q_lorn norm	0.016448	0.07%												
+flashinfer::norm::RMSNormKernel	k_lorn norm	0.012992	0.05%												
+per_token_group_quant_8bit_kernel	q_lora  quant	0.018208	0.07%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	q_lora ->q 	0.50752	2.08%	8192x1536x(128x192)	2*M*N*D	288.00	567.47	28.67%	(M*N+M*D+N*D)	0.23	461.80	0.10	1,228.80		无提升
+nvjet_tst_256x152_64x4_1x2_h_bz_coopA_TNT	bmm操作 q 和 w_kv 乘,维度和MQA reduce维度对齐	0.367072	1.51%	128,8192X128x512	2*head*M*N*D	128.00	348.71	17.62%	2*head*(M*N+M*D+N*D)	1.26	3,426.61	0.71	101.76		
+flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel	q_pe k_pe RoPE	0.086624	0.36%												
+per_token_group_quant_8bit_kernel	Indexer::_get_q_k_bf16 q quant	0.017504	0.07%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	Indexer::_get_q_k_bf16  q_lora 生成 index_q	0.169984	0.70%	8192x1536x(64*128)	2*M*N*D	96.00	564.76	28.54%	(M*N+M*D+N*D)	0.15	873.24	0.18	646.74	无提升	
+per_token_group_quant_8bit_kernel	Indexer::_get_q_k_bf16  x quant	0.067712	0.28%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	Indexer::_get_q_k_bf16 x 生成 index_key (可合并index_weight)	0.022048	0.09%	8192x7168x(128)	2*M*N*D	14.00	634.98	32.09%	(M*N+M*D+N*D)	0.06	2,607.72	0.54	243.50	提升20%	
+flashinfer::norm::generalLayerNorm	Indexer::_get_q_k_bf16 index_key norm	0.009088	0.04%												
+flashinfer::BatchQKApplyRotaryPosIdsCosSinCacheHeadParallelismKernel	Indexer::_get_q_k_bf16 index q k rope	0.040352	0.17%												
+fast_hadamard_transform_kernel	Indexer::_get_q_k_bf16 index_q rotate	0.317248	1.30%	8192x64x128	M*H*log(H)	0.00	0.01	0.00%	2*M*H*2	0.25	788.03	0.16	0.01		
+fast_hadamard_transform_kernel	Indexer::_get_q_k_bf16 index_k rotate	0.006912	0.03%	8192x128											
+_act_quant_kernel	index_q quant	0.048	0.20%												
+_act_quant_kernel	index_k quant	0.00384	0.02%												
+_set_k_and_s_triton_kernel	save k index to kvcache pool	0.006784	0.03%												
+nvjet_tst_64x72_64x12_1x4_h_bz_TNT	x -> index_weight	0.037152	0.15%	8192x7168x64	2*M*N*D	7.00	188.42	9.52%	2*(M*N+M*D+N*D)	0.11	2,993.27	0.62	62.95		
+triton_poi_fused_mul_0	Indexer::_get_logits_head_gate	0.002944	0.01%												
+at::native::vectorized_elementwise_kernel	Indexer::_get_topk_raged prepare mqa_logits	0.001504	0.38%												
+elementwise_kernel_with_index		0.001216													
+at::native::elementwise_kernel		0.004928													
+at::native::unrolled_elementwise_kernel		0.005248													
+at::native::index_elementwise_kernel		0.009792													
+at::native::vectorized_elementwise_kernel		0.001408													
+elementwise_kernel_with_index		0.001184													
+at::native::elementwise_kernel		0.002528													
+at::native::vectorized_elementwise_kernel		0.001536													
+at::native::unrolled_elementwise_kernel		0.002912													
+at::native::index_elementwise_kernel		0.005472													
+at::native::vectorized_elementwise_kernel		0.00096													
+at::native::vectorized_elementwise_kernel		0.00128													
+at::native::vectorized_elementwise_kernel		0.001536													
+elementwise_kernel_with_index		0.001216													
+at::native::elementwise_kernel		0.00464													
+at::native::unrolled_elementwise_kernel		0.005056													
+at::native::index_elementwise_kernel		0.00928													
+at::native::vectorized_elementwise_kernel		0.001312													
+elementwise_kernel_with_index		0.000864													
+at::native::elementwise_kernel		0.002528													
+at::native::vectorized_elementwise_kernel		0.001472													
+at::native::unrolled_elementwise_kernel		0.00288													
+at::native::index_elementwise_kernel		0.005472													
+at::native::vectorized_elementwise_kernel		0.001184													
+at::native::unrolled_elementwise_kernel		0.001856													
+at::native::CatArrayBatchedCopy_contig		0.005664													
+at::native::CatArrayBatchedCopy_contig		0.003008													
+at::native::CatArrayBatchedCopy_alignedK_contig		0.00224													
+at::native::CatArrayBatchedCopy_alignedK_contig		0.002304													
+deep_gemm::sm90_fp8_mqa_logits	Indexer::_get_topk_raged::fp8_paged_mqa_logits	0.514816	2.11%	8192, 64, 128	2 * 128 * seq_len * 2048 * 65	260.00	505.03	25.52%	128 * 2k + 8192 * seq_len + seq_len * 2k	0.1	152.2	0.03	3,317.63		
+topk_transform_prefill_kernel	topk	0.450784	1.85%						8192*（8192*2048)*2	0.1	173.3	0.04			
+at::native::vectorized_elementwise_kernel	 Indexer::_get_topk_raged for prefix	0.015648	0.06%												
+set_mla_kv_buffer_kernel	 Indexer::_get_topk_raged for prefix	0.0272	0.11%												
+concat_mla_absorb_q_kernel	nsabackend::forward_extend 拼接q_nope q_rope	0.585984	2.41%	8192x128x576	0				M*N	2.3	3,839.7	0.80			
+sm90::sparse_attn_fwd_kernel	attention core,	7.319	30.04%	8192x128x576	head*(2*2k*s*d+2s*2k*d1)	4,352.00	594.62	30.05%	2*(seq*head*head_dim + 2k*head_dim +seq*head_dim_1)	2.1	290.9	0.06	2,044.01		
+nvjet_tst_128x216_64x4_1x2_h_bz_coopA_TNT	forward_absorb_core  bmm attn_ouput*w_vc	0.37136	1.52%	128*8192*512->128*8192*128	2*token*head*512*128	128.0	344.68	17.42%	2*seq*head*(head_dim+head_dim1)+head*head_dim*head_dim1	1.3	3,387.0	0.71	101.76		
+per_token_group_quant_8bit_kernel	out quant	0.153472	0.63%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	attention out	1.56	6.40%	8192x128x128*7168	2*token*head*head_dim*hidden_size	1,792.00	1,148.72	58.05%	(M*N+M*D+N*D)	0.5	300.5	0.06	3,822.93		
+flashinfer::norm::FusedAddRMSNormKernel	out RMS	0.12	0.49%												
+nvjet_tst_128x128_64x6_1x2_h_bz_TNT	MoEGate F.linear	0.045408	0.19%												
+per_token_group_quant_8bit_kernel	SharedMLP quant	0.067168	0.28%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	SharedMLP gate_up	0.388864	1.60%	8192x7168	2*token*2*inter*hidden_size	448.00	1,152.07	58.21%	(M*N+M*D+N*D)	0.1	371.7	0.08	3,099.68	无提升	
+flashinfer::activation::act_and_mul_kernel	SharedMLP norm	0.023488	0.10%												
+per_token_group_quant_8bit_kernel	SharedMLP quant	0.02144	0.09%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	SharedMLP down	0.203424	0.84%	8192x7168	2*token*inter*hidden_size	224.00	1,101.15	55.64%	(M*N+M*D+N*D)	0.2	758.5	0.16	1,451.75	提升2%	
+at::native::unrolled_elementwise_kernel		0.008608	0.04%												
+moe_fused_gate_kernel	select experts topk	0.029376	0.12%												
+triton_poi_fused_index_index_put_lift_fresh_0	topk post	0.002496	0.01%												
+per_token_group_quant_8bit_kernel	quant attention output	0.060224	0.25%												
+deep_ep::layout::get_dispatch_layout	dispatch 	0.089504	0.37%												
+deep_ep::intranode::notify_dispatch	dispatch 	0.349472	1.43%												
+deep_ep::intranode::dispatch	dispatch 	1.106	4.54%					0.00	token*topk*hidden_size	0.4375	395.6	0.83			
+_fwd_kernel_ep_scatter_1	数据重排	0.002432	0.01%												
+_fwd_kernel_ep_scatter_2	数据重排	0.254016	1.04%							0.4375	1,722.3	3.60			
+_tma_align_input_scale_kernel		0.075648	0.31%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	路由专家 group gemm gate_up	3.556	14.60%	8192,32,7168,4096	2*rank*seq*topk/rank*e/e*hidden_size*2*inter	3584	1,007.87	50.93%	(M*N+M*D+N*D)	1.8125	509.7	0.11	1,977.38	吞吐下降4%	
+flashinfer::activation::act_and_mul_kernel		0.221216	0.91%												
+per_token_group_quant_8bit_kernel		0.168704	0.69%												
+_tma_align_input_scale_kernel		0.025472	0.10%												
+deep_gemm::sm90_fp8_gemm_1d2d_impl	路由专家 group gemm down	1.811	7.43%	8192,32,7168,2048	2*rank*seq*topk/rank*e/e*hidden_size*2*inter	1792	989.51	50.00%	(M*N+M*D+N*D)	1.440917968	795.6	0.17	1,243.65	吞吐下降4%	
+_fwd_kernel_ep_gather		0.418272	1.72%	8,8192,7168						0.875	2,091.9	0.44			
+deep_ep::intranode::cached_notify_combine		0.027072	0.11%												
+deep_ep::intranode::combine		1.932	7.93%						2*token*topk*hidden_size	0.875	452.9	0.95			
+at::native::vectorized_elementwise_kernel		0.082208	0.34%												

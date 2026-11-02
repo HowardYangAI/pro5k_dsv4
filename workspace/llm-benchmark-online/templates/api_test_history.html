@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}接口测试历史 — LLM Benchmark{% endblock %}
+{% block content %}
+<h1>接口测试历史</h1>
+
+<div class="card">
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>连接</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td><a href="/api-test/{{ task.id }}">{{ task.name }}</a></td>
+                <td>
+                    {% if task.connection_mode == 'base_url' %}
+                        <span title="{{ task.base_url }}">{{ task.base_url[:30] }}{% if task.base_url|length > 30 %}...{% endif %}</span>
+                    {% else %}
+                        {{ task.host }}:{{ task.port }}
+                    {% endif %}
+                </td>
+                <td><span class="status status-{{ task.status }}">{{ task.status }}</span></td>
+                <td>{{ task.created_at|beijing_time }}</td>
+                <td>
+                    <a href="/api-test/{{ task.id }}" class="btn btn-secondary" style="padding:4px 8px; font-size:12px;">详情</a>
+                    <button class="btn btn-danger" onclick="deleteTask({{ task.id }})"
+                            style="padding:4px 8px; font-size:12px; background:#e74c3c; margin-left:4px;"
+                            {% if task.status == 'running' %}disabled title="运行中的任务无法删除"{% endif %}>
+                        删除
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if total > per_page %}
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="?page={{ page - 1 }}" class="btn btn-secondary">上一页</a>
+        {% endif %}
+        <span style="margin: 0 12px;">第 {{ page }} 页 / 共 {{ (total / per_page)|round(0, 'ceil')|int }} 页</span>
+        {% if page * per_page < total %}
+        <a href="?page={{ page + 1 }}" class="btn btn-secondary">下一页</a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if tasks|length == 0 %}
+    <p style="text-align:center; color:#666; padding:40px;">暂无接口测试记录</p>
+    {% endif %}
+</div>
+
+<div style="margin-top: 16px;">
+    <a href="/api-test/create" class="btn btn-primary" style="background:#e17055;">新建接口测试</a>
+</div>
+
+<script>
+async function deleteTask(taskId) {
+    if (!confirm('确定要删除该测试记录吗？此操作不可恢复！')) {
+        return;
+    }
+
+    try {
+        const resp = await fetch(`/api/task/${taskId}`, {
+            method: 'DELETE',
+        });
+        const data = await resp.json();
+
+        if (!resp.ok) {
+            alert('删除失败: ' + (data.detail || resp.statusText));
+            return;
+        }
+
+        alert('删除成功');
+        window.location.reload();
+    } catch (err) {
+        alert('网络请求失败: ' + err.message);
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+.github-auth/
+**/.ssh/
+**/.aws/
+auth.json
+*.pem
+*.private-key
+*-wal
+*-shm

@@ -1,0 +1,1683 @@
+/sgl-workspace/sglang-swa-evict-fixed/python/sglang/launch_server.py:56: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-08-29 08:51:16] disaggregation transfer backend 'mooncake_tcp' -> mooncake with MC_FORCE_TCP=1 (TCP transport, no RDMA)
+[2026-08-29 08:51:17] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:17] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:17] Use dsv4 attention backend for DeepseekV4ForCausalLM, setting page_size to 256.
+[2026-08-29 08:51:17] Setting swa_full_tokens_ratio to 0.1 for DeepseekV4ForCausalLM.
+[2026-08-29 08:51:17] Setting KV cache dtype to fp8_e4m3 for DeepseekV4ForCausalLM.
+[2026-08-29 08:51:17] DP attention is enabled. chunked prefill size is adjusted from 2048 to 256.
+[2026-08-29 08:51:17] DSpark draft weights are bundled in the target checkpoint; defaulting --speculative-draft-model-path to --model-path (/data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731).
+[2026-08-29 08:51:17] No IB devices specified for Mooncake backend, falling back to auto discovery.
+[2026-08-29 08:51:19] server_args=ServerArgs(model_path='/data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731', tokenizer_path='/data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731', tokenizer_mode='auto', tokenizer_backend='huggingface', tokenizer_worker_num=1, detokenizer_worker_num=1, skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=True, context_length=131072, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', model_config_parser='auto', json_model_override_args='{}', dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='fp8_e4m3', enable_fp32_lm_head=False, modelopt_quant=None, modelopt_checkpoint_restore_path=None, modelopt_checkpoint_save_path=None, modelopt_export_path=None, quantize_and_serve=False, rl_quant_profile=None, enable_tf32_matmul=False, mem_fraction_static=0.7, max_running_requests=1024, max_queued_requests=None, max_total_tokens=None, chunked_prefill_size=256, enable_dynamic_chunking=False, max_prefill_tokens=8192, prefill_max_requests=None, schedule_policy='fcfs', enable_priority_scheduling=False, disable_priority_preemption=False, default_priority_value=None, abort_on_priority_when_disabled=False, schedule_low_priority_values_first=False, priority_scheduling_preemption_threshold=10, retraction_policy='length', schedule_conservativeness=0.3, page_size=256, swa_full_tokens_ratio=0.1, disable_hybrid_swa_memory=False, radix_eviction_policy='lru', prefill_only_disable_kv_cache=False, disable_radix_cache=True, enable_page_major_kv_layout=False, enable_unified_memory=False, disable_chunked_prefix_cache=False, disable_overlap_schedule=False, num_continuous_decode_steps=1, scheduler_recv_interval=1, enable_mixed_chunk=False, nccl_port=None, dist_timeout=None, dist_init_addr=None, nnodes=1, node_rank=0, tp_size=8, dcp_size=1, pp_size=1, pp_max_micro_batch_size=None, pp_async_batch_depth=0, dp_size=8, load_balance_method='follow_bootstrap_room', attn_cp_size=1, moe_dp_size=1, enable_prefill_cp=False, cp_strategy=None, enable_dsa_cache_layer_split=False, enable_dsa_prefill_context_parallel=False, dsa_prefill_cp_mode='round-robin-split', enable_prefill_context_parallel=False, prefill_cp_mode='in-seq-split', enable_dp_attention=True, enable_dp_attention_local_control_broadcast=False, enable_dp_lm_head=True, enable_attn_tp_input_scattered=False, disable_attn_tp_gather=False, enable_p2p_check=False, device='cuda', base_gpu_id=0, gpu_id_step=1, random_seed=311301132, watchdog_timeout=300, soft_watchdog_timeout=None, sleep_on_idle=False, use_ray=False, custom_sigquit_handler=None, numa_node=None, gc_threshold=None, host='0.0.0.0', port=30001, fastapi_root_path='', smg_grpc_mode=False, grpc_mode=False, grpc_port=None, sidecar=None, sidecar_args=None, skip_server_warmup=False, warmups=None, enable_http2=False, ssl_keyfile=None, ssl_certfile=None, ssl_ca_certs=None, ssl_keyfile_password=None, enable_ssl_refresh=False, api_key=None, admin_api_key=None, served_model_name='DeepSeek-V4-Flash-0731', weight_version='default', chat_template=None, hf_chat_template_name=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=True, reasoning_parser=None, default_chat_template_kwargs=None, strip_thinking_cache=False, enable_strict_thinking=False, tool_call_parser=None, tool_server=None, sampling_defaults='model', asr_max_buffer_seconds=60, asr_max_concurrent_sessions=32, preferred_sampling_params=None, allow_auto_truncate=False, stream_interval=1, batch_notify_size=16, stream_response_default_include_usage=False, incremental_streaming_output=False, enable_streaming_session=False, enable_session_radix_cache=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=2, log_requests_format='text', log_requests_target=None, uvicorn_access_log_exclude_prefixes=[], crash_dump_folder=None, show_time_cost=False, enable_metrics=False, smg_http_sidecar_port=None, enable_mfu_metrics=False, enable_metrics_for_all_schedulers=False, load_snapshot_publish_interval=15, tokenizer_metrics_custom_labels_header='x-custom-labels', tokenizer_metrics_allowed_custom_labels=None, extra_metric_labels=None, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, prompt_tokens_buckets=None, generation_tokens_buckets=None, gc_warning_threshold_secs=0.0, decode_log_interval=20, enable_request_time_stats_logging=False, kv_events_config=None, enable_forward_pass_metrics=False, forward_pass_metrics_worker_id='', forward_pass_metrics_ipc_name=None, enable_trace=False, trace_modules='request', otlp_traces_endpoint='localhost:4317', export_metrics_to_file=False, export_metrics_to_file_dir=None, stat_loggers=None, constrained_json_whitespace_pattern=None, constrained_json_disable_any_whitespace=False, attention_backend='dsv4', decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='xgrammar', radix_cache_backend=None, mm_attention_backend=None, fp8_gemm_runner_backend='auto', fp4_gemm_runner_backend='auto', bf16_gemm_backend='auto', dsa_prefill_backend=None, dsa_decode_backend=None, dsa_paged_mqa_logits_backend='auto', dsa_topk_backend='sgl-kernel', disable_flashinfer_autotune=False, mamba_backend='triton', cuda_graph_config=CudaGraphConfig(decode=PhaseConfig(backend='full', max_bs=128, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], tc_compiler='eager', full_prefill_max_req=None), prefill=PhaseConfig(backend='disabled', max_bs=2048, bs=[4, 8, 12, 16, 20, 24, 28, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 288, 320, 352, 384, 416, 448, 480, 512, 576, 640, 704, 768, 832, 896, 960, 1024, 1280, 1536, 1792, 2048], tc_compiler='eager', full_prefill_max_req=None)), cuda_graph_backend_decode='full', cuda_graph_backend_prefill=None, cuda_graph_max_bs_decode=128, cuda_graph_max_bs_prefill=None, cuda_graph_bs_decode=None, cuda_graph_bs_prefill=None, cuda_graph_tc_compiler=None, disable_prefill_cuda_graph=False, disable_decode_cuda_graph=False, disable_cuda_graph=True, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_cudagraph_gc=False, debug_cuda_graph=False, enable_layerwise_nvtx_marker=False, enable_nccl_nvls=False, enable_symm_mem=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, triton_attention_split_tile_size=None, flashinfer_mla_disable_ragged=False, enable_fused_qk_norm_rope=False, enable_precise_embedding_interpolation=False, enable_fused_moe_sum_all_reduce=False, enable_deepseek_v4_fp4_indexer=False, disable_custom_all_reduce=False, enable_mscclpp=False, enable_torch_symm_mem=False, enable_scattered_sconv=False, pre_warm_nccl=False, enable_quant_communications=False, enable_flashinfer_allreduce_fusion=False, enforce_disable_flashinfer_allreduce_fusion=False, flashinfer_allreduce_fusion_backend=None, enable_aiter_allreduce_fusion=False, enable_torch_compile=False, enable_torch_compile_debug_mode=False, torch_compile_max_bs=32, torchao_config='', speculative_algorithm='DSPARK', speculative_draft_model_path='/data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731', speculative_draft_model_revision=None, speculative_draft_load_format=None, speculative_num_steps=1, speculative_eagle_topk=1, speculative_num_draft_tokens=6, speculative_dflash_block_size=None, speculative_dspark_block_size=None, speculative_dspark_sps_table_path=None, speculative_dspark_confidence_sts_path=None, speculative_dspark_align_verify_tokens_to_graph_tier=False, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_use_rejection_sampling=False, speculative_token_map=None, speculative_attention_mode='decode', speculative_draft_attention_backend=None, speculative_draft_window_size=None, speculative_moe_runner_backend='flashinfer_mxfp4', speculative_moe_a2a_backend=None, speculative_draft_model_quantization=None, speculative_skip_dp_mlp_sync=False, enable_multi_layer_eagle=False, speculative_adaptive=False, speculative_adaptive_config=None, decoupled_spec_bind_endpoint=None, decoupled_spec_connect_endpoints=None, decoupled_spec_rank=None, decoupled_spec_role='null', spec_trace_dir=None, speculative_ngram_min_bfs_breadth=1, speculative_ngram_max_bfs_breadth=10, speculative_ngram_match_type='BFS', speculative_ngram_max_trie_depth=18, speculative_ngram_capacity=10000000, speculative_ngram_external_corpus_path=None, speculative_ngram_external_sam_budget=0, speculative_ngram_external_corpus_max_tokens=10000000, ep_size=4, moe_a2a_backend='none', moe_runner_backend='flashinfer_mxfp4', flashinfer_mxfp4_moe_precision='default', deepep_mode='auto', fuseep_mode=2, deepep_dispatcher_output_dtype='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm=None, init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, eplb_min_rebalancing_utilization_threshold=1.0, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, elastic_ep_backend=None, enable_elastic_expert_backup=False, mooncake_ib_device=None, enable_waterfill=False, ep_join_mode=None, ep_join_rank_offset=0, elastic_ep_initial_size=None, max_ep_size=None, elastic_ep_scale_timeout=600, elastic_ep_rejoin=False, disable_flashinfer_cutlass_moe_fp4_allgather=False, disable_shared_experts_fusion=False, enforce_shared_experts_fusion=False, max_mamba_cache_size=None, mamba_ssm_dtype=None, enable_mamba_cache_stochastic_rounding=False, mamba_cache_philox_rounds=0, mamba_full_memory_ratio=0.9, mamba_radix_cache_strategy='auto', uses_mamba_radix_cache=False, mamba_track_interval=256, enable_int8_mamba_checkpoint=False, int8_mamba_ckpt_size=None, linear_attn_backend='triton', linear_attn_decode_backend=None, linear_attn_prefill_backend=None, enable_linear_replayssm=False, linear_replayssm_cache_len=16, enable_gdn_replayssm_spec=False, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through', hicache_io_backend='kernel', hicache_mem_layout='page_first', hicache_storage_backend=None, hicache_storage_prefetch_policy='timeout', hicache_storage_backend_extra_config=None, enable_hisparse=False, hisparse_config=None, enable_broadcast_mm_inputs_process=False, enable_prefix_mm_cache=False, mm_enable_dp_encoder=False, mm_process_config={}, limit_mm_data_per_request=None, enable_mm_global_cache=False, disable_fast_image_processor=False, mm_feature_transport='cpu', keep_mm_feature_on_device=False, enable_lora=None, enable_lora_overlap_loading=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loaded_loras=None, max_loras_per_batch=8, lora_eviction_policy='lru', lora_backend='csgmv', max_lora_chunk_size=16, experts_shared_outer_loras=None, lora_use_virtual_experts=False, lora_strict_loading=False, lora_drain_wait_threshold=0.0, enable_two_batch_overlap=False, enable_single_batch_overlap=False, tbo_token_distribution_threshold=0.48, cpu_offload_gb=0, offload_group_size=-1, offload_num_in_group=1, offload_prefetch_step=1, offload_mode='cpu', enable_lmcache=False, lmcache_config_file=None, enable_flexkv=False, flexkv_config_file=None, kt_weight_path=None, kt_method='AMXINT4', kt_cpuinfer=None, kt_threadpool_count=2, kt_num_gpu_experts=None, kt_max_deferred_experts_per_token=None, dllm_algorithm=None, dllm_algorithm_config=None, dllm_fdfo=True, disaggregation_mode='prefill', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_ib_device=None, disaggregation_decode_enable_radix_cache=False, disaggregation_decode_enable_offload_kvcache=False, num_reserved_decode_tokens=512, disaggregation_decode_extra_slots=None, disaggregation_decode_polling_interval=1, optimistic_prefill_attempts=0, encoder_only=False, language_only=False, encoder_transfer_backend='zmq_to_scheduler', encoder_urls=[], encoder_bootstrap_port=8997, encoder_register_urls=[], enable_adaptive_dispatch_to_encoder=False, enable_pdmux=False, pdmux_config_path=None, sm_group_num=8, custom_weight_loader=[], weight_loader_disable_mmap=False, weight_loader_prefetch_checkpoints=False, weight_loader_prefetch_num_threads=4, weight_loader_drop_cache_after_load=False, remote_instance_weight_loader_seed_instance_ip=None, remote_instance_weight_loader_seed_instance_service_port=None, remote_instance_weight_loader_send_weights_group_ports=None, remote_instance_weight_loader_backend='nccl', remote_instance_weight_loader_start_seed_via_transfer_engine=False, engine_info_bootstrap_port=6789, modelexpress_config=None, download_dir=None, model_checksum=None, delete_ckpt_after_loading=False, decrypted_config_file=None, decrypted_draft_config_file=None, checkpoint_engine_wait_weights_before_ready=False, enable_prefill_delayer=False, prefill_delayer_max_delay_passes=30, prefill_delayer_token_usage_low_watermark=None, prefill_delayer_forward_passes_buckets=None, prefill_delayer_wait_seconds_buckets=None, prefill_delayer_queue_min_ratio=None, prefill_delayer_max_delay_ms=None, min_free_slots_delay=None, enable_deterministic_inference=False, rl_on_policy_target=None, kv_canary='none', kv_canary_real_data='none', kv_canary_sweep_interval=0, enable_dynamic_batch_tokenizer=False, dynamic_batch_tokenizer_batch_size=32, dynamic_batch_tokenizer_batch_timeout=0.002, enable_tokenizer_batch_encode=False, disable_tokenizer_batch_decode=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_layers=None, debug_tensor_dump_input_file=None, enable_memory_saver=False, enable_weights_cpu_backup=False, enable_draft_weights_cpu_backup=False, enable_custom_logit_processor=False, enable_return_hidden_states=False, enable_return_routed_experts=False, enable_return_indexer_topk=False, disable_outlines_disk_cache=False, enable_mis=False, forward_hooks=None, msprobe_dump_config=None)
+[2026-08-29 08:51:19] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:19] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:20] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:21] CommonKVBootstrapServer started successfully on 0.0.0.0:8998
+[2026-08-29 08:51:21] No HuggingFace chat template found
+[2026-08-29 08:51:21] No chat template found, defaulting to 'string' content format
+[2026-08-29 08:51:27] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:34 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP3 TP3 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP3 TP3 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP4 TP4 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP4 TP4 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP6 TP6 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP6 TP6 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP7 TP7 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP7 TP7 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP2 TP2 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP2 TP2 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP5 TP5 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP5 TP5 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:34 DP1 TP1 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:34 DP1 TP1 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:36 DP3 TP3 EP1] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP0 TP0 EP0] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP4 TP4 EP2] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP3 TP3 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP3 TP3 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:36 DP7 TP7 EP3] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:36 DP4 TP4 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP4 TP4 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:36 DP1 TP1 EP0] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP3 TP3 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:36 DP0 TP0 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:36 DP4 TP4 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:36 DP3 TP3 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP3 TP3 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:36 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:36 DP4 TP4 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP4 TP4 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:36 DP3 TP3 EP1] Init torch distributed begin.
+[2026-08-29 08:51:36 DP0 TP0 EP0] Init torch distributed begin.
+[2026-08-29 08:51:36 DP4 TP4 EP2] Init torch distributed begin.
+[2026-08-29 08:51:36 DP7 TP7 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP7 TP7 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:36 DP2 TP2 EP1] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP7 TP7 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:36 DP1 TP1 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP1 TP1 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:36 DP6 TP6 EP3] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP5 TP5 EP2] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:51:36 DP7 TP7 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP7 TP7 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:36 DP7 TP7 EP3] Init torch distributed begin.
+[2026-08-29 08:51:36 DP1 TP1 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:36 DP1 TP1 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:36 DP1 TP1 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:36 DP1 TP1 EP0] Init torch distributed begin.
+[2026-08-29 08:51:37 DP2 TP2 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:37 DP2 TP2 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:37 DP2 TP2 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:37 DP2 TP2 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:37 DP2 TP2 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:37 DP2 TP2 EP1] Init torch distributed begin.
+[2026-08-29 08:51:37 DP6 TP6 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:37 DP6 TP6 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:37 DP5 TP5 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:37 DP5 TP5 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-29 08:51:37 DP5 TP5 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:37 DP6 TP6 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:51:37 DP5 TP5 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:37 DP5 TP5 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:37 DP6 TP6 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:51:37 DP6 TP6 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:51:37 DP5 TP5 EP2] Init torch distributed begin.
+[2026-08-29 08:51:37 DP6 TP6 EP3] Init torch distributed begin.
+[W829 08:51:37.989678250 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.993675829 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.996434101 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.063612364 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.072440862 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.208746915 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.231475112 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[W829 08:51:37.238361684 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:42317 (errno: 97 - Address family not supported by protocol).
+[2026-08-29 08:51:37 DP0 TP0 EP0] sglang is using nccl==2.28.9
+[2026-08-29 08:51:37 DP7 TP7 EP3] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP5 TP5 EP2] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP6 TP6 EP3] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP4 TP4 EP2] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP0 TP0 EP0] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP3 TP3 EP1] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP1 TP1 EP0] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP2 TP2 EP1] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP4 TP4 EP2] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP5 TP5 EP2] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP6 TP6 EP3] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP3 TP3 EP1] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP7 TP7 EP3] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP2 TP2 EP1] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP1 TP1 EP0] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP0 TP0 EP0] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-29 08:51:37 DP7 TP7 EP3] Init torch distributed ends. elapsed=1.08 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP0 TP0 EP0] Init torch distributed ends. elapsed=1.20 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP5 TP5 EP2] Init torch distributed ends. elapsed=0.75 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP4 TP4 EP2] Init torch distributed ends. elapsed=1.20 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP2 TP2 EP1] Init torch distributed ends. elapsed=0.85 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP6 TP6 EP3] Init torch distributed ends. elapsed=0.74 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP1 TP1 EP0] Init torch distributed ends. elapsed=1.02 s, mem usage=0.23 GB
+[2026-08-29 08:51:37 DP3 TP3 EP1] Init torch distributed ends. elapsed=1.20 s, mem usage=0.23 GB
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+W0829 08:51:37.992802 18696 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+I0829 08:51:37.992861 18696 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+I0829 08:51:37.992870 18696 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0829 08:51:37.992894 18696 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:16443
+W0829 08:51:37.992882 18694 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0829 08:51:37.992921 18694 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+W0829 08:51:37.992903 18699 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+I0829 08:51:37.993000 18694 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+W0829 08:51:37.992905 18693 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+I0829 08:51:37.992942 18696 transfer_engine_impl.cpp:237] Auto-discovering topology...
+W0829 08:51:37.992906 18697 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+W0829 08:51:37.992913 18692 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+W0829 08:51:37.992913 18698 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+W0829 08:51:37.992915 18695 transfer_engine_py.cpp:96] Using default malloc/free for protocol: rdma
+I0829 08:51:37.993023 18694 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:16650
+I0829 08:51:37.993032 18699 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+I0829 08:51:37.993040 18699 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+I0829 08:51:37.993041 18693 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+I0829 08:51:37.993049 18692 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+I0829 08:51:37.993052 18697 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+W0829 08:51:37.993054 18696 topology.cpp:156] No RDMA devices found, check your device installation
+I0829 08:51:37.993067 18695 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+I0829 08:51:37.993058 18693 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+I0829 08:51:37.993062 18692 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+I0829 08:51:37.993067 18698 transfer_engine_impl.cpp:811] Metrics reporting is disabled (set MC_TE_METRIC=1 to enable)
+I0829 08:51:37.993068 18697 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+I0829 08:51:37.993070 18699 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:15258
+I0829 08:51:37.993088 18695 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+I0829 08:51:37.993090 18694 transfer_engine_impl.cpp:237] Auto-discovering topology...
+I0829 08:51:37.993103 18696 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+I0829 08:51:37.993111 18692 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:16467
+I0829 08:51:37.993112 18698 transfer_engine_impl.cpp:115] Transfer Engine parseHostNameWithPort. server_name: 10.207.193.156 port: 12001
+I0829 08:51:37.993114 18693 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:15326
+I0829 08:51:37.993139 18695 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:16724
+I0829 08:51:37.993129 18697 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:15430
+E0829 08:51:37.993140 18696 transfer_metadata.cpp:877] Local segment descriptor not found
+W0829 08:51:37.993145 18694 topology.cpp:156] No RDMA devices found, check your device installation
+I0829 08:51:37.993158 18699 transfer_engine_impl.cpp:237] Auto-discovering topology...
+I0829 08:51:37.993160 18698 transfer_engine_impl.cpp:182] Transfer Engine RPC using P2P handshake, listening on 10.207.193.156:15232
+I0829 08:51:37.993165 18696 tcp_transport.cpp:553] TcpTransport: listen on port 16422
+I0829 08:51:37.993173 18694 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+I0829 08:51:37.993176 18692 transfer_engine_impl.cpp:237] Auto-discovering topology...
+E0829 08:51:37.993184 18694 transfer_metadata.cpp:877] Local segment descriptor not found
+W0829 08:51:37.993191 18699 topology.cpp:156] No RDMA devices found, check your device installation
+I0829 08:51:37.993191 18695 transfer_engine_impl.cpp:237] Auto-discovering topology...
+I0829 08:51:37.993193 18693 transfer_engine_impl.cpp:237] Auto-discovering topology...
+I0829 08:51:37.993196 18694 tcp_transport.cpp:553] TcpTransport: listen on port 16871
+W0829 08:51:37.993201 18692 topology.cpp:156] No RDMA devices found, check your device installation
+I0829 08:51:37.993203 18697 transfer_engine_impl.cpp:237] Auto-discovering topology...
+I0829 08:51:37.993218 18699 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+I0829 08:51:37.993227 18692 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+E0829 08:51:37.993230 18699 transfer_metadata.cpp:877] Local segment descriptor not found
+W0829 08:51:37.993234 18695 topology.cpp:156] No RDMA devices found, check your device installation
+W0829 08:51:37.993234 18693 topology.cpp:156] No RDMA devices found, check your device installation
+I0829 08:51:37.993235 18698 transfer_engine_impl.cpp:237] Auto-discovering topology...
+E0829 08:51:37.993237 18692 transfer_metadata.cpp:877] Local segment descriptor not found
+W0829 08:51:37.993242 18697 topology.cpp:156] No RDMA devices found, check your device installation
+I0829 08:51:37.993243 18699 tcp_transport.cpp:553] TcpTransport: listen on port 15493
+I0829 08:51:37.993258 18692 tcp_transport.cpp:553] TcpTransport: listen on port 16599
+I0829 08:51:37.993270 18695 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+I0829 08:51:37.993270 18693 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+I0829 08:51:37.993280 18697 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+W0829 08:51:37.993283 18698 topology.cpp:156] No RDMA devices found, check your device installation
+E0829 08:51:37.993285 18695 transfer_metadata.cpp:877] Local segment descriptor not found
+E0829 08:51:37.993289 18693 transfer_metadata.cpp:877] Local segment descriptor not found
+E0829 08:51:37.993295 18697 transfer_metadata.cpp:877] Local segment descriptor not found
+I0829 08:51:37.993307 18695 tcp_transport.cpp:553] TcpTransport: listen on port 15267
+I0829 08:51:37.993309 18693 tcp_transport.cpp:553] TcpTransport: listen on port 15599
+I0829 08:51:37.993312 18697 tcp_transport.cpp:553] TcpTransport: listen on port 16620
+I0829 08:51:37.993325 18698 transfer_engine_impl.cpp:252] Topology discovery complete. Found 0 HCAs.
+E0829 08:51:37.993340 18698 transfer_metadata.cpp:877] Local segment descriptor not found
+I0829 08:51:37.993355 18698 tcp_transport.cpp:553] TcpTransport: listen on port 15472
+E0829 08:51:37.994498 18694 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994536 18692 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994647 18695 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994663 18696 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994668 18697 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994733 18693 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994848 18698 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+E0829 08:51:37.994848 18699 tcp_transport.cpp:454] Failed to set up IPv6 dual-stack listener: Address family not supported by protocol (error code: 97)
+[2026-08-29 08:51:39 DP7 TP7 EP3] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP5 TP5 EP2] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP4 TP4 EP2] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP2 TP2 EP1] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP3 TP3 EP1] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP1 TP1 EP0] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP0 TP0 EP0] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP6 TP6 EP3] Load weight begin. avail mem=70.53 GB
+[2026-08-29 08:51:39 DP0 TP0 EP0] Detected fp8 checkpoint.
+[2026-08-29 08:51:39 DP0 TP0 EP0] Config does not support fused shared expert(s). Shared experts fusion optimization is disabled.
+[2026-08-29 08:51:39 DP3 TP3 EP1] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP1 TP1 EP0] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP2 TP2 EP1] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP5 TP5 EP2] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP6 TP6 EP3] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP0 TP0 EP0] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP7 TP7 EP3] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-29 08:51:39 DP4 TP4 EP2] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+Multi-thread loading shards:   0% Completed | 0/48 [00:00<?, ?it/s]Multi-thread loading shards:   4% Completed | 2/48 [00:00<00:08,  5.47it/s]Multi-thread loading shards:  21% Completed | 10/48 [00:01<00:04,  8.67it/s]Multi-thread loading shards:  38% Completed | 18/48 [00:01<00:02, 13.32it/s]Multi-thread loading shards:  52% Completed | 25/48 [00:01<00:01, 19.63it/s]Multi-thread loading shards:  60% Completed | 29/48 [00:01<00:01, 18.12it/s]Multi-thread loading shards:  69% Completed | 33/48 [00:02<00:00, 19.78it/s]Multi-thread loading shards:  75% Completed | 36/48 [00:02<00:00, 18.23it/s]Multi-thread loading shards:  85% Completed | 41/48 [00:02<00:00, 20.70it/s]Multi-thread loading shards: 100% Completed | 48/48 [00:02<00:00, 18.83it/s]
+[2026-08-29 08:51:42 DP0 TP0 EP0] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP3 TP3 EP1] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP7 TP7 EP3] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP2 TP2 EP1] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP5 TP5 EP2] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP4 TP4 EP2] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP6 TP6 EP3] Execute dequant fp8 wo_a
+[2026-08-29 08:51:42 DP1 TP1 EP0] Execute dequant fp8 wo_a
+[2026-08-29 08:52:09 DP3 TP3 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:09 DP3 TP3 EP1] Load weight end. elapsed=30.09 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:09 DP1 TP1 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:09 DP1 TP1 EP0] Load weight end. elapsed=30.45 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:10 DP5 TP5 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:10 DP5 TP5 EP2] Load weight end. elapsed=30.55 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:10 DP4 TP4 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:10 DP4 TP4 EP2] Load weight end. elapsed=30.61 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:10 DP2 TP2 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:10 DP2 TP2 EP1] Load weight end. elapsed=30.79 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:10 DP7 TP7 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:10 DP7 TP7 EP3] Load weight end. elapsed=30.87 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.0.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.1.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.2.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.3.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.4.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.5.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.6.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.7.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.8.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.9.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.10.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.11.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.12.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.13.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.14.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.15.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.16.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.17.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.18.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.19.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.20.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.21.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.22.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.23.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.24.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.25.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.26.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.27.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.28.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.29.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.30.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.31.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.32.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.33.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.34.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.35.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.36.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.37.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.38.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.39.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.40.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.41.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.42.mlp.experts)...
+[2026-08-29 08:52:10 DP0 TP0 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:10 DP0 TP0 EP0] Load weight end. elapsed=30.90 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:10 DP6 TP6 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:10 DP6 TP6 EP3] Load weight end. elapsed=30.97 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-29 08:52:11 DP2 TP2 EP1] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:11 DP1 TP1 EP0] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:11 DP3 TP3 EP1] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:12 DP4 TP4 EP2] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:12 DP6 TP6 EP3] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:12 DP0 TP0 EP0] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:12 DP7 TP7 EP3] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:12 DP2 TP2 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP4 TP4 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP6 TP6 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP2 TP2 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP2 TP2 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP2 TP2 EP1] Init torch distributed begin.
+[2026-08-29 08:52:12 DP4 TP4 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP4 TP4 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP4 TP4 EP2] Init torch distributed begin.
+[2026-08-29 08:52:12 DP6 TP6 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP6 TP6 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP6 TP6 EP3] Init torch distributed begin.
+[2026-08-29 08:52:12 DP5 TP5 EP2] Tokenizer for /data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-29 08:52:12 DP1 TP1 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP7 TP7 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP5 TP5 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP0 TP0 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP3 TP3 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-29 08:52:12 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP7 TP7 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP7 TP7 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP0 TP0 EP0] Init torch distributed begin.
+[2026-08-29 08:52:12 DP7 TP7 EP3] Init torch distributed begin.
+[2026-08-29 08:52:12 DP1 TP1 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP1 TP1 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP1 TP1 EP0] Init torch distributed begin.
+[2026-08-29 08:52:12 DP3 TP3 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP3 TP3 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP3 TP3 EP1] Init torch distributed begin.
+[2026-08-29 08:52:12 DP5 TP5 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-29 08:52:12 DP5 TP5 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-29 08:52:12 DP5 TP5 EP2] Init torch distributed begin.
+[2026-08-29 08:52:12 DP0 TP0 EP0] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP7 TP7 EP3] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP5 TP5 EP2] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP3 TP3 EP1] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP1 TP1 EP0] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP4 TP4 EP2] Init torch distributed ends. elapsed=0.48 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP2 TP2 EP1] Init torch distributed ends. elapsed=0.48 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP0 TP0 EP0] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP6 TP6 EP3] Init torch distributed ends. elapsed=0.47 s, mem usage=0.00 GB
+[2026-08-29 08:52:12 DP5 TP5 EP2] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP7 TP7 EP3] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP1 TP1 EP0] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP3 TP3 EP1] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP2 TP2 EP1] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP4 TP4 EP2] Load weight begin. avail mem=43.66 GB
+[2026-08-29 08:52:12 DP0 TP0 EP0] Detected fp8 checkpoint.
+[2026-08-29 08:52:12 DP6 TP6 EP3] Load weight begin. avail mem=43.66 GB
+Multi-thread loading shards:   0% Completed | 0/48 [00:00<?, ?it/s]Multi-thread loading shards:   4% Completed | 2/48 [00:00<00:08,  5.21it/s]Multi-thread loading shards:  21% Completed | 10/48 [00:00<00:02, 15.43it/s]Multi-thread loading shards:  38% Completed | 18/48 [00:01<00:01, 18.19it/s]Multi-thread loading shards:  46% Completed | 22/48 [00:01<00:01, 21.20it/s]Multi-thread loading shards:  54% Completed | 26/48 [00:01<00:01, 18.46it/s]Multi-thread loading shards:  62% Completed | 30/48 [00:01<00:00, 21.57it/s]Multi-thread loading shards:  71% Completed | 34/48 [00:01<00:00, 18.23it/s]Multi-thread loading shards:  79% Completed | 38/48 [00:02<00:00, 21.28it/s]Multi-thread loading shards:  88% Completed | 42/48 [00:02<00:00, 22.31it/s]Multi-thread loading shards: 100% Completed | 48/48 [00:02<00:00, 21.25it/s]
+[2026-08-29 08:52:23 DP5 TP5 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:23 DP5 TP5 EP2] Load weight end. elapsed=10.31 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:23 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.0.mlp.experts)...
+[2026-08-29 08:52:23 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.1.mlp.experts)...
+[2026-08-29 08:52:23 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.2.mlp.experts)...
+[2026-08-29 08:52:23 DP0 TP0 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:23 DP0 TP0 EP0] Load weight end. elapsed=10.37 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:23 DP3 TP3 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:23 DP3 TP3 EP1] Load weight end. elapsed=10.43 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:23 DP6 TP6 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:23 DP6 TP6 EP3] Load weight end. elapsed=10.65 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:24 DP2 TP2 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:24 DP2 TP2 EP1] Load weight end. elapsed=11.96 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:25 DP4 TP4 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:25 DP4 TP4 EP2] Load weight end. elapsed=12.15 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:25 DP7 TP7 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:25 DP7 TP7 EP3] Load weight end. elapsed=12.30 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:26 DP1 TP1 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-29 08:52:26 DP1 TP1 EP0] Load weight end. elapsed=13.87 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-29 08:52:26 DP0 TP0 EP0] Initialized DSpark draft runner. attention_backend=dsv4, model=DeepseekV4ForCausalLMDSpark, gamma=5, verify_num_draft_tokens=6, mask_token_id=128799, markov_head=DSparkV4MarkovHead
+[2026-08-29 08:52:26 DP0 TP0 EP0] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP7 TP7 EP3] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP6 TP6 EP3] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP0 TP0 EP0] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP7 TP7 EP3] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP4 TP4 EP2] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP3 TP3 EP1] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP6 TP6 EP3] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP2 TP2 EP1] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP1 TP1 EP0] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP4 TP4 EP2] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP3 TP3 EP1] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP2 TP2 EP1] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP5 TP5 EP2] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=20.45 GB, c128_state_fixed=2.55 GB, full_token=2075136
+[2026-08-29 08:52:26 DP1 TP1 EP0] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP5 TP5 EP2] DSV4 pool sizes: full=2075136, swa=207360, c4=518784, c128=16212, c4_state=25920, c128_state=0
+[2026-08-29 08:52:26 DP7 TP7 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP3 TP3 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP1 TP1 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP0 TP0 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP4 TP4 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP2 TP2 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP6 TP6 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:26 DP5 TP5 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=518784 c4_logical_size=518784 c128_size=16212 c4_state_pool_size=25920 c128_state_pool_size=33024
+[2026-08-29 08:52:27 DP1 TP1 EP0] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP0 TP0 EP0] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP1 TP1 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP0 TP0 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP0 TP0 EP0] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP1 TP1 EP0] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP3 TP3 EP1] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP3 TP3 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP6 TP6 EP3] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP6 TP6 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP3 TP3 EP1] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP7 TP7 EP3] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP7 TP7 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP6 TP6 EP3] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP2 TP2 EP1] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP2 TP2 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP4 TP4 EP2] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP4 TP4 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP7 TP7 EP3] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP2 TP2 EP1] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP4 TP4 EP2] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP5 TP5 EP2] Memory pool end. avail mem=21.27 GB
+[2026-08-29 08:52:27 DP5 TP5 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=128 swa_size=207360 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-29 08:52:27 DP5 TP5 EP2] Memory pool end. avail mem=20.93 GB
+[2026-08-29 08:52:27 DP4 TP4 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP7 TP7 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP4 TP4 EP2] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP4 TP4 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP7 TP7 EP3] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP7 TP7 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP7 TP7 EP3] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp7_pp0_dp7.json
+[2026-08-29 08:52:27 DP4 TP4 EP2] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp4_pp0_dp4.json
+[2026-08-29 08:52:27 DP6 TP6 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP6 TP6 EP3] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP6 TP6 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP6 TP6 EP3] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp6_pp0_dp6.json
+[2026-08-29 08:52:27 DP2 TP2 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP1 TP1 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP2 TP2 EP1] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP2 TP2 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP1 TP1 EP0] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP1 TP1 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP2 TP2 EP1] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp2_pp0_dp2.json
+[2026-08-29 08:52:27 DP1 TP1 EP0] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp1_pp0_dp1.json
+[2026-08-29 08:52:27 DP3 TP3 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP3 TP3 EP1] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP3 TP3 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP3 TP3 EP1] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp3_pp0_dp3.json
+[2026-08-29 08:52:27 DP0 TP0 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP0 TP0 EP0] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP0 TP0 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP5 TP5 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP0 TP0 EP0] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp0_pp0_dp0.json
+[2026-08-29 08:52:27 DP5 TP5 EP2] Overriding draft attention backend to dsv4.
+[2026-08-29 08:52:27 DP5 TP5 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-29 08:52:27 DP5 TP5 EP2] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.17/sm120/c941c06a8770c7da/rank_tp5_pp0_dp5.json
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/21 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.56profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.37profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.57profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.58profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.56profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.58profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.58profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   5%|▍         | 1/21 [00:00<00:02,  9.45profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 18.03profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 18.12profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 18.11profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 18.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 18.07profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 17.99profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 17.94profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  19%|█▉        | 4/21 [00:00<00:00, 17.90profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.34profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.35profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.30profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.30profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.27profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.26profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  33%|███▎      | 7/21 [00:00<00:00, 19.06profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.42profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.44profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.36profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.34profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.33profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.33profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.16profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  43%|████▎     | 9/21 [00:00<00:00, 18.09profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.71profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.72profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.44profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.43profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.38profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.42profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.47profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  52%|█████▏    | 11/21 [00:00<00:00, 17.45profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.25profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.28profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.07profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.04profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.04profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.13profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.03profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▏   | 13/21 [00:00<00:00, 17.04profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.99profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.95profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.78profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.76profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.77profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.78profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.80profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  71%|███████▏  | 15/21 [00:00<00:00, 16.78profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:00<00:00, 16.72profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:00<00:00, 16.68profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:01<00:00, 16.54profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:01<00:00, 16.52profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:00<00:00, 16.57profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:01<00:00, 16.51profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:01<00:00, 16.52profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:01<00:00, 16.35profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.30profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.23profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.16profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.12profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.07profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:01<00:00, 16.02profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.89profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.40profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.33profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.73profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.22profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.68profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.21profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.68profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.21profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.72profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.20profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.67profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 14.70profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.19profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:01<00:00, 16.19profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.78profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.73profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.74profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.69profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.68profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.77profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  10%|▉         | 2/21 [00:00<00:01, 11.65profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.76profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.72profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.70profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.71profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.74profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.69profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  19%|█▉        | 4/21 [00:00<00:01, 11.63profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.57profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.49profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.52profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.54profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.50profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.55profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.48profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:01, 11.43profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.13profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.08profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.08profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.05profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 11.03profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  38%|███▊      | 8/21 [00:00<00:01, 10.99profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.78profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.74profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.74profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.74profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.69profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.63profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.63profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  48%|████▊     | 10/21 [00:00<00:01, 10.58profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.59profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.53profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.52profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.52profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.47profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.45profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.42profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  57%|█████▋    | 12/21 [00:01<00:00, 10.39profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.45profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.40profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.38profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.39profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.34profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.34profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.30profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.28profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.35profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.29profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.26profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.27profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.26profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.23profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.21profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00, 10.19profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.20profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.11profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.11profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.11profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.06profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.05profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00, 10.03profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.93profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.85profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.81profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.84profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.86profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.81profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:01<00:00,  9.78profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.12profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.21profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.04profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.14profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.02profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.12profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.04profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.14profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.07profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.13profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.00profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.09profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  9.01profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.08profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  8.99profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00, 10.05profile/s]
+[2026-08-29 08:52:34 DP7 TP7 EP3] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP7 TP7 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP2 TP2 EP1] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP2 TP2 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP5 TP5 EP2] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP5 TP5 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP4 TP4 EP2] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP4 TP4 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP6 TP6 EP3] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP1 TP1 EP0] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP6 TP6 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP0 TP0 EP0] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP1 TP1 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP0 TP0 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP3 TP3 EP1] FlashInfer autotune completed.
+[2026-08-29 08:52:34 DP3 TP3 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:52:34 DP7 TP7 EP3] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=19.37 GB
+[2026-08-29 08:52:34 DP5 TP5 EP2] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=19.47 GB
+[2026-08-29 08:52:34 DP4 TP4 EP2] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=19.47 GB
+[2026-08-29 08:52:34 DP6 TP6 EP3] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=20.21 GB
+[2026-08-29 08:52:34 DP2 TP2 EP1] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=20.21 GB
+[2026-08-29 08:52:34 DP1 TP1 EP0] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=20.21 GB
+[2026-08-29 08:52:34 DP0 TP0 EP0] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=19.41 GB
+[2026-08-29 08:52:34 DP3 TP3 EP1] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], avail mem=20.21 GB
+  0%|          | 0/35 [00:00<?, ?it/s]Capturing batches (bs=128 avail_mem=18.92 GB):   0%|          | 0/35 [00:00<?, ?it/s]Capturing batches (bs=128 avail_mem=18.92 GB):   3%|▎         | 1/35 [00:01<00:44,  1.31s/it]Capturing batches (bs=120 avail_mem=18.78 GB):   3%|▎         | 1/35 [00:01<00:44,  1.31s/it]Capturing batches (bs=120 avail_mem=18.78 GB):   6%|▌         | 2/35 [00:02<00:37,  1.12s/it]Capturing batches (bs=112 avail_mem=18.76 GB):   6%|▌         | 2/35 [00:02<00:37,  1.12s/it]Capturing batches (bs=112 avail_mem=18.76 GB):   9%|▊         | 3/35 [00:03<00:34,  1.07s/it]Capturing batches (bs=104 avail_mem=18.73 GB):   9%|▊         | 3/35 [00:03<00:34,  1.07s/it]Capturing batches (bs=104 avail_mem=18.73 GB):  11%|█▏        | 4/35 [00:04<00:29,  1.04it/s]Capturing batches (bs=96 avail_mem=18.71 GB):  11%|█▏        | 4/35 [00:04<00:29,  1.04it/s] Capturing batches (bs=96 avail_mem=18.71 GB):  14%|█▍        | 5/35 [00:04<00:26,  1.14it/s]Capturing batches (bs=88 avail_mem=18.69 GB):  14%|█▍        | 5/35 [00:04<00:26,  1.14it/s]Capturing batches (bs=88 avail_mem=18.69 GB):  17%|█▋        | 6/35 [00:05<00:23,  1.21it/s]Capturing batches (bs=80 avail_mem=18.66 GB):  17%|█▋        | 6/35 [00:05<00:23,  1.21it/s]Capturing batches (bs=80 avail_mem=18.66 GB):  20%|██        | 7/35 [00:06<00:22,  1.26it/s]Capturing batches (bs=72 avail_mem=18.64 GB):  20%|██        | 7/35 [00:06<00:22,  1.26it/s]Capturing batches (bs=72 avail_mem=18.64 GB):  23%|██▎       | 8/35 [00:06<00:20,  1.34it/s]Capturing batches (bs=64 avail_mem=18.61 GB):  23%|██▎       | 8/35 [00:06<00:20,  1.34it/s]Capturing batches (bs=64 avail_mem=18.61 GB):  26%|██▌       | 9/35 [00:07<00:18,  1.40it/s]Capturing batches (bs=60 avail_mem=18.59 GB):  26%|██▌       | 9/35 [00:07<00:18,  1.40it/s]Capturing batches (bs=60 avail_mem=18.59 GB):  29%|██▊       | 10/35 [00:08<00:17,  1.44it/s]Capturing batches (bs=56 avail_mem=18.57 GB):  29%|██▊       | 10/35 [00:08<00:17,  1.44it/s]Capturing batches (bs=56 avail_mem=18.57 GB):  31%|███▏      | 11/35 [00:08<00:16,  1.47it/s]Capturing batches (bs=52 avail_mem=18.54 GB):  31%|███▏      | 11/35 [00:08<00:16,  1.47it/s]Capturing batches (bs=52 avail_mem=18.54 GB):  34%|███▍      | 12/35 [00:09<00:15,  1.51it/s]Capturing batches (bs=48 avail_mem=18.52 GB):  34%|███▍      | 12/35 [00:09<00:15,  1.51it/s]Capturing batches (bs=48 avail_mem=18.52 GB):  37%|███▋      | 13/35 [00:10<00:14,  1.53it/s]Capturing batches (bs=44 avail_mem=18.50 GB):  37%|███▋      | 13/35 [00:10<00:14,  1.53it/s]Capturing batches (bs=44 avail_mem=18.50 GB):  40%|████      | 14/35 [00:10<00:13,  1.54it/s]Capturing batches (bs=40 avail_mem=18.47 GB):  40%|████      | 14/35 [00:10<00:13,  1.54it/s]Capturing batches (bs=40 avail_mem=18.47 GB):  43%|████▎     | 15/35 [00:11<00:12,  1.55it/s]Capturing batches (bs=32 avail_mem=18.45 GB):  43%|████▎     | 15/35 [00:11<00:12,  1.55it/s]Capturing batches (bs=32 avail_mem=18.45 GB):  46%|████▌     | 16/35 [00:12<00:12,  1.56it/s]Capturing batches (bs=30 avail_mem=18.43 GB):  46%|████▌     | 16/35 [00:12<00:12,  1.56it/s]Capturing batches (bs=30 avail_mem=18.43 GB):  49%|████▊     | 17/35 [00:12<00:11,  1.55it/s]Capturing batches (bs=28 avail_mem=18.40 GB):  49%|████▊     | 17/35 [00:12<00:11,  1.55it/s]Capturing batches (bs=28 avail_mem=18.40 GB):  51%|█████▏    | 18/35 [00:13<00:10,  1.56it/s]Capturing batches (bs=26 avail_mem=18.38 GB):  51%|█████▏    | 18/35 [00:13<00:10,  1.56it/s]Capturing batches (bs=26 avail_mem=18.38 GB):  54%|█████▍    | 19/35 [00:13<00:10,  1.57it/s]Capturing batches (bs=24 avail_mem=18.36 GB):  54%|█████▍    | 19/35 [00:13<00:10,  1.57it/s]Capturing batches (bs=24 avail_mem=18.36 GB):  57%|█████▋    | 20/35 [00:14<00:09,  1.57it/s]Capturing batches (bs=22 avail_mem=18.33 GB):  57%|█████▋    | 20/35 [00:14<00:09,  1.57it/s]Capturing batches (bs=22 avail_mem=18.33 GB):  60%|██████    | 21/35 [00:15<00:08,  1.58it/s]Capturing batches (bs=20 avail_mem=18.31 GB):  60%|██████    | 21/35 [00:15<00:08,  1.58it/s]Capturing batches (bs=20 avail_mem=18.31 GB):  63%|██████▎   | 22/35 [00:15<00:08,  1.53it/s]Capturing batches (bs=18 avail_mem=18.17 GB):  63%|██████▎   | 22/35 [00:15<00:08,  1.53it/s]Capturing batches (bs=18 avail_mem=18.17 GB):  66%|██████▌   | 23/35 [00:16<00:07,  1.53it/s]Capturing batches (bs=16 avail_mem=18.14 GB):  66%|██████▌   | 23/35 [00:16<00:07,  1.53it/s]Capturing batches (bs=16 avail_mem=18.14 GB):  69%|██████▊   | 24/35 [00:17<00:07,  1.52it/s]Capturing batches (bs=14 avail_mem=18.10 GB):  69%|██████▊   | 24/35 [00:17<00:07,  1.52it/s]Capturing batches (bs=14 avail_mem=18.10 GB):  71%|███████▏  | 25/35 [00:17<00:06,  1.50it/s]Capturing batches (bs=12 avail_mem=18.07 GB):  71%|███████▏  | 25/35 [00:17<00:06,  1.50it/s]Capturing batches (bs=12 avail_mem=18.07 GB):  74%|███████▍  | 26/35 [00:18<00:05,  1.51it/s]Capturing batches (bs=10 avail_mem=18.03 GB):  74%|███████▍  | 26/35 [00:18<00:05,  1.51it/s]Capturing batches (bs=10 avail_mem=18.03 GB):  77%|███████▋  | 27/35 [00:19<00:05,  1.48it/s]Capturing batches (bs=8 avail_mem=17.99 GB):  77%|███████▋  | 27/35 [00:19<00:05,  1.48it/s] Capturing batches (bs=8 avail_mem=17.99 GB):  80%|████████  | 28/35 [00:19<00:04,  1.46it/s]Capturing batches (bs=7 avail_mem=17.96 GB):  80%|████████  | 28/35 [00:19<00:04,  1.46it/s]Capturing batches (bs=7 avail_mem=17.96 GB):  83%|████████▎ | 29/35 [00:20<00:04,  1.44it/s]Capturing batches (bs=6 avail_mem=17.92 GB):  83%|████████▎ | 29/35 [00:20<00:04,  1.44it/s]Capturing batches (bs=6 avail_mem=17.92 GB):  86%|████████▌ | 30/35 [00:21<00:03,  1.44it/s]Capturing batches (bs=5 avail_mem=17.88 GB):  86%|████████▌ | 30/35 [00:21<00:03,  1.44it/s]Capturing batches (bs=5 avail_mem=17.88 GB):  89%|████████▊ | 31/35 [00:22<00:02,  1.43it/s]Capturing batches (bs=4 avail_mem=17.84 GB):  89%|████████▊ | 31/35 [00:22<00:02,  1.43it/s]Capturing batches (bs=4 avail_mem=17.84 GB):  91%|█████████▏| 32/35 [00:22<00:02,  1.43it/s]Capturing batches (bs=3 avail_mem=17.80 GB):  91%|█████████▏| 32/35 [00:22<00:02,  1.43it/s]Capturing batches (bs=3 avail_mem=17.80 GB):  94%|█████████▍| 33/35 [00:23<00:01,  1.42it/s]Capturing batches (bs=2 avail_mem=17.76 GB):  94%|█████████▍| 33/35 [00:23<00:01,  1.42it/s]Capturing batches (bs=2 avail_mem=17.76 GB):  97%|█████████▋| 34/35 [00:24<00:00,  1.39it/s]Capturing batches (bs=1 avail_mem=17.72 GB):  97%|█████████▋| 34/35 [00:24<00:00,  1.39it/s]Capturing batches (bs=1 avail_mem=17.72 GB): 100%|██████████| 35/35 [00:24<00:00,  1.40it/s]Capturing batches (bs=1 avail_mem=17.72 GB): 100%|██████████| 35/35 [00:24<00:00,  1.40it/s]
+[2026-08-29 08:53:00 DP7 TP7 EP3] Capture target verify CUDA graph end. elapsed=26.18 s, mem usage=1.68 GB, avail mem=17.69 GB.
+[2026-08-29 08:53:00 DP7 TP7 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP3 TP3 EP1] Capture target verify CUDA graph end. elapsed=26.19 s, mem usage=2.51 GB, avail mem=17.71 GB.
+[2026-08-29 08:53:00 DP7 TP7 EP3] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:00 DP3 TP3 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP3 TP3 EP1] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:00 DP6 TP6 EP3] Capture target verify CUDA graph end. elapsed=26.19 s, mem usage=2.51 GB, avail mem=17.71 GB.
+[2026-08-29 08:53:00 DP6 TP6 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP6 TP6 EP3] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:00 DP4 TP4 EP2] Capture target verify CUDA graph end. elapsed=26.20 s, mem usage=1.78 GB, avail mem=17.69 GB.
+[2026-08-29 08:53:00 DP4 TP4 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP4 TP4 EP2] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:00 DP1 TP1 EP0] Capture target verify CUDA graph end. elapsed=26.20 s, mem usage=2.51 GB, avail mem=17.71 GB.
+[2026-08-29 08:53:00 DP1 TP1 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP1 TP1 EP0] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:00 DP2 TP2 EP1] Capture target verify CUDA graph end. elapsed=26.22 s, mem usage=2.51 GB, avail mem=17.71 GB.
+[2026-08-29 08:53:00 DP2 TP2 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP2 TP2 EP1] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:00 DP0 TP0 EP0] Capture target verify CUDA graph end. elapsed=26.23 s, mem usage=1.72 GB, avail mem=17.69 GB.
+[2026-08-29 08:53:00 DP0 TP0 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:00 DP0 TP0 EP0] max_total_num_tokens=2075136, chunked_prefill_size=256, max_prefill_tokens=8192, max_running_requests=128, context_len=131072, available_gpu_mem=17.62 GB
+[2026-08-29 08:53:00 DP0 TP0 EP0] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:01 DP5 TP5 EP2] Capture target verify CUDA graph end. elapsed=26.44 s, mem usage=1.78 GB, avail mem=17.69 GB.
+[2026-08-29 08:53:01 DP5 TP5 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-29 08:53:01 DP5 TP5 EP2] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-29 08:53:01] INFO:     Started server process [18159]
+[2026-08-29 08:53:01] INFO:     Waiting for application startup.
+[2026-08-29 08:53:01] Using default chat sampling params from model generation config: {'temperature': 1.0, 'top_p': 1.0}
+[2026-08-29 08:53:01] INFO:     Application startup complete.
+[2026-08-29 08:53:01] INFO:     Uvicorn running on http://0.0.0.0:30001 (Press CTRL+C to quit)
+[2026-08-29 08:53:02] DataParallelController hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang-swa-evict-fixed/python/sglang/srt/managers/data_parallel_controller.py", line 849, in run_data_parallel_controller_process
+    controller.event_loop()
+  File "/sgl-workspace/sglang-swa-evict-fixed/python/sglang/srt/managers/data_parallel_controller.py", line 804, in event_loop
+    self._request_dispatcher(recv_req)
+  File "/sgl-workspace/sglang-swa-evict-fixed/python/sglang/utils.py", line 659, in __call__
+    return fn(obj)
+           ^^^^^^^
+  File "/sgl-workspace/sglang-swa-evict-fixed/python/sglang/srt/managers/data_parallel_controller.py", line 326, in dispatching_with_trace
+    self.dispatching(req)
+  File "/sgl-workspace/sglang-swa-evict-fixed/python/sglang/srt/managers/data_parallel_controller.py", line 774, in follow_bootstrap_room_scheduler
+    assert req.bootstrap_room is not None, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: req.bootstrap_room should not be None. Do not send requests directly to prefill or decode instances; send to the router instead.
+
+[2026-08-29 08:53:02] SIGQUIT received. signum=None, frame=None. It usually means one child failed.
+[2026-08-29 08:53:02] Sleeping 5 seconds before crash diagnostics to let GPU activity settle.
+[2026-08-29 08:53:08] Pyspy dump for PID 18692 (py-spy dump --native --pid 18692):
+Process 18692: sglang::scheduler_DP0_TP0_EP0
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18692 (idle): "MainThread"
+    0x7f45e0d95d71 (libc.so.6)
+    pthread_cond_wait (libc.so.6)
+    std::condition_variable::wait (libstdc++.so.6.0.33)
+    c10d::Work::wait (libtorch_cpu.so)
+    pybind11::cpp_function::initialize<pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >)#1}, bool, c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >&&)#1}, bool (*)(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >), pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(pybind11::detail::function_call&)#1}::_FUN (libtorch_python.so)
+    pybind11::cpp_function::dispatcher (libtorch_python.so)
+    all_gather_into_tensor (torch/distributed/distributed_c10d.py:4193)
+    wrapper (torch/distributed/c10d_logger.py:83)
+    all_gather (scheduler_components/dp_attn.py:158)
+    prepare_mlp_sync_batch_raw (scheduler_components/dp_attn.py:316)
+    prepare_mlp_sync_batch (scheduler_components/dp_attn.py:378)
+    maybe_prepare_mlp_sync_batch (scheduler_components/dp_attn.py:405)
+    get_next_disagg_prefill_batch_to_run (prefill.py:498)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:558)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f45e0d271ca (libc.so.6)
+Thread 20378 (idle): "tqdm_monitor"
+    0x7f45e0d95d71 (libc.so.6)
+    0x7f45e0da12be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21146 (idle): "tqdm_monitor"
+    0x7f45e0d95d71 (libc.so.6)
+    0x7f45e0da12be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21203 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21968 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22431 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22441 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f40df080eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f40df055acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f40df086b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f40df086626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f40df0ae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f40e2649b53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f40e263ed80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22442 (idle): "Thread-3 (transfer_worker)"
+    0x7f45e0d95d71 (libc.so.6)
+    0x7f45e0da1fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22443 (idle): "Thread-4 (transfer_worker)"
+    0x7f45e0d95d71 (libc.so.6)
+    0x7f45e0da1fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22444 (idle): "Thread-5 (transfer_worker)"
+    0x7f45e0d95d71 (libc.so.6)
+    0x7f45e0da1fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22445 (idle): "Thread-6 (transfer_worker)"
+    0x7f45e0d95d71 (libc.so.6)
+    0x7f45e0da1fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f45e0d99aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:08] Pyspy dump for PID 18693 (py-spy dump --native --pid 18693):
+Process 18693: sglang::scheduler_DP1_TP1_EP0
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18693 (active): "MainThread"
+    0x7f667688cd71 (libc.so.6)
+    pthread_cond_wait (libc.so.6)
+    std::condition_variable::wait (libstdc++.so.6.0.33)
+    c10d::Work::wait (libtorch_cpu.so)
+    pybind11::cpp_function::initialize<pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >)#1}, bool, c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >&&)#1}, bool (*)(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >), pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(pybind11::detail::function_call&)#1}::_FUN (libtorch_python.so)
+    pybind11::cpp_function::dispatcher (libtorch_python.so)
+    all_gather_into_tensor (torch/distributed/distributed_c10d.py:4193)
+    wrapper (torch/distributed/c10d_logger.py:83)
+    all_gather (scheduler_components/dp_attn.py:158)
+    prepare_mlp_sync_batch_raw (scheduler_components/dp_attn.py:316)
+    prepare_mlp_sync_batch (scheduler_components/dp_attn.py:378)
+    maybe_prepare_mlp_sync_batch (scheduler_components/dp_attn.py:405)
+    get_next_disagg_prefill_batch_to_run (prefill.py:498)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:558)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f667681e1ca (libc.so.6)
+Thread 20361 (idle): "tqdm_monitor"
+    0x7f667688cd71 (libc.so.6)
+    0x7f66768982be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21145 (idle): "tqdm_monitor"
+    0x7f667688cd71 (libc.so.6)
+    0x7f66768982be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21202 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22261 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22403 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22426 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f6174c80eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f6174c55acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f6174c86b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f6174c86626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f6174cae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f6178641b53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f6178636d80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22427 (idle): "Thread-3 (transfer_worker)"
+    0x7f667688cd71 (libc.so.6)
+    0x7f6676898fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22428 (idle): "Thread-4 (transfer_worker)"
+    0x7f667688cd71 (libc.so.6)
+    0x7f6676898fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22429 (idle): "Thread-5 (transfer_worker)"
+    0x7f667688cd71 (libc.so.6)
+    0x7f6676898fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22430 (idle): "Thread-6 (transfer_worker)"
+    0x7f667688cd71 (libc.so.6)
+    0x7f6676898fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f6676890aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:09] Pyspy dump for PID 18694 (py-spy dump --native --pid 18694):
+Process 18694: sglang::scheduler_DP2_TP2_EP1
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18694 (idle): "MainThread"
+    0x7ffb9636fd71 (libc.so.6)
+    pthread_cond_wait (libc.so.6)
+    std::condition_variable::wait (libstdc++.so.6.0.33)
+    c10d::Work::wait (libtorch_cpu.so)
+    pybind11::cpp_function::initialize<pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >)#1}, bool, c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >&&)#1}, bool (*)(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >), pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(pybind11::detail::function_call&)#1}::_FUN (libtorch_python.so)
+    pybind11::cpp_function::dispatcher (libtorch_python.so)
+    broadcast (torch/distributed/distributed_c10d.py:2974)
+    wrapper (torch/distributed/c10d_logger.py:83)
+    broadcast_pyobj (utils/common.py:2190)
+    _broadcast_reqs_across_ranks (scheduler_components/request_receiver.py:190)
+    recv_requests (scheduler_components/request_receiver.py:90)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:549)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7ffb963011ca (libc.so.6)
+Thread 20379 (idle): "tqdm_monitor"
+    0x7ffb9636fd71 (libc.so.6)
+    0x7ffb9637b2be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21147 (idle): "tqdm_monitor"
+    0x7ffb9636fd71 (libc.so.6)
+    0x7ffb9637b2be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21204 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22249 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22418 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22434 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7ff694680eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7ff694655acf (libzmq-7b073b3d.so.5.2.5)
+    0x7ff694686b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7ff694686626 (libzmq-7b073b3d.so.5.2.5)
+    0x7ff6946ae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7ff6978e0b53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7ff6978d5d80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22435 (idle): "Thread-3 (transfer_worker)"
+    0x7ffb9636fd71 (libc.so.6)
+    0x7ffb9637bfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22436 (idle): "Thread-4 (transfer_worker)"
+    0x7ffb9636fd71 (libc.so.6)
+    0x7ffb9637bfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22437 (idle): "Thread-5 (transfer_worker)"
+    0x7ffb9636fd71 (libc.so.6)
+    0x7ffb9637bfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22438 (idle): "Thread-6 (transfer_worker)"
+    0x7ffb9636fd71 (libc.so.6)
+    0x7ffb9637bfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7ffb96373aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:09] Pyspy dump for PID 18695 (py-spy dump --native --pid 18695):
+Process 18695: sglang::scheduler_DP3_TP3_EP1
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18695 (idle): "MainThread"
+    prepare_mlp_sync_batch_raw (scheduler_components/dp_attn.py:333)
+    prepare_mlp_sync_batch (scheduler_components/dp_attn.py:378)
+    maybe_prepare_mlp_sync_batch (scheduler_components/dp_attn.py:405)
+    get_next_disagg_prefill_batch_to_run (prefill.py:498)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:558)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f34ca8831ca (libc.so.6)
+Thread 20371 (idle): "tqdm_monitor"
+    0x7f34ca8f1d71 (libc.so.6)
+    0x7f34ca8fd2be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21140 (idle): "tqdm_monitor"
+    0x7f34ca8f1d71 (libc.so.6)
+    0x7f34ca8fd2be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21197 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22182 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22391 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22406 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f2fc8c80eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f2fc8c55acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f2fc8c86b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f2fc8c86626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f2fc8cae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f2fcc27ab53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f2fcc26fd80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22407 (idle): "Thread-3 (transfer_worker)"
+    0x7f34ca8f1d71 (libc.so.6)
+    0x7f34ca8fdfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22408 (idle): "Thread-4 (transfer_worker)"
+    0x7f34ca8f1d71 (libc.so.6)
+    0x7f34ca8fdfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22409 (idle): "Thread-5 (transfer_worker)"
+    0x7f34ca8f1d71 (libc.so.6)
+    0x7f34ca8fdfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22410 (idle): "Thread-6 (transfer_worker)"
+    0x7f34ca8f1d71 (libc.so.6)
+    0x7f34ca8fdfb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f34ca8f5aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:09] Pyspy dump for PID 18696 (py-spy dump --native --pid 18696):
+Process 18696: sglang::scheduler_DP4_TP4_EP2
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18696 (idle): "MainThread"
+    0x7f716c46902c (zmq/backend/cython/_zmq.abi3.so)
+    0x7f716c46a5f8 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f716c47ab74 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f716c46fd80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_pyobj (zmq/sugar/socket.py:989)
+    sock_recv (io_struct.py:2263)
+    _pull_raw_reqs (scheduler_components/request_receiver.py:110)
+    recv_requests (scheduler_components/request_receiver.py:85)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:549)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f766ad881ca (libc.so.6)
+Thread 20363 (idle): "tqdm_monitor"
+    0x7f766adf6d71 (libc.so.6)
+    0x7f766ae022be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21142 (idle): "tqdm_monitor"
+    0x7f766adf6d71 (libc.so.6)
+    0x7f766ae022be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21193 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22232 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22393 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22421 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f7169280eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f7169255acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f7169286b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f7169286626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f71692ae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f716c47ab53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f716c46fd80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22422 (idle): "Thread-3 (transfer_worker)"
+    0x7f766adf6d71 (libc.so.6)
+    0x7f766ae02fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22423 (idle): "Thread-4 (transfer_worker)"
+    0x7f766adf6d71 (libc.so.6)
+    0x7f766ae02fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22424 (idle): "Thread-5 (transfer_worker)"
+    0x7f766adf6d71 (libc.so.6)
+    0x7f766ae02fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22425 (idle): "Thread-6 (transfer_worker)"
+    0x7f766adf6d71 (libc.so.6)
+    0x7f766ae02fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f766adfaaa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:10] Pyspy dump for PID 18697 (py-spy dump --native --pid 18697):
+Process 18697: sglang::scheduler_DP5_TP5_EP2
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18697 (idle): "MainThread"
+    torch::autograd::__PySlice_Unpack (libtorch_python.so)
+    torch::autograd::applySlicing (libtorch_python.so)
+    torch::autograd::THPVariable_getitem (libtorch_python.so)
+    compute_output (two_batch_overlap.py:451)
+    prepare_mlp_sync_batch_raw (scheduler_components/dp_attn.py:323)
+    prepare_mlp_sync_batch (scheduler_components/dp_attn.py:378)
+    maybe_prepare_mlp_sync_batch (scheduler_components/dp_attn.py:405)
+    get_next_disagg_prefill_batch_to_run (prefill.py:498)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:558)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f90442be1ca (libc.so.6)
+Thread 20375 (idle): "tqdm_monitor"
+    0x7f904432cd71 (libc.so.6)
+    0x7f90443382be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21141 (idle): "tqdm_monitor"
+    0x7f904432cd71 (libc.so.6)
+    0x7f90443382be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21201 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22210 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22446 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22449 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f8b42680eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f8b42655acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f8b42686b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f8b42686626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f8b426ae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f8b4587ab53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f8b4586fd80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22450 (idle): "Thread-3 (transfer_worker)"
+    0x7f904432cd71 (libc.so.6)
+    0x7f9044338fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22451 (idle): "Thread-4 (transfer_worker)"
+    0x7f904432cd71 (libc.so.6)
+    0x7f9044338fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22452 (idle): "Thread-5 (transfer_worker)"
+    0x7f904432cd71 (libc.so.6)
+    0x7f9044338fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22453 (idle): "Thread-6 (transfer_worker)"
+    0x7f904432cd71 (libc.so.6)
+    0x7f9044338fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9044330aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:10] Pyspy dump for PID 18698 (py-spy dump --native --pid 18698):
+Process 18698: sglang::scheduler_DP6_TP6_EP3
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18698 (idle): "MainThread"
+    0x7f9a52738d71 (libc.so.6)
+    pthread_cond_wait (libc.so.6)
+    std::condition_variable::wait (libstdc++.so.6.0.33)
+    c10d::Work::wait (libtorch_cpu.so)
+    pybind11::cpp_function::initialize<pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >)#1}, bool, c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::cpp_function::cpp_function<bool, c10d::Work, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >, pybind11::name, pybind11::is_method, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654]>(pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >&&)#1}, bool (*)(c10d::Work*, std::chrono::duration<long, std::ratio<(long)1, (long)1000> >), pybind11::name const, pybind11::is_method&, pybind11::sibling, pybind11::arg_v, pybind11::call_guard<pybind11::gil_scoped_release>, char [654])::{lambda(pybind11::detail::function_call&)#1}::_FUN (libtorch_python.so)
+    pybind11::cpp_function::dispatcher (libtorch_python.so)
+    all_gather_into_tensor (torch/distributed/distributed_c10d.py:4193)
+    wrapper (torch/distributed/c10d_logger.py:83)
+    all_gather (scheduler_components/dp_attn.py:158)
+    prepare_mlp_sync_batch_raw (scheduler_components/dp_attn.py:316)
+    prepare_mlp_sync_batch (scheduler_components/dp_attn.py:378)
+    maybe_prepare_mlp_sync_batch (scheduler_components/dp_attn.py:405)
+    get_next_disagg_prefill_batch_to_run (prefill.py:498)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:558)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f9a526ca1ca (libc.so.6)
+Thread 20369 (idle): "tqdm_monitor"
+    0x7f9a52738d71 (libc.so.6)
+    0x7f9a527442be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21143 (idle): "tqdm_monitor"
+    0x7f9a52738d71 (libc.so.6)
+    0x7f9a527442be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21205 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21785 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22392 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22411 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f9550a80eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f9550a55acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f9550a86b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f9550a86626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f9550aae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f9553c7ab53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f9553c6fd80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22412 (idle): "Thread-3 (transfer_worker)"
+    0x7f9a52738d71 (libc.so.6)
+    0x7f9a52744fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22413 (idle): "Thread-4 (transfer_worker)"
+    0x7f9a52738d71 (libc.so.6)
+    0x7f9a52744fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22414 (idle): "Thread-5 (transfer_worker)"
+    0x7f9a52738d71 (libc.so.6)
+    0x7f9a52744fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22415 (idle): "Thread-6 (transfer_worker)"
+    0x7f9a52738d71 (libc.so.6)
+    0x7f9a52744fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f9a5273caa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:10] Pyspy dump for PID 18699 (py-spy dump --native --pid 18699):
+Process 18699: sglang::scheduler_DP7_TP7_EP3
+Python v3.12.3 (/usr/bin/python3.12)
+
+Thread 18699 (idle): "MainThread"
+    get_new_batch_prefill (scheduler.py:2840)
+    get_next_disagg_prefill_batch_to_run (prefill.py:495)
+    wrapper (utils/nvtx_utils.py:109)
+    event_loop_overlap_disagg_prefill (prefill.py:558)
+    decorate_context (torch/utils/_contextlib.py:124)
+    dispatch_event_loop (scheduler.py:4497)
+    run_event_loop (scheduler.py:1500)
+    run_scheduler_process (scheduler.py:4639)
+    run (multiprocessing/process.py:108)
+    _bootstrap (multiprocessing/process.py:314)
+    _main (multiprocessing/spawn.py:135)
+    spawn_main (multiprocessing/spawn.py:122)
+    <module> (<string>:1)
+    0x7f48cff871ca (libc.so.6)
+Thread 20377 (idle): "tqdm_monitor"
+    0x7f48cfff5d71 (libc.so.6)
+    0x7f48d00012be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21144 (idle): "tqdm_monitor"
+    0x7f48cfff5d71 (libc.so.6)
+    0x7f48d00012be (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:359)
+    wait (threading.py:655)
+    run (tqdm/_monitor.py:69)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21198 (idle): "InductorSubproc"
+    read (libc.so.6)
+    _recv_msg (torch/_inductor/compile_worker/subproc_pool.py:76)
+    _read_thread (torch/_inductor/compile_worker/subproc_pool.py:271)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 21870 (idle): "subproc_worker_timer"
+    clock_nanosleep (libc.so.6)
+    check (torch/_inductor/compile_worker/timer.py:43)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22390 (idle): "Thread-1 (_watchdog_thread)"
+    clock_nanosleep (libc.so.6)
+    _watchdog_once (utils/watchdog.py:147)
+    _watchdog_thread (utils/watchdog.py:127)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22398 (idle): "Thread-2 (bootstrap_thread)"
+    poll (libc.so.6)
+    0x7f43ce480eb7 (libzmq-7b073b3d.so.5.2.5)
+    0x7f43ce455acf (libzmq-7b073b3d.so.5.2.5)
+    0x7f43ce486b0f (libzmq-7b073b3d.so.5.2.5)
+    0x7f43ce486626 (libzmq-7b073b3d.so.5.2.5)
+    0x7f43ce4ae4d2 (libzmq-7b073b3d.so.5.2.5)
+    zmq_msg_recv (libzmq-7b073b3d.so.5.2.5)
+    0x7f43d167ab53 (zmq/backend/cython/_zmq.abi3.so)
+    0x7f43d166fd80 (zmq/backend/cython/_zmq.abi3.so)
+    recv_multipart (zmq/sugar/socket.py:799)
+    bootstrap_thread (mooncake/conn.py:1508)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22399 (idle): "Thread-3 (transfer_worker)"
+    0x7f48cfff5d71 (libc.so.6)
+    0x7f48d0001fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22400 (idle): "Thread-4 (transfer_worker)"
+    0x7f48cfff5d71 (libc.so.6)
+    0x7f48d0001fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22401 (idle): "Thread-5 (transfer_worker)"
+    0x7f48cfff5d71 (libc.so.6)
+    0x7f48d0001fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+Thread 22402 (idle): "Thread-6 (transfer_worker)"
+    0x7f48cfff5d71 (libc.so.6)
+    0x7f48d0001fb8 (libc.so.6)
+    PyThread_acquire_lock_timed (python3.12)
+    wait (threading.py:355)
+    get (common/utils.py:81)
+    transfer_worker (mooncake/conn.py:1280)
+    run (threading.py:1010)
+    _bootstrap_inner (threading.py:1073)
+    _bootstrap (threading.py:1030)
+    0x7f48cfff9aa4 (libc.so.6)
+    __gconv_open (libc.so.6)
+
+[2026-08-29 08:53:10] CUDA user-triggered coredump is not enabled. Set CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 before CUDA initialization.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18692: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18692. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18693: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18693. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18694: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18694. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18695: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18695. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18696: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18696. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18697: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18697. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18698: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18698. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] CUDA coredump pipe not found for PID 18699: /sgl-workspace/sglang-swa-evict-fixed/corepipe.cuda.ml-pro5000-ser187.qgz02.18699. Ensure CUDA_ENABLE_USER_TRIGGERED_COREDUMP=1 was set before this process initialized CUDA.
+[2026-08-29 08:53:10] Waiting 60.0 seconds for CUDA coredumps before exiting.

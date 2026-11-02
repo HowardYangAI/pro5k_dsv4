@@ -1,0 +1,13 @@
+diff --git a/runner.py b/runner.py
+index d7913b6..415f094 100644
+--- a/runner.py
++++ b/runner.py
+@@ -833,7 +833,7 @@ EVAL_DATASET_ARGS = {
+ EVAL_GEN_CONFIGS = {
+     'mmlu': '{"max_tokens": 8192, "temperature": 0.7, "top_p": 0.95}',
+     'gsm8k': '{"max_tokens": 8192, "temperature": 0.0}',
+-    'bfcl_v3': '{"temperature": 1, "max_tokens": 32000, "parallel_tool_calls": true}',
++    'bfcl_v3': '{"temperature": 0, "max_tokens": 32000, "parallel_tool_calls": true}',
+     'longbench_v2': '{"batch_size": 1, "temperature": 0.0}',
+     'needle_haystack': '{"batch_size": 1, "temperature": 0.0}',
+ }

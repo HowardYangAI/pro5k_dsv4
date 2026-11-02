@@ -1,0 +1,35 @@
+{
+  "original_path": "/sgl-workspace/llm-benchmark-online",
+  "head_commit": "76334d9c95794e3e76f75816f24ac3f64ed6b35e",
+  "base_commit": "76334d9c95794e3e76f75816f24ac3f64ed6b35e",
+  "branch": "master",
+  "git_common_directory": "/sgl-workspace/llm-benchmark-online/.git",
+  "local_refs": [
+    "refs/heads/master 76334d9c95794e3e76f75816f24ac3f64ed6b35e"
+  ],
+  "is_shallow": false,
+  "remotes": {
+    "origin": "git@git.xiaojukeji.com:duzeyan/llm-benchmark-online.git"
+  },
+  "status_porcelain": " M runner.py\n?? benchmark.db-shm\n?? benchmark.db-wal\n",
+  "staged_paths": [],
+  "unstaged_paths": [
+    "runner.py"
+  ],
+  "untracked_paths": [
+    "benchmark.db-shm",
+    "benchmark.db-wal"
+  ],
+  "committed_delta_paths": [],
+  "recent_commits": [
+    "76334d9c95794e3e76f75816f24ac3f64ed6b35e 2026-08-19T19:01:38+08:00 refactor: identify timestamp replay logs by client",
+    "a09c57d4e7598b6e3354757611af12e92c7be90d 2026-08-19T17:29:27+08:00 fix: preserve replay mode and add database merger",
+    "263c1cec2fef85433102b4476d9345e59d8c59c3 2026-08-19T16:31:09+08:00 feat: add multi-turn replay workloads and TPOT metrics",
+    "cdab983a768b8dc65c5f1c15128926478c494650 2026-08-19T10:41:56+08:00 delete empty folder",
+    "da4096420a0f80a66c9c8b28dc01bfd86cf4fa90 2026-08-18T20:43:17+08:00 add gpu monitor",
+    "1e1e059d8ca1b24fff19020ac5c34e24dce5c613 2026-08-14T14:40:13+08:00 feat: 多轮对话测试支持缓存命中率 L1/L2 分层统计",
+    "0f626d3db0283b150a630b5252914134a347261d 2026-08-12T14:56:50+08:00 调整多轮对话默认组合参数与预设值",
+    "7011c65e513444e37d2edfd422fce40e88e919a7 2026-08-12T14:45:06+08:00 修复:测试添加重复报错bug"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

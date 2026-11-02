@@ -1,0 +1,94 @@
+==============================================
+Running benchmark with:
+ --max-concurrency: 4
+ --num-prompts: 40
+==============================================
+python3 bench_serving.py --backend sglang-oai-chat --dataset-path /home/luban/ShareGPT_V3_unfiltered_cleaned_split.json --dataset-name random --random-input-len 8192 --random-output-len 64 --random-range-ratio 1 --extra-request-body {"stream_options": {"include_usage": true}} --seed 1787110561 --host 10.207.193.139 --port 30002 --model /nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8 --model-name DeepSeek-V4-Flash-0731 --max-concurrency 4 --num-prompts 40 --request-rate inf
+----------------------------------------------
+You are using a model of type `deepseek_v4` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+You are using a model of type `deepseek_v4` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8', model_name='DeepSeek-V4-Flash-0731', num_prompts=40, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=64, random_range_ratio=1.0, request_rate=inf, max_concurrency=4, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787110561, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8', model_name='DeepSeek-V4-Flash-0731', num_prompts=40, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=64, random_range_ratio=1.0, request_rate=inf, max_concurrency=4, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787110561, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+#Input tokens: 327680
+#Output tokens: 2560
+Starting warmup with 1 sequences...
+Warmup completed with 1 sequences. Starting main benchmark run...
+
+  0%|          | 0/40 [00:00<?, ?it/s]
+  2%|▎         | 1/40 [00:04<02:59,  4.60s/it]
+  8%|▊         | 3/40 [00:08<01:31,  2.48s/it]
+ 10%|█         | 4/40 [00:08<01:00,  1.67s/it]
+ 12%|█▎        | 5/40 [00:12<01:23,  2.39s/it]
+ 18%|█▊        | 7/40 [00:12<00:41,  1.27s/it]
+ 20%|██        | 8/40 [00:12<00:31,  1.03it/s]
+ 22%|██▎       | 9/40 [00:17<01:01,  1.97s/it]
+ 25%|██▌       | 10/40 [00:17<00:43,  1.46s/it]
+ 30%|███       | 12/40 [00:21<00:47,  1.69s/it]
+ 32%|███▎      | 13/40 [00:24<00:59,  2.19s/it]
+ 38%|███▊      | 15/40 [00:25<00:33,  1.34s/it]
+ 40%|████      | 16/40 [00:25<00:25,  1.06s/it]
+ 42%|████▎     | 17/40 [00:29<00:45,  1.96s/it]
+ 50%|█████     | 20/40 [00:33<00:31,  1.58s/it]
+ 52%|█████▎    | 21/40 [00:37<00:38,  2.01s/it]
+ 55%|█████▌    | 22/40 [00:37<00:28,  1.61s/it]
+ 57%|█████▊    | 23/40 [00:37<00:21,  1.25s/it]
+ 60%|██████    | 24/40 [00:41<00:30,  1.91s/it]
+ 62%|██████▎   | 25/40 [00:44<00:34,  2.32s/it]
+ 65%|██████▌   | 26/40 [00:45<00:24,  1.73s/it]
+ 70%|███████   | 28/40 [00:49<00:21,  1.83s/it]
+ 72%|███████▎  | 29/40 [00:52<00:24,  2.22s/it]
+ 78%|███████▊  | 31/40 [00:56<00:19,  2.12s/it]
+ 80%|████████  | 32/40 [00:56<00:13,  1.68s/it]
+ 82%|████████▎ | 33/40 [01:00<00:14,  2.12s/it]
+ 85%|████████▌ | 34/40 [01:03<00:14,  2.41s/it]
+ 88%|████████▊ | 35/40 [01:06<00:13,  2.70s/it]
+ 90%|█████████ | 36/40 [01:06<00:07,  1.99s/it]
+ 92%|█████████▎| 37/40 [01:10<00:07,  2.42s/it]
+ 95%|█████████▌| 38/40 [01:10<00:03,  1.77s/it]
+ 98%|█████████▊| 39/40 [01:10<00:01,  1.29s/it]
+100%|██████████| 40/40 [01:11<00:00,  1.04s/it]
+100%|██████████| 40/40 [01:11<00:00,  1.78s/it]
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang-oai-chat
+Traffic request rate:                    inf       
+Max request concurrency:                 4         
+Successful requests:                     40        
+Benchmark duration (s):                  71.46     
+Total input tokens:                      327680    
+Total cached tokens:                     0         
+Cache hit rate:                          0.00      
+Total generated tokens:                  2560      
+Total generated tokens (retokenized):    2548      
+Request throughput (req/s):              0.56      
+Input token throughput (tok/s):          4585.75   
+Output token throughput (tok/s):         35.83     
+Total token throughput (tok/s):          4621.58   
+Concurrency:                             3.96      
+Accept length:                           2.67      
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   7076.74   
+Median E2E Latency (ms):                 7543.50   
+---------------Time to First Token----------------
+Mean TTFT (ms):                          3533.65   
+Median TTFT (ms):                        3530.91   
+P95 TTFT (ms):                           3923.25   
+P99 TTFT (ms):                           3927.83   
+--------------Time Per Output Token---------------
+Mean TPOT (ms):                          56.24     
+Median TPOT (ms):                        64.27     
+P95 TPOT (ms):                           116.43    
+P99 TPOT (ms):                           126.47    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           162.15    
+Median ITL (ms):                         45.10     
+P95 ITL (ms):                            135.39    
+P99 ITL (ms):                            3219.43   
+Max ITL (ms):                            3726.48   
+==================================================
+All benchmark tests completed!

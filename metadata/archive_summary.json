@@ -1,0 +1,29 @@
+{
+  "archive": "pro5k_dsv4",
+  "destination": "https://github.com/HowardYangAI/pro5k_dsv4",
+  "created_at_utc": "2026-11-02T10:48:02.249427+00:00",
+  "conversation_cutoff_utc": "2026-11-02T09:55:04.617618+00:00",
+  "conversation_threads": 22,
+  "readable_messages": 4067,
+  "attachments": 41,
+  "offline_test_document_source_paths": 42522,
+  "offline_unique_content_objects": 6209,
+  "source_worktrees": 14,
+  "private_baseline_bridges": 2,
+  "temporary_artifacts": 44,
+  "verification": "metadata/verification.json",
+  "source_python_verification": "metadata/workspace/source_roundtrip_verification.json",
+  "missing_artifacts": "metadata/artifacts/missing_artifacts.json",
+  "local_recovery_smoke_check": {
+    "repository": "llm-benchmark-online",
+    "files_restored": 22,
+    "output_hashes_valid": true
+  },
+  "scope_notes": [
+    "Current Codex and older workspace sessions are indexed together.",
+    "Active conversations are bounded by the recorded byte snapshot.",
+    "Public upstream tests and docs are content-deduplicated with full path mappings.",
+    "Credentials, private keys, model weights, install packages, container images, and compilation caches are excluded.",
+    "Existing source files and Git worktrees were not changed."
+  ]
+}

@@ -1,0 +1,3251 @@
+2026-09-02 11:41:55 - evalscope - [32mINFO[0m: Args: Task config is provided with TaskConfig type.[0m
+2026-09-02 11:41:55 - evalscope - [32mINFO[0m: Running with native backend[0m
+2026-09-02 11:41:55 - evalscope - [32mINFO[0m: Dump task config to /tmp-data/ifx-llm-cache/eval_outputs/20260902_114155/configs/task_config.yaml[0m
+2026-09-02 11:41:55 - evalscope - [32mINFO[0m: {
+    "model": "/data1/deepseek-ai/DeepSeek-V4-Flash-0731/",
+    "model_id": "untitled",
+    "model_args": {},
+    "model_task": "text_generation",
+    "chat_template": null,
+    "datasets": [
+        "bfcl_v3"
+    ],
+    "dataset_args": {
+        "bfcl_v3": {
+            "name": "bfcl_v3",
+            "dataset_id": "AI-ModelScope/bfcl_v3",
+            "output_types": [
+                "generation"
+            ],
+            "subset_list": [
+                "simple",
+                "multiple",
+                "parallel",
+                "parallel_multiple",
+                "java",
+                "javascript",
+                "live_simple",
+                "live_multiple",
+                "live_parallel",
+                "live_parallel_multiple",
+                "irrelevance",
+                "live_relevance",
+                "live_irrelevance",
+                "multi_turn_base",
+                "multi_turn_miss_func",
+                "multi_turn_miss_param",
+                "multi_turn_long_context"
+            ],
+            "default_subset": "default",
+            "few_shot_num": 0,
+            "few_shot_random": false,
+            "train_split": null,
+            "eval_split": "train",
+            "prompt_template": null,
+            "few_shot_prompt_template": null,
+            "system_prompt": null,
+            "query_template": null,
+            "pretty_name": "BFCL-v3",
+            "description": "\n## Overview\n\nBFCL (Berkeley Function Calling Leaderboard) v3 is the first comprehensive and executable function call evaluation benchmark for assessing LLMs' ability to invoke functions. It evaluates various forms of function calls, diverse scenarios, and executability.\n\n## Task Description\n\n- **Task Type**: Function Calling / Tool Use Evaluation\n- **Input**: User query with available function definitions\n- **Output**: Correct function call with parameters\n- **Categories**: AST_NON_LIVE, AST_LIVE, RELEVANCE, MULTI_TURN\n\n## Key Features\n\n- Comprehensive function call evaluation\n- Tests simple, multiple, and parallel function calls\n- Multi-language support (Python, Java, JavaScript)\n- Relevance detection (irrelevance handling)\n- Multi-turn conversation function calling\n- Live API endpoints for execution testing\n\n## Evaluation Notes\n\n- Requires `pip install bfcl-eval==2025.10.27.1` before evaluation\n- Set `is_fc_model=True` for models with native function calling support\n- `underscore_to_dot` parameter controls function name formatting\n- See the [usage documentation](https://evalscope.readthedocs.io/en/latest/third_party/bfcl_v3.html) for detailed setup\n- Results broken down by category (AST, Relevance, Multi-turn)\n",
+            "paper_url": null,
+            "data_statistics": null,
+            "sample_example": null,
+            "tags": [
+                "FunctionCalling",
+                "Agent"
+            ],
+            "filters": null,
+            "metric_list": [
+                "acc"
+            ],
+            "aggregation": "mean",
+            "shuffle": false,
+            "shuffle_choices": false,
+            "force_redownload": false,
+            "review_timeout": null,
+            "extra_params": {
+                "underscore_to_dot": true,
+                "is_fc_model": true
+            },
+            "sandbox_config": {}
+        }
+    },
+    "dataset_dir": "/home/luban/ifx_llm_dist_auto_test/dataset",
+    "dataset_hub": "modelscope",
+    "repeats": 1,
+    "generation_config": {
+        "batch_size": 10,
+        "max_tokens": 32000,
+        "temperature": 1.0,
+        "parallel_tool_calls": true
+    },
+    "eval_type": "openai_api",
+    "eval_backend": "Native",
+    "eval_config": null,
+    "limit": null,
+    "eval_batch_size": 10,
+    "use_cache": null,
+    "rerun_review": false,
+    "work_dir": "/tmp-data/ifx-llm-cache/eval_outputs/20260902_114155",
+    "no_timestamp": false,
+    "enable_progress_tracker": false,
+    "ignore_errors": true,
+    "debug": false,
+    "seed": 42,
+    "api_url": "http://10.93.165.26:8030/v1/chat/completions",
+    "timeout": null,
+    "stream": null,
+    "judge_strategy": "auto",
+    "judge_worker_num": null,
+    "judge_model_args": {},
+    "analysis_report": false,
+    "collect_perf": true,
+    "use_sandbox": false,
+    "sandbox_type": "docker",
+    "sandbox_manager_config": {},
+    "evalscope_version": "1.7.0"
+}[0m
+
+============================================================
+Starting eval: datasets=['bfcl_v3'], model=/data1/deepseek-ai/DeepSeek-V4-Flash-0731/
+api_url=http://10.93.165.26:8030/v1/chat/completions, limit=None, batch_size=10
+============================================================
+
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+                                                           
+2026-09-02 11:41:55 - evalscope - [32mINFO[0m: Start loading benchmark dataset: bfcl_v3[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Processing records:   0%|          | 0/4441 [00:00<?, ?it/s][A
+
+Processing records:  20%|█▉        | 869/4441 [00:00<00:00, 4514.78it/s][A
+
+Processing records:  39%|███▉      | 1748/4441 [00:00<00:00, 6333.95it/s][A
+
+Processing records:  57%|█████▋    | 2511/4441 [00:00<00:00, 6823.89it/s][A
+
+Processing records:  73%|███████▎  | 3242/4441 [00:01<00:00, 2047.23it/s][A
+
+Processing records:  84%|████████▍ | 3748/4441 [00:01<00:00, 2430.97it/s][A
+
+Processing records:  95%|█████████▌| 4236/4441 [00:01<00:00, 1487.08it/s][A
+Processing records: 100%|██████████| 4441/4441 [00:02<00:00, 2138.47it/s]
+
+                                                           
+2026-09-02 11:42:01 - evalscope - [32mINFO[0m: Start evaluating 17 subsets of bfcl_v3: ['simple', 'multiple', 'parallel', 'parallel_multiple', 'java', 'javascript', 'live_simple', 'live_multiple', 'live_parallel', 'live_parallel_multiple', 'irrelevance', 'live_relevance', 'live_irrelevance', 'multi_turn_base', 'multi_turn_miss_func', 'multi_turn_miss_param', 'multi_turn_long_context'][0m
+
+Running[eval]:   0%|          | 0/1 [00:05<?, ?benchmark/s]
+                                                           
+2026-09-02 11:42:01 - evalscope - [32mINFO[0m: Unified pool: 4441 items to process, 0 already fully cached (4441 total across all subsets).[0m
+
+Running[eval]:   0%|          | 0/1 [00:05<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:   0%|          | 0/4441 [00:00<?, ?it/s][A
+                                                           
+
+                                                             
+[A2026-09-02 11:42:01 - evalscope - [32mINFO[0m: Loading model for prediction...[0m
+
+Running[eval]:   0%|          | 0/1 [00:05<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:   0%|          | 0/4441 [00:00<?, ?it/s][A
+                                                           
+
+                                                             
+[A2026-09-02 11:42:01 - evalscope - [32mINFO[0m: Creating model /data1/deepseek-ai/DeepSeek-V4-Flash-0731/ with eval_type=openai_api base_url=http://10.93.165.26:8030/v1/chat/completions, config={'retries': 5, 'retry_interval': 10, 'batch_size': 10, 'max_tokens': 32000, 'temperature': 1.0, 'parallel_tool_calls': True}, model_args={}[0m
+
+Running[eval]:   0%|          | 0/1 [00:05<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:   0%|          | 0/4441 [00:00<?, ?it/s][A
+                                                           
+
+                                                             
+[A2026-09-02 11:42:01 - evalscope - [32mINFO[0m: Model loaded successfully.[0m
+
+Running[eval]:   0%|          | 0/1 [00:05<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:   0%|          | 0/4441 [00:00<?, ?it/s][A
+
+Evaluating[bfcl_v3]:   0%|          | 1/4441 [00:03<4:51:47,  3.94s/it][A
+
+Evaluating[bfcl_v3]:   0%|          | 21/4441 [00:05<15:27,  4.76it/s] [A
+
+Evaluating[bfcl_v3]:   1%|          | 41/4441 [00:07<10:08,  7.23it/s][A
+
+Evaluating[bfcl_v3]:   1%|▏         | 61/4441 [00:08<08:22,  8.72it/s][A
+
+Evaluating[bfcl_v3]:   2%|▏         | 81/4441 [00:10<07:37,  9.53it/s][A
+
+Evaluating[bfcl_v3]:   2%|▏         | 101/4441 [00:12<07:17,  9.93it/s][A
+
+Evaluating[bfcl_v3]:   3%|▎         | 121/4441 [00:14<07:00, 10.26it/s][A
+
+Evaluating[bfcl_v3]:   3%|▎         | 141/4441 [00:16<06:48, 10.54it/s][A
+
+Evaluating[bfcl_v3]:   4%|▎         | 161/4441 [00:18<06:37, 10.77it/s][A
+
+Evaluating[bfcl_v3]:   4%|▍         | 181/4441 [00:19<06:30, 10.92it/s][A
+
+Evaluating[bfcl_v3]:   5%|▍         | 201/4441 [00:21<06:25, 10.99it/s][A
+
+Evaluating[bfcl_v3]:   5%|▍         | 221/4441 [00:23<06:19, 11.13it/s][A
+
+Evaluating[bfcl_v3]:   5%|▌         | 233/4441 [00:24<06:15, 11.22it/s][A
+
+Evaluating[bfcl_v3]:   6%|▌         | 250/4441 [00:25<06:19, 11.04it/s][A
+
+Evaluating[bfcl_v3]:   6%|▌         | 270/4441 [00:27<06:17, 11.04it/s][A
+
+Evaluating[bfcl_v3]:   7%|▋         | 290/4441 [00:29<06:13, 11.12it/s][A
+
+Evaluating[bfcl_v3]:   7%|▋         | 310/4441 [00:31<06:11, 11.13it/s][A
+
+Evaluating[bfcl_v3]:   7%|▋         | 330/4441 [00:33<06:09, 11.11it/s][A
+
+Evaluating[bfcl_v3]:   8%|▊         | 342/4441 [00:34<06:05, 11.22it/s][A
+
+Evaluating[bfcl_v3]:   8%|▊         | 359/4441 [00:35<06:17, 10.83it/s][A
+
+Evaluating[bfcl_v3]:   9%|▊         | 379/4441 [00:37<06:20, 10.67it/s][A
+
+Evaluating[bfcl_v3]:   9%|▉         | 399/4441 [00:39<06:23, 10.53it/s][A
+
+Evaluating[bfcl_v3]:   9%|▉         | 410/4441 [00:40<06:21, 10.56it/s][A
+
+Evaluating[bfcl_v3]:   9%|▉         | 421/4441 [00:41<06:19, 10.58it/s][A
+
+Evaluating[bfcl_v3]:  10%|▉         | 436/4441 [00:43<06:51,  9.72it/s][A
+
+Evaluating[bfcl_v3]:  10%|█         | 446/4441 [00:44<06:50,  9.72it/s][A
+
+Evaluating[bfcl_v3]:  10%|█         | 465/4441 [00:46<06:31, 10.15it/s][A
+
+Evaluating[bfcl_v3]:  11%|█         | 481/4441 [00:47<05:45, 11.46it/s][A
+
+Evaluating[bfcl_v3]:  11%|█         | 495/4441 [00:49<06:35,  9.98it/s][A
+
+Evaluating[bfcl_v3]:  12%|█▏        | 515/4441 [00:51<06:30, 10.05it/s][A
+
+Evaluating[bfcl_v3]:  12%|█▏        | 532/4441 [00:53<06:34,  9.91it/s][A
+
+Evaluating[bfcl_v3]:  12%|█▏        | 552/4441 [00:54<06:18, 10.28it/s][A
+
+Evaluating[bfcl_v3]:  13%|█▎        | 572/4441 [00:56<06:15, 10.31it/s][A
+
+Evaluating[bfcl_v3]:  13%|█▎        | 590/4441 [00:58<06:23, 10.04it/s][A
+
+Evaluating[bfcl_v3]:  14%|█▎        | 601/4441 [00:59<06:18, 10.16it/s][A
+                                                           
+
+                                                                       
+[A2026-09-02 11:43:01 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  14%| 606/4441 [Elapsed: 01:00 < Remaining: 06:17, 10.16it/s][0m
+
+Running[eval]:   0%|          | 0/1 [01:05<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  14%|█▎        | 606/4441 [01:00<06:17, 10.16it/s][A
+
+Evaluating[bfcl_v3]:  14%|█▍        | 612/4441 [01:01<07:31,  8.47it/s][A
+
+Evaluating[bfcl_v3]:  14%|█▍        | 621/4441 [01:03<08:33,  7.43it/s][A
+
+Evaluating[bfcl_v3]:  14%|█▍        | 631/4441 [01:04<08:02,  7.90it/s][A
+
+Evaluating[bfcl_v3]:  14%|█▍        | 640/4441 [01:05<07:49,  8.09it/s][A
+
+Evaluating[bfcl_v3]:  15%|█▍        | 649/4441 [01:07<09:27,  6.68it/s][A
+
+Evaluating[bfcl_v3]:  15%|█▍        | 657/4441 [01:08<09:05,  6.93it/s][A
+
+Evaluating[bfcl_v3]:  15%|█▍        | 665/4441 [01:09<08:49,  7.13it/s][A
+
+Evaluating[bfcl_v3]:  15%|█▌        | 673/4441 [01:10<08:35,  7.31it/s][A
+
+Evaluating[bfcl_v3]:  15%|█▌        | 681/4441 [01:11<08:24,  7.45it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▌        | 689/4441 [01:12<08:16,  7.55it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▌        | 697/4441 [01:14<10:26,  5.98it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▌        | 704/4441 [01:15<10:03,  6.19it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▌        | 711/4441 [01:16<09:45,  6.37it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▌        | 718/4441 [01:18<12:02,  5.15it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▋        | 724/4441 [01:19<11:37,  5.33it/s][A
+
+Evaluating[bfcl_v3]:  16%|█▋        | 730/4441 [01:20<11:18,  5.47it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 736/4441 [01:21<11:03,  5.58it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 742/4441 [01:22<10:53,  5.66it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 748/4441 [01:23<10:44,  5.73it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 754/4441 [01:24<10:38,  5.77it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 760/4441 [01:25<10:34,  5.81it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 766/4441 [01:27<13:31,  4.53it/s][A
+
+Evaluating[bfcl_v3]:  17%|█▋        | 773/4441 [01:28<11:59,  5.10it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 779/4441 [01:29<11:29,  5.31it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 785/4441 [01:30<11:08,  5.47it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 791/4441 [01:31<10:52,  5.59it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 797/4441 [01:33<10:41,  5.68it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 803/4441 [01:34<10:33,  5.74it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 811/4441 [01:35<09:31,  6.35it/s][A
+
+Evaluating[bfcl_v3]:  18%|█▊        | 818/4441 [01:36<09:18,  6.49it/s][A
+
+Evaluating[bfcl_v3]:  19%|█▊        | 826/4441 [01:37<08:46,  6.87it/s][A
+
+Evaluating[bfcl_v3]:  19%|█▉        | 833/4441 [01:38<08:45,  6.86it/s][A
+
+Evaluating[bfcl_v3]:  19%|█▉        | 842/4441 [01:39<08:04,  7.43it/s][A
+
+Evaluating[bfcl_v3]:  19%|█▉        | 855/4441 [01:41<08:17,  7.20it/s][A
+
+Evaluating[bfcl_v3]:  19%|█▉        | 863/4441 [01:42<08:06,  7.35it/s][A
+
+Evaluating[bfcl_v3]:  20%|█▉        | 871/4441 [01:44<10:02,  5.93it/s][A
+
+Evaluating[bfcl_v3]:  20%|█▉        | 878/4441 [01:45<09:40,  6.14it/s][A
+
+Evaluating[bfcl_v3]:  20%|█▉        | 885/4441 [01:46<09:23,  6.31it/s][A
+
+Evaluating[bfcl_v3]:  20%|██        | 892/4441 [01:47<09:10,  6.44it/s][A
+
+Evaluating[bfcl_v3]:  20%|██        | 899/4441 [01:49<11:24,  5.18it/s][A
+
+Evaluating[bfcl_v3]:  20%|██        | 905/4441 [01:50<11:01,  5.35it/s][A
+
+Evaluating[bfcl_v3]:  21%|██        | 911/4441 [01:51<10:43,  5.48it/s][A
+
+Evaluating[bfcl_v3]:  21%|██        | 917/4441 [01:52<10:30,  5.59it/s][A
+
+Evaluating[bfcl_v3]:  21%|██        | 923/4441 [01:53<10:19,  5.68it/s][A
+
+Evaluating[bfcl_v3]:  21%|██        | 929/4441 [01:54<10:12,  5.73it/s][A
+
+Evaluating[bfcl_v3]:  21%|██        | 935/4441 [01:55<10:06,  5.78it/s][A
+
+Evaluating[bfcl_v3]:  21%|██        | 941/4441 [01:57<12:54,  4.52it/s][A
+
+Evaluating[bfcl_v3]:  21%|██▏       | 946/4441 [01:58<12:37,  4.61it/s][A
+
+Evaluating[bfcl_v3]:  21%|██▏       | 951/4441 [01:59<12:24,  4.69it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 956/4441 [02:00<12:13,  4.75it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 961/4441 [02:01<12:05,  4.80it/s][A
+                                                           
+
+                                                                       
+[A2026-09-02 11:44:02 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  22%| 961/4441 [Elapsed: 02:01 < Remaining: 12:05,  4.80it/s][0m
+
+Running[eval]:   0%|          | 0/1 [02:06<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  22%|██▏       | 961/4441 [02:01<12:05,  4.80it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 966/4441 [02:02<11:59,  4.83it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 971/4441 [02:03<11:54,  4.86it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 976/4441 [02:04<11:51,  4.87it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 981/4441 [02:05<11:48,  4.88it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 986/4441 [02:06<11:46,  4.89it/s][A
+
+Evaluating[bfcl_v3]:  22%|██▏       | 991/4441 [02:07<11:45,  4.89it/s][A
+
+Evaluating[bfcl_v3]:  23%|██▎       | 1006/4441 [02:09<09:08,  6.26it/s][A
+
+Evaluating[bfcl_v3]:  23%|██▎       | 1025/4441 [02:11<07:26,  7.66it/s][A
+
+Evaluating[bfcl_v3]:  24%|██▎       | 1045/4441 [02:13<06:36,  8.57it/s][A
+
+Evaluating[bfcl_v3]:  24%|██▎       | 1053/4441 [02:14<06:42,  8.42it/s][A
+
+Evaluating[bfcl_v3]:  24%|██▍       | 1061/4441 [02:15<06:48,  8.28it/s][A
+
+Evaluating[bfcl_v3]:  24%|██▍       | 1070/4441 [02:16<06:41,  8.40it/s][A
+
+Evaluating[bfcl_v3]:  24%|██▍       | 1079/4441 [02:17<06:35,  8.50it/s][A
+
+Evaluating[bfcl_v3]:  25%|██▍       | 1097/4441 [02:19<06:21,  8.77it/s][A
+
+Evaluating[bfcl_v3]:  25%|██▍       | 1107/4441 [02:20<06:10,  9.00it/s][A
+
+Evaluating[bfcl_v3]:  25%|██▌       | 1123/4441 [02:22<06:22,  8.68it/s][A
+
+Evaluating[bfcl_v3]:  26%|██▌       | 1133/4441 [02:23<06:10,  8.92it/s][A
+
+Evaluating[bfcl_v3]:  26%|██▌       | 1143/4441 [02:24<06:01,  9.12it/s][A
+
+Evaluating[bfcl_v3]:  26%|██▌       | 1161/4441 [02:26<05:40,  9.64it/s][A
+
+Evaluating[bfcl_v3]:  26%|██▋       | 1171/4441 [02:27<05:38,  9.66it/s][A
+
+Evaluating[bfcl_v3]:  27%|██▋       | 1188/4441 [02:29<05:46,  9.39it/s][A
+
+Evaluating[bfcl_v3]:  27%|██▋       | 1198/4441 [02:30<05:42,  9.47it/s][A
+
+Evaluating[bfcl_v3]:  27%|██▋       | 1215/4441 [02:31<05:41,  9.45it/s][A
+
+Evaluating[bfcl_v3]:  28%|██▊       | 1225/4441 [02:32<05:38,  9.51it/s][A
+
+Evaluating[bfcl_v3]:  28%|██▊       | 1235/4441 [02:33<05:35,  9.57it/s][A
+
+Evaluating[bfcl_v3]:  28%|██▊       | 1250/4441 [02:35<06:03,  8.78it/s][A
+
+Evaluating[bfcl_v3]:  28%|██▊       | 1260/4441 [02:36<05:53,  8.99it/s][A
+
+Evaluating[bfcl_v3]:  29%|██▊       | 1274/4441 [02:38<06:17,  8.39it/s][A
+
+Evaluating[bfcl_v3]:  29%|██▉       | 1283/4441 [02:39<06:12,  8.47it/s][A
+
+Evaluating[bfcl_v3]:  29%|██▉       | 1292/4441 [02:40<06:08,  8.55it/s][A
+
+Evaluating[bfcl_v3]:  29%|██▉       | 1301/4441 [02:41<06:04,  8.62it/s][A
+
+Evaluating[bfcl_v3]:  29%|██▉       | 1310/4441 [02:42<06:01,  8.66it/s][A
+
+Evaluating[bfcl_v3]:  30%|██▉       | 1329/4441 [02:44<05:36,  9.25it/s][A
+
+Evaluating[bfcl_v3]:  30%|███       | 1339/4441 [02:45<05:31,  9.37it/s][A
+
+Evaluating[bfcl_v3]:  30%|███       | 1354/4441 [02:47<05:38,  9.13it/s][A
+
+Evaluating[bfcl_v3]:  31%|███       | 1374/4441 [02:49<05:20,  9.57it/s][A
+
+Evaluating[bfcl_v3]:  31%|███▏      | 1393/4441 [02:51<05:05,  9.98it/s][A
+
+Evaluating[bfcl_v3]:  32%|███▏      | 1403/4441 [02:52<05:06,  9.92it/s][A
+
+Evaluating[bfcl_v3]:  32%|███▏      | 1413/4441 [02:53<05:06,  9.86it/s][A
+
+Evaluating[bfcl_v3]:  32%|███▏      | 1423/4441 [02:54<05:07,  9.80it/s][A
+
+Evaluating[bfcl_v3]:  32%|███▏      | 1433/4441 [02:55<05:08,  9.74it/s][A
+
+Evaluating[bfcl_v3]:  32%|███▏      | 1443/4441 [02:56<05:08,  9.72it/s][A
+
+Evaluating[bfcl_v3]:  33%|███▎      | 1453/4441 [02:58<06:31,  7.63it/s][A
+
+Evaluating[bfcl_v3]:  33%|███▎      | 1462/4441 [02:59<06:17,  7.89it/s][A
+
+Evaluating[bfcl_v3]:  33%|███▎      | 1474/4441 [03:00<05:33,  8.90it/s][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:45:02 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  33%| 1478/4441 [Elapsed: 03:01 < Remaining: 05:32,  8.90it/s][0m
+
+Running[eval]:   0%|          | 0/1 [03:06<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  33%|███▎      | 1478/4441 [03:01<05:32,  8.90it/s][A
+
+Evaluating[bfcl_v3]:  33%|███▎      | 1484/4441 [03:02<06:38,  7.41it/s][A
+
+Evaluating[bfcl_v3]:  34%|███▎      | 1493/4441 [03:03<06:21,  7.72it/s][A
+
+Evaluating[bfcl_v3]:  34%|███▍      | 1504/4441 [03:04<06:25,  7.62it/s][A
+
+Evaluating[bfcl_v3]:  34%|███▍      | 1515/4441 [03:06<06:52,  7.10it/s][A
+
+Evaluating[bfcl_v3]:  34%|███▍      | 1526/4441 [03:08<06:59,  6.95it/s][A
+
+Evaluating[bfcl_v3]:  35%|███▍      | 1534/4441 [03:09<06:47,  7.13it/s][A
+
+Evaluating[bfcl_v3]:  35%|███▍      | 1550/4441 [03:11<06:18,  7.65it/s][A
+
+Evaluating[bfcl_v3]:  35%|███▌      | 1561/4441 [03:13<06:47,  7.08it/s][A
+
+Evaluating[bfcl_v3]:  35%|███▌      | 1575/4441 [03:14<06:35,  7.24it/s][A
+
+Evaluating[bfcl_v3]:  36%|███▌      | 1583/4441 [03:15<06:29,  7.35it/s][A
+
+Evaluating[bfcl_v3]:  36%|███▌      | 1597/4441 [03:17<06:21,  7.45it/s][A
+
+Evaluating[bfcl_v3]:  36%|███▋      | 1610/4441 [03:18<05:28,  8.62it/s][A
+
+Evaluating[bfcl_v3]:  36%|███▋      | 1620/4441 [03:20<06:12,  7.57it/s][A
+
+Evaluating[bfcl_v3]:  37%|███▋      | 1629/4441 [03:21<05:59,  7.82it/s][A
+
+Evaluating[bfcl_v3]:  37%|███▋      | 1640/4441 [03:23<06:01,  7.75it/s][A
+
+Evaluating[bfcl_v3]:  37%|███▋      | 1650/4441 [03:24<05:37,  8.27it/s][A
+
+Evaluating[bfcl_v3]:  38%|███▊      | 1670/4441 [03:25<04:59,  9.25it/s][A
+
+Evaluating[bfcl_v3]:  38%|███▊      | 1685/4441 [03:27<05:17,  8.68it/s][A
+
+Evaluating[bfcl_v3]:  38%|███▊      | 1694/4441 [03:28<05:16,  8.68it/s][A
+
+Evaluating[bfcl_v3]:  38%|███▊      | 1703/4441 [03:29<05:15,  8.68it/s][A
+
+Evaluating[bfcl_v3]:  39%|███▊      | 1712/4441 [03:30<05:14,  8.69it/s][A
+
+Evaluating[bfcl_v3]:  39%|███▉      | 1725/4441 [03:32<05:39,  8.00it/s][A
+
+Evaluating[bfcl_v3]:  39%|███▉      | 1738/4441 [03:34<05:58,  7.53it/s][A
+
+Evaluating[bfcl_v3]:  39%|███▉      | 1751/4441 [03:36<06:00,  7.47it/s][A
+
+Evaluating[bfcl_v3]:  40%|███▉      | 1759/4441 [03:37<05:55,  7.54it/s][A
+
+Evaluating[bfcl_v3]:  40%|███▉      | 1767/4441 [03:38<05:52,  7.59it/s][A
+
+Evaluating[bfcl_v3]:  40%|████      | 1782/4441 [03:40<05:44,  7.72it/s][A
+
+Evaluating[bfcl_v3]:  40%|████      | 1794/4441 [03:42<05:45,  7.66it/s][A
+
+Evaluating[bfcl_v3]:  41%|████      | 1807/4441 [03:43<05:52,  7.46it/s][A
+
+Evaluating[bfcl_v3]:  41%|████      | 1817/4441 [03:44<05:30,  7.94it/s][A
+
+Evaluating[bfcl_v3]:  41%|████      | 1826/4441 [03:45<05:22,  8.12it/s][A
+
+Evaluating[bfcl_v3]:  41%|████▏     | 1835/4441 [03:48<06:41,  6.49it/s][A
+
+Evaluating[bfcl_v3]:  41%|████▏     | 1843/4441 [03:50<07:37,  5.68it/s][A
+
+Evaluating[bfcl_v3]:  42%|████▏     | 1851/4441 [03:51<07:04,  6.11it/s][A
+
+Evaluating[bfcl_v3]:  42%|████▏     | 1862/4441 [03:52<06:55,  6.20it/s][A
+
+Evaluating[bfcl_v3]:  42%|████▏     | 1873/4441 [03:54<06:40,  6.41it/s][A
+
+Evaluating[bfcl_v3]:  42%|████▏     | 1885/4441 [03:56<06:41,  6.37it/s][A
+
+Evaluating[bfcl_v3]:  43%|████▎     | 1894/4441 [03:57<06:11,  6.86it/s][A
+
+Evaluating[bfcl_v3]:  43%|████▎     | 1906/4441 [03:59<06:12,  6.81it/s][A
+
+Evaluating[bfcl_v3]:  43%|████▎     | 1917/4441 [04:00<06:23,  6.59it/s][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:46:02 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  43%| 1918/4441 [Elapsed: 04:01 < Remaining: 06:23,  6.59it/s][0m
+
+Running[eval]:   0%|          | 0/1 [04:06<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  43%|████▎     | 1918/4441 [04:01<06:23,  6.59it/s][A
+
+Evaluating[bfcl_v3]:  43%|████▎     | 1928/4441 [04:02<06:15,  6.69it/s][A
+
+Evaluating[bfcl_v3]:  44%|████▎     | 1941/4441 [04:04<06:06,  6.81it/s][A
+
+Evaluating[bfcl_v3]:  44%|████▍     | 1950/4441 [04:05<05:45,  7.21it/s][A
+
+Evaluating[bfcl_v3]:  44%|████▍     | 1963/4441 [04:07<05:43,  7.20it/s][A
+
+Evaluating[bfcl_v3]:  44%|████▍     | 1975/4441 [04:09<05:57,  6.90it/s][A
+
+Evaluating[bfcl_v3]:  45%|████▍     | 1987/4441 [04:10<05:58,  6.84it/s][A
+
+Evaluating[bfcl_v3]:  45%|████▍     | 1997/4441 [04:11<05:28,  7.44it/s][A
+
+Evaluating[bfcl_v3]:  45%|████▌     | 2017/4441 [04:13<04:48,  8.41it/s][A
+
+Evaluating[bfcl_v3]:  46%|████▌     | 2028/4441 [04:15<04:57,  8.12it/s][A
+
+Evaluating[bfcl_v3]:  46%|████▌     | 2038/4441 [04:16<04:44,  8.46it/s][A
+
+Evaluating[bfcl_v3]:  46%|████▋     | 2054/4441 [04:18<04:44,  8.38it/s][A
+
+Evaluating[bfcl_v3]:  47%|████▋     | 2068/4441 [04:20<04:59,  7.93it/s][A
+
+Evaluating[bfcl_v3]:  47%|████▋     | 2077/4441 [04:21<04:53,  8.06it/s][A
+
+Evaluating[bfcl_v3]:  47%|████▋     | 2086/4441 [04:23<05:34,  7.04it/s][A
+
+Evaluating[bfcl_v3]:  47%|████▋     | 2094/4441 [04:24<05:25,  7.20it/s][A
+
+Evaluating[bfcl_v3]:  47%|████▋     | 2105/4441 [04:26<05:43,  6.79it/s][A
+
+Evaluating[bfcl_v3]:  48%|████▊     | 2125/4441 [04:27<04:47,  8.05it/s][A
+
+Evaluating[bfcl_v3]:  48%|████▊     | 2137/4441 [04:29<04:55,  7.81it/s][A
+
+Evaluating[bfcl_v3]:  48%|████▊     | 2149/4441 [04:31<05:12,  7.33it/s][A
+
+Evaluating[bfcl_v3]:  49%|████▊     | 2157/4441 [04:32<05:08,  7.41it/s][A
+
+Evaluating[bfcl_v3]:  49%|████▉     | 2165/4441 [04:33<05:03,  7.49it/s][A
+
+Evaluating[bfcl_v3]:  49%|████▉     | 2173/4441 [04:34<05:00,  7.55it/s][A
+
+Evaluating[bfcl_v3]:  49%|████▉     | 2181/4441 [04:35<04:56,  7.61it/s][A
+
+Evaluating[bfcl_v3]:  49%|████▉     | 2193/4441 [04:37<05:23,  6.95it/s][A
+
+Evaluating[bfcl_v3]:  50%|████▉     | 2202/4441 [04:38<05:01,  7.42it/s][A
+
+Evaluating[bfcl_v3]:  50%|████▉     | 2210/4441 [04:39<04:57,  7.50it/s][A
+
+Evaluating[bfcl_v3]:  50%|█████     | 2227/4441 [04:41<04:33,  8.09it/s][A
+
+Evaluating[bfcl_v3]:  50%|█████     | 2239/4441 [04:43<04:44,  7.74it/s][A
+
+Evaluating[bfcl_v3]:  51%|█████     | 2252/4441 [04:45<04:57,  7.36it/s][A
+
+Evaluating[bfcl_v3]:  51%|█████     | 2264/4441 [04:47<05:12,  6.96it/s][A
+
+Evaluating[bfcl_v3]:  51%|█████     | 2275/4441 [04:49<05:46,  6.26it/s][A
+
+Evaluating[bfcl_v3]:  51%|█████▏    | 2285/4441 [04:51<05:46,  6.22it/s][A
+
+Evaluating[bfcl_v3]:  52%|█████▏    | 2292/4441 [04:52<05:38,  6.35it/s][A
+
+Evaluating[bfcl_v3]:  52%|█████▏    | 2299/4441 [04:53<05:32,  6.44it/s][A
+
+Evaluating[bfcl_v3]:  52%|█████▏    | 2311/4441 [04:54<05:32,  6.41it/s][A
+
+Evaluating[bfcl_v3]:  52%|█████▏    | 2318/4441 [04:55<05:26,  6.50it/s][A
+
+Evaluating[bfcl_v3]:  52%|█████▏    | 2325/4441 [04:56<05:21,  6.58it/s][A
+
+Evaluating[bfcl_v3]:  53%|█████▎    | 2332/4441 [04:58<05:17,  6.64it/s][A
+
+Evaluating[bfcl_v3]:  53%|█████▎    | 2339/4441 [04:59<05:14,  6.69it/s][A
+
+Evaluating[bfcl_v3]:  53%|█████▎    | 2352/4441 [05:00<04:55,  7.07it/s][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:47:02 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  53%| 2362/4441 [Elapsed: 05:01 < Remaining: 04:54,  7.07it/s][0m
+
+Running[eval]:   0%|          | 0/1 [05:06<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  53%|█████▎    | 2362/4441 [05:01<04:54,  7.07it/s][A
+
+Evaluating[bfcl_v3]:  53%|█████▎    | 2372/4441 [05:02<04:04,  8.45it/s][A
+
+Evaluating[bfcl_v3]:  54%|█████▎    | 2381/4441 [05:03<04:01,  8.52it/s][A
+
+Evaluating[bfcl_v3]:  54%|█████▍    | 2394/4441 [05:05<04:20,  7.86it/s][A
+
+Evaluating[bfcl_v3]:  54%|█████▍    | 2403/4441 [05:06<04:12,  8.07it/s][A
+
+Evaluating[bfcl_v3]:  54%|█████▍    | 2413/4441 [05:07<03:59,  8.45it/s][A
+
+Evaluating[bfcl_v3]:  55%|█████▍    | 2432/4441 [05:09<03:43,  8.99it/s][A
+
+Evaluating[bfcl_v3]:  55%|█████▍    | 2441/4441 [05:10<03:44,  8.93it/s][A
+
+Evaluating[bfcl_v3]:  55%|█████▌    | 2450/4441 [05:11<03:44,  8.87it/s][A
+
+Evaluating[bfcl_v3]:  55%|█████▌    | 2462/4441 [05:13<04:07,  8.00it/s][A
+
+Evaluating[bfcl_v3]:  56%|█████▌    | 2472/4441 [05:14<03:54,  8.41it/s][A
+
+Evaluating[bfcl_v3]:  56%|█████▌    | 2481/4441 [05:15<03:50,  8.49it/s][A
+
+Evaluating[bfcl_v3]:  56%|█████▌    | 2490/4441 [05:16<03:48,  8.55it/s][A
+
+Evaluating[bfcl_v3]:  56%|█████▋    | 2499/4441 [05:18<04:45,  6.79it/s][A
+
+Evaluating[bfcl_v3]:  56%|█████▋    | 2507/4441 [05:19<04:34,  7.03it/s][A
+
+Evaluating[bfcl_v3]:  57%|█████▋    | 2515/4441 [05:21<05:31,  5.80it/s][A
+
+Evaluating[bfcl_v3]:  57%|█████▋    | 2522/4441 [05:22<05:17,  6.04it/s][A
+
+Evaluating[bfcl_v3]:  57%|█████▋    | 2529/4441 [05:23<05:06,  6.24it/s][A
+
+Evaluating[bfcl_v3]:  57%|█████▋    | 2536/4441 [05:24<04:57,  6.41it/s][A
+
+Evaluating[bfcl_v3]:  57%|█████▋    | 2543/4441 [05:25<04:50,  6.53it/s][A
+
+Evaluating[bfcl_v3]:  57%|█████▋    | 2550/4441 [05:27<06:02,  5.21it/s][A
+
+Evaluating[bfcl_v3]:  58%|█████▊    | 2567/4441 [05:29<04:45,  6.57it/s][A
+
+Evaluating[bfcl_v3]:  58%|█████▊    | 2574/4441 [05:30<04:41,  6.63it/s][A
+
+Evaluating[bfcl_v3]:  58%|█████▊    | 2581/4441 [05:32<05:43,  5.42it/s][A
+
+Evaluating[bfcl_v3]:  58%|█████▊    | 2589/4441 [05:33<05:11,  5.94it/s][A
+
+Evaluating[bfcl_v3]:  58%|█████▊    | 2596/4441 [05:35<06:08,  5.00it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▊    | 2602/4441 [05:36<05:54,  5.19it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▊    | 2608/4441 [05:37<05:41,  5.36it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▉    | 2614/4441 [05:38<05:32,  5.50it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▉    | 2620/4441 [05:39<05:24,  5.61it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▉    | 2626/4441 [05:40<05:18,  5.69it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▉    | 2632/4441 [05:41<05:14,  5.75it/s][A
+
+Evaluating[bfcl_v3]:  59%|█████▉    | 2638/4441 [05:42<05:11,  5.79it/s][A
+
+Evaluating[bfcl_v3]:  60%|█████▉    | 2644/4441 [05:43<05:08,  5.83it/s][A
+
+Evaluating[bfcl_v3]:  60%|█████▉    | 2650/4441 [05:44<05:06,  5.85it/s][A
+
+Evaluating[bfcl_v3]:  60%|█████▉    | 2656/4441 [05:45<05:04,  5.87it/s][A
+
+Evaluating[bfcl_v3]:  60%|█████▉    | 2662/4441 [05:46<05:02,  5.88it/s][A
+
+Evaluating[bfcl_v3]:  60%|██████    | 2668/4441 [05:47<05:01,  5.89it/s][A
+
+Evaluating[bfcl_v3]:  60%|██████    | 2674/4441 [05:48<04:59,  5.89it/s][A
+
+Evaluating[bfcl_v3]:  60%|██████    | 2681/4441 [05:49<04:44,  6.18it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████    | 2688/4441 [05:50<04:34,  6.38it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████    | 2696/4441 [05:51<04:16,  6.81it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████    | 2703/4441 [05:52<04:14,  6.83it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████    | 2710/4441 [05:53<04:12,  6.85it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████    | 2717/4441 [05:55<04:11,  6.85it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████▏   | 2724/4441 [05:56<04:10,  6.86it/s][A
+
+Evaluating[bfcl_v3]:  61%|██████▏   | 2731/4441 [05:57<04:09,  6.86it/s][A
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2738/4441 [05:59<05:21,  5.30it/s][A
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2744/4441 [06:00<05:14,  5.39it/s][A
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2752/4441 [06:01<04:40,  6.02it/s][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:48:03 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  62%| 2758/4441 [Elapsed: 06:02 < Remaining: 04:39,  6.02it/s][0m
+
+Running[eval]:   0%|          | 0/1 [06:07<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2758/4441 [06:02<04:39,  6.02it/s][A
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2759/4441 [06:02<04:29,  6.24it/s][A
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2766/4441 [06:03<04:21,  6.41it/s][A
+
+Evaluating[bfcl_v3]:  62%|██████▏   | 2773/4441 [06:05<05:26,  5.11it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2779/4441 [06:06<05:13,  5.30it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2785/4441 [06:08<06:19,  4.36it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2790/4441 [06:09<06:07,  4.49it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2795/4441 [06:10<05:58,  4.60it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2800/4441 [06:11<05:50,  4.69it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2805/4441 [06:12<05:44,  4.75it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2810/4441 [06:13<05:39,  4.80it/s][A
+
+Evaluating[bfcl_v3]:  63%|██████▎   | 2816/4441 [06:14<05:17,  5.12it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▎   | 2822/4441 [06:15<05:02,  5.35it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▎   | 2828/4441 [06:16<04:52,  5.51it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▍   | 2834/4441 [06:17<04:45,  5.63it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▍   | 2840/4441 [06:18<04:40,  5.71it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▍   | 2846/4441 [06:19<04:36,  5.77it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▍   | 2852/4441 [06:21<05:53,  4.49it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▍   | 2858/4441 [06:22<05:26,  4.84it/s][A
+
+Evaluating[bfcl_v3]:  64%|██████▍   | 2864/4441 [06:23<05:07,  5.12it/s][A
+
+Evaluating[bfcl_v3]:  65%|██████▍   | 2870/4441 [06:24<04:54,  5.33it/s][A
+
+Evaluating[bfcl_v3]:  65%|██████▍   | 2878/4441 [06:25<04:18,  6.04it/s][A
+
+Evaluating[bfcl_v3]:  65%|██████▍   | 2885/4441 [06:26<04:08,  6.27it/s][A
+
+Evaluating[bfcl_v3]:  65%|██████▌   | 2893/4441 [06:27<03:50,  6.72it/s][A
+
+Evaluating[bfcl_v3]:  65%|██████▌   | 2900/4441 [06:28<03:48,  6.75it/s][A
+
+Evaluating[bfcl_v3]:  65%|██████▌   | 2907/4441 [06:29<03:46,  6.77it/s][A
+
+Evaluating[bfcl_v3]:  66%|██████▌   | 2914/4441 [06:30<03:44,  6.80it/s][A
+
+Evaluating[bfcl_v3]:  66%|██████▌   | 2921/4441 [06:32<04:48,  5.28it/s][A
+
+Evaluating[bfcl_v3]:  66%|██████▌   | 2927/4441 [06:33<04:38,  5.43it/s][A
+
+Evaluating[bfcl_v3]:  66%|██████▌   | 2934/4441 [06:34<04:20,  5.79it/s][A
+
+Evaluating[bfcl_v3]:  66%|██████▋   | 2943/4441 [06:35<03:46,  6.60it/s][A
+
+Evaluating[bfcl_v3]:  66%|██████▋   | 2950/4441 [06:36<03:43,  6.67it/s][A
+
+Evaluating[bfcl_v3]:  67%|██████▋   | 2957/4441 [06:37<03:40,  6.73it/s][A
+
+Evaluating[bfcl_v3]:  67%|██████▋   | 2964/4441 [06:38<03:38,  6.77it/s][A
+
+Evaluating[bfcl_v3]:  67%|██████▋   | 2971/4441 [06:39<03:36,  6.79it/s][A
+
+Evaluating[bfcl_v3]:  67%|██████▋   | 2982/4441 [06:41<03:53,  6.25it/s][A
+
+Evaluating[bfcl_v3]:  67%|██████▋   | 2996/4441 [06:42<02:57,  8.15it/s][A
+
+Evaluating[bfcl_v3]:  68%|██████▊   | 3005/4441 [06:44<03:37,  6.60it/s][A
+
+Evaluating[bfcl_v3]:  68%|██████▊   | 3013/4441 [06:45<03:27,  6.87it/s][A
+
+Evaluating[bfcl_v3]:  68%|██████▊   | 3021/4441 [06:46<03:20,  7.09it/s][A
+
+Evaluating[bfcl_v3]:  68%|██████▊   | 3029/4441 [06:48<04:03,  5.80it/s][A
+
+Evaluating[bfcl_v3]:  68%|██████▊   | 3037/4441 [06:49<03:44,  6.26it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▊   | 3044/4441 [06:50<03:38,  6.40it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▊   | 3051/4441 [06:51<03:33,  6.50it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▉   | 3058/4441 [06:52<03:29,  6.60it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▉   | 3065/4441 [06:54<03:26,  6.66it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▉   | 3072/4441 [06:55<03:23,  6.71it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▉   | 3079/4441 [06:57<04:18,  5.26it/s][A
+
+Evaluating[bfcl_v3]:  69%|██████▉   | 3085/4441 [06:58<04:10,  5.41it/s][A
+
+Evaluating[bfcl_v3]:  70%|██████▉   | 3091/4441 [06:59<04:03,  5.53it/s][A
+
+Evaluating[bfcl_v3]:  70%|██████▉   | 3097/4441 [07:01<05:01,  4.46it/s][A
+
+Evaluating[bfcl_v3]:  70%|██████▉   | 3103/4441 [07:02<04:39,  4.79it/s][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:49:04 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  70%| 3107/4441 [Elapsed: 07:03 < Remaining: 04:38,  4.79it/s][0m
+
+Running[eval]:   0%|          | 0/1 [07:08<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  70%|██████▉   | 3107/4441 [07:03<04:38,  4.79it/s][A
+
+Evaluating[bfcl_v3]:  70%|███████   | 3109/4441 [07:03<04:23,  5.06it/s][A
+
+Evaluating[bfcl_v3]:  70%|███████   | 3115/4441 [07:04<04:11,  5.28it/s][A
+
+Evaluating[bfcl_v3]:  70%|███████   | 3121/4441 [07:06<05:07,  4.29it/s][A
+
+Evaluating[bfcl_v3]:  70%|███████   | 3126/4441 [07:07<04:56,  4.44it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3131/4441 [07:08<04:47,  4.56it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3136/4441 [07:10<05:53,  3.70it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3142/4441 [07:11<05:09,  4.20it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3147/4441 [07:12<04:55,  4.38it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3152/4441 [07:13<04:45,  4.52it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3157/4441 [07:14<04:37,  4.63it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████   | 3162/4441 [07:15<04:31,  4.71it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████▏  | 3167/4441 [07:16<04:27,  4.77it/s][A
+
+Evaluating[bfcl_v3]:  71%|███████▏  | 3175/4441 [07:17<03:43,  5.65it/s][A
+
+Evaluating[bfcl_v3]:  72%|███████▏  | 3181/4441 [07:18<03:40,  5.73it/s][A
+
+Evaluating[bfcl_v3]:  72%|███████▏  | 3188/4441 [07:19<03:26,  6.05it/s][A
+
+Evaluating[bfcl_v3]:  72%|███████▏  | 3195/4441 [07:20<03:17,  6.30it/s][A
+
+Evaluating[bfcl_v3]:  72%|███████▏  | 3202/4441 [07:21<03:11,  6.47it/s][A
+
+Evaluating[bfcl_v3]:  72%|███████▏  | 3209/4441 [07:23<04:01,  5.09it/s][A
+
+Evaluating[bfcl_v3]:  72%|███████▏  | 3216/4441 [07:24<03:41,  5.53it/s][A
+
+Evaluating[bfcl_v3]:  73%|███████▎  | 3224/4441 [07:25<03:18,  6.13it/s][A
+
+Evaluating[bfcl_v3]:  73%|███████▎  | 3231/4441 [07:26<03:11,  6.32it/s][A
+
+Evaluating[bfcl_v3]:  73%|███████▎  | 3238/4441 [07:27<03:05,  6.48it/s][A
+
+Evaluating[bfcl_v3]:  73%|███████▎  | 3245/4441 [07:28<03:01,  6.58it/s][A
+
+Evaluating[bfcl_v3]:  73%|███████▎  | 3252/4441 [07:29<02:58,  6.65it/s][A
+
+Evaluating[bfcl_v3]:  73%|███████▎  | 3259/4441 [07:31<03:46,  5.22it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▎  | 3265/4441 [07:32<03:38,  5.39it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▎  | 3271/4441 [07:33<03:31,  5.52it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▍  | 3277/4441 [07:34<03:26,  5.62it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▍  | 3283/4441 [07:35<03:23,  5.70it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▍  | 3290/4441 [07:36<03:10,  6.04it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▍  | 3297/4441 [07:37<03:02,  6.28it/s][A
+
+Evaluating[bfcl_v3]:  74%|███████▍  | 3304/4441 [07:38<02:56,  6.44it/s][A
+
+Evaluating[bfcl_v3]:  75%|███████▍  | 3311/4441 [07:39<02:52,  6.56it/s][A
+
+Evaluating[bfcl_v3]:  75%|███████▍  | 3318/4441 [07:40<02:48,  6.65it/s][A
+
+Evaluating[bfcl_v3]:  75%|███████▍  | 3325/4441 [07:42<03:34,  5.20it/s][A
+
+Evaluating[bfcl_v3]:  75%|███████▌  | 3332/4441 [07:43<03:17,  5.61it/s][A
+
+Evaluating[bfcl_v3]:  75%|███████▌  | 3339/4441 [07:44<03:05,  5.94it/s][A
+
+Evaluating[bfcl_v3]:  75%|███████▌  | 3346/4441 [07:45<02:57,  6.18it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▌  | 3353/4441 [07:46<02:51,  6.36it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▌  | 3360/4441 [07:48<03:32,  5.08it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▌  | 3366/4441 [07:49<03:24,  5.26it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▌  | 3372/4441 [07:50<03:17,  5.41it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▌  | 3378/4441 [07:53<04:02,  4.38it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▌  | 3384/4441 [07:54<03:43,  4.72it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▋  | 3390/4441 [07:55<03:29,  5.01it/s][A
+
+Evaluating[bfcl_v3]:  76%|███████▋  | 3396/4441 [07:56<03:19,  5.23it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3402/4441 [07:57<03:12,  5.41it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3408/4441 [07:58<03:06,  5.53it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3414/4441 [07:59<03:02,  5.63it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3420/4441 [08:01<03:49,  4.44it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3428/4441 [08:02<03:13,  5.25it/s][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:50:04 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  77%| 3431/4441 [Elapsed: 08:03 < Remaining: 03:12,  5.25it/s][0m
+
+Running[eval]:   0%|          | 0/1 [08:08<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3431/4441 [08:03<03:12,  5.25it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3434/4441 [08:03<03:06,  5.41it/s][A
+
+Evaluating[bfcl_v3]:  77%|███████▋  | 3440/4441 [08:04<03:00,  5.53it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3446/4441 [08:05<02:56,  5.63it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3452/4441 [08:06<02:53,  5.69it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3458/4441 [08:08<03:39,  4.48it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3465/4441 [08:09<03:13,  5.05it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3472/4441 [08:10<02:55,  5.51it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3478/4441 [08:11<02:51,  5.61it/s][A
+
+Evaluating[bfcl_v3]:  78%|███████▊  | 3484/4441 [08:12<02:48,  5.68it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▊  | 3490/4441 [08:13<02:45,  5.74it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▊  | 3496/4441 [08:14<02:43,  5.78it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▉  | 3502/4441 [08:15<02:41,  5.81it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▉  | 3508/4441 [08:16<02:40,  5.83it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▉  | 3514/4441 [08:17<02:39,  5.82it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▉  | 3520/4441 [08:18<02:37,  5.84it/s][A
+
+Evaluating[bfcl_v3]:  79%|███████▉  | 3526/4441 [08:20<03:21,  4.53it/s][A
+
+Evaluating[bfcl_v3]:  80%|███████▉  | 3534/4441 [08:21<02:49,  5.35it/s][A
+
+Evaluating[bfcl_v3]:  80%|███████▉  | 3540/4441 [08:22<02:44,  5.49it/s][A
+
+Evaluating[bfcl_v3]:  80%|███████▉  | 3546/4441 [08:23<02:39,  5.60it/s][A
+
+Evaluating[bfcl_v3]:  80%|███████▉  | 3552/4441 [08:24<02:36,  5.67it/s][A
+
+Evaluating[bfcl_v3]:  80%|████████  | 3558/4441 [08:25<02:34,  5.73it/s][A
+
+Evaluating[bfcl_v3]:  80%|████████  | 3564/4441 [08:26<02:31,  5.78it/s][A
+
+Evaluating[bfcl_v3]:  80%|████████  | 3570/4441 [08:27<02:29,  5.82it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████  | 3577/4441 [08:28<02:21,  6.12it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████  | 3584/4441 [08:29<02:15,  6.34it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████  | 3591/4441 [08:30<02:11,  6.47it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████  | 3598/4441 [08:31<02:08,  6.58it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████  | 3605/4441 [08:32<02:05,  6.67it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████▏ | 3612/4441 [08:34<02:39,  5.21it/s][A
+
+Evaluating[bfcl_v3]:  81%|████████▏ | 3618/4441 [08:35<02:33,  5.38it/s][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3624/4441 [08:36<02:28,  5.51it/s][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3630/4441 [08:37<02:24,  5.62it/s][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3636/4441 [08:38<02:21,  5.68it/s][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3642/4441 [08:50<09:28,  1.40it/s][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3643/4441 [08:54<12:19,  1.08it/s][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3648/4441 [09:01<13:26,  1.02s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:51:05 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  82%| 3650/4441 [Elapsed: 09:04 < Remaining: 13:24,  1.02s/it][0m
+
+Running[eval]:   0%|          | 0/1 [09:09<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3650/4441 [09:04<13:24,  1.02s/it][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3652/4441 [09:07<15:06,  1.15s/it][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3655/4441 [09:14<18:32,  1.41s/it][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3657/4441 [09:16<17:34,  1.34s/it][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3659/4441 [09:17<15:21,  1.18s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:51:22 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [09:26<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3659/4441 [09:21<15:21,  1.18s/it][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3661/4441 [09:24<22:02,  1.70s/it][A
+
+Evaluating[bfcl_v3]:  82%|████████▏ | 3663/4441 [09:28<22:57,  1.77s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3665/4441 [09:29<18:43,  1.45s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3667/4441 [09:30<15:26,  1.20s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3669/4441 [09:36<21:51,  1.70s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3671/4441 [09:37<17:29,  1.36s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3673/4441 [09:40<17:59,  1.41s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3675/4441 [09:41<14:37,  1.15s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3677/4441 [09:44<15:56,  1.25s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3679/4441 [09:49<20:38,  1.63s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3680/4441 [09:50<19:15,  1.52s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3681/4441 [09:53<23:00,  1.82s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3682/4441 [09:54<20:43,  1.64s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3683/4441 [09:55<18:47,  1.49s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3684/4441 [09:57<20:27,  1.62s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3685/4441 [09:58<18:23,  1.46s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3687/4441 [09:59<13:38,  1.09s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3689/4441 [10:02<15:40,  1.25s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:52:05 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  83%| 3689/4441 [Elapsed: 10:04 < Remaining: 15:40,  1.25s/it][0m
+
+Running[eval]:   0%|          | 0/1 [10:09<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3689/4441 [10:04<15:40,  1.25s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3690/4441 [10:08<28:26,  2.27s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3691/4441 [10:11<30:35,  2.45s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3694/4441 [10:16<25:40,  2.06s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3697/4441 [10:22<25:19,  2.04s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3699/4441 [10:24<21:37,  1.75s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3700/4441 [10:34<38:50,  3.14s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3701/4441 [10:35<33:41,  2.73s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3705/4441 [10:36<17:33,  1.43s/it][A
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3707/4441 [10:38<16:07,  1.32s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:52:45 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [10:50<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  83%|████████▎ | 3708/4441 [10:44<16:05,  1.32s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▎ | 3709/4441 [10:48<28:44,  2.36s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▎ | 3710/4441 [10:51<30:04,  2.47s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▎ | 3712/4441 [10:53<22:18,  1.84s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▎ | 3714/4441 [10:57<22:55,  1.89s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▎ | 3716/4441 [10:58<17:41,  1.46s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▎ | 3718/4441 [10:59<14:06,  1.17s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:53:06 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  84%| 3720/4441 [Elapsed: 11:05 < Remaining: 14:04,  1.17s/it][0m
+
+Running[eval]:   0%|          | 0/1 [11:10<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3720/4441 [11:05<14:04,  1.17s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3721/4441 [11:06<19:38,  1.64s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3723/4441 [11:11<22:28,  1.88s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3725/4441 [11:12<17:49,  1.49s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3727/4441 [11:16<19:33,  1.64s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3730/4441 [11:19<16:37,  1.40s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3732/4441 [11:30<29:30,  2.50s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3735/4441 [11:31<20:11,  1.72s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3737/4441 [11:37<24:02,  2.05s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3739/4441 [11:39<20:43,  1.77s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3741/4441 [11:40<16:35,  1.42s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3743/4441 [11:41<13:32,  1.16s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3745/4441 [11:47<19:41,  1.70s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3747/4441 [11:53<24:04,  2.08s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3748/4441 [11:54<21:57,  1.90s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3749/4441 [11:55<19:54,  1.73s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3750/4441 [11:57<20:36,  1.79s/it][A
+
+Evaluating[bfcl_v3]:  84%|████████▍ | 3751/4441 [11:58<18:26,  1.60s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3753/4441 [12:01<17:57,  1.57s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3754/4441 [12:02<16:30,  1.44s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:54:06 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  85%| 3754/4441 [Elapsed: 12:05 < Remaining: 16:30,  1.44s/it][0m
+
+Running[eval]:   0%|          | 0/1 [12:10<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3754/4441 [12:05<16:30,  1.44s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3755/4441 [12:07<25:13,  2.21s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3756/4441 [12:08<21:40,  1.90s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3757/4441 [12:11<25:04,  2.20s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3759/4441 [12:14<21:35,  1.90s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3760/4441 [12:16<21:52,  1.93s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3761/4441 [12:17<19:13,  1.70s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3762/4441 [12:20<23:09,  2.05s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3764/4441 [12:21<15:36,  1.38s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3768/4441 [12:26<14:45,  1.32s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3769/4441 [12:29<17:51,  1.59s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3770/4441 [12:30<16:35,  1.48s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3771/4441 [12:33<20:14,  1.81s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▍ | 3773/4441 [12:34<14:41,  1.32s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3775/4441 [12:38<17:22,  1.57s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3776/4441 [12:39<16:07,  1.45s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3778/4441 [12:40<12:16,  1.11s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3780/4441 [12:43<13:44,  1.25s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3782/4441 [12:47<16:28,  1.50s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3783/4441 [12:49<17:30,  1.60s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3784/4441 [12:52<20:50,  1.90s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3785/4441 [12:53<18:31,  1.69s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3787/4441 [12:54<13:17,  1.22s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3789/4441 [12:56<12:25,  1.14s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3791/4441 [13:02<19:18,  1.78s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:55:06 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  85%| 3792/4441 [Elapsed: 13:05 < Remaining: 19:16,  1.78s/it][0m
+
+Running[eval]:   0%|          | 0/1 [13:10<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3792/4441 [13:05<19:16,  1.78s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3793/4441 [13:12<30:41,  2.84s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3794/4441 [13:13<26:53,  2.49s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3795/4441 [13:14<23:27,  2.18s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3796/4441 [13:15<20:29,  1.91s/it][A
+
+Evaluating[bfcl_v3]:  85%|████████▌ | 3797/4441 [13:16<18:03,  1.68s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3798/4441 [13:17<16:08,  1.51s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3799/4441 [13:18<14:40,  1.37s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3800/4441 [13:19<13:33,  1.27s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3801/4441 [13:21<15:49,  1.48s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3802/4441 [13:22<14:20,  1.35s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3803/4441 [13:33<44:28,  4.18s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3805/4441 [13:35<29:00,  2.74s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3806/4441 [13:36<24:29,  2.31s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3808/4441 [13:42<27:28,  2.60s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3809/4441 [13:44<26:00,  2.47s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3810/4441 [13:50<35:06,  3.34s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3811/4441 [13:51<28:43,  2.74s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3812/4441 [13:54<29:28,  2.81s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3813/4441 [14:01<41:42,  3.98s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3814/4441 [14:05<41:44,  3.99s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:56:07 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  86%| 3814/4441 [Elapsed: 14:05 < Remaining: 41:44,  3.99s/it][0m
+
+Running[eval]:   0%|          | 0/1 [14:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3814/4441 [14:05<41:44,  3.99s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3817/4441 [14:11<30:13,  2.91s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3818/4441 [14:15<30:25,  2.93s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3819/4441 [14:17<28:12,  2.72s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3820/4441 [14:27<48:22,  4.67s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3821/4441 [14:32<49:13,  4.76s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3822/4441 [14:33<38:42,  3.75s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3823/4441 [14:35<33:39,  3.27s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3824/4441 [14:36<26:59,  2.62s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3825/4441 [14:37<22:09,  2.16s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3826/4441 [14:46<42:43,  4.17s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3828/4441 [14:47<25:35,  2.50s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3829/4441 [14:48<21:50,  2.14s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▌ | 3830/4441 [14:54<32:09,  3.16s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3831/4441 [14:56<28:57,  2.85s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3832/4441 [14:57<23:44,  2.34s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3833/4441 [14:58<19:52,  1.96s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3834/4441 [15:05<34:37,  3.42s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:57:07 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  86%| 3834/4441 [Elapsed: 15:05 < Remaining: 34:37,  3.42s/it][0m
+
+Running[eval]:   0%|          | 0/1 [15:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3834/4441 [15:05<34:37,  3.42s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3837/4441 [15:09<21:01,  2.09s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:57:10 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [15:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3837/4441 [15:09<21:01,  2.09s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3838/4441 [15:11<20:49,  2.07s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3839/4441 [15:22<41:23,  4.13s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3840/4441 [15:31<53:25,  5.33s/it][A
+
+Evaluating[bfcl_v3]:  86%|████████▋ | 3841/4441 [15:33<44:41,  4.47s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3843/4441 [15:39<38:20,  3.85s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3844/4441 [15:40<31:41,  3.18s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3845/4441 [15:41<26:14,  2.64s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3846/4441 [15:42<21:56,  2.21s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3847/4441 [15:54<48:30,  4.90s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3848/4441 [16:02<57:06,  5.78s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3849/4441 [16:05<49:12,  4.99s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:06 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [16:10<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3849/4441 [16:05<49:12,  4.99s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3850/4441 [16:06<37:45,  3.83s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:07 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  87%| 3850/4441 [Elapsed: 16:06 < Remaining: 37:45,  3.83s/it][0m
+
+Running[eval]:   0%|          | 0/1 [16:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3850/4441 [16:06<37:45,  3.83s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3851/4441 [16:08<32:26,  3.30s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3852/4441 [16:17<48:59,  4.99s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3853/4441 [16:25<57:41,  5.89s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3855/4441 [16:26<33:24,  3.42s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:36 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [16:40<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3855/4441 [16:35<33:24,  3.42s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:38 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [16:42<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3855/4441 [16:37<33:24,  3.42s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3856/4441 [16:37<51:56,  5.33s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3857/4441 [16:41<48:31,  4.99s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3859/4441 [16:48<42:14,  4.36s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3860/4441 [16:52<41:24,  4.28s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:54 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [16:58<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3860/4441 [16:52<41:24,  4.28s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:56 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [17:00<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3860/4441 [16:55<41:24,  4.28s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:58:56 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [17:00<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3860/4441 [16:55<41:24,  4.28s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3861/4441 [17:01<52:52,  5.47s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3863/4441 [17:06<40:48,  4.24s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:59:07 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  87%| 3863/4441 [Elapsed: 17:06 < Remaining: 40:48,  4.24s/it][0m
+
+Running[eval]:   0%|          | 0/1 [17:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3863/4441 [17:06<40:48,  4.24s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:59:08 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [17:12<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3863/4441 [17:07<40:48,  4.24s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3864/4441 [17:10<40:15,  4.19s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3865/4441 [17:12<35:02,  3.65s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3866/4441 [17:16<35:56,  3.75s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3867/4441 [17:19<33:09,  3.47s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3868/4441 [17:21<29:15,  3.06s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3870/4441 [17:27<28:55,  3.04s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3871/4441 [17:28<24:14,  2.55s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:59:33 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [17:37<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3871/4441 [17:32<24:14,  2.55s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3872/4441 [17:32<27:51,  2.94s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3873/4441 [17:36<30:31,  3.22s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:59:39 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [17:43<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3874/4441 [17:38<30:28,  3.22s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3875/4441 [17:44<33:38,  3.57s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3877/4441 [17:45<22:37,  2.41s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3878/4441 [17:49<25:48,  2.75s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3879/4441 [17:51<24:08,  2.58s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3880/4441 [17:53<22:46,  2.44s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 11:59:58 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [18:02<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3880/4441 [17:57<22:46,  2.44s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3881/4441 [17:59<31:33,  3.38s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:00:07 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [18:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3881/4441 [18:06<31:33,  3.38s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3882/4441 [18:06<40:49,  4.38s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:00:07 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  87%| 3882/4441 [Elapsed: 18:06 < Remaining: 40:49,  4.38s/it][0m
+
+Running[eval]:   0%|          | 0/1 [18:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3882/4441 [18:06<40:49,  4.38s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3884/4441 [18:17<45:17,  4.88s/it][A
+
+Evaluating[bfcl_v3]:  87%|████████▋ | 3885/4441 [18:18<36:39,  3.96s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3886/4441 [18:22<36:43,  3.97s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3888/4441 [18:24<25:07,  2.73s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3890/4441 [18:27<20:50,  2.27s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:00:30 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [18:34<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3890/4441 [18:29<20:50,  2.27s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3891/4441 [18:33<28:04,  3.06s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3892/4441 [18:37<30:02,  3.28s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3893/4441 [18:44<38:30,  4.22s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3894/4441 [18:47<35:33,  3.90s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3896/4441 [18:48<22:14,  2.45s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3897/4441 [18:53<27:39,  3.05s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3898/4441 [18:57<29:49,  3.29s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3899/4441 [19:01<31:28,  3.48s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3900/4441 [19:03<27:47,  3.08s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3901/4441 [19:06<27:34,  3.06s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:01:08 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  88%| 3901/4441 [Elapsed: 19:06 < Remaining: 27:34,  3.06s/it][0m
+
+Running[eval]:   0%|          | 0/1 [19:12<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3901/4441 [19:06<27:34,  3.06s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3902/4441 [19:10<29:59,  3.34s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3903/4441 [19:19<44:45,  4.99s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3904/4441 [19:22<36:51,  4.12s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3905/4441 [19:24<31:15,  3.50s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3906/4441 [19:27<29:57,  3.36s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3907/4441 [19:38<50:11,  5.64s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3909/4441 [19:40<31:08,  3.51s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3910/4441 [19:49<43:07,  4.87s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3911/4441 [19:58<52:36,  5.96s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3912/4441 [19:59<40:40,  4.61s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3913/4441 [20:02<36:40,  4.17s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3914/4441 [20:05<33:43,  3.84s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:02:07 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [20:11<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3914/4441 [20:06<33:43,  3.84s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3915/4441 [20:06<26:29,  3.02s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:02:08 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  88%| 3915/4441 [Elapsed: 20:07 < Remaining: 26:29,  3.02s/it][0m
+
+Running[eval]:   0%|          | 0/1 [20:12<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3915/4441 [20:07<26:29,  3.02s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:02:09 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [20:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3915/4441 [20:08<26:29,  3.02s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:02:16 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [20:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3915/4441 [20:15<26:29,  3.02s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3916/4441 [20:17<46:54,  5.36s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3917/4441 [20:23<48:34,  5.56s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3918/4441 [20:24<36:43,  4.21s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3919/4441 [20:30<41:20,  4.75s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3920/4441 [20:31<31:34,  3.64s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3921/4441 [20:36<35:07,  4.05s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3922/4441 [20:38<29:47,  3.44s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3924/4441 [20:44<28:01,  3.25s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3925/4441 [20:45<23:12,  2.70s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3926/4441 [20:47<21:37,  2.52s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3927/4441 [20:52<27:23,  3.20s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3928/4441 [20:54<24:30,  2.87s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3929/4441 [20:56<22:22,  2.62s/it][A
+
+Evaluating[bfcl_v3]:  88%|████████▊ | 3930/4441 [20:58<20:50,  2.45s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3931/4441 [21:04<29:40,  3.49s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:03:08 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  89%| 3931/4441 [Elapsed: 21:07 < Remaining: 29:40,  3.49s/it][0m
+
+Running[eval]:   0%|          | 0/1 [21:12<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3931/4441 [21:07<29:40,  3.49s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3932/4441 [21:11<38:27,  4.53s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:03:13 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [21:18<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3932/4441 [21:12<38:27,  4.53s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3933/4441 [21:18<43:20,  5.12s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3934/4441 [21:25<48:02,  5.68s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3935/4441 [21:27<38:43,  4.59s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3936/4441 [21:28<29:38,  3.52s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3937/4441 [21:30<25:47,  3.07s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3938/4441 [21:31<20:35,  2.46s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3939/4441 [21:33<19:26,  2.32s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3940/4441 [21:35<18:37,  2.23s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▊ | 3941/4441 [21:39<23:02,  2.77s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3942/4441 [21:48<38:35,  4.64s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3943/4441 [21:50<31:58,  3.85s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3945/4441 [21:52<21:00,  2.54s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3947/4441 [22:03<30:39,  3.72s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3948/4441 [22:05<27:29,  3.35s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:04:09 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  89%| 3948/4441 [Elapsed: 22:08 < Remaining: 27:29,  3.35s/it][0m
+
+Running[eval]:   0%|          | 0/1 [22:13<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3948/4441 [22:08<27:29,  3.35s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3949/4441 [22:12<34:38,  4.23s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3950/4441 [22:22<46:40,  5.70s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3953/4441 [22:23<23:37,  2.90s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3955/4441 [22:33<29:12,  3.61s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3956/4441 [22:34<25:07,  3.11s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:04:36 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [22:40<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3956/4441 [22:35<25:07,  3.11s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:04:38 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [22:42<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3956/4441 [22:37<25:07,  3.11s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3958/4441 [22:40<24:46,  3.08s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3959/4441 [22:44<26:14,  3.27s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3960/4441 [22:47<26:08,  3.26s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3961/4441 [22:53<31:26,  3.93s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3962/4441 [22:54<25:23,  3.18s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3963/4441 [22:55<20:42,  2.60s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3964/4441 [22:56<17:09,  2.16s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3966/4441 [22:57<11:19,  1.43s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3967/4441 [23:08<11:17,  1.43s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:05:09 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  89%| 3967/4441 [Elapsed: 23:08 < Remaining: 11:17,  1.43s/it][0m
+
+Running[eval]:   0%|          | 0/1 [23:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3967/4441 [23:08<11:17,  1.43s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3968/4441 [23:10<26:47,  3.40s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3969/4441 [23:12<24:22,  3.10s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3970/4441 [23:13<20:27,  2.61s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3971/4441 [23:14<17:16,  2.20s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3972/4441 [23:16<16:50,  2.15s/it][A
+
+Evaluating[bfcl_v3]:  89%|████████▉ | 3974/4441 [23:25<24:41,  3.17s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3976/4441 [23:26<16:43,  2.16s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3978/4441 [23:30<16:15,  2.11s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3979/4441 [23:37<23:49,  3.09s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3980/4441 [23:38<20:12,  2.63s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3981/4441 [23:39<17:10,  2.24s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3982/4441 [23:45<22:35,  2.95s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3983/4441 [23:46<18:34,  2.43s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3984/4441 [23:47<15:32,  2.04s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3985/4441 [23:49<15:42,  2.07s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3986/4441 [23:54<22:06,  2.92s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3987/4441 [23:58<24:29,  3.24s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3989/4441 [24:07<28:44,  3.82s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:06:10 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  90%| 3989/4441 [Elapsed: 24:09 < Remaining: 28:44,  3.82s/it][0m
+
+Running[eval]:   0%|          | 0/1 [24:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3989/4441 [24:09<28:44,  3.82s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3990/4441 [24:12<30:53,  4.11s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:06:17 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [24:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3990/4441 [24:16<30:53,  4.11s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3991/4441 [24:22<42:19,  5.64s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3992/4441 [24:25<36:54,  4.93s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3993/4441 [24:26<28:40,  3.84s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3994/4441 [24:28<24:44,  3.32s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:06:30 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [24:34<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3995/4441 [24:29<24:40,  3.32s/it][A
+
+Evaluating[bfcl_v3]:  90%|████████▉ | 3996/4441 [24:30<16:56,  2.29s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 3997/4441 [24:39<28:59,  3.92s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 3998/4441 [24:42<27:12,  3.69s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 3999/4441 [24:43<21:51,  2.97s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4001/4441 [24:54<29:51,  4.07s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4003/4441 [25:01<28:09,  3.86s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:07:10 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  90%| 4003/4441 [Elapsed: 25:09 < Remaining: 28:09,  3.86s/it][0m
+
+Running[eval]:   0%|          | 0/1 [25:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4003/4441 [25:09<28:09,  3.86s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4004/4441 [25:10<36:09,  4.97s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:07:15 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [25:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4004/4441 [25:14<36:09,  4.97s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:07:16 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [25:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4004/4441 [25:15<36:09,  4.97s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:07:17 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [25:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4004/4441 [25:16<36:09,  4.97s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4005/4441 [25:28<58:21,  8.03s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4007/4441 [25:31<39:09,  5.41s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:07:37 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [25:41<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4007/4441 [25:36<39:09,  5.41s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:07:41 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [25:45<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4007/4441 [25:40<39:09,  5.41s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4008/4441 [25:41<46:28,  6.44s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4009/4441 [25:45<42:14,  5.87s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4010/4441 [25:49<38:44,  5.39s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4011/4441 [26:02<53:19,  7.44s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:08:10 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  90%| 4011/4441 [Elapsed: 26:09 < Remaining: 53:19,  7.44s/it][0m
+
+Running[eval]:   0%|          | 0/1 [26:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4011/4441 [26:09<53:19,  7.44s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:08:13 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [26:17<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4011/4441 [26:11<53:19,  7.44s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4012/4441 [26:12<58:19,  8.16s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4013/4441 [26:15<47:47,  6.70s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4014/4441 [26:20<44:13,  6.21s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:08:28 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [26:32<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4014/4441 [26:27<44:13,  6.21s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:08:32 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [26:36<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4014/4441 [26:31<44:13,  6.21s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:08:42 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [26:46<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4014/4441 [26:41<44:13,  6.21s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4015/4441 [26:42<1:16:50, 10.82s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4016/4441 [26:47<1:04:33,  9.11s/it][A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4018/4441 [26:49<38:10,  5.42s/it]  [A
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4019/4441 [26:57<42:35,  6.05s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:09:10 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  90%| 4019/4441 [Elapsed: 27:09 < Remaining: 42:35,  6.05s/it][0m
+
+Running[eval]:   0%|          | 0/1 [27:14<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4019/4441 [27:09<42:35,  6.05s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:09:12 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [27:16<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  90%|█████████ | 4019/4441 [27:11<42:35,  6.05s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4020/4441 [27:11<57:00,  8.13s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4021/4441 [27:12<43:23,  6.20s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:09:30 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [27:34<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4021/4441 [27:29<43:23,  6.20s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4022/4441 [27:31<1:08:23,  9.79s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4023/4441 [27:33<52:47,  7.58s/it]  [A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4024/4441 [27:37<45:30,  6.55s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:09:40 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [27:44<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4024/4441 [27:39<45:30,  6.55s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4025/4441 [27:41<40:18,  5.81s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4026/4441 [27:45<36:36,  5.29s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4027/4441 [27:57<50:16,  7.29s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4028/4441 [27:59<37:19,  5.42s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4029/4441 [28:01<30:16,  4.41s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4030/4441 [28:06<31:26,  4.59s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4031/4441 [28:07<24:03,  3.52s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4032/4441 [28:08<18:53,  2.77s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:10:11 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  91%| 4032/4441 [Elapsed: 28:10 < Remaining: 18:53,  2.77s/it][0m
+
+Running[eval]:   0%|          | 0/1 [28:15<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4032/4441 [28:10<18:53,  2.77s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4033/4441 [28:11<19:22,  2.85s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4034/4441 [28:12<15:35,  2.30s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4035/4441 [28:14<14:58,  2.21s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4036/4441 [28:28<38:50,  5.76s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4037/4441 [28:31<33:13,  4.93s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4038/4441 [28:35<31:17,  4.66s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4039/4441 [28:36<23:53,  3.57s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4040/4441 [28:42<28:45,  4.30s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4042/4441 [28:46<21:36,  3.25s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4043/4441 [28:47<17:52,  2.69s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4044/4441 [28:53<23:34,  3.56s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4045/4441 [28:55<20:43,  3.14s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4046/4441 [28:57<18:36,  2.83s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4047/4441 [28:59<17:01,  2.59s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4048/4441 [29:02<17:46,  2.71s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4049/4441 [29:05<18:18,  2.80s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4050/4441 [29:08<18:41,  2.87s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4051/4441 [29:10<17:00,  2.62s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:11:11 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  91%| 4051/4441 [Elapsed: 29:10 < Remaining: 17:00,  2.62s/it][0m
+
+Running[eval]:   0%|          | 0/1 [29:15<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4051/4441 [29:10<17:00,  2.62s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████ | 4052/4441 [29:12<15:49,  2.44s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4053/4441 [29:13<13:01,  2.01s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4054/4441 [29:19<20:43,  3.21s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4055/4441 [29:22<20:17,  3.15s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4056/4441 [29:24<18:02,  2.81s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:11:29 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [29:33<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4057/4441 [29:28<18:00,  2.81s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4058/4441 [29:30<18:32,  2.90s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4059/4441 [29:31<15:30,  2.44s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4060/4441 [29:32<13:06,  2.06s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:11:41 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [29:45<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4060/4441 [29:40<13:06,  2.06s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4061/4441 [29:40<23:19,  3.68s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4062/4441 [29:47<29:09,  4.62s/it][A
+
+Evaluating[bfcl_v3]:  91%|█████████▏| 4063/4441 [29:48<22:36,  3.59s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4064/4441 [29:49<17:51,  2.84s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:11:52 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [29:57<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4064/4441 [29:51<17:51,  2.84s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4065/4441 [29:52<18:07,  2.89s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4066/4441 [29:55<18:17,  2.93s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4068/4441 [29:56<11:19,  1.82s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4069/4441 [30:00<14:39,  2.36s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4070/4441 [30:01<12:27,  2.01s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4072/4441 [30:06<13:42,  2.23s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:12:11 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  92%| 4072/4441 [Elapsed: 30:10 < Remaining: 13:42,  2.23s/it][0m
+
+Running[eval]:   0%|          | 0/1 [30:16<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4072/4441 [30:10<13:42,  2.23s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4073/4441 [30:11<17:40,  2.88s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4076/4441 [30:12<09:48,  1.61s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4078/4441 [30:13<07:36,  1.26s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4080/4441 [30:19<10:53,  1.81s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4082/4441 [30:25<13:05,  2.19s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4084/4441 [30:26<09:57,  1.67s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4086/4441 [30:32<12:19,  2.08s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4087/4441 [30:34<12:12,  2.07s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4088/4441 [30:35<10:54,  1.86s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4089/4441 [30:38<12:25,  2.12s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4090/4441 [30:41<12:16,  2.10s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4091/4441 [30:46<16:38,  2.85s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4092/4441 [30:50<18:25,  3.17s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4093/4441 [30:51<14:54,  2.57s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:12:52 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [30:57<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4094/4441 [30:51<14:51,  2.57s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4095/4441 [30:52<09:34,  1.66s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4097/4441 [30:54<08:52,  1.55s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4098/4441 [30:56<09:26,  1.65s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4100/4441 [31:04<14:31,  2.56s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4101/4441 [31:09<17:28,  3.08s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:13:12 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  92%| 4101/4441 [Elapsed: 31:10 < Remaining: 17:28,  3.08s/it][0m
+
+Running[eval]:   0%|          | 0/1 [31:16<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4101/4441 [31:10<17:28,  3.08s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4102/4441 [31:11<16:00,  2.83s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4105/4441 [31:12<08:52,  1.59s/it][A
+
+Evaluating[bfcl_v3]:  92%|█████████▏| 4107/4441 [31:20<12:18,  2.21s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4108/4441 [31:26<16:13,  2.92s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4109/4441 [31:27<13:57,  2.52s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4112/4441 [31:33<12:30,  2.28s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4113/4441 [31:34<11:11,  2.05s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4114/4441 [31:36<11:07,  2.04s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4115/4441 [31:40<13:33,  2.50s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4116/4441 [31:42<12:52,  2.38s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4117/4441 [31:45<13:43,  2.54s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4118/4441 [31:46<11:27,  2.13s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4119/4441 [31:47<09:45,  1.82s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4120/4441 [31:52<14:36,  2.73s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4121/4441 [31:55<15:00,  2.81s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4122/4441 [31:57<13:42,  2.58s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4123/4441 [31:59<12:47,  2.41s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4125/4441 [32:02<10:32,  2.00s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4126/4441 [32:06<13:06,  2.50s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4127/4441 [32:10<15:08,  2.89s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4128/4441 [32:11<12:27,  2.39s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:14:12 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  93%| 4128/4441 [Elapsed: 32:11 < Remaining: 12:27,  2.39s/it][0m
+
+Running[eval]:   0%|          | 0/1 [32:16<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4128/4441 [32:11<12:27,  2.39s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4129/4441 [32:15<14:47,  2.85s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4131/4441 [32:18<11:39,  2.26s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4133/4441 [32:22<11:05,  2.16s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4134/4441 [32:28<15:20,  3.00s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4135/4441 [32:29<12:55,  2.53s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4136/4441 [32:30<10:55,  2.15s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4137/4441 [32:34<13:23,  2.64s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4138/4441 [32:35<11:05,  2.20s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4139/4441 [32:36<09:22,  1.86s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4140/4441 [32:38<09:34,  1.91s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4141/4441 [32:39<08:15,  1.65s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4142/4441 [32:40<07:17,  1.46s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4144/4441 [32:42<06:13,  1.26s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4145/4441 [32:52<16:49,  3.41s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4147/4441 [32:54<11:51,  2.42s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4148/4441 [32:56<11:21,  2.33s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4149/4441 [32:57<09:45,  2.00s/it][A
+
+Evaluating[bfcl_v3]:  93%|█████████▎| 4150/4441 [33:01<12:15,  2.53s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4153/4441 [33:08<11:41,  2.43s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:15:10 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [33:15<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4153/4441 [33:09<11:41,  2.43s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4154/4441 [33:10<11:15,  2.35s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:15:12 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  94%| 4154/4441 [Elapsed: 33:11 < Remaining: 11:15,  2.35s/it][0m
+
+Running[eval]:   0%|          | 0/1 [33:17<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4154/4441 [33:11<11:15,  2.35s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4155/4441 [33:13<11:55,  2.50s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4156/4441 [33:14<10:11,  2.14s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4157/4441 [33:15<08:46,  1.85s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4158/4441 [33:19<11:28,  2.43s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4159/4441 [33:22<12:11,  2.59s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4160/4441 [33:25<12:42,  2.71s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4161/4441 [33:26<10:22,  2.22s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4162/4441 [33:28<10:03,  2.16s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▎| 4163/4441 [33:29<08:27,  1.83s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4164/4441 [33:30<07:20,  1.59s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4165/4441 [33:32<07:53,  1.72s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4167/4441 [33:35<07:24,  1.62s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4168/4441 [33:43<13:26,  2.95s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4169/4441 [33:44<11:06,  2.45s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4170/4441 [33:46<10:31,  2.33s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4173/4441 [33:48<06:26,  1.44s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4175/4441 [33:49<04:59,  1.13s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4177/4441 [33:57<09:06,  2.07s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4179/4441 [34:00<08:16,  1.89s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4180/4441 [34:01<07:32,  1.73s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4181/4441 [34:02<06:51,  1.58s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4182/4441 [34:03<06:15,  1.45s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4183/4441 [34:04<05:46,  1.34s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4184/4441 [34:06<06:30,  1.52s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4185/4441 [34:10<09:22,  2.20s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4186/4441 [34:11<07:55,  1.87s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4187/4441 [34:12<06:51,  1.62s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:16:13 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  94%| 4187/4441 [Elapsed: 34:12 < Remaining: 06:51,  1.62s/it][0m
+
+Running[eval]:   0%|          | 0/1 [34:17<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4187/4441 [34:12<06:51,  1.62s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4188/4441 [34:15<08:32,  2.03s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4190/4441 [34:18<07:30,  1.79s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4191/4441 [34:23<10:45,  2.58s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4192/4441 [34:24<09:02,  2.18s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4193/4441 [34:25<07:42,  1.86s/it][A
+
+Evaluating[bfcl_v3]:  94%|█████████▍| 4195/4441 [34:27<06:07,  1.49s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4197/4441 [34:32<07:39,  1.88s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4199/4441 [34:37<08:29,  2.11s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4201/4441 [34:40<07:37,  1.91s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4202/4441 [34:42<07:40,  1.93s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4203/4441 [34:43<06:51,  1.73s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4204/4441 [34:44<06:09,  1.56s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4205/4441 [34:56<16:30,  4.20s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4206/4441 [34:59<15:13,  3.89s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4207/4441 [35:00<12:04,  3.10s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4209/4441 [35:03<09:16,  2.40s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4210/4441 [35:07<10:43,  2.79s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4211/4441 [35:11<11:52,  3.10s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:17:13 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  95%| 4211/4441 [Elapsed: 35:12 < Remaining: 11:52,  3.10s/it][0m
+
+Running[eval]:   0%|          | 0/1 [35:17<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4211/4441 [35:12<11:52,  3.10s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4212/4441 [35:13<10:43,  2.81s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4213/4441 [35:15<09:51,  2.59s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4214/4441 [35:24<16:40,  4.41s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4216/4441 [35:32<15:52,  4.23s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4217/4441 [35:33<12:53,  3.45s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▍| 4218/4441 [35:43<19:06,  5.14s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4219/4441 [35:49<19:17,  5.21s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:17:51 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [35:56<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4219/4441 [35:50<19:17,  5.21s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4220/4441 [35:55<20:01,  5.44s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4221/4441 [35:57<16:22,  4.47s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4222/4441 [36:01<15:49,  4.34s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:18:06 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [36:10<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4222/4441 [36:05<15:49,  4.34s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4223/4441 [36:05<15:25,  4.24s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4224/4441 [36:08<14:03,  3.89s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4225/4441 [36:13<15:12,  4.22s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:18:14 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  95%| 4225/4441 [Elapsed: 36:13 < Remaining: 15:12,  4.22s/it][0m
+
+Running[eval]:   0%|          | 0/1 [36:18<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4225/4441 [36:13<15:12,  4.22s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4226/4441 [36:22<20:14,  5.65s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4228/4441 [36:23<11:41,  3.29s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:18:25 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [36:29<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4228/4441 [36:24<11:41,  3.29s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4229/4441 [36:27<12:15,  3.47s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4230/4441 [36:29<10:52,  3.09s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4231/4441 [36:31<09:47,  2.80s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4232/4441 [36:32<08:00,  2.30s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4233/4441 [36:37<10:40,  3.08s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4234/4441 [36:46<16:34,  4.80s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4235/4441 [36:50<15:41,  4.57s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4236/4441 [36:53<14:03,  4.11s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4237/4441 [36:56<12:52,  3.79s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4239/4441 [36:58<08:28,  2.52s/it][A
+
+Evaluating[bfcl_v3]:  95%|█████████▌| 4240/4441 [37:05<12:08,  3.63s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4242/4441 [37:06<07:45,  2.34s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4243/4441 [37:07<06:43,  2.04s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:19:14 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  96%| 4243/4441 [Elapsed: 37:13 < Remaining: 06:43,  2.04s/it][0m
+
+Running[eval]:   0%|          | 0/1 [37:18<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4243/4441 [37:13<06:43,  2.04s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4244/4441 [37:14<10:43,  3.26s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:19:17 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [37:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4244/4441 [37:16<10:43,  3.26s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4245/4441 [37:18<11:17,  3.46s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4248/4441 [37:20<06:24,  1.99s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4249/4441 [37:22<06:23,  2.00s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4250/4441 [37:23<05:39,  1.78s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4251/4441 [37:26<06:34,  2.08s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4252/4441 [37:30<08:06,  2.57s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4253/4441 [37:31<06:45,  2.15s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4254/4441 [37:32<05:44,  1.84s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4255/4441 [37:35<06:44,  2.17s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4257/4441 [37:41<07:49,  2.55s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4258/4441 [37:43<07:23,  2.42s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4260/4441 [37:45<05:34,  1.85s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4261/4441 [37:47<05:39,  1.89s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4262/4441 [37:50<06:27,  2.17s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4263/4441 [37:53<07:05,  2.39s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4264/4441 [37:54<05:57,  2.02s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4267/4441 [37:56<03:46,  1.30s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4268/4441 [37:57<03:34,  1.24s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4269/4441 [37:58<03:24,  1.19s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4270/4441 [37:59<03:16,  1.15s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4271/4441 [38:04<05:38,  1.99s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4272/4441 [38:05<04:52,  1.73s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▌| 4273/4441 [38:06<04:17,  1.53s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4275/4441 [38:08<03:36,  1.30s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4276/4441 [38:09<03:23,  1.23s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4277/4441 [38:13<05:18,  1.94s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4278/4441 [38:14<04:36,  1.70s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:20:15 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  96%| 4278/4441 [Elapsed: 38:14 < Remaining: 04:36,  1.70s/it][0m
+
+Running[eval]:   0%|          | 0/1 [38:19<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4278/4441 [38:14<04:36,  1.70s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4279/4441 [38:19<07:03,  2.61s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4281/4441 [38:21<05:05,  1.91s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4282/4441 [38:24<05:45,  2.17s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4283/4441 [38:25<04:56,  1.88s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4284/4441 [38:26<04:18,  1.65s/it][A
+
+Evaluating[bfcl_v3]:  96%|█████████▋| 4285/4441 [38:27<03:49,  1.47s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:20:31 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [38:35<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4286/4441 [38:30<03:48,  1.47s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4287/4441 [38:32<04:57,  1.93s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4288/4441 [38:37<06:48,  2.67s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4289/4441 [38:40<06:59,  2.76s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4290/4441 [38:46<09:08,  3.63s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4291/4441 [38:48<07:57,  3.18s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4292/4441 [38:49<06:23,  2.57s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4293/4441 [38:50<05:14,  2.12s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4294/4441 [38:51<04:24,  1.80s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4295/4441 [38:52<03:49,  1.57s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4296/4441 [38:55<04:49,  2.00s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4297/4441 [38:59<06:14,  2.60s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4298/4441 [39:05<08:37,  3.62s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4299/4441 [39:11<10:15,  4.33s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:21:15 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  97%| 4299/4441 [Elapsed: 39:14 < Remaining: 10:15,  4.33s/it][0m
+
+Running[eval]:   0%|          | 0/1 [39:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4299/4441 [39:14<10:15,  4.33s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4300/4441 [39:17<11:22,  4.84s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4301/4441 [39:19<09:18,  3.99s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4303/4441 [39:22<06:05,  2.65s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4305/4441 [39:25<04:59,  2.20s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4307/4441 [39:28<04:21,  1.95s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4308/4441 [39:36<07:05,  3.20s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4309/4441 [39:40<07:26,  3.38s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4310/4441 [39:44<07:43,  3.54s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4311/4441 [39:45<06:14,  2.88s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4312/4441 [39:49<06:51,  3.19s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4313/4441 [39:50<05:32,  2.60s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4316/4441 [39:51<02:54,  1.39s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4318/4441 [39:55<03:17,  1.60s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4319/4441 [39:56<03:01,  1.49s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4320/4441 [39:58<03:13,  1.60s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4321/4441 [40:07<06:44,  3.37s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4323/4441 [40:08<04:21,  2.21s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4325/4441 [40:13<04:29,  2.32s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4326/4441 [40:14<03:55,  2.05s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4327/4441 [40:15<03:26,  1.81s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:22:16 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  97%| 4327/4441 [Elapsed: 40:15 < Remaining: 03:26,  1.81s/it][0m
+
+Running[eval]:   0%|          | 0/1 [40:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4327/4441 [40:15<03:26,  1.81s/it][A
+
+Evaluating[bfcl_v3]:  97%|█████████▋| 4328/4441 [40:17<03:30,  1.87s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4330/4441 [40:29<06:37,  3.58s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4331/4441 [40:30<05:29,  2.99s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4332/4441 [40:38<07:33,  4.16s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4333/4441 [40:39<06:01,  3.35s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4335/4441 [40:42<04:32,  2.57s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4336/4441 [40:43<03:51,  2.21s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4337/4441 [40:46<04:10,  2.41s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4338/4441 [40:57<08:01,  4.68s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4339/4441 [40:59<06:43,  3.95s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4340/4441 [41:09<09:31,  5.66s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4341/4441 [41:10<07:13,  4.33s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4342/4441 [41:11<05:33,  3.37s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4344/4441 [41:12<03:21,  2.07s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:23:16 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4344/4441 [Elapsed: 41:15 < Remaining: 03:21,  2.07s/it][0m
+
+Running[eval]:   0%|          | 0/1 [41:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4344/4441 [41:15<03:21,  2.07s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4344/4441 [41:26<03:21,  2.07s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4345/4441 [41:40<13:28,  8.42s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4346/4441 [42:01<18:29, 11.68s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4347/4441 [42:11<17:36, 11.24s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4348/4441 [42:14<13:52,  8.95s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:24:16 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4348/4441 [Elapsed: 42:15 < Remaining: 13:52,  8.95s/it][0m
+
+Running[eval]:   0%|          | 0/1 [42:20<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4348/4441 [42:15<13:52,  8.95s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4349/4441 [42:35<18:59, 12.38s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4351/4441 [42:58<17:59, 11.99s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4352/4441 [43:00<14:11,  9.57s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:25:16 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4352/4441 [Elapsed: 43:15 < Remaining: 14:11,  9.57s/it][0m
+
+Running[eval]:   0%|          | 0/1 [43:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4352/4441 [43:15<14:11,  9.57s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4353/4441 [43:18<17:13, 11.75s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4354/4441 [43:19<12:51,  8.87s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4355/4441 [44:06<27:55, 19.49s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:26:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4355/4441 [Elapsed: 44:15 < Remaining: 27:55, 19.49s/it][0m
+
+Running[eval]:   0%|          | 0/1 [44:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4355/4441 [44:15<27:55, 19.49s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4356/4441 [44:51<37:52, 26.74s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4357/4441 [44:59<29:52, 21.33s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4358/4441 [45:01<21:18, 15.40s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4359/4441 [45:09<18:04, 13.23s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4360/4441 [45:11<13:22,  9.91s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4361/4441 [45:13<10:05,  7.56s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:27:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4361/4441 [Elapsed: 45:16 < Remaining: 10:05,  7.56s/it][0m
+
+Running[eval]:   0%|          | 0/1 [45:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4361/4441 [45:16<10:05,  7.56s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4362/4441 [45:29<13:16, 10.08s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:28:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4362/4441 [Elapsed: 46:16 < Remaining: 13:16, 10.08s/it][0m
+
+Running[eval]:   0%|          | 0/1 [46:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4362/4441 [46:16<13:16, 10.08s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4363/4441 [46:21<29:23, 22.61s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4364/4441 [46:22<20:43, 16.15s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4365/4441 [46:27<16:14, 12.82s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4366/4441 [46:33<13:28, 10.78s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4367/4441 [46:37<10:47,  8.75s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4368/4441 [46:46<10:44,  8.83s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4369/4441 [47:07<14:58, 12.49s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4370/4441 [47:08<10:42,  9.04s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4371/4441 [47:09<07:44,  6.64s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:29:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  98%| 4371/4441 [Elapsed: 47:16 < Remaining: 07:44,  6.64s/it][0m
+
+Running[eval]:   0%|          | 0/1 [47:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4371/4441 [47:16<07:44,  6.64s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4372/4441 [47:24<10:31,  9.15s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4373/4441 [47:25<07:36,  6.71s/it][A
+
+Evaluating[bfcl_v3]:  98%|█████████▊| 4374/4441 [47:29<06:35,  5.90s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4375/4441 [47:33<05:52,  5.34s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4376/4441 [47:48<08:55,  8.24s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4378/4441 [47:52<05:38,  5.37s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4379/4441 [48:00<06:13,  6.02s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4380/4441 [48:02<05:03,  4.97s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4381/4441 [48:14<06:53,  6.89s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:30:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  99%| 4381/4441 [Elapsed: 48:16 < Remaining: 06:53,  6.89s/it][0m
+
+Running[eval]:   0%|          | 0/1 [48:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4381/4441 [48:16<06:53,  6.89s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4382/4441 [48:20<06:32,  6.65s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4383/4441 [48:22<05:08,  5.32s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4384/4441 [48:29<05:31,  5.81s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▊| 4385/4441 [48:41<07:07,  7.63s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4386/4441 [48:47<06:33,  7.15s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4387/4441 [48:55<06:40,  7.41s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4388/4441 [49:04<06:57,  7.89s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:31:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  99%| 4388/4441 [Elapsed: 49:16 < Remaining: 06:57,  7.89s/it][0m
+
+Running[eval]:   0%|          | 0/1 [49:21<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4388/4441 [49:16<06:57,  7.89s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4389/4441 [49:31<11:46, 13.59s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4391/4441 [49:33<06:30,  7.81s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4394/4441 [49:37<03:36,  4.60s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4395/4441 [49:39<03:08,  4.11s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4396/4441 [49:42<02:54,  3.87s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4398/4441 [49:47<02:24,  3.36s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4399/4441 [49:49<02:08,  3.07s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4400/4441 [49:50<01:46,  2.59s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4401/4441 [49:54<01:57,  2.95s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4402/4441 [49:55<01:35,  2.44s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4403/4441 [49:57<01:28,  2.32s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4404/4441 [50:11<03:27,  5.61s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4406/4441 [50:14<02:12,  3.79s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:32:17 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3]  99%| 4406/4441 [Elapsed: 50:16 < Remaining: 02:12,  3.79s/it][0m
+
+Running[eval]:   0%|          | 0/1 [50:22<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4406/4441 [50:16<02:12,  3.79s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4407/4441 [50:18<02:10,  3.84s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4408/4441 [50:26<02:42,  4.92s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4409/4441 [50:32<02:46,  5.21s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4410/4441 [50:34<02:14,  4.33s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:32:36 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [50:40<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4410/4441 [50:35<02:14,  4.33s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4411/4441 [50:37<01:58,  3.96s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4412/4441 [50:44<02:20,  4.84s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4413/4441 [50:51<02:33,  5.47s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4414/4441 [50:52<01:52,  4.16s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4415/4441 [50:59<02:10,  5.01s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4416/4441 [51:02<01:50,  4.41s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4417/4441 [51:04<01:28,  3.70s/it][A
+
+Evaluating[bfcl_v3]:  99%|█████████▉| 4418/4441 [51:13<02:01,  5.29s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4419/4441 [51:14<01:28,  4.01s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4420/4441 [51:16<01:05,  3.11s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:33:18 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3] 100%| 4420/4441 [Elapsed: 51:17 < Remaining: 01:05,  3.11s/it][0m
+
+Running[eval]:   0%|          | 0/1 [51:22<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4420/4441 [51:17<01:05,  3.11s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4421/4441 [51:25<01:37,  4.88s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:33:27 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [51:31<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4421/4441 [51:26<01:37,  4.88s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4422/4441 [51:44<02:53,  9.12s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4423/4441 [51:47<02:11,  7.29s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4424/4441 [51:50<01:42,  6.01s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4425/4441 [51:51<01:12,  4.51s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4426/4441 [51:52<00:52,  3.47s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4427/4441 [51:54<00:42,  3.03s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4428/4441 [51:57<00:39,  3.03s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4429/4441 [52:07<01:01,  5.12s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4430/4441 [52:09<00:46,  4.19s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4432/4441 [52:11<00:24,  2.72s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:34:18 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3] 100%| 4432/4441 [Elapsed: 52:17 < Remaining: 00:24,  2.72s/it][0m
+
+Running[eval]:   0%|          | 0/1 [52:22<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4432/4441 [52:17<00:24,  2.72s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4433/4441 [52:20<00:34,  4.28s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4434/4441 [52:24<00:29,  4.21s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:34:27 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [52:31<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4434/4441 [52:26<00:29,  4.21s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4435/4441 [52:34<00:34,  5.79s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:34:47 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [52:51<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4435/4441 [52:46<00:34,  5.79s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4436/4441 [52:49<00:41,  8.37s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4437/4441 [52:51<00:26,  6.55s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4438/4441 [53:08<00:28,  9.58s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:35:18 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3] 100%| 4438/4441 [Elapsed: 53:17 < Remaining: 00:28,  9.58s/it][0m
+
+Running[eval]:   0%|          | 0/1 [53:22<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4438/4441 [53:17<00:28,  9.58s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4439/4441 [53:30<00:26, 13.22s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:35:37 - evalscope - [33mWARNING[0m: INFERENCE_WARNING: Exceeded max inference steps (20)[0m
+
+Running[eval]:   0%|          | 0/1 [53:41<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4439/4441 [53:36<00:26, 13.22s/it][A
+
+Evaluating[bfcl_v3]: 100%|█████████▉| 4440/4441 [53:39<00:11, 11.98s/it][A
+
+Evaluating[bfcl_v3]: 100%|██████████| 4441/4441 [53:58<00:00, 14.05s/it][A
+                                                           
+
+                                                                        
+[A2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Evaluating[bfcl_v3] 100%| 4441/4441 [Elapsed: 53:58 < Remaining: 00:00, 14.05s/it][0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+
+Evaluating[bfcl_v3]: 100%|██████████| 4441/4441 [53:58<00:00, 14.05s/it][A
+Evaluating[bfcl_v3]: 100%|██████████| 4441/4441 [53:58<00:00,  1.37it/s]
+
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Unified pool finished for bfcl_v3.[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: simple[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: multiple[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: parallel[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: parallel_multiple[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: java[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: javascript[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: live_simple[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: live_multiple[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: live_parallel[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: live_parallel_multiple[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: irrelevance[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: live_relevance[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: live_irrelevance[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: multi_turn_base[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: multi_turn_miss_func[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: multi_turn_miss_param[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Aggregating scores for subset: multi_turn_long_context[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Generating report...[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: 
+bfcl_v3 report table:
+┌──────────┬───────────┬──────────┬─────────────────────────┬───────┬─────────┬──────────────┐
+│ Model    │ Dataset   │ Metric   │ Subset                  │   Num │   Score │ Cat.0        │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_simple             │   258 │  0.8566 │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_multiple           │  1053 │  0.7559 │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_parallel           │    16 │  0.75   │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_parallel_multiple  │    24 │  0.5833 │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ simple                  │   400 │  0.9375 │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multiple                │   200 │  0.955  │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ parallel                │   200 │  0.92   │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ parallel_multiple       │   200 │  0.845  │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ java                    │   100 │  0.63   │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ javascript              │    50 │  0.62   │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_base         │   200 │  0.37   │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_miss_func    │   200 │  0.255  │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_miss_param   │   200 │  0.31   │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_long_context │   200 │  0.315  │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ irrelevance             │   240 │  0.4    │ RELEVANCE    │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_relevance          │    18 │  0.7222 │ RELEVANCE    │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_irrelevance        │   882 │  0.5125 │ RELEVANCE    │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ NON_LIVE                │  1390 │  0.6311 │ -            │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ LIVE                    │  2251 │  0.6699 │ -            │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ MULTI_TURN              │   800 │  0.3317 │ -            │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ OVERALL                 │  4441 │  0.5442 │ -            │
+└──────────┴───────────┴──────────┴─────────────────────────┴───────┴─────────┴──────────────┘ 
+[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Skipping report analysis (`analysis_report=False`).[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Dump report to: /tmp-data/ifx-llm-cache/eval_outputs/20260902_114155/reports/untitled/bfcl_v3.json 
+[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+                                                           
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Benchmark bfcl_v3 evaluation finished.[0m
+
+Running[eval]:   0%|          | 0/1 [54:03<?, ?benchmark/s]
+Running[eval]: 100%|██████████| 1/1 [54:03<00:00, 3243.73s/benchmark]
+                                                                     
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Running[eval] 100%| 1/1 [Elapsed: 54:03 < Remaining: 00:00, 3243.73s/benchmark][0m
+
+Running[eval]: 100%|██████████| 1/1 [54:03<00:00, 3243.73s/benchmark]
+Running[eval]: 100%|██████████| 1/1 [54:03<00:00, 3243.73s/benchmark]
+2026-09-02 12:35:59 - evalscope - [32mINFO[0m: Overall report table: 
+┌──────────┬───────────┬──────────┬─────────────────────────┬───────┬─────────┬──────────────┐
+│ Model    │ Dataset   │ Metric   │ Subset                  │   Num │   Score │ Cat.0        │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_simple             │   258 │  0.8566 │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_multiple           │  1053 │  0.7559 │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_parallel           │    16 │  0.75   │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_parallel_multiple  │    24 │  0.5833 │ AST_LIVE     │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ simple                  │   400 │  0.9375 │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multiple                │   200 │  0.955  │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ parallel                │   200 │  0.92   │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ parallel_multiple       │   200 │  0.845  │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ java                    │   100 │  0.63   │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ javascript              │    50 │  0.62   │ AST_NON_LIVE │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_base         │   200 │  0.37   │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_miss_func    │   200 │  0.255  │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_miss_param   │   200 │  0.31   │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ multi_turn_long_context │   200 │  0.315  │ MULTI_TURN   │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ irrelevance             │   240 │  0.4    │ RELEVANCE    │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_relevance          │    18 │  0.7222 │ RELEVANCE    │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ live_irrelevance        │   882 │  0.5125 │ RELEVANCE    │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ NON_LIVE                │  1390 │  0.6311 │ -            │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ LIVE                    │  2251 │  0.6699 │ -            │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ MULTI_TURN              │   800 │  0.3317 │ -            │
+├──────────┼───────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────────┤
+│ untitled │ bfcl_v3   │ acc      │ OVERALL                 │  4441 │  0.5442 │ -            │
+└──────────┴───────────┴──────────┴─────────────────────────┴───────┴─────────┴──────────────┘ 
+[0m
+2026-09-02 12:36:00 - evalscope - [32mINFO[0m: HTML report generated: /tmp-data/ifx-llm-cache/eval_outputs/20260902_114155/reports/report.html[0m
+2026-09-02 12:36:00 - evalscope - [32mINFO[0m: Finished evaluation for untitled on ['bfcl_v3'][0m
+2026-09-02 12:36:00 - evalscope - [32mINFO[0m: Output directory: /tmp-data/ifx-llm-cache/eval_outputs/20260902_114155[0m
+
+============================================================
+Evaluation completed in 3244.7s
+============================================================
+
+===EVAL_RESULT===
+{"model_id": "/data1/deepseek-ai/DeepSeek-V4-Flash-0731/", "duration_sec": 3244.7, "datasets": {"bfcl_v3": {"score": 0.6456, "metric_name": "acc", "categories": [{"name": "AST_LIVE", "score": 0.772, "num": 1351}, {"name": "AST_NON_LIVE", "score": 0.8809, "num": 1150}, {"name": "MULTI_TURN", "score": 0.3125, "num": 800}, {"name": "RELEVANCE", "score": 0.4921, "num": 1140}, {"name": "-", "score": 0.5705, "num": 8882}]}}}
+===EVAL_RESULT_END===

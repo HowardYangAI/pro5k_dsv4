@@ -1,0 +1,77 @@
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo kill 13855
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo fuser -v /dev/nvidia*
+                     USER        PID ACCESS COMMAND
+/dev/nvidia0:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia1:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia2:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia3:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia4:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia5:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia6:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia7:        root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidiactl:      root      214911 F...m dcgm-exporter
+                     root      222896 F...m nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+/dev/nvidia-uvm:     root      214911 F.... dcgm-exporter
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ dcgm-exporter
+-bash: dcgm-exporter: command not found
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ nvidia-device-plugin × 2
+-bash: nvidia-device-plugin: command not found
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo ps -fp 214745,222830,222974
+UID          PID    PPID  C STIME TTY          TIME CMD
+root      214745       1  0 Jun29 ?        00:06:23 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 7ea72ae61417dbc
+root      222830       1  0 Jun29 ?        00:05:58 /usr/bin/containerd-shim-runc-v2 -namespace moby -id d1c1dbbd5b50d71
+root      222974       1  0 Jun29 ?        00:05:55 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 8b7f0802a610e2d
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo cat /proc/214911/cgroup
+11:freezer:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+10:hugetlb:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+9:rdma:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+8:perf_event:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+7:pids:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+6:devices:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+5:blkio,memory:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+4:net_cls,net_prio:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+3:cpu,cpuacct:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+2:cpuset:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+1:name=systemd:/kubepods/burstable/podfcca5c4a-a2ee-4431-ba91-0f5d8db9553a/7ea72ae61417dbc3b0f9d7795a58fff829c81247912f8df95d19cbc25c65c542
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo cat /proc/222896/cgroup
+11:freezer:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+10:hugetlb:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+9:rdma:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+8:perf_event:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+7:pids:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+6:devices:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+5:blkio,memory:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+4:net_cls,net_prio:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+3:cpu,cpuacct:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+2:cpuset:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+1:name=systemd:/kubepods/besteffort/podbb7d37f6-d178-4018-a240-634f9995fbf8/d1c1dbbd5b50d71b405d38f390ff966c66081a41da73dd6f4eb296bc62c029b8
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo cat /proc/222998/cgroup
+11:freezer:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+10:hugetlb:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+9:rdma:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+8:perf_event:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+7:pids:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+6:devices:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+5:blkio,memory:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+4:net_cls,net_prio:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+3:cpu,cpuacct:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+2:cpuset:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+1:name=systemd:/kubepods/besteffort/poda72aa34f-9598-4e01-8956-ba79421d0006/8b7f0802a610e2d47881fe7bc1d06cb29bc27125e8b71ff3fdf5295fbe098a91
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ 

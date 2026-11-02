@@ -1,0 +1,21 @@
+diff --git a/python/sglang/srt/speculative/dspark_components/dspark_draft.py b/python/sglang/srt/speculative/dspark_components/dspark_draft.py
+index 34b1db90325..0ae9a135b57 100644
+--- a/python/sglang/srt/speculative/dspark_components/dspark_draft.py
++++ b/python/sglang/srt/speculative/dspark_components/dspark_draft.py
+@@ -409,6 +409,16 @@ class DraftBlockProposer:
+     ) -> None:
+         if not self._dp_moe_sync or batch.global_num_tokens is None:
+             return
++
++        # Hand-built DSpark batches bypass ForwardBatch.init_new(), which normally
++        # records the real token count before DP/EP padding. CUDA graph replay uses
++        # this value to derive the rank-local count for gathered DP buffers.
++        num_tokens = forward_batch.input_ids.numel()
++        forward_batch.num_token_non_padded = torch.tensor(
++            num_tokens, dtype=torch.int32, device=self.draft_model_runner.device
++        )
++        forward_batch.num_token_non_padded_cpu = num_tokens
++
+         gnt, gnt_logprob = spec_scale_global_num_tokens(
+             self._draft_block_spec_info,
+             batch.global_num_tokens,

@@ -1,0 +1,944 @@
+/sgl-workspace/sglang/python/sglang/launch_server.py:56: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-08-07 03:47:47] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:47:47] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:47:47] Breakable CUDA graph is incompatible with DeepSeek-V4 (heavy capture-pool memory pressure); disabling prefill CUDA graph.
+[2026-08-07 03:47:47] Use dsv4 attention backend for DeepseekV4ForCausalLM, setting page_size to 256.
+[2026-08-07 03:47:47] Setting swa_full_tokens_ratio to 0.1 for DeepseekV4ForCausalLM.
+[2026-08-07 03:47:47] Setting KV cache dtype to fp8_e4m3 for DeepseekV4ForCausalLM.
+[2026-08-07 03:47:47] DP attention is enabled. chunked prefill size is adjusted from 2048 to 256.
+[2026-08-07 03:47:47] DSpark draft weights are bundled in the target checkpoint; defaulting --speculative-draft-model-path to --model-path (/data/models/DeepSeek-V4-Flash-0731).
+[2026-08-07 03:47:48] server_args=ServerArgs(model_path='/data/models/DeepSeek-V4-Flash-0731', tokenizer_path='/data/models/DeepSeek-V4-Flash-0731', tokenizer_mode='auto', tokenizer_backend='huggingface', tokenizer_worker_num=1, detokenizer_worker_num=1, skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=True, context_length=131072, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', model_config_parser='auto', json_model_override_args='{}', dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='fp8_e4m3', enable_fp32_lm_head=False, modelopt_quant=None, modelopt_checkpoint_restore_path=None, modelopt_checkpoint_save_path=None, modelopt_export_path=None, quantize_and_serve=False, rl_quant_profile=None, enable_tf32_matmul=False, mem_fraction_static=0.6, max_running_requests=16, max_queued_requests=None, max_total_tokens=None, chunked_prefill_size=256, enable_dynamic_chunking=False, max_prefill_tokens=8192, prefill_max_requests=None, schedule_policy='fcfs', enable_priority_scheduling=False, disable_priority_preemption=False, default_priority_value=None, abort_on_priority_when_disabled=False, schedule_low_priority_values_first=False, priority_scheduling_preemption_threshold=10, retraction_policy='length', schedule_conservativeness=0.3, page_size=256, swa_full_tokens_ratio=0.1, disable_hybrid_swa_memory=False, radix_eviction_policy='lru', prefill_only_disable_kv_cache=False, disable_radix_cache=True, enable_page_major_kv_layout=False, enable_unified_memory=False, disable_chunked_prefix_cache=False, disable_overlap_schedule=False, num_continuous_decode_steps=1, scheduler_recv_interval=1, enable_mixed_chunk=False, nccl_port=None, dist_timeout=None, dist_init_addr=None, nnodes=1, node_rank=0, tp_size=8, dcp_size=1, pp_size=1, pp_max_micro_batch_size=None, pp_async_batch_depth=0, dp_size=8, load_balance_method='round_robin', attn_cp_size=1, moe_dp_size=1, enable_prefill_cp=False, cp_strategy=None, enable_dsa_cache_layer_split=False, enable_dsa_prefill_context_parallel=False, dsa_prefill_cp_mode='round-robin-split', enable_prefill_context_parallel=False, prefill_cp_mode='in-seq-split', enable_dp_attention=True, enable_dp_attention_local_control_broadcast=False, enable_dp_lm_head=True, enable_attn_tp_input_scattered=False, disable_attn_tp_gather=False, enable_p2p_check=False, device='cuda', base_gpu_id=0, gpu_id_step=1, random_seed=1027575349, watchdog_timeout=300, soft_watchdog_timeout=None, sleep_on_idle=False, use_ray=False, custom_sigquit_handler=None, numa_node=None, gc_threshold=None, host='0.0.0.0', port=30002, fastapi_root_path='', smg_grpc_mode=False, grpc_mode=False, grpc_port=None, sidecar=None, sidecar_args=None, skip_server_warmup=False, warmups=None, enable_http2=False, ssl_keyfile=None, ssl_certfile=None, ssl_ca_certs=None, ssl_keyfile_password=None, enable_ssl_refresh=False, api_key=None, admin_api_key=None, served_model_name='DeepSeek-V4-Flash-0731', weight_version='default', chat_template=None, hf_chat_template_name=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=True, reasoning_parser=None, default_chat_template_kwargs=None, strip_thinking_cache=False, enable_strict_thinking=False, tool_call_parser=None, tool_server=None, sampling_defaults='model', asr_max_buffer_seconds=60, asr_max_concurrent_sessions=32, preferred_sampling_params=None, allow_auto_truncate=False, stream_interval=1, batch_notify_size=16, stream_response_default_include_usage=False, incremental_streaming_output=False, enable_streaming_session=False, enable_session_radix_cache=False, log_level='info', log_level_http=None, log_requests=True, log_requests_level=0, log_requests_format='text', log_requests_target=None, uvicorn_access_log_exclude_prefixes=[], crash_dump_folder=None, show_time_cost=False, enable_metrics=True, smg_http_sidecar_port=None, enable_mfu_metrics=False, enable_metrics_for_all_schedulers=False, load_snapshot_publish_interval=15, tokenizer_metrics_custom_labels_header='x-custom-labels', tokenizer_metrics_allowed_custom_labels=None, extra_metric_labels=None, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, prompt_tokens_buckets=None, generation_tokens_buckets=None, gc_warning_threshold_secs=0.0, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, enable_forward_pass_metrics=False, forward_pass_metrics_worker_id='', forward_pass_metrics_ipc_name=None, enable_trace=False, trace_modules='request', otlp_traces_endpoint='localhost:4317', export_metrics_to_file=False, export_metrics_to_file_dir=None, stat_loggers=None, constrained_json_whitespace_pattern=None, constrained_json_disable_any_whitespace=False, attention_backend='dsv4', decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='xgrammar', radix_cache_backend=None, mm_attention_backend=None, fp8_gemm_runner_backend='auto', fp4_gemm_runner_backend='auto', bf16_gemm_backend='auto', dsa_prefill_backend=None, dsa_decode_backend=None, dsa_paged_mqa_logits_backend='auto', dsa_topk_backend='sgl-kernel', disable_flashinfer_autotune=False, mamba_backend='triton', cuda_graph_config=CudaGraphConfig(decode=PhaseConfig(backend='full', max_bs=16, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], tc_compiler='eager', full_prefill_max_req=None), prefill=PhaseConfig(backend='disabled', max_bs=2048, bs=[4, 8, 12, 16, 20, 24, 28, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 288, 320, 352, 384, 416, 448, 480, 512, 576, 640, 704, 768, 832, 896, 960, 1024, 1280, 1536, 1792, 2048], tc_compiler='eager', full_prefill_max_req=None)), cuda_graph_backend_decode='full', cuda_graph_backend_prefill=None, cuda_graph_max_bs_decode=16, cuda_graph_max_bs_prefill=None, cuda_graph_bs_decode=None, cuda_graph_bs_prefill=None, cuda_graph_tc_compiler=None, disable_prefill_cuda_graph=False, disable_decode_cuda_graph=False, disable_cuda_graph=False, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_cudagraph_gc=False, debug_cuda_graph=False, enable_layerwise_nvtx_marker=False, enable_nccl_nvls=False, enable_symm_mem=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, triton_attention_split_tile_size=None, flashinfer_mla_disable_ragged=False, enable_fused_qk_norm_rope=False, enable_precise_embedding_interpolation=False, enable_fused_moe_sum_all_reduce=False, enable_deepseek_v4_fp4_indexer=False, disable_custom_all_reduce=False, enable_mscclpp=False, enable_torch_symm_mem=False, enable_scattered_sconv=False, pre_warm_nccl=False, enable_quant_communications=False, enable_flashinfer_allreduce_fusion=False, enforce_disable_flashinfer_allreduce_fusion=False, flashinfer_allreduce_fusion_backend=None, enable_aiter_allreduce_fusion=False, enable_torch_compile=False, enable_torch_compile_debug_mode=False, torch_compile_max_bs=32, torchao_config='', speculative_algorithm='DSPARK', speculative_draft_model_path='/data/models/DeepSeek-V4-Flash-0731', speculative_draft_model_revision=None, speculative_draft_load_format=None, speculative_num_steps=1, speculative_eagle_topk=1, speculative_num_draft_tokens=6, speculative_dflash_block_size=None, speculative_dspark_block_size=None, speculative_dspark_sps_table_path=None, speculative_dspark_confidence_sts_path=None, speculative_dspark_align_verify_tokens_to_graph_tier=False, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_use_rejection_sampling=False, speculative_token_map=None, speculative_attention_mode='decode', speculative_draft_attention_backend=None, speculative_draft_window_size=None, speculative_moe_runner_backend='flashinfer_mxfp4', speculative_moe_a2a_backend=None, speculative_draft_model_quantization=None, speculative_skip_dp_mlp_sync=False, enable_multi_layer_eagle=False, speculative_adaptive=False, speculative_adaptive_config=None, decoupled_spec_bind_endpoint=None, decoupled_spec_connect_endpoints=None, decoupled_spec_rank=None, decoupled_spec_role='null', spec_trace_dir=None, speculative_ngram_min_bfs_breadth=1, speculative_ngram_max_bfs_breadth=10, speculative_ngram_match_type='BFS', speculative_ngram_max_trie_depth=18, speculative_ngram_capacity=10000000, speculative_ngram_external_corpus_path=None, speculative_ngram_external_sam_budget=0, speculative_ngram_external_corpus_max_tokens=10000000, ep_size=8, moe_a2a_backend='none', moe_runner_backend='flashinfer_mxfp4', flashinfer_mxfp4_moe_precision='default', deepep_mode='auto', fuseep_mode=2, deepep_dispatcher_output_dtype='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm=None, init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, eplb_min_rebalancing_utilization_threshold=1.0, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, elastic_ep_backend=None, enable_elastic_expert_backup=False, mooncake_ib_device=None, enable_waterfill=False, ep_join_mode=None, ep_join_rank_offset=0, elastic_ep_initial_size=None, max_ep_size=None, elastic_ep_scale_timeout=600, elastic_ep_rejoin=False, disable_flashinfer_cutlass_moe_fp4_allgather=False, disable_shared_experts_fusion=False, enforce_shared_experts_fusion=False, max_mamba_cache_size=None, mamba_ssm_dtype=None, enable_mamba_cache_stochastic_rounding=False, mamba_cache_philox_rounds=0, mamba_full_memory_ratio=0.9, mamba_radix_cache_strategy='auto', uses_mamba_radix_cache=False, mamba_track_interval=256, enable_int8_mamba_checkpoint=False, int8_mamba_ckpt_size=None, linear_attn_backend='triton', linear_attn_decode_backend=None, linear_attn_prefill_backend=None, enable_linear_replayssm=False, linear_replayssm_cache_len=16, enable_gdn_replayssm_spec=False, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through', hicache_io_backend='kernel', hicache_mem_layout='page_first', hicache_storage_backend=None, hicache_storage_prefetch_policy='timeout', hicache_storage_backend_extra_config=None, enable_hisparse=False, hisparse_config=None, enable_broadcast_mm_inputs_process=False, enable_prefix_mm_cache=False, mm_enable_dp_encoder=False, mm_process_config={}, limit_mm_data_per_request=None, enable_mm_global_cache=False, disable_fast_image_processor=False, mm_feature_transport='cpu', keep_mm_feature_on_device=False, enable_lora=None, enable_lora_overlap_loading=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loaded_loras=None, max_loras_per_batch=8, lora_eviction_policy='lru', lora_backend='csgmv', max_lora_chunk_size=16, experts_shared_outer_loras=None, lora_use_virtual_experts=False, lora_strict_loading=False, lora_drain_wait_threshold=0.0, enable_two_batch_overlap=False, enable_single_batch_overlap=False, tbo_token_distribution_threshold=0.48, cpu_offload_gb=0, offload_group_size=-1, offload_num_in_group=1, offload_prefetch_step=1, offload_mode='cpu', enable_lmcache=False, lmcache_config_file=None, enable_flexkv=False, flexkv_config_file=None, kt_weight_path=None, kt_method='AMXINT4', kt_cpuinfer=None, kt_threadpool_count=2, kt_num_gpu_experts=None, kt_max_deferred_experts_per_token=None, dllm_algorithm=None, dllm_algorithm_config=None, dllm_fdfo=True, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_ib_device=None, disaggregation_decode_enable_radix_cache=False, disaggregation_decode_enable_offload_kvcache=False, num_reserved_decode_tokens=512, disaggregation_decode_extra_slots=None, disaggregation_decode_polling_interval=1, optimistic_prefill_attempts=0, encoder_only=False, language_only=False, encoder_transfer_backend='zmq_to_scheduler', encoder_urls=[], encoder_bootstrap_port=8997, encoder_register_urls=[], enable_adaptive_dispatch_to_encoder=False, enable_pdmux=False, pdmux_config_path=None, sm_group_num=8, custom_weight_loader=[], weight_loader_disable_mmap=False, weight_loader_prefetch_checkpoints=False, weight_loader_prefetch_num_threads=4, weight_loader_drop_cache_after_load=False, remote_instance_weight_loader_seed_instance_ip=None, remote_instance_weight_loader_seed_instance_service_port=None, remote_instance_weight_loader_send_weights_group_ports=None, remote_instance_weight_loader_backend='nccl', remote_instance_weight_loader_start_seed_via_transfer_engine=False, engine_info_bootstrap_port=6789, modelexpress_config=None, download_dir=None, model_checksum=None, delete_ckpt_after_loading=False, decrypted_config_file=None, decrypted_draft_config_file=None, checkpoint_engine_wait_weights_before_ready=False, enable_prefill_delayer=False, prefill_delayer_max_delay_passes=30, prefill_delayer_token_usage_low_watermark=None, prefill_delayer_forward_passes_buckets=None, prefill_delayer_wait_seconds_buckets=None, prefill_delayer_queue_min_ratio=None, prefill_delayer_max_delay_ms=None, min_free_slots_delay=None, enable_deterministic_inference=False, rl_on_policy_target=None, kv_canary='none', kv_canary_real_data='none', kv_canary_sweep_interval=0, enable_dynamic_batch_tokenizer=False, dynamic_batch_tokenizer_batch_size=32, dynamic_batch_tokenizer_batch_timeout=0.002, enable_tokenizer_batch_encode=False, disable_tokenizer_batch_decode=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_layers=None, debug_tensor_dump_input_file=None, enable_memory_saver=False, enable_weights_cpu_backup=False, enable_draft_weights_cpu_backup=False, enable_custom_logit_processor=False, enable_return_hidden_states=False, enable_return_routed_experts=False, enable_return_indexer_topk=False, disable_outlines_disk_cache=False, enable_mis=False, forward_hooks=None, msprobe_dump_config=None)
+[2026-08-07 03:47:48] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:47:48] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:47:50] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:47:50] No HuggingFace chat template found
+[2026-08-07 03:47:50] No chat template found, defaulting to 'string' content format
+[2026-08-07 03:47:56] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:03 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:03 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:03 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:04 DP7 TP7 EP7] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP6 TP6 EP6] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP4 TP4 EP4] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP2 TP2 EP2] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP1 TP1 EP1] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:04 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:04 DP5 TP5 EP5] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP7 TP7 EP7] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:04 DP3 TP3 EP3] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:04 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:04 DP7 TP7 EP7] Init torch distributed begin.
+[2026-08-07 03:48:04 DP4 TP4 EP4] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:04 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:04 DP4 TP4 EP4] Init torch distributed begin.
+[2026-08-07 03:48:04 DP6 TP6 EP6] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:04 DP0 TP0 EP0] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:04 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:04 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:04 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:04 DP6 TP6 EP6] Init torch distributed begin.
+[2026-08-07 03:48:05 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:05 DP2 TP2 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:05 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:05 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:05 DP2 TP2 EP2] Init torch distributed begin.
+[2026-08-07 03:48:05 DP1 TP1 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:05 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:05 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:05 DP1 TP1 EP1] Init torch distributed begin.
+[2026-08-07 03:48:05 DP5 TP5 EP5] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:05 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:05 DP3 TP3 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:05 DP5 TP5 EP5] Init torch distributed begin.
+[2026-08-07 03:48:05 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:05 DP3 TP3 EP3] Init torch distributed begin.
+[2026-08-07 03:48:05 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-07 03:48:05 DP0 TP0 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:05 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:05 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:05 DP0 TP0 EP0] Init torch distributed begin.
+[W807 03:48:05.874213443 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.240150575 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.254089738 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.340441275 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.375545471 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.383543041 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.387838094 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[W807 03:48:05.411241232 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:32743 (errno: 97 - Address family not supported by protocol).
+[2026-08-07 03:48:06 DP0 TP0 EP0] sglang is using nccl==2.28.9
+[2026-08-07 03:48:06 DP5 TP5 EP5] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP6 TP6 EP6] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP7 TP7 EP7] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP0 TP0 EP0] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP2 TP2 EP2] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP4 TP4 EP4] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP3 TP3 EP3] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP1 TP1 EP1] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP2 TP2 EP2] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP1 TP1 EP1] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP0 TP0 EP0] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP3 TP3 EP3] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP4 TP4 EP4] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP5 TP5 EP5] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP6 TP6 EP6] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP7 TP7 EP7] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-07 03:48:06 DP0 TP0 EP0] Init torch distributed ends. elapsed=1.59 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP5 TP5 EP5] Init torch distributed ends. elapsed=1.73 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP6 TP6 EP6] Init torch distributed ends. elapsed=1.90 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP3 TP3 EP3] Init torch distributed ends. elapsed=1.70 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP2 TP2 EP2] Init torch distributed ends. elapsed=1.82 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP7 TP7 EP7] Init torch distributed ends. elapsed=1.98 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP4 TP4 EP4] Init torch distributed ends. elapsed=1.94 s, mem usage=0.23 GB
+[2026-08-07 03:48:06 DP1 TP1 EP1] Init torch distributed ends. elapsed=1.78 s, mem usage=0.23 GB
+[2026-08-07 03:48:07 DP4 TP4 EP4] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:07 DP7 TP7 EP7] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:07 DP6 TP6 EP6] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:07 DP5 TP5 EP5] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:07 DP3 TP3 EP3] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:07 DP1 TP1 EP1] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:08 DP2 TP2 EP2] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:08 DP4 TP4 EP4] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP7 TP7 EP7] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP6 TP6 EP6] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP5 TP5 EP5] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP3 TP3 EP3] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP1 TP1 EP1] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP2 TP2 EP2] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-07 03:48:08 DP0 TP0 EP0] Load weight begin. avail mem=70.53 GB
+[2026-08-07 03:48:08 DP0 TP0 EP0] Detected fp8 checkpoint.
+[2026-08-07 03:48:08 DP0 TP0 EP0] Config does not support fused shared expert(s). Shared experts fusion optimization is disabled.
+[2026-08-07 03:48:08 DP0 TP0 EP0] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+Multi-thread loading shards:   0% Completed | 0/48 [00:00<?, ?it/s]Multi-thread loading shards:   4% Completed | 2/48 [00:00<00:09,  4.86it/s]Multi-thread loading shards:  21% Completed | 10/48 [00:01<00:04,  7.95it/s]Multi-thread loading shards:  38% Completed | 18/48 [00:01<00:02, 11.67it/s]Multi-thread loading shards:  54% Completed | 26/48 [00:02<00:01, 14.55it/s]Multi-thread loading shards:  69% Completed | 33/48 [00:02<00:00, 20.15it/s][2026-08-07 03:48:10 DP5 TP5 EP5] Execute dequant fp8 wo_a
+[2026-08-07 03:48:10 DP4 TP4 EP4] Execute dequant fp8 wo_a
+Multi-thread loading shards:  77% Completed | 37/48 [00:02<00:00, 17.06it/s][2026-08-07 03:48:11 DP3 TP3 EP3] Execute dequant fp8 wo_a
+[2026-08-07 03:48:11 DP6 TP6 EP6] Execute dequant fp8 wo_a
+Multi-thread loading shards:  88% Completed | 42/48 [00:02<00:00, 17.75it/s][2026-08-07 03:48:11 DP7 TP7 EP7] Execute dequant fp8 wo_a
+Multi-thread loading shards: 100% Completed | 48/48 [00:02<00:00, 16.81it/s]
+[2026-08-07 03:48:11 DP0 TP0 EP0] Execute dequant fp8 wo_a
+[2026-08-07 03:48:11 DP2 TP2 EP2] Execute dequant fp8 wo_a
+[2026-08-07 03:48:11 DP1 TP1 EP1] Execute dequant fp8 wo_a
+[2026-08-07 03:48:29 DP4 TP4 EP4] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP4 TP4 EP4] Load weight end. elapsed=21.38 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:29 DP6 TP6 EP6] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP6 TP6 EP6] Load weight end. elapsed=21.35 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:29 DP2 TP2 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP2 TP2 EP2] Load weight end. elapsed=21.43 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:29 DP3 TP3 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP3 TP3 EP3] Load weight end. elapsed=21.57 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:29 DP5 TP5 EP5] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP5 TP5 EP5] Load weight end. elapsed=21.66 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:29 DP1 TP1 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP1 TP1 EP1] Load weight end. elapsed=21.78 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:29 DP7 TP7 EP7] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:29 DP7 TP7 EP7] Load weight end. elapsed=22.01 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.0.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.1.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.2.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.3.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.4.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.5.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.6.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.7.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.8.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.9.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.10.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.11.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.12.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.13.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.14.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.15.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.16.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.17.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.18.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.19.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.20.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.21.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.22.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.23.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.24.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.25.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.26.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.27.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.28.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.29.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.30.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.31.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.32.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.33.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.34.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.35.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.36.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.37.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.38.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.39.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.40.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.41.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.42.mlp.experts)...
+[2026-08-07 03:48:30 DP0 TP0 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:30 DP0 TP0 EP0] Load weight end. elapsed=21.98 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-07 03:48:31 DP6 TP6 EP6] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP4 TP4 EP4] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP7 TP7 EP7] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP5 TP5 EP5] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP3 TP3 EP3] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP1 TP1 EP1] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP0 TP0 EP0] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:31 DP2 TP2 EP2] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-07 03:48:32 DP7 TP7 EP7] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP3 TP3 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP6 TP6 EP6] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP4 TP4 EP4] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP1 TP1 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP5 TP5 EP5] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP0 TP0 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP2 TP2 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-07 03:48:32 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP6 TP6 EP6] Init torch distributed begin.
+[2026-08-07 03:48:32 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP4 TP4 EP4] Init torch distributed begin.
+[2026-08-07 03:48:32 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP3 TP3 EP3] Init torch distributed begin.
+[2026-08-07 03:48:32 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP7 TP7 EP7] Init torch distributed begin.
+[2026-08-07 03:48:32 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP5 TP5 EP5] Init torch distributed begin.
+[2026-08-07 03:48:32 DP0 TP0 EP0] Init torch distributed begin.
+[2026-08-07 03:48:32 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP2 TP2 EP2] Init torch distributed begin.
+[2026-08-07 03:48:32 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-07 03:48:32 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-07 03:48:32 DP1 TP1 EP1] Init torch distributed begin.
+[2026-08-07 03:48:32 DP0 TP0 EP0] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP7 TP7 EP7] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP6 TP6 EP6] Init torch distributed ends. elapsed=0.02 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP5 TP5 EP5] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP4 TP4 EP4] Init torch distributed ends. elapsed=0.02 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP3 TP3 EP3] Init torch distributed ends. elapsed=0.02 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP1 TP1 EP1] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP2 TP2 EP2] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-07 03:48:32 DP6 TP6 EP6] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP4 TP4 EP4] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP3 TP3 EP3] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP7 TP7 EP7] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP5 TP5 EP5] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP0 TP0 EP0] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP1 TP1 EP1] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP2 TP2 EP2] Load weight begin. avail mem=43.66 GB
+[2026-08-07 03:48:32 DP0 TP0 EP0] Detected fp8 checkpoint.
+Multi-thread loading shards:   0% Completed | 0/48 [00:00<?, ?it/s]Multi-thread loading shards:   4% Completed | 2/48 [00:00<00:08,  5.14it/s]Multi-thread loading shards:  21% Completed | 10/48 [00:00<00:02, 16.30it/s]Multi-thread loading shards:  25% Completed | 12/48 [00:00<00:02, 17.03it/s]Multi-thread loading shards:  38% Completed | 18/48 [00:01<00:01, 20.02it/s]Multi-thread loading shards:  44% Completed | 21/48 [00:01<00:01, 19.04it/s]Multi-thread loading shards:  54% Completed | 26/48 [00:01<00:01, 21.82it/s]Multi-thread loading shards:  60% Completed | 29/48 [00:01<00:01, 18.00it/s]Multi-thread loading shards:  71% Completed | 34/48 [00:01<00:00, 23.18it/s]Multi-thread loading shards:  77% Completed | 37/48 [00:02<00:00, 16.56it/s]Multi-thread loading shards:  92% Completed | 44/48 [00:02<00:00, 21.55it/s]Multi-thread loading shards: 100% Completed | 48/48 [00:02<00:00, 20.73it/s]
+[2026-08-07 03:48:44 DP2 TP2 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:44 DP2 TP2 EP2] Load weight end. elapsed=11.93 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:44 DP1 TP1 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:44 DP1 TP1 EP1] Load weight end. elapsed=12.52 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:44 DP5 TP5 EP5] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:44 DP5 TP5 EP5] Load weight end. elapsed=12.72 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:45 DP3 TP3 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:45 DP3 TP3 EP3] Load weight end. elapsed=13.04 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:45 DP4 TP4 EP4] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:45 DP4 TP4 EP4] Load weight end. elapsed=13.31 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:45 DP6 TP6 EP6] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:45 DP6 TP6 EP6] Load weight end. elapsed=13.34 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:45 DP7 TP7 EP7] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:45 DP7 TP7 EP7] Load weight end. elapsed=13.41 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:45 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.0.mlp.experts)...
+[2026-08-07 03:48:45 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.1.mlp.experts)...
+[2026-08-07 03:48:45 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.2.mlp.experts)...
+[2026-08-07 03:48:45 DP0 TP0 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-07 03:48:45 DP0 TP0 EP0] Load weight end. elapsed=13.42 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-07 03:48:45 DP0 TP0 EP0] Initialized DSpark draft runner. attention_backend=dsv4, model=DeepseekV4ForCausalLMDSpark, gamma=5, verify_num_draft_tokens=6, mask_token_id=128799, markov_head=DSparkV4MarkovHead
+[2026-08-07 03:48:45 DP6 TP6 EP6] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP6 TP6 EP6] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP4 TP4 EP4] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP4 TP4 EP4] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP3 TP3 EP3] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP0 TP0 EP0] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP0 TP0 EP0] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP3 TP3 EP3] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP5 TP5 EP5] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP5 TP5 EP5] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP7 TP7 EP7] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP7 TP7 EP7] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP1 TP1 EP1] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP6 TP6 EP6] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP1 TP1 EP1] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP4 TP4 EP4] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP2 TP2 EP2] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.09 GB, full_token=1542400
+[2026-08-07 03:48:45 DP2 TP2 EP2] DSV4 pool sizes: full=1542400, swa=154112, c4=385600, c128=12050, c4_state=19264, c128_state=0
+[2026-08-07 03:48:45 DP3 TP3 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP0 TP0 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP1 TP1 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP5 TP5 EP5] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP2 TP2 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP7 TP7 EP7] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=385600 c4_logical_size=385600 c128_size=12050 c4_state_pool_size=19264 c128_state_pool_size=768
+[2026-08-07 03:48:45 DP6 TP6 EP6] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP6 TP6 EP6] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP6 TP6 EP6] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP0 TP0 EP0] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP0 TP0 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP1 TP1 EP1] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP1 TP1 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP0 TP0 EP0] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP3 TP3 EP3] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP3 TP3 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP1 TP1 EP1] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP5 TP5 EP5] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP5 TP5 EP5] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP3 TP3 EP3] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP4 TP4 EP4] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP4 TP4 EP4] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP5 TP5 EP5] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP2 TP2 EP2] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP2 TP2 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP4 TP4 EP4] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP7 TP7 EP7] Memory pool end. avail mem=28.26 GB
+[2026-08-07 03:48:45 DP7 TP7 EP7] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=2 swa_size=154112 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-07 03:48:45 DP2 TP2 EP2] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP7 TP7 EP7] Memory pool end. avail mem=28.00 GB
+[2026-08-07 03:48:45 DP6 TP6 EP6] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP6 TP6 EP6] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP6 TP6 EP6] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP0 TP0 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP0 TP0 EP0] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP0 TP0 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP6 TP6 EP6] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp6_pp0_dp6.json
+[2026-08-07 03:48:45 DP3 TP3 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP0 TP0 EP0] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp0_pp0_dp0.json
+[2026-08-07 03:48:45 DP3 TP3 EP3] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP3 TP3 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP1 TP1 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP1 TP1 EP1] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP1 TP1 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP3 TP3 EP3] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp3_pp0_dp3.json
+[2026-08-07 03:48:45 DP4 TP4 EP4] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP4 TP4 EP4] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP4 TP4 EP4] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP1 TP1 EP1] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp1_pp0_dp1.json
+[2026-08-07 03:48:45 DP4 TP4 EP4] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp4_pp0_dp4.json
+[2026-08-07 03:48:45 DP2 TP2 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP2 TP2 EP2] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP2 TP2 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP2 TP2 EP2] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp2_pp0_dp2.json
+[2026-08-07 03:48:45 DP5 TP5 EP5] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP5 TP5 EP5] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP5 TP5 EP5] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP5 TP5 EP5] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp5_pp0_dp5.json
+[2026-08-07 03:48:45 DP7 TP7 EP7] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP7 TP7 EP7] Overriding draft attention backend to dsv4.
+[2026-08-07 03:48:45 DP7 TP7 EP7] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-07 03:48:45 DP7 TP7 EP7] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp7_pp0_dp7.json
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 650.46profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 495.27profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 655.38profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 671.46profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 648.24profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 657.52profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 631.91profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 635.23profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:   0%|          | 0/8 [00:00<?, ?profile/s][TensorRT-LLM][INFO] Set logger level to INFO
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.58profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.50profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.47profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.43profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.47profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.55profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.40profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  25%|██▌       | 2/8 [00:00<00:00, 14.45profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 19.03profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 18.95profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 18.87profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 18.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 19.06profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 18.87profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 18.93profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  62%|██████▎   | 5/8 [00:00<00:00, 18.90profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.25profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.10profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.24profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.13profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.17profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.05profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.23profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1:  88%|████████▊ | 7/8 [00:00<00:00, 18.06profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.39profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.32profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.39profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.34profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.40profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.30profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.29profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 8/8 [00:00<00:00, 17.35profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/8 [00:00<?, ?profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.88profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.58profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.76profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.75profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.69profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  25%|██▌       | 2/8 [00:00<00:00, 11.66profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.79profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.69profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.73profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.60profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.69profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.67profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.63profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  50%|█████     | 4/8 [00:00<00:00, 11.59profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.44profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.40profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.40profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.33profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.38profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.37profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.35profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2:  75%|███████▌  | 6/8 [00:00<00:00, 11.35profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.76profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 11.07profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.80profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 11.07profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.82profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 11.09profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.71profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.98profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.82profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 11.08profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.72profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 11.01profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.71profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.99profile/s]
+[AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.70profile/s][AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 8/8 [00:00<00:00, 10.98profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 91.44profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 93.53profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 91.12profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 92.13profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 90.22profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 92.91profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 93.28profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 91.81profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 43.43profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 44.37profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 44.56profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 44.15profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 43.60profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 44.62profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 44.72profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:  83%|████████▎ | 5/6 [00:00<00:00, 43.95profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 31.54profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 32.19profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 31.88profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 31.70profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 31.79profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 32.24profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 31.01profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 31.75profile/s]
+[2026-08-07 03:48:51 DP5 TP5 EP5] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP5 TP5 EP5] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP6 TP6 EP6] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP6 TP6 EP6] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP4 TP4 EP4] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP4 TP4 EP4] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP1 TP1 EP1] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP1 TP1 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP2 TP2 EP2] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP0 TP0 EP0] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP3 TP3 EP3] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP2 TP2 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP0 TP0 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP3 TP3 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP7 TP7 EP7] FlashInfer autotune completed.
+[2026-08-07 03:48:51 DP7 TP7 EP7] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:51 DP5 TP5 EP5] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP6 TP6 EP6] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP4 TP4 EP4] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP1 TP1 EP1] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP0 TP0 EP0] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP7 TP7 EP7] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP3 TP3 EP3] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+[2026-08-07 03:48:51 DP2 TP2 EP2] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2], avail mem=27.78 GB
+  0%|          | 0/2 [00:00<?, ?it/s]Capturing batches (bs=2 avail_mem=27.78 GB):   0%|          | 0/2 [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/compile_fx.py:322: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+Capturing batches (bs=2 avail_mem=27.78 GB):  50%|█████     | 1/2 [00:01<00:01,  1.51s/it]Capturing batches (bs=1 avail_mem=27.62 GB):  50%|█████     | 1/2 [00:01<00:01,  1.51s/it]Capturing batches (bs=1 avail_mem=27.62 GB): 100%|██████████| 2/2 [00:02<00:00,  1.39s/it]Capturing batches (bs=1 avail_mem=27.62 GB): 100%|██████████| 2/2 [00:02<00:00,  1.41s/it]
+[2026-08-07 03:48:55 DP2 TP2 EP2] Capture target verify CUDA graph end. elapsed=3.80 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP2 TP2 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP2 TP2 EP2] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP6 TP6 EP6] Capture target verify CUDA graph end. elapsed=3.81 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP6 TP6 EP6] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP6 TP6 EP6] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP1 TP1 EP1] Capture target verify CUDA graph end. elapsed=3.82 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP1 TP1 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP1 TP1 EP1] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP4 TP4 EP4] Capture target verify CUDA graph end. elapsed=3.83 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP7 TP7 EP7] Capture target verify CUDA graph end. elapsed=3.82 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP4 TP4 EP4] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP4 TP4 EP4] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP7 TP7 EP7] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP7 TP7 EP7] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP5 TP5 EP5] Capture target verify CUDA graph end. elapsed=3.84 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP5 TP5 EP5] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP5 TP5 EP5] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP0 TP0 EP0] Capture target verify CUDA graph end. elapsed=3.86 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP0 TP0 EP0] DSpark draft greedy proposal folded into the draft cuda graph.
+[2026-08-07 03:48:55 DP0 TP0 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP0 TP0 EP0] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:55 DP3 TP3 EP3] Capture target verify CUDA graph end. elapsed=3.89 s, mem usage=0.21 GB, avail mem=27.58 GB.
+[2026-08-07 03:48:55 DP3 TP3 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-07 03:48:55 DP3 TP3 EP3] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2], avail mem=27.58 GB
+[2026-08-07 03:48:56 DP2 TP2 EP2] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp2_pp0_dp2.json
+[2026-08-07 03:48:56 DP1 TP1 EP1] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp1_pp0_dp1.json
+  0%|          | 0/2 [00:00<?, ?it/s]Capturing batches (bs=2 avail_mem=27.58 GB):   0%|          | 0/2 [00:00<?, ?it/s][2026-08-07 03:48:56 DP0 TP0 EP0] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp0_pp0_dp0.json
+[2026-08-07 03:48:56 DP3 TP3 EP3] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp3_pp0_dp3.json
+[2026-08-07 03:48:56 DP2 TP2 EP2] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][2026-08-07 03:48:56 DP1 TP1 EP1] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 129.17profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 131.68profile/s]
+[2026-08-07 03:48:56 DP0 TP0 EP0] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][A[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 132.03profile/s]
+[2026-08-07 03:48:56 DP3 TP3 EP3] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 126.72profile/s]
+[2026-08-07 03:48:56 DP6 TP6 EP6] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp6_pp0_dp6.json
+[2026-08-07 03:48:56 DP7 TP7 EP7] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp7_pp0_dp7.json
+[2026-08-07 03:48:56 DP5 TP5 EP5] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp5_pp0_dp5.json
+[2026-08-07 03:48:56 DP4 TP4 EP4] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp4_pp0_dp4.json
+[2026-08-07 03:48:57 DP6 TP6 EP6] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][2026-08-07 03:48:57 DP7 TP7 EP7] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][2026-08-07 03:48:57 DP5 TP5 EP5] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][2026-08-07 03:48:57 DP4 TP4 EP4] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4:   0%|          | 0/6 [00:00<?, ?profile/s][AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 131.52profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 132.06profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 131.39profile/s]
+[AutoTuner]: Tuning sparse_mla_sm120_decode_dsv4: 100%|██████████| 6/6 [00:00<00:00, 129.76profile/s]
+[2026-08-07 03:48:57 DP3 TP3 EP3] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP0 TP0 EP0] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP1 TP1 EP1] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP2 TP2 EP2] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP6 TP6 EP6] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP5 TP5 EP5] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP4 TP4 EP4] FlashInfer autotune completed.
+[2026-08-07 03:48:57 DP7 TP7 EP7] FlashInfer autotune completed.
+Capturing batches (bs=2 avail_mem=27.58 GB):  50%|█████     | 1/2 [00:02<00:02,  2.24s/it]Capturing batches (bs=1 avail_mem=27.51 GB):  50%|█████     | 1/2 [00:02<00:02,  2.24s/it]Capturing batches (bs=1 avail_mem=27.51 GB): 100%|██████████| 2/2 [00:02<00:00,  1.28s/it]Capturing batches (bs=1 avail_mem=27.51 GB): 100%|██████████| 2/2 [00:02<00:00,  1.42s/it]
+[2026-08-07 03:48:59 DP6 TP6 EP6] Capture draft verify CUDA graph end. elapsed=3.86 s, mem usage=0.15 GB, avail mem=27.43 GB.
+[2026-08-07 03:48:59 DP6 TP6 EP6] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP5 TP5 EP5] Capture draft verify CUDA graph end. elapsed=3.83 s, mem usage=0.15 GB, avail mem=27.43 GB.
+[2026-08-07 03:48:59 DP1 TP1 EP1] Capture draft verify CUDA graph end. elapsed=3.85 s, mem usage=0.08 GB, avail mem=27.50 GB.
+[2026-08-07 03:48:59 DP5 TP5 EP5] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP1 TP1 EP1] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP3 TP3 EP3] Capture draft verify CUDA graph end. elapsed=3.80 s, mem usage=0.08 GB, avail mem=27.50 GB.
+[2026-08-07 03:48:59 DP3 TP3 EP3] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP7 TP7 EP7] Capture draft verify CUDA graph end. elapsed=3.88 s, mem usage=0.15 GB, avail mem=27.43 GB.
+[2026-08-07 03:48:59 DP7 TP7 EP7] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP4 TP4 EP4] Capture draft verify CUDA graph end. elapsed=3.88 s, mem usage=0.15 GB, avail mem=27.43 GB.
+[2026-08-07 03:48:59 DP4 TP4 EP4] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP2 TP2 EP2] Capture draft verify CUDA graph end. elapsed=3.94 s, mem usage=0.08 GB, avail mem=27.50 GB.
+[2026-08-07 03:48:59 DP2 TP2 EP2] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59 DP0 TP0 EP0] Capture draft verify CUDA graph end. elapsed=3.88 s, mem usage=0.08 GB, avail mem=27.50 GB.
+[2026-08-07 03:48:59 DP0 TP0 EP0] max_total_num_tokens=1542400, chunked_prefill_size=256, max_prefill_tokens=8192, max_running_requests=2, context_len=131072, available_gpu_mem=27.50 GB
+[2026-08-07 03:48:59 DP0 TP0 EP0] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-07 03:48:59] INFO:     Started server process [89534]
+[2026-08-07 03:48:59] INFO:     Waiting for application startup.
+[2026-08-07 03:48:59] Using default chat sampling params from model generation config: {'temperature': 1.0, 'top_p': 1.0}
+[2026-08-07 03:48:59] INFO:     Application startup complete.
+[2026-08-07 03:48:59] INFO:     Uvicorn running on http://0.0.0.0:30002 (Press CTRL+C to quit)
+[2026-08-07 03:49:00] INFO:     127.0.0.1:57626 - "GET /model_info HTTP/1.1" 200 OK
+[2026-08-07 03:49:00] Receive: obj=GenerateReqInput(rid=['e7e0bec314d14adcabf2d2cb8462b551', '25b4ce8973b442b0a6d18cb006184b89', '7a37289cfca94d748996c815aa56f38f', '1a31a5ff206340f289a47ada5b115b21', '6758e46aa08b4c6cae96c6e4b2cd55db', '1ccb73e8a208476583fd2faa1609a2ab', 'fb9b47f36d9e4053a1d0fb8d7720e6b5', '157aac2d3a904e8d8a8f438f54bfb8b1'], session_id=None, mm_hashes=None, use_audio_in_video=False, return_logprob=[False, False, False, False, False, False, False, False], logprob_start_len=[-1, -1, -1, -1, -1, -1, -1, -1], top_logprobs_num=[0, 0, 0, 0, 0, 0, 0, 0], token_ids_logprob=[None, None, None, None, None, None, None, None], return_sampling_mask=[False, False, False, False, False, False, False, False], return_text_in_logprobs=False, stream=False, log_metrics=True, return_hidden_states=False, return_routed_experts=False, routed_experts_start_len=0, return_indexer_topk=False, modalities=None, session_params=None, lora_id=None, custom_logit_processor=[None, None, None, None, None, None, None, None], positional_embed_overrides=None, bootstrap_host=[None, None, None, None, None, None, None, None], bootstrap_port=[None, None, None, None, None, None, None, None], bootstrap_room=[None, None, None, None, None, None, None, None], bootstrap_pair_key=[None, None, None, None, None, None, None, None], decode_tp_size=[None, None, None, None, None, None, None, None], routed_dp_rank=None, disagg_prefill_dp_rank=None, routing_key=None, conversation_id=None, http_worker_ipc=None, background=False, require_reasoning=False, priority=None, extra_key=None, no_logs=False, custom_labels=None, return_bytes=False, return_entropy=False, return_prompt_token_ids=False, external_trace_header=None, received_time=None, need_wait_for_mm_inputs=None, num_items_assigned=None, encoder_urls=None, max_dynamic_patch=None, min_dynamic_patch=None, image_max_dynamic_patch=None, video_max_dynamic_patch=None, images_config=None, multi_item_delimiter_indices=None)
+[2026-08-07 03:49:02 DP6 TP6 EP6] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP4 TP4 EP4] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP5 TP5 EP5] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP7 TP7 EP7] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP1 TP1 EP1] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP0 TP0 EP0] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP2 TP2 EP2] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:02 DP3 TP3 EP3] Scheduler hit an exception: Traceback (most recent call last):
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4639, in run_scheduler_process
+    scheduler.run_event_loop()
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1500, in run_event_loop
+    dispatch_event_loop(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 4490, in dispatch_event_loop
+    scheduler.event_loop_overlap()
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 1601, in event_loop_overlap
+    batch_result = self.run_batch(batch)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/utils/nvtx_utils.py", line 109, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/managers/scheduler.py", line 3351, in run_batch
+    batch_result = self.model_worker.forward_batch_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 372, in forward_batch_generation
+    return self._forward_decode(batch, on_publish)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_worker_v2.py", line 520, in _forward_decode
+    proposal = self._proposer.propose(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 259, in propose
+    fwd = self._run_forward(
+          ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/speculative/dspark_components/dspark_draft.py", line 394, in _run_forward
+    draft_out = self.draft_model_runner.forward(draft_forward_batch)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1277, in forward
+    output = self._forward_raw(
+             ^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/model_runner.py", line 1409, in _forward_raw
+    ret = self.decode_cuda_graph_runner.execute(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1238, in execute
+    self.load_batch(forward_batch, pp_proxy_tensors)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py", line 1142, in load_batch
+    self.buffer_registry.fill_from(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 469, in fill_from
+    slot.post_fill(slot.buffer, forward_batch, ctx)
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/cuda_graph_buffer_registry.py", line 652, in _num_token_non_padded_post_fill
+    compute_local_num_token_non_padded(
+  File "/sgl-workspace/sglang/python/sglang/srt/model_executor/forward_batch_info.py", line 235, in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+
+[2026-08-07 03:49:03] Subprocess scheduler_0 (pid=89694) crashed with exit code -3. Triggering SIGQUIT for cleanup...
+[2026-08-07 03:49:03] SIGQUIT received. signum=None, frame=None. It usually means one child failed.
+[2026-08-07 03:49:03] Sleeping 5 seconds before crash diagnostics to let GPU activity settle.
+[2026-08-07 03:49:08] No live scheduler processes found; skipping py-spy and CUDA coredump.
+[2026-08-07 03:49:08] kill_process_tree called: parent_pid=89534, include_parent=True, pid=89534

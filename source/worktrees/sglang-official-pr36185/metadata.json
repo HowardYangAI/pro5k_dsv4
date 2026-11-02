@@ -1,0 +1,44 @@
+{
+  "original_path": "/sgl-workspace/sglang-official-pr36185",
+  "head_commit": "eee13f4a19392d58b7d770a669a3f18bb5c4ec5f",
+  "base_commit": "e51a3ae65e3401b21de860c90a64102133d2d6a6",
+  "branch": "test/pr-36185-latest",
+  "git_common_directory": "/sgl-workspace/sglang-dsv4-fixed/.git",
+  "local_refs": [
+    "refs/heads/fix/dsv4-pd-retraction-kv-only dbd56954514ff714329cc62ffda3162758672a41",
+    "refs/heads/fix/dsv4-retraction-upstream-main dc80d7da1632dd0af9996ef9e6ce01427c88e19b",
+    "refs/heads/fix/pd-decode-retraction-abort 5a1b58fedf08e99ffe9b09c7e517d28e725729c3",
+    "refs/heads/test/pr-36185-latest eee13f4a19392d58b7d770a669a3f18bb5c4ec5f",
+    "refs/heads/upstream_0.5.16-pr-33407 3cf4ce7dbe461c9b86447851ca4acef2caab1f37"
+  ],
+  "is_shallow": true,
+  "remotes": {
+    "ifx": "https://git.xiaojukeji.com/IFX-Group/sglang.git",
+    "origin": "git@git.xiaojukeji.com:IFX-Group/sglang.git"
+  },
+  "status_porcelain": "",
+  "staged_paths": [],
+  "unstaged_paths": [],
+  "untracked_paths": [],
+  "committed_delta_paths": [
+    "python/sglang/srt/disaggregation/decode.py",
+    "python/sglang/srt/hardware_backend/npu/dsv4/dsv4_memory_pool.py",
+    "python/sglang/srt/managers/schedule_batch.py",
+    "python/sglang/srt/mem_cache/base_swa_memory_pool.py",
+    "python/sglang/srt/mem_cache/common.py",
+    "python/sglang/srt/mem_cache/deepseek_v4_memory_pool.py",
+    "python/sglang/srt/mem_cache/kv_cache_builder.py",
+    "python/sglang/srt/mem_cache/swa_memory_pool.py",
+    "python/sglang/srt/mem_cache/unified_radix_cache.py",
+    "test/registered/unit/disaggregation/test_decode_queue_cleanup.py",
+    "test/registered/unit/mem_cache/test_dsv4_retraction_backup_capability.py"
+  ],
+  "recent_commits": [
+    "eee13f4a19392d58b7d770a669a3f18bb5c4ec5f 2026-08-30T11:47:06+00:00 test: adapt DSV4 retraction fix to latest main",
+    "3110ea7b2434b3f4a6d11cc813fc23b5caef1ba0 2026-08-24T03:21:42+00:00 fix(pd): make DSV4 retraction safe",
+    "e51a3ae65e3401b21de860c90a64102133d2d6a6 2026-08-30T02:24:35-07:00 [Config] Round 5.2: the per-model declarations get their own modules (#37087)",
+    "7e751153eb5926882f2c32372aaf64d15986727e 2026-08-30T02:18:33-07:00 [Config] Round 5.1: the published-side readers ask the bags, and a platform fact gets one address (#37086)",
+    "a6e402136872653a1eed5efc133fe37382c09e85 2026-08-30T16:33:14+08:00 [diffusion] chore: reject incompatible transformer fallback (#36917)"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

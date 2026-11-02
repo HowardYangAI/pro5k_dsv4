@@ -1,0 +1,263 @@
+{
+  "generated_at_utc": "2026-11-02T10:42:48.841190+00:00",
+  "jsonl_cutoff_utc": "2026-11-02T09:55:04.617618+00:00",
+  "sources": [
+    {
+      "source_path": "/root/.codex/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a022bb-b813-7c43-b6da-467e265a35eb",
+      "snapshot_bytes_limit": 7870161,
+      "source_snapshot_sha256": "a9d9d99719db4bb4df5df41d3a8ba6403c598a60380211c74acce22f9e10f903",
+      "raw_destination": "conversations/raw/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl.gz",
+      "readable_destination": "conversations/threads/01a022bb-b813-7c43-b6da-467e265a35eb.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/archived_sessions/rollout-2026-08-21T07-40-37-01a02343-c01b-7f51-8d67-f37a68d49505.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a02343-c01b-7f51-8d67-f37a68d49505",
+      "snapshot_bytes_limit": 57580,
+      "source_snapshot_sha256": "ea93a984e0dc8cddc99b334b100bb18b1077354847b58b5447ddc2af51758257",
+      "raw_destination": "conversations/raw/archived_sessions/rollout-2026-08-21T07-40-37-01a02343-c01b-7f51-8d67-f37a68d49505.jsonl.gz",
+      "readable_destination": "conversations/threads/01a02343-c01b-7f51-8d67-f37a68d49505.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a02332-ca6d-7be1-a8ce-5b652cb93858",
+      "snapshot_bytes_limit": 37186313,
+      "source_snapshot_sha256": "86c9347f8835bf10030ee352d1f27da3175c4ac8ffae6e56026f50bf51269a0d",
+      "raw_destination": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "readable_destination": "conversations/threads/01a02332-ca6d-7be1-a8ce-5b652cb93858.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/23/rollout-2026-08-23T02-46-28-01a02c83-281d-7751-95f7-678490ab1c02.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a02c83-281d-7751-95f7-678490ab1c02",
+      "snapshot_bytes_limit": 1567141,
+      "source_snapshot_sha256": "673d5418def306554ba1308d3668f731ac81c4f54430cd0e8f6ba8297f5ef97f",
+      "raw_destination": "conversations/raw/sessions/2026/08/23/rollout-2026-08-23T02-46-28-01a02c83-281d-7751-95f7-678490ab1c02.jsonl.gz",
+      "readable_destination": "conversations/threads/01a02c83-281d-7751-95f7-678490ab1c02.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a0466f-37e1-7b11-83d6-bb8ea61ae9d5",
+      "snapshot_bytes_limit": 30094043,
+      "source_snapshot_sha256": "c6afc02fe082ddd33040a66443d4ddb6a55a91315e78e960fb76a73e09299500",
+      "raw_destination": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+      "readable_destination": "conversations/threads/01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/08/28/rollout-2026-08-28T06-01-53-01a046f5-de72-7011-ad77-6f429bb71576.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a046f5-de72-7011-ad77-6f429bb71576",
+      "snapshot_bytes_limit": 123293,
+      "source_snapshot_sha256": "4bb9694c1bd29f0138ec83037ee4bc15f9d286b90255060162866b9c477e868b",
+      "raw_destination": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T06-01-53-01a046f5-de72-7011-ad77-6f429bb71576.jsonl.gz",
+      "readable_destination": "conversations/threads/01a046f5-de72-7011-ad77-6f429bb71576.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/01/rollout-2026-09-01T09-37-34-01a05c54-c622-78b3-9644-ca704e76df17.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a05c54-c622-78b3-9644-ca704e76df17",
+      "snapshot_bytes_limit": 1344676,
+      "source_snapshot_sha256": "00e14d9a627e952407a544bb875b6e45c2a671c54dad00196edfa51ef88f2c32",
+      "raw_destination": "conversations/raw/sessions/2026/09/01/rollout-2026-09-01T09-37-34-01a05c54-c622-78b3-9644-ca704e76df17.jsonl.gz",
+      "readable_destination": "conversations/threads/01a05c54-c622-78b3-9644-ca704e76df17.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-31-41-01a08024-f733-7443-9cde-80c32bdbf7fc.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a08024-f733-7443-9cde-80c32bdbf7fc",
+      "snapshot_bytes_limit": 7957395,
+      "source_snapshot_sha256": "426d0b9291fb5a415fa377d40131606e9ac7d70f0cef67086b0b63d14e1edc6e",
+      "raw_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-31-41-01a08024-f733-7443-9cde-80c32bdbf7fc.jsonl.gz",
+      "readable_destination": "conversations/threads/01a08024-f733-7443-9cde-80c32bdbf7fc.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-38-38-01a0802b-53db-75f2-9f81-1922375d5f84.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a0802b-53db-75f2-9f81-1922375d5f84",
+      "snapshot_bytes_limit": 7740420,
+      "source_snapshot_sha256": "95af49c270495653040733c4ae2ea1453f3f55c6003239deb3f6a169775d7a39",
+      "raw_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-38-38-01a0802b-53db-75f2-9f81-1922375d5f84.jsonl.gz",
+      "readable_destination": "conversations/threads/01a0802b-53db-75f2-9f81-1922375d5f84.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T08-51-11-01a08036-d1e9-7160-b3d5-07c46362bc06.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a08036-d1e9-7160-b3d5-07c46362bc06",
+      "snapshot_bytes_limit": 143496,
+      "source_snapshot_sha256": "daf26127b9051405335c6fa83cf608e77ea51c1661b2fcb488c221dcfb376750",
+      "raw_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-51-11-01a08036-d1e9-7160-b3d5-07c46362bc06.jsonl.gz",
+      "readable_destination": "conversations/threads/01a08036-d1e9-7160-b3d5-07c46362bc06.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/08/rollout-2026-09-08T12-58-39-01a08119-6186-7f73-b5bd-b04c2093edc7.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a08119-6186-7f73-b5bd-b04c2093edc7",
+      "snapshot_bytes_limit": 1119630,
+      "source_snapshot_sha256": "54103f67b31efca818a19160fbed9d99d04dcf7cf686801e0c6354461f8e6cf7",
+      "raw_destination": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T12-58-39-01a08119-6186-7f73-b5bd-b04c2093edc7.jsonl.gz",
+      "readable_destination": "conversations/threads/01a08119-6186-7f73-b5bd-b04c2093edc7.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/09/09/rollout-2026-09-09T08-24-35-01a08119-6186-7f73-b5bd-b04c2093edc7_01a08544-d4e6-7801-bd76-e2da2c8fcea0.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a08119-6186-7f73-b5bd-b04c2093edc7",
+      "snapshot_bytes_limit": 263213,
+      "source_snapshot_sha256": "cd8f11fb6ff8d7163ad4f42f6559098f00325546e7fed106fd76fea0697f0bf0",
+      "raw_destination": "conversations/raw/sessions/2026/09/09/rollout-2026-09-09T08-24-35-01a08119-6186-7f73-b5bd-b04c2093edc7_01a08544-d4e6-7801-bd76-e2da2c8fcea0.jsonl.gz",
+      "readable_destination": "conversations/threads/01a08119-6186-7f73-b5bd-b04c2093edc7.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-27d8-7021-989a-6cfd99b81fb2.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a19bad-27d8-7021-989a-6cfd99b81fb2",
+      "snapshot_bytes_limit": 98164,
+      "source_snapshot_sha256": "ad978ea0ab0fabbd38323df2c6ebba96d82cf1c16c98f0f3b9c9145bdc677bb3",
+      "raw_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-27d8-7021-989a-6cfd99b81fb2.jsonl.gz",
+      "readable_destination": "conversations/threads/01a19bad-27d8-7021-989a-6cfd99b81fb2.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-6544-7fc1-8031-0441755f24e3.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a19bae-6544-7fc1-8031-0441755f24e3",
+      "snapshot_bytes_limit": 104235,
+      "source_snapshot_sha256": "65fd4df1dc6617393c2c52792d69a577c26ffaf817ea44a41ed08248ea1201eb",
+      "raw_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-6544-7fc1-8031-0441755f24e3.jsonl.gz",
+      "readable_destination": "conversations/threads/01a19bae-6544-7fc1-8031-0441755f24e3.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-40-01a19bae-b53e-7051-80bb-e0108675f76c.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a19bae-b53e-7051-80bb-e0108675f76c",
+      "snapshot_bytes_limit": 96103,
+      "source_snapshot_sha256": "ff36dd48379e5c3c217c2bbfe11db0c1510f89de76daeb53d59f12ace08e08b4",
+      "raw_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-40-01a19bae-b53e-7051-80bb-e0108675f76c.jsonl.gz",
+      "readable_destination": "conversations/threads/01a19bae-b53e-7051-80bb-e0108675f76c.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/root/.codex/sessions/2026/11/02/rollout-2026-11-02T09-54-56-01a19bae-f31a-7a33-9054-6fc246bc7af6.jsonl",
+      "category": "current_codex_rollout",
+      "thread_id": "01a19bae-f31a-7a33-9054-6fc246bc7af6",
+      "snapshot_bytes_limit": 86876,
+      "source_snapshot_sha256": "5cf0a2c03cd2c34a5ada18f35c4f5467d491f22ab1e4aff65fd4cd585ed6fbbd",
+      "raw_destination": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-56-01a19bae-f31a-7a33-9054-6fc246bc7af6.jsonl.gz",
+      "readable_destination": "conversations/threads/01a19bae-f31a-7a33-9054-6fc246bc7af6.md",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl",
+      "category": "legacy_workspace_rollout",
+      "thread_id": "019fd684-b350-7471-8274-e5bf3f8f91d9",
+      "snapshot_bytes_limit": 2069247,
+      "snapshot_mtime_ns": 1787284616676282205,
+      "source_snapshot_sha256": "ef1956ead91bb697c6c1e9f077227f461799280b0f0c065787f36806d396d700",
+      "record_count": 1136,
+      "invalid_or_partial_lines_omitted": [],
+      "raw_destination": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl",
+      "readable_destination": "conversations/threads/019fd684-b350-7471-8274-e5bf3f8f91d9.md",
+      "raw_copy_owned_by": "workspace agent; no duplicate raw JSONL copied by conversation exporter",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl",
+      "category": "legacy_workspace_rollout",
+      "thread_id": "019fd6e4-10ac-7611-b6e0-32143580ab3d",
+      "snapshot_bytes_limit": 50331286,
+      "snapshot_mtime_ns": 1787284616831287953,
+      "source_snapshot_sha256": "5321fd26ab586c117d734246f0b5478bb9a24393393e8eb3db8227a5b4f00edd",
+      "record_count": 11142,
+      "invalid_or_partial_lines_omitted": [],
+      "raw_destination": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl.gz",
+      "readable_destination": "conversations/threads/019fd6e4-10ac-7611-b6e0-32143580ab3d.md",
+      "raw_copy_owned_by": "workspace agent; no duplicate raw JSONL copied by conversation exporter",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl",
+      "category": "legacy_workspace_rollout",
+      "thread_id": "019fdae9-b489-7b72-be97-9e0ea12785bf",
+      "snapshot_bytes_limit": 2281341,
+      "snapshot_mtime_ns": 1787284616839288249,
+      "source_snapshot_sha256": "89c9a5c09d88ceaa5d9badb717b6775450046004fd2f5427685cf4e1f165baba",
+      "record_count": 475,
+      "invalid_or_partial_lines_omitted": [],
+      "raw_destination": "legacy_archive/session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl.gz",
+      "readable_destination": "conversations/threads/019fdae9-b489-7b72-be97-9e0ea12785bf.md",
+      "raw_copy_owned_by": "workspace agent; no duplicate raw JSONL copied by conversation exporter",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/10/rollout-2026-08-10T02-03-24-019fe969-1146-76d2-956f-d391a4ddd5d1.jsonl",
+      "category": "legacy_workspace_rollout",
+      "thread_id": "019fe969-1146-76d2-956f-d391a4ddd5d1",
+      "snapshot_bytes_limit": 241117,
+      "snapshot_mtime_ns": 1787284616840288287,
+      "source_snapshot_sha256": "ece50618a9b4bc7277b03a2262ce02a764f825842e494a03f387dff0ba21bc5b",
+      "record_count": 122,
+      "invalid_or_partial_lines_omitted": [],
+      "raw_destination": "legacy_archive/session/all-sessions/2026/08/10/rollout-2026-08-10T02-03-24-019fe969-1146-76d2-956f-d391a4ddd5d1.jsonl",
+      "readable_destination": "conversations/threads/019fe969-1146-76d2-956f-d391a4ddd5d1.md",
+      "raw_copy_owned_by": "workspace agent; no duplicate raw JSONL copied by conversation exporter",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/12/rollout-2026-08-12T03-45-08-019ff412-ece1-7101-95cd-64058149b2b5.jsonl",
+      "category": "legacy_workspace_rollout",
+      "thread_id": "019ff412-ece1-7101-95cd-64058149b2b5",
+      "snapshot_bytes_limit": 237640,
+      "snapshot_mtime_ns": 1787284616840288287,
+      "source_snapshot_sha256": "e3a2b1189c9d8184fe9dacc72425c601edcb1203dc398e2daa60c96b58e98fc3",
+      "record_count": 135,
+      "invalid_or_partial_lines_omitted": [],
+      "raw_destination": "legacy_archive/session/all-sessions/2026/08/12/rollout-2026-08-12T03-45-08-019ff412-ece1-7101-95cd-64058149b2b5.jsonl",
+      "readable_destination": "conversations/threads/019ff412-ece1-7101-95cd-64058149b2b5.md",
+      "raw_copy_owned_by": "workspace agent; no duplicate raw JSONL copied by conversation exporter",
+      "raw_destination_exists": true
+    },
+    {
+      "source_path": "/sgl-workspace/deepseek-v4-flash/session/primary-session.jsonl",
+      "category": "legacy_primary_duplicate",
+      "source_snapshot_sha256": "5321fd26ab586c117d734246f0b5478bb9a24393393e8eb3db8227a5b4f00edd",
+      "bytes": 50331286,
+      "duplicate_of": "/sgl-workspace/deepseek-v4-flash/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl",
+      "thread_id": "019fd6e4-10ac-7611-b6e0-32143580ab3d",
+      "readable_destination": "conversations/threads/019fd6e4-10ac-7611-b6e0-32143580ab3d.md",
+      "raw_destination": "legacy_archive/session/primary-session.jsonl.gz",
+      "raw_destination_exists": true
+    }
+  ],
+  "summary": {
+    "source_paths": 22,
+    "current_codex_rollouts": 16,
+    "legacy_workspace_rollouts": 5,
+    "duplicate_primary_copies": 1,
+    "unique_thread_ids_in_rollouts": 20,
+    "unique_rollout_snapshot_hashes": 21,
+    "indexed_threads_including_metadata_only": 22,
+    "pending_raw_destination_count": 0
+  },
+  "notes": [
+    "Workspace legacy raw files are copied by the workspace export; this exporter only adds their readable messages and unified index.",
+    "Legacy primary-session.jsonl is a byte-identical extra copy of one all-sessions rollout.",
+    "Metadata-only DB threads are retained in conversations/index.json and can have no rollout in the initial byte snapshot."
+  ],
+  "target_presence_checked_at_utc": "2026-11-02T10:44:36.016697+00:00"
+}

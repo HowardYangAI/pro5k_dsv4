@@ -1,0 +1,8 @@
+*.bundle binary
+*.bundle.part-* binary
+*.gz binary
+*.png binary
+*.xlsx binary
+*.trace binary
+*.jsonl -diff
+*.excalidraw -diff

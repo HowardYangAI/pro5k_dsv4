@@ -1,0 +1,7 @@
+# Preserve snapshot bytes so SHA-256 manifests remain valid on every platform.
+* -text
+*.gz -diff
+*.bundle -diff
+*.part-* -diff
+*.png -diff
+*.jpg -diff

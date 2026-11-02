@@ -1,0 +1,35 @@
+{
+  "original_path": "/sgl-workspace/deepseek-v4-flash",
+  "head_commit": "63a288fe9673d068c68650369138ba75cb81094e",
+  "base_commit": "63a288fe9673d068c68650369138ba75cb81094e",
+  "branch": "backup-20260819",
+  "git_common_directory": "/sgl-workspace/deepseek-v4-flash/.git",
+  "local_refs": [
+    "refs/heads/backup-20260819 63a288fe9673d068c68650369138ba75cb81094e"
+  ],
+  "is_shallow": false,
+  "remotes": {
+    "origin": "git@git.xiaojukeji.com:yanghaoxiang_i/deepseek-v4-flash.git"
+  },
+  "status_porcelain": "?? artifacts/plan/request-to-real-pd-decode-flow.excalidraw\n?? artifacts/plan/request-to-real-pd-decode-flow.png\n?? artifacts/plan/request-to-real-pd-decode-swimlane.excalidraw\n?? artifacts/plan/request-to-real-pd-decode-swimlane.png\n",
+  "staged_paths": [],
+  "unstaged_paths": [],
+  "untracked_paths": [
+    "artifacts/plan/request-to-real-pd-decode-flow.excalidraw",
+    "artifacts/plan/request-to-real-pd-decode-flow.png",
+    "artifacts/plan/request-to-real-pd-decode-swimlane.excalidraw",
+    "artifacts/plan/request-to-real-pd-decode-swimlane.png"
+  ],
+  "committed_delta_paths": [],
+  "recent_commits": [
+    "63a288fe9673d068c68650369138ba75cb81094e 2026-08-19T11:41:11+00:00 finalize session archive before machine handoff",
+    "d6c91fe56476c6e1ed2081acf16cc5a5d630c9e3 2026-08-19T11:37:36+00:00 sync latest conversation session archive",
+    "7ddf58c2dc614861e91bce6b99abf51e2329e962 2026-08-19T10:14:06+00:00 add profile session handoff documentation",
+    "b5fe7d66fc85c78bd539ea49ee117b090d2b019b 2026-08-19T10:05:24+00:00 add no-dspark end-to-end split A/B",
+    "62b494f1c1f57d420990a95f22ef4598a7c8882d 2026-08-19T09:32:09+00:00 archive full end-to-end split optimization A/B",
+    "eb1997b379be58b466a85cea9d72d985b70e3ebd 2026-08-19T08:01:08+00:00 archive formal torch profiles and split optimization A/B",
+    "1537570116c41acd953f59682848465478f967a4 2026-08-19T04:30:20+00:00 archive bounded Torch Profile diagnosis and stage traces",
+    "9f8c03cc91dae8e56ba904ccf2cd71ce83fb5122 2026-08-19T04:06:42+00:00 archive remaining profiler tools, stash, environment, and early logs"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

@@ -1,0 +1,32 @@
+d07dd66fb75e9382e8455d1e40adc6e06a4feb89
+## HEAD (no branch)
+ M python/sglang/srt/disaggregation/decode.py
+ M python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py
+ M python/sglang/srt/managers/schedule_batch.py
+ M python/sglang/srt/managers/scheduler.py
+ M python/sglang/srt/managers/tokenizer_manager.py
+ M python/sglang/srt/mem_cache/allocator/base.py
+ M python/sglang/srt/mem_cache/hisparse_memory_pool.py
+ M python/sglang/srt/mem_cache/memory_pool.py
+ M python/sglang/srt/mem_cache/swa_memory_pool.py
+ M python/sglang/srt/mem_cache/unified_memory_pool.py
+ M python/sglang/srt/speculative/dflash_info_v2.py
+ M python/sglang/srt/speculative/dspark_components/dspark_draft.py
+ M python/sglang/srt/speculative/eagle_utils.py
+ M python/sglang/srt/speculative/spec_utils.py
+ M test/registered/unit/disaggregation/test_decode_queue_cleanup.py
+?? test/registered/spec/dspark/test_dspark_dp_moe_metadata.py
+893ba98a12a7c47f804141386a275bebbf7b0ad2f31ec9b1dccabdbd314acbf2  python/sglang/srt/disaggregation/decode.py
+70192fe6ff3fce0cab3730d05a4ef1de9599b18efd1772249b7f5551b079599f  python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py
+3cc3fb617566f4edd36e842bf473dd45e506ba34abca7ea777465e5f27455d5f  python/sglang/srt/managers/schedule_batch.py
+9ce88ccf06e07fed13400b77e9530403dc524c772f9209519e35509ae1e2eadd  python/sglang/srt/managers/scheduler.py
+58576567ff3320be645a6efecb0e372dc0d3e1f2f44af3e2edebe81e573a8293  python/sglang/srt/managers/tokenizer_manager.py
+cdb94af7b6566314cf1d00ac095e47058dfb7a0877b64b7a8960d302c7ccdcdb  python/sglang/srt/mem_cache/allocator/base.py
+9aa5476e16312745878df81422459db7d3e6061e392cbf053c11d0e5916ce2de  python/sglang/srt/mem_cache/hisparse_memory_pool.py
+84ccd0db997df402ce7d039728be4f5618843f40469e9783cdc633e10668b305  python/sglang/srt/mem_cache/memory_pool.py
+94dfea8c6a30aa0a456b35a9e6fd9992965c370bd32415c113fc1651adb9eab0  python/sglang/srt/mem_cache/swa_memory_pool.py
+e5a9c72e44d944c06f823c3dc46e2fb7ed8561dca810d32903c3e396da1ef769  python/sglang/srt/mem_cache/unified_memory_pool.py
+5a1232842e7254e699128d338907660ac1bc37d069d3337ad1526cba429772eb  python/sglang/srt/speculative/dflash_info_v2.py
+c43ac0f78cad264164e7d68e68800d40f041a18b66c923824b7eb5320f7f51dc  python/sglang/srt/speculative/dspark_components/dspark_draft.py
+86e9c49fb52af79f05f4a81eead7ee2bf5cd2e6801df5cbc9e38104d1fe645bb  python/sglang/srt/speculative/eagle_utils.py
+2abd3008197f888e63803841c30d3c9cea9355f27d869cabd3c8032a5de77fea  python/sglang/srt/speculative/spec_utils.py

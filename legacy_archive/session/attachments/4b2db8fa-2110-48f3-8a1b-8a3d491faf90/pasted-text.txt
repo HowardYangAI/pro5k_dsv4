@@ -1,0 +1,114 @@
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo nvidia-smi --gpu-reset -i 1,2,3,4,5,6,7
+The following GPUs could not be reset:
+  GPU 00000000:31:00.0: In use by another client
+  GPU 00000000:41:00.0: In use by another client
+  GPU 00000000:61:00.0: In use by another client
+  GPU 00000000:81:00.0: In use by another client
+  GPU 00000000:A1:00.0: In use by another client
+  GPU 00000000:C1:00.0: In use by another client
+  GPU 00000000:E1:00.0: In use by another client
+
+7 devices are currently being used by one or more other processes (e.g., Fabric Manager, CUDA application, graphics application such as an X server, or a monitoring application such as another instance of nvidia-smi). Please first kill all processes using these devices and all compute applications running in the system.
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo nvidia-smi --gpu-reset -i 1,2,3,4,5,6,7
+The following GPUs could not be reset:
+  GPU 00000000:31:00.0: In use by another client
+  GPU 00000000:41:00.0: In use by another client
+  GPU 00000000:61:00.0: In use by another client
+  GPU 00000000:81:00.0: In use by another client
+  GPU 00000000:A1:00.0: In use by another client
+  GPU 00000000:C1:00.0: In use by another client
+  GPU 00000000:E1:00.0: In use by another client
+
+7 devices are currently being used by one or more other processes (e.g., Fabric Manager, CUDA application, graphics application such as an X server, or a monitoring application such as another instance of nvidia-smi). Please first kill all processes using these devices and all compute applications running in the system.
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo fuser -v /dev/nvidia*
+                     USER        PID ACCESS COMMAND
+/dev/nvidia0:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia1:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia2:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia3:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia4:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia5:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia6:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidia7:        root      13855 F.... nvidia-persiste
+                     root      214911 F.... dcgm-exporter
+                     root      222896 F.... nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+/dev/nvidiactl:      root      13855 F.... nvidia-persiste
+                     root      214911 F...m dcgm-exporter
+                     root      222896 F...m nvidia-device-p
+                     root      222998 F.... nvidia-device-p
+                     root      2227741 F...m nvidia-smi
+                     root      2670019 F...m nvidia-smi
+                     root      2959756 F...m nvidia-smi
+/dev/nvidia-uvm:     root      214911 F.... dcgm-exporter
+                     root      2227741 F.... nvidia-smi
+                     root      2670019 F.... nvidia-smi
+                     root      2959756 F.... nvidia-smi
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo lsof /dev/nvidia* 2>/dev/nullsudo systemctl status nvidia-fabricmanager
+-bash: /dev/nullsudo: Permission denied
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo systemctl status nvidia-persistenced
+Unit nvidia-persistenced.service could not be found.
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo systemctl status nvidia-dcgm
+Unit nvidia-dcgm.service could not be found.
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo systemctl status dcgm
+Unit dcgm.service could not be found.
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ ps -ef | grep -Ei 'fabricmanager|persistenced|dcgm|nv-hostengine|mps' | grep -v grep
+root       13855       1  0 Jun29 ?        00:00:32 nvidia-persistenced --persistence-mode
+root      214911  214745  0 Jun29 ?        02:54:12 /usr/bin/dcgm-exporter --collectors=/etc/dcgm-exporter/dcp-metrics-included.csv
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ sudo nvidia-smi --gpu-reset -i 1,2,3,4,5,6,7
+The following GPUs could not be reset:
+  GPU 00000000:31:00.0: In use by another client
+  GPU 00000000:41:00.0: In use by another client
+  GPU 00000000:61:00.0: In use by another client
+  GPU 00000000:81:00.0: In use by another client
+  GPU 00000000:A1:00.0: In use by another client
+  GPU 00000000:C1:00.0: In use by another client
+  GPU 00000000:E1:00.0: In use by another client
+
+7 devices are currently being used by one or more other processes (e.g., Fabric Manager, CUDA application, graphics application such as an X server, or a monitoring application such as another instance of nvidia-smi). Please first kill all processes using these devices and all compute applications running in the system.
+[yanghaoxiang_i@ml-pro5000-ser171 ~]$ 

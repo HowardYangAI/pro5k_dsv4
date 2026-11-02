@@ -1,0 +1,282 @@
+    def handle_generate_request(
+        self,
+        recv_req: TokenizedGenerateReqInput,
+    ):
+        # Route: normal request / session request / session-not-found
+        session_id = (
+            recv_req.session_params.id if recv_req.session_params is not None else None
+        )
+        # Radix-native sessions use only the top-level session_id.
+        radix_native_session = (
+            recv_req.session_id is not None
+            and self.server_args.enable_session_radix_cache
+        )
+
+        if session_id is None or radix_native_session:
+            # Normal non-session request, or a radix-native session request
+            if recv_req.input_embeds is not None:
+                # Generate fake input_ids based on the length of input_embeds
+                seq_length = len(recv_req.input_embeds)
+                recv_req.input_ids = array("q", [1]) * seq_length
+
+            if recv_req.bootstrap_port is None:
+                # Use default bootstrap port
+                recv_req.bootstrap_port = self.server_args.disaggregation_bootstrap_port
+
+            req = Req(
+                recv_req.rid,
+                recv_req.input_text,
+                recv_req.input_ids,
+                recv_req.sampling_params,
+                return_logprob=recv_req.return_logprob,
+                top_logprobs_num=recv_req.top_logprobs_num,
+                token_ids_logprob=recv_req.token_ids_logprob,
+                return_sampling_mask=recv_req.return_sampling_mask,
+                stream=recv_req.stream,
+                lora_id=recv_req.lora_id,
+                session_id=recv_req.session_id,
+                input_embeds=recv_req.input_embeds,
+                positional_embed_overrides=recv_req.positional_embed_overrides,
+                token_type_ids=recv_req.token_type_ids,
+                custom_logit_processor=recv_req.custom_logit_processor,
+                require_reasoning=recv_req.require_reasoning,
+                return_hidden_states=recv_req.return_hidden_states,
+                return_routed_experts=recv_req.return_routed_experts,
+                routed_experts_start_len=recv_req.routed_experts_start_len,
+                return_indexer_topk=recv_req.return_indexer_topk,
+                eos_token_ids=self.model_config.hf_eos_token_id,
+                bootstrap_host=recv_req.bootstrap_host,
+                bootstrap_port=recv_req.bootstrap_port,
+                bootstrap_room=recv_req.bootstrap_room,
+                disagg_mode=self.disaggregation_mode,
+                routed_dp_rank=recv_req.routed_dp_rank,
+                disagg_prefill_dp_rank=recv_req.disagg_prefill_dp_rank,
+                vocab_size=self.model_config.vocab_size,
+                priority=recv_req.priority,
+                metrics_collector=(
+                    self.metrics_collector
+                    if self.metrics_reporter.enable_metrics
+                    else None
+                ),
+                routing_key=recv_req.routing_key,
+                extra_key=recv_req.extra_key,
+                http_worker_ipc=recv_req.http_worker_ipc,
+                dllm_config=self.dllm_config,
+                time_stats=recv_req.time_stats,
+                multi_item_delimiter_indices=recv_req.multi_item_delimiter_indices,
+            )
+            req.tokenizer = self.tokenizer
+
+            if self.disaggregation_mode != DisaggregationMode.NULL:
+                # Invalid request for disaggregated mode
+                if (
+                    recv_req.bootstrap_room is None
+                    and self.transfer_backend != TransferBackend.FAKE
+                ):
+                    error_msg = (
+                        f"Invalid request: Disaggregated request received without "
+                        f"bootstrap room id. {req.rid=}"
+                    )
+                    logger.error(error_msg)
+                    recv_req.time_stats.trace_ctx.abort(
+                        abort_info={"reason": error_msg}
+                    )
+                    prepare_abort(req, error_msg, status_code=HTTPStatus.BAD_REQUEST)
+                    self.output_streamer.stream_output([req], req.return_logprob)
+                    return
+
+        elif (
+            session_id in self.session_controller
+            and not self.session_controller.get(session_id).close_on_finish
+        ):
+            # Session exists and is not closing: create request from session
+            session = self.session_controller.get(session_id)
+            req = session.create_req(
+                recv_req,
+                self.tokenizer,
+                self.model_config.vocab_size,
+                eos_token_ids=self.model_config.hf_eos_token_id,
+            )
+            # TODO: set trace context
+            if self.metrics_reporter.enable_metrics:
+                req.time_stats.set_metrics_collector(self.metrics_collector)
+            if isinstance(req.finished_reason, FINISH_ABORT):
+                self.init_req_max_new_tokens(req)
+                self._add_request_to_queue(req)
+                return
+
+        else:
+            # Session not found, or session is closing
+            if session_id in self.session_controller:
+                error_msg = (
+                    f"Invalid request: close was requested for session {session_id}"
+                )
+            else:
+                error_msg = f"Invalid request: session id {session_id} does not exist"
+            req = Req(
+                recv_req.rid,
+                recv_req.input_text,
+                recv_req.input_ids,
+                recv_req.sampling_params,
+                vocab_size=self.model_config.vocab_size,
+                http_worker_ipc=recv_req.http_worker_ipc,
+            )
+            req.tokenizer = self.tokenizer
+            req.set_finish_with_abort(error_msg)
+            self.init_req_max_new_tokens(req)
+            self._add_request_to_queue(req)
+            return
+
+        self._maybe_namespace_elastic_radix_cache(req)
+
+        if self.spec_algorithm.is_dflash_family():
+            error_msg = validate_dflash_request(req, self.enable_overlap)
+            if error_msg is not None:
+                req.set_finish_with_abort(error_msg)
+                self.init_req_max_new_tokens(req)
+                self._add_request_to_queue(req)
+                return
+
+        if (
+            req.return_sampling_mask
+            and self.disaggregation_mode != DisaggregationMode.NULL
+            and not self.disagg_metadata_buffers.enable_sampling_mask
+        ):
+            error_msg = (
+                "return_sampling_mask with disaggregation requires "
+                "SGLANG_DISAGGREGATION_SAMPLING_MASK_MAX_TOKENS > 0."
+            )
+            req.set_finish_with_abort(error_msg)
+            self.init_req_max_new_tokens(req)
+            self._add_request_to_queue(req)
+            return
+
+        if req.return_sampling_mask and req.sampling_params.top_k == TOP_K_ALL:
+            error_msg = (
+                "return_sampling_mask requires finite top_k; top_p-only sampling "
+                "is valid but can return huge masks in the tail, blowing up "
+                "metadata, so we need a safety cap."
+            )
+            req.set_finish_with_abort(error_msg)
+            self.init_req_max_new_tokens(req)
+            self._add_request_to_queue(req)
+            return
+
+        if req.return_sampling_mask and not self.spec_algorithm.is_none():
+            # Spec workers do not emit one sampling support per accepted token, so
+            # the returned mask would not align 1:1 with generated tokens. Reject
+            # the combination instead of silently returning a misaligned mask.
+            error_msg = (
+                "return_sampling_mask is not supported with speculative decoding."
+            )
+            req.set_finish_with_abort(error_msg)
+            self.init_req_max_new_tokens(req)
+            self._add_request_to_queue(req)
+            return
+
+        if req.return_sampling_mask and self.server_args.sampling_backend == "ascend":
+            # The ascend backend samples from logits directly and never builds the
+            # top-k/top-p support, so it cannot produce a sampling mask.
+            error_msg = (
+                "return_sampling_mask is not supported with the ascend "
+                "sampling backend."
+            )
+            req.set_finish_with_abort(error_msg)
+            self.init_req_max_new_tokens(req)
+            self._add_request_to_queue(req)
+            return
+
+        # Handle multimodal inputs
+        if recv_req.mm_inputs is not None:
+            image_inputs = self._get_multimodal_inputs(recv_req.mm_inputs)
+
+            SessionController.adjust_mm_offsets(recv_req, req, image_inputs)
+
+            # The following steps are already fast, execute locally on each rank.
+            # Expand a single image token into multiple dummy tokens for receiving image embeddings.
+            # The pad function is model-specific and can be None for some backends.
+            if (
+                not self._try_apply_padded_mm_input_ids(recv_req, req, image_inputs)
+                and self.pad_input_ids_func
+            ):
+                req.origin_input_ids = array(
+                    "q", self.pad_input_ids_func(req.origin_input_ids, image_inputs)
+                )
+            req.extend_image_inputs(image_inputs)
+            self._maybe_compute_mrope_positions(req)
+
+            if len(req.origin_input_ids) >= self.max_req_input_len:
+                req.set_finish_with_abort(
+                    error_msg=(
+                        "Multimodal prompt is too long after expanding multimodal tokens. "
+                        f"After expanding {len(req.origin_input_ids_unpadded)=} => {len(req.origin_input_ids)} >= {self.max_req_input_len}."
+                    )
+                )
+                self.init_req_max_new_tokens(req)
+                self._add_request_to_queue(req)
+                return
+
+        # initialize before returning
+        self.init_req_max_new_tokens(req)
+
+        # Validate prompt length
+        error_msg = validate_input_length(
+            req,
+            self.max_req_input_len,
+            self.server_args.allow_auto_truncate,
+        )
+        if error_msg:
+            req.set_finish_with_abort(error_msg)
+            self._add_request_to_queue(req)
+            return
+
+        if not recv_req.return_logprob and recv_req.logprob_start_len != -1:
+            # When return_logprob is False, logprob_start_len should be ignored
+            recv_req.logprob_start_len = -1
+
+        if recv_req.logprob_start_len == -1:
+            if recv_req.return_logprob and recv_req.token_ids_logprob is None:
+                # If logprob is required but neither token_ids_logprob nor logprob_start_len is
+                # set, return the logprobs for output tokens by default
+                req.logprob_start_len = len(req.origin_input_ids)
+            elif req.is_prefill_only:
+                # For prefill-only requests with logprob_start_len == -1, set logprob_start_len
+                # beyond input sequence to skip input logprob computation entirely
+                req.logprob_start_len = len(req.origin_input_ids)
+            else:
+                # If return_logprob is False, only the last token requires logprob computation
+                req.logprob_start_len = -1
+        else:
+            req.logprob_start_len = recv_req.logprob_start_len
+
+        if req.logprob_start_len > len(req.origin_input_ids):
+            error_msg = f"{req.logprob_start_len=} is higher than the number of input tokens {len(req.origin_input_ids)=}. Please use a smaller logprob_start_len."
+            req.logprob_start_len = -1
+            req.set_finish_with_abort(error_msg)
+            self._add_request_to_queue(req)
+            return
+
+        if recv_req.return_routed_experts:
+            error_msg = None
+            if recv_req.routed_experts_start_len < 0:
+                error_msg = (
+                    f"{recv_req.routed_experts_start_len=} is lower than 0. "
+                    "Please use a non-negative routed_experts_start_len."
+                )
+
+            if recv_req.routed_experts_start_len > len(req.origin_input_ids):
+                error_msg = (
+                    f"{recv_req.routed_experts_start_len=} is higher than the "
+                    f"number of input tokens {len(req.origin_input_ids)=}. Please "
+                    f"use a smaller routed_experts_start_len."
+                )
+
+            if error_msg is not None:
+                req.routed_experts_start_len = 0
+                req.set_finish_with_abort(error_msg)
+                self._add_request_to_queue(req)
+                return
+
+        added_to_grammar_queue = self.grammar_manager.process_req_with_grammar(req)
+        if not added_to_grammar_queue:
+            self._add_request_to_queue(req)

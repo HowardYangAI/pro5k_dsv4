@@ -1,0 +1,867 @@
+/sgl-workspace/sglang/python/sglang/launch_server.py:56: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-08-19 04:22:52] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:22:52] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:22:52] Breakable CUDA graph is incompatible with DeepSeek-V4 (heavy capture-pool memory pressure); disabling prefill CUDA graph.
+[2026-08-19 04:22:53] Use dsv4 attention backend for DeepseekV4ForCausalLM, setting page_size to 256.
+[2026-08-19 04:22:53] Setting swa_full_tokens_ratio to 0.1 for DeepseekV4ForCausalLM.
+[2026-08-19 04:22:53] Setting KV cache dtype to fp8_e4m3 for DeepseekV4ForCausalLM.
+[2026-08-19 04:22:53] DP attention is enabled. chunked prefill size is adjusted from 2048 to 256.
+[2026-08-19 04:22:53] DSpark draft weights are bundled in the target checkpoint; defaulting --speculative-draft-model-path to --model-path (/data/models/DeepSeek-V4-Flash-0731).
+[2026-08-19 04:22:54] server_args=ServerArgs(model_path='/data/models/DeepSeek-V4-Flash-0731', tokenizer_path='/data/models/DeepSeek-V4-Flash-0731', tokenizer_mode='auto', tokenizer_backend='huggingface', tokenizer_worker_num=1, detokenizer_worker_num=1, skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=True, context_length=131072, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', model_config_parser='auto', json_model_override_args='{}', dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='fp8_e4m3', enable_fp32_lm_head=False, modelopt_quant=None, modelopt_checkpoint_restore_path=None, modelopt_checkpoint_save_path=None, modelopt_export_path=None, quantize_and_serve=False, rl_quant_profile=None, enable_tf32_matmul=False, mem_fraction_static=0.6, max_running_requests=128, max_queued_requests=None, max_total_tokens=None, chunked_prefill_size=256, enable_dynamic_chunking=False, max_prefill_tokens=8192, prefill_max_requests=None, schedule_policy='fcfs', enable_priority_scheduling=False, disable_priority_preemption=False, default_priority_value=None, abort_on_priority_when_disabled=False, schedule_low_priority_values_first=False, priority_scheduling_preemption_threshold=10, retraction_policy='length', schedule_conservativeness=0.3, page_size=256, swa_full_tokens_ratio=0.1, disable_hybrid_swa_memory=False, radix_eviction_policy='lru', prefill_only_disable_kv_cache=False, disable_radix_cache=True, enable_page_major_kv_layout=False, enable_unified_memory=False, disable_chunked_prefix_cache=False, disable_overlap_schedule=False, num_continuous_decode_steps=1, scheduler_recv_interval=1, enable_mixed_chunk=False, nccl_port=None, dist_timeout=None, dist_init_addr=None, nnodes=1, node_rank=0, tp_size=8, dcp_size=1, pp_size=1, pp_max_micro_batch_size=None, pp_async_batch_depth=0, dp_size=8, load_balance_method='round_robin', attn_cp_size=1, moe_dp_size=1, enable_prefill_cp=False, cp_strategy=None, enable_dsa_cache_layer_split=False, enable_dsa_prefill_context_parallel=False, dsa_prefill_cp_mode='round-robin-split', enable_prefill_context_parallel=False, prefill_cp_mode='in-seq-split', enable_dp_attention=True, enable_dp_attention_local_control_broadcast=False, enable_dp_lm_head=True, enable_attn_tp_input_scattered=False, disable_attn_tp_gather=False, enable_p2p_check=False, device='cuda', base_gpu_id=0, gpu_id_step=1, random_seed=973822833, watchdog_timeout=300, soft_watchdog_timeout=None, sleep_on_idle=False, use_ray=False, custom_sigquit_handler=None, numa_node=None, gc_threshold=None, host='0.0.0.0', port=30012, fastapi_root_path='', smg_grpc_mode=False, grpc_mode=False, grpc_port=None, sidecar=None, sidecar_args=None, skip_server_warmup=False, warmups=None, enable_http2=False, ssl_keyfile=None, ssl_certfile=None, ssl_ca_certs=None, ssl_keyfile_password=None, enable_ssl_refresh=False, api_key=None, admin_api_key=None, served_model_name='DeepSeek-V4-Flash-0731', weight_version='default', chat_template=None, hf_chat_template_name=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser=None, default_chat_template_kwargs=None, strip_thinking_cache=False, enable_strict_thinking=False, tool_call_parser=None, tool_server=None, sampling_defaults='model', asr_max_buffer_seconds=60, asr_max_concurrent_sessions=32, preferred_sampling_params=None, allow_auto_truncate=False, stream_interval=1, batch_notify_size=16, stream_response_default_include_usage=False, incremental_streaming_output=False, enable_streaming_session=False, enable_session_radix_cache=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=2, log_requests_format='text', log_requests_target=None, uvicorn_access_log_exclude_prefixes=[], crash_dump_folder=None, show_time_cost=False, enable_metrics=False, smg_http_sidecar_port=None, enable_mfu_metrics=False, enable_metrics_for_all_schedulers=False, load_snapshot_publish_interval=15, tokenizer_metrics_custom_labels_header='x-custom-labels', tokenizer_metrics_allowed_custom_labels=None, extra_metric_labels=None, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, prompt_tokens_buckets=None, generation_tokens_buckets=None, gc_warning_threshold_secs=0.0, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, enable_forward_pass_metrics=False, forward_pass_metrics_worker_id='', forward_pass_metrics_ipc_name=None, enable_trace=False, trace_modules='request', otlp_traces_endpoint='localhost:4317', export_metrics_to_file=False, export_metrics_to_file_dir=None, stat_loggers=None, constrained_json_whitespace_pattern=None, constrained_json_disable_any_whitespace=False, attention_backend='dsv4', decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='xgrammar', radix_cache_backend=None, mm_attention_backend=None, fp8_gemm_runner_backend='auto', fp4_gemm_runner_backend='auto', bf16_gemm_backend='auto', dsa_prefill_backend=None, dsa_decode_backend=None, dsa_paged_mqa_logits_backend='auto', dsa_topk_backend='sgl-kernel', disable_flashinfer_autotune=False, mamba_backend='triton', cuda_graph_config=CudaGraphConfig(decode=PhaseConfig(backend='full', max_bs=128, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48, 52, 56, 60, 64, 72, 80, 88, 96, 104, 112, 120, 128], tc_compiler='eager', full_prefill_max_req=None), prefill=PhaseConfig(backend='disabled', max_bs=2048, bs=[4, 8, 12, 16, 20, 24, 28, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 288, 320, 352, 384, 416, 448, 480, 512, 576, 640, 704, 768, 832, 896, 960, 1024, 1280, 1536, 1792, 2048], tc_compiler='eager', full_prefill_max_req=None)), cuda_graph_backend_decode='full', cuda_graph_backend_prefill=None, cuda_graph_max_bs_decode=128, cuda_graph_max_bs_prefill=None, cuda_graph_bs_decode=None, cuda_graph_bs_prefill=None, cuda_graph_tc_compiler=None, disable_prefill_cuda_graph=False, disable_decode_cuda_graph=False, disable_cuda_graph=False, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_cudagraph_gc=False, debug_cuda_graph=False, enable_layerwise_nvtx_marker=False, enable_nccl_nvls=False, enable_symm_mem=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, triton_attention_split_tile_size=None, flashinfer_mla_disable_ragged=False, enable_fused_qk_norm_rope=False, enable_precise_embedding_interpolation=False, enable_fused_moe_sum_all_reduce=False, enable_deepseek_v4_fp4_indexer=False, disable_custom_all_reduce=False, enable_mscclpp=False, enable_torch_symm_mem=False, enable_scattered_sconv=False, pre_warm_nccl=False, enable_quant_communications=False, enable_flashinfer_allreduce_fusion=False, enforce_disable_flashinfer_allreduce_fusion=False, flashinfer_allreduce_fusion_backend=None, enable_aiter_allreduce_fusion=False, enable_torch_compile=False, enable_torch_compile_debug_mode=False, torch_compile_max_bs=32, torchao_config='', speculative_algorithm='DSPARK', speculative_draft_model_path='/data/models/DeepSeek-V4-Flash-0731', speculative_draft_model_revision=None, speculative_draft_load_format=None, speculative_num_steps=1, speculative_eagle_topk=1, speculative_num_draft_tokens=6, speculative_dflash_block_size=None, speculative_dspark_block_size=None, speculative_dspark_sps_table_path=None, speculative_dspark_confidence_sts_path=None, speculative_dspark_align_verify_tokens_to_graph_tier=False, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_use_rejection_sampling=False, speculative_token_map=None, speculative_attention_mode='decode', speculative_draft_attention_backend=None, speculative_draft_window_size=None, speculative_moe_runner_backend='flashinfer_mxfp4', speculative_moe_a2a_backend=None, speculative_draft_model_quantization=None, speculative_skip_dp_mlp_sync=False, enable_multi_layer_eagle=False, speculative_adaptive=False, speculative_adaptive_config=None, decoupled_spec_bind_endpoint=None, decoupled_spec_connect_endpoints=None, decoupled_spec_rank=None, decoupled_spec_role='null', spec_trace_dir=None, speculative_ngram_min_bfs_breadth=1, speculative_ngram_max_bfs_breadth=10, speculative_ngram_match_type='BFS', speculative_ngram_max_trie_depth=18, speculative_ngram_capacity=10000000, speculative_ngram_external_corpus_path=None, speculative_ngram_external_sam_budget=0, speculative_ngram_external_corpus_max_tokens=10000000, ep_size=8, moe_a2a_backend='none', moe_runner_backend='flashinfer_mxfp4', flashinfer_mxfp4_moe_precision='default', deepep_mode='auto', fuseep_mode=2, deepep_dispatcher_output_dtype='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm=None, init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, eplb_min_rebalancing_utilization_threshold=1.0, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, elastic_ep_backend=None, enable_elastic_expert_backup=False, mooncake_ib_device=None, enable_waterfill=False, ep_join_mode=None, ep_join_rank_offset=0, elastic_ep_initial_size=None, max_ep_size=None, elastic_ep_scale_timeout=600, elastic_ep_rejoin=False, disable_flashinfer_cutlass_moe_fp4_allgather=False, disable_shared_experts_fusion=False, enforce_shared_experts_fusion=False, max_mamba_cache_size=None, mamba_ssm_dtype=None, enable_mamba_cache_stochastic_rounding=False, mamba_cache_philox_rounds=0, mamba_full_memory_ratio=0.9, mamba_radix_cache_strategy='auto', uses_mamba_radix_cache=False, mamba_track_interval=256, enable_int8_mamba_checkpoint=False, int8_mamba_ckpt_size=None, linear_attn_backend='triton', linear_attn_decode_backend=None, linear_attn_prefill_backend=None, enable_linear_replayssm=False, linear_replayssm_cache_len=16, enable_gdn_replayssm_spec=False, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through', hicache_io_backend='kernel', hicache_mem_layout='page_first', hicache_storage_backend=None, hicache_storage_prefetch_policy='timeout', hicache_storage_backend_extra_config=None, enable_hisparse=False, hisparse_config=None, enable_broadcast_mm_inputs_process=False, enable_prefix_mm_cache=False, mm_enable_dp_encoder=False, mm_process_config={}, limit_mm_data_per_request=None, enable_mm_global_cache=False, disable_fast_image_processor=False, mm_feature_transport='cpu', keep_mm_feature_on_device=False, enable_lora=None, enable_lora_overlap_loading=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loaded_loras=None, max_loras_per_batch=8, lora_eviction_policy='lru', lora_backend='csgmv', max_lora_chunk_size=16, experts_shared_outer_loras=None, lora_use_virtual_experts=False, lora_strict_loading=False, lora_drain_wait_threshold=0.0, enable_two_batch_overlap=False, enable_single_batch_overlap=False, tbo_token_distribution_threshold=0.48, cpu_offload_gb=0, offload_group_size=-1, offload_num_in_group=1, offload_prefetch_step=1, offload_mode='cpu', enable_lmcache=False, lmcache_config_file=None, enable_flexkv=False, flexkv_config_file=None, kt_weight_path=None, kt_method='AMXINT4', kt_cpuinfer=None, kt_threadpool_count=2, kt_num_gpu_experts=None, kt_max_deferred_experts_per_token=None, dllm_algorithm=None, dllm_algorithm_config=None, dllm_fdfo=True, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_ib_device=None, disaggregation_decode_enable_radix_cache=False, disaggregation_decode_enable_offload_kvcache=False, num_reserved_decode_tokens=512, disaggregation_decode_extra_slots=None, disaggregation_decode_polling_interval=1, optimistic_prefill_attempts=0, encoder_only=False, language_only=False, encoder_transfer_backend='zmq_to_scheduler', encoder_urls=[], encoder_bootstrap_port=8997, encoder_register_urls=[], enable_adaptive_dispatch_to_encoder=False, enable_pdmux=False, pdmux_config_path=None, sm_group_num=8, custom_weight_loader=[], weight_loader_disable_mmap=False, weight_loader_prefetch_checkpoints=False, weight_loader_prefetch_num_threads=4, weight_loader_drop_cache_after_load=False, remote_instance_weight_loader_seed_instance_ip=None, remote_instance_weight_loader_seed_instance_service_port=None, remote_instance_weight_loader_send_weights_group_ports=None, remote_instance_weight_loader_backend='nccl', remote_instance_weight_loader_start_seed_via_transfer_engine=False, engine_info_bootstrap_port=6789, modelexpress_config=None, download_dir=None, model_checksum=None, delete_ckpt_after_loading=False, decrypted_config_file=None, decrypted_draft_config_file=None, checkpoint_engine_wait_weights_before_ready=False, enable_prefill_delayer=False, prefill_delayer_max_delay_passes=30, prefill_delayer_token_usage_low_watermark=None, prefill_delayer_forward_passes_buckets=None, prefill_delayer_wait_seconds_buckets=None, prefill_delayer_queue_min_ratio=None, prefill_delayer_max_delay_ms=None, min_free_slots_delay=None, enable_deterministic_inference=False, rl_on_policy_target=None, kv_canary='none', kv_canary_real_data='none', kv_canary_sweep_interval=0, enable_dynamic_batch_tokenizer=False, dynamic_batch_tokenizer_batch_size=32, dynamic_batch_tokenizer_batch_timeout=0.002, enable_tokenizer_batch_encode=False, disable_tokenizer_batch_decode=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_layers=None, debug_tensor_dump_input_file=None, enable_memory_saver=False, enable_weights_cpu_backup=False, enable_draft_weights_cpu_backup=False, enable_custom_logit_processor=False, enable_return_hidden_states=False, enable_return_routed_experts=False, enable_return_indexer_topk=False, disable_outlines_disk_cache=False, enable_mis=False, forward_hooks=None, msprobe_dump_config=None)
+[2026-08-19 04:22:54] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:22:54] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:22:55] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:22:56] No HuggingFace chat template found
+[2026-08-19 04:22:56] No chat template found, defaulting to 'string' content format
+[2026-08-19 04:23:03] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:12 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:12 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:12 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:12 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:13 DP6 TP6 EP6] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:14 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP6 TP6 EP6] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:14 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:14 DP6 TP6 EP6] Init torch distributed begin.
+[2026-08-19 04:23:14 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[W819 04:23:14.882398963 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[2026-08-19 04:23:14 DP7 TP7 EP7] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:14 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:14 DP7 TP7 EP7] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:14 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:14 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:14 DP7 TP7 EP7] Init torch distributed begin.
+[W819 04:23:14.360232132 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[2026-08-19 04:23:15 DP0 TP0 EP0] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:15 DP1 TP1 EP1] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:15 DP2 TP2 EP2] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:16 DP5 TP5 EP5] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:16 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:16 DP3 TP3 EP3] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:16 DP0 TP0 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:16 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:16 DP4 TP4 EP4] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:16 DP0 TP0 EP0] Init torch distributed begin.
+[2026-08-19 04:23:16 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:16 DP1 TP1 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:16 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:16 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:16 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:16 DP1 TP1 EP1] Init torch distributed begin.
+[2026-08-19 04:23:16 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:16 DP2 TP2 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:16 DP5 TP5 EP5] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:16 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:16 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:16 DP2 TP2 EP2] Init torch distributed begin.
+[2026-08-19 04:23:16 DP3 TP3 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:16 DP5 TP5 EP5] Init torch distributed begin.
+[2026-08-19 04:23:16 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:16 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLM']
+[2026-08-19 04:23:16 DP3 TP3 EP3] Init torch distributed begin.
+[2026-08-19 04:23:16 DP4 TP4 EP4] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:16 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:16 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:16 DP4 TP4 EP4] Init torch distributed begin.
+[W819 04:23:16.057992621 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[W819 04:23:16.234520542 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[W819 04:23:16.271274774 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[W819 04:23:16.278029561 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[W819 04:23:16.281147111 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[W819 04:23:16.291800393 socket.cpp:764] [c10d] The client socket cannot be initialized to connect to [::ffff:0.0.0.0]:29113 (errno: 97 - Address family not supported by protocol).
+[2026-08-19 04:23:18 DP0 TP0 EP0] sglang is using nccl==2.28.9
+[2026-08-19 04:23:18 DP7 TP7 EP7] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP0 TP0 EP0] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP6 TP6 EP6] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP1 TP1 EP1] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP3 TP3 EP3] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP2 TP2 EP2] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP4 TP4 EP4] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP5 TP5 EP5] CustomAllReduceV2 is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP0 TP0 EP0] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP7 TP7 EP7] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP1 TP1 EP1] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP6 TP6 EP6] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP5 TP5 EP5] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP2 TP2 EP2] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP3 TP3 EP3] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP4 TP4 EP4] CustomAllreduce is disabled because it's not supported on more than two PCIe-only GPUs. To silence this warning, specify disable_custom_all_reduce=True explicitly.
+[2026-08-19 04:23:18 DP0 TP0 EP0] Init torch distributed ends. elapsed=2.62 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP7 TP7 EP7] Init torch distributed ends. elapsed=4.01 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP6 TP6 EP6] Init torch distributed ends. elapsed=4.48 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP5 TP5 EP5] Init torch distributed ends. elapsed=2.43 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP4 TP4 EP4] Init torch distributed ends. elapsed=2.33 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP1 TP1 EP1] Init torch distributed ends. elapsed=2.51 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP3 TP3 EP3] Init torch distributed ends. elapsed=2.41 s, mem usage=0.23 GB
+[2026-08-19 04:23:18 DP2 TP2 EP2] Init torch distributed ends. elapsed=2.44 s, mem usage=0.23 GB
+[2026-08-19 04:23:19 DP2 TP2 EP2] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP3 TP3 EP3] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP0 TP0 EP0] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP0 TP0 EP0] Detected fp8 checkpoint.
+[2026-08-19 04:23:19 DP0 TP0 EP0] Config does not support fused shared expert(s). Shared experts fusion optimization is disabled.
+[2026-08-19 04:23:19 DP2 TP2 EP2] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP6 TP6 EP6] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP7 TP7 EP7] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP1 TP1 EP1] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP3 TP3 EP3] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP4 TP4 EP4] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:19 DP0 TP0 EP0] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP6 TP6 EP6] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP1 TP1 EP1] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP7 TP7 EP7] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP4 TP4 EP4] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+[2026-08-19 04:23:19 DP5 TP5 EP5] Load weight begin. avail mem=70.53 GB
+[2026-08-19 04:23:20 DP5 TP5 EP5] FlashInfer TRTLLM MoE deferred finalize is disabled (moe_runner_backend=flashinfer_mxfp4, quant_method=Mxfp4FlashinferCutlassMoEMethod).
+Multi-thread loading shards:   0% Completed | 0/48 [00:00<?, ?it/s]Multi-thread loading shards:   4% Completed | 2/48 [00:00<00:10,  4.22it/s]Multi-thread loading shards:  19% Completed | 9/48 [00:00<00:02, 17.03it/s]Multi-thread loading shards:  25% Completed | 12/48 [00:01<00:04,  7.88it/s]Multi-thread loading shards:  35% Completed | 17/48 [00:01<00:02, 10.69it/s]Multi-thread loading shards:  40% Completed | 19/48 [00:01<00:02, 10.73it/s]Multi-thread loading shards:  50% Completed | 24/48 [00:01<00:01, 15.60it/s]Multi-thread loading shards:  56% Completed | 27/48 [00:02<00:01, 14.10it/s]Multi-thread loading shards:  67% Completed | 32/48 [00:02<00:00, 18.46it/s][2026-08-19 04:23:22 DP6 TP6 EP6] Execute dequant fp8 wo_a
+Multi-thread loading shards:  73% Completed | 35/48 [00:02<00:00, 16.09it/s][2026-08-19 04:23:22 DP4 TP4 EP4] Execute dequant fp8 wo_a
+[2026-08-19 04:23:22 DP7 TP7 EP7] Execute dequant fp8 wo_a
+[2026-08-19 04:23:22 DP3 TP3 EP3] Execute dequant fp8 wo_a
+[2026-08-19 04:23:22 DP2 TP2 EP2] Execute dequant fp8 wo_a
+Multi-thread loading shards:  83% Completed | 40/48 [00:02<00:00, 20.39it/s][2026-08-19 04:23:23 DP5 TP5 EP5] Execute dequant fp8 wo_a
+[2026-08-19 04:23:23 DP1 TP1 EP1] Execute dequant fp8 wo_a
+Multi-thread loading shards:  90% Completed | 43/48 [00:02<00:00, 19.07it/s]Multi-thread loading shards: 100% Completed | 48/48 [00:03<00:00, 15.97it/s]
+[2026-08-19 04:23:23 DP0 TP0 EP0] Execute dequant fp8 wo_a
+[2026-08-19 04:23:39 DP7 TP7 EP7] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:39 DP7 TP7 EP7] Load weight end. elapsed=19.52 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:39 DP6 TP6 EP6] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:39 DP6 TP6 EP6] Load weight end. elapsed=19.58 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:40 DP5 TP5 EP5] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:40 DP5 TP5 EP5] Load weight end. elapsed=20.56 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:40 DP2 TP2 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:40 DP2 TP2 EP2] Load weight end. elapsed=20.88 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:40 DP1 TP1 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:40 DP1 TP1 EP1] Load weight end. elapsed=21.04 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.0.mlp.experts)...
+[2026-08-19 04:23:40 DP3 TP3 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:40 DP3 TP3 EP3] Load weight end. elapsed=21.12 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.1.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.2.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.3.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.4.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.5.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.6.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.7.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.8.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.9.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.10.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.11.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.12.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.13.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.14.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.15.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.16.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.17.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.18.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.19.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.20.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.21.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.22.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.23.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.24.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.25.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.26.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.27.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.28.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.29.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.30.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.31.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.32.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.33.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.34.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.35.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.36.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.37.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.38.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.39.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.40.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.41.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: model.layers.42.mlp.experts)...
+[2026-08-19 04:23:40 DP0 TP0 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:40 DP0 TP0 EP0] Load weight end. elapsed=21.09 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:41 DP4 TP4 EP4] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:41 DP4 TP4 EP4] Load weight end. elapsed=21.39 s, type=DeepseekV4ForCausalLM, quant=fp8, fmt=e4m3, avail mem=43.66 GB, mem usage=26.87 GB.
+[2026-08-19 04:23:42 DP5 TP5 EP5] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP0 TP0 EP0] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP6 TP6 EP6] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP3 TP3 EP3] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP4 TP4 EP4] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP7 TP7 EP7] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP1 TP1 EP1] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:42 DP2 TP2 EP2] Tokenizer for /data/models/DeepSeek-V4-Flash-0731 is still TokenizersBackend after retries with --trust-remote-code. Model-specific tokenizer attributes may be missing.
+[2026-08-19 04:23:43 DP0 TP0 EP0] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP7 TP7 EP7] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP6 TP6 EP6] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP3 TP3 EP3] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP1 TP1 EP1] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP2 TP2 EP2] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP5 TP5 EP5] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP4 TP4 EP4] Draft checkpoint bundles a DSpark head; loading draft arch DeepseekV4ForCausalLMDSpark.
+[2026-08-19 04:23:43 DP7 TP7 EP7] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP3 TP3 EP3] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP7 TP7 EP7] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP6 TP6 EP6] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP7 TP7 EP7] Init torch distributed begin.
+[2026-08-19 04:23:43 DP3 TP3 EP3] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP6 TP6 EP6] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP3 TP3 EP3] Init torch distributed begin.
+[2026-08-19 04:23:43 DP6 TP6 EP6] Init torch distributed begin.
+[2026-08-19 04:23:43 DP0 TP0 EP0] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP0 TP0 EP0] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP0 TP0 EP0] Init torch distributed begin.
+[2026-08-19 04:23:43 DP5 TP5 EP5] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP5 TP5 EP5] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP2 TP2 EP2] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP1 TP1 EP1] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP5 TP5 EP5] Init torch distributed begin.
+[2026-08-19 04:23:43 DP2 TP2 EP2] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP1 TP1 EP1] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP2 TP2 EP2] Init torch distributed begin.
+[2026-08-19 04:23:43 DP1 TP1 EP1] Init torch distributed begin.
+[2026-08-19 04:23:43 DP4 TP4 EP4] Auto-detected DSV4 routed-expert layout: is_fp4_experts=True
+[2026-08-19 04:23:43 DP4 TP4 EP4] Hybrid swa model: self.hf_config.architectures=['DeepseekV4ForCausalLMDSpark']
+[2026-08-19 04:23:43 DP4 TP4 EP4] Init torch distributed begin.
+[2026-08-19 04:23:43 DP0 TP0 EP0] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP7 TP7 EP7] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP6 TP6 EP6] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP5 TP5 EP5] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP4 TP4 EP4] Init torch distributed ends. elapsed=0.00 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP3 TP3 EP3] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP1 TP1 EP1] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP2 TP2 EP2] Init torch distributed ends. elapsed=0.01 s, mem usage=0.00 GB
+[2026-08-19 04:23:43 DP0 TP0 EP0] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP7 TP7 EP7] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP6 TP6 EP6] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP1 TP1 EP1] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP3 TP3 EP3] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP2 TP2 EP2] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP5 TP5 EP5] Load weight begin. avail mem=43.66 GB
+[2026-08-19 04:23:43 DP0 TP0 EP0] Detected fp8 checkpoint.
+[2026-08-19 04:23:43 DP4 TP4 EP4] Load weight begin. avail mem=43.66 GB
+Multi-thread loading shards:   0% Completed | 0/48 [00:00<?, ?it/s]Multi-thread loading shards:   4% Completed | 2/48 [00:00<00:08,  5.52it/s]Multi-thread loading shards:  21% Completed | 10/48 [00:00<00:02, 17.17it/s]Multi-thread loading shards:  33% Completed | 16/48 [00:00<00:01, 25.74it/s]Multi-thread loading shards:  42% Completed | 20/48 [00:01<00:01, 19.47it/s]Multi-thread loading shards:  54% Completed | 26/48 [00:01<00:00, 22.13it/s]Multi-thread loading shards:  60% Completed | 29/48 [00:01<00:00, 22.27it/s]Multi-thread loading shards:  71% Completed | 34/48 [00:01<00:00, 23.60it/s]Multi-thread loading shards:  77% Completed | 37/48 [00:01<00:00, 22.80it/s]Multi-thread loading shards:  88% Completed | 42/48 [00:01<00:00, 26.17it/s]Multi-thread loading shards: 100% Completed | 48/48 [00:01<00:00, 24.08it/s]
+[2026-08-19 04:23:55 DP4 TP4 EP4] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:55 DP4 TP4 EP4] Load weight end. elapsed=11.97 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:55 DP5 TP5 EP5] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:55 DP5 TP5 EP5] Load weight end. elapsed=12.17 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:56 DP6 TP6 EP6] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:56 DP6 TP6 EP6] Load weight end. elapsed=13.34 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:56 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.0.mlp.experts)...
+[2026-08-19 04:23:56 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.1.mlp.experts)...
+[2026-08-19 04:23:56 DP0 TP0 EP0] Preparing DSv4 MXFP4 experts for FlashInfer SM120 CUTLASS (layer: stages.2.mlp.experts)...
+[2026-08-19 04:23:56 DP0 TP0 EP0] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:56 DP0 TP0 EP0] Load weight end. elapsed=13.44 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:56 DP7 TP7 EP7] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:56 DP7 TP7 EP7] Load weight end. elapsed=13.46 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:56 DP2 TP2 EP2] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:56 DP2 TP2 EP2] Load weight end. elapsed=13.62 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:56 DP3 TP3 EP3] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:56 DP3 TP3 EP3] Load weight end. elapsed=13.66 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:57 DP1 TP1 EP1] Using FP8 KV cache but no scaling factors provided. Defaulting to scaling factors of 1.0. This may lead to less accurate results!
+[2026-08-19 04:23:57 DP1 TP1 EP1] Load weight end. elapsed=13.78 s, type=DeepseekV4ForCausalLMDSpark, quant=fp8, fmt=e4m3, avail mem=41.61 GB, mem usage=2.05 GB.
+[2026-08-19 04:23:57 DP0 TP0 EP0] Initialized DSpark draft runner. attention_backend=dsv4, model=DeepseekV4ForCausalLMDSpark, gamma=5, verify_num_draft_tokens=6, mask_token_id=128799, markov_head=DSparkV4MarkovHead
+[2026-08-19 04:23:57 DP0 TP0 EP0] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP0 TP0 EP0] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP7 TP7 EP7] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP7 TP7 EP7] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP3 TP3 EP3] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP2 TP2 EP2] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP3 TP3 EP3] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP2 TP2 EP2] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP1 TP1 EP1] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP6 TP6 EP6] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP1 TP1 EP1] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP4 TP4 EP4] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP5 TP5 EP5] DSV4 memory calculation: bytes_per_full_token=9259.90, available_bytes=13.39 GB, c128_state_fixed=0.36 GB, full_token=1510656
+[2026-08-19 04:23:57 DP6 TP6 EP6] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP4 TP4 EP4] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP5 TP5 EP5] DSV4 pool sizes: full=1510656, swa=151040, c4=377664, c128=11802, c4_state=18880, c128_state=0
+[2026-08-19 04:23:57 DP0 TP0 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP7 TP7 EP7] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP2 TP2 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP3 TP3 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP1 TP1 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP4 TP4 EP4] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP6 TP6 EP6] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP5 TP5 EP5] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=377664 c4_logical_size=377664 c128_size=11802 c4_state_pool_size=18880 c128_state_pool_size=4352
+[2026-08-19 04:23:57 DP7 TP7 EP7] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP7 TP7 EP7] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP2 TP2 EP2] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP2 TP2 EP2] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP7 TP7 EP7] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP0 TP0 EP0] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP0 TP0 EP0] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP2 TP2 EP2] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP5 TP5 EP5] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP5 TP5 EP5] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP3 TP3 EP3] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP3 TP3 EP3] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP5 TP5 EP5] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP3 TP3 EP3] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP0 TP0 EP0] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP1 TP1 EP1] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP1 TP1 EP1] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP4 TP4 EP4] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP4 TP4 EP4] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP4 TP4 EP4] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP1 TP1 EP1] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP6 TP6 EP6] Memory pool end. avail mem=28.26 GB
+[2026-08-19 04:23:57 DP6 TP6 EP6] Initialize DeepSeekV4TokenToKVPool with max_num_reqs=16 swa_size=151040 c4_size=0 c4_logical_size=0 c128_size=0 c4_state_pool_size=0 c128_state_pool_size=0
+[2026-08-19 04:23:57 DP6 TP6 EP6] Memory pool end. avail mem=28.01 GB
+[2026-08-19 04:23:57 DP7 TP7 EP7] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP7 TP7 EP7] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP7 TP7 EP7] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP2 TP2 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP3 TP3 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP7 TP7 EP7] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp7_pp0_dp7.json
+[2026-08-19 04:23:57 DP2 TP2 EP2] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP2 TP2 EP2] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP3 TP3 EP3] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP3 TP3 EP3] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP0 TP0 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP0 TP0 EP0] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP0 TP0 EP0] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP2 TP2 EP2] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp2_pp0_dp2.json
+[2026-08-19 04:23:57 DP3 TP3 EP3] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp3_pp0_dp3.json
+[2026-08-19 04:23:57 DP0 TP0 EP0] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp0_pp0_dp0.json
+[2026-08-19 04:23:57 DP1 TP1 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP1 TP1 EP1] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP1 TP1 EP1] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP1 TP1 EP1] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp1_pp0_dp1.json
+[2026-08-19 04:23:57 DP4 TP4 EP4] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP4 TP4 EP4] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP4 TP4 EP4] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP4 TP4 EP4] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp4_pp0_dp4.json
+[2026-08-19 04:23:57 DP6 TP6 EP6] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP5 TP5 EP5] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP6 TP6 EP6] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP6 TP6 EP6] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP5 TP5 EP5] Overriding draft attention backend to dsv4.
+[2026-08-19 04:23:57 DP5 TP5 EP5] Using DeepseekV4AttnBackend for dsv4 attention backend (CUDA).
+[2026-08-19 04:23:57 DP5 TP5 EP5] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp5_pp0_dp5.json
+[2026-08-19 04:23:57 DP6 TP6 EP6] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/1e954b291663d3fb/rank_tp6_pp0_dp6.json
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[TensorRT-LLM][INFO] Set logger level to INFO
+[2026-08-19 04:24:01 DP7 TP7 EP7] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP5 TP5 EP5] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP4 TP4 EP4] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP7 TP7 EP7] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP5 TP5 EP5] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP4 TP4 EP4] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP1 TP1 EP1] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP0 TP0 EP0] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP2 TP2 EP2] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP6 TP6 EP6] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP0 TP0 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP1 TP1 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP2 TP2 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP6 TP6 EP6] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP1 TP1 EP1] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP6 TP6 EP6] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP3 TP3 EP3] FlashInfer autotune completed.
+[2026-08-19 04:24:01 DP3 TP3 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:01 DP0 TP0 EP0] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP5 TP5 EP5] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP4 TP4 EP4] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP2 TP2 EP2] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP7 TP7 EP7] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+[2026-08-19 04:24:01 DP3 TP3 EP3] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=6, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.82 GB
+  0%|          | 0/12 [00:00<?, ?it/s]Capturing batches (bs=16 avail_mem=27.76 GB):   0%|          | 0/12 [00:00<?, ?it/s]Capturing batches (bs=16 avail_mem=27.76 GB):   8%|▊         | 1/12 [00:01<00:12,  1.12s/it]Capturing batches (bs=14 avail_mem=27.46 GB):   8%|▊         | 1/12 [00:01<00:12,  1.12s/it]Capturing batches (bs=14 avail_mem=27.46 GB):  17%|█▋        | 2/12 [00:01<00:09,  1.06it/s]Capturing batches (bs=12 avail_mem=27.43 GB):  17%|█▋        | 2/12 [00:01<00:09,  1.06it/s]Capturing batches (bs=12 avail_mem=27.43 GB):  25%|██▌       | 3/12 [00:02<00:08,  1.09it/s]Capturing batches (bs=10 avail_mem=27.39 GB):  25%|██▌       | 3/12 [00:02<00:08,  1.09it/s]Capturing batches (bs=10 avail_mem=27.39 GB):  33%|███▎      | 4/12 [00:03<00:06,  1.16it/s]Capturing batches (bs=8 avail_mem=27.36 GB):  33%|███▎      | 4/12 [00:03<00:06,  1.16it/s] Capturing batches (bs=8 avail_mem=27.36 GB):  42%|████▏     | 5/12 [00:04<00:05,  1.25it/s]Capturing batches (bs=7 avail_mem=27.32 GB):  42%|████▏     | 5/12 [00:04<00:05,  1.25it/s]Capturing batches (bs=7 avail_mem=27.32 GB):  50%|█████     | 6/12 [00:04<00:04,  1.31it/s]Capturing batches (bs=6 avail_mem=27.28 GB):  50%|█████     | 6/12 [00:04<00:04,  1.31it/s]Capturing batches (bs=6 avail_mem=27.28 GB):  58%|█████▊    | 7/12 [00:05<00:03,  1.35it/s]Capturing batches (bs=5 avail_mem=27.24 GB):  58%|█████▊    | 7/12 [00:05<00:03,  1.35it/s]Capturing batches (bs=5 avail_mem=27.24 GB):  67%|██████▋   | 8/12 [00:06<00:02,  1.38it/s]Capturing batches (bs=4 avail_mem=27.20 GB):  67%|██████▋   | 8/12 [00:06<00:02,  1.38it/s]Capturing batches (bs=4 avail_mem=27.20 GB):  75%|███████▌  | 9/12 [00:07<00:02,  1.41it/s]Capturing batches (bs=3 avail_mem=27.16 GB):  75%|███████▌  | 9/12 [00:07<00:02,  1.41it/s]Capturing batches (bs=3 avail_mem=27.16 GB):  83%|████████▎ | 10/12 [00:07<00:01,  1.41it/s]Capturing batches (bs=2 avail_mem=27.12 GB):  83%|████████▎ | 10/12 [00:07<00:01,  1.41it/s]Capturing batches (bs=2 avail_mem=27.12 GB):  92%|█████████▏| 11/12 [00:08<00:00,  1.40it/s]Capturing batches (bs=1 avail_mem=27.09 GB):  92%|█████████▏| 11/12 [00:08<00:00,  1.40it/s]Capturing batches (bs=1 avail_mem=27.09 GB): 100%|██████████| 12/12 [00:09<00:00,  1.42it/s]Capturing batches (bs=1 avail_mem=27.09 GB): 100%|██████████| 12/12 [00:09<00:00,  1.31it/s]
+[2026-08-19 04:24:11 DP7 TP7 EP7] Capture target verify CUDA graph end. elapsed=10.17 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP7 TP7 EP7] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP7 TP7 EP7] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP1 TP1 EP1] Capture target verify CUDA graph end. elapsed=10.18 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP5 TP5 EP5] Capture target verify CUDA graph end. elapsed=10.18 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP1 TP1 EP1] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP1 TP1 EP1] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP5 TP5 EP5] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP5 TP5 EP5] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP4 TP4 EP4] Capture target verify CUDA graph end. elapsed=10.18 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP4 TP4 EP4] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP0 TP0 EP0] Capture target verify CUDA graph end. elapsed=10.18 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP0 TP0 EP0] DSpark draft greedy proposal folded into the draft cuda graph.
+[2026-08-19 04:24:11 DP4 TP4 EP4] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP0 TP0 EP0] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP0 TP0 EP0] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP3 TP3 EP3] Capture target verify CUDA graph end. elapsed=10.19 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP3 TP3 EP3] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP3 TP3 EP3] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP6 TP6 EP6] Capture target verify CUDA graph end. elapsed=10.21 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP6 TP6 EP6] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP6 TP6 EP6] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:11 DP2 TP2 EP2] Capture target verify CUDA graph end. elapsed=10.23 s, mem usage=0.77 GB, avail mem=27.05 GB.
+[2026-08-19 04:24:11 DP2 TP2 EP2] Disable prefill CUDA graph because cuda_graph_config resolved prefill.backend='disabled' (e.g. via --cuda-graph-backend-prefill=disabled or auto-disable rules).
+[2026-08-19 04:24:11 DP2 TP2 EP2] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=5, bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16], avail mem=27.05 GB
+[2026-08-19 04:24:12 DP7 TP7 EP7] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp7_pp0_dp7.json
+[2026-08-19 04:24:12 DP4 TP4 EP4] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp4_pp0_dp4.json
+  0%|          | 0/12 [00:00<?, ?it/s]Capturing batches (bs=16 avail_mem=27.05 GB):   0%|          | 0/12 [00:00<?, ?it/s][2026-08-19 04:24:12 DP0 TP0 EP0] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp0_pp0_dp0.json
+[2026-08-19 04:24:12 DP5 TP5 EP5] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp5_pp0_dp5.json
+[2026-08-19 04:24:12 DP1 TP1 EP1] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp1_pp0_dp1.json
+[2026-08-19 04:24:12 DP3 TP3 EP3] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp3_pp0_dp3.json
+[2026-08-19 04:24:12 DP2 TP2 EP2] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp2_pp0_dp2.json
+[2026-08-19 04:24:12 DP6 TP6 EP6] Running FlashInfer autotune with cache: /root/.cache/sglang/flashinfer/autotune/0.6.15.post1/sm120/860192e0aa163670/rank_tp6_pp0_dp6.json
+[2026-08-19 04:24:12 DP7 TP7 EP7] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP4 TP4 EP4] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP5 TP5 EP5] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP0 TP0 EP0] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP1 TP1 EP1] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP2 TP2 EP2] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP3 TP3 EP3] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP6 TP6 EP6] SM120 sparse-MLA: padding topk 192 -> 512 (next instantiated bucket, -1 skip sentinel; scan capped via topk_length).
+[2026-08-19 04:24:12 DP0 TP0 EP0] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP5 TP5 EP5] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP4 TP4 EP4] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP2 TP2 EP2] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP7 TP7 EP7] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP1 TP1 EP1] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP3 TP3 EP3] FlashInfer autotune completed.
+[2026-08-19 04:24:12 DP6 TP6 EP6] FlashInfer autotune completed.
+Capturing batches (bs=16 avail_mem=27.05 GB):   8%|▊         | 1/12 [00:00<00:05,  2.13it/s]Capturing batches (bs=14 avail_mem=26.86 GB):   8%|▊         | 1/12 [00:00<00:05,  2.13it/s]Capturing batches (bs=12 avail_mem=26.85 GB):   8%|▊         | 1/12 [00:00<00:05,  2.13it/s]Capturing batches (bs=12 avail_mem=26.85 GB):  25%|██▌       | 3/12 [00:00<00:01,  5.96it/s]Capturing batches (bs=10 avail_mem=26.85 GB):  25%|██▌       | 3/12 [00:00<00:01,  5.96it/s]Capturing batches (bs=8 avail_mem=26.85 GB):  25%|██▌       | 3/12 [00:00<00:01,  5.96it/s] Capturing batches (bs=8 avail_mem=26.85 GB):  42%|████▏     | 5/12 [00:00<00:00,  8.75it/s]Capturing batches (bs=7 avail_mem=26.85 GB):  42%|████▏     | 5/12 [00:00<00:00,  8.75it/s]Capturing batches (bs=6 avail_mem=26.85 GB):  42%|████▏     | 5/12 [00:00<00:00,  8.75it/s]Capturing batches (bs=6 avail_mem=26.85 GB):  58%|█████▊    | 7/12 [00:00<00:00, 10.72it/s]Capturing batches (bs=5 avail_mem=26.84 GB):  58%|█████▊    | 7/12 [00:00<00:00, 10.72it/s]Capturing batches (bs=4 avail_mem=26.84 GB):  58%|█████▊    | 7/12 [00:00<00:00, 10.72it/s]Capturing batches (bs=4 avail_mem=26.84 GB):  75%|███████▌  | 9/12 [00:00<00:00, 12.29it/s]Capturing batches (bs=3 avail_mem=26.84 GB):  75%|███████▌  | 9/12 [00:00<00:00, 12.29it/s]Capturing batches (bs=2 avail_mem=26.83 GB):  75%|███████▌  | 9/12 [00:01<00:00, 12.29it/s]Capturing batches (bs=2 avail_mem=26.83 GB):  92%|█████████▏| 11/12 [00:01<00:00, 13.63it/s]Capturing batches (bs=1 avail_mem=26.83 GB):  92%|█████████▏| 11/12 [00:01<00:00, 13.63it/s]Capturing batches (bs=1 avail_mem=26.83 GB): 100%|██████████| 12/12 [00:01<00:00, 10.34it/s]
+[2026-08-19 04:24:13 DP2 TP2 EP2] Capture draft verify CUDA graph end. elapsed=1.97 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP2 TP2 EP2] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP7 TP7 EP7] Capture draft verify CUDA graph end. elapsed=2.05 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP7 TP7 EP7] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP0 TP0 EP0] Capture draft verify CUDA graph end. elapsed=2.04 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP0 TP0 EP0] max_total_num_tokens=1510656, chunked_prefill_size=256, max_prefill_tokens=8192, max_running_requests=16, context_len=131072, available_gpu_mem=26.82 GB
+[2026-08-19 04:24:13 DP0 TP0 EP0] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP4 TP4 EP4] Capture draft verify CUDA graph end. elapsed=2.04 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP4 TP4 EP4] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP3 TP3 EP3] Capture draft verify CUDA graph end. elapsed=2.03 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP3 TP3 EP3] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP5 TP5 EP5] Capture draft verify CUDA graph end. elapsed=2.05 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP5 TP5 EP5] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP6 TP6 EP6] Capture draft verify CUDA graph end. elapsed=2.04 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP6 TP6 EP6] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:13 DP1 TP1 EP1] Capture draft verify CUDA graph end. elapsed=2.11 s, mem usage=0.23 GB, avail mem=26.82 GB.
+[2026-08-19 04:24:13 DP1 TP1 EP1] Tree cache initialized: source=default impl=SWAChunkCache hybrid_swa=True hybrid_ssm=False hierarchical=False streaming_wrapped=False
+[2026-08-19 04:24:14] INFO:     Started server process [224811]
+[2026-08-19 04:24:14] INFO:     Waiting for application startup.
+[2026-08-19 04:24:14] Using default chat sampling params from model generation config: {'temperature': 1.0, 'top_p': 1.0}
+[2026-08-19 04:24:14] INFO:     Application startup complete.
+[2026-08-19 04:24:14] INFO:     Uvicorn running on http://0.0.0.0:30012 (Press CTRL+C to quit)
+[2026-08-19 04:24:15] INFO:     127.0.0.1:57900 - "GET /health HTTP/1.1" 503 Service Unavailable
+[2026-08-19 04:24:15] INFO:     127.0.0.1:57934 - "GET /model_info HTTP/1.1" 200 OK
+[2026-08-19 04:24:15 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 159.56
+[2026-08-19 04:24:15 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 165.77
+[2026-08-19 04:24:15 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 157.76
+[2026-08-19 04:24:15 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 146.72
+[2026-08-19 04:24:15 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 144.74
+[2026-08-19 04:24:15 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 145.31
+[2026-08-19 04:24:15 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 145.03
+[2026-08-19 04:24:15 DP7 TP7 EP7] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 143.83
+[2026-08-19 04:24:15] INFO:     127.0.0.1:57938 - "POST /generate HTTP/1.1" 200 OK
+[2026-08-19 04:24:15] The server is fired up and ready to roll!
+[2026-08-19 04:24:16 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 378.14
+[2026-08-19 04:24:17] INFO:     127.0.0.1:58028 - "GET /health HTTP/1.1" 200 OK
+[2026-08-19 04:24:35 DP5 TP5 EP5] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP0 TP0 EP0] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP6 TP6 EP6] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP2 TP2 EP2] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP7 TP7 EP7] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP3 TP3 EP3] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP1 TP1 EP1] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+[2026-08-19 04:24:35 DP4 TP4 EP4] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1 (with profile id: cpu_gpu_num_steps1)
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+[2026-08-19 04:24:37] INFO:     127.0.0.1:61026 - "POST /start_profile HTTP/1.1" 200 OK
+[2026-08-19 04:24:46 DP4 TP4 EP4] Stop profiling...
+[2026-08-19 04:24:46 DP1 TP1 EP1] Stop profiling...
+[2026-08-19 04:24:46 DP5 TP5 EP5] Stop profiling...
+[2026-08-19 04:24:46 DP7 TP7 EP7] Stop profiling...
+[2026-08-19 04:24:46 DP6 TP6 EP6] Stop profiling...
+[2026-08-19 04:24:46 DP0 TP0 EP0] Stop profiling...
+[2026-08-19 04:24:46 DP3 TP3 EP3] Stop profiling...
+[2026-08-19 04:24:46 DP2 TP2 EP2] Stop profiling...
+[2026-08-19 04:25:03 DP0 TP0 EP0] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP7 TP7 EP7] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP5 TP5 EP5] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP4 TP4 EP4] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP2 TP2 EP2] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP6 TP6 EP6] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP3 TP3 EP3] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP1 TP1 EP1] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps1
+[2026-08-19 04:25:03 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 5.29
+[2026-08-19 04:25:03 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 25201.28
+[2026-08-19 04:25:03] INFO:     127.0.0.1:62570 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:25:04] Endpoint '/get_server_info' is deprecated and will be removed in a future version. Please use '/server_info' instead.
+[2026-08-19 04:25:04] INFO:     127.0.0.1:65094 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-08-19 04:25:09 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 4.76
+[2026-08-19 04:25:09] INFO:     127.0.0.1:20138 - "GET /health HTTP/1.1" 200 OK
+[2026-08-19 04:25:40 DP0 TP0 EP0] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP4 TP4 EP4] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP2 TP2 EP2] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP6 TP6 EP6] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP5 TP5 EP5] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP7 TP7 EP7] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP3 TP3 EP3] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40 DP1 TP1 EP1] Profiling starts. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k (with profile id: cpu_gpu_num_steps10_8k)
+[2026-08-19 04:25:40] INFO:     127.0.0.1:24824 - "POST /start_profile HTTP/1.1" 200 OK
+[2026-08-19 04:25:50 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7940, cuda graph: False, input throughput (token/s): 2.70
+[2026-08-19 04:25:50 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7940, cuda graph: False, input throughput (token/s): 2.70
+[2026-08-19 04:25:50 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7684, cuda graph: False, input throughput (token/s): 2076.81
+[2026-08-19 04:25:50 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7925, cuda graph: False, input throughput (token/s): 2.70
+[2026-08-19 04:25:50 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7940, cuda graph: False, input throughput (token/s): 2.70
+[2026-08-19 04:25:50 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7669, cuda graph: False, input throughput (token/s): 2092.35
+[2026-08-19 04:25:50 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7684, cuda graph: False, input throughput (token/s): 2091.23
+[2026-08-19 04:25:50 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7428, cuda graph: False, input throughput (token/s): 2091.57
+[2026-08-19 04:25:50 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7684, cuda graph: False, input throughput (token/s): 2089.81
+[2026-08-19 04:25:50 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7428, cuda graph: False, input throughput (token/s): 2099.89
+[2026-08-19 04:25:50 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7413, cuda graph: False, input throughput (token/s): 2097.64
+[2026-08-19 04:25:50 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7428, cuda graph: False, input throughput (token/s): 2097.74
+[2026-08-19 04:25:50 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7172, cuda graph: False, input throughput (token/s): 2097.54
+[2026-08-19 04:25:50 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7157, cuda graph: False, input throughput (token/s): 2093.30
+[2026-08-19 04:25:50 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7172, cuda graph: False, input throughput (token/s): 2093.31
+[2026-08-19 04:25:50 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6916, cuda graph: False, input throughput (token/s): 2093.39
+[2026-08-19 04:25:50 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7172, cuda graph: False, input throughput (token/s): 2091.17
+[2026-08-19 04:25:51 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6916, cuda graph: False, input throughput (token/s): 2031.37
+[2026-08-19 04:25:51 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6901, cuda graph: False, input throughput (token/s): 2029.50
+[2026-08-19 04:25:51 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6916, cuda graph: False, input throughput (token/s): 2029.52
+[2026-08-19 04:25:51 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6660, cuda graph: False, input throughput (token/s): 2028.03
+[2026-08-19 04:25:51 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6660, cuda graph: False, input throughput (token/s): 2087.16
+[2026-08-19 04:25:51 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6404, cuda graph: False, input throughput (token/s): 2088.66
+[2026-08-19 04:25:51 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6660, cuda graph: False, input throughput (token/s): 2086.14
+[2026-08-19 04:25:51 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6645, cuda graph: False, input throughput (token/s): 2085.43
+[2026-08-19 04:25:51 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6404, cuda graph: False, input throughput (token/s): 2118.37
+[2026-08-19 04:25:51 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6389, cuda graph: False, input throughput (token/s): 2120.33
+[2026-08-19 04:25:51 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6404, cuda graph: False, input throughput (token/s): 2119.13
+[2026-08-19 04:25:51 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6148, cuda graph: False, input throughput (token/s): 2118.07
+[2026-08-19 04:25:51 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6133, cuda graph: False, input throughput (token/s): 2099.24
+[2026-08-19 04:25:51 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6148, cuda graph: False, input throughput (token/s): 2098.27
+[2026-08-19 04:25:51 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6148, cuda graph: False, input throughput (token/s): 2099.23
+[2026-08-19 04:25:51 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5892, cuda graph: False, input throughput (token/s): 2099.32
+[2026-08-19 04:25:51 DP6 TP6 EP6] Stop profiling...
+[2026-08-19 04:25:51 DP5 TP5 EP5] Stop profiling...
+[2026-08-19 04:25:51 DP4 TP4 EP4] Stop profiling...
+[2026-08-19 04:25:51 DP3 TP3 EP3] Stop profiling...
+[2026-08-19 04:25:51 DP7 TP7 EP7] Stop profiling...
+[2026-08-19 04:25:51 DP2 TP2 EP2] Stop profiling...
+[2026-08-19 04:25:51 DP1 TP1 EP1] Stop profiling...
+[2026-08-19 04:25:51 DP0 TP0 EP0] Stop profiling...
+[2026-08-19 04:26:08 DP7 TP7 EP7] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:08 DP0 TP0 EP0] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:08 DP2 TP2 EP2] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:08 DP1 TP1 EP1] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:10 DP6 TP6 EP6] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:11 DP5 TP5 EP5] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:11 DP3 TP3 EP3] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:11 DP4 TP4 EP4] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_num_steps10_8k
+[2026-08-19 04:26:11 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5636, cuda graph: False, input throughput (token/s): 12.52
+[2026-08-19 04:26:11 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5877, cuda graph: False, input throughput (token/s): 12.52
+[2026-08-19 04:26:11 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5892, cuda graph: False, input throughput (token/s): 12.52
+[2026-08-19 04:26:11 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5892, cuda graph: False, input throughput (token/s): 12.52
+[2026-08-19 04:26:11 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5621, cuda graph: False, input throughput (token/s): 2251.01
+[2026-08-19 04:26:11 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5636, cuda graph: False, input throughput (token/s): 2250.99
+[2026-08-19 04:26:11 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5380, cuda graph: False, input throughput (token/s): 2243.34
+[2026-08-19 04:26:11 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5636, cuda graph: False, input throughput (token/s): 2250.65
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5365, cuda graph: False, input throughput (token/s): 2290.38
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5380, cuda graph: False, input throughput (token/s): 2290.63
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5124, cuda graph: False, input throughput (token/s): 2290.64
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5380, cuda graph: False, input throughput (token/s): 2292.44
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5124, cuda graph: False, input throughput (token/s): 2293.40
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5109, cuda graph: False, input throughput (token/s): 2292.59
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4868, cuda graph: False, input throughput (token/s): 2293.35
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5124, cuda graph: False, input throughput (token/s): 2293.68
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4853, cuda graph: False, input throughput (token/s): 2301.79
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4868, cuda graph: False, input throughput (token/s): 2300.98
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4612, cuda graph: False, input throughput (token/s): 2301.26
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4868, cuda graph: False, input throughput (token/s): 2301.65
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4612, cuda graph: False, input throughput (token/s): 2257.34
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4597, cuda graph: False, input throughput (token/s): 2256.43
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4356, cuda graph: False, input throughput (token/s): 2256.82
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4612, cuda graph: False, input throughput (token/s): 2255.37
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4356, cuda graph: False, input throughput (token/s): 2218.62
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4341, cuda graph: False, input throughput (token/s): 2218.65
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4100, cuda graph: False, input throughput (token/s): 2218.65
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4356, cuda graph: False, input throughput (token/s): 2219.52
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4100, cuda graph: False, input throughput (token/s): 2299.01
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4085, cuda graph: False, input throughput (token/s): 2299.03
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3844, cuda graph: False, input throughput (token/s): 2299.35
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4100, cuda graph: False, input throughput (token/s): 2300.01
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3844, cuda graph: False, input throughput (token/s): 2292.07
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3829, cuda graph: False, input throughput (token/s): 2292.12
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3588, cuda graph: False, input throughput (token/s): 2292.28
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3844, cuda graph: False, input throughput (token/s): 2291.74
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3588, cuda graph: False, input throughput (token/s): 2301.92
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3573, cuda graph: False, input throughput (token/s): 2301.59
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3588, cuda graph: False, input throughput (token/s): 2301.72
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3332, cuda graph: False, input throughput (token/s): 2299.67
+[2026-08-19 04:26:12 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3317, cuda graph: False, input throughput (token/s): 2294.23
+[2026-08-19 04:26:12 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3332, cuda graph: False, input throughput (token/s): 2293.18
+[2026-08-19 04:26:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3076, cuda graph: False, input throughput (token/s): 2294.64
+[2026-08-19 04:26:12 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3332, cuda graph: False, input throughput (token/s): 2292.71
+[2026-08-19 04:26:14 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3061, cuda graph: False, input throughput (token/s): 168.71
+[2026-08-19 04:26:14 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3076, cuda graph: False, input throughput (token/s): 168.71
+[2026-08-19 04:26:14 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2820, cuda graph: False, input throughput (token/s): 168.70
+[2026-08-19 04:26:14 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3076, cuda graph: False, input throughput (token/s): 168.68
+[2026-08-19 04:26:14 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2805, cuda graph: False, input throughput (token/s): 2251.28
+[2026-08-19 04:26:14 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2820, cuda graph: False, input throughput (token/s): 2251.11
+[2026-08-19 04:26:14 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2820, cuda graph: False, input throughput (token/s): 2257.19
+[2026-08-19 04:26:14 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2564, cuda graph: False, input throughput (token/s): 2249.37
+[2026-08-19 04:26:16 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2308, cuda graph: False, input throughput (token/s): 122.38
+[2026-08-19 04:26:16 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2564, cuda graph: False, input throughput (token/s): 122.36
+[2026-08-19 04:26:16 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2549, cuda graph: False, input throughput (token/s): 122.33
+[2026-08-19 04:26:16 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2564, cuda graph: False, input throughput (token/s): 122.33
+[2026-08-19 04:26:16 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2052, cuda graph: False, input throughput (token/s): 2146.56
+[2026-08-19 04:26:16 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2293, cuda graph: False, input throughput (token/s): 2156.74
+[2026-08-19 04:26:16 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2308, cuda graph: False, input throughput (token/s): 2147.42
+[2026-08-19 04:26:16 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2308, cuda graph: False, input throughput (token/s): 2155.59
+[2026-08-19 04:26:16 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2037, cuda graph: False, input throughput (token/s): 2257.55
+[2026-08-19 04:26:16 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1796, cuda graph: False, input throughput (token/s): 2255.67
+[2026-08-19 04:26:16 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2052, cuda graph: False, input throughput (token/s): 2257.81
+[2026-08-19 04:26:16 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2052, cuda graph: False, input throughput (token/s): 2259.92
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1781, cuda graph: False, input throughput (token/s): 2273.06
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1796, cuda graph: False, input throughput (token/s): 2272.97
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1540, cuda graph: False, input throughput (token/s): 2271.76
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1796, cuda graph: False, input throughput (token/s): 2273.38
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1525, cuda graph: False, input throughput (token/s): 2281.84
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1284, cuda graph: False, input throughput (token/s): 2283.51
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1540, cuda graph: False, input throughput (token/s): 2281.12
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1540, cuda graph: False, input throughput (token/s): 2280.75
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1284, cuda graph: False, input throughput (token/s): 2283.31
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1269, cuda graph: False, input throughput (token/s): 2281.47
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1028, cuda graph: False, input throughput (token/s): 2280.08
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1284, cuda graph: False, input throughput (token/s): 2281.54
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1013, cuda graph: False, input throughput (token/s): 2280.70
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1028, cuda graph: False, input throughput (token/s): 2279.01
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 772, cuda graph: False, input throughput (token/s): 2280.90
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1028, cuda graph: False, input throughput (token/s): 2281.87
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 757, cuda graph: False, input throughput (token/s): 2289.46
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 772, cuda graph: False, input throughput (token/s): 2290.24
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 516, cuda graph: False, input throughput (token/s): 2289.54
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 772, cuda graph: False, input throughput (token/s): 2288.92
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 516, cuda graph: False, input throughput (token/s): 2290.29
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 501, cuda graph: False, input throughput (token/s): 2289.51
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 260, cuda graph: False, input throughput (token/s): 2290.62
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 516, cuda graph: False, input throughput (token/s): 2290.32
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 245, cuda graph: False, input throughput (token/s): 1799.65
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 260, cuda graph: False, input throughput (token/s): 1798.32
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 1797.87
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 260, cuda graph: False, input throughput (token/s): 1797.24
+[2026-08-19 04:26:17 DP6 TP6 EP6] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 7282.17
+[2026-08-19 04:26:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 7274.24
+[2026-08-19 04:26:17] INFO:     127.0.0.1:26078 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:26:17] INFO:     127.0.0.1:26072 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 1786.60
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 1785.08
+[2026-08-19 04:26:17 DP5 TP5 EP5] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 27625.29
+[2026-08-19 04:26:17] INFO:     127.0.0.1:26076 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:26:17 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 23636.57
+[2026-08-19 04:26:17] INFO:     127.0.0.1:26074 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:26:19] Endpoint '/get_server_info' is deprecated and will be removed in a future version. Please use '/server_info' instead.
+[2026-08-19 04:26:19] INFO:     127.0.0.1:30532 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-08-19 04:26:23 DP7 TP7 EP7] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 2.01
+[2026-08-19 04:26:23] INFO:     127.0.0.1:31156 - "GET /health HTTP/1.1" 200 OK
+[2026-08-19 04:27:03] INFO:     127.0.0.1:37064 - "POST /start_profile HTTP/1.1" 200 OK
+[2026-08-19 04:27:12 DP0 TP0 EP0] Profiling starts for EXTEND. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:12 DP3 TP3 EP3] Profiling starts for EXTEND. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:12 DP2 TP2 EP2] Profiling starts for EXTEND. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:12 DP1 TP1 EP1] Profiling starts for EXTEND. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:12 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7940, cuda graph: False, input throughput (token/s): 1.45
+[2026-08-19 04:27:12 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7940, cuda graph: False, input throughput (token/s): 2.07
+[2026-08-19 04:27:12 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7684, cuda graph: False, input throughput (token/s): 2079.70
+[2026-08-19 04:27:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7925, cuda graph: False, input throughput (token/s): 4.66
+[2026-08-19 04:27:12 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 7940, cuda graph: False, input throughput (token/s): 1.99
+[2026-08-19 04:27:12 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7428, cuda graph: False, input throughput (token/s): 2045.98
+[2026-08-19 04:27:12 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7684, cuda graph: False, input throughput (token/s): 2045.36
+[2026-08-19 04:27:12 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7684, cuda graph: False, input throughput (token/s): 2046.66
+[2026-08-19 04:27:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7669, cuda graph: False, input throughput (token/s): 2045.36
+[2026-08-19 04:27:12 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7428, cuda graph: False, input throughput (token/s): 2082.43
+[2026-08-19 04:27:12 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7172, cuda graph: False, input throughput (token/s): 2081.45
+[2026-08-19 04:27:12 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7428, cuda graph: False, input throughput (token/s): 2081.76
+[2026-08-19 04:27:12 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7413, cuda graph: False, input throughput (token/s): 2082.00
+[2026-08-19 04:27:12 DP0 TP0 EP0] Stop profiling-EXTEND...
+[2026-08-19 04:27:15 DP0 TP0 EP0] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:15 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6916, cuda graph: False, input throughput (token/s): 105.20
+[2026-08-19 04:27:15 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7157, cuda graph: False, input throughput (token/s): 105.20
+[2026-08-19 04:27:15 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7172, cuda graph: False, input throughput (token/s): 105.19
+[2026-08-19 04:27:15 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 7172, cuda graph: False, input throughput (token/s): 105.18
+[2026-08-19 04:27:15 DP3 TP3 EP3] Stop profiling-EXTEND...
+[2026-08-19 04:27:15 DP2 TP2 EP2] Stop profiling-EXTEND...
+[2026-08-19 04:27:15 DP1 TP1 EP1] Stop profiling-EXTEND...
+[2026-08-19 04:27:17 DP2 TP2 EP2] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:17 DP1 TP1 EP1] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:17 DP3 TP3 EP3] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:17 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6660, cuda graph: False, input throughput (token/s): 99.08
+[2026-08-19 04:27:17 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6916, cuda graph: False, input throughput (token/s): 99.08
+[2026-08-19 04:27:17 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6916, cuda graph: False, input throughput (token/s): 99.10
+[2026-08-19 04:27:17 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6901, cuda graph: False, input throughput (token/s): 99.00
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6404, cuda graph: False, input throughput (token/s): 2133.89
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6660, cuda graph: False, input throughput (token/s): 2134.60
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6660, cuda graph: False, input throughput (token/s): 2134.63
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6645, cuda graph: False, input throughput (token/s): 2170.82
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6148, cuda graph: False, input throughput (token/s): 2321.72
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6404, cuda graph: False, input throughput (token/s): 2322.20
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6404, cuda graph: False, input throughput (token/s): 2322.62
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6389, cuda graph: False, input throughput (token/s): 2322.85
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5892, cuda graph: False, input throughput (token/s): 2322.84
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6148, cuda graph: False, input throughput (token/s): 2322.73
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6148, cuda graph: False, input throughput (token/s): 2322.75
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 6133, cuda graph: False, input throughput (token/s): 2322.67
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5636, cuda graph: False, input throughput (token/s): 2332.68
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5892, cuda graph: False, input throughput (token/s): 2332.89
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5892, cuda graph: False, input throughput (token/s): 2332.87
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5877, cuda graph: False, input throughput (token/s): 2332.80
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5380, cuda graph: False, input throughput (token/s): 2249.03
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5636, cuda graph: False, input throughput (token/s): 2248.57
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5636, cuda graph: False, input throughput (token/s): 2246.78
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5621, cuda graph: False, input throughput (token/s): 2245.37
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5380, cuda graph: False, input throughput (token/s): 2317.73
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5124, cuda graph: False, input throughput (token/s): 2316.42
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5365, cuda graph: False, input throughput (token/s): 2321.21
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5380, cuda graph: False, input throughput (token/s): 2318.41
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4868, cuda graph: False, input throughput (token/s): 2326.79
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5124, cuda graph: False, input throughput (token/s): 2325.97
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5124, cuda graph: False, input throughput (token/s): 2326.89
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 5109, cuda graph: False, input throughput (token/s): 2325.10
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4612, cuda graph: False, input throughput (token/s): 2328.47
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4868, cuda graph: False, input throughput (token/s): 2328.47
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4868, cuda graph: False, input throughput (token/s): 2328.90
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4853, cuda graph: False, input throughput (token/s): 2328.64
+[2026-08-19 04:27:18 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4612, cuda graph: False, input throughput (token/s): 2279.60
+[2026-08-19 04:27:18 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4356, cuda graph: False, input throughput (token/s): 2278.89
+[2026-08-19 04:27:18 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4612, cuda graph: False, input throughput (token/s): 2278.66
+[2026-08-19 04:27:18 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4597, cuda graph: False, input throughput (token/s): 2279.47
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4100, cuda graph: False, input throughput (token/s): 2265.29
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4341, cuda graph: False, input throughput (token/s): 2266.01
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4356, cuda graph: False, input throughput (token/s): 2265.10
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4356, cuda graph: False, input throughput (token/s): 2263.55
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3844, cuda graph: False, input throughput (token/s): 2325.54
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4100, cuda graph: False, input throughput (token/s): 2326.48
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4085, cuda graph: False, input throughput (token/s): 2324.49
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4100, cuda graph: False, input throughput (token/s): 2234.88
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3844, cuda graph: False, input throughput (token/s): 2221.44
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3588, cuda graph: False, input throughput (token/s): 2220.76
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3829, cuda graph: False, input throughput (token/s): 2221.18
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3844, cuda graph: False, input throughput (token/s): 2309.52
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3588, cuda graph: False, input throughput (token/s): 2322.11
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3588, cuda graph: False, input throughput (token/s): 2323.71
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3573, cuda graph: False, input throughput (token/s): 2322.76
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3332, cuda graph: False, input throughput (token/s): 2321.17
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3076, cuda graph: False, input throughput (token/s): 2325.95
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3332, cuda graph: False, input throughput (token/s): 2324.22
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3317, cuda graph: False, input throughput (token/s): 2324.11
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3332, cuda graph: False, input throughput (token/s): 2322.07
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3076, cuda graph: False, input throughput (token/s): 2323.55
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2820, cuda graph: False, input throughput (token/s): 2322.27
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3061, cuda graph: False, input throughput (token/s): 2322.42
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 3076, cuda graph: False, input throughput (token/s): 2323.62
+[2026-08-19 04:27:19 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2820, cuda graph: False, input throughput (token/s): 2318.69
+[2026-08-19 04:27:19 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2564, cuda graph: False, input throughput (token/s): 2319.19
+[2026-08-19 04:27:19 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2820, cuda graph: False, input throughput (token/s): 2320.42
+[2026-08-19 04:27:19 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2805, cuda graph: False, input throughput (token/s): 2318.06
+[2026-08-19 04:27:22 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2549, cuda graph: False, input throughput (token/s): 97.05
+[2026-08-19 04:27:22 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2564, cuda graph: False, input throughput (token/s): 97.04
+[2026-08-19 04:27:22 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2564, cuda graph: False, input throughput (token/s): 97.04
+[2026-08-19 04:27:22 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2308, cuda graph: False, input throughput (token/s): 97.04
+[2026-08-19 04:27:22 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2308, cuda graph: False, input throughput (token/s): 2289.97
+[2026-08-19 04:27:22 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2293, cuda graph: False, input throughput (token/s): 2286.91
+[2026-08-19 04:27:22 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2052, cuda graph: False, input throughput (token/s): 2288.84
+[2026-08-19 04:27:22 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2308, cuda graph: False, input throughput (token/s): 2286.66
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2037, cuda graph: False, input throughput (token/s): 96.18
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1796, cuda graph: False, input throughput (token/s): 96.18
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2052, cuda graph: False, input throughput (token/s): 96.18
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 2052, cuda graph: False, input throughput (token/s): 96.16
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1796, cuda graph: False, input throughput (token/s): 2247.62
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1781, cuda graph: False, input throughput (token/s): 2243.61
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1540, cuda graph: False, input throughput (token/s): 2245.01
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1796, cuda graph: False, input throughput (token/s): 2254.37
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1540, cuda graph: False, input throughput (token/s): 2310.69
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1525, cuda graph: False, input throughput (token/s): 2311.30
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1284, cuda graph: False, input throughput (token/s): 2311.30
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1540, cuda graph: False, input throughput (token/s): 2311.82
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1284, cuda graph: False, input throughput (token/s): 2312.43
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1269, cuda graph: False, input throughput (token/s): 2312.30
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1028, cuda graph: False, input throughput (token/s): 2312.26
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1284, cuda graph: False, input throughput (token/s): 2312.07
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1028, cuda graph: False, input throughput (token/s): 2319.56
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1013, cuda graph: False, input throughput (token/s): 2319.72
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 1028, cuda graph: False, input throughput (token/s): 2320.51
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 772, cuda graph: False, input throughput (token/s): 2319.21
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 772, cuda graph: False, input throughput (token/s): 2312.10
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 757, cuda graph: False, input throughput (token/s): 2312.30
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 772, cuda graph: False, input throughput (token/s): 2312.05
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 516, cuda graph: False, input throughput (token/s): 2311.85
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 516, cuda graph: False, input throughput (token/s): 2316.66
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 501, cuda graph: False, input throughput (token/s): 2316.50
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 516, cuda graph: False, input throughput (token/s): 2316.93
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 260, cuda graph: False, input throughput (token/s): 2316.68
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 245, cuda graph: False, input throughput (token/s): 1818.75
+[2026-08-19 04:27:25 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 260, cuda graph: False, input throughput (token/s): 1818.04
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 1817.98
+[2026-08-19 04:27:25 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 260, cuda graph: False, input throughput (token/s): 1816.15
+[2026-08-19 04:27:25 DP3 TP3 EP3] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 7647.87
+[2026-08-19 04:27:25] INFO:     127.0.0.1:38304 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:27:25 DP0 TP0 EP0] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 7408.64
+[2026-08-19 04:27:25] INFO:     127.0.0.1:38298 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:27:26 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 1878.88
+[2026-08-19 04:27:26 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 4, cuda graph: False, input throughput (token/s): 1872.34
+[2026-08-19 04:27:26 DP0 TP0 EP0] Profiling starts for DECODE. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:26 DP3 TP3 EP3] Profiling starts for DECODE. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:26 DP1 TP1 EP1] Profiling starts for DECODE. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:26 DP2 TP2 EP2] Profiling starts for DECODE. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:26 DP2 TP2 EP2] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 13316.97
+[2026-08-19 04:27:26] INFO:     127.0.0.1:38302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:27:26 DP1 TP1 EP1] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.01, swa token usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 8957.18
+[2026-08-19 04:27:26] INFO:     127.0.0.1:38300 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-08-19 04:27:26 DP0 TP0 EP0] Stop profiling-DECODE...
+[2026-08-19 04:27:26 DP2 TP2 EP2] Stop profiling-DECODE...
+[2026-08-19 04:27:26 DP1 TP1 EP1] Stop profiling-DECODE...
+[2026-08-19 04:27:26 DP3 TP3 EP3] Stop profiling-DECODE...
+[2026-08-19 04:27:26 DP0 TP0 EP0] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:26 DP2 TP2 EP2] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:26 DP3 TP3 EP3] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:26 DP1 TP1 EP1] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:27 DP3 TP3 EP3] Decode batch, #running-req: 1, #full token: 8448, full token usage: 0.01, #swa token: 1024, swa token usage: 0.01, accept len: 3.00, accept rate: 0.40, cuda graph: True, gen throughput (token/s): 0.62, #queue-req: 0
+[2026-08-19 04:27:27] Endpoint '/get_server_info' is deprecated and will be removed in a future version. Please use '/server_info' instead.
+[2026-08-19 04:27:27] INFO:     127.0.0.1:40342 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-08-19 04:27:33 DP4 TP4 EP4] Profiling starts for EXTEND. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:33 DP4 TP4 EP4] Stop profiling-EXTEND...
+[2026-08-19 04:27:34 DP4 TP4 EP4] Profiling done. Traces are saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k
+[2026-08-19 04:27:34 DP4 TP4 EP4] Profiling starts for DECODE. Traces will be saved to: /sgl-workspace/workspace/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k (with profile id: cpu_gpu_by_stage_5_8k)
+[2026-08-19 04:27:34 DP4 TP4 EP4] Prefill batch, #new-seq: 1, #new-token: 256, #cached-token: 0, full token usage: 0.00, swa token usage: 0.00, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 3.35
+[2026-08-19 04:27:34] INFO:     127.0.0.1:41172 - "GET /health HTTP/1.1" 200 OK

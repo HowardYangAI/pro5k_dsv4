@@ -1,0 +1,58 @@
+{
+  "original_path": "/sgl-workspace/sglang-dcl-6565881-pd-test",
+  "head_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+  "base_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+  "branch": null,
+  "git_common_directory": "/sgl-workspace/sglang/.git",
+  "local_refs": [],
+  "is_shallow": true,
+  "remotes": {
+    "ifx": "https://git.xiaojukeji.com/IFX-Group/sglang.git",
+    "origin": "https://github.com/sgl-project/sglang.git"
+  },
+  "status_porcelain": " M python/sglang/srt/disaggregation/common/conn.py\nMM python/sglang/srt/disaggregation/decode.py\nM  python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py\nM  python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py\nM  python/sglang/srt/managers/schedule_batch.py\nM  python/sglang/srt/managers/schedule_policy.py\nMM python/sglang/srt/managers/scheduler.py\nM  python/sglang/srt/managers/tokenizer_manager.py\nM  python/sglang/srt/mem_cache/allocator/base.py\nM  python/sglang/srt/mem_cache/hisparse_memory_pool.py\nM  python/sglang/srt/mem_cache/memory_pool.py\nM  python/sglang/srt/mem_cache/swa_memory_pool.py\nM  python/sglang/srt/mem_cache/unified_memory_pool.py\nM  python/sglang/srt/observability/req_time_stats.py\nM  python/sglang/srt/speculative/dspark_components/dspark_draft.py\nM  test/registered/disaggregation/test_specv2_kvcache_offloading.py\nA  test/registered/spec/dspark/test_dspark_dp_moe_metadata.py\nM  test/registered/unit/disaggregation/test_decode_queue_cleanup.py\nM  test/registered/unit/managers/test_hisparse_unit.py\nM  test/registered/unit/managers/test_prefill_adder.py\nM  test/registered/unit/managers/test_priority_scheduling_disaggregation.py\nA  test/registered/unit/managers/test_retraction_cpu_copy.py\nM  test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py\nM  test/registered/unit/mem_cache/test_decode_radix_lock_ref.py\nM  test/registered/unit/mem_cache/test_hisparse_allocator.py\n",
+  "staged_paths": [
+    "python/sglang/srt/disaggregation/decode.py",
+    "python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py",
+    "python/sglang/srt/disaggregation/decode_schedule_batch_mixin.py",
+    "python/sglang/srt/managers/schedule_batch.py",
+    "python/sglang/srt/managers/schedule_policy.py",
+    "python/sglang/srt/managers/scheduler.py",
+    "python/sglang/srt/managers/tokenizer_manager.py",
+    "python/sglang/srt/mem_cache/allocator/base.py",
+    "python/sglang/srt/mem_cache/hisparse_memory_pool.py",
+    "python/sglang/srt/mem_cache/memory_pool.py",
+    "python/sglang/srt/mem_cache/swa_memory_pool.py",
+    "python/sglang/srt/mem_cache/unified_memory_pool.py",
+    "python/sglang/srt/observability/req_time_stats.py",
+    "python/sglang/srt/speculative/dspark_components/dspark_draft.py",
+    "test/registered/disaggregation/test_specv2_kvcache_offloading.py",
+    "test/registered/spec/dspark/test_dspark_dp_moe_metadata.py",
+    "test/registered/unit/disaggregation/test_decode_queue_cleanup.py",
+    "test/registered/unit/managers/test_hisparse_unit.py",
+    "test/registered/unit/managers/test_prefill_adder.py",
+    "test/registered/unit/managers/test_priority_scheduling_disaggregation.py",
+    "test/registered/unit/managers/test_retraction_cpu_copy.py",
+    "test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py",
+    "test/registered/unit/mem_cache/test_decode_radix_lock_ref.py",
+    "test/registered/unit/mem_cache/test_hisparse_allocator.py"
+  ],
+  "unstaged_paths": [
+    "python/sglang/srt/disaggregation/common/conn.py",
+    "python/sglang/srt/disaggregation/decode.py",
+    "python/sglang/srt/managers/scheduler.py"
+  ],
+  "untracked_paths": [],
+  "committed_delta_paths": [],
+  "recent_commits": [
+    "48886803b94596884d737132a381bd5124ea1cfd 2026-08-06T05:19:18+00:00 [feat] support dspark in SM120",
+    "0c7876927e4bc1fad0608046457abe118ed0e3bb 2025-12-19T04:19:36+00:00 avoid dp port conflicts",
+    "5b2ef6ea9d407f851752c816c59b5bacd5351e3b 2026-08-03T11:55:58+08:00 add dockerfile",
+    "a44dfa3c409f41fdf78feda337aaa4e1b83ebf76 2026-07-28T12:01:06+08:00 fix bootstrap_host id None",
+    "6ffff9b514aa7c0a2102e1993a23d9bf8a465419 2026-07-27T17:35:55+08:00 support dspark for decode in PD",
+    "7505dc627f70c7f66ab82a658e39da4cd6fc241f 2026-07-23T23:15:43-07:00 [Cherry-pick to release/v0.5.16] Fix dynamo recompile limit in allreduce and bf16 gemm (#32239) (#32292)",
+    "6870be7448172b35594fd88bbcd2185c64035988 2026-07-23T18:04:40-04:00 [Cherry-pick to release/v0.5.16] [spec decoding] fix inkling multi layer mtp draft extend cuda graph (#32254) (#32260)",
+    "6227ae88b94d9d76973eebfcb11364308b650561 2026-07-23T17:58:26-04:00 [Cherry-pick to release/v0.5.16] Fix nvfp4 online scale with pcg (#32246) (#32259)"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

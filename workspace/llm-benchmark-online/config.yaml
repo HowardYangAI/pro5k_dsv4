@@ -1,0 +1,29 @@
+# LLM Benchmark Platform Configuration
+# Modify paths here to match your environment.
+
+# Model directories — scanned recursively for tokenizer models.
+model_dirs:
+  - /nfs/ofs-llab-cold/model
+  - /nfs/ofs-luban-data/model
+
+# Default model path (used when no model is selected).
+default_model_path: /nfs/ofs-llab-cold/model/deepseek-ai/DeepSeek-V4-Flash
+
+# Dataset directory — datasets are listed as dropdown options.
+dataset_dir: /home/luban
+
+# Available datasets — name and filename under dataset_dir.
+# The full path shown to the user is dataset_dir / filename.
+datasets:
+  - name: ShareGPT V3 (GPU)
+    filename: ShareGPT_V3_unfiltered_cleaned_split.json
+
+# Default dataset (must match one of the names above).
+default_dataset: ShareGPT V3 (GPU)
+
+# SQLite store used by multi-turn history and timestamp replay workloads.
+replay_dataset_path: /nfs/ofs-ifx-biz/benchmark_dataset/tokenservice_data_export/glm51_session_replay.sqlite
+
+# Eval dataset directory — where mmlu/gsm8k/bfcl_v3 datasets reside.
+# Uses evalscope's default cache if left empty.
+eval_dataset_dir: /home/luban/ifx_llm_dist_auto_test/dataset

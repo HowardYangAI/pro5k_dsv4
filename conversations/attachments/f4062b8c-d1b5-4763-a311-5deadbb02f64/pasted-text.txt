@@ -1,0 +1,64 @@
+Hi @linyueqian — I'd like to take Mechanism 2 (capacity-adaptive, punctuation-aware segmentation) from this RFC, plus its ρ instrumentation prerequisite (a mergeable observability-only first PR on the async-chunk ramp path in qwen3_tts_code2wav.py).
+你好——我想认领这个 RFC 中的机制 2（容量自适应、标点感知的分段），以及它的 ρ 插桩前置项（一个可合并的、仅用于可观测性的首个 PR，位于 qwen3_tts_code2wav.py 中的 async-chunk ramp 路径上）。
+
+Plan: segmentation policy engine as a model-agnostic module with CPU unit tests (ρ̂ via EMA + static-ramp warmup, budget freeze at segment open, punctuation-ranked cuts with a hard-cut ceiling, fragmentation ≤ 1.43× optimal), wired into the live path once #6515/#1766 land — targeting regressions #4913 and #5889.
+计划：分段策略引擎作为一个与模型无关的模块，包含 CPU 单元测试（ρ̂ 通过 EMA + 静态斜升预热、片段开启时预算冻结、带硬切上限的按标点排序切分、碎片化 ≤ 1.43× 最优），在 #6515 / #1766 落地后接入实时路径——目标回归 #4913 和 #5889 。
+
+No overlap with @liuyao0322's #6515 (commitment policy — different joint: text-release safety vs decode-capacity budgeting). Could you assign me for this slice, or should I just open a draft PR?
+与 #6515 没有重叠（承诺策略——不同的联合：文本释放安全 vs 解码容量预算）。你能把这一部分分配给我吗，还是我应该直接开一个草稿 PR？
+
+hsliuustc0106 commented 3 days ago
+@hsliuustc0106
+hsliuustc0106
+3d ago
+Collaborator
+Thanks for putting this together — concept ACK. A few points to tighten before interfaces are frozen:
+感谢整理这些内容——概念上 ACK。在接口冻结之前，有几点需要收紧：
+
+Please distinguish transport text chunks, TTS text segments, and codec/audio chunks. codec_chunk_ramp controls Talker → Code2Wav output cadence; it is not the CAPS text segmenter. I would define ρ and capacity at Stage 0/Talker using normalized TTS tokens, acoustic output steps, and Talker KV positions.
+请区分传输文本块、TTS 文本片段和编解码器/音频块。 codec_chunk_ramp 控制 Talker → Code2Wav 的输出节奏；它不是 CAPS 文本分段器。我会在 Stage 0/Talker 使用归一化的 TTS token、声学输出步数和 Talker KV 位置来定义 ρ 和容量。
+Reuse the existing /v1/audio/speech/stream surface if possible. It already accepts input.text but buffers until input.done; the missing contract is opt-in early synthesis, backpressure, EOF, cancellation, and compatibility semantics.
+尽可能复用现有的 /v1/audio/speech/stream 接口。它已经接受 input.text ，但会缓冲直到 input.done ；缺失的契约是可选加入的早期合成、背压、EOF、取消以及兼容性语义。
+Code2Wav currently clears request state on is_segment_finished. Cross-segment inheritance needs a logical stream identity, segment sequence, health checks, and terminal/error cleanup. Talker H=4 history is separate, model-specific work.
+Code2Wav 当前在 is_segment_finished 时清除请求状态。跨片段继承需要逻辑流标识、片段序列、健康检查以及终止/错误清理。Talker H=4 历史是独立的、模型特定的工作。
+The related-bug claims should stay narrow: [Performance]: Streaming chunk gap with Qwen3-TTS Base #4913 is primarily output cadence/compute (feat(qwen3-tts): add codec_chunk_ramp for gradual chunk size warmup #5152), while [Bug]: [Bug][Qwen3-TTS Base][Streaming] Short Chinese request reaches stage-0 max_tokens and produces ~82s trailing noise #5889 supports normalization work but its complete-request EOS failure would not be fixed by commitment alone.
+相关缺陷声明应保持狭窄范围： [Performance]: Streaming chunk gap with Qwen3-TTS Base #4913 主要涉及输出节奏/计算（ feat(qwen3-tts): add codec_chunk_ramp for gradual chunk size warmup #5152 ），而 [Bug]: [Bug][Qwen3-TTS Base][Streaming] Short Chinese request reaches stage-0 max_tokens and produces ~82s trailing noise #5889 支持规范化工作，但其完整请求的 EOS 失败无法仅通过承诺来修复。
+Suggested order: contract + CPU commitment tests → live WebSocket integration → Stage-0 ρ instrumentation/CAPS → Code2Wav and Talker inheritance with E2E metrics. Draft #6515 looks like a reasonable first slice.
+建议顺序：契约 + CPU 承诺测试 → 实时 WebSocket 集成 → Stage-0 ρ 插桩/CAPS → 带有端到端指标的 Code2Wav 和 Talker 继承。草稿 #6515 看起来是一个合理的第一部分。
+
+
+CAICAIIs
+added 5 commits that reference this issue 3d ago
+[Core][TTS] Fix rho-stat tests to format mocked logger messages (vllm…
+
+b85140b
+[Core][TTS] Apply ruff format to rho instrumentation and tests (vllm-…
+
+c803cc6
+[Core][TTS] Guard rho stats for manually constructed Code2Wav models (v…
+
+ff1c322
+[Core][TTS] Fix rho-stat tests and guard manual Code2Wav construction (…
+
+7bfd6b4
+[Core][TTS] Flush rho stats on empty-finished input and on_requests_f…
+
+e3db2c1
+VLa1111 commented 2 days ago
+@VLa1111
+VLa1111
+2d ago
+Hi @linyueqian — I'd like to take the per-concurrency first-audio-latency reporting good-first-issue item (median + P99 over a concurrency sweep on the TTS benchmark path).
+你好——我想认领按并发度统计首音频延迟上报这个 good-first-issue 条目（在 TTS 基准测试路径上对并发度扫描取得中位数 + P99）。
+
+Plan:  计划：
+
+Add per-concurrency first-audio-latency reporting to the TTS benchmark path (client-observed first audio chunk, median + P99, over a concurrency sweep).
+在 TTS 基准测试路径中加入按并发度的首音频延迟上报（客户端观测到的首个音频块，中位数 + P99，覆盖一次并发度扫描）。
+Emit it alongside the existing --percentile-metrics shape (e.g. audio_ttfp), so a single bench invocation produces a per concurrency table.
+将其与现有的 --percentile-metrics 形式一起输出（例如 audio_ttfp ），这样单次 bench 调用即可生成按并发度划分的表格。
+Validate with a bounded GPU run and report the measured numbers.
+使用受限的 GPU 运行进行验证，并报告实测数值。
+No overlap with @liuyao0322's (#6515) and @CAICAIIs's Mechanism 2 + ρ. Could you assign me for this slice? thanks~
+与 's（ #6515 ）和 's 机制 2 + ρ 没有重叠。能否把这个切片分配给我？谢谢~
+

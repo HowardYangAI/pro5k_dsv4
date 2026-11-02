@@ -1,0 +1,104 @@
+==============================================
+Running benchmark with:
+ --max-concurrency: 640
+ --num-prompts: 6400
+==============================================
+python3 bench_serving.py --backend sglang-oai-chat --dataset-path /home/luban/ShareGPT_V3_unfiltered_cleaned_split.json --dataset-name random --random-input-len 8192 --random-output-len 2048 --random-range-ratio 1 --extra-request-body {"stream_options": {"include_usage": true}} --seed 1786505627 --host 10.207.193.139 --port 30002 --model /nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8 --model-name DeepSeek-V4-Flash-0731 --max-concurrency 640 --num-prompts 6400 --request-rate inf --enable-test-pd-without-transfer
+----------------------------------------------
+You are using a model of type `deepseek_v4` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+You are using a model of type `deepseek_v4` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8', model_name='DeepSeek-V4-Flash-0731', num_prompts=6400, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=2048, random_range_ratio=1.0, request_rate=inf, max_concurrency=640, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1786505627, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=True)
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url=None, host='10.207.193.139', port=30002, dataset_name='random', dataset_path='/home/luban/ShareGPT_V3_unfiltered_cleaned_split.json', model='/nfs/ofs-luban-data/model/sgl-project/DeepSeek-V4-Flash-FP8', model_name='DeepSeek-V4-Flash-0731', num_prompts=6400, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=2048, random_range_ratio=1.0, request_rate=inf, max_concurrency=640, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1786505627, disable_ignore_eos=False, extra_request_body='{"stream_options": {"include_usage": true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=1, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=True)
+
+#Input tokens: 52428800
+#Output tokens: 13107200
+Starting warmup with 1 sequences...
+Warmup completed with 1 sequences. Starting main benchmark run...
+  0%|          | 0/6400 [00:00<?, ?it/s]  0%|          | 1/6400 [01:07<120:41:44, 67.90s/it]  0%|          | 2/6400 [01:08<50:42:44, 28.53s/it]   0%|          | 3/6400 [01:09<27:45:04, 15.62s/it]  0%|          | 4/6400 [01:09<17:08:13,  9.65s/it]  0%|          | 7/6400 [01:09<6:27:22,  3.64s/it]   0%|          | 8/6400 [01:10<5:04:11,  2.86s/it]  0%|          | 10/6400 [01:10<3:08:34,  1.77s/it]  0%|          | 12/6400 [01:10<2:05:07,  1.18s/it]  0%|          | 14/6400 [01:11<1:31:25,  1.16it/s]  0%|          | 16/6400 [01:11<1:05:50,  1.62it/s]  0%|          | 17/6400 [01:11<58:16,  1.83it/s]    0%|          | 18/6400 [01:11<51:24,  2.07it/s]  0%|          | 22/6400 [01:12<26:48,  3.97it/s]  0%|          | 25/6400 [01:12<20:07,  5.28it/s]  0%|          | 28/6400 [01:12<16:11,  6.56it/s]  0%|          | 30/6400 [01:18<1:25:50,  1.24it/s]  1%|          | 38/6400 [01:18<36:41,  2.89it/s]    4%|▍         | 270/6400 [01:18<01:31, 66.92it/s] 10%|█         | 647/6400 [01:18<00:28, 199.76it/s] 11%|█         | 719/6400 [01:19<00:27, 208.85it/s] 14%|█▎        | 873/6400 [01:20<00:28, 191.93it/s] 19%|█▉        | 1216/6400 [01:20<00:15, 335.51it/s] 21%|██        | 1318/6400 [01:20<00:14, 341.59it/s] 24%|██▎       | 1511/6400 [01:20<00:12, 381.49it/s] 28%|██▊       | 1774/6400 [01:21<00:11, 387.86it/s] 31%|███       | 1956/6400 [01:21<00:10, 431.63it/s] 34%|███▎      | 2151/6400 [01:22<00:08, 482.90it/s] 36%|███▋      | 2334/6400 [01:22<00:08, 485.32it/s] 40%|████      | 2591/6400 [01:22<00:05, 682.84it/s] 42%|████▏     | 2701/6400 [01:23<00:07, 478.29it/s] 44%|████▎     | 2791/6400 [01:23<00:07, 474.27it/s] 45%|████▌     | 2891/6400 [01:23<00:09, 389.52it/s] 50%|█████     | 3231/6400 [01:24<00:04, 679.10it/s] 52%|█████▏    | 3340/6400 [01:24<00:04, 631.82it/s] 54%|█████▍    | 3448/6400 [01:25<00:08, 328.93it/s] 60%|██████    | 3871/6400 [01:25<00:04, 522.21it/s] 64%|██████▍   | 4082/6400 [01:26<00:04, 469.30it/s] 70%|███████   | 4511/6400 [01:26<00:03, 543.61it/s] 74%|███████▎  | 4711/6400 [01:27<00:03, 459.22it/s] 80%|████████  | 5151/6400 [01:27<00:02, 614.04it/s] 84%|████████▎ | 5351/6400 [01:28<00:02, 461.54it/s] 90%|█████████ | 5791/6400 [01:29<00:00, 609.51it/s] 94%|█████████▎| 5991/6400 [01:29<00:00, 568.30it/s]100%|██████████| 6400/6400 [01:29<00:00, 71.53it/s] 
+Traceback (most recent call last):
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/usr/lib/python3.12/http/client.py", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.12/http/client.py", line 1093, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.12/http/client.py", line 1037, in send
+    self.connect()
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='10.207.193.139', port=30002): Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='10.207.193.139', port=30002): Max retries exceeded with url: /get_server_info (Caused by NewConnectionError("HTTPConnection(host='10.207.193.139', port=30002): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2301, in <module>
+    run_benchmark(args)
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2029, in run_benchmark
+    return asyncio.run(
+           ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 1691, in benchmark
+    server_info = requests.get(base_url + "/get_server_info")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='10.207.193.139', port=30002): Max retries exceeded with url: /get_server_info (Caused by NewConnectionError("HTTPConnection(host='10.207.193.139', port=30002): Failed to establish a new connection: [Errno 111] Connection refused"))
+All benchmark tests completed!

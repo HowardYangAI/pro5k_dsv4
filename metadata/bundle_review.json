@@ -1,0 +1,870 @@
+{
+  "reviewed_at_utc": "2026-11-02T10:43:11.723054+00:00",
+  "method": "Read every reachable blob in all three saved Git bundles; inspect common credential patterns, exact locally known credential values, and credential assignments. Findings contain no secret values.",
+  "bundles": [
+    {
+      "source": "/sgl-workspace/deepseek-v4-flash/source/cupti-kernel-monitoring.bundle",
+      "reachable_blob_count": 30,
+      "reachable_blob_bytes": 249655,
+      "initial_pattern_hit_blobs": 0,
+      "initial_pattern_counts": {}
+    },
+    {
+      "source": "/sgl-workspace/deepseek-v4-flash/source/llm-benchmark-online.bundle",
+      "reachable_blob_count": 144,
+      "reachable_blob_bytes": 1623151,
+      "initial_pattern_hit_blobs": 0,
+      "initial_pattern_counts": {}
+    },
+    {
+      "source": "/tmp/pro5k_bundle_scan/sglang-all-refs.bundle",
+      "reachable_blob_count": 78920,
+      "reachable_blob_bytes": 2266361579,
+      "initial_pattern_hit_blobs": 1790,
+      "initial_pattern_counts": {
+        "credential_assignment": 2380,
+        "authorization": 910,
+        "api_token": 20,
+        "private_key": 1
+      }
+    }
+  ],
+  "review_result": "No machine credentials found. Matches in the SGLang upstream history were API-authentication test fixtures, documentation placeholders, code variable references, and separated PEM-marker assertions. Original Git bundles retained to preserve offline restoration.",
+  "scope_limit": "Pattern-based review does not establish that arbitrary binary payloads contain no secrets.",
+  "reviewed_fixture_value_shapes": [
+    {
+      "value_sha256_prefix": "16d87a742d37f455",
+      "count": 1511,
+      "paths": [
+        "(historical unnamed blob)",
+        "docs/basic_usage/gpt_oss.md",
+        "docs_new/cookbook/autoregressive/OpenAI/GPT-OSS.mdx",
+        "docs_new/docs/basic_usage/gpt_oss.mdx",
+        "python/sglang/test/ascend/vlm_utils.py",
+        "python/sglang/test/kits/mmmu_vlm_kit.py"
+      ],
+      "shape": {
+        "length": 9,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "123"
+        ]
+      },
+      "key_names": [
+        "api_key = \"",
+        "api_key=\"",
+        "server_api_key = \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "cdae455a807d70ad",
+      "count": 111,
+      "paths": [
+        "(historical unnamed blob)",
+        "python/sglang/multimodal_gen/test/scripts/gen_perf_baselines.py",
+        "python/sglang/multimodal_gen/test/server/diffusion_server.py",
+        "python/sglang/multimodal_gen/test/server/test_server_common.py",
+        "python/sglang/multimodal_gen/test/server/test_server_perf_common.py",
+        "python/sglang/multimodal_gen/test/server/test_server_performance.py"
+      ],
+      "shape": {
+        "length": 15,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "sglang"
+        ]
+      },
+      "key_names": [
+        "api_key=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "3a689b32a992b1de",
+      "count": 61,
+      "paths": [
+        "docs/advanced_features/router.md",
+        "docs/advanced_features/sgl_model_gateway.md",
+        "docs_new/docs/advanced_features/sgl_model_gateway.mdx",
+        "sgl-model-gateway/README.md",
+        "sgl-router/README.md"
+      ],
+      "shape": {
+        "length": 10,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "\"api_key\":\"",
+        "api_key="
+      ]
+    },
+    {
+      "value_sha256_prefix": "ff17bbb3d78db18e",
+      "count": 59,
+      "paths": [
+        "(historical unnamed blob)",
+        "docs/diffusion/api/openai_api.md",
+        "docs/supported_models/diffusion_models.md",
+        "docs/supported_models/image_generation/diffusion_models.md",
+        "docs_new/docs/sglang-diffusion/api/openai-api.mdx",
+        "docs_new/docs/sglang-diffusion/api/openai_api.mdx"
+      ],
+      "shape": {
+        "length": 18,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "123"
+        ]
+      },
+      "key_names": [
+        "\"api_key\": \"",
+        "api_key=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "6f9f03f95e7890c4",
+      "count": 43,
+      "paths": [
+        "python/sglang/srt/server.py",
+        "python/sglang/srt/utils.py"
+      ],
+      "shape": {
+        "length": 9,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "API_KEY_HEADER_NAME = \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "931260eb3eb45a75",
+      "count": 43,
+      "paths": [
+        "sgl-model-gateway/e2e_test/chat_completions/test_enable_thinking.py",
+        "sgl-model-gateway/e2e_test/conftest.py",
+        "sgl-model-gateway/e2e_test/fixtures/pool.py",
+        "sgl-model-gateway/e2e_test/fixtures/setup_backend.py",
+        "sgl-model-gateway/e2e_test/infra/model_pool.py"
+      ],
+      "shape": {
+        "length": 8,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "API_KEY = \"",
+        "api_key=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "2e35b6583bdba19c",
+      "count": 42,
+      "paths": [
+        "test/registered/unit/utils/test_auth.py"
+      ],
+      "shape": {
+        "length": 10,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "09963dfdd8b70d3f",
+      "count": 38,
+      "paths": [
+        "sgl-model-gateway/README.md",
+        "sgl-router/README.md"
+      ],
+      "shape": {
+        "length": 20,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key="
+      ]
+    },
+    {
+      "value_sha256_prefix": "f57a34b2911731d7",
+      "count": 34,
+      "paths": [
+        "(historical unnamed blob)",
+        "python/sglang/srt/entrypoints/http_server.py"
+      ],
+      "shape": {
+        "length": 20,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "password",
+          "key"
+        ]
+      },
+      "key_names": [
+        "ssl_key_password="
+      ]
+    },
+    {
+      "value_sha256_prefix": "12cf2d62a8e89706",
+      "count": 28,
+      "paths": [
+        "(historical unnamed blob)",
+        ".github/actions/check-maintenance/action.yml",
+        ".github/actions/check-pr-test-health/action.yml",
+        ".github/actions/check-stage-health/action.yml",
+        ".github/actions/wait-for-jobs/action.yml"
+      ],
+      "shape": {
+        "length": 12,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "github-token:"
+      ]
+    },
+    {
+      "value_sha256_prefix": "16175223c8ddce5a",
+      "count": 24,
+      "paths": [
+        "test/registered/unit/utils/test_auth.py"
+      ],
+      "shape": {
+        "length": 12,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "secret",
+          "admin"
+        ]
+      },
+      "key_names": [
+        "admin_api_key=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "38c3240448e24c47",
+      "count": 20,
+      "paths": [
+        "sgl-router/py_test/test_launch_server.py"
+      ],
+      "shape": {
+        "length": 15,
+        "quoted": true,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "5d8a442a3b0351b1",
+      "count": 16,
+      "paths": [
+        "(historical unnamed blob)",
+        "docs/developer_guide/bench_serving.md",
+        "docs_new/docs/developer_guide/bench_serving.mdx"
+      ],
+      "shape": {
+        "length": 16,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "your",
+          "key"
+        ]
+      },
+      "key_names": [
+        "OPENAI_API_KEY="
+      ]
+    },
+    {
+      "value_sha256_prefix": "1bd0074c9fd82ff8",
+      "count": 11,
+      "paths": [
+        "sgl-model-gateway/e2e_test/backends.py",
+        "sgl-model-gateway/e2e_test/e2e_response_api/conftest.py",
+        "sgl-model-gateway/e2e_test/infra/model_specs.py"
+      ],
+      "shape": {
+        "length": 14,
+        "quoted": true,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "\"api_key_env\": \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "f215d09f570b2799",
+      "count": 10,
+      "paths": [
+        "python/sglang/srt/utils/auth.py",
+        "python/sglang/test/test_http_server_auth.py",
+        "test/registered/unit/utils/test_http_server_auth.py"
+      ],
+      "shape": {
+        "length": 13,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key",
+          "admin"
+        ]
+      },
+      "key_names": [
+        "admin_api_key =",
+        "admin_api_key="
+      ]
+    },
+    {
+      "value_sha256_prefix": "6ce439cbbd21adf9",
+      "count": 10,
+      "paths": [
+        "docs/backend/openai_api_completions.ipynb",
+        "docs/basic_usage/hy3_preview.md",
+        "docs/basic_usage/openai_api_completions.ipynb",
+        "docs_new/cookbook/autoregressive/GLM/GLM-4.6V.mdx"
+      ],
+      "shape": {
+        "length": 14,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key="
+      ]
+    },
+    {
+      "value_sha256_prefix": "b26cd113ce231d95",
+      "count": 8,
+      "paths": [
+        "sgl-router/src/routers/http/router.rs"
+      ],
+      "shape": {
+        "length": 12,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "monitor_api_keys ="
+      ]
+    },
+    {
+      "value_sha256_prefix": "ad9858116e63b0c5",
+      "count": 7,
+      "paths": [
+        "test/registered/unit/mem_cache/test_hicache_nixl_storage.py"
+      ],
+      "shape": {
+        "length": 10,
+        "quoted": true,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "admin"
+        ]
+      },
+      "key_names": [
+        "password = \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "ce4d630d8861a3e0",
+      "count": 7,
+      "paths": [
+        "sgl-model-gateway/e2e_test/backends.py",
+        "sgl-model-gateway/e2e_test/e2e_response_api/conftest.py",
+        "sgl-model-gateway/e2e_test/infra/model_specs.py"
+      ],
+      "shape": {
+        "length": 11,
+        "quoted": true,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "\"api_key_env\": \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "6f1102a125d188ea",
+      "count": 6,
+      "paths": [
+        "sgl-model-gateway/e2e_test/fixtures/router_manager.py",
+        "sgl-model-gateway/py_test/fixtures/router_manager.py",
+        "sgl-router/py_test/fixtures/router_manager.py"
+      ],
+      "shape": {
+        "length": 9,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "\"api_key\": \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "d652816c12431c49",
+      "count": 6,
+      "paths": [
+        "sgl-model-gateway/bindings/python/sglang_router/router.py",
+        "sgl-model-gateway/bindings/python/src/sglang_router/router.py"
+      ],
+      "shape": {
+        "length": 11,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_keys="
+      ]
+    },
+    {
+      "value_sha256_prefix": "eceadfbb53b79c09",
+      "count": 4,
+      "paths": [
+        "test/registered/unit/constrained/test_e2e_constrained_reasoning.py"
+      ],
+      "shape": {
+        "length": 12,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "test",
+          "123"
+        ]
+      },
+      "key_names": [
+        "API_KEY = \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "383532ce3db073b8",
+      "count": 4,
+      "paths": [
+        "README.md"
+      ],
+      "shape": {
+        "length": 9,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "xxx"
+        ]
+      },
+      "key_names": [
+        "OPENAI_API_KEY="
+      ]
+    },
+    {
+      "value_sha256_prefix": "dbfdd1ba91a35b94",
+      "count": 2,
+      "paths": [
+        "python/sglang/srt/entrypoints/tool.py"
+      ],
+      "shape": {
+        "length": 11,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key="
+      ]
+    },
+    {
+      "value_sha256_prefix": "930bbdc51b6aed5c",
+      "count": 2,
+      "paths": [
+        "(historical unnamed blob)"
+      ],
+      "shape": {
+        "length": 12,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "secret",
+          "token"
+        ]
+      },
+      "key_names": [
+        "\"api_key\": \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "a4e8b19e298e2141",
+      "count": 2,
+      "paths": [
+        "sgl-model-gateway/tests/auth_integration_test.rs",
+        "sgl-model-gateway/tests/security/auth_integration_test.rs"
+      ],
+      "shape": {
+        "length": 22,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "api_key_config ="
+      ]
+    },
+    {
+      "value_sha256_prefix": "9e471951a1b4106e",
+      "count": 1,
+      "paths": [
+        "sgl-model-gateway/e2e_test/backends.py"
+      ],
+      "shape": {
+        "length": 11,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "api_key_env:"
+      ]
+    },
+    {
+      "value_sha256_prefix": "040db5247ce8b92a",
+      "count": 1,
+      "paths": [
+        "python/sglang/srt/mem_cache/storage/aibrix_kvcache/README.md"
+      ],
+      "shape": {
+        "length": 13,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "AIBRIX_KV_CACHE_OL_PRIS_PASSWORD=\""
+      ]
+    },
+    {
+      "value_sha256_prefix": "94522abc1c88b126",
+      "count": 1,
+      "paths": [
+        "test/registered/unit/entrypoints/openai/test_exa_search.py"
+      ],
+      "shape": {
+        "length": 15,
+        "quoted": true,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "sglang",
+          "key"
+        ]
+      },
+      "key_names": [
+        "\"EXA_API_KEY\": \""
+      ]
+    },
+    {
+      "value_sha256_prefix": "6d03ed5adcd2e178",
+      "count": 1,
+      "paths": [
+        "examples/frontend_language/quick_start/orcarouter_example_chat.py"
+      ],
+      "shape": {
+        "length": 8,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": []
+      },
+      "key_names": [
+        "ORCAROUTER_API_KEY="
+      ]
+    },
+    {
+      "value_sha256_prefix": "10d77386ad8b60b8",
+      "count": 1,
+      "paths": [
+        "sgl-model-gateway/src/auth/middleware.rs"
+      ],
+      "shape": {
+        "length": 18,
+        "quoted": false,
+        "is_identifier": false,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key ="
+      ]
+    },
+    {
+      "value_sha256_prefix": "3a3bfc52e175ae67",
+      "count": 1,
+      "paths": [
+        "python/sglang/lang/backend/crusoe.py"
+      ],
+      "shape": {
+        "length": 16,
+        "quoted": false,
+        "is_identifier": true,
+        "all_digits": false,
+        "dummy_markers": [
+          "key"
+        ]
+      },
+      "key_names": [
+        "api_key="
+      ]
+    }
+  ],
+  "reviewed_token_pattern_fixtures": [
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 23,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 23,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 22,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 22,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "abc"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "abc"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "abc"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "xxx"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": []
+    },
+    {
+      "path": "sgl-model-gateway/tests/auth_integration_test.rs",
+      "object": "3478ab68559cd2db9bb93e40dbd9b57d8d7f64a1",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": []
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 23,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 23,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 22,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 22,
+      "dummy_markers": [
+        "test",
+        "123"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "abc"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "abc"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "abc"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": [
+        "xxx"
+      ]
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": []
+    },
+    {
+      "path": "sgl-model-gateway/tests/security/auth_integration_test.rs",
+      "object": "93b2541cf9a9b39518a9b04175a4bfb70434d9c5",
+      "category": "api_token",
+      "length": 19,
+      "dummy_markers": []
+    }
+  ]
+}

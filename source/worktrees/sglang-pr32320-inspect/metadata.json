@@ -1,0 +1,35 @@
+{
+  "original_path": "/sgl-workspace/sglang-pr32320-inspect",
+  "head_commit": "f5868c99b434c65aa3905cdf09518c3cfb477d89",
+  "base_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+  "branch": "upstream_0.5.16-pr-33407",
+  "git_common_directory": "/sgl-workspace/sglang-pr32320-inspect/.git",
+  "local_refs": [
+    "refs/heads/upstream_0.5.16-pr-33407 f5868c99b434c65aa3905cdf09518c3cfb477d89"
+  ],
+  "is_shallow": true,
+  "remotes": {
+    "origin": "/tmp/sglang-archive-readonly.bundle"
+  },
+  "status_porcelain": "M  python/sglang/kernels/ops/attention/flash_mla_sm120.py\nM  test/registered/kernels/test_flash_mla_backends.py\n",
+  "staged_paths": [
+    "python/sglang/kernels/ops/attention/flash_mla_sm120.py",
+    "test/registered/kernels/test_flash_mla_backends.py"
+  ],
+  "unstaged_paths": [],
+  "untracked_paths": [],
+  "committed_delta_paths": [
+    "test/registered/jit/test_flash_mla_sm120_topk_buckets.py"
+  ],
+  "recent_commits": [
+    "f5868c99b434c65aa3905cdf09518c3cfb477d89 2026-08-06T05:21:51+02:00 Fix SM120 topk-bucket test port: intercept at the paged-attention entry",
+    "3bb5add9fa3a2cae9f108f6cf2203b3dff7d67da 2026-08-04T15:30:59+02:00 Fix lint: isort import order + register CI suite for SM120 topk-bucket test",
+    "9a11022e5fc94897c9ea44eb0d80b5694f6fc7bb 2026-08-04T07:59:00+02:00 Add SM120 topk-bucket dispatch tests; extract _next_topk_bucket helper",
+    "3eede726e3cca32cc6aa480451789e99bcf957b0 2026-08-03T18:06:45+02:00 Fix DSPARK SM120 decode dispatch for non-instantiated topk widths",
+    "48886803b94596884d737132a381bd5124ea1cfd 2026-08-06T05:19:18+00:00 [feat] support dspark in SM120",
+    "0c7876927e4bc1fad0608046457abe118ed0e3bb 2025-12-19T04:19:36+00:00 avoid dp port conflicts",
+    "5b2ef6ea9d407f851752c816c59b5bacd5351e3b 2026-08-03T11:55:58+08:00 add dockerfile",
+    "a44dfa3c409f41fdf78feda337aaa4e1b83ebf76 2026-07-28T12:01:06+08:00 fix bootstrap_host id None"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

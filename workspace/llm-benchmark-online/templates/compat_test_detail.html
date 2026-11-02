@@ -1,0 +1,381 @@
+{% extends "base.html" %}
+{% block title %}兼容性测试详情 — {{ task.name }} — LLM Benchmark{% endblock %}
+{% block content %}
+
+<div class="card">
+    <h2>{{ task.name }}</h2>
+    <table class="info-table">
+        <tr><th>状态</th><td><span class="status status-{{ task.status }}">{{ task.status }}</span></td></tr>
+        <tr><th>连接方式</th><td>{% if task.connection_mode == 'base_url' %}{{ task.base_url }}{% else %}{{ task.host }}:{{ task.port }}{% endif %}</td></tr>
+        <tr><th>模型</th><td>{{ task.request_model or 'default' }}</td></tr>
+        <tr><th>创建时间</th><td>{{ task.created_at|beijing_time }}</td></tr>
+    </table>
+</div>
+
+{% if task.status == 'pending' %}
+<div class="card" style="margin-bottom: 16px;">
+    <button id="btn-run" onclick="startTask()" class="btn btn-primary" style="background:#00b894;">开始测试</button>
+</div>
+{% endif %}
+
+{% if task.status == 'running' %}
+<div class="card" style="margin-bottom: 16px;">
+    <button id="btn-kill" onclick="killTask()" class="btn btn-danger">终止测试</button>
+    <span id="running-hint" style="margin-left:12px; color:#666;">测试运行中...</span>
+</div>
+{% endif %}
+
+{% if task.status in ('done', 'failed', 'abort') %}
+<div class="card" style="margin-bottom: 16px;">
+    <a href="#" onclick="rerunTask(); return false;" class="btn btn-primary" style="background: #6c5ce7;">再测一次</a>
+</div>
+{% endif %}
+
+<!-- 统计汇总：完成后显示 -->
+<div id="summary-section" class="card" style="margin-bottom: 16px; {% if task.status not in ('done', 'failed', 'abort') %}display:none;{% endif %}">
+    <h3 style="margin:0 0 12px 0;">测试汇总</h3>
+    <div id="summary-stats" class="summary-stats"></div>
+</div>
+
+<!-- 失败测试：完成后显示，放在最前面 -->
+<div id="failed-section" class="card" style="margin-bottom: 16px; display:none;">
+    <h3 style="margin:0 0 12px 0; color:#e74c3c;">失败 / 异常测试 <span id="failed-count"></span></h3>
+    <div id="failed-container"></div>
+    <div id="failed-pagination" class="pagination" style="margin-top:12px;"></div>
+</div>
+
+<!-- 通过测试：完成后显示 -->
+<div id="passed-section" class="card" style="margin-bottom: 16px; display:none;">
+    <h3 style="margin:0 0 12px 0; color:#00b894;">通过测试 <span id="passed-count"></span></h3>
+    <div id="passed-container"></div>
+    <div id="passed-pagination" class="pagination" style="margin-top:12px;"></div>
+</div>
+
+<!-- 实时日志 -->
+<div class="card">
+    <h3>执行日志</h3>
+    <pre id="log-output" style="background:#1e1e1e; color:#d4d4d4; padding:16px; border-radius:8px; max-height:600px; overflow:auto; font-size:13px; line-height:1.5; white-space:pre-wrap; word-break:break-all;">{% if runs and runs[0].raw_output %}{{ runs[0].raw_output }}{% else %}等待测试开始...{% endif %}</pre>
+</div>
+
+<!-- 详情弹窗 -->
+<div id="detail-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box" style="max-width:800px;">
+        <h3 id="modal-title">测试详情</h3>
+        <p><strong>分类:</strong> <span id="modal-category"></span></p>
+        <p><strong>描述:</strong> <span id="modal-desc"></span></p>
+        <p><strong>状态:</strong> <span id="modal-status"></span></p>
+        <p><strong>耗时:</strong> <span id="modal-time"></span></p>
+        <div id="modal-error-section" style="display:none;">
+            <hr style="margin:12px 0;">
+            <h4 style="color:#e74c3c;">错误信息</h4>
+            <pre id="modal-error" style="background:#f8f9fa; padding:12px; border-radius:4px; max-height:200px; overflow:auto; white-space:pre-wrap; word-break:break-all;"></pre>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-primary" onclick="closeDetailModal()">关闭</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.summary-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 24px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    min-width: 80px;
+}
+.summary-item.pass { background: #d4edda; }
+.summary-item.fail { background: #f8d7da; }
+.summary-item.highlight { background: #e8f4fd; border: 2px solid #74b9ff; }
+.summary-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+.summary-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d3436;
+}
+.summary-item.pass .summary-value { color: #00b894; }
+.summary-item.fail .summary-value { color: #e74c3c; }
+.summary-item.highlight .summary-value { color: #0984e3; }
+
+.result-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.result-table th, .result-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+.result-table th { background: #f8f9fa; font-weight: 600; position: sticky; top: 0; }
+.result-table tr.row-pass { background: #f0fff4; }
+.result-table tr.row-fail { background: #fff0f0; }
+.result-table tr.row-error { background: #fffaf0; }
+
+.pagination { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.pagination button { padding: 4px 12px; cursor: pointer; }
+.pagination span { font-size: 13px; color: #666; }
+
+.modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+}
+.modal-box {
+    background: #fff; border-radius: 12px; padding: 24px;
+    width: 90%; max-height: 80vh; overflow-y: auto;
+}
+.modal-actions { margin-top: 16px; text-align: right; }
+</style>
+
+<script>
+var TASK_ID = {{ task.id }};
+var TASK_STATUS = '{{ task.status }}';
+var RUN_ID = {% if runs %}{{ runs[0].id }}{% else %}0{% endif %};
+var cachedResults = null;
+
+function renderSummary(parsed) {
+    if (!parsed || !parsed.total) return '';
+    var total = parsed.total || 0;
+    var passed = parsed.passed || 0;
+    var failed = parsed.failed || 0;
+    var rate = total > 0 ? (passed / total * 100).toFixed(1) + '%' : '0%';
+
+    var html = '<div class="summary-grid">';
+    html += '<div class="summary-item"><span class="summary-label">总测试数</span><span class="summary-value">' + total + '</span></div>';
+    html += '<div class="summary-item pass"><span class="summary-label">通过</span><span class="summary-value">' + passed + '</span></div>';
+    html += '<div class="summary-item fail"><span class="summary-label">失败</span><span class="summary-value">' + failed + '</span></div>';
+    html += '<div class="summary-item highlight"><span class="summary-label">通过率</span><span class="summary-value">' + rate + '</span></div>';
+    if (parsed.avg_time_ms) {
+        html += '<div class="summary-item"><span class="summary-label">平均耗时</span><span class="summary-value">' + (parsed.avg_time_ms / 1000).toFixed(2) + 's</span></div>';
+    }
+    html += '</div>';
+    return html;
+}
+
+var PAGE_SIZE = 30;
+var failedTests = [];
+var passedTests = [];
+var failedPage = 1;
+var passedPage = 1;
+var detailTests = [];
+
+function renderTablePage(tests, page) {
+    var start = (page - 1) * PAGE_SIZE;
+    var end = Math.min(start + PAGE_SIZE, tests.length);
+    var pageTests = tests.slice(start, end);
+
+    if (pageTests.length === 0) {
+        return '<p style="color:#666;">暂无数据</p>';
+    }
+    var html = '<table class="result-table"><thead><tr>';
+    html += '<th>#</th><th>测试名称</th><th>描述</th><th>分类</th><th>状态</th><th>耗时</th><th>操作</th>';
+    html += '</tr></thead><tbody>';
+    pageTests.forEach(function(t, idx) {
+        var globalIdx = start + idx + 1;
+        detailTests.push(t);
+        var detailIdx = detailTests.length - 1;
+        var rowClass = 'row-' + t.status;
+        var statusText = t.status === 'pass' ? '✓ 通过' : (t.status === 'fail' ? '✗ 失败' : '⚠ 异常');
+        html += '<tr class="' + rowClass + '">';
+        html += '<td>' + globalIdx + '</td>';
+        html += '<td>' + t.name + '</td>';
+        html += '<td>' + t.description + '</td>';
+        html += '<td>' + (t.category || '-') + '</td>';
+        html += '<td>' + statusText + '</td>';
+        html += '<td>' + t.time_sec.toFixed(2) + 's</td>';
+        html += '<td><button onclick="showDetail(' + detailIdx + ')" class="btn btn-secondary" style="padding:4px 8px; font-size:12px;">详情</button></td>';
+        html += '</tr>';
+    });
+    html += '</tbody></table>';
+    html += '<div style="text-align:center; margin-top:8px; font-size:13px; color:#666;">显示 ' + (start + 1) + '-' + end + ' / 共 ' + tests.length + ' 条</div>';
+    return html;
+}
+
+function renderPagination(tests, currentPage, updateFn) {
+    var totalPages = Math.ceil(tests.length / PAGE_SIZE);
+    if (totalPages <= 1) return '';
+    var html = '';
+    html += '<button onclick="' + updateFn + '(1)" ' + (currentPage === 1 ? 'disabled' : '') + '>首页</button>';
+    html += '<button onclick="' + updateFn + '(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '>上一页</button>';
+    html += '<span>第 ' + currentPage + ' / ' + totalPages + ' 页</span>';
+    html += '<button onclick="' + updateFn + '(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '>下一页</button>';
+    html += '<button onclick="' + updateFn + '(' + totalPages + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '>末页</button>';
+    return html;
+}
+
+function updateFailedPage(page) {
+    failedPage = page;
+    detailTests = [];
+    document.getElementById('failed-container').innerHTML = renderTablePage(failedTests, page);
+    document.getElementById('failed-pagination').innerHTML = renderPagination(failedTests, page, 'updateFailedPage');
+}
+
+function updatePassedPage(page) {
+    passedPage = page;
+    detailTests = [];
+    document.getElementById('passed-container').innerHTML = renderTablePage(passedTests, page);
+    document.getElementById('passed-pagination').innerHTML = renderPagination(passedTests, page, 'updatePassedPage');
+}
+
+function showDetail(idx) {
+    var t = detailTests[idx];
+    if (!t) return;
+    document.getElementById('modal-title').textContent = t.name;
+    document.getElementById('modal-category').textContent = t.category || '-';
+    document.getElementById('modal-desc').textContent = t.description;
+    document.getElementById('modal-status').textContent = t.status === 'pass' ? '✓ 通过' : (t.status === 'fail' ? '✗ 失败' : '⚠ 异常');
+    document.getElementById('modal-time').textContent = t.time_sec ? t.time_sec.toFixed(2) + 's' : '-';
+    if (t.error) {
+        document.getElementById('modal-error-section').style.display = '';
+        document.getElementById('modal-error').textContent = t.error;
+    } else {
+        document.getElementById('modal-error-section').style.display = 'none';
+    }
+    document.getElementById('detail-modal').style.display = 'flex';
+}
+
+function closeDetailModal() {
+    document.getElementById('detail-modal').style.display = 'none';
+}
+
+async function loadResults() {
+    if (!RUN_ID) return;
+    try {
+        var resp = await fetch('/api/run/' + RUN_ID);
+        var data = await resp.json();
+
+        // 更新日志
+        if (data.raw_output) {
+            document.getElementById('log-output').textContent = data.raw_output;
+            var pre = document.getElementById('log-output');
+            pre.scrollTop = pre.scrollHeight;
+        }
+
+        // 更新统计和测试结果表格
+        if (data.parsed_result) {
+            try {
+                cachedResults = JSON.parse(data.parsed_result);
+                document.getElementById('summary-stats').innerHTML = renderSummary(cachedResults);
+
+                if (cachedResults.tests && cachedResults.tests.length > 0) {
+                    // 分离失败和通过
+                    failedTests = cachedResults.tests.filter(function(t) { return t.status !== 'pass'; });
+                    passedTests = cachedResults.tests.filter(function(t) { return t.status === 'pass'; });
+
+                    if (failedTests.length > 0) {
+                        document.getElementById('failed-section').style.display = '';
+                        document.getElementById('failed-count').textContent = '(' + failedTests.length + ' 个)';
+                        updateFailedPage(1);
+                    } else {
+                        document.getElementById('failed-section').style.display = 'none';
+                    }
+
+                    if (passedTests.length > 0) {
+                        document.getElementById('passed-section').style.display = '';
+                        document.getElementById('passed-count').textContent = '(' + passedTests.length + ' 个)';
+                        updatePassedPage(1);
+                    } else {
+                        document.getElementById('passed-section').style.display = 'none';
+                    }
+                }
+            } catch(e) {}
+        }
+    } catch(e) {
+        console.error('加载结果失败:', e);
+    }
+}
+
+async function startTask() {
+    var btn = document.getElementById('btn-run');
+    btn.disabled = true;
+    btn.textContent = '启动中...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/run', {method: 'POST'});
+        var data = await resp.json();
+        if (!resp.ok) {
+            alert('启动失败: ' + (data.detail || resp.statusText));
+            btn.disabled = false;
+            btn.textContent = '开始测试';
+            return;
+        }
+        location.reload();
+    } catch(err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '开始测试';
+    }
+}
+
+async function killTask() {
+    if (!confirm('确定要终止测试吗？')) return;
+    var btn = document.getElementById('btn-kill');
+    btn.disabled = true;
+    btn.textContent = '终止中...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/kill', {method: 'POST'});
+        location.reload();
+    } catch(err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '终止测试';
+    }
+}
+
+async function rerunTask() {
+    var btn = event.target;
+    btn.disabled = true;
+    btn.textContent = '加载配置...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/rerun-config');
+        if (!resp.ok) {
+            alert('获取配置失败');
+            btn.disabled = false;
+            btn.textContent = '再测一次';
+            return;
+        }
+        var config = await resp.json();
+        localStorage.setItem('compat_test_rerun_config', JSON.stringify(config));
+        window.location.href = '/compat-test/create';
+    } catch(err) {
+        alert('请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '再测一次';
+    }
+}
+
+// 轮询状态
+async function poll() {
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID);
+        var data = await resp.json();
+        if (data.task.status !== TASK_STATUS) {
+            location.reload();
+            return;
+        }
+        if (data.task.status === 'running') {
+            loadResults();
+        }
+    } catch(e) {}
+    setTimeout(poll, 1500);
+}
+
+// 初始化
+loadResults();
+
+if (TASK_STATUS === 'running') {
+    poll();
+}
+
+// 点击弹窗外部关闭
+document.getElementById('detail-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeDetailModal();
+});
+</script>
+{% endblock %}

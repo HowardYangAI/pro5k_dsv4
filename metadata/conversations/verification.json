@@ -1,0 +1,503 @@
+{
+  "verified_at_utc": "2026-11-02T10:44:36.016697+00:00",
+  "manifest_outputs_verified": 73,
+  "gzip_jsonl_records_decoded": 24289,
+  "indexed_threads": 22,
+  "readable_message_roles": {
+    "user": 1468,
+    "assistant": 2599
+  },
+  "readable_messages": 4067,
+  "current_source_invalid_lines": {},
+  "pending_legacy_raw_destinations": [],
+  "legacy_raw_destination_checks": [
+    {
+      "path": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl",
+      "exists": true,
+      "jsonl_records": 1136,
+      "gzip_valid": null,
+      "jsonl_valid": true
+    },
+    {
+      "path": "legacy_archive/session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl.gz",
+      "exists": true,
+      "jsonl_records": 11142,
+      "gzip_valid": true,
+      "jsonl_valid": true
+    },
+    {
+      "path": "legacy_archive/session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl.gz",
+      "exists": true,
+      "jsonl_records": 475,
+      "gzip_valid": true,
+      "jsonl_valid": true
+    },
+    {
+      "path": "legacy_archive/session/all-sessions/2026/08/10/rollout-2026-08-10T02-03-24-019fe969-1146-76d2-956f-d391a4ddd5d1.jsonl",
+      "exists": true,
+      "jsonl_records": 122,
+      "gzip_valid": null,
+      "jsonl_valid": true
+    },
+    {
+      "path": "legacy_archive/session/all-sessions/2026/08/12/rollout-2026-08-12T03-45-08-019ff412-ece1-7101-95cd-64058149b2b5.jsonl",
+      "exists": true,
+      "jsonl_records": 135,
+      "gzip_valid": null,
+      "jsonl_valid": true
+    },
+    {
+      "path": "legacy_archive/session/primary-session.jsonl.gz",
+      "exists": true,
+      "jsonl_records": 11142,
+      "gzip_valid": true,
+      "jsonl_valid": true
+    }
+  ],
+  "legacy_raw_validation_errors": [],
+  "outputs": [
+    {
+      "path": "conversations/raw/archived_sessions/rollout-2026-08-21T05-12-02-01a022bb-b813-7c43-b6da-467e265a35eb.jsonl.gz",
+      "bytes": 4729631,
+      "jsonl_records": 476,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/archived_sessions/rollout-2026-08-21T07-40-37-01a02343-c01b-7f51-8d67-f37a68d49505.jsonl.gz",
+      "bytes": 20595,
+      "jsonl_records": 36,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/session_index.jsonl.gz",
+      "bytes": 825,
+      "jsonl_records": 14,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/08/21/rollout-2026-08-21T07-22-06-01a02332-ca6d-7be1-a8ce-5b652cb93858.jsonl.gz",
+      "bytes": 10349297,
+      "jsonl_records": 13519,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/08/23/rollout-2026-08-23T02-46-28-01a02c83-281d-7751-95f7-678490ab1c02.jsonl.gz",
+      "bytes": 492034,
+      "jsonl_records": 670,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T03-34-49-01a0466f-37e1-7b11-83d6-bb8ea61ae9d5.jsonl.gz",
+      "bytes": 17648633,
+      "jsonl_records": 2785,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/08/28/rollout-2026-08-28T06-01-53-01a046f5-de72-7011-ad77-6f429bb71576.jsonl.gz",
+      "bytes": 35732,
+      "jsonl_records": 71,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/09/01/rollout-2026-09-01T09-37-34-01a05c54-c622-78b3-9644-ca704e76df17.jsonl.gz",
+      "bytes": 600406,
+      "jsonl_records": 125,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-31-41-01a08024-f733-7443-9cde-80c32bdbf7fc.jsonl.gz",
+      "bytes": 4082801,
+      "jsonl_records": 1594,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-38-38-01a0802b-53db-75f2-9f81-1922375d5f84.jsonl.gz",
+      "bytes": 4010587,
+      "jsonl_records": 1474,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T08-51-11-01a08036-d1e9-7160-b3d5-07c46362bc06.jsonl.gz",
+      "bytes": 34872,
+      "jsonl_records": 44,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/09/08/rollout-2026-09-08T12-58-39-01a08119-6186-7f73-b5bd-b04c2093edc7.jsonl.gz",
+      "bytes": 263479,
+      "jsonl_records": 253,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/09/09/rollout-2026-09-09T08-24-35-01a08119-6186-7f73-b5bd-b04c2093edc7_01a08544-d4e6-7801-bd76-e2da2c8fcea0.jsonl.gz",
+      "bytes": 46871,
+      "jsonl_records": 114,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-52-58-01a19bad-27d8-7021-989a-6cfd99b81fb2.jsonl.gz",
+      "bytes": 31505,
+      "jsonl_records": 48,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-20-01a19bae-6544-7fc1-8031-0441755f24e3.jsonl.gz",
+      "bytes": 25271,
+      "jsonl_records": 40,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-40-01a19bae-b53e-7051-80bb-e0108675f76c.jsonl.gz",
+      "bytes": 19005,
+      "jsonl_records": 43,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/raw/sessions/2026/11/02/rollout-2026-11-02T09-54-56-01a19bae-f31a-7a33-9054-6fc246bc7af6.jsonl.gz",
+      "bytes": 17298,
+      "jsonl_records": 34,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/threads.jsonl.gz",
+      "bytes": 3679,
+      "jsonl_records": 17,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/thread_spawn_edges.jsonl.gz",
+      "bytes": 235,
+      "jsonl_records": 5,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/thread_sections.jsonl.gz",
+      "bytes": 96,
+      "jsonl_records": 1,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/thread_dynamic_tools.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/projects.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/project_roots.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/state_5/thread_attachments.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/thread_history_1/thread_turns.jsonl.gz",
+      "bytes": 40978,
+      "jsonl_records": 666,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/thread_history_1/thread_items.jsonl.gz",
+      "bytes": 4021116,
+      "jsonl_records": 2246,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/thread_history_1/thread_history_projection_state.jsonl.gz",
+      "bytes": 466,
+      "jsonl_records": 13,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/thread_history_1/thread_realtime_items.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/goals_1/thread_goals.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/goals_1/thread_goal_continuation_deferrals.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/memories_1/stage1_outputs.jsonl.gz",
+      "bytes": 20,
+      "jsonl_records": 0,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/databases/memories_1/consolidation_progress.jsonl.gz",
+      "bytes": 57,
+      "jsonl_records": 1,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/pasted-text-attachments.json",
+      "bytes": 92895,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/33897ac1-4fc9-43c0-98a5-20f7bc7870a9/pasted-text.txt",
+      "bytes": 5236,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/a51791a3-6a00-47e5-b0be-a9111487accb/pasted-text.txt",
+      "bytes": 12841,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/692c8861-745d-4f50-8f03-312eb41741bd/pasted-text.txt",
+      "bytes": 6320,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/85471966-98ed-4024-b100-ccc701fd5449/pasted-text.txt",
+      "bytes": 15724,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/088b6e24-1135-42ea-a6de-285a7d0af145/pasted-text.txt",
+      "bytes": 6319,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/639d989a-6b79-410d-9d2e-bbae41c63caa/pasted-text.txt",
+      "bytes": 15724,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/2fca5258-82d1-4cfa-8840-1b78e737a2e6/pasted-text.txt",
+      "bytes": 11620,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/f5d7b9d8-62d4-4ab4-bac6-27e0604bccf6/pasted-text.txt",
+      "bytes": 15724,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/5f8e6e63-5763-4245-b911-8d7c7b81a248/pasted-text.txt",
+      "bytes": 17258,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/960a14e1-d054-411c-81b6-2730834741ed/pasted-text.txt",
+      "bytes": 17163,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/f4062b8c-d1b5-4763-a311-5deadbb02f64/pasted-text.txt",
+      "bytes": 6495,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/87fb44b8-96f2-4c54-b04c-8b9d291897ce/pasted-text.txt",
+      "bytes": 6698,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/bec685ef-624a-47b7-8100-e84649cf0349/pasted-text.txt",
+      "bytes": 6239,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/317a0da3-c804-4e99-a77d-35432ecc9d19/pasted-text.txt",
+      "bytes": 6436,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/c9044c5b-a732-437e-995e-2de124eb4acf/pasted-text.txt",
+      "bytes": 6902,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/af5956f8-3276-4966-a18c-301dae490448/pasted-text.txt",
+      "bytes": 8119,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/09f6dbd3-b54d-45c7-aad7-6239e2174257/pasted-text.txt",
+      "bytes": 22913,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/e64e91ca-934e-4827-b377-e08ed7e5f659/pasted-text.txt",
+      "bytes": 139871,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/11e34533-734d-4e5b-956d-6e3fca45c6ab/pasted-text.txt",
+      "bytes": 10339,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/3dc34b5b-0538-4599-a54f-6af49719ebc1/pasted-text.txt",
+      "bytes": 14952,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/3b971584-2c5a-4f6f-8356-c887d83afbe0/pasted-text.txt",
+      "bytes": 105023,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/55d5843b-c77a-42bc-8300-c0650f0966e7/pasted-text.txt",
+      "bytes": 5442,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/bc7fdf6d-7faf-4369-b2ee-94e3a05e26c1/pasted-text.txt",
+      "bytes": 19981,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/75e1f172-9f8a-4ab5-83f2-939cbb022463/pasted-text.txt",
+      "bytes": 72342,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/e9b922c1-45af-4ba2-8d0b-3dc773f206a2/pasted-text.txt",
+      "bytes": 12888,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/e32caa45-5ccd-4833-93be-a5c65ad33ca9/pasted-text.txt",
+      "bytes": 11318,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/9abd37bd-96a0-4be2-b5b5-4e024051dbfd/pasted-text.txt",
+      "bytes": 11685,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/856af96b-0d9c-476c-ab22-7b9b44e3f8b2/pasted-text.txt",
+      "bytes": 42062,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/f64052e5-b2e7-4e2e-9e51-167ed142ba23/pasted-text.txt",
+      "bytes": 18692,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/6feb4159-5475-44ac-8020-95376dba605b/pasted-text.txt",
+      "bytes": 8148,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/4baa4cbf-891d-469a-a0f5-7048ad8c02e6/pasted-text.txt",
+      "bytes": 38765,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/2f756231-f41f-4555-8a63-5319ae0089da/pasted-text.txt",
+      "bytes": 17150,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/a5db9728-7caf-400d-9384-0a783a99b97f/pasted-text.txt",
+      "bytes": 8291,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/58f80d66-c2d8-4fa8-958a-834454411d93/pasted-text.txt",
+      "bytes": 98890,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/5d491394-11e3-45a6-b9f3-d6de204c5891/pasted-text.txt",
+      "bytes": 98890,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/75f5e8d2-51a7-4813-a3d9-1288fd8fe76d/pasted-text.txt",
+      "bytes": 170521,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/55abaa1b-e9fa-467e-95e4-a602e23a8398/pasted-text.txt",
+      "bytes": 104522,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/a8134a1f-05b3-4326-a119-affb4cc888c2/pasted-text.txt",
+      "bytes": 14911,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/aedf8309-8bbb-4865-8728-5a9c7ac17b94/pasted-text.txt",
+      "bytes": 185432,
+      "jsonl_records": null,
+      "hash_matches": true
+    },
+    {
+      "path": "conversations/attachments/e87d9679-98e0-4668-b9e9-4eefcd87fac4/pasted-text.txt",
+      "bytes": 49228,
+      "jsonl_records": null,
+      "hash_matches": true
+    }
+  ],
+  "database_item_json_strings_decoded": 2246,
+  "database_user_message_texts_covered_by_readable_jsonl": 664,
+  "database_assistant_message_texts_covered_by_readable_jsonl": 1368,
+  "database_only_user_or_assistant_text_count": 0,
+  "readable_database_message_comparison": "metadata/conversations/database_message_coverage.json"
+}

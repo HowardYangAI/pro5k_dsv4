@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+{% block title %}新建精度测试 — LLM Benchmark{% endblock %}
+{% block content %}
+<h1>新建精度测试 (EvalScope)</h1>
+
+<form id="eval-form" class="card-form">
+    <fieldset>
+        <legend>基本信息</legend>
+        <div class="form-group">
+            <label for="name">任务名称 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="例如: dsv4-flash-eval">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>连接配置</legend>
+        <div class="form-group">
+            <label for="connection_mode">连接模式</label>
+            <select id="connection_mode" name="connection_mode">
+                <option value="host_port">Host:Port</option>
+                <option value="base_url">Base URL + Token</option>
+            </select>
+        </div>
+
+        <div id="host-port-group">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="host">Host</label>
+                    <input type="text" id="host" name="host" value="10.93.160.25" placeholder="10.93.160.25">
+                </div>
+                <div class="form-group">
+                    <label for="port">Port</label>
+                    <input type="number" id="port" name="port" value="30000" placeholder="30000">
+                </div>
+            </div>
+        </div>
+
+        <div id="base-url-group" style="display:none">
+            <div class="form-group">
+                <label for="base_url">Base URL</label>
+                <input type="text" id="base_url" name="base_url" placeholder="https://tokenservice.example.com">
+            </div>
+            <div class="form-group">
+                <label for="api_key">API Key</label>
+                <input type="password" id="api_key" name="api_key" placeholder="sk-...">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>模型配置</legend>
+        <div class="form-group">
+            <label>Model Name</label>
+            <div class="segmented-toggle" style="margin-bottom:6px;">
+                <input type="radio" id="emn_auto" name="model_name_mode" value="auto" checked onchange="toggleModelNameInput()">
+                <label for="emn_auto">自动获取</label>
+                <input type="radio" id="emn_manual" name="model_name_mode" value="manual" onchange="toggleModelNameInput()">
+                <label for="emn_manual">手动输入</label>
+            </div>
+            <input type="text" id="model_name" name="model_name" placeholder="例如: DeepSeek-V4-Flash" style="display:none;">
+            <small id="model-name-hint">自动通过 /v1/models 查询，失败则使用 default</small>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>推理模式</legend>
+        <div class="form-group" style="padding: 12px; background: #f8f9fa; border-radius: 4px; margin-bottom: 16px;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="checkbox" id="enable_think" name="enable_think" style="margin-right: 8px; width: 16px; height: 16px;">
+                <strong style="margin-right: 8px;">开启 Think 模式</strong>
+                <small style="color:#666;">启用后模型将进行深度思考（传递 chat_template_kwargs.thinking=true）</small>
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>数据集选择</legend>
+        <p class="help-text">选择要评估的数据集，可分别设置每个数据集的采样数（轻量验证/全量验证）和批次大小。</p>
+        <div class="form-group" style="padding: 12px; background: #f8f9fa; border-radius: 4px; margin-bottom: 16px;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="checkbox" id="full_test" name="full_test" style="margin-right: 8px; width: 16px; height: 16px;">
+                <strong style="margin-right: 8px;">全量测试</strong>
+                <small style="color:#666;">勾选后将运行完整数据集，无需设置采样数</small>
+            </label>
+        </div>
+        <div id="dataset-list"></div>
+    </fieldset>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" style="background:#00b894;">创建精度测试</button>
+        <a href="/" class="btn btn-secondary">取消</a>
+    </div>
+</form>
+
+<script>
+var STORAGE_KEY = 'eval_last_params';
+
+var EVAL_DATASETS = [
+    {
+        name: 'mmlu',
+        label: 'MMLU',
+        description: 'Massive Multitask Language Understanding',
+        default_limit: 20,
+        default_batch_size: 128,
+        limit_options: [5, 10, 20, 50, 100, 200, 500],
+    },
+    {
+        name: 'gsm8k',
+        label: 'GSM8K',
+        description: 'Grade School Math 8K',
+        default_limit: 800,
+        default_batch_size: 128,
+        limit_options: [10, 20, 50, 100, 200, 500, 800],
+    },
+    {
+        name: 'bbh',
+        label: 'BBH',
+        description: 'BIG-Bench Hard (27 challenging tasks)',
+        default_limit: 10,
+        default_batch_size: 128,
+        limit_options: [5, 10, 20, 50, 100],
+    },
+    {
+        name: 'bfcl_v3',
+        label: 'BFCL V3',
+        description: 'Berkeley Function Calling Leaderboard V3',
+        default_limit: 10,
+        default_batch_size: 10,
+        limit_options: [5, 10, 20, 50, 100],
+    },
+    {
+        name: 'longbench_v2',
+        label: 'LongBench V2',
+        description: 'Long-Context Understanding (up to 2M tokens)',
+        default_limit: 10,
+        default_batch_size: 1,
+        limit_options: [5, 10, 20, 50, 100],
+    },
+    {
+        name: 'needle_haystack',
+        label: 'Needle-in-a-Haystack',
+        description: 'Long-Context Information Retrieval',
+        default_limit: 10,
+        default_batch_size: 1,
+        limit_options: [5, 10, 20, 50, 100],
+        requires_judge: true,
+    },
+];
+
+function toggleModelNameInput() {
+    var manual = document.querySelector('input[name="model_name_mode"]:checked').value === 'manual';
+    var input = document.getElementById('model_name');
+    var hint = document.getElementById('model-name-hint');
+    input.style.display = manual ? '' : 'none';
+    hint.textContent = manual ? '手动指定发送给 API 的模型名称' : '自动通过 /v1/models 接口查询模型名，查询失败则使用 default';
+    if (!manual) input.value = '';
+    saveParams();
+}
+
+var state = {};
+
+function renderDatasets() {
+    var fullTest = document.getElementById('full_test').checked;
+    var html = '';
+    EVAL_DATASETS.forEach(function(ds) {
+        var s = state[ds.name];
+        var checked = s.checked ? 'checked' : '';
+        html += '<div class="eval-dataset-card">';
+        html += '<label class="eval-checkbox-label">';
+        html += '<input type="checkbox" class="eval-ds-checkbox" data-name="' + ds.name + '" ' + checked + '>';
+        html += '<strong>' + ds.label + '</strong>';
+        html += '<span class="eval-ds-desc">' + ds.description + '</span>';
+        html += '</label>';
+        html += '<div class="eval-ds-options">';
+        html += '<label>采样数: <select class="eval-ds-limit" data-name="' + ds.name + '" ' + (fullTest ? 'disabled' : '') + '>';
+        ds.limit_options.forEach(function(opt) {
+            var sel = opt === s.limit ? 'selected' : '';
+            html += '<option value="' + opt + '" ' + sel + '>' + opt + '</option>';
+        });
+        html += '</select></label>';
+        if (fullTest) {
+            html += '<small style="color:#00b894; margin-left:8px;">全量测试</small>';
+        }
+        html += '<label>Batch Size: <input type="number" class="eval-ds-batch" data-name="' + ds.name + '" value="' + s.batch_size + '" min="1" max="512" style="width:80px;"></label>';
+        html += '</div></div>';
+    });
+    document.getElementById('dataset-list').innerHTML = html;
+
+    // Bind checkbox events
+    document.querySelectorAll('.eval-ds-checkbox').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+            state[this.dataset.name].checked = this.checked;
+            renderDatasets();
+            saveParams();
+        });
+    });
+    // Bind limit events
+    document.querySelectorAll('.eval-ds-limit').forEach(function(sel) {
+        sel.addEventListener('change', function() {
+            state[this.dataset.name].limit = parseInt(this.value);
+            saveParams();
+        });
+    });
+    // Bind batch events
+    document.querySelectorAll('.eval-ds-batch').forEach(function(inp) {
+        inp.addEventListener('change', function() {
+            state[this.dataset.name].batch_size = parseInt(this.value) || 1;
+            saveParams();
+        });
+    });
+}
+
+// ── localStorage ───────────────────────────────────────────────────
+function saveParams() {
+    var data = {};
+    ['name','connection_mode','host','port','base_url','api_key','model_name'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) data[id] = el.value;
+    });
+    var modeEl = document.querySelector('input[name="model_name_mode"]:checked');
+    if (modeEl) data['model_name_mode'] = modeEl.value;
+    data.full_test = document.getElementById('full_test').checked;
+    data.enable_think = document.getElementById('enable_think').checked;
+    data.datasets = {};
+    EVAL_DATASETS.forEach(function(ds) {
+        data.datasets[ds.name] = {
+            checked: state[ds.name].checked,
+            limit: state[ds.name].limit,
+            batch_size: state[ds.name].batch_size,
+        };
+    });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadParams() {
+    try {
+        // Check for rerun config first
+        var rerunRaw = localStorage.getItem('eval_rerun_config');
+        var data = null;
+        if (rerunRaw) {
+            data = JSON.parse(rerunRaw);
+            localStorage.removeItem('eval_rerun_config'); // Clear after use
+        } else {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            data = JSON.parse(raw);
+        }
+        ['name','connection_mode','host','port','base_url','api_key','model_name'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && data[id] !== undefined) el.value = data[id];
+        });
+        document.getElementById('connection_mode').dispatchEvent(new Event('change'));
+        if (data['model_name_mode']) {
+            var radio = document.querySelector('input[name="model_name_mode"][value="' + data['model_name_mode'] + '"]');
+            if (radio) radio.checked = true;
+            toggleModelNameInput();
+        }
+        // Load full_test checkbox
+        if (data['full_test'] !== undefined) {
+            document.getElementById('full_test').checked = data['full_test'];
+        }
+        if (data['enable_think'] !== undefined) {
+            document.getElementById('enable_think').checked = data['enable_think'];
+        }
+        if (data.datasets) {
+            // Handle rerun format: array of datasets
+            if (Array.isArray(data.datasets)) {
+                EVAL_DATASETS.forEach(function(ds) {
+                    var found = data.datasets.find(function(d) { return d.name === ds.name; });
+                    if (found) {
+                        state[ds.name].checked = true;
+                        state[ds.name].limit = found.limit || ds.default_limit;
+                        state[ds.name].batch_size = found.batch_size || ds.default_batch_size;
+                    } else {
+                        state[ds.name].checked = false;
+                    }
+                });
+            } else {
+                // Handle localStorage format: object keyed by name
+                EVAL_DATASETS.forEach(function(ds) {
+                    if (data.datasets[ds.name]) {
+                        state[ds.name].checked = data.datasets[ds.name].checked;
+                        state[ds.name].limit = data.datasets[ds.name].limit || ds.default_limit;
+                        state[ds.name].batch_size = data.datasets[ds.name].batch_size || ds.default_batch_size;
+                    }
+                });
+            }
+        }
+        renderDatasets();
+    } catch(e) {}
+}
+
+// ── Init ───────────────────────────────────────────────────────────
+document.getElementById('connection_mode').addEventListener('change', function() {
+    var isHost = this.value === 'host_port';
+    document.getElementById('host-port-group').style.display = isHost ? '' : 'none';
+    document.getElementById('base-url-group').style.display = isHost ? 'none' : '';
+});
+
+EVAL_DATASETS.forEach(function(ds) {
+    state[ds.name] = { checked: true, limit: ds.default_limit, batch_size: ds.default_batch_size };
+});
+
+// 全量测试勾选框事件
+document.getElementById('full_test').addEventListener('change', function() {
+    saveParams();
+    renderDatasets();
+});
+
+renderDatasets();
+
+document.getElementById('eval-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var form = this;
+    saveParams();
+
+    var selected = EVAL_DATASETS.filter(function(ds) { return state[ds.name].checked; });
+    if (selected.length === 0) {
+        alert('请至少选择一个数据集');
+        return;
+    }
+
+    if (!form.name.value.trim()) {
+        alert('请填写任务名称');
+        return;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = '创建中...';
+
+    var body = {
+        name: form.name.value.trim(),
+        connection_mode: form.connection_mode.value,
+        host: form.host.value.trim(),
+        port: parseInt(form.port.value) || 0,
+        base_url: form.base_url.value.trim(),
+        api_key: form.api_key.value.trim(),
+        model_name: form.model_name.value.trim(),
+        full_test: document.getElementById('full_test').checked,
+        enable_think: document.getElementById('enable_think').checked,
+        datasets: selected.map(function(ds) {
+            return {
+                name: ds.name,
+                limit: document.getElementById('full_test').checked ? 0 : state[ds.name].limit,
+                batch_size: state[ds.name].batch_size,
+            };
+        }),
+    };
+
+    try {
+        var resp = await fetch('/api/eval/task', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body),
+        });
+        var data = await resp.json();
+        if (!resp.ok) {
+            alert('创建失败: ' + (data.detail || resp.statusText));
+            btn.disabled = false;
+            btn.textContent = '创建精度测试';
+            return;
+        }
+        window.location.href = '/task/' + data.task_id;
+    } catch(err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '创建精度测试';
+    }
+});
+
+loadParams();
+</script>
+{% endblock %}

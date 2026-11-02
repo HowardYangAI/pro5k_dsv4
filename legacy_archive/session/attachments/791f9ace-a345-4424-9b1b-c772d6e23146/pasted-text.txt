@@ -1,0 +1,81 @@
+机器	Pro 5k 72GB																							
+模型	GLM 5.2 NVFP4																							
+备注	Chunked prefill is enabled with max_num_batched_tokens=8192.																							
+配置 	TP = 4, PP = 2, EP = 4																							
+显存	(Worker_PP0_TP0_EP0 pid=64315) INFO 08-04 21:09:19 [weight_utils.py:869] Filesystem type for checkpoints: XFS. Checkpoint size: 432.90 GiB. Available RAM: 1445.46 GiB.
+(Worker_PP0_TP0_EP0 pid=64315) INFO 08-04 21:15:17 [gpu_model_runner.py:6737] Estimated CUDA graph memory: 0.56 GiB total
+(Worker_PP0_TP0_EP0 pid=64315) INFO 08-04 21:15:46 [gpu_worker.py:793] CUDA graph pool memory: 0.16 GiB (actual), 0.56 GiB (estimated), difference: 0.4 GiB (245.8%).
+(Worker_PP0_TP0_EP0 pid=64315) INFO 08-04 21:15:18 [gpu_worker.py:560] Available KV cache memory: 13.0 GiB
+(EngineCore pid=64047) INFO 08-04 21:15:18 [kv_cache_utils.py:2177] GPU KV cache size: 372,992 tokens
+(EngineCore pid=64047) INFO 08-04 21:15:18 [kv_cache_utils.py:2178] Maximum concurrency for 32,768 tokens per request: 11.38x																							
+																								
+Traffic request rate	Successful requests	Max request concurrency	Mean E2E(ms)	P99 E2E(ms)	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Total token throughput (tok/s)	Concurrency	Accept length	设备数目(卡)	
+元/百万Token	成本(千  TPM )	Input 单卡吞吐	Output 单卡吞吐	TPM (W)
+input 2k 
+output 64																								
+INF	16	1	2306.6	2308.73	826.32	826.25	827.98	828.24	23.5	23.5	23.53	23.53	0.43	892.98	27.74	920.77			8			111.6225	3.4675	
+INF	16	2	3442.28	3465.39	1256.22	1257.06	1658.01	1665.49	34.7	34.61	41.14	41.16	0.58	1195.94	37.15	1232.95			8			149.4925	4.64375	
+INF	32	8	8742.14	9486.08	3952.21	4182.31	6076.39	6078.57	76.03	72.06	124.6	124.86	0.91	1882.35	58.48	1940.78			8			235.29375	7.31	
+input 20k 
+output 1																								
+INF	16	1	4239.36	4251.46	4239.33	4240.63	4249.58	4251.44	0	0	0	0	0.24	4720.51	0.24	4720.5			8			590.06375	0.03	
+INF	16	2	8120.08	8381.3	8120.04	8324.11	8350.66	8381.26	0	0	0	0	0.24	4804.08	0.24	4804.68			8			600.51	0.03	
+INF	32	8	29832.64	34010.03	29832.61	32716.04	33974.61	34010	0	0	0	0	0.24	4800.84	0.24	4801.21			8			600.105	0.03	
+input 20k 
+output 512																								
+INF	16	1	16358.92	16369.57	4240.78	4243.63	4251.66	4252.25	23.71	23.71	23.75	23.75	0.06	1223.27	31.3	1254.59			8			152.90875	3.9125	
+INF	16	2	24295.04	24362.84	7213.13	7202.38	9423.62	9448.66	33.43	33.42	37.81	37.82	0.08	1647.16	42.14	1689.34			8			205.895	5.2675	
+INF	32	8	68421.26	98983.94	15680.84	13874.79	36986.09	43438.68	103.21	108.48	120.25	120.69	0.12	2337.42	59.8	2397.22			8			292.1775	7.475	
+																								
+机器	Pro 5k 72GB																							
+模型	GLM 5.2 NVFP4																							
+备注	Chunked prefill is enabled with max_num_batched_tokens=8192.																							
+配置 	TP = 8, EP = 8																							
+显存	(Worker_TP0_EP0 pid=1615) INFO 08-05 10:48:01 [weight_utils.py:869] Filesystem type for checkpoints: XFS. Checkpoint size: 432.90 GiB. Available RAM: 1442.20 GiB.
+(Worker_TP1_EP1 pid=1616) INFO 08-05 10:55:14 [gpu_model_runner.py:6737] Estimated CUDA graph memory: 0.73 GiB total
+(Worker_TP1_EP1 pid=1616) INFO 08-05 10:55:43 [gpu_worker.py:793] CUDA graph pool memory: 0.28 GiB (actual), 0.73 GiB (estimated), difference: 0.45 GiB (160.8%).
+(Worker_TP0_EP0 pid=1615) INFO 08-05 10:55:15 [gpu_worker.py:560] Available KV cache memory: 9.52 GiB
+(EngineCore pid=1342) INFO 08-05 10:55:15 [kv_cache_utils.py:2177] GPU KV cache size: 189,440 tokens
+(EngineCore pid=1342) INFO 08-05 10:55:15 [kv_cache_utils.py:2178] Maximum concurrency for 32,768 tokens per request: 5.78x																							
+Traffic request rate	Successful requests	Max request concurrency	Mean E2E(ms)	P99 E2E(ms)	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Total token throughput (tok/s)	Concurrency	Accept length	设备数目(卡)	
+元/百万Token	成本(千  TPM )	Input 单卡吞吐	Output 单卡吞吐	TPM (W)
+input 2k 
+output 64																								
+INF	16	1	3006.15	3014.85	1066.25	1067.23	1070.62	1071.65	30.79	30.82	30.89	30.89	0.33	685.24	21.29	706.5			8			85.655	2.66125	
+INF	16	2	4363.84	4388.48	1622.23	1623.63	2141.84	2151.11	43.52	43.45	51.76	51.82	0.46	944.43	29.31	972.56			8			118.05375	3.66375	
+INF	32	8	10827.22	11825.13	5229.18	5557.44	8066.33	8067.18	88.86	83.59	153.67	154.32	0.74	1519.94	47.22	1567.23			8			189.9925	5.9025	
+input 20k 
+output 1																								
+INF	16	1	6404.53	6433.4	6404.5	6401.61	6426.81	6433.36	0	0	0	0	0.16	3124.23	0.16	3124.7			8			390.52875	0.02	
+INF	16	2	12318.88	12690.18	12318.85	12592.46	12653.59	12690.15	0	0	0	0	0.16	3175.24	0.16	3175.4			8			396.905	0.02	
+INF	32	8	45115.27	51848.31	45115.24	48959.84	51651.66	51848.28	0	0	0	0	0.16	3182.19	0.16	3182.31			8			397.77375	0.02	
+input 20k 
+output 512																								
+INF	16	1	22274.77	22330.48	6413.98	6415.77	6431.12	6439.11	31.04	31.03	31.09	31.11	0.04	898.4	22.99	921.39			8			112.3	2.87375	
+INF	16	2	31054.36	31178.25	10361.65	10348.56	12652.48	12693.23	40.49	40.5	45.02	45.06	0.06	1288.65	32.97	1321.64			8			161.08125	4.12125	
+INF	32	8	73539.16	108102.29	17578.75	14937.46	42461.45	49270.83	109.51	115.72	127.83	127.92	0.11	2174.55	55.63	2230.18			8			271.81875	6.95375	
+																								
+机器	Pro 5k 72GB																							
+模型	GLM 5.2 NVFP4																							
+备注	Chunked prefill is enabled with max_num_batched_tokens=8192.
+max-model-len 32768
+max-num-seqs 8
+gpu-memory-utilization 0.9																							
+配置 	PP = 8																							
+显存	(Worker_PP0_EP0 pid=95181) INFO 08-05 14:59:58 [weight_utils.py:869] Filesystem type for checkpoints: XFS. Checkpoint size: 432.90 GiB. Available RAM: 1448.52 GiB.
+(Worker_PP0_EP0 pid=95181) INFO 08-05 15:00:30 [gpu_model_runner.py:6737] Estimated CUDA graph memory: 0.41 GiB total
+(Worker_PP0_EP0 pid=95181) INFO 08-05 15:01:13 [gpu_worker.py:793] CUDA graph pool memory: 0.05 GiB (actual), 0.41 GiB (estimated), difference: 0.36 GiB (700.0%).(Worker_PP0_EP0 pid=95181) INFO 08-05 15:00:31 [gpu_worker.py:560] Available KV cache memory: 22.39 GiB
+(EngineCore pid=94913) INFO 08-05 15:00:32 [kv_cache_utils.py:2177] GPU KV cache size: 681,088 tokens
+(EngineCore pid=94913) INFO 08-05 15:00:32 [kv_cache_utils.py:2178] Maximum concurrency for 32,768 tokens per request: 20.79x																							
+Traffic request rate	Successful requests	Max request concurrency	Mean E2E(ms)	P99 E2E(ms)	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Total token throughput (tok/s)	Concurrency	Accept length	设备数目(卡)	
+元/百万Token	成本(千  TPM )	Input 单卡吞吐	Output 单卡吞吐	TPM (W)
+input 2k 
+output 64																								
+INF	16	1	4964.3	4970.22	1940.46	1941.46	1944.95	1945.04	48	48	48.02	48.02	0.2	414.96	12.89	427.83			8			51.87	1.61125	
+INF	16	2	6904.84	6970.2	3268.49	3283.35	3290.44	3290.51	57.72	57.84	58.4	58.41	0.29	596.67	18.54	615.2			8			74.58375	2.3175	
+INF	32	8	17884.81	18188.81	10710.23	11366.61	11781.89	11866.93	113.88	102.82	150.84	150.85	0.45	920.8	28.61	949.39			8			115.1	3.57625	
+input 20k 
+output 1																								
+INF	16	1	5609.2	5629.22	5609.17	5609.21	5627.12	5629.19	0	0	0	0	0.18	3567.6	0.18	3567.73			8			445.95	0.0225	
+INF	16	2	10768.25	11140.24	10768.22	11118.73	11137.53	11140.2	0	0	0	0	0.18	3600.49	0.18	3600.58			8			450.06125	0.0225	
+INF	32	8	40526.42	49170.24	40526.4	44428.64	46853.92	49170.21	0	0	0	0	0.18	3581.57	0.18	3581.73			8			447.69625	0.0225	

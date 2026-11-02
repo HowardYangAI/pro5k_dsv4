@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}首页 — LLM Benchmark{% endblock %}
+{% block content %}
+<h1>LLM 测试规划平台</h1>
+
+<div class="card" style="margin-bottom: 24px;">
+    <h2>快速操作</h2>
+    <p>创建新的 Benchmark 任务，支持批量编排不同并发、请求率、输入输出长度的组合测试。</p>
+    <div style="display:flex;gap:12px;">
+        <a href="/task/create" class="btn btn-primary">新建性能测试</a>
+        <a href="/eval/create" class="btn btn-primary" style="background:#00b894;">新建精度测试</a>
+    </div>
+</div>
+
+<h2>最近任务</h2>
+{% if tasks %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>连接方式</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in tasks %}
+        <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.name }}</td>
+            <td>{{ t.connection_mode }}</td>
+            <td><span class="status status-{{ t.status }}">{{ t.status }}</span></td>
+            <td>{{ t.created_at|beijing_time }}</td>
+            <td><a href="/task/{{ t.id }}" class="btn btn-sm">查看</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {% if page > 1 %}
+    <a href="?page={{ page - 1 }}">&laquo; 上一页</a>
+    {% endif %}
+    <span>第 {{ page }} 页 (共 {{ (total + per_page - 1) // per_page if total > 0 else 1 }} 页)</span>
+    {% if total > page * per_page %}
+    <a href="?page={{ page + 1 }}">下一页 &raquo;</a>
+    {% endif %}
+</div>
+{% else %}
+<p>暂无任务，<a href="/task/create">点击创建第一个任务</a>。</p>
+{% endif %}
+{% endblock %}

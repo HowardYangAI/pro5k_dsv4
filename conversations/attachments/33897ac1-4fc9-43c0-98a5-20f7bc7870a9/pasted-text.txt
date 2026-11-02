@@ -1,0 +1,112 @@
+
+            # Send finish_reason chunks for each index that completed
+            for idx, finish_reason_data in finish_reasons.items():
+                finish_reason_type = finish_reason_data["type"]
+
+                # Change finish_reason to "tool_calls" if we had tool calls and stopped naturally
+                final_finish_reason = finish_reason_type
+                if has_tool_calls.get(idx, False) and finish_reason_type == "stop":
+                    final_finish_reason = "tool_calls"
+
+                matched_stop = finish_reason_data.get("matched")
+                yield build_sse_content(
+                    chunk_id=content["meta_info"]["id"],
+                    created=int(time.time()),
+                    model=request.model,
+                    index=idx,
+                    finish_reason=final_finish_reason,
+                    matched_stop=matched_stop,
+                )
+
+            # Send hidden states if requested
+            if request.return_hidden_states and hidden_states:
+                for index, choice_hidden_states in hidden_states.items():
+                    if choice_hidden_states:
+                        last_token_hidden_states = (
+                            choice_hidden_states[-1]
+                            if len(choice_hidden_states) > 1
+                            else []
+                        )
+                        hidden_states_chunk = ChatCompletionStreamResponse(
+                            id=content["meta_info"]["id"],
+                            created=int(time.time()),
+                            choices=[
+                                ChatCompletionResponseStreamChoice(
+                                    index=index,
+                                    delta=DeltaMessage(
+                                        hidden_states=last_token_hidden_states
+                                    ),
+                                    finish_reason=None,  # Hidden states don't need finish_reason
+                                )
+                            ],
+                            model=request.model,
+                        )
+                        yield f"data: {hidden_states_chunk.model_dump_json()}\n\n"
+
+            sglext_routed = None
+            if request.return_routed_experts and routed_experts:
+                sglext_routed = next(
+                    (v for v in routed_experts.values() if v is not None), None
+                )
+
+            sglext_details = None
+            if request.return_cached_tokens_details and cached_tokens_details:
+                first_details = next(
+                    (v for v in cached_tokens_details.values() if v is not None), None
+                )
+                if first_details is not None:
+                    sglext_details = cached_tokens_details_from_dict(first_details)
+
+            if sglext_routed is not None or sglext_details is not None:
+                sglext_chunk = ChatCompletionStreamResponse(
+                    id=content["meta_info"]["id"],
+                    created=int(time.time()),
+                    choices=[],  # sglext is at response level
+                    model=request.model,
+                    sglext=SglExt(
+                        routed_experts=sglext_routed,
+                        cached_tokens_details=sglext_details,
+                    ),
+                )
+                yield f"data: {sglext_chunk.model_dump_json()}\n\n"
+
+            # Additional usage chunk
+            if include_usage:
+                # Multimodal tokens are per-prompt (input side), so aggregate
+                # once per prompt (first choice), matching prompt/cached semantics.
+                total_image_tokens = sum(
+                    tok for idx, tok in image_tokens.items() if idx % request.n == 0
+                )
+                total_audio_tokens = sum(
+                    tok for idx, tok in audio_tokens.items() if idx % request.n == 0
+                )
+                total_video_tokens = sum(
+                    tok for idx, tok in video_tokens.items() if idx % request.n == 0
+                )
+                usage = UsageProcessor.calculate_streaming_usage(
+                    prompt_tokens,
+                    reasoning_tokens,
+                    completion_tokens,
+                    cached_tokens=cached_tokens,
+                    n_choices=request.n,
+                    enable_cache_report=self.tokenizer_manager.server_args.enable_cache_report,
+                    image_tokens=total_image_tokens,
+                    audio_tokens=total_audio_tokens,
+                    video_tokens=total_video_tokens,
+                )
+                usage_chunk = ChatCompletionStreamResponse(
+                    id=content["meta_info"]["id"],
+                    created=int(time.time()),
+                    choices=[],  # Empty choices array as per OpenAI spec
+                    model=request.model,
+                    usage=usage,
+                )
+                yield f"data: {usage_chunk.model_dump_json()}\n\n"
+
+        except ValueError as e:
+            if not stream_started:
+                raise
+            error = self.create_streaming_error_response(str(e))
+            yield f"data: {error}\n\n"
+
+        yield "data: [DONE]\n\n"

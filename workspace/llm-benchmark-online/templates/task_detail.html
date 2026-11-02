@@ -1,0 +1,1349 @@
+{% extends "base.html" %}
+{% block title %}任务 #{{ task.id }} — LLM Benchmark{% endblock %}
+{% block content %}
+<h1>任务 #{{ task.id }}: {{ task.name }}</h1>
+
+<div class="card" style="margin-bottom: 16px;">
+    <table class="info-table">
+        <tr><th>类型</th><td><strong>{{ task.display_type }}</strong></td></tr>
+        <tr><th>测试模式</th><td><span class="test-mode-badge">{{ task.display_mode }}</span></td></tr>
+        <tr><th>状态</th><td id="task-status"><span class="status status-{{ task.status }}">{{ task.status }}</span></td></tr>
+        <tr><th>连接方式</th><td>{{ 'Host / Port' if task.connection_mode == 'host_port' else 'Base URL' }}</td></tr>
+        {% if task.connection_mode == 'host_port' %}
+        <tr><th>Host</th><td>{{ task.host }}:{{ task.port }}</td></tr>
+        {% else %}
+        <tr><th>Base URL</th><td>{{ task.base_url }}</td></tr>
+        {% endif %}
+        {% if task.model_name %}
+        <tr><th>Model Name</th><td>{{ task.model_name }}</td></tr>
+        {% endif %}
+        <tr><th>模型路径</th><td>{{ task.model_path }}</td></tr>
+        {% if task.task_type != 'eval' %}
+        <tr><th>数据集</th><td>{% if runs and runs[0].get('mt_workload_mode') in ['replay', 'timestamp_replay'] %}GLM-5.1 真实 Session 回放库（1837 sessions / 11817 spans）{% else %}{{ task.dataset_path }}{% endif %}</td></tr>
+        {% endif %}
+        {% if task.extra_args %}
+        <tr><th>自定义参数</th><td><code>{{ task.extra_args }}</code></td></tr>
+        {% endif %}
+        {% if task.task_type == 'eval' %}
+        {% set enable_think = '--enable-think' in task.extra_args %}
+        <tr><th>Think 模式</th><td>{% if enable_think %}<span style="color:#00b894; font-weight:600;">已开启</span>{% else %}<span style="color:#888;">未开启</span>{% endif %}</td></tr>
+        {% endif %}
+        <tr><th>GPU 监控</th><td>
+            {% if task.monitor_enabled %}
+            已启用 — {{ task.monitor_host }}:{{ task.monitor_port }}, devices={{ task.monitor_devices or task.monitor_device }}, {{ task.monitor_interval_ms }}ms
+            {% else %}未启用{% endif %}
+        </td></tr>
+        <tr><th>创建时间</th><td>{{ task.created_at|beijing_time }}</td></tr>
+    </table>
+</div>
+
+{% if task.status == 'pending' %}
+<div class="card" style="margin-bottom: 16px;" id="section-pending">
+    <button id="btn-run" class="btn btn-primary" onclick="startTask()">开始执行</button>
+</div>
+{% elif task.status == 'running' %}
+<div class="card" style="margin-bottom: 16px;" id="section-running-actions">
+    <button id="btn-kill" class="btn btn-danger" onclick="killTask()">终止任务</button>
+</div>
+<script>
+// On page load, check if task is being killed (e.g. after refresh)
+fetch('/api/task/' + {{ task.id }} + '/killing').then(function(r){return r.json();}).then(function(d){
+    if (d.killing) {
+        var btn = document.getElementById('btn-kill');
+        if (btn) { btn.disabled = true; btn.textContent = '终止中...'; }
+    }
+});
+</script>
+{% endif %}
+
+<div class="card" style="margin-bottom: 16px;{% if task.status not in ('running', 'done', 'failed', 'abort') or total_runs == 0 %} display:none;{% endif %}" id="section-progress">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <span style="font-weight: 600;" id="progress-label">
+            {% if task.status == 'running' %}
+            执行中: {{ done_runs + failed_runs }}/{{ total_runs }}
+            {% else %}
+            完成: {{ done_runs }}/{{ total_runs }}{% if failed_runs > 0 %}, {{ failed_runs }} 失败{% endif %}
+            {% endif %}
+        </span>
+        <span style="color: #0984e3; font-size: 13px;" id="progress-cur">
+        {% if running_now %}
+            {% if running_now.test_mode == 'multi_turn' %}
+            {% if running_now.mt_workload_mode == 'timestamp_replay' %}
+            当前: 线上时间戳回放，客户端数={{ running_now.mt_num_clients }}，请求数={{ running_now.mt_total_requests if running_now.mt_total_requests else '首批Session全部span' }}
+            {% elif running_now.mt_workload_mode == 'replay' %}
+            当前: 历史回放，客户端={{ running_now.mt_num_clients }}, O={{ running_now.mt_output_length }}, 请求数={{ running_now.mt_total_requests if running_now.mt_total_requests else '完整数据集' }}
+            {% else %}
+            当前: 客户端={{ running_now.mt_num_clients }}, L={{ running_now.mt_request_length }}, S={{ running_now.mt_sub_question_input_length }}, O={{ running_now.mt_output_length }}
+            {% endif %}
+            {% else %}
+            当前: 并发={{ running_now.concurrency }}, in={{ running_now.random_input_len }}, out={{ running_now.random_output_len }}
+            {% endif %}
+        {% endif %}
+        </span>
+        {% if task.status in ('done', 'failed', 'abort') and done_runs > 0 %}
+        <a href="/api/task/{{ task.id }}/download" class="btn btn-primary" style="margin-left: auto;" id="btn-download">下载 Markdown 结果</a>
+        <a href="/api/task/{{ task.id }}/download-json" class="btn btn-primary" id="btn-download-json">下载 JSON 结果</a>
+        {% endif %}
+    </div>
+    <div class="progress-bar">
+        {% set pct = ((done_runs + failed_runs) / total_runs * 100)|int if total_runs > 0 else 0 %}
+        <div class="progress-fill" style="width: {{ pct }}%"></div>
+    </div>
+</div>
+
+{% if runs and runs[0].get('test_mode') == 'multi_turn' %}
+<div class="card" style="margin-bottom: 16px;">
+    <h3 style="margin: 0 0 12px 0;">{% if runs[0].get('mt_workload_mode') == 'timestamp_replay' %}线上时间戳回放结果{% elif runs[0].get('mt_workload_mode') == 'replay' %}多轮对话历史回放结果{% else %}多轮对话长度合成结果{% endif %}（{{ runs|length }} 个用例）</h3>
+
+    <!-- 任务级公共信息 + 共享参数（每组通用，只展示一次） -->
+    {% set mt0 = runs[0] %}
+    {% set is_replay = mt0.mt_workload_mode in ['replay', 'timestamp_replay'] %}
+    <table class="info-table" style="width:100%; margin-bottom: 8px;">
+        <tr>
+            <th>服务端地址</th><td>{% if task.connection_mode == 'base_url' %}{{ task.base_url }}{% else %}http://{{ task.host }}:{{ task.port }}{% endif %}/v1/chat/completions</td>
+            <th>模型名称</th><td>{{ task.model_name or task.request_model or '自动获取' }}</td>
+        </tr>
+        <tr>
+            <th>模型路径</th><td>{{ task.model_path }}</td>
+            <th>API 格式</th><td>{{ mt0.mt_api_format or 'openai' }}</td>
+        </tr>
+        <tr>
+            <th>负载模式</th><td>{% if mt0.mt_workload_mode == 'timestamp_replay' %}线上时间戳回放{% elif mt0.mt_workload_mode == 'replay' %}历史会话回放{% else %}长度合成{% endif %}</td>
+            <th>{% if mt0.mt_workload_mode == 'timestamp_replay' %}发射节奏{% elif is_replay %}请求速率上限{% else %}请求速率{% endif %}</th><td>{% if mt0.mt_workload_mode == 'timestamp_replay' %}时间戳 + 响应门控{% elif mt0.request_rate == 0 %}不限制{% else %}{{ mt0.request_rate }} req/s{% endif %}</td>
+        </tr>
+        <tr>
+            <th>随机种子</th><td>{{ mt0.mt_seed if mt0.mt_seed else '自动生成' }}</td>
+            <th>{% if is_replay %}调度方式{% else %}长度变化范围{% endif %}</th><td>{% if mt0.mt_workload_mode == 'timestamp_replay' %}时间戳间隔 + 响应门控{% elif mt0.mt_workload_mode == 'replay' %}响应驱动闭环{% else %}{{ '%.0f'|format(mt0.mt_range_ratio * 100) }}%{% endif %}</td>
+        </tr>
+        <tr>
+            <th>最大上下文</th><td>{% if is_replay %}使用回放数据原始上下文{% else %}{{ mt0.mt_max_context_length if mt0.mt_max_context_length else '不限制' }}{% endif %}</td>
+            {% if mt0.mt_workload_mode == 'timestamp_replay' %}<th>回放配置</th><td>客户端数 {{ mt0.mt_num_clients }} · {{ mt0.mt_total_requests if mt0.mt_total_requests else '首批 Session 全部 span' }} 请求 · 首轮错峰 {{ mt0.mt_init_interval }} s</td>{% else %}<th>{{ '首批客户端错峰' if mt0.mt_workload_mode == 'replay' else '首轮错峰' }}</th><td>{{ mt0.mt_init_interval }} s</td>{% endif %}
+        </tr>
+        <tr>
+            <th>Session Key</th><td>{{ '开' if mt0.mt_enable_session_key else '关' }}</td>
+            <th>{% if mt0.mt_workload_mode == 'replay' %}Session 选择{% else %}轮次屏障{% endif %}</th><td>{% if mt0.mt_workload_mode == 'replay' %}{{ '按开始时间顺序' if mt0.mt_replay_sequential_sessions else '随机洗牌' }}{% elif is_replay %}不适用{% else %}{{ '开' if mt0.mt_enable_round_barrier else '关' }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Thinking 模式</th><td>{{ '开' if mt0.mt_thinking else '关' }}</td>
+            <th></th><td></td>
+        </tr>
+    </table>
+
+    {% for r in runs %}
+    {% if r.get('parsed') %}
+    {% set mp = r.get('parsed') or {} %}
+    <details class="mt-case-result">
+        <summary class="mt-case-result-title">用例 #{{ loop.index }}：{% if r.mt_workload_mode == 'timestamp_replay' %}客户端数 {{ r.mt_num_clients }} · 输出上限 {{ r.mt_output_length }} · 请求数 {{ r.mt_total_requests if r.mt_total_requests else '首批Session全部span' }}{% else %}{% if r.mt_workload_mode != 'replay' %}起始长度 {{ r.mt_request_length }} · 每轮新增子长度 {{ r.mt_sub_question_input_length }} · {% endif %}输出长度 {{ r.mt_output_length }} · 客户端 {{ r.mt_num_clients }} · 请求数 {{ r.mt_total_requests if r.mt_total_requests else '完整数据集' }}{% endif %}</summary>
+        <div class="mt-case-result-body">
+
+        <h4 style="margin: 16px 0 8px 0; color: #555; font-size: 14px;">实测长度统计</h4>
+        <table class="result-table">
+            <thead><tr><th>指标</th><th>Average</th><th>P90</th><th>P99</th></tr></thead>
+            <tbody>
+                {% for metric in ['Prompt Length', 'Output Length'] %}
+                <tr>
+                    <td>{{ metric }} (tokens)</td>
+                    {% for stat in ['Average', 'P90', 'P99'] %}
+                    {% set v = mp.get(stat + ' ' + metric, '-') %}
+                    <td>{% if v is number %}{{ '%.0f'|format(v) }}{% else %}{{ v }}{% endif %}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 style="margin: 16px 0 8px 0; color: #555; font-size: 14px;">延迟百分位</h4>
+        <table class="result-table">
+            <thead><tr><th>指标</th><th>Average</th><th>Median</th><th>P90</th><th>P99</th><th>Max</th></tr></thead>
+            <tbody>
+                {% for metric, unit in [('TTFT', 's'), ('TPOT', 'ms'), ('Latency', 's')] %}
+                <tr>
+                    <td>{{ metric }} ({{ unit }})</td>
+                    {% for stat in ['Average', 'Median', 'P90', 'P99', 'Max'] %}
+                    {% set v = mp.get(stat + ' ' + metric + ' (ms)', '-') %}
+                    <td>{% if v is number %}{% if unit == 's' %}{{ '%.2f'|format(v / 1000) }}{% else %}{{ '%.2f'|format(v) }}{% endif %}{% else %}{{ v }}{% endif %}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 style="margin: 16px 0 8px 0; color: #555; font-size: 14px;">吞吐与缓存</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            {% for label, key in [('输入吞吐 (tok/s)', 'Input token throughput (tok/s)'),
+                                  ('输出吞吐 (tok/s)', 'Output token throughput (tok/s)'),
+                                  ('请求吞吐 (req/s)', 'Request throughput (req/s)')] %}
+            {% set v = mp.get(key, '-') %}
+            <div style="flex:1; min-width:130px; padding: 12px 18px; background: #e9ecef; border-radius: 8px; text-align: center;">
+                <div style="font-size: 12px; color: #555; white-space: nowrap;">{{ label }}</div>
+                <div style="font-size: 18px; font-weight: 700; color: #2d3436;">{% if v is number %}{{ '%.1f'|format(v) }}{% else %}{{ v }}{% endif %}</div>
+            </div>
+            {% endfor %}
+            {% set l1 = mp.get('Cache hit rate L1') %}
+            {% set l1l2 = mp.get('Cache hit rate') %}
+            {% set has_l2 = mp.get('Cache has L2') %}
+            {# 第二列(L1+L2 累加)展示规则：
+               - sglang(has_l2 真)：显示合计
+               - vLLM(有 L1 但 has_l2 假)：显示「-」(无 L2)
+               - 旧数据(无 L1 但有合计)：回退显示合计 #}
+            {% set show_l1l2 = l1l2 is number and (has_l2 or l1 is not number) %}
+            <div style="flex:1; min-width:180px; padding: 12px 18px; background: #e9ecef; border-radius: 8px; text-align: center;">
+                <div style="font-size: 12px; color: #555; white-space: nowrap;">实测缓存命中率(L1/L2/L3)</div>
+                <div style="font-size: 18px; font-weight: 700; color: #2d3436;">
+                    {% if l1 is number %}{{ '%.2f'|format(l1 * 100) }}%{% else %}-{% endif %}
+                    /
+                    {% if show_l1l2 %}{{ '%.2f'|format(l1l2 * 100) }}%{% else %}-{% endif %}
+                    / -
+                </div>
+            </div>
+            {% set th1 = mp.get('Theoretical Hit Rate (PD Sep)', '-') %}
+            {% set th2 = mp.get('Theoretical Hit Rate (PD No Sep)', '-') %}
+            <div style="flex:1; min-width:130px; padding: 12px 18px; background: #f5fbff; border-radius: 8px; text-align: center; border: 1px solid #cfe8ff;">
+                <div style="font-size: 12px; color: #555; white-space: nowrap;">{% if r.mt_workload_mode in ['replay', 'timestamp_replay'] %}理论最大前缀命中率{% else %}理论命中率（PD 分离）{% endif %}</div>
+                <div style="font-size: 18px; font-weight: 700; color: #4d94e6;">{% if th1 is number %}{{ '%.2f'|format(th1 * 100) }}%{% else %}{{ th1 }}{% endif %}</div>
+            </div>
+            {% if r.mt_workload_mode not in ['replay', 'timestamp_replay'] %}<div style="flex:1; min-width:130px; padding: 12px 18px; background: #f5fbff; border-radius: 8px; text-align: center; border: 1px solid #cfe8ff;">
+                <div style="font-size: 12px; color: #555; white-space: nowrap;">理论命中率（PD 不分离）</div>
+                <div style="font-size: 18px; font-weight: 700; color: #4d94e6;">{% if th2 is number %}{{ '%.2f'|format(th2 * 100) }}%{% else %}{{ th2 }}{% endif %}</div>
+            </div>{% endif %}
+        </div>
+
+        {% if r.get('mt_rounds') %}
+        <h4 style="margin: 16px 0 8px 0; color: #555; font-size: 14px;">逐轮指标</h4>
+        <table class="result-table">
+            <thead><tr><th>轮次</th><th>平均 TTFT (ms)</th><th>平均 TPOT (ms)</th><th>缓存命中率(L1/L2/L3)</th><th>请求数</th></tr></thead>
+            <tbody>
+                {% for rd in r.mt_rounds %}
+                {% set rl1 = rd.get('Cache Hit Rate L1') %}
+                {% set rl1l2 = rd.get('Cache Hit Rate') %}
+                {% set show_rl1l2 = rl1l2 is number and (has_l2 or rl1 is not number) %}
+                <tr>
+                    <td>第 {{ rd.n }} 轮</td>
+                    {% set round_ttft = rd.get('Average TTFT (ms)', '-') %}
+                    {% set round_tpot = rd.get('Average TPOT (ms)', '-') %}
+                    <td>{% if round_ttft is number %}{{ '%.2f'|format(round_ttft) }}{% else %}{{ round_ttft }}{% endif %}</td>
+                    <td>{% if round_tpot is number %}{{ '%.2f'|format(round_tpot) }}{% else %}{{ round_tpot }}{% endif %}</td>
+                    <td>
+                        {% if rl1 is number %}{{ '%.2f'|format(rl1 * 100) }}%{% else %}-{% endif %}
+                        /
+                        {% if show_rl1l2 %}{{ '%.2f'|format(rl1l2 * 100) }}%{% else %}-{% endif %}
+                        / -
+                    </td>
+                    <td>{{ rd.get('Request Count', '-') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        </div>
+    </details>
+    {% else %}
+    <details class="mt-case-result">
+        <summary class="mt-case-result-title mt-case-result-title-pending">用例 #{{ loop.index }}：{% if r.mt_workload_mode == 'timestamp_replay' %}客户端数 {{ r.mt_num_clients }} · 请求数 {{ r.mt_total_requests if r.mt_total_requests else '首批Session全部span' }}{% else %}{% if r.mt_workload_mode != 'replay' %}起始长度 {{ r.mt_request_length }} · 每轮新增子长度 {{ r.mt_sub_question_input_length }} · {% endif %}输出长度 {{ r.mt_output_length }} · 客户端 {{ r.mt_num_clients }} · 请求数 {{ r.mt_total_requests if r.mt_total_requests else '完整数据集' }}{% endif %}</summary>
+        <div class="mt-case-result-body">
+            <p style="color: #888;">{% if r.status == 'pending' %}⏳ 等待执行{% elif r.status == 'running' %}<span style="color:#0984e3;">⏳ 执行中...</span>{% elif r.status == 'failed' %}<span style="color:#e74c3c;">✗ 执行失败</span>{% elif r.status == 'abort' %}<span style="color:#d63031;">已终止</span>{% else %}暂无结果{% endif %}</p>
+        </div>
+    </details>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if task.monitor_enabled and runs %}
+<div class="card monitor-results-card" id="section-monitor-results">
+    <h3>GPU 监控结果（{{ runs|length }} 个 Run）</h3>
+    {% set monitor_common = namespace(device=none, devices=[]) %}
+    {% for mr in runs %}
+        {% set mr_metadata = mr.monitor_metadata or {} %}
+        {% set mr_devices = mr_metadata.get('devices') or [] %}
+        {% if monitor_common.device is none and mr_devices %}
+            {% set monitor_common.device = mr_devices[0] %}
+            {% set monitor_common.devices = mr_devices %}
+        {% endif %}
+    {% endfor %}
+    <h4 class="monitor-section-title">监控配置与硬件规格</h4>
+    <table class="info-table monitor-common-info">
+        <tr>
+            <th>Monitor</th><td>{{ task.monitor_host }}:{{ task.monitor_port }}</td>
+            <th>GPU选择</th><td>{{ task.monitor_devices or task.monitor_device }}</td>
+            <th>采样间隔</th><td>{{ task.monitor_interval_ms }} ms</td>
+            <th>最长时间</th><td>{{ task.monitor_max_duration }} s</td>
+        </tr>
+        {% if monitor_common.device %}
+        <tr>
+            <th>GPU型号</th><td>{{ monitor_common.device.get('name') or monitor_common.device.get('device_name') or monitor_common.device.get('chip_name') or '-' }}</td>
+            <th>GPU数量</th><td>{{ monitor_common.devices|length }}</td>
+            <th>GPU编号</th><td colspan="3">{% for d in monitor_common.devices %}{{ d.get('index', d.get('device', '-')) }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+        </tr>
+        {% endif %}
+    </table>
+    {% if monitor_common.device %}
+    {% set hd = monitor_common.device %}
+    <div class="monitor-hardware-grid monitor-common-hardware">
+        <div><span>SM 总数</span><strong>{{ hd.get('sm_count') if hd.get('sm_count') is not none else '-' }}</strong></div>
+        <div><span>CUDA Core 总数</span><strong>{{ hd.get('cuda_core_count') if hd.get('cuda_core_count') is not none else '-' }}</strong></div>
+        <div><span>Tensor Core 总数</span><strong>{{ hd.get('tensor_core_count') if hd.get('tensor_core_count') is not none else '-' }}</strong></div>
+        <div><span>峰值 HBM 带宽</span><strong>{% if hd.get('peak_memory_bandwidth_gbps') %}{{ hd.get('peak_memory_bandwidth_gbps') }} GB/s{% else %}-{% endif %}</strong></div>
+        <div><span>峰值 NVLink 带宽</span><strong>{% if hd.get('peak_nvlink_bandwidth_gbps') %}{{ hd.get('peak_nvlink_bandwidth_gbps') }} GB/s{% else %}-{% endif %}</strong><small>双向合计</small></div>
+        <div><span>峰值 PCIe 带宽</span><strong>{% if hd.get('peak_pcie_bandwidth_gbps') %}{{ hd.get('peak_pcie_bandwidth_gbps')|round|int }} GB/s{% else %}-{% endif %}</strong><small>双向合计</small></div>
+    </div>
+    {% endif %}
+    {% for r in runs %}
+    <details class="monitor-run-result">
+        <summary class="monitor-run-title">
+            Run #{{ r.id }}
+            <span class="monitor-run-params">
+            {% if r.get('test_mode') == 'shared_prefix' %}
+                组数 {{ r.gsp_num_groups }} · 前缀 {{ r.gsp_system_prompt_len }} · 问题 {{ r.gsp_question_len }} · 每组 {{ r.gsp_prompts_per_group }}
+            {% elif r.get('test_mode') == 'multi_turn' %}
+                客户端 {{ r.mt_num_clients }} · 起始 {{ r.mt_request_length }} · 新增 {{ r.mt_sub_question_input_length }} · 输出 {{ r.mt_output_length }}
+            {% else %}
+                并发 {{ r.concurrency }} · 输入 {{ r.random_input_len }} · 输出 {{ r.random_output_len }} · 请求率 {{ 'INF' if r.request_rate == 0 else r.request_rate }}
+            {% endif %}
+            </span>
+        </summary>
+        <div class="monitor-result-panel" id="monitor-result-panel-{{ r.id }}">
+            <p class="help-text">正在整理监控结果...</p>
+        </div>
+    </details>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h2>运行结果 ({{ runs|length }})</h2>
+
+{% if runs %}
+<div style="overflow-x: auto;">
+{% if task.task_type == 'eval' %}
+<table class="runs-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>数据集</th>
+            <th>采样数</th>
+            <th>Batch Size</th>
+            <th>准确率</th>
+            <th>状态</th>
+            <th>运行时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in runs %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.dataset_name }}</td>
+            <td>{{ r.limit_val }}</td>
+            <td>{{ r.batch_size }}</td>
+            <td id="run-accuracy-{{ r.id }}">
+                {{ r.accuracy if r.accuracy is defined else '-' }}
+            </td>
+            <td id="run-status-{{ r.id }}"><span class="status status-{{ r.status }}">{{ r.status }}</span></td>
+            <td id="run-duration-{{ r.id }}">
+                {% if r.eval_duration is defined and r.eval_duration %}
+                    {{ r.eval_duration }}
+                {% elif r.duration_sec is not none and r.duration_sec > 0 %}
+                    {{ r.duration_sec }}s
+                {% elif r.status == 'running' %}
+                    运行中
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{% macro monitor_stat(r, metric, field='avg', suffix='') -%}
+    {%- set value = r.monitor_summary.get(metric) if r.monitor_summary else none -%}
+    {%- if value is mapping and value.get(field) is not none -%}{{ value.get(field) }}{{ suffix }}{%- else -%}-{%- endif -%}
+{%- endmacro %}
+{% macro result_stat(r, field) -%}
+    {%- if r.parsed and r.parsed.get(field) is not none -%}
+        {%- set value = r.parsed.get(field) -%}
+        {%- if value is number -%}{{ ('%.2f'|format(value)).rstrip('0').rstrip('.') }}{%- else -%}{{ value }}{%- endif -%}
+    {%- else -%}-{%- endif -%}
+{%- endmacro %}
+{% if iterations_count > 1 %}
+<p class="help-text" style="margin-bottom: 12px;">检测到 {{ iterations_count }} 次迭代，相同参数组合的运行已分组展示。</p>
+{% endif %}
+{% set mode_column_count = 6 if runs[0].get('test_mode') == 'shared_prefix' else ((3 if runs[0].get('mt_workload_mode') in ['replay', 'timestamp_replay'] else 5) if runs[0].get('test_mode') == 'multi_turn' else 3) %}
+{% set result_table_colspan = 1 + (1 if iterations_count > 1 else 0) + mode_column_count + 1 + 5 + (6 if task.monitor_enabled else 0) + 2 %}
+<div class="result-table-wrap">
+<table class="runs-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            {% if iterations_count > 1 %}<th>迭代</th>{% endif %}
+            {% if runs[0].get('test_mode') == 'shared_prefix' %}
+            <th>组数</th>
+            <th>前缀长度</th>
+            <th>问题长度</th>
+            <th>每组请求</th>
+            <th>随机范围</th>
+            <th>最大并发</th>
+            {% elif runs[0].get('test_mode') == 'multi_turn' %}
+            {% if runs[0].get('mt_workload_mode') == 'timestamp_replay' %}
+            <th>客户端数</th>
+            <th>输出上限</th>
+            <th>请求数</th>
+            {% else %}
+            <th>客户端</th>
+            {% if runs[0].get('mt_workload_mode') not in ['replay', 'timestamp_replay'] %}
+            <th>起始长度</th>
+            <th>新增子长度</th>
+            {% endif %}
+            <th>输出</th>
+            <th>请求数</th>
+            {% endif %}
+            {% else %}
+            <th>并发</th>
+            <th>输入</th>
+            <th>输出</th>
+            {% endif %}
+            <th>{% if runs[0].get('mt_workload_mode') == 'timestamp_replay' %}发射节奏{% elif runs[0].get('mt_workload_mode') == 'replay' %}请求率上限{% else %}请求率{% endif %}</th>
+            <th>req/s</th>
+            <th>Avg TTFT</th>
+            <th>Avg TPOT</th>
+            <th>输出 tok/s</th>
+            <th>{% if runs[0].get('test_mode') == 'multi_turn' %}Avg Latency{% else %}Avg E2E{% endif %}</th>
+            <th>状态</th>
+            {% if task.monitor_enabled %}
+            <th>Monitor</th>
+            <th>GPU</th>
+            <th>CUDA</th>
+            <th>SM</th>
+            <th>TC</th>
+            <th>HBM</th>
+            {% endif %}
+            <th>运行时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in runs %}
+        {% if iterations_count > 1 and r._iter_idx == 0 and r._combo_idx > 0 %}
+        <tr class="combo-separator"><td colspan="{{ result_table_colspan }}"></td></tr>
+        {% endif %}
+        <tr{% if iterations_count > 1 and r._iter_idx == 0 %} class="combo-first"{% endif %}>
+            <td>{{ r.id }}</td>
+            {% if iterations_count > 1 %}
+            <td>
+                {% if r._iter_idx == 0 %}
+                <span class="iter-badge iter-first">第1次</span>
+                {% elif r._iter_idx == iterations_count - 1 %}
+                <span class="iter-badge iter-last">第{{ r._iter_idx + 1 }}次</span>
+                {% else %}
+                <span class="iter-badge">第{{ r._iter_idx + 1 }}次</span>
+                {% endif %}
+            </td>
+            {% endif %}
+            {% if r.get('test_mode') == 'shared_prefix' %}
+            <td>{{ r.gsp_num_groups }}</td>
+            <td>{{ r.gsp_system_prompt_len }}</td>
+            <td>{{ r.gsp_question_len }}</td>
+            <td>{{ r.gsp_prompts_per_group }}</td>
+            {% if r.get('gsp_range_ratio', 0) > 0 %}
+            <td style="color: #e67e22;">±{{ (r.gsp_range_ratio * 100)|int }}%</td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
+            {% if r.get('gsp_max_concurrency', 0) > 0 %}
+            <td style="color: #0984e3;">{{ r.gsp_max_concurrency }}</td>
+            {% else %}
+            <td style="color: #888;">不限制</td>
+            {% endif %}
+            {% elif r.get('test_mode') == 'multi_turn' %}
+            {% if r.get('mt_workload_mode') == 'timestamp_replay' %}
+            <td>{{ r.mt_num_clients }}</td>
+            <td>{{ r.mt_output_length }}</td>
+            <td>{{ r.mt_total_requests if r.mt_total_requests else '首批 Session 全部 span' }}</td>
+            {% else %}
+            <td>{{ r.mt_num_clients }}</td>
+            {% if r.get('mt_workload_mode') not in ['replay', 'timestamp_replay'] %}
+            <td>{{ r.mt_request_length }}</td>
+            <td>{{ r.mt_sub_question_input_length }}</td>
+            {% endif %}
+            <td>{{ r.mt_output_length }}</td>
+            <td>{% if r.get('mt_workload_mode') == 'timestamp_replay' %}按时间窗口{% else %}{{ r.mt_total_requests if r.mt_total_requests else ('完整数据集' if r.get('mt_workload_mode') == 'replay' else '不限') }}{% endif %}</td>
+            {% endif %}
+            {% else %}
+            <td>{{ r.concurrency }}</td>
+            <td>{{ r.random_input_len }}</td>
+            <td>{{ r.random_output_len }}</td>
+            {% endif %}
+            <td>{% if r.get('mt_workload_mode') == 'timestamp_replay' %}时间戳+响应{% else %}{{ "INF" if r.request_rate == 0 else r.request_rate|string }}{% endif %}</td>
+            <td id="bench-rps-{{ r.id }}">{{ result_stat(r, 'Request throughput (req/s)') }}</td>
+            <td id="bench-ttft-{{ r.id }}">{{ result_stat(r, 'Average TTFT (ms)' if r.get('test_mode') == 'multi_turn' else 'Mean TTFT (ms)') }}</td>
+            <td id="bench-tpot-{{ r.id }}">{{ result_stat(r, 'Average TPOT (ms)' if r.get('test_mode') == 'multi_turn' else 'Mean TPOT (ms)') }}</td>
+            <td id="bench-output-tps-{{ r.id }}">{{ result_stat(r, 'Output token throughput (tok/s)') }}</td>
+            <td id="bench-e2e-{{ r.id }}">{{ result_stat(r, 'Average Latency (ms)' if r.get('test_mode') == 'multi_turn' else 'Mean E2E Latency (ms)') }}</td>
+            <td id="run-status-{{ r.id }}"><span class="status status-{{ r.status }}">{{ r.status }}</span></td>
+            {% if task.monitor_enabled %}
+            <td id="monitor-status-{{ r.id }}"><span class="status status-{{ r.monitor_status }}">{{ r.monitor_status }}</span></td>
+            <td id="monitor-gpu-avg-{{ r.id }}">{{ monitor_stat(r, 'gpu_util_pct', 'avg', '%') }}</td>
+            <td id="monitor-cuda-avg-{{ r.id }}">{{ monitor_stat(r, 'cuda_core_pct', 'avg', '%') }}</td>
+            <td id="monitor-sm-avg-{{ r.id }}">{{ monitor_stat(r, 'sm_util_pct', 'avg', '%') }}</td>
+            <td id="monitor-tensor-avg-{{ r.id }}">{{ monitor_stat(r, 'tensor_core_pct', 'avg', '%') }}</td>
+            <td id="monitor-mem-avg-{{ r.id }}">{{ monitor_stat(r, 'hbm_bw_pct', 'avg', '%') }}</td>
+            {% endif %}
+            <td id="run-duration-{{ r.id }}">
+                {% if r.duration_sec is not none %}
+                    {{ r.duration_sec }}s
+                {% elif r.status == 'running' %}
+                    运行中
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<style>
+/* 运行结果表：表头与数据行都居中 */
+.runs-table th,
+.runs-table td {
+    text-align: center;
+}
+.combo-separator td {
+    height: 8px;
+    background: #f0f0f0;
+    border: none;
+}
+.combo-first {
+    border-top: 2px solid #74b9ff;
+}
+.iter-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #f0f0f0;
+    color: #666;
+}
+.iter-badge.iter-first {
+    background: #e8f4fd;
+    color: #0984e3;
+}
+.iter-badge.iter-last {
+    background: #d4edda;
+    color: #00b894;
+}
+.log-combo-separator {
+    margin: 16px 0 8px 0;
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border-left: 3px solid #74b9ff;
+    font-weight: 600;
+    font-size: 13px;
+    color: #555;
+}
+.log-combo-separator:first-child {
+    margin-top: 0;
+}
+</style>
+{% endif %}
+</div>
+{% else %}
+<p>暂无运行记录。</p>
+{% endif %}
+
+{% if task.status in ('done', 'failed', 'abort') and done_runs > 0 %}
+<div class="card" style="margin-bottom: 16px;" id="section-md-preview">
+    <details id="markdown-preview-details" style="margin-bottom: 0;">
+        <summary style="font-weight: 600; font-size: 15px;">Markdown 预览</summary>
+        <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
+            <button type="button" class="btn btn-primary" style="font-size: 12px; padding: 4px 12px;" onclick="event.stopPropagation(); copyTableToClipboard()">Copy 表格</button>
+            <small id="copy-hint" style="color: #00b894; display: none;">已复制，可直接粘贴到 Excel</small>
+        </div>
+        <div style="overflow-x: auto; margin-top: 8px;">
+            <div id="markdown-content" class="markdown-body"></div>
+        </div>
+    </details>
+</div>
+{% endif %}
+
+{% if task.status in ('done', 'failed', 'abort') %}
+<div class="card" style="margin-bottom: 16px;">
+    <a href="#" onclick="rerunTask(); return false;" class="btn btn-primary" style="background: #6c5ce7;">再测一次</a>
+</div>
+{% endif %}
+
+<div style="margin-top: 24px;" id="section-log">
+    <h2>日志输出</h2>
+    {% for r in runs %}
+    {% if iterations_count > 1 and r._iter_idx == 0 and r._combo_idx > 0 %}
+    <div class="log-combo-separator">组合 #{{ r._combo_idx + 1 }}</div>
+    {% endif %}
+    {% if r.raw_output %}
+    <details style="margin-bottom: 8px;" id="log-run-{{ r.id }}">
+        <summary>
+            Run #{{ r.id }}
+            {% if iterations_count > 1 %} <span class="iter-badge">第{{ r._iter_idx + 1 }}次</span>{% endif %}
+            ({{ r.status }}) — {{ r.raw_output|length }} 字符
+        </summary>
+        <pre class="log-pre">{{ r.raw_output }}</pre>
+    </details>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<div id="traffic-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <h3 id="traffic-modal-title"></h3>
+        <pre id="traffic-modal-log" class="traffic-log"></pre>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-primary" id="btn-traffic-proceed" style="display:none;" onclick="closeTrafficModalAndStart()">继续执行</button>
+            <button type="button" class="btn btn-warning" id="btn-traffic-skip" style="display:none;" onclick="skipTrafficAndStart()">跳过检测</button>
+            <button type="button" class="btn btn-primary" id="btn-traffic-ok" style="display:none;" onclick="closeTrafficModalAndStart()">确定</button>
+            <button type="button" class="btn btn-secondary" id="btn-traffic-cancel" onclick="closeTrafficModal()">取消</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+var TASK_ID = {{ task.id }};
+var TASK_STATUS = '{{ task.status }}';
+var TASK_TYPE = '{{ task.task_type }}';
+var POLL_MS = 3000;
+var knownDone = new Set();
+var monitorCharts = {};
+var MONITOR_RESULT_PAYLOADS = {{ monitor_result_payloads | tojson }};
+
+{% for r in runs %}
+{% if r.status == 'done' %}knownDone.add({{ r.id }});{% endif %}
+{% endfor %}
+
+var trafficCheckPassed = false;
+
+function startTask() {
+    var btn = document.getElementById('btn-run');
+    btn.disabled = true;
+    btn.textContent = '检查中...';
+
+    var taskMode = '{{ task.connection_mode }}';
+    if (taskMode === 'host_port' && !trafficCheckPassed) {
+        runTrafficCheckBeforeStart();
+    } else {
+        doStartTask();
+    }
+}
+
+async function runTrafficCheckBeforeStart() {
+    var host = '{{ task.host }}';
+    var port = {{ task.port or 0 }};
+    var modal = document.getElementById('traffic-modal');
+    var title = document.getElementById('traffic-modal-title');
+    var logEl = document.getElementById('traffic-modal-log');
+    var btnProceed = document.getElementById('btn-traffic-proceed');
+    var btnSkip = document.getElementById('btn-traffic-skip');
+    var btnOk = document.getElementById('btn-traffic-ok');
+    var btnCancel = document.getElementById('btn-traffic-cancel');
+    var btnRun = document.getElementById('btn-run');
+
+    title.textContent = '正在检测服务流量...';
+    title.style.color = '';
+    logEl.textContent = '连接 ' + host + ':' + port + '/metrics ...\n';
+    btnProceed.style.display = 'none';
+    btnSkip.style.display = 'none';
+    btnOk.style.display = 'none';
+    btnCancel.style.display = '';
+    modal.style.display = '';
+
+    try {
+        var resp = await fetch('/api/check-traffic', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({host: host, port: port, duration: 20}),
+        });
+        var data = await resp.json();
+        logEl.textContent = (data.log || []).join('\n');
+
+        if (data.ok) {
+            title.textContent = '✅ ' + data.message;
+            title.style.color = '#00b894';
+            btnOk.style.display = '';
+            btnProceed.style.display = 'none';
+            btnSkip.style.display = 'none';
+        } else {
+            title.textContent = '⛔ ' + data.message;
+            title.style.color = '#e74c3c';
+            btnProceed.style.display = '';
+            btnSkip.style.display = '';
+            btnOk.style.display = 'none';
+        }
+    } catch(err) {
+        title.textContent = '❌ 检测失败';
+        title.style.color = '#e74c3c';
+        logEl.textContent = '请求失败: ' + err.message;
+        btnProceed.style.display = 'none';
+        btnSkip.style.display = '';
+        btnOk.style.display = 'none';
+    }
+
+    btnRun.disabled = false;
+    btnRun.textContent = '开始执行';
+}
+
+function closeTrafficModalAndStart() {
+    document.getElementById('traffic-modal').style.display = 'none';
+    trafficCheckPassed = true;
+    doStartTask();
+}
+
+function closeTrafficModal() {
+    document.getElementById('traffic-modal').style.display = 'none';
+    trafficCheckPassed = false;
+}
+
+function skipTrafficAndStart() {
+    document.getElementById('traffic-modal').style.display = 'none';
+    trafficCheckPassed = true;
+    doStartTask();
+}
+
+function doStartTask() {
+    var btn = document.getElementById('btn-run');
+    btn.disabled = true;
+    btn.textContent = '启动中...';
+    fetch('/api/task/' + TASK_ID + '/run', {method: 'POST'})
+        .then(function(r) { return r.json(); })
+        .then(function() {
+            TASK_STATUS = 'running';
+            document.getElementById('task-status').innerHTML =
+                '<span class="status status-running">running</span>';
+            document.getElementById('section-progress').style.display = '';
+            document.getElementById('section-pending').style.display = 'none';
+            // Show kill button
+            var actionsDiv = document.getElementById('section-running-actions');
+            if (!actionsDiv) {
+                actionsDiv = document.createElement('div');
+                actionsDiv.className = 'card';
+                actionsDiv.style.marginBottom = '16px';
+                actionsDiv.id = 'section-running-actions';
+                actionsDiv.innerHTML = '<button id="btn-kill" class="btn btn-danger" onclick="killTask()">终止任务</button>';
+                document.getElementById('section-progress').parentNode.insertBefore(actionsDiv, document.getElementById('section-progress'));
+            }
+            poll();
+        })
+        .catch(function(err) {
+            alert('启动失败: ' + err.message);
+            btn.disabled = false;
+            btn.textContent = '开始执行';
+            trafficCheckPassed = false;
+        });
+}
+
+function killTask() {
+    var btn = document.getElementById('btn-kill');
+    if (!confirm('确定要终止当前任务吗？正在运行的测试将被中断。')) return;
+    btn.disabled = true;
+    btn.textContent = '终止中...';
+    fetch('/api/task/' + TASK_ID + '/kill', {method: 'POST'})
+        .then(function(r) { return r.json(); })
+        .then(function() {
+            // Will be updated by next poll
+        })
+        .catch(function(err) {
+            alert('终止失败: ' + err.message);
+            btn.disabled = false;
+            btn.textContent = '终止任务';
+        });
+}
+
+async function poll() {
+    if (TASK_STATUS === 'done' || TASK_STATUS === 'failed' || TASK_STATUS === 'abort') return;
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID);
+        var data = await resp.json();
+        var task = data.task;
+        var runs = data.runs;
+        var previousTaskStatus = TASK_STATUS;
+        TASK_STATUS = task.status;
+
+        // Update task status badge
+        document.getElementById('task-status').innerHTML =
+            '<span class="status status-' + task.status + '">' + task.status + '</span>';
+
+        // Hide kill button when task stops running
+        if (task.status !== 'running') {
+            var killSection = document.getElementById('section-running-actions');
+            if (killSection) killSection.style.display = 'none';
+        } else {
+            // Check if task is being killed (to update button state on refresh)
+            fetch('/api/task/' + TASK_ID + '/killing').then(function(r){return r.json();}).then(function(d){
+                if (d.killing) {
+                    var btn = document.getElementById('btn-kill');
+                    if (btn) { btn.disabled = true; btn.textContent = '终止中...'; }
+                }
+            });
+        }
+
+        // Update progress bar
+        var elProgress = document.getElementById('section-progress');
+        if (elProgress) {
+            var done = 0, failed = 0, running = null;
+            runs.forEach(function(r) {
+                if (r.status === 'done') done++;
+                if (r.status === 'failed') failed++;
+                if (r.status === 'running') running = r;
+            });
+            var pct = runs.length > 0 ? Math.round((done + failed) / runs.length * 100) : 0;
+            elProgress.querySelector('.progress-fill').style.width = pct + '%';
+
+            // Update progress label text
+            var label = document.getElementById('progress-label');
+            if (label) {
+                if (task.status === 'running') {
+                    label.textContent = '执行中: ' + (done + failed) + '/' + runs.length;
+                } else {
+                    var txt = '完成: ' + done + '/' + runs.length;
+                    if (failed > 0) txt += ', ' + failed + ' 失败';
+                    label.textContent = txt;
+                }
+            }
+
+            // Update current run info
+            var curSpan = document.getElementById('progress-cur');
+            if (curSpan) {
+                if (running) {
+                    if (TASK_TYPE === 'eval') {
+                        curSpan.textContent = '当前: ' + running.dataset_name + ' (limit=' + running.limit_val + ', batch=' + running.batch_size + ')';
+                    } else if (running.test_mode === 'shared_prefix') {
+                        curSpan.textContent = '当前: 组数=' + running.gsp_num_groups + ', 前缀=' + running.gsp_system_prompt_len + ', 问题=' + running.gsp_question_len;
+                    } else if (running.test_mode === 'multi_turn') {
+                        curSpan.textContent = running.mt_workload_mode === 'timestamp_replay'
+                            ? '当前: 时间戳回放, 客户端数=' + running.mt_num_clients + ', 请求数=' + (running.mt_total_requests || '首批Session全部span')
+                            : running.mt_workload_mode === 'replay'
+                            ? '当前: 历史回放, 客户端=' + running.mt_num_clients + ', O=' + running.mt_output_length + ', 请求数=' + (running.mt_total_requests || '完整数据集')
+                            : '当前: 客户端=' + running.mt_num_clients + ', L=' + running.mt_request_length + ', S=' + running.mt_sub_question_input_length + ', O=' + running.mt_output_length;
+                    } else {
+                        curSpan.textContent = '当前: 并发=' + running.concurrency + ', in=' + running.random_input_len + ', out=' + running.random_output_len;
+                    }
+                    curSpan.style.display = '';
+                } else {
+                    curSpan.style.display = 'none';
+                }
+            }
+
+            // Show download button after entire task finishes
+            if (done > 0 && (task.status === 'done' || task.status === 'failed' || task.status === 'abort') && !document.getElementById('btn-download')) {
+                var dl = document.createElement('a');
+                dl.href = '/api/task/' + TASK_ID + '/download';
+                dl.className = 'btn btn-primary';
+                dl.style.marginLeft = 'auto';
+                dl.id = 'btn-download';
+                dl.textContent = '下载 Markdown 结果';
+                label.parentNode.appendChild(dl);
+                var jsonDl = document.createElement('a');
+                jsonDl.href = '/api/task/' + TASK_ID + '/download-json';
+                jsonDl.className = 'btn btn-primary';
+                jsonDl.id = 'btn-download-json';
+                jsonDl.textContent = '下载 JSON 结果';
+                label.parentNode.appendChild(jsonDl);
+                addMarkdownPreviewSection();
+            }
+        }
+
+        // Update run statuses and results
+        var logDiv = document.getElementById('section-log');
+        runs.forEach(function(r) {
+            var statusCell = document.getElementById('run-status-' + r.id);
+            if (statusCell) {
+                statusCell.innerHTML = '<span class="status status-' + r.status + '">' + r.status + '</span>';
+            }
+            var monitorCell = document.getElementById('monitor-status-' + r.id);
+            if (monitorCell) {
+                monitorCell.innerHTML = '<span class="status status-' + escapeHtml(r.monitor_status) + '">' + escapeHtml(r.monitor_status) + '</span>';
+            }
+            var parsedBench = parseRunResult(r.parsed_result);
+            updateCell('bench-rps-' + r.id, parsedBench['Request throughput (req/s)']);
+            var isMultiTurn = r.test_mode === 'multi_turn';
+            updateCell('bench-ttft-' + r.id, parsedBench[isMultiTurn ? 'Average TTFT (ms)' : 'Mean TTFT (ms)']);
+            updateCell('bench-tpot-' + r.id, parsedBench[isMultiTurn ? 'Average TPOT (ms)' : 'Mean TPOT (ms)']);
+            updateCell('bench-output-tps-' + r.id, parsedBench['Output token throughput (tok/s)']);
+            updateCell('bench-e2e-' + r.id, parsedBench[isMultiTurn ? 'Average Latency (ms)' : 'Mean E2E Latency (ms)']);
+            updateCell('monitor-gpu-avg-' + r.id, monitorValue(r.monitor_summary, 'gpu_util_pct', 'avg'), '%');
+            updateCell('monitor-cuda-avg-' + r.id, monitorValue(r.monitor_summary, 'cuda_core_pct', 'avg'), '%');
+            updateCell('monitor-sm-avg-' + r.id, monitorValue(r.monitor_summary, 'sm_util_pct', 'avg'), '%');
+            updateCell('monitor-tensor-avg-' + r.id, monitorValue(r.monitor_summary, 'tensor_core_pct', 'avg'), '%');
+            updateCell('monitor-mem-avg-' + r.id, monitorValue(r.monitor_summary, 'hbm_bw_pct', 'avg'), '%');
+            // Update accuracy cell for eval
+            if (TASK_TYPE === 'eval' && r.status === 'done' && r.parsed_result) {
+                var accCell = document.getElementById('run-accuracy-' + r.id);
+                if (accCell) {
+                    try {
+                        var parsed = typeof r.parsed_result === 'string' ? JSON.parse(r.parsed_result) : r.parsed_result;
+                        var dsData = parsed.datasets && parsed.datasets[r.dataset_name];
+                        if (dsData && dsData.score !== undefined) {
+                            var score = dsData.score;
+                            accCell.textContent = score <= 1 ? (score * 100).toFixed(2) + '%' : score;
+                        }
+                    } catch(e) {}
+                }
+            }
+            // Update duration cell
+            if (r.status === 'done' || r.status === 'failed') {
+                var durCell = document.getElementById('run-duration-' + r.id);
+                if (durCell && r.started_at && r.finished_at) {
+                    var t0 = new Date(r.started_at).getTime();
+                    var t1 = new Date(r.finished_at).getTime();
+                    var sec = Math.round((t1 - t0) / 1000);
+                    durCell.textContent = sec + 's';
+                }
+                if (!knownDone.has(r.id)) {
+                    knownDone.add(r.id);
+                }
+            }
+            // Append new log entry for just-completed runs
+            if (r.raw_output && !document.getElementById('log-run-' + r.id)) {
+                var det = document.createElement('details');
+                det.style.marginBottom = '8px';
+                det.id = 'log-run-' + r.id;
+                det.innerHTML = '<summary>Run #' + r.id + ' (' + r.status + ') — ' + r.raw_output.length + ' 字符</summary>' +
+                    '<pre class="log-pre">' + escapeHtml(r.raw_output) + '</pre>';
+                logDiv.appendChild(det);
+            } else if (r.raw_output) {
+                // Update existing log entry (for streaming output)
+                var det = document.getElementById('log-run-' + r.id);
+                if (det) {
+                    det.querySelector('summary').textContent = 'Run #' + r.id + ' (' + r.status + ') — ' + r.raw_output.length + ' 字符';
+                    det.querySelector('pre').textContent = r.raw_output;
+                }
+            }
+        });
+
+        if (task.status === 'running') {
+            setTimeout(poll, POLL_MS);
+        } else if (task.status !== previousTaskStatus) {
+            // Task status changed (e.g., from running to done), refresh to show rerun button
+            location.reload();
+        }
+    } catch(e) {
+        setTimeout(poll, POLL_MS);
+    }
+}
+
+function escapeHtml(s) {
+    return String(s === undefined || s === null ? '' : s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function parseRunResult(value) {
+    if (!value) return {};
+    if (typeof value === 'object') return value;
+    try { return JSON.parse(value); } catch (e) { return {}; }
+}
+
+function updateCell(id, value, suffix) {
+    var cell = document.getElementById(id);
+    if (!cell) return;
+    if (value === undefined || value === null || value === '-') {
+        cell.textContent = '-';
+        return;
+    }
+    var display = value;
+    if (typeof value === 'number' && Number.isFinite(value)) {
+        display = value.toFixed(2).replace(/\.0+$|(?<=\.[0-9])0+$/, '');
+    }
+    cell.textContent = String(display) + (suffix || '');
+}
+
+function monitorValue(summary, metric, stat) {
+    var value = summary && summary[metric];
+    return value && value[stat] !== undefined && value[stat] !== null ? value[stat] : '-';
+}
+
+function monitorStatusLabel(status) {
+    var labels = {disabled:'未启用', pending:'等待中', running:'采集中', done:'完成', partial:'部分数据',
+        unavailable:'不可用', start_failed:'启动失败', stop_failed:'停止失败', timeout:'超时停止'};
+    return labels[status] || status;
+}
+
+function renderMonitorDetail(run, targetBox, options) {
+    var box = targetBox || document.getElementById('monitor-detail-' + run.id);
+    if (!box) return;
+    options = options || {};
+    var summary = run.monitor_summary || {};
+    var metadata = run.monitor_metadata || {};
+    var samples = run.monitor_samples || [];
+    var device = metadata.device || {};
+    var devices = Array.isArray(metadata.devices) ? metadata.devices : (Object.keys(device).length ? [device] : []);
+    var warning = run.monitor_error || metadata.warning || '';
+    var hasSummary = Object.keys(summary).some(function(key) {
+        return summary[key] && typeof summary[key] === 'object';
+    });
+    if (!hasSummary && ['pending', 'running'].indexOf(run.monitor_status) !== -1) {
+        box.innerHTML = '<div class="monitor-empty-state"><span class="monitor-status monitor-status-' +
+            escapeHtml(run.monitor_status) + '">' + escapeHtml(monitorStatusLabel(run.monitor_status)) +
+            '</span><p>监控数据将在本次压测结束后展示。</p></div>';
+        box.dataset.monitorStatus = run.monitor_status || '';
+        return;
+    }
+    if (!warning && ['start_failed','stop_failed','unavailable','timeout'].indexOf(run.monitor_status) !== -1) {
+        warning = 'Monitor 状态为 ' + monitorStatusLabel(run.monitor_status) + '，未获得完整监控数据';
+    }
+    function metricCards(value, specs) {
+        return '<div class="monitor-metric-grid">' + specs.map(function(spec) {
+            var metricValue = monitorValue(value, spec[0], 'avg');
+            var display = metricValue === '-' ? '-' : escapeHtml(metricValue) + spec[2];
+            return '<div><span>' + spec[1] + '</span><strong>' + display + '</strong></div>';
+        }).join('') + '</div>';
+    }
+    function averageDisplay(value, metric, unit) {
+        var metricValue = monitorValue(value, metric, 'avg');
+        return metricValue === '-' ? '-' : escapeHtml(metricValue) + (unit || '');
+    }
+    function hardwareNumber(value) {
+        return typeof value === 'number' && isFinite(value) ? String(value) : '-';
+    }
+    var hardwareItem = devices.find(function(candidate) {
+            return ['sm_count', 'cuda_core_count', 'tensor_core_count',
+                'peak_memory_bandwidth_gbps', 'peak_nvlink_bandwidth_gbps',
+                'peak_pcie_bandwidth_gbps'].some(function(key) {
+                    return candidate[key] !== null && candidate[key] !== undefined;
+                });
+        });
+    function hardwareCards(item) {
+        if (!item) return '';
+        var deviceName = escapeHtml(item.name || item.device_name || item.chip_name || '未知型号');
+        return '<h4 class="monitor-section-title">硬件规格（GPU 每卡 · ' + deviceName + '）</h4>' +
+            '<div class="monitor-hardware-grid">' +
+            '<div><span>SM 总数</span><strong>' + hardwareNumber(item.sm_count) + '</strong><small>&nbsp;</small></div>' +
+            '<div><span>CUDA Core 总数</span><strong>' + hardwareNumber(item.cuda_core_count) + '</strong><small>&nbsp;</small></div>' +
+            '<div><span>Tensor Core 总数</span><strong>' + hardwareNumber(item.tensor_core_count) + '</strong><small>&nbsp;</small></div>' +
+            '<div><span>峰值 HBM 带宽</span><strong>' +
+                (item.peak_memory_bandwidth_gbps != null ? escapeHtml(item.peak_memory_bandwidth_gbps) + ' GB/s' : '-') +
+            '</strong><small>&nbsp;</small></div>' +
+            '<div><span>峰值 NVLink 带宽</span><strong>' +
+                (item.peak_nvlink_bandwidth_gbps != null && item.peak_nvlink_bandwidth_gbps > 0 ? escapeHtml(item.peak_nvlink_bandwidth_gbps) + ' GB/s' : '-') +
+            '</strong><small>双向合计</small></div>' +
+            '<div><span>峰值 PCIe 带宽</span><strong>' +
+                (item.peak_pcie_bandwidth_gbps != null && item.peak_pcie_bandwidth_gbps > 0 ? escapeHtml(Math.round(item.peak_pcie_bandwidth_gbps)) + ' GB/s' : '-') +
+            '</strong><small>双向合计</small></div></div>';
+    }
+    function peakDisplay(item, key) {
+        var value = item && item[key];
+        if (key === 'peak_pcie_bandwidth_gbps' && typeof value === 'number') {
+            value = Math.round(value);
+        }
+        return value !== null && value !== undefined && value > 0
+            ? escapeHtml(value) + ' GB/s' : '-';
+    }
+    function bandwidthTable(value, item) {
+        var rows = [
+            ['HBM', 'hbm_read_bw_gbps', 'hbm_write_bw_gbps', 'hbm_total_bw_gbps', 'hbm_bw_pct', 'peak_memory_bandwidth_gbps'],
+            ['L2', null, null, 'l2_bw_gbps', null, null],
+            ['NVLink', 'nvlink_rx_bw_gbps', 'nvlink_tx_bw_gbps', 'nvlink_total_bw_gbps', 'nvlink_bw_pct', 'peak_nvlink_bandwidth_gbps'],
+            ['PCIe', 'pcie_read_bw_gbps', 'pcie_write_bw_gbps', 'pcie_total_bw_gbps', 'pcie_bw_pct', 'peak_pcie_bandwidth_gbps']
+        ];
+        var body = rows.map(function(row) {
+            return '<tr><td>' + row[0] + '</td>' +
+                '<td>' + (row[1] ? averageDisplay(value, row[1], ' GB/s') : '-') + '</td>' +
+                '<td>' + (row[2] ? averageDisplay(value, row[2], ' GB/s') : '-') + '</td>' +
+                '<td>' + averageDisplay(value, row[3], ' GB/s') + '</td>' +
+                '<td>' + (row[4] ? averageDisplay(value, row[4], '%') : '-') + '</td></tr>';
+        }).join('');
+        return '<div class="monitor-summary-wrap"><table class="monitor-bandwidth-table"><thead><tr>' +
+            '<th>类型</th><th>读 / RX</th><th>写 / TX</th><th>总带宽</th><th>利用率</th>' +
+            '</tr></thead><tbody>' + body + '</tbody></table></div>';
+    }
+    function perDeviceDetails(deviceSummaries) {
+        if (!deviceSummaries || typeof deviceSummaries !== 'object') return '';
+        var keys = Object.keys(deviceSummaries).sort(function(a, b) {
+            return Number(a) - Number(b);
+        });
+        if (!keys.length) return '';
+        function bandwidthCell(value, readKey, writeKey, totalKey, pctKey, readLabel, writeLabel) {
+            var parts = [];
+            if (readKey) parts.push((readLabel || 'R') + ' ' + averageDisplay(value, readKey, ''));
+            if (writeKey) parts.push((writeLabel || 'W') + ' ' + averageDisplay(value, writeKey, ''));
+            parts.push('T ' + averageDisplay(value, totalKey, ''));
+            var text = parts.join(' / ') + ' GB/s';
+            if (pctKey) text += ' · ' + averageDisplay(value, pctKey, '%');
+            return text;
+        }
+        var rows = keys.map(function(key) {
+            var entry = deviceSummaries[key] || {};
+            var item = entry.device || {};
+            var value = entry.summary || {};
+            var name = item.name || item.device_name || item.chip_name || 'GPU';
+            return '<tr><td>GPU ' + escapeHtml(key) + ' · ' + escapeHtml(name) + '</td>' +
+                '<td>' + averageDisplay(value, 'gpu_util_pct', '%') + '</td>' +
+                '<td>' + averageDisplay(value, 'cuda_core_pct', '%') + '</td>' +
+                '<td>' + averageDisplay(value, 'sm_util_pct', '%') + '</td>' +
+                '<td>' + averageDisplay(value, 'tensor_core_pct', '%') + '</td>' +
+                '<td>' + bandwidthCell(value, 'hbm_read_bw_gbps', 'hbm_write_bw_gbps', 'hbm_total_bw_gbps', 'hbm_bw_pct', 'R', 'W') + '</td>' +
+                '<td>' + bandwidthCell(value, null, null, 'l2_bw_gbps', null) + '</td>' +
+                '<td>' + bandwidthCell(value, 'nvlink_rx_bw_gbps', 'nvlink_tx_bw_gbps', 'nvlink_total_bw_gbps', 'nvlink_bw_pct', 'RX', 'TX') + '</td>' +
+                '<td>' + bandwidthCell(value, 'pcie_read_bw_gbps', 'pcie_write_bw_gbps', 'pcie_total_bw_gbps', 'pcie_bw_pct', 'R', 'W') + '</td></tr>';
+        }).join('');
+        return '<h4 class="monitor-section-title">每张 GPU 指标</h4>' +
+            '<div class="monitor-summary-wrap"><table class="monitor-per-gpu-table"><thead><tr>' +
+            '<th>显卡</th><th>GPU</th><th>CUDA</th><th>SM</th><th>Tensor</th>' +
+            '<th>HBM</th><th>L2</th><th>NVLink</th><th>PCIe</th>' +
+            '</tr></thead><tbody>' + rows + '</tbody></table></div>';
+    }
+    var computeCards = metricCards(summary, [
+        ['gpu_util_pct', 'GPU', '%'], ['cuda_core_pct', 'CUDA Core', '%'],
+        ['sm_util_pct', 'SM', '%'], ['tensor_core_pct', 'Tensor Core', '%']
+    ]);
+    var bandwidthCards = metricCards(summary, [
+        ['hbm_bw_pct', 'HBM', '%'], ['nvlink_bw_pct', 'NVLink', '%'],
+        ['pcie_bw_pct', 'PCIe', '%']
+    ]);
+    var hardware = options.showHardware === false ? '' : hardwareCards(hardwareItem);
+    var deviceDetails = perDeviceDetails(metadata.device_summaries);
+    var hbmChartMetric = samples.some(function(sample) {
+        return sample.hbm_total_bw_gbps !== null && sample.hbm_total_bw_gbps !== undefined;
+    }) ? 'hbm_total_bw_gbps' : 'mem_bw_gbps';
+    var deviceNames = [];
+    var deviceIndices = [];
+    devices.forEach(function(item) {
+        var name = item.name || item.device_name || item.chip_name || 'GPU';
+        if (deviceNames.indexOf(name) === -1) deviceNames.push(name);
+        deviceIndices.push(item.index ?? item.device ?? '-');
+    });
+    var deviceLabel = devices.length
+        ? deviceNames.join(' / ') + ' · GPU ' + deviceIndices.join(', ')
+        : (device.name || device.device_name || device.chip_name || ('GPU ' + (device.index ?? '-')));
+    var fullDownload = run.monitor_session_id && ['done','partial','timeout'].indexOf(run.monitor_status) !== -1
+        ? '<a class="btn btn-secondary" href="/api/run/' + run.id + '/monitor.raw.jsonl">下载完整原始 JSONL</a>'
+        : '';
+    box.innerHTML =
+        (warning ? '<div class="monitor-warning">⚠ GPU 监控异常，但 Benchmark 结果不受影响<br>原因：' + escapeHtml(warning) + '</div>' : '') +
+        '<h4 class="monitor-section-title">采集概况</h4>' +
+        '<div class="monitor-meta-grid">' +
+        '<div><span>状态</span><strong>' + escapeHtml(monitorStatusLabel(run.monitor_status)) + '</strong></div>' +
+        '<div><span>GPU</span><strong>' + escapeHtml(deviceLabel) + '</strong></div>' +
+        '<div><span>起止时间</span><strong class="monitor-time-lines"><span>开始：' + escapeHtml(run.monitor_started_at || '-') + '</span><span>结束：' + escapeHtml(run.monitor_finished_at || '-') + '</span></strong></div>' +
+        '<div><span>样本</span><strong>' + escapeHtml(metadata.sample_count ?? samples.length) + '</strong></div>' +
+        '<div><span>丢失样本</span><strong>' + escapeHtml(metadata.dropped_samples ?? '-') + '</strong></div></div>' +
+        '<div class="monitor-downloads"><a class="btn btn-secondary" href="/api/run/' + run.id + '/monitor.json">下载展示数据 JSON</a>' +
+        '<a class="btn btn-secondary" href="/api/run/' + run.id + '/monitor.csv">下载展示数据 CSV</a>' +
+        fullDownload + '</div>' +
+        hardware +
+        '<h4 class="monitor-section-title">计算利用率</h4>' + computeCards +
+        '<h4 class="monitor-section-title">总带宽利用率</h4>' + bandwidthCards +
+        '<h4 class="monitor-section-title">带宽读写明细（平均值）</h4>' +
+        bandwidthTable(summary, hardwareItem) + deviceDetails +
+        (samples.length && devices.length <= 1 && options.showCharts !== false ? '<div class="monitor-chart-grid">' +
+        '<div><h4>GPU Util (%)</h4><canvas id="chart-gpu-' + run.id + '"></canvas></div>' +
+        '<div><h4>SM Util (%)</h4><canvas id="chart-sm-' + run.id + '"></canvas></div>' +
+        '<div><h4>Tensor Core Util (%)</h4><canvas id="chart-tensor-' + run.id + '"></canvas></div>' +
+        '<div><h4>HBM Total BW (GB/s)</h4><canvas id="chart-mem-' + run.id + '"></canvas></div></div>' : '');
+    monitorCharts[run.id] = {samples:samples, charts:[
+        ['chart-gpu-' + run.id,'gpu_util_pct','#0984e3'], ['chart-sm-' + run.id,'sm_util_pct','#00b894'],
+        ['chart-tensor-' + run.id,'tensor_core_pct','#6c5ce7'], ['chart-mem-' + run.id,hbmChartMetric,'#e17055']
+    ].filter(function(spec) { return document.getElementById(spec[0]); })};
+    box.dataset.monitorStatus = run.monitor_status || '';
+    redrawMonitorCharts(run.id);
+}
+
+function renderStandaloneMonitorResults() {
+    MONITOR_RESULT_PAYLOADS.forEach(function(run) {
+        var box = document.getElementById('monitor-result-panel-' + run.id);
+        if (!box) return;
+        renderMonitorDetail(run, box, {
+            showHardware: false,
+            showCharts: false
+        });
+    });
+}
+
+renderStandaloneMonitorResults();
+
+function redrawMonitorCharts(runId) {
+    var data = monitorCharts[runId];
+    if (!data) return;
+    data.charts.forEach(function(spec) { drawMonitorChart(spec[0], data.samples, spec[1], spec[2]); });
+}
+
+function drawMonitorChart(canvasId, samples, metric, color) {
+    var canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    var width = Math.max(320, canvas.parentElement.clientWidth - 20), height = 190;
+    var ratio = window.devicePixelRatio || 1;
+    canvas.width = width * ratio; canvas.height = height * ratio;
+    canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+    var ctx = canvas.getContext('2d'); ctx.scale(ratio, ratio);
+    var points = samples.map(function(s,i){ return {x:i, y:Number(s[metric])}; }).filter(function(p){ return Number.isFinite(p.y); });
+    ctx.font = '11px sans-serif'; ctx.fillStyle = '#888';
+    if (!points.length) { ctx.fillText('暂无该指标的时序样本', 12, 24); return; }
+    var pad = {l:45,r:12,t:12,b:28};
+    var min = Math.min.apply(null, points.map(function(p){return p.y;}));
+    var max = Math.max.apply(null, points.map(function(p){return p.y;}));
+    if (min === max) { min = Math.max(0, min - 1); max += 1; }
+    ctx.strokeStyle = '#e5e7eb'; ctx.lineWidth = 1;
+    for (var i=0;i<=4;i++) { var y=pad.t+(height-pad.t-pad.b)*i/4; ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(width-pad.r,y); ctx.stroke();
+        ctx.fillStyle='#888'; ctx.fillText((max-(max-min)*i/4).toFixed(1),3,y+4); }
+    ctx.strokeStyle=color; ctx.lineWidth=1.7; ctx.beginPath();
+    points.forEach(function(p,i){ var x=pad.l+(width-pad.l-pad.r)*(points.length===1?0:p.x/(samples.length-1));
+        var y=pad.t+(height-pad.t-pad.b)*(max-p.y)/(max-min); if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y); }); ctx.stroke();
+    ctx.fillStyle='#888'; ctx.fillText('0',pad.l,height-8); ctx.fillText(String(samples.length-1),width-pad.r-24,height-8);
+}
+
+window.addEventListener('resize', function(){ Object.keys(monitorCharts).forEach(redrawMonitorCharts); });
+
+// ── Markdown preview ─────────────────────────────────────
+var markdownLoaded = false;
+
+function loadMarkdownPreview() {
+    if (markdownLoaded) return;
+    var container = document.getElementById('markdown-content');
+    if (!container) return;
+    container.innerHTML = '<p style="color:#888;">加载中...</p>';
+    fetch('/api/task/' + TASK_ID + '/markdown')
+        .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.text();
+        })
+        .then(function(md) {
+            container.innerHTML = marked.parse(md);
+            markdownLoaded = true;
+        })
+        .catch(function(err) {
+            container.innerHTML = '<p style="color:#e74c3c;">加载失败: ' + err.message + '</p>';
+        });
+}
+
+// Auto-load markdown when details is opened
+document.addEventListener('click', function(e) {
+    var details = document.getElementById('markdown-preview-details');
+    if (details && e.target.closest('#markdown-preview-details > summary')) {
+        loadMarkdownPreview();
+    }
+});
+
+function copyTableToClipboard() {
+    var container = document.getElementById('markdown-content');
+    if (!container) return;
+    // If markdown not loaded yet, load it first then copy
+    if (!markdownLoaded) {
+        loadMarkdownPreview();
+        // Wait for markdown to load, then retry
+        var tries = 0;
+        var interval = setInterval(function() {
+            tries++;
+            if (markdownLoaded) {
+                clearInterval(interval);
+                doCopy();
+            } else if (tries > 50) {
+                clearInterval(interval);
+                alert('表格数据加载超时，请稍后再试');
+            }
+        }, 200);
+        return;
+    }
+    doCopy();
+
+    function doCopy() {
+        var tables = container.querySelectorAll('table');
+        if (tables.length === 0) {
+            alert('没有找到表格数据');
+            return;
+        }
+        var lines = [];
+        tables.forEach(function(table) {
+            var rows = table.querySelectorAll('tr');
+            rows.forEach(function(row) {
+                var cells = row.querySelectorAll('th, td');
+                var vals = [];
+                cells.forEach(function(cell) { vals.push(cell.textContent.trim()); });
+                lines.push(vals.join('\t'));
+            });
+            lines.push('');  // blank line between tables
+        });
+        var text = lines.join('\n').trim();
+
+        // Use execCommand fallback for HTTP (non-HTTPS) environments
+        function onCopyOk() {
+            var hint = document.getElementById('copy-hint');
+            if (hint) {
+                hint.style.display = '';
+                setTimeout(function() { hint.style.display = 'none'; }, 2000);
+            }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(onCopyOk).catch(function() {
+                _fallbackCopy(text, onCopyOk);
+            });
+        } else {
+            _fallbackCopy(text, onCopyOk);
+        }
+    }
+}
+
+function _fallbackCopy(text, onSuccess) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+        document.execCommand('copy');
+        onSuccess();
+    } catch(e) {
+        alert('复制失败: ' + e.message);
+    }
+    document.body.removeChild(ta);
+}
+
+function addMarkdownPreviewSection() {
+    if (document.getElementById('section-md-preview')) return;
+    var section = document.createElement('div');
+    section.className = 'card';
+    section.style.marginBottom = '16px';
+    section.id = 'section-md-preview';
+    section.innerHTML = '<details id="markdown-preview-details" style="margin-bottom:0;">' +
+        '<summary style="font-weight:600;font-size:15px;">Markdown 预览</summary>' +
+        '<div style="margin-top:12px;display:flex;align-items:center;gap:8px;">' +
+        '<button type="button" class="btn btn-primary" style="font-size:12px;padding:4px 12px;" onclick="event.stopPropagation(); copyTableToClipboard()">Copy 表格</button>' +
+        '<small id="copy-hint" style="color:#00b894;display:none;">已复制，可直接粘贴到 Excel</small>' +
+        '</div>' +
+        '<div style="overflow-x:auto;margin-top:8px;">' +
+        '<div id="markdown-content" class="markdown-body"></div>' +
+        '</div>' +
+        '</details>';
+    var logSection = document.getElementById('section-log');
+    if (logSection) {
+        logSection.parentNode.insertBefore(section, logSection);
+    }
+}
+
+if (TASK_STATUS === 'running') { poll(); }
+
+// ── Rerun task ───────────────────────────────────────────
+async function rerunTask() {
+    var btn = event.target;
+    btn.disabled = true;
+    btn.textContent = '加载配置...';
+
+    try {
+        var resp = await fetch('/api/task/' + TASK_ID + '/rerun-config');
+        if (!resp.ok) {
+            alert('获取配置失败');
+            btn.disabled = false;
+            btn.textContent = '再测一次';
+            return;
+        }
+        var config = await resp.json();
+
+        // Store config to localStorage for the create page to pick up
+        if (TASK_TYPE === 'eval') {
+            localStorage.setItem('eval_rerun_config', JSON.stringify(config));
+            window.location.href = '/eval/create';
+        } else {
+            localStorage.setItem('bench_rerun_config', JSON.stringify(config));
+            window.location.href = '/task/create';
+        }
+    } catch(err) {
+        alert('请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '再测一次';
+    }
+}
+</script>
+{% endblock %}

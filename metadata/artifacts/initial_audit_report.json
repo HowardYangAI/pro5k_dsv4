@@ -1,0 +1,165 @@
+{
+  "summary": {
+    "files": 174,
+    "bytes": 520006721,
+    "categories": {
+      "test_document": 15,
+      "test_result": 21,
+      "test_log": 93,
+      "diagram_source": 8,
+      "diagram_render": 8,
+      "source_patch": 5,
+      "research_reference": 21,
+      "source_reference": 2,
+      "source_provenance": 1
+    }
+  },
+  "duplicates": [
+    {
+      "sha256": "6c06f7f4db918588f49164f78c29554788d47f2d7950dd4b93d4c76fc84590de",
+      "sources": [
+        "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_cuda_enumeration_retry.log",
+        "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_cuda_enumeration_retry_2.log"
+      ]
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sources": [
+        "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/router_fixed_previous.log",
+        "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/router_runnable.log",
+        "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/prefill_startup_unpinned_defaults.log",
+        "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/router.log"
+      ]
+    },
+    {
+      "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e",
+      "sources": [
+        "/tmp/dcl-6565881.patch",
+        "/tmp/kv-only-staged.patch"
+      ]
+    },
+    {
+      "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+      "sources": [
+        "/tmp/default_router_health.out",
+        "/tmp/router_health",
+        "/tmp/router_health.out",
+        "/tmp/router_health_20260902.out"
+      ]
+    },
+    {
+      "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b",
+      "sources": [
+        "/tmp/pr32320-only.patch",
+        "/tmp/pr32320.patch"
+      ]
+    }
+  ],
+  "bundle_duplicates": [
+    {
+      "sha256": "a2396fce6dac48cdf2308b8acce35b47fc2c86083f0f767fe439e122f58b2336",
+      "sources": [
+        "/tmp/deepseek-v4-sglang-all-refs.bundle",
+        "/tmp/sglang-archive-readonly.bundle"
+      ]
+    }
+  ],
+  "large_files": [
+    {
+      "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/prefill.log",
+      "size": 56649282,
+      "category": "test_log",
+      "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+      "sha256": "3339761bc08fa0fcf8f3cc3c21c5944c92fcb2677d57ab2d58b4e6e306048942"
+    },
+    {
+      "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log",
+      "size": 53686811,
+      "category": "test_log",
+      "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+      "sha256": "c024ca5909670b48906cebc43bd9946e75a6d710dc69c3b4d6f7c6baecc82f26"
+    },
+    {
+      "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/prefill.log",
+      "size": 69208826,
+      "category": "test_log",
+      "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+      "sha256": "c6fe24c872bc9a7b6f568b8a69719e3b48ca223c07122871e72b3471e88df238"
+    }
+  ],
+  "sensitive_pattern_findings": [
+    {
+      "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log",
+      "matches": {
+        "credential_assignment": 64
+      },
+      "classification": "All 64 assignments are benchmark prompt example placeholders beginning with your; not actual credential values."
+    }
+  ],
+  "excluded": [
+    {
+      "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/model_sync.pid",
+      "size": 7,
+      "reason": "Ephemeral process ID; no test evidence"
+    },
+    {
+      "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/prefill.pid",
+      "size": 7,
+      "reason": "Ephemeral process ID; no test evidence"
+    },
+    {
+      "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/router.pid",
+      "size": 7,
+      "reason": "Ephemeral process ID; no test evidence"
+    },
+    {
+      "source": "/tmp/deepseek-v4-sglang-all-refs.bundle",
+      "size": 105203479,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    },
+    {
+      "source": "/tmp/excalidraw_skill_full.txt",
+      "size": 22790,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    },
+    {
+      "source": "/tmp/flashinfer_jit_cache-0.6.17+cu129-cp39-abi3-manylinux_2_28_x86_64.whl",
+      "size": 1937178770,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    },
+    {
+      "source": "/tmp/ming-vllm-0.30.0-cu129.tar",
+      "size": 10734760669,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    },
+    {
+      "source": "/tmp/ming-vllm-omni-nightly-6a56252e.tar",
+      "size": 9941054976,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    },
+    {
+      "source": "/tmp/ming3-image-transfer.pid",
+      "size": 1,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    },
+    {
+      "source": "/tmp/ming3-transfer-temp-key",
+      "size": 411,
+      "reason": "Private key candidate: credential, never archive"
+    },
+    {
+      "source": "/tmp/sglang-archive-readonly.bundle",
+      "size": 105203479,
+      "reason": "Large binary/Git bundle or tool/runtime material; not test/document content"
+    }
+  ],
+  "scan_notes": [
+    "Source files were read only; only these /tmp/pro5k_* audit files were created.",
+    "Internal IP addresses, hostnames, user names and local model paths occur in test logs and server metadata; no automatic redaction performed in this read-only audit.",
+    "Credentials and configuration in /root/.codex, /root/.ssh, /root/.aws, /root/.config and /root/.cc-switch were excluded.",
+    "Clean temporary public repository clones were excluded: /tmp/sglang-dcl-check 48886803b94596884d737132a381bd5124ea1cfd; /tmp/tmp.muvLHigfAG/fa ce088ab9ce0fc0434dcd8afa0a791da9fcc3a820; /tmp/tmp.iX6EANZMPS/fla 35dceaee5408e69a555fec34cb215c93c375dabe; /tmp/tmp.KHuQydmdSb/kda 7afb9f454f160a6c4bbc0999beca0a8c40a38934.",
+    "/tmp/sglang-archive-inspect contains only Git metadata and an unpopulated working tree at 3cf4ce7dbe461c9b86447851ca4acef2caab1f37.",
+    "No additional user-produced reports or screenshots found under /root outside Codex session locations; cache images/documents were third-party tool assets.",
+    "Automated secret scan found no actual key material in 174 candidates; one large benchmark log contains 64 illustrative placeholder credential assignments within prompt text."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "original_path": "/sgl-workspace/sglang-upstream-main",
+  "head_commit": "dc80d7da1632dd0af9996ef9e6ce01427c88e19b",
+  "base_commit": "3ec22948c122f99f742b1c1c0921893b6c7de958",
+  "branch": "fix/dsv4-retraction-upstream-main",
+  "git_common_directory": "/sgl-workspace/sglang-dsv4-fixed/.git",
+  "local_refs": [
+    "refs/heads/fix/dsv4-pd-retraction-kv-only dbd56954514ff714329cc62ffda3162758672a41",
+    "refs/heads/fix/dsv4-retraction-upstream-main dc80d7da1632dd0af9996ef9e6ce01427c88e19b",
+    "refs/heads/fix/pd-decode-retraction-abort 5a1b58fedf08e99ffe9b09c7e517d28e725729c3",
+    "refs/heads/test/pr-36185-latest eee13f4a19392d58b7d770a669a3f18bb5c4ec5f",
+    "refs/heads/upstream_0.5.16-pr-33407 3cf4ce7dbe461c9b86447851ca4acef2caab1f37"
+  ],
+  "is_shallow": true,
+  "remotes": {
+    "ifx": "https://git.xiaojukeji.com/IFX-Group/sglang.git",
+    "origin": "git@git.xiaojukeji.com:IFX-Group/sglang.git"
+  },
+  "status_porcelain": "",
+  "staged_paths": [],
+  "unstaged_paths": [],
+  "untracked_paths": [],
+  "committed_delta_paths": [
+    "python/sglang/srt/disaggregation/decode.py",
+    "python/sglang/srt/managers/schedule_batch.py",
+    "python/sglang/srt/managers/scheduler.py",
+    "python/sglang/srt/mem_cache/common.py",
+    "python/sglang/srt/mem_cache/kv_cache_builder.py",
+    "test/registered/unit/mem_cache/test_decode_retraction_backend.py"
+  ],
+  "recent_commits": [
+    "dc80d7da1632dd0af9996ef9e6ce01427c88e19b 2026-08-26T05:16:38+00:00 [PD] Rebootstrap decode requests when KV backup is unavailable",
+    "3ec22948c122f99f742b1c1c0921893b6c7de958 2026-08-25T20:15:54-07:00 [CI] /rerun-failed-ci: rerun cancelled runs and target the newest run per workflow (#34057)",
+    "34de1fb47f15e8600eb815d6cc5b1f80ea51e8cd 2026-08-26T11:04:52+08:00 fix(test): stabilize nightly precision regression (#34668)",
+    "2e4773aaddabcfb21060f555061930644447ee1f 2026-08-26T11:01:11+08:00 Fix NPUMHATokenToKVPool missing k_data_ptrs/v_data_ptrs (#35820)",
+    "5bcc978f2aaf5f44ea2459c89d17b4bc33c357a9 2026-08-26T10:57:59+08:00 [AMD][CI] Pass USE_PDL explicitly in the fused MoE gate (#36306)",
+    "fa3ac61661cd785d43df4d21399cf968ad2e66aa 2026-08-26T10:57:29+08:00 [Diffusion] Bound reusable Ulysses A2A staging buffers across shapes (#36327)",
+    "cc3b61873f5c1ee5eaa6d555a03b978627f66edb 2026-08-26T10:55:09+08:00 [Diffusion][minimax-h3] Restrict MiniMax-H3 SubBlock sparsity to video queries (#35850)",
+    "4382947b58205be36d578ee12e00d85ef2239886 2026-08-25T19:52:05-07:00 Fix DSV4 shared-fusion CPU unit test after the EP guard landed (#36424)"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

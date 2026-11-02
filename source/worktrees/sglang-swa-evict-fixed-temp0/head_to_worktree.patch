@@ -1,0 +1,13 @@
+diff --git a/python/sglang/srt/entrypoints/openai/serving_chat.py b/python/sglang/srt/entrypoints/openai/serving_chat.py
+index 021d222834a..6517a658819 100644
+--- a/python/sglang/srt/entrypoints/openai/serving_chat.py
++++ b/python/sglang/srt/entrypoints/openai/serving_chat.py
+@@ -698,6 +698,8 @@ class OpenAIServingChat(OpenAIServingBase):
+             model_generation_config=self.default_sampling_params,
+             tool_call_constraint=processed_messages.tool_call_constraint,
+         )
++        # Accuracy A/B test: force greedy decoding regardless of request defaults.
++        sampling_params["temperature"] = 0.0
+ 
+         # Handle single vs multiple requests
+         if request.input_ids is not None:

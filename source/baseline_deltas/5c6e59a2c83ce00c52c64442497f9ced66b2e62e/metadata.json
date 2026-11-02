@@ -1,0 +1,19 @@
+{
+  "archived_base_commit": "48886803b94596884d737132a381bd5124ea1cfd",
+  "target_base_commit": "5c6e59a2c83ce00c52c64442497f9ced66b2e62e",
+  "original_repository": "/sgl-workspace/sglang-dsv4-fixed",
+  "commits": [
+    "5c6e59a2c83ce00c52c64442497f9ced66b2e62e 2026-08-20T08:43:53+00:00 [feat]  support fake transfer backend for prefill disaggregation",
+    "667b5dc86df3046931e6d08312683c3b36ebd42f 2026-08-13T09:20:06+00:00 add CodeGraph"
+  ],
+  "changed_paths": [
+    ".codegraph/.gitignore",
+    ".gitignore",
+    "python/sglang/srt/arg_groups/pd_disaggregation_hook.py",
+    "python/sglang/srt/managers/disagg_service.py",
+    "python/sglang/srt/mem_cache/common.py",
+    "tools/codegraph/README.md",
+    "tools/codegraph/fetch_codegraph_index.sh"
+  ],
+  "restore": "Restore legacy SGLang bundle then check out archived_base_commit. Apply committed.patch for identical target tree, or apply history.mbox with git am to retain per-commit descriptions. files/ are snapshots from target_base_commit."
+}

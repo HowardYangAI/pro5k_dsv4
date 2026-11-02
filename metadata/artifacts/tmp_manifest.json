@@ -1,0 +1,838 @@
+[
+  {
+    "source": "/tmp/cr6647271_current_decode.log",
+    "source_bytes": 43540,
+    "source_sha256": "a8957cec93b39e0eafccf1595ed0c32975a50b89311444d55d4d68ffbde0ed19",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_current_decode.log",
+        "bytes": 43540,
+        "sha256": "a8957cec93b39e0eafccf1595ed0c32975a50b89311444d55d4d68ffbde0ed19"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_current_decode.log",
+    "bytes": 43540,
+    "sha256": "a8957cec93b39e0eafccf1595ed0c32975a50b89311444d55d4d68ffbde0ed19",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/cr6647271_local_source.sha256",
+    "source_bytes": 1607,
+    "source_sha256": "00547b196f2636834949e419d27948a923979dbf55f3313232ab0ba3f89aad13",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_local_source.sha256",
+        "bytes": 1607,
+        "sha256": "00547b196f2636834949e419d27948a923979dbf55f3313232ab0ba3f89aad13"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_local_source.sha256",
+    "bytes": 1607,
+    "sha256": "00547b196f2636834949e419d27948a923979dbf55f3313232ab0ba3f89aad13",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/cr6647271_remote_check.txt",
+    "source_bytes": 2523,
+    "source_sha256": "9211fd8da8bfc6e7f06bfbac121c090b0a3c985db960e158284fb411796aa330",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_remote_check.txt",
+        "bytes": 2523,
+        "sha256": "9211fd8da8bfc6e7f06bfbac121c090b0a3c985db960e158284fb411796aa330"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_remote_check.txt",
+    "bytes": 2523,
+    "sha256": "9211fd8da8bfc6e7f06bfbac121c090b0a3c985db960e158284fb411796aa330",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/cr6647271_remote_source.sha256",
+    "source_bytes": 1669,
+    "source_sha256": "38ab65b6a2765f6f9ee9cf18254fd0f53413a7787e6961a5b1d47fe2ac101b3e",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_remote_source.sha256",
+        "bytes": 1669,
+        "sha256": "38ab65b6a2765f6f9ee9cf18254fd0f53413a7787e6961a5b1d47fe2ac101b3e"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/cr6647271_remote_source.sha256",
+    "bytes": 1669,
+    "sha256": "38ab65b6a2765f6f9ee9cf18254fd0f53413a7787e6961a5b1d47fe2ac101b3e",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/dcl-6565881.patch",
+    "source_bytes": 67151,
+    "source_sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dcl-6565881.patch",
+        "bytes": 67151,
+        "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dcl-6565881.patch",
+    "bytes": 67151,
+    "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e",
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/default_router_health.out",
+    "source_bytes": 19,
+    "source_sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/default_router_health.out",
+        "bytes": 19,
+        "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/default_router_health.out",
+    "bytes": 19,
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/default_smoke.json",
+    "source_bytes": 465,
+    "source_sha256": "6a4ef98390b496892a3e941caa335a33d492afc53b8acb22ad2739a5c8fb7aa3",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/default_smoke.json",
+        "bytes": 465,
+        "sha256": "6a4ef98390b496892a3e941caa335a33d492afc53b8acb22ad2739a5c8fb7aa3"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/default_smoke.json",
+    "bytes": 465,
+    "sha256": "6a4ef98390b496892a3e941caa335a33d492afc53b8acb22ad2739a5c8fb7aa3",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/dsv4_local_sizes.txt",
+    "source_bytes": 2297,
+    "source_sha256": "e39c62bf12eabc79de411c8c091fbd429aec896a7f71bf551d44531b909e7677",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_local_sizes.txt",
+        "bytes": 2297,
+        "sha256": "e39c62bf12eabc79de411c8c091fbd429aec896a7f71bf551d44531b909e7677"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_local_sizes.txt",
+    "bytes": 2297,
+    "sha256": "e39c62bf12eabc79de411c8c091fbd429aec896a7f71bf551d44531b909e7677",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/dsv4_official_0.json",
+    "source_bytes": 25349,
+    "source_sha256": "ac77d8a67e9dad34477c3115124e519a534da3bf71ce523b5b3720f7b7972a86",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_official_0.json",
+        "bytes": 25349,
+        "sha256": "ac77d8a67e9dad34477c3115124e519a534da3bf71ce523b5b3720f7b7972a86"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_official_0.json",
+    "bytes": 25349,
+    "sha256": "ac77d8a67e9dad34477c3115124e519a534da3bf71ce523b5b3720f7b7972a86",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/dsv4_official_1.json",
+    "source_bytes": 25349,
+    "source_sha256": "4c9838a357b336c14097b0cccfbc590e3be2e38ec931be9b483e191213b698e0",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_official_1.json",
+        "bytes": 25349,
+        "sha256": "4c9838a357b336c14097b0cccfbc590e3be2e38ec931be9b483e191213b698e0"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_official_1.json",
+    "bytes": 25349,
+    "sha256": "4c9838a357b336c14097b0cccfbc590e3be2e38ec931be9b483e191213b698e0",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/dsv4_official_2.json",
+    "source_bytes": 18474,
+    "source_sha256": "16a9d0abadd778028208c0c213a7e218eb0bda635648e07c5809cbc25bc0affc",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_official_2.json",
+        "bytes": 18474,
+        "sha256": "16a9d0abadd778028208c0c213a7e218eb0bda635648e07c5809cbc25bc0affc"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/dsv4_official_2.json",
+    "bytes": 18474,
+    "sha256": "16a9d0abadd778028208c0c213a7e218eb0bda635648e07c5809cbc25bc0affc",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/flash_mla_sm120-main.py",
+    "source_bytes": 21774,
+    "source_sha256": "39f0f98151a7cfd750b987d82cf05fafe80e8e972ef53a2b78352ce9b472e9b5",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/flash_mla_sm120-main.py",
+        "bytes": 21774,
+        "sha256": "39f0f98151a7cfd750b987d82cf05fafe80e8e972ef53a2b78352ce9b472e9b5"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/flash_mla_sm120-main.py",
+    "bytes": 21774,
+    "sha256": "39f0f98151a7cfd750b987d82cf05fafe80e8e972ef53a2b78352ce9b472e9b5",
+    "category": "source_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/flash_mla_sm120-pr32320.py",
+    "source_bytes": 23086,
+    "source_sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/flash_mla_sm120-pr32320.py",
+        "bytes": 23086,
+        "sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/flash_mla_sm120-pr32320.py",
+    "bytes": 23086,
+    "sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310",
+    "category": "source_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/glm53_hf.json",
+    "source_bytes": 561785,
+    "source_sha256": "8c42ba1c60de67eb950f0abdc5812bf4effbd9095049df797d20052b3d57df82",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/glm53_hf.json",
+        "bytes": 561785,
+        "sha256": "8c42ba1c60de67eb950f0abdc5812bf4effbd9095049df797d20052b3d57df82"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/glm53_hf.json",
+    "bytes": 561785,
+    "sha256": "8c42ba1c60de67eb950f0abdc5812bf4effbd9095049df797d20052b3d57df82",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/issue1854.json",
+    "source_bytes": 30068,
+    "source_sha256": "0f31f2dc9655483eb0fe3c2c38f9c891b537366167639a9ff7672352a63c025c",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/issue1854.json",
+        "bytes": 30068,
+        "sha256": "0f31f2dc9655483eb0fe3c2c38f9c891b537366167639a9ff7672352a63c025c"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/issue1854.json",
+    "bytes": 30068,
+    "sha256": "0f31f2dc9655483eb0fe3c2c38f9c891b537366167639a9ff7672352a63c025c",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/kv-only-staged.patch",
+    "source_bytes": 67151,
+    "source_sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/kv-only-staged.patch",
+        "bytes": 67151,
+        "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/kv-only-staged.patch",
+    "bytes": 67151,
+    "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e",
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/minimax_h3_hf.json",
+    "source_bytes": 53905,
+    "source_sha256": "8f6620c34fb2a4563fae2eb8c3a8c0dc25dd0cdba09de8be7562db7191ec0a51",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/minimax_h3_hf.json",
+        "bytes": 53905,
+        "sha256": "8f6620c34fb2a4563fae2eb8c3a8c0dc25dd0cdba09de8be7562db7191ec0a51"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/minimax_h3_hf.json",
+    "bytes": 53905,
+    "sha256": "8f6620c34fb2a4563fae2eb8c3a8c0dc25dd0cdba09de8be7562db7191ec0a51",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/mooncake_tree.json",
+    "source_bytes": 740436,
+    "source_sha256": "1671f5fd52f922b0f0ffc43f435d38f9de2af09bf9b272cb07349780f0bde546",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/mooncake_tree.json",
+        "bytes": 740436,
+        "sha256": "1671f5fd52f922b0f0ffc43f435d38f9de2af09bf9b272cb07349780f0bde546"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/mooncake_tree.json",
+    "bytes": 740436,
+    "sha256": "1671f5fd52f922b0f0ffc43f435d38f9de2af09bf9b272cb07349780f0bde546",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/openai-chatgpt-gallery.json",
+    "source_bytes": 5352422,
+    "source_sha256": "b7cb108e865d2066c5dfda77cda89668565087445c344c76590497de0bb8a9b2",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/openai-chatgpt-gallery.json.gz",
+        "bytes": 145688,
+        "sha256": "80fab53b9abc7a464b77a9b03a6acd0b042a04183df463f60538a6ccb8cc3262"
+      }
+    ],
+    "compression": "gzip",
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/openai-chatgpt-gallery.json.gz",
+    "bytes": 145688,
+    "sha256": "80fab53b9abc7a464b77a9b03a6acd0b042a04183df463f60538a6ccb8cc3262",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/openai-chatgpt-url",
+    "source_bytes": 135,
+    "source_sha256": "55d22d4432408ec0a254b2131bc42022ec97b4cd8123ee600dfe6636012c2f9e",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/openai-chatgpt-url",
+        "bytes": 135,
+        "sha256": "55d22d4432408ec0a254b2131bc42022ec97b4cd8123ee600dfe6636012c2f9e"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/openai-chatgpt-url",
+    "bytes": 135,
+    "sha256": "55d22d4432408ec0a254b2131bc42022ec97b4cd8123ee600dfe6636012c2f9e",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/openai-chatgpt-version",
+    "source_bytes": 13,
+    "source_sha256": "31fbbf184d99589b10af9d36210a29ad595e49b2cde6b16ee21e4970c28f9b4f",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/openai-chatgpt-version",
+        "bytes": 13,
+        "sha256": "31fbbf184d99589b10af9d36210a29ad595e49b2cde6b16ee21e4970c28f9b4f"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/openai-chatgpt-version",
+    "bytes": 13,
+    "sha256": "31fbbf184d99589b10af9d36210a29ad595e49b2cde6b16ee21e4970c28f9b4f",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/pr32320-only.patch",
+    "source_bytes": 12705,
+    "source_sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/pr32320-only.patch",
+        "bytes": 12705,
+        "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/pr32320-only.patch",
+    "bytes": 12705,
+    "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b",
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/pr32320.patch",
+    "source_bytes": 12705,
+    "source_sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/pr32320.patch",
+        "bytes": 12705,
+        "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/pr32320.patch",
+    "bytes": 12705,
+    "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b",
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/pr739.patch",
+    "source_bytes": 21241,
+    "source_sha256": "b7a2bb1f79b5cc53c1b84e244fe0b49c5a594e16295435975cac5e02306b6c45",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/pr739.patch",
+        "bytes": 21241,
+        "sha256": "b7a2bb1f79b5cc53c1b84e244fe0b49c5a594e16295435975cac5e02306b6c45"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/pr739.patch",
+    "bytes": 21241,
+    "sha256": "b7a2bb1f79b5cc53c1b84e244fe0b49c5a594e16295435975cac5e02306b6c45",
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/prefill_health.out",
+    "source_bytes": 0,
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/prefill_health.out",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/prefill_health.out",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "category": "test_result",
+    "reason": "Conversation-referenced empty health/error output retained as test evidence"
+  },
+  {
+    "source": "/tmp/prefill_server_info.out",
+    "source_bytes": 137912,
+    "source_sha256": "e8feb10269669155bd3bef1595bbb48c2e21fa73ebff9383a92ab8e40ce0a9e7",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/prefill_server_info.out",
+        "bytes": 137912,
+        "sha256": "e8feb10269669155bd3bef1595bbb48c2e21fa73ebff9383a92ab8e40ce0a9e7"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/prefill_server_info.out",
+    "bytes": 137912,
+    "sha256": "e8feb10269669155bd3bef1595bbb48c2e21fa73ebff9383a92ab8e40ce0a9e7",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/router_health",
+    "source_bytes": 19,
+    "source_sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_health",
+        "bytes": 19,
+        "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_health",
+    "bytes": 19,
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/router_health.out",
+    "source_bytes": 19,
+    "source_sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_health.out",
+        "bytes": 19,
+        "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_health.out",
+    "bytes": 19,
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/router_health_20260902.out",
+    "source_bytes": 19,
+    "source_sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_health_20260902.out",
+        "bytes": 19,
+        "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_health_20260902.out",
+    "bytes": 19,
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/router_help.err",
+    "source_bytes": 0,
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_help.err",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_help.err",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "category": "test_result",
+    "reason": "Conversation-referenced empty health/error output retained as test evidence"
+  },
+  {
+    "source": "/tmp/router_help.out",
+    "source_bytes": 12031,
+    "source_sha256": "a1cff58fd37a491059a9c6a5cb508159814fcb14ccdd496eddd04f907073b4db",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_help.out",
+        "bytes": 12031,
+        "sha256": "a1cff58fd37a491059a9c6a5cb508159814fcb14ccdd496eddd04f907073b4db"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_help.out",
+    "bytes": 12031,
+    "sha256": "a1cff58fd37a491059a9c6a5cb508159814fcb14ccdd496eddd04f907073b4db",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/router_models.out",
+    "source_bytes": 185,
+    "source_sha256": "8227b2df8a8f128bd8316c841ba35879b625ce0100111f2210e74d77ad3c6553",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_models.out",
+        "bytes": 185,
+        "sha256": "8227b2df8a8f128bd8316c841ba35879b625ce0100111f2210e74d77ad3c6553"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_models.out",
+    "bytes": 185,
+    "sha256": "8227b2df8a8f128bd8316c841ba35879b625ce0100111f2210e74d77ad3c6553",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/router_probe.out",
+    "source_bytes": 138913,
+    "source_sha256": "2fa970db8f130aa4d0009821967109c86d13a6d6f025b4b27294b97243cd927d",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_probe.out",
+        "bytes": 138913,
+        "sha256": "2fa970db8f130aa4d0009821967109c86d13a6d6f025b4b27294b97243cd927d"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/router_probe.out",
+    "bytes": 138913,
+    "sha256": "2fa970db8f130aa4d0009821967109c86d13a6d6f025b4b27294b97243cd927d",
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/sglang-main-tree.json",
+    "source_bytes": 3133738,
+    "source_sha256": "9a372f8298eb55b39d43afefdc914fd4a41174e9cf7f9e6fbf2891f0a1f15653",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/sglang-main-tree.json.gz",
+        "bytes": 416261,
+        "sha256": "e763ec6d5c934d7c4de697b193af5cbc039b8b284e9748bdb7088423dc08a7cf"
+      }
+    ],
+    "compression": "gzip",
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/sglang-main-tree.json.gz",
+    "bytes": 416261,
+    "sha256": "e763ec6d5c934d7c4de697b193af5cbc039b8b284e9748bdb7088423dc08a7cf",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_2645_comments.json",
+    "source_bytes": 158672,
+    "source_sha256": "215daec380a91313a8f82ce16329aaa97f5e125fadacd7dd27b4dfb801b77991",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_2645_comments.json",
+        "bytes": 158672,
+        "sha256": "215daec380a91313a8f82ce16329aaa97f5e125fadacd7dd27b4dfb801b77991"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_2645_comments.json",
+    "bytes": 158672,
+    "sha256": "215daec380a91313a8f82ce16329aaa97f5e125fadacd7dd27b4dfb801b77991",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_4901_comments.json",
+    "source_bytes": 36643,
+    "source_sha256": "6e8cb7cca1da9db2d0f5fee16c5a773e830fdab75193ea7bc71fefd1c5be4201",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_4901_comments.json",
+        "bytes": 36643,
+        "sha256": "6e8cb7cca1da9db2d0f5fee16c5a773e830fdab75193ea7bc71fefd1c5be4201"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_4901_comments.json",
+    "bytes": 36643,
+    "sha256": "6e8cb7cca1da9db2d0f5fee16c5a773e830fdab75193ea7bc71fefd1c5be4201",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_4901_issue.json",
+    "source_bytes": 15244,
+    "source_sha256": "d3daf88d95172d8b661137eb756e6f9de6a1d0520f3301a73169f89395b3b19d",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_4901_issue.json",
+        "bytes": 15244,
+        "sha256": "d3daf88d95172d8b661137eb756e6f9de6a1d0520f3301a73169f89395b3b19d"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_4901_issue.json",
+    "bytes": 15244,
+    "sha256": "d3daf88d95172d8b661137eb756e6f9de6a1d0520f3301a73169f89395b3b19d",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_5700_comments.json",
+    "source_bytes": 88648,
+    "source_sha256": "db379a80e235ba6913feb42a5aca2f506728c540e749b3280091d40a164eea50",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_5700_comments.json",
+        "bytes": 88648,
+        "sha256": "db379a80e235ba6913feb42a5aca2f506728c540e749b3280091d40a164eea50"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_5700_comments.json",
+    "bytes": 88648,
+    "sha256": "db379a80e235ba6913feb42a5aca2f506728c540e749b3280091d40a164eea50",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_5700_issue.json",
+    "source_bytes": 41474,
+    "source_sha256": "9e45378701ba723bc3ca63d9fc3111b49f7cdfbe2c63c5fba002e62c87941be6",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_5700_issue.json",
+        "bytes": 41474,
+        "sha256": "9e45378701ba723bc3ca63d9fc3111b49f7cdfbe2c63c5fba002e62c87941be6"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_5700_issue.json",
+    "bytes": 41474,
+    "sha256": "9e45378701ba723bc3ca63d9fc3111b49f7cdfbe2c63c5fba002e62c87941be6",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_6496_comments.json",
+    "source_bytes": 17237,
+    "source_sha256": "0c9ebaf41096bf831a07c328acba3d710bd934018c0cc3f418d73e53d9c4ec53",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_6496_comments.json",
+        "bytes": 17237,
+        "sha256": "0c9ebaf41096bf831a07c328acba3d710bd934018c0cc3f418d73e53d9c4ec53"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_6496_comments.json",
+    "bytes": 17237,
+    "sha256": "0c9ebaf41096bf831a07c328acba3d710bd934018c0cc3f418d73e53d9c4ec53",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_6496_issue.json",
+    "source_bytes": 19158,
+    "source_sha256": "b2faf2a24ea0c512ae9c802f1b11189baa029e7bbe28be5786ed8b070f75abc4",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_6496_issue.json",
+        "bytes": 19158,
+        "sha256": "b2faf2a24ea0c512ae9c802f1b11189baa029e7bbe28be5786ed8b070f75abc4"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_6496_issue.json",
+    "bytes": 19158,
+    "sha256": "b2faf2a24ea0c512ae9c802f1b11189baa029e7bbe28be5786ed8b070f75abc4",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_omni_tree.json",
+    "source_bytes": 1233517,
+    "source_sha256": "12f081fd08bcd1aec27574a82fca144fb58396be338965b81ff2d0e91a3e49b7",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_tree.json",
+        "bytes": 1233517,
+        "sha256": "12f081fd08bcd1aec27574a82fca144fb58396be338965b81ff2d0e91a3e49b7"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_omni_tree.json",
+    "bytes": 1233517,
+    "sha256": "12f081fd08bcd1aec27574a82fca144fb58396be338965b81ff2d0e91a3e49b7",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/vllm_recipe_prs.json",
+    "source_bytes": 142115,
+    "source_sha256": "37ebb41cc309d12c18441857ba9f8a12f2d29bcdf9b70d414c8b58fe07fec8f3",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_recipe_prs.json",
+        "bytes": 142115,
+        "sha256": "37ebb41cc309d12c18441857ba9f8a12f2d29bcdf9b70d414c8b58fe07fec8f3"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/vllm_recipe_prs.json",
+    "bytes": 142115,
+    "sha256": "37ebb41cc309d12c18441857ba9f8a12f2d29bcdf9b70d414c8b58fe07fec8f3",
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  },
+  {
+    "source": "/tmp/worktree-add.log",
+    "source_bytes": 101,
+    "source_sha256": "76bb3d5c58a9969908af992273f98d2eb12c85a25b8360877ec6f3201094dc70",
+    "outputs": [
+      {
+        "path": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/worktree-add.log",
+        "bytes": 101,
+        "sha256": "76bb3d5c58a9969908af992273f98d2eb12c85a25b8360877ec6f3201094dc70"
+      }
+    ],
+    "compression": null,
+    "redactions": {},
+    "destination": "/sgl-workspace/pro5k_dsv4/artifacts/tmp/worktree-add.log",
+    "bytes": 101,
+    "sha256": "76bb3d5c58a9969908af992273f98d2eb12c85a25b8360877ec6f3201094dc70",
+    "category": "source_provenance",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work"
+  }
+]

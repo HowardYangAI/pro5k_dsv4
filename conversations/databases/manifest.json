@@ -1,0 +1,193 @@
+[
+  {
+    "source_path": "/root/.codex/state_5.sqlite",
+    "read_transaction_utc": "2026-11-02T10:42:36.088322+00:00",
+    "snapshot_method": "direct read-only transaction; WAL included",
+    "creation_cutoff_ms": 1793613304617,
+    "tables": [
+      {
+        "name": "threads",
+        "create_sql": "CREATE TABLE threads (\n    id TEXT PRIMARY KEY,\n    rollout_path TEXT NOT NULL,\n    created_at INTEGER NOT NULL,\n    updated_at INTEGER NOT NULL,\n    source TEXT NOT NULL,\n    model_provider TEXT NOT NULL,\n    cwd TEXT NOT NULL,\n    title TEXT NOT NULL,\n    sandbox_policy TEXT NOT NULL,\n    approval_mode TEXT NOT NULL,\n    tokens_used INTEGER NOT NULL DEFAULT 0,\n    has_user_event INTEGER NOT NULL DEFAULT 0,\n    archived INTEGER NOT NULL DEFAULT 0,\n    archived_at INTEGER,\n    git_sha TEXT,\n    git_branch TEXT,\n    git_origin_url TEXT\n, cli_version TEXT NOT NULL DEFAULT '', first_user_message TEXT NOT NULL DEFAULT '', agent_nickname TEXT, agent_role TEXT, memory_mode TEXT NOT NULL DEFAULT 'enabled', model TEXT, reasoning_effort TEXT, agent_path TEXT, created_at_ms INTEGER, updated_at_ms INTEGER, thread_source TEXT, preview TEXT NOT NULL DEFAULT '', recency_at INTEGER NOT NULL DEFAULT 0, recency_at_ms INTEGER NOT NULL DEFAULT 0, history_mode TEXT NOT NULL DEFAULT 'legacy', name TEXT, is_pinned INTEGER NOT NULL DEFAULT 0, thread_section_id TEXT\n    REFERENCES thread_sections(id) ON DELETE SET NULL, section_position INTEGER, section_entered_at_ms INTEGER, project_id TEXT\n    REFERENCES projects(id) ON DELETE SET NULL, originator TEXT, daybreak_enabled BOOLEAN, creator_user_id TEXT, creator_account_id TEXT)",
+        "source_row_count_at_transaction": 17,
+        "exported_path": "databases/state_5/threads.jsonl.gz",
+        "records": 17,
+        "bytes": 3679,
+        "sha256": "05f32d6acc4ace3c76e10229192827e750dee4f6b933d13994a0cc05c5832012"
+      },
+      {
+        "name": "thread_spawn_edges",
+        "create_sql": "CREATE TABLE thread_spawn_edges (\n    parent_thread_id TEXT NOT NULL,\n    child_thread_id TEXT NOT NULL PRIMARY KEY,\n    status TEXT NOT NULL\n)",
+        "source_row_count_at_transaction": 5,
+        "exported_path": "databases/state_5/thread_spawn_edges.jsonl.gz",
+        "records": 5,
+        "bytes": 235,
+        "sha256": "eeb795cbad32154c757b713eb49ee91787ed8ba35f34a88e915c9044e0982462"
+      },
+      {
+        "name": "thread_sections",
+        "create_sql": "CREATE TABLE thread_sections (\n    id TEXT PRIMARY KEY,\n    name TEXT NOT NULL\n, appearance TEXT)",
+        "source_row_count_at_transaction": 1,
+        "exported_path": "databases/state_5/thread_sections.jsonl.gz",
+        "records": 1,
+        "bytes": 96,
+        "sha256": "71aaa28de87a9a1a3cfb36ffc533741d89363763e69b31f6596a9b7bf2799d12"
+      },
+      {
+        "name": "thread_dynamic_tools",
+        "create_sql": "CREATE TABLE thread_dynamic_tools (\n    thread_id TEXT NOT NULL,\n    position INTEGER NOT NULL,\n    name TEXT NOT NULL,\n    description TEXT NOT NULL,\n    input_schema TEXT NOT NULL, defer_loading INTEGER NOT NULL DEFAULT 0, namespace TEXT,\n    PRIMARY KEY(thread_id, position),\n    FOREIGN KEY(thread_id) REFERENCES threads(id) ON DELETE CASCADE\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/state_5/thread_dynamic_tools.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "name": "projects",
+        "create_sql": "CREATE TABLE projects (\n    id TEXT PRIMARY KEY,\n    name TEXT NOT NULL,\n    metadata TEXT NOT NULL DEFAULT '{}',\n    position INTEGER NOT NULL,\n    created_at_ms INTEGER NOT NULL,\n    updated_at_ms INTEGER NOT NULL\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/state_5/projects.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "name": "project_roots",
+        "create_sql": "CREATE TABLE project_roots (\n    project_id TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,\n    position INTEGER NOT NULL,\n    path TEXT NOT NULL,\n    PRIMARY KEY (project_id, position)\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/state_5/project_roots.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "name": "thread_attachments",
+        "create_sql": "CREATE TABLE \"thread_attachments\" (\n    id TEXT PRIMARY KEY,\n    thread_id TEXT NOT NULL REFERENCES threads(id) ON DELETE CASCADE,\n    attachment_type TEXT NOT NULL,\n    identity_key TEXT NOT NULL,\n    payload TEXT NOT NULL,\n    created_at INTEGER NOT NULL,\n    UNIQUE (thread_id, attachment_type, identity_key)\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/state_5/thread_attachments.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    ],
+    "skipped_tables": [
+      "_sqlx_migrations",
+      "backfill_state",
+      "external_agent_config_imports",
+      "project_idempotency_keys",
+      "remote_control_enrollments",
+      "rollout_migration_skipped_rollouts",
+      "rollout_migration_state",
+      "sqlite_sequence"
+    ],
+    "note": "Read-only SQLite transaction includes WAL. Rows created after initial cutoff are omitted. Existing rows may reflect later updates at transaction time."
+  },
+  {
+    "source_path": "/root/.codex/thread_history_1.sqlite",
+    "read_transaction_utc": "2026-11-02T10:42:36.106742+00:00",
+    "snapshot_method": "stable DB/WAL/SHM byte copy into private /tmp, source size+mtime verified before/after; read-only transaction on copy",
+    "creation_cutoff_ms": 1793613304617,
+    "tables": [
+      {
+        "name": "thread_turns",
+        "create_sql": "CREATE TABLE thread_turns (\n    thread_id TEXT NOT NULL,\n    turn_id TEXT NOT NULL,\n    rollout_ordinal INTEGER NOT NULL,\n    status TEXT NOT NULL,\n    error_json TEXT,\n    started_at INTEGER,\n    completed_at INTEGER,\n    duration_ms INTEGER,\n    first_user_item_id TEXT,\n    final_agent_item_id TEXT, rollout_byte_offset INTEGER, rollout_end_ordinal INTEGER, rollout_end_byte_offset INTEGER, root_turn_id TEXT,\n    PRIMARY KEY (thread_id, turn_id)\n)",
+        "source_row_count_at_transaction": 683,
+        "exported_path": "databases/thread_history_1/thread_turns.jsonl.gz",
+        "records": 666,
+        "bytes": 40978,
+        "sha256": "61b9ce01c28ea5ab087bb5d6c8a62cdbbe49b5e22603eff44ee300fb1ccee639"
+      },
+      {
+        "name": "thread_items",
+        "create_sql": "CREATE TABLE thread_items (\n    thread_id TEXT NOT NULL,\n    turn_id TEXT NOT NULL,\n    item_id TEXT NOT NULL,\n    rollout_ordinal INTEGER NOT NULL,\n    created_at_ms INTEGER NOT NULL,\n    item_json TEXT NOT NULL, item_type TEXT NOT NULL DEFAULT '', updated_at_ordinal INTEGER NOT NULL DEFAULT 0, started_at_ms INTEGER, completed_at_ms INTEGER,\n    PRIMARY KEY (thread_id, turn_id, item_id)\n)",
+        "source_row_count_at_transaction": 2283,
+        "exported_path": "databases/thread_history_1/thread_items.jsonl.gz",
+        "records": 2246,
+        "bytes": 4021116,
+        "sha256": "ea826ffce2eec09a33a90350828877af9004e6e4686561e39b1980d69df90801"
+      },
+      {
+        "name": "thread_history_projection_state",
+        "create_sql": "CREATE TABLE thread_history_projection_state (\n    thread_id TEXT PRIMARY KEY,\n    next_rollout_byte_offset INTEGER NOT NULL,\n    next_rollout_ordinal INTEGER NOT NULL\n)",
+        "source_row_count_at_transaction": 14,
+        "exported_path": "databases/thread_history_1/thread_history_projection_state.jsonl.gz",
+        "records": 13,
+        "bytes": 466,
+        "sha256": "5bd583dc988b07d1107f0d6d42b98b86c52ac9a46fd190af9d3a232a6b7d1160"
+      },
+      {
+        "name": "thread_realtime_items",
+        "create_sql": "CREATE TABLE thread_realtime_items (\n    thread_id TEXT NOT NULL,\n    item_id TEXT NOT NULL,\n    rollout_ordinal INTEGER NOT NULL,\n    created_at_ms INTEGER NOT NULL,\n    item_type TEXT NOT NULL,\n    item_json TEXT NOT NULL,\n    PRIMARY KEY (thread_id, item_id)\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/thread_history_1/thread_realtime_items.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    ],
+    "skipped_tables": [
+      "_sqlx_migrations"
+    ],
+    "note": "Read-only SQLite transaction includes WAL. Rows created after initial cutoff are omitted. Existing rows may reflect later updates at transaction time."
+  },
+  {
+    "source_path": "/root/.codex/goals_1.sqlite",
+    "read_transaction_utc": "2026-11-02T10:42:38.024814+00:00",
+    "snapshot_method": "direct read-only transaction; WAL included",
+    "creation_cutoff_ms": 1793613304617,
+    "tables": [
+      {
+        "name": "thread_goals",
+        "create_sql": "CREATE TABLE thread_goals (\n    thread_id TEXT PRIMARY KEY NOT NULL,\n    goal_id TEXT NOT NULL,\n    objective TEXT NOT NULL,\n    status TEXT NOT NULL CHECK(status IN (\n        'active',\n        'paused',\n        'blocked',\n        'usage_limited',\n        'budget_limited',\n        'complete'\n    )),\n    token_budget INTEGER,\n    tokens_used INTEGER NOT NULL DEFAULT 0,\n    time_used_seconds INTEGER NOT NULL DEFAULT 0,\n    created_at_ms INTEGER NOT NULL,\n    updated_at_ms INTEGER NOT NULL\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/goals_1/thread_goals.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "name": "thread_goal_continuation_deferrals",
+        "create_sql": "CREATE TABLE thread_goal_continuation_deferrals (\n    thread_id TEXT PRIMARY KEY NOT NULL REFERENCES thread_goals(thread_id) ON DELETE CASCADE\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/goals_1/thread_goal_continuation_deferrals.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    ],
+    "skipped_tables": [
+      "_sqlx_migrations"
+    ],
+    "note": "Read-only SQLite transaction includes WAL. Rows created after initial cutoff are omitted. Existing rows may reflect later updates at transaction time."
+  },
+  {
+    "source_path": "/root/.codex/memories_1.sqlite",
+    "read_transaction_utc": "2026-11-02T10:42:38.026145+00:00",
+    "snapshot_method": "stable DB/WAL/SHM byte copy into private /tmp, source size+mtime verified before/after; read-only transaction on copy",
+    "creation_cutoff_ms": 1793613304617,
+    "tables": [
+      {
+        "name": "stage1_outputs",
+        "create_sql": "CREATE TABLE stage1_outputs (\n    thread_id TEXT PRIMARY KEY,\n    source_updated_at INTEGER NOT NULL,\n    raw_memory TEXT NOT NULL,\n    rollout_summary TEXT NOT NULL,\n    rollout_slug TEXT,\n    generated_at INTEGER NOT NULL,\n    usage_count INTEGER,\n    last_usage INTEGER,\n    selected_for_phase2 INTEGER NOT NULL DEFAULT 0,\n    selected_for_phase2_source_updated_at INTEGER\n)",
+        "source_row_count_at_transaction": 0,
+        "exported_path": "databases/memories_1/stage1_outputs.jsonl.gz",
+        "records": 0,
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      {
+        "name": "consolidation_progress",
+        "create_sql": "CREATE TABLE consolidation_progress (\n    singleton INTEGER PRIMARY KEY CHECK (singleton = 1),\n    max_thread_count INTEGER NOT NULL DEFAULT 0\n)",
+        "source_row_count_at_transaction": 1,
+        "exported_path": "databases/memories_1/consolidation_progress.jsonl.gz",
+        "records": 1,
+        "bytes": 57,
+        "sha256": "9219f8e3bc8ab8dc6fba4e7d23898e32c69f6a0eed7138f3b4475d18e9be9b38"
+      }
+    ],
+    "skipped_tables": [
+      "_sqlx_migrations",
+      "jobs"
+    ],
+    "note": "Read-only SQLite transaction includes WAL. Rows created after initial cutoff are omitted. Existing rows may reflect later updates at transaction time."
+  }
+]

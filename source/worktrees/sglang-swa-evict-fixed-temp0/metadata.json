@@ -1,0 +1,60 @@
+{
+  "original_path": "/sgl-workspace/sglang-swa-evict-fixed-temp0",
+  "head_commit": "5a1b58fedf08e99ffe9b09c7e517d28e725729c3",
+  "base_commit": "d07dd66fb75e9382e8455d1e40adc6e06a4feb89",
+  "branch": null,
+  "git_common_directory": "/sgl-workspace/sglang-dsv4-fixed/.git",
+  "local_refs": [
+    "refs/heads/fix/dsv4-pd-retraction-kv-only dbd56954514ff714329cc62ffda3162758672a41",
+    "refs/heads/fix/dsv4-retraction-upstream-main dc80d7da1632dd0af9996ef9e6ce01427c88e19b",
+    "refs/heads/fix/pd-decode-retraction-abort 5a1b58fedf08e99ffe9b09c7e517d28e725729c3",
+    "refs/heads/test/pr-36185-latest eee13f4a19392d58b7d770a669a3f18bb5c4ec5f",
+    "refs/heads/upstream_0.5.16-pr-33407 3cf4ce7dbe461c9b86447851ca4acef2caab1f37"
+  ],
+  "is_shallow": true,
+  "remotes": {
+    "ifx": "https://git.xiaojukeji.com/IFX-Group/sglang.git",
+    "origin": "git@git.xiaojukeji.com:IFX-Group/sglang.git"
+  },
+  "status_porcelain": " M python/sglang/srt/entrypoints/openai/serving_chat.py\n",
+  "staged_paths": [],
+  "unstaged_paths": [
+    "python/sglang/srt/entrypoints/openai/serving_chat.py"
+  ],
+  "untracked_paths": [],
+  "committed_delta_paths": [
+    "python/sglang/srt/disaggregation/decode.py",
+    "python/sglang/srt/disaggregation/decode_kvcache_offload_manager.py",
+    "python/sglang/srt/managers/schedule_batch.py",
+    "python/sglang/srt/managers/scheduler.py",
+    "python/sglang/srt/managers/tokenizer_manager.py",
+    "python/sglang/srt/mem_cache/allocator/base.py",
+    "python/sglang/srt/mem_cache/hisparse_memory_pool.py",
+    "python/sglang/srt/mem_cache/memory_pool.py",
+    "python/sglang/srt/mem_cache/swa_memory_pool.py",
+    "python/sglang/srt/mem_cache/unified_memory_pool.py",
+    "python/sglang/srt/speculative/dflash_info_v2.py",
+    "python/sglang/srt/speculative/dspark_components/dspark_draft.py",
+    "python/sglang/srt/speculative/eagle_utils.py",
+    "python/sglang/srt/speculative/spec_utils.py",
+    "test/registered/disaggregation/test_specv2_kvcache_offloading.py",
+    "test/registered/spec/dspark/test_dspark_dp_moe_metadata.py",
+    "test/registered/unit/disaggregation/test_decode_queue_cleanup.py",
+    "test/registered/unit/managers/test_retraction_cpu_copy.py",
+    "test/registered/unit/managers/test_schedule_batch_swa_retraction.py",
+    "test/registered/unit/managers/test_tokenizer_manager_rid_cleanup.py",
+    "test/registered/unit/spec/test_decode_bookkeeping_ownership.py",
+    "test/registered/unit/spec/test_spec_prepare_for_decode.py"
+  ],
+  "recent_commits": [
+    "5a1b58fedf08e99ffe9b09c7e517d28e725729c3 2026-08-30T14:38:27+00:00 fix: reclaim SWA before decode retraction",
+    "2984ac56eb726a6c6a31925718c45f43099b29da 2026-08-30T11:15:31+00:00 fix: handle unsupported PD decode retractions safely",
+    "d07dd66fb75e9382e8455d1e40adc6e06a4feb89 2026-08-27T09:36:38+00:00 fix swa not eviction when dspark enabled",
+    "5c6e59a2c83ce00c52c64442497f9ced66b2e62e 2026-08-20T08:43:53+00:00 [feat]  support fake transfer backend for prefill disaggregation",
+    "667b5dc86df3046931e6d08312683c3b36ebd42f 2026-08-13T09:20:06+00:00 add CodeGraph",
+    "48886803b94596884d737132a381bd5124ea1cfd 2026-08-06T05:19:18+00:00 [feat] support dspark in SM120",
+    "0c7876927e4bc1fad0608046457abe118ed0e3bb 2025-12-19T04:19:36+00:00 avoid dp port conflicts",
+    "5b2ef6ea9d407f851752c816c59b5bacd5351e3b 2026-08-03T11:55:58+08:00 add dockerfile"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

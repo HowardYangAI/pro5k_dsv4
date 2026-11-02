@@ -1,0 +1,50 @@
+benchmark_args=Namespace(backend='sglang-oai-chat', base_url=None, host='127.0.0.1', port=30012, dataset_name='random', dataset_path='/tmp/ShareGPT_V3_unfiltered_cleaned_split.json', model='/data/models/DeepSeek-V4-Flash-0731', model_name='DeepSeek-V4-Flash-0731', num_prompts=40, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=64, random_range_ratio=1.0, request_rate=inf, max_concurrency=8, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787127002, disable_ignore_eos=False, extra_request_body='{"stream_options":{"include_usage":true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=0, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+WARNING It is recommended to use the `Chat` or `Instruct` model for benchmarking.
+Because when the tokenizer counts the output tokens, if there is gibberish, it might count incorrectly.
+
+Namespace(backend='sglang-oai-chat', base_url=None, host='127.0.0.1', port=30012, dataset_name='random', dataset_path='/tmp/ShareGPT_V3_unfiltered_cleaned_split.json', model='/data/models/DeepSeek-V4-Flash-0731', model_name='DeepSeek-V4-Flash-0731', num_prompts=40, sharegpt_output_len=None, sharegpt_context_len=None, random_input_len=8192, random_output_len=64, random_range_ratio=1.0, request_rate=inf, max_concurrency=8, output_file=None, output_details=False, disable_tqdm=False, disable_stream=False, return_logprob=False, seed=1787127002, disable_ignore_eos=False, extra_request_body='{"stream_options":{"include_usage":true}}', apply_chat_template=False, profile=False, lora_name=None, prompt_suffix='', pd_separated=False, flush_cache=False, warmup_requests=0, tokenize_prompt=False, save_requests_to_file=None, gsp_num_groups=64, gsp_prompts_per_group=16, gsp_system_prompt_len=2048, gsp_question_len=128, gsp_output_len=256, multi_turn_rounds=3, enable_test_pd_without_transfer=False)
+
+#Input tokens: 327680
+#Output tokens: 2560
+Starting warmup with 0 sequences...
+Warmup completed with 0 sequences. Starting main benchmark run...
+  0%|          | 0/40 [00:00<?, ?it/s]  2%|▎         | 1/40 [00:06<04:14,  6.52s/it] 12%|█▎        | 5/40 [00:11<01:07,  1.93s/it] 18%|█▊        | 7/40 [00:14<00:59,  1.81s/it] 20%|██        | 8/40 [00:17<01:06,  2.07s/it] 22%|██▎       | 9/40 [00:20<01:15,  2.43s/it] 28%|██▊       | 11/40 [00:24<01:01,  2.13s/it] 30%|███       | 12/40 [00:24<00:47,  1.69s/it] 32%|███▎      | 13/40 [00:27<00:56,  2.08s/it] 35%|███▌      | 14/40 [00:30<01:01,  2.35s/it] 38%|███▊      | 15/40 [00:34<01:04,  2.57s/it] 40%|████      | 16/40 [00:37<01:05,  2.72s/it] 42%|████▎     | 17/40 [00:40<01:06,  2.87s/it] 45%|████▌     | 18/40 [00:43<01:04,  2.94s/it] 50%|█████     | 20/40 [00:46<00:47,  2.38s/it] 57%|█████▊    | 23/40 [00:50<00:31,  1.86s/it] 60%|██████    | 24/40 [00:53<00:33,  2.10s/it] 62%|██████▎   | 25/40 [00:57<00:35,  2.35s/it] 68%|██████▊   | 27/40 [01:00<00:27,  2.12s/it] 70%|███████   | 28/40 [01:03<00:28,  2.37s/it] 72%|███████▎  | 29/40 [01:07<00:28,  2.57s/it] 78%|███████▊  | 31/40 [01:10<00:19,  2.21s/it] 80%|████████  | 32/40 [01:13<00:19,  2.42s/it] 82%|████████▎ | 33/40 [01:16<00:18,  2.60s/it] 85%|████████▌ | 34/40 [01:17<00:11,  1.98s/it] 88%|████████▊ | 35/40 [01:17<00:07,  1.55s/it] 95%|█████████▌| 38/40 [01:17<00:01,  1.32it/s]100%|██████████| 40/40 [01:17<00:00,  1.81it/s]100%|██████████| 40/40 [01:17<00:00,  1.95s/it]
+
+============ Serving Benchmark Result ============
+Backend:                                 sglang-oai-chat
+Traffic request rate:                    inf       
+Max request concurrency:                 8         
+Successful requests:                     40        
+Benchmark duration (s):                  78.00     
+Total input tokens:                      327680    
+Total cached tokens:                     0         
+Cache hit rate:                          0.00      
+Total generated tokens:                  2560      
+Total generated tokens (retokenized):    2547      
+Request throughput (req/s):              0.51      
+Input token throughput (tok/s):          4200.84   
+Output token throughput (tok/s):         32.82     
+Total token throughput (tok/s):          4233.66   
+Concurrency:                             7.94      
+Accept length:                           2.85      
+----------------End-to-End Latency----------------
+Mean E2E Latency (ms):                   15489.28  
+Median E2E Latency (ms):                 16612.94  
+---------------Time to First Token----------------
+Mean TTFT (ms):                          3700.32   
+Median TTFT (ms):                        3226.24   
+P95 TTFT (ms):                           5442.10   
+P99 TTFT (ms):                           5443.10   
+--------------Time Per Output Token---------------
+Mean TPOT (ms):                          187.13    
+Median TPOT (ms):                        208.04    
+P95 TPOT (ms):                           314.74    
+P99 TPOT (ms):                           321.03    
+---------------Inter-Token Latency----------------
+Mean ITL (ms):                           522.79    
+Median ITL (ms):                         53.65     
+P95 ITL (ms):                            3142.67   
+P99 ITL (ms):                            3340.50   
+Max ITL (ms):                            4302.81   
+==================================================

@@ -1,0 +1,29 @@
+{
+  "original_path": "/sgl-workspace/sglang",
+  "head_commit": "5b2ef6ea9d407f851752c816c59b5bacd5351e3b",
+  "base_commit": "5b2ef6ea9d407f851752c816c59b5bacd5351e3b",
+  "branch": null,
+  "git_common_directory": "/sgl-workspace/sglang/.git",
+  "local_refs": [],
+  "is_shallow": true,
+  "remotes": {
+    "ifx": "https://git.xiaojukeji.com/IFX-Group/sglang.git",
+    "origin": "https://github.com/sgl-project/sglang.git"
+  },
+  "status_porcelain": "",
+  "staged_paths": [],
+  "unstaged_paths": [],
+  "untracked_paths": [],
+  "committed_delta_paths": [],
+  "recent_commits": [
+    "5b2ef6ea9d407f851752c816c59b5bacd5351e3b 2026-08-03T11:55:58+08:00 add dockerfile",
+    "a44dfa3c409f41fdf78feda337aaa4e1b83ebf76 2026-07-28T12:01:06+08:00 fix bootstrap_host id None",
+    "6ffff9b514aa7c0a2102e1993a23d9bf8a465419 2026-07-27T17:35:55+08:00 support dspark for decode in PD",
+    "7505dc627f70c7f66ab82a658e39da4cd6fc241f 2026-07-23T23:15:43-07:00 [Cherry-pick to release/v0.5.16] Fix dynamo recompile limit in allreduce and bf16 gemm (#32239) (#32292)",
+    "6870be7448172b35594fd88bbcd2185c64035988 2026-07-23T18:04:40-04:00 [Cherry-pick to release/v0.5.16] [spec decoding] fix inkling multi layer mtp draft extend cuda graph (#32254) (#32260)",
+    "6227ae88b94d9d76973eebfcb11364308b650561 2026-07-23T17:58:26-04:00 [Cherry-pick to release/v0.5.16] Fix nvfp4 online scale with pcg (#32246) (#32259)",
+    "49e709eafb2df5b060e9a8c95b5a809379257c53 2026-07-22T15:18:16-07:00 (cherry-pick) feat: add native gRPC sidecar module launcher (#31076) (#32074)",
+    "8905cbd42f4a27dbecad6487cd3904278756fef8 2026-07-20T16:14:12-07:00 Fix MiniMax-M3 crash on ROCm by making its override fields resolvable (#31837)"
+  ],
+  "restore": "Check out base_commit; apply committed.patch; preserve HEAD changes via staged.patch then unstaged.patch. files/ contains current relevant source and tests; untracked source paths are copied to files/. Patches contain credential redaction when necessary."
+}

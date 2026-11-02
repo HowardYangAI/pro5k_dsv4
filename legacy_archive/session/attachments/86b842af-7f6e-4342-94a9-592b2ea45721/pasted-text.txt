@@ -1,0 +1,243 @@
+Skip to content
+Projects
+Groups
+Search or jump to…
+
+C
+cupti_kernel_monitoring
+Project
+Details
+Activity
+Repository
+Members
+Collapse sidebar
+IFX-Group
+cupti_kernel_monitoring
+Details
+C
+cupti_kernel_monitoring
+Public
+No license. All rights reserved
+目前存在安全风险, 如非lib库请将代码库的可见性设置为private
+Git 仅用于代码托管，请不要用于非代码管理场景，以免给服务带来稳定性风险，如有文件存储场景(包括大文件管理、大量读写)请使用相应的基础服务，如 GIFT 等
+Project ID: 284940
+0
+0
+https://git.xiaojukeji.com/IFX-Group/cupti_kernel_monitoring.git
+Readme
+Files (215 KB)
+Commits (3)
+Branch (1)
+Tags (0)
+master
+cupti_kernel_monitoring
+ 
+ 
+yangjintao's avatar
+refactor: 移除UCF PMU采集，仅保留ARM PMU CPU DRAM带宽监控 
+yangjintao authored 3 months ago
+d56ff161
+Name	Last commit	Last update
+ src	refactor: 移除UCF PMU采集，仅保留ARM PMU CPU DRAM带宽监控	3 months ago
+ .gitignore	feat: CUPTI PM Sampling GPU性能分析工具	3 months ago
+ CLAUDE.md	refactor: 移除UCF PMU采集，仅保留ARM PMU CPU DRAM带宽监控	3 months ago
+ Makefile	feat: 添加CPU内存带宽监控（UCF PMU + ARM PMU）	3 months ago
+ README.md	refactor: 移除UCF PMU采集，仅保留ARM PMU CPU DRAM带宽监控	3 months ago
+ context.md	refactor: 移除UCF PMU采集，仅保留ARM PMU CPU DRAM带宽监控	3 months ago
+ run_profiler.py	feat: CUPTI PM Sampling GPU性能分析工具	3 months ago
+ README.md
+GPU Profiler — CUPTI PM Sampling GPU 性能分析工具
+基于 NVIDIA CUPTI PM Sampling API 的 GPU 性能分析工具，在 Thor (GB10B) 平台上以可配置间隔（默认 100ms）持续采样硬件计数器，计算并输出 GPU 利用率、CUDA Core 利用率、SM 利用率、Tensor Core 利用率、内存带宽利用率、CPU DRAM 带宽等关键指标。
+
+背景
+在 GPU 推理场景（如自动驾驶模型部署）中，需要实时监控 GPU 资源使用情况，以判断：
+
+GPU 是否成为推理瓶颈（GPU 利用率）
+计算单元是否充分使用（CUDA Core / Tensor Core 利用率）
+内存带宽是否饱和（Mem BW 利用率）
+CPU 内存带宽是否成为瓶颈（CPU DRAM 带宽）
+传统的 nvidia-smi 仅提供粗粒度的 GPU 利用率（整体百分比值），无法区分计算与访存的瓶颈来源。NVIDIA CUPTI (CUDA Profiling Tools Interface) 提供了更底层的硬件计数器访问能力，其中 PM Sampling API 支持以固定时间间隔采样 GPU 各单元的硬件计数器，无需修改应用程序代码，适合作为后台监控工具。
+
+原理
+PM Sampling 工作机制
+PM Sampling（Performance Monitor Sampling）是 CUPTI 提供的一种轻量级 GPU 性能监控方式：
+
+配置阶段：选择要采样的硬件计数器指标（如 SM 活跃周期数、Tensor Core 活跃周期数、LTS 传输字节数等），CUPTI 生成配置镜像
+采样阶段：GPU 硬件按配置的间隔（以 GPU sysclk 周期为单位）自动采集计数器值，写入硬件缓冲区
+解码阶段：软件端定期从硬件缓冲区读取原始数据，解码并计算各指标的数值
+PM Sampling 的关键优势：
+
+无侵入：不需要修改或重新编译被监控的应用程序
+低开销：硬件自动采样，软件端只需定期解码
+系统级：可以监控 GPU 上所有进程的活动
+采样间隔
+采样间隔以 GPU 系统时钟周期 为单位设置，需要从毫秒换算：
+
+GPU cycles = GPU_clock_MHz × 1000 × interval_ms
+Thor GPU 运行在 1575 MHz，因此 100ms 间隔 = 157,500,000 GPU cycles。
+
+指标限制
+PM Sampling 仅支持硬件计数器基础指标，并需要附加子指标后缀（.avg、.sum、.max）。派生指标（如 sm__throughput.avg.pct_of_peak_sustained_elapsed）不被 PM Sampling 支持，会返回 CUPTI_ERROR_INVALID_PARAMETER。因此，所有利用率必须从原始计数器手动计算。
+
+利用率计算公式
+指标	公式	含义
+GPU Util%	gpu__cycles_active.avg / gpu__cycles_elapsed.avg × 100	GPU 整体活跃时间占比（包含 SM、Copy Engine 等所有单元）
+CUDA Core%	sm__pipe_alu_cycles_active.avg / sm__cycles_elapsed.avg × 100	FP32 ALU 计算管线活跃占比
+SM Util%	sm__cycles_active.avg / gr__cycles_elapsed.max × 100	SM（流式多处理器）活跃占比
+Tensor Core%	SM_C.TriageTop.smsp__pipe_tensor_cycles_active.avg / gr__cycles_elapsed.max × 100	Tensor Core 矩阵运算单元活跃占比
+Mem BW GB/s	lts__t_bytes.sum / interval_sec / 1e9	实际内存带宽（通过 LTS 传输字节数 / 采样间隔）
+Mem BW%	Mem BW / 213.0 × 100	内存带宽占峰值（Thor LPDDR5 213 GB/s）的百分比
+CPU 内存带宽监控
+通过 Linux perf_event_open() 系统调用采集 ARM PMU 硬件性能计数器，监控 CPU 侧 DRAM 带宽。
+
+ARM PMU（Cortex-A78AE）
+ll_cache_miss_rd（event 0x37）：Last-Level Cache miss 读次数 → DRAM 读代理
+l2d_cache_wb（event 0x18）：L2 cache writeback 次数 → DRAM 写代理
+带宽 = events × 64（cache line bytes）/ interval
+仅统计 CPU 侧 DRAM 访问，不含 GPU/DLA
+注意：Thor 平台上 l3d_cache_refill/l3d_cache_wb 事件未实现（返回 0），因此使用 ll_cache_miss_rd/l2d_cache_wb 替代
+注意：l2d_cache_wb 包含 L2→L3 的 writeback（不一定到达 DRAM），因此 CPU DRAM WR 值可能偏高，仅作为上界参考
+CPU 带宽指标
+指标	CSV 列名	说明
+CPU DRAM Read BW	cpu_dram_rd_gbps	CPU 发起的 DRAM 读带宽（GB/s），基于 LLC miss，准确
+CPU DRAM Write BW	cpu_dram_wr_gbps	CPU 发起的 DRAM 写带宽（GB/s），基于 L2 writeback，偏高（含 L2→L3）
+CPU DRAM Total BW	cpu_dram_total_gbps	CPU 发起的 DRAM 总带宽（GB/s）
+注：cpu_dram_* 与 mem_bw_gbps 视角不同。mem_bw_gbps 来自 GPU LTS 计数器（GPU L2↔DRAM 的带宽），cpu_dram_* 来自 ARM PMU（CPU 侧 DRAM 访问代理）。
+
+编译
+环境要求
+平台：aarch64 (NVIDIA Jetson Thor)
+GPU：Thor (GB10B), Compute Capability 11.0
+CUDA：13.0，路径 /usr/local/cuda/
+CUPTI：13.0.1，库路径 /usr/local/cuda/lib64/
+TensorRT：10.14.2（系统运行时，路径 /usr/lib/aarch64-linux-gnu/）
+nvcc：/usr/local/cuda/bin/nvcc
+环境变量
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-13.0/thor/targets/aarch64-linux/lib:$LD_LIBRARY_PATH
+构建命令
+make              # 构建两个二进制：gpu_profiler_daemon + gpu_profiler_test
+make daemon       # 仅构建 daemon（无 TRT 依赖，体积更小）
+make test         # 仅构建 test（需要 TRT 运行时）
+make clean        # 清理构建产物
+项目产出两个二进制：
+
+二进制	依赖	用途
+gpu_profiler_daemon	CUPTI + CUDA	后台持续采样，旁观任意 GPU 工作负载
+gpu_profiler_test	CUPTI + CUDA + TensorRT	加载 TRT engine 推理并采样
+运行
+后台监控模式（Daemon）
+持续采样 GPU 指标并输出 CSV 数据，按 Ctrl+C 停止并打印汇总报告。不依赖任何推理引擎，可监控 GPU 上任意进程的活动。
+
+# 默认 100ms 间隔采样
+make run-daemon
+
+# 或手动运行
+LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-13.0/thor/targets/aarch64-linux/lib:$LD_LIBRARY_PATH \
+  ./gpu_profiler_daemon -i 100
+
+# 保存 CSV 到文件
+./gpu_profiler_daemon -i 100 > output.csv
+
+# 同时查看屏幕和保存文件
+./gpu_profiler_daemon -i 100 2>&1 | tee output.csv
+命令行参数：
+
+参数	说明	默认值
+-d, --device <index>	CUDA 设备索引	0
+-i, --interval <ms>	采样间隔（毫秒）	100
+-s, --max-samples <n>	最大采样数	10000
+-b, --buffer-size <bytes>	硬件缓冲区大小	536870912 (512MB)
+-m, --metrics <m1,m2,...>	自定义指标（逗号分隔）	内置 8 项
+-f, --format <format>	输出格式：csv, table	csv
+-q, --query-metrics	列出 GPU 可用指标	-
+CSV 输出示例：
+
+timestamp,gpu_util_pct,cuda_core_pct,sm_util_pct,tensor_core_pct,mem_bw_gbps,mem_bw_pct,cpu_dram_rd_gbps,cpu_dram_wr_gbps,cpu_dram_total_gbps
+2026-04-24 03:10:58.647,84.77,26.41,32.13,1.62,120.2,56.5,0.09,4.47,4.56
+2026-04-24 03:10:58.752,84.73,27.31,33.24,1.67,120.5,56.6,0.08,4.96,5.04
+TRT 推理测试模式（Test）
+加载 TensorRT engine 文件，运行推理同时进行性能采样，结束后输出汇总报告。
+
+# 使用 Makefile
+make run-test
+
+# 或手动运行
+LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-13.0/thor/targets/aarch64-linux/lib:/usr/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH \
+  ./gpu_profiler_test -e model.engine -t 10 -i 100
+
+# 指定不同间隔和时长
+./gpu_profiler_test -e model.engine -t 30 -i 50
+命令行参数：
+
+参数	说明	默认值
+-e, --engine <path>	TensorRT engine 文件路径（必选）	-
+-d, --device <index>	CUDA 设备索引	0
+-i, --interval <ms>	采样间隔（毫秒）	100
+-t, --duration <seconds>	推理持续时间（秒）	10
+-s, --max-samples <n>	最大采样数	1000
+-b, --buffer-size <bytes>	硬件缓冲区大小	536870912 (512MB)
+-m, --metrics <m1,m2,...>	自定义指标（逗号分隔）	内置 8 项
+表格输出示例：
+
+==========================================================================================================================================================
+  GPU Utilization Report (CUPTI PM Sampling)
+  Peak DRAM Bandwidth: 213 GB/s
+  Sampling Interval: 100 ms
+  CPU DRAM BW Method: ARM PMU (ll_cache_miss_rd/l2d_cache_wb, CPU DRAM)
+==========================================================================================================================================================
+               Timestamp   GPU Util%    CUDA Core%    SM Util%  Tensor Core%     Mem BW GB/s     Mem BW%   CPU DRAM RD   CPU DRAM WR  CPU DRAM Tot
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+ 2026-04-24 03:10:58.647       84.77         26.41       32.13          1.62          120.24       56.45          0.09          4.47          4.56
+ 2026-04-24 03:10:58.752       84.73         27.31       33.24          1.67          120.54       56.59          0.08          4.96          5.04
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+  Average:        84.35%       26.69%     32.48%        1.64%        120.16       56.41%          0.07          4.86          4.93
+查询可用指标
+make query
+# 或
+./gpu_profiler_daemon -q
+列出当前 GPU 上 PM Sampling 支持的所有基础指标，可用于 -m 参数自定义。
+
+构建 TRT Engine
+由于 TensorRT 10.x 的 trtexec 工具不支持 SM 110（Thor/Blackwell），需要使用项目内的自定义 builder：
+
+# 编译 builder（需 TRT 运行时）
+# 编辑 src/trt_builder.cpp 中的 ONNX 模型路径
+make builder
+
+# 运行
+LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-13.0/thor/targets/aarch64-linux/lib:/usr/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH \
+  ./trt_builder
+生成的 model.engine 文件即可用于 gpu_profiler_test。
+
+项目结构
+src/
+├── common.h              # 共享宏、SampleRecord 结构体、时间戳格式化、常量
+├── cpu_bw_profiler.h     # CpuBwProfiler 类声明（CPU DRAM 带宽采集）
+├── cpu_bw_profiler.cpp   # CPU 带宽实现：perf_event_open、ARM PMU、后台采样线程
+├── gpu_profiler.h        # GpuProfiler 类声明（CUPTI PM Sampling 封装 + CpuBwProfiler 集成）
+├── gpu_profiler.cpp      # 核心实现：CUPTI 初始化、采样、解码、利用率计算与报告
+├── gpu_profiler_main.cpp # Daemon 入口：后台采样、CSV 输出、信号处理
+├── trt_workload.h        # TrtInferenceWorkload 类声明
+├── trt_workload.cpp      # TRT engine 加载与推理（TRT 10 API）
+├── trt_test_main.cpp     # Test 入口：TRT 推理 + CUPTI 采样
+├── trt_builder.cpp       # 独立 TRT engine 构建工具（ONNX → engine）
+Makefile                  # 双目标构建：daemon（仅 CUPTI）+ test（CUPTI + TRT）
+默认采样指标（8 项）
+指标名	含义
+gpu__cycles_active.avg	GPU 活跃周期数
+gpu__cycles_elapsed.avg	GPU 总周期数
+sm__cycles_active.avg	SM 活跃周期数
+gr__cycles_elapsed.max	Graphics 已用周期数
+sm__cycles_elapsed.avg	SM 总周期数
+sm__pipe_alu_cycles_active.avg	FP32 ALU 管线活跃周期数
+SM_C.TriageTop.smsp__pipe_tensor_cycles_active.avg	Tensor Core 活跃周期数
+lts__t_bytes.sum	LTS 传输字节数
+注意事项
+PM Sampling 独占性：同一时间只能有一个 CUPTI PM Sampling 进程运行，daemon 和 test 不可同时执行
+空闲 GPU 显示 0%：无 GPU 计算负载时，SM/Tensor Core/GPU cycles active 为 0，这是正确行为
+TensorRT SM 110 限制：TRT 10.x 的 trtexec 不支持 SM 110 engine 构建，需使用项目内自定义 builder
+采样间隔精度：实际采样间隔受硬件调度影响，可能略大于设定值
+CPU 带宽权限：系统级 PMU 计数器采集需要 root 权限或 perf_event_paranoid <= 0。普通用户运行时自动回退或禁用 CPU 带宽监控
+ARM PMU L3 事件不可用：Thor (Cortex-A78AE) 上 l3d_cache_refill/l3d_cache_wb 事件未实现，使用 ll_cache_miss_rd/l2d_cache_wb 替代
+CPU DRAM WR 偏高：l2d_cache_wb 包含 L2→L3 writeback（不一定到 DRAM），因此 CPU DRAM Write BW 仅作为上界参考

@@ -1,0 +1,306 @@
+5kPRO																			
+镜像	NV镜像																		
+模型	GLM 5.2 NVFP4																		
+备注	--chunked-prefill-size 2048
+--max-prefill-tokens 8192																		
+配置 	PP8																		
+显存	[2026-08-25 09:26:38 PP7] Memory pool end. avail mem=13.13 GB
+[2026-08-25 09:26:38 PP7] KV Cache is allocated. dtype: torch.float8_e4m3fn, #tokens: 32768, KV size: 0.24 GB																		
+8k1 																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	2,017.77	2,003.47	2,115.89	2,119.88	0	0	0	0	2,017.82	0.49	4,001.39	0.49	0.99	0.00%		81920	10
+INF	40	4	3,281.67	3,286.97	3,771.01	4,262.51	0	0	0	0	3,281.71	1.17	9,592.95	1.17	3.84	0.00%		327680	40
+INF	80	8	6,466.94	6,639.49	6,984.62	7,161.58	0	0	0	0	6,466.98	1.18	9,663.17	1.18	7.63	0.00%		655360	80
+																			
+2k64																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	1,217.67	1,212.94	1,304.66	1,333.84	47.86	48.02	48.26	48.34	4,232.55	0.23	480.69	15.02	0.99	0.00%		20480	640
+INF	40	4	1,556.81	1,511.98	2,268.97	2,438.97	57.72	55.82	76.4	78.9	5,193.26	0.77	1,568.94	49.03	3.98	0.00%		81920	2560
+INF	80	8	2,139.55	2,187.01	3,113.67	3,379.89	78.53	79.58	94.31	107.86	7,086.78	1.13	2,304.64	72.02	7.97	0.00%		163840	5120
+																			
+8k1 /pp流水线重排																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	1,889.52	1,897.52	1,959.23	1,959.55	0	0	0	0	1,889.57	0.53	4,305.55	0.53	0.99	0.00%		81920	10
+INF	40	4	3,161.81	3,184.05	3,357.79	4,047.27	0	0	0	0	3,161.85	1.22	9,981.50	1.22	3.85	0.00%		327680	40
+INF	80	8	6,141.65	6,289.87	6,557.05	6,794.50	0	0	0	0	6,141.70	1.24	10,179.72	1.24	7.63	0.00%		655360	80
+																			
+2k64 / pp流水线重排																			
+INF	10	1	1,173.28	1,184.36	1,193.43	1,195.49	48	48	48.02	48.02	4,197.10	0.24	486.38	15.2	1	0.00%		20480	640
+INF	40	4	1,432.04	1,410.80	1,745.40	1,748.71	53.05	53.98	56.92	57.71	4,774.40	0.84	1,710.30	53.45	3.99	0.00%		81920	2560
+INF	80	8	2,071.84	2,043.84	3,041.36	3,196.40	77.48	78.13	97.01	108.29	6,952.82	1.15	2,350.89	73.47	7.98	0.00%		163840	5120
+																			
+Void-Z/GLM-5.2-NVFP4-FP8-Hybrid																			
+8k1 																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	1,681.70	1,698.52	1,758.87	1,772.97	0	0	0	0	1,681.74	0.59	4,831.92	0.59	0.99	0.00%		81920	10
+INF	40	4	2,850.18	2,876.86	3,032.19	3,582.62	0	0	0	0	2,850.22	1.35	11,061.93	1.35	3.85	0.00%		327680	40
+INF	80	8	5,568.95	5,683.74	5,948.17	6,275.37	0	0	0	0	5,569.00	1.37	11,246.84	1.37	7.65	0.00%		655360	80
+INF	160	16	11,003.70	11,411.93	12,114.24	12,180.77	0	0	0	0	11,003.74	1.38	11,307.12	1.38	15.19	0.00%		1310720	160
+INF	320	32	21,491.65	22,543.88	23,185.87	23,491.08	0	0	0	0	21,562.90	1.41	11,558.43	1.41	30.42	0.00%		2621440	320
+																			
+8k1 /pp流水线重排																			
+INF	10	1	1,695.56	1,696.41	1,739.51	1,743.62	0	0	0	0	1,695.60	0.59	4,793.94	0.59	0.99	0.00%		81920	10
+INF	40	4	2,727.38	2,739.24	2,919.53	3,444.97	0	0	0	0	2,727.42	1.4	11,498.73	1.4	3.83	0.00%		327680	40
+INF	80	8	5,392.22	5,510.93	5,799.85	6,262.75	0	0	0	0	5,392.26	1.41	11,574.91	1.41	7.62	0.00%		655360	80
+INF	160	16	10,632.01	11,027.07	11,381.59	11,600.43	0	0	0	0	10,632.05	1.43	11,713.50	1.43	15.2	0.00%		1310720	160
+INF	320	32	21,162.80	22,147.06	22,546.18	22,667.84	0	0	0	0	21,162.84	1.44	11,783.17	1.44	30.44	0.00%		2621440	320
+																			
+																			
+20k/500																			
+INF	10	1	2,735.61	2,732.65	2,880.48	2,886.98	204.31	204.14	206.62	207.05	104,688.30	0.01	195.57	4.77	1	0.00%		204800	5000
+INF	40	4	4,402.99	4,188.99	6,696.62	6,898.74	156.86	156.46	162.14	164.27	82,677.57	0.05	990.76	24.19	4	0.00%		819200	20000
+INF	80	8	8,162.24	7,907.12	13,971.28	14,166.30	219.29	219.88	231.23	233.15	117,585.94	0.07	1,392.91	34.01	8	0.00%		1638400	40000
+INF	160	16	128,349.05	125,303.06	223,739.69	234,574.40	220.36	220.2	233.26	242.72	238,308.65	0.07	1,333.83	32.56	15.52	0.00%		3276800	80000
+																			
+																			
+															 				
+																			
+配置 	TP4 PP2    MF0.9																		
+显存	[2026-08-26 06:33:49 PP0 TP1] KV Cache is allocated. dtype: torch.float8_e4m3fn, #tokens: 65536, KV size: 1.88 GB
+[2026-08-26 06:33:49 PP0 TP1] Memory pool end. avail mem=16.02 GB																		
+2k64																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	713.68	707.79	748.63	764.94	22.12	22.11	22.28	22.3	2,107.44	0.47	966.06	30.19	0.99	0.00%		20480	640
+INF	40	4	1,313.65	1,459.04	1,589.67	1,776.31	33.33	33.07	39.19	43.65	3,413.55	1.17	2,389.65	74.68	3.98	0.00%		81920	2560
+INF	80	8	1,905.14	1,925.94	2,996.26	3,212.01	55.42	55.33	71.63	78.83	5,396.58	1.48	3,028.17	94.63	7.98	0.00%		163840	5120
+8k1 																			
+INF	10	1	1,788.52	1,788.18	1,851.96	1,869.30	0	0	0	0	1,788.56	0.56	4,547.08	0.56	0.99	0.00%		81920	10
+INF	40	4	5,082.32	5,257.34	5,544.39	5,605.84	0	0	0	0	5,082.36	0.76	6,202.77	0.76	3.85	0.00%		327680	40
+INF	80	8	10,109.01	10,481.21	10,799.21	11,108.66	0	0	0	0	10,109.05	0.76	6,217.48	0.76	7.67	0.00%		655360	80
+																			
+																			
+配置 	TP4 EP4 PP2 MF0.9																		
+显存	[2026-08-26 07:15:52 PP1 TP0 EP0] KV Cache is allocated. dtype: torch.float8_e4m3fn, #tokens: 65536, KV size: 1.88 GB																		
+2k64																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	671.88	675.97	704.74	706.87	23.79	23.79	23.89	23.91	2,170.62	0.46	936.22	29.26	0.99	0.00%		20480	640
+INF	40	4	1,228.63	1,273.94	1,489.93	1,499.00	35.23	34.43	40.97	41.06	3,448.33	1.16	2,366.18	73.94	3.98	0.00%		81920	2560
+INF	80	8	1,803.54	1,816.08	2,817.28	3,035.80	57.12	57.79	73.05	81.05	5,401.95	1.48	3,022.89	94.47	7.97	0.00%		163840	5120
+																			
+8k1 																			
+INF	10	1	1,695.07	1,691.82	1,749.17	1,752.78	0	0	0	0	1,695.11	0.59	4,795.29	0.59	0.99	0.00%		81920	10
+INF	40	4	4,862.06	4,993.97	5,220.09	5,369.31	0	0	0	0	4,862.10	0.79	6,474.52	0.79	3.84	0.00%		327680	40
+INF	80	8	9,627.75	9,930.51	10,319.37	10,456.62	0	0	0	0	9,627.79	0.79	6,508.94	0.79	7.65	0.00%		655360	80
+																			
+																			
+PD-DECODE																			
+配置 	TP8, max-running-requests=128，TP8 + MTP NEXTN（steps=2, topk=1, draft=3）MF0.85																		
+显存	[2026-09-01 06:15:30 TP4] KV Cache is allocated. dtype: torch.float8_e4m3fn, #tokens: 78592, KV size: 4.50 GB																		
+模型	Void-Z/GLM-5.2-NVFP4-FP8-Hybrid																		
+20k/500																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	231.56	224.53	275.19	278.36	20.82	20.67	24.46	24.98	10,618.68	0.09	1,925.92	47.02	1	0.00%	1.41	204800	5000
+INF	40	4	3,541.99	3,324.85	9,572.91	10,715.49	21.81	21.17	25.7	30.87	14,425.66	0.27	5499.72	134.27	3.87	0.00%	1.7	819200	20000
+INF	80	8	19,860.33	20,785.64	24,732.28	26,437.38	24.91	23.69	31.97	33.24	32,292.60	0.24	4,846.51	118.32	7.64	0.00%	1.61	1638400	40000
+INF	160	16	57,085.82	59,406.50	67,676.06	69,981.38	27.67	27.35	33.07	35.09	70,891.75	0.21	4,396.83	107.34	15.22	0.00%	1.49	3276800	80000
+INF	320	32	141,704.95	149,193.51	157,972.31	159,202.85	30.81	31	37.4	37.74	157,079.82	0.19	3,974.33	97.03	30.48	0.00%	1.35	6553600	160000
+kv显存限制了并发，导致测试的ttft过高，排队																			
+																			
+																			
+配置 	TP4 PP2 ， MAX_RUNNING_REQUESTS=128， MF0.9																		
+显存	[2026-09-01 07:29:28 PP0 TP2] KV Cache is allocated. dtype: torch.float8_e4m3fn, #tokens: 357440, KV size: 10.23 GB																		
+20k/500																			
+INF	80	8	353.45	332.46	477.36	621.88	36.6	36.86	38.17	38.19	18,618.82	0.43	8,782.13	214.41	7.98	0.00%		1638400	40000
+INF	160	16	412.74	366.58	774.75	804.05	43.9	43.9	44.59	44.64	22,318.86	0.71	14,640.51	357.43	15.96	0.00%		3276800	80000
+INF	320	32	19,587.06	22,788.95	25,066.77	25,333.45	45.6	45.26	49.97	50.4	42,342.99	0.73	15,021.99	366.75	31.06	0.00%		6553600	160000
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+6KD																			
+机器	Pro 6kD 																		
+模型	GLM 5.2 NVFP4																		
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	1,745.82	1,772.21	1,802.19	1,806.82	0	0	0	0	1,745.86	0.57	4,688.47	0.57	1	0.00%		81920	10
+INF	40	4	3,118.04	3,139.31	3,333.11	3,809.33	0	0	0	0	3,118.08	1.23	10,113.76	1.23	3.85	0.00%		327680	40
+INF	80	8	5,955.69	6,126.97	6,433.00	6,579.73	0	0	0	0	5,955.73	1.29	10,532.91	1.29	7.66	0.00%		655360	80
+																			
+																			
+流水线重排																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	1,781.47	1,781.59	1,822.80	1,827.80	0	0	0	0	1,781.51	0.56	4,594.72	0.56	1	0.00%		81920	10
+INF	40	4	2,965.65	2,953.00	3,171.71	3,673.74	0	0	0	0	2,965.69	1.3	10,672.42	1.3	3.86	0.00%		327680	40
+INF	80	8	5,977.67	6,038.43	6,478.85	7,090.32	0	0	0	0	5,977.72	1.28	10,480.39	1.28	7.65	0.00%		655360	80
+																			
+																			
+Void-Z/GLM-5.2-NVFP4-FP8-Hybrid																			
+8k1 																			
+Traffic request rate	Successful requests	Max request concurrency	Mean TTFT (ms)	Median TTFT (ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT (ms)	Median TPOT (ms)	P95 TPOT (ms)	P99 TPOT (ms)	Mean E2E Latency (ms)	Request throughput (req/s)	Input token throughput (tok/s)	Output token throughput (tok/s)	Concurrency	Cache hit rate	Accept length	Total input tokens	Total generated tokens
+INF	10	1	1,403.24	1,400.79	1,435.04	1,437.58	0	0	0	0	1,403.28	0.71	5,803.09	0.71	0.99	0.00%		81920	10
+INF	40	4	2,563.91	2,568.01	2,709.41	3,104.19	0	0	0	0	2,563.96	1.5	12,289.86	1.5	3.85	0.00%		327680	40
+INF	80	8	4,686.67	4,804.84	5,060.78	5,463.78	0	0	0	0	4,686.72	1.63	13,325.51	1.63	7.62	0.00%		655360	80
+INF	160	16	9,878.00	10,226.57	10,566.75	10,697.92	0	0	0	0	9,878.05	1.55	12,667.51	1.55	15.27	0.00%		1310720	160
+INF	320	32	19,580.55	20,390.14	21,075.33	21,200.19	0	0	0	0	19,580.60	1.56	12,752.08	1.56	30.48	0.00%		2621440	320
+																			
+20k/500																			
+INF	10	1	2,247.56	2,271.53	2,315.71	2,325.22	143.56	143.54	145.6	145.64	73,882.43	0.01	277.19	6.77	1	0.00%		204800	5000
+INF	40	4	5,130.11	5,159.10	7,669.67	7,868.88	208.24	208.45	215.49	215.85	109,039.48	0.04	751.06	18.34	4	0.00%		819200	20000
+INF	80	8	5,071.59	4,314.92	10,298.62	12,514.84	164.4	165.39	174.41	178.97	87,107.56	0.09	1,879.28	45.88	7.99	0.00%		1638400	40000
+INF	160	16	91,448.77	93,059.27	102,014.41	170,737.91	162.78	162.42	181.22	183.8	172,677.80	0.09	1,793.13	43.78	15.12	0.00%		3276800	80000
+INF	320	32	262,247.74	264,725.14	343,133.35	346,740.87	159.3	159.43	171.07	175.5	341,738.05	0.09	1,822.27	44.49	30.41	0.00%		6553600	160000
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			

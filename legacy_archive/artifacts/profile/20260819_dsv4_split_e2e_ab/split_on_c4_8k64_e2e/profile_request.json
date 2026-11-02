@@ -1,0 +1,8 @@
+{
+  "output_dir": "/sgl-workspace/workspace/profile/20260819_dsv4_split_e2e_ab/split_on/trace_c4_8k64",
+  "activities": ["GPU"],
+  "with_stack": false,
+  "record_shapes": false,
+  "profile_by_stage": false,
+  "profile_prefix": "dsv4-split-on-c4-w40-n4-8k-64-e2e"
+}

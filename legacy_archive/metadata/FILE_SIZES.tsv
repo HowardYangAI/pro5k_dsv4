@@ -1,0 +1,283 @@
+108190675	artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv
+105837159	artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/01_e2e_operator_timeline_tp0.csv
+78643200	source/sglang-all-refs.bundle.part-00
+50331286	session/primary-session.jsonl
+50331286	session/all-sessions/2026/08/06/rollout-2026-08-06T11-44-58-019fd6e4-10ac-7611-b6e0-32143580ab3d.jsonl
+26560279	source/sglang-all-refs.bundle.part-01
+23907546	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/01_operator_timeline_tp0.csv
+20342694	artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_on_decode_timeline_tp0.csv
+20085910	artifacts/profile/20260819_dsv4_split_ab/delivery/01_split_off_decode_timeline_tp0.csv
+19790232	artifacts/stress test/20260810_tcp16_mem07/gpu-dmon-rank0.log
+16747282	artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz
+16680399	artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/03_e2e_8k_to_64_tp0_perfetto_lite.trace.json.gz
+15423488	artifacts/stress test/20260807_065608/server.log
+13201872	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/01_decode_timeline_tp0.csv
+11583465	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/vmstat.log.gz
+10382648	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/01_prefill_timeline_tp0.csv
+8774751	artifacts/stress test/20260811_tp8_dp8_ep4_mf06/gpu-dmon.log
+8375805	artifacts/profile/20260819_dsv4_split_ab/delivery/dsv4_split_ab_profile_bundle.tar.gz
+8204812	artifacts/stress test/20260807_034600/gpu-dmon-attempt-2.log
+6829090	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/gpu-dmon.log.gz
+6055496	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite_bundle.tar.gz
+5034277	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-4-DP-4.trace.json.gz
+5033241	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-3-DP-3.trace.json.gz
+5025369	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-2-DP-2.trace.json.gz
+5018841	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-5-DP-5.trace.json.gz
+4967610	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-6-DP-6.trace.json.gz
+4961148	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-7-DP-7.trace.json.gz
+4957364	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-1-DP-1.trace.json.gz
+4941677	artifacts/legacy-profiles/pr32320_disabled/1787107679.9250057-TP-0-DP-0.trace.json.gz
+4745048	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/gpu-dmon.log
+4580790	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-EXTEND.trace.json.gz
+4577533	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-EXTEND.trace.json.gz
+4573848	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-EXTEND.trace.json.gz
+4557031	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-EXTEND.trace.json.gz
+4105056	artifacts/stress test/20260807_064500/vmstat.log.gz
+4091908	artifacts/stress test/20260807_065608/vmstat.log.gz
+3922323	artifacts/stress test/20260807_092330/vmstat.log.gz
+3871490	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/server.log
+3846802	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/server-final.log
+3788683	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite/dsv4_ep8_dspark_c8_prefill_tp0_perfetto_lite.trace.json.gz
+2877503	artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_off_c8_w40_n80_decode_tp0.trace.json.gz
+2855861	artifacts/profile/20260819_dsv4_split_ab/delivery/perfetto_lite/dsv4_split_on_c8_w40_n80_decode_tp0.trace.json.gz
+2578395	artifacts/stress test/20260810_tcp16_mem07/vmstat-rank0.log
+2517068	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite/dsv4_ep8_dspark_c8_decode_tp0_perfetto_lite.trace.json.gz
+2281341	session/all-sessions/2026/08/07/rollout-2026-08-07T06-29-37-019fdae9-b489-7b72-be97-9e0ea12785bf.jsonl
+2238909	artifacts/stress test/20260807_064500/gpu-dmon.log.gz
+2238692	artifacts/stress test/20260811_three_path_c512/server-c512-passed.log.gz
+2190763	artifacts/stress test/20260810_tcp16_mem07/server-rank0-attempt2.log.gz
+2188062	artifacts/stress test/20260807_065608/gpu-dmon.log.gz
+2120790	artifacts/stress test/20260811_tp8_dp8_ep4_mf06/server.log.gz
+2069247	session/all-sessions/2026/08/06/rollout-2026-08-06T10-00-48-019fd684-b350-7471-8274-e5bf3f8f91d9.jsonl
+2054808	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/server.log.gz
+1909403	artifacts/stress test/20260807_092330/gpu-dmon.log.gz
+1875593	artifacts/stress test/20260807_092330/server.log.gz
+1749126	artifacts/stress test/20260811_three_path_c512/server.log.gz
+1541736	artifacts/stress test/20260807_092330/server-before-restart.log.gz
+1398762	artifacts/plan/deepseek-v4-decode-benchmark-and-fixes.png
+1240894	artifacts/stress test/20260811_three_path_c512/server-c640-page-align-passed.log.gz
+1207436	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-2-DP-2-EP-2-DECODE.trace.json.gz
+1196108	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-3-DP-3-EP-3-DECODE.trace.json.gz
+1195327	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-1-DP-1-EP-1-DECODE.trace.json.gz
+1192450	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-0-DP-0-EP-0-DECODE.trace.json.gz
+1144060	artifacts/stress test/20260811_tp8_dp8_ep4_mf06/vmstat.log
+1112723	artifacts/stress test/20260811_three_path_c512/server-c640-pre-page-align-crash.log
+1075874	artifacts/stress test/20260807_034600/vmstat-attempt-2.log
+915110	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/cpu_gpu_by_stage_5_8k/cpu_gpu_by_stage_5_8k-TP-4-DP-4-EP-4-EXTEND.trace.json.gz
+914107	artifacts/plan/04-dspark-ep-forwardbatch-bug.png
+908510	artifacts/plan/02-swa-kv-retraction-fix.png
+767355	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-4-DP-4-EP-4.trace.json.gz
+758542	artifacts/plan/03-page-and-dspark-ep-fixes.png
+660048	artifacts/plan/01-decode-benchmark.png
+623499	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/vmstat.log
+432066	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-5-DP-5-EP-5.trace.json.gz
+427644	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-2-DP-2-EP-2.trace.json.gz
+426420	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-0-DP-0-EP-0.trace.json.gz
+425979	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-1-DP-1-EP-1.trace.json.gz
+425968	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-3-DP-3-EP-3.trace.json.gz
+425589	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-6-DP-6-EP-6.trace.json.gz
+424811	artifacts/profile/20260819_ep8_e2e_torch_profile/traces/gpu_only_no_stack_no_shapes/gpu_only_no_stack_no_shapes-TP-7-DP-7-EP-7.trace.json.gz
+318144	artifacts/stress test/20260807_034600/server-attempt-2.log
+253213	artifacts/stress test/20260807_063000/server.log
+241117	session/all-sessions/2026/08/10/rollout-2026-08-10T02-03-24-019fe969-1146-76d2-956f-d391a4ddd5d1.jsonl
+237640	session/all-sessions/2026/08/12/rollout-2026-08-12T03-45-08-019ff412-ece1-7101-95cd-64058149b2b5.jsonl
+225421	artifacts/stress test/20260810_tcp16_mem07/server-rank0.log
+196061	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/gpu_only_no_stack_no_shapes-c4x4.log
+179231	artifacts/stress test/20260807_064500/server-attempt-2.log
+165541	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-cuda-graph-port30012.log
+149353	source/llm-benchmark-online.bundle
+128288	artifacts/stress test/20260811_three_path_c512/server-second-warmup-crash.log
+125966	artifacts/stress test/20260807_034600/server.log
+123293	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid-attempt2.log
+119812	artifacts/stress test/20260811_tp8_dp4_ep4_mf06/gpu-dmon.log
+117122	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-port30012.log
+96461	artifacts/stress test/20260807_034600/gpu_dmon.log
+84803	artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv
+83739	artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/02_e2e_kernel_aggregate_tp0.csv
+80867	artifacts/profile/20260819_dsv4_split_e2e_ab/05_e2e_split_on_off_kernel_comparison_tp0.csv
+63016	artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_off_decode_kernel_aggregate_tp0.csv
+62916	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/03_decode_kernel_aggregate_tp0.csv
+61432	artifacts/profile/20260819_dsv4_split_ab/delivery/02_split_on_decode_kernel_aggregate_tp0.csv
+60832	artifacts/profile/20260819_dsv4_split_ab/delivery/03_split_on_off_kernel_comparison_tp0.csv
+59993	artifacts/early-logs/deepseek-v4-flash-0731-dspark-smoke.log
+57953	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/02_prefill_kernel_aggregate_tp0.csv
+57810	session/attachments/pasted-text-attachments.json
+56610	artifacts/profile/20260819_dsv4_ep8_dspark_formal/02_decode_kernel_aggregate_tp0.csv
+46056	artifacts/stress test/20260811_tp8_dp4_ep4_mf06/server.log
+43835	source/cupti-kernel-monitoring.bundle
+37163	artifacts/plan/deepseek-v4-decode-benchmark-and-fixes.excalidraw
+25146	session/attachments/9d6b3eb3-d1e6-45ce-9290-9256799ad9fa/pasted-text.txt
+18888	artifacts/profile/20260819_dsv4_ep8_dspark_formal/02_prefill_kernel_aggregate_tp0.csv
+18145	session/attachments/0837eca5-dd97-40f5-9f60-98d56688f961/pasted-text.txt
+17649	session/attachments/fb0d5f92-719d-4d2f-b7f4-ba97dd453427/pasted-text.txt
+17517	artifacts/plan/02-swa-kv-retraction-fix.excalidraw
+16861	artifacts/plan/04-dspark-ep-forwardbatch-bug.excalidraw
+16655	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/benchmark-c512.log
+15455	artifacts/stress test/20260811_tp8_dp4_ep4_mf06/vmstat.log
+15399	source/kv-only-staged.patch.gz
+15254	artifacts/plan/deepseek-v4-pd-decode-kv-retraction-fix-plan.md
+13794	artifacts/plan/01-decode-benchmark.excalidraw
+13778	artifacts/profile/20260819_dsv4_ep8_dspark_formal/README.md
+13303	session/attachments/86b842af-7f6e-4342-94a9-592b2ea45721/pasted-text.txt
+13263	artifacts/plan/03-page-and-dspark-ep-fixes.excalidraw
+12415	session/attachments/b44e856c-2659-4890-abc3-e7b05aa43c81/pasted-text.txt
+11540	artifacts/profile/20260819_dsv4_split_ab/delivery/04_skill_triage_report.md
+11508	session/attachments/9b3dcb96-1065-45ad-a959-9b674a2ec634/pasted-text.txt
+11234	artifacts/profile/20260819_dsv4_ep8_dspark_formal/03_skill_triage_report.md
+11137	artifacts/stress test/20260807_034600/vmstat.log
+10650	artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/04_skill_triage_report.md
+10609	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/03_skill_triage_report.md
+10559	artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/04_skill_triage_report.md
+10188	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/README.md
+9375	session/attachments/475649a2-17ec-44cd-9a74-4ed7d8212c55/pasted-text.txt
+9277	session/attachments/160df98f-445a-44bd-8ea4-6670d72c6e1e/pasted-text.txt
+9225	artifacts/stress test/20260807_065608/decode_8k_2k_summary.xlsx
+9193	session/attachments/a4b7069a-9473-440e-8dda-69aff7a5c33c/pasted-text.txt
+9165	session/attachments/7aa253a8-6c46-4a4a-883e-cbefb09a6d34/pasted-text.txt
+9164	session/attachments/6169bd52-658e-4bb4-ae24-ed6d84b3bfbc/pasted-text.txt
+9163	session/attachments/11b54b52-8916-4f4a-b5c9-bb28b0da1027/pasted-text.txt
+8958	source/old-experiments-stash.patch.gz
+8841	session/attachments/7c27a983-c3df-441e-b1f6-d884f751eaba/pasted-text.txt
+8841	session/attachments/5387c6ca-9685-4ed2-b6c6-255ca49614f3/pasted-text.txt
+8771	artifacts/stress test/20260811_three_path_c512/server-c1024-first-port-race.log
+8769	artifacts/stress test/20260813_kv_only_c1024/server.log
+8766	artifacts/stress test/20260811_three_path_c512/server-first-failed.log
+8766	artifacts/stress test/20260811_three_path_c512/server-c640-second-port-race.log
+8766	artifacts/stress test/20260811_three_path_c512/server-c640-first-port-race.log
+8524	session/attachments/2c199a43-c5e7-45ce-b72d-c05982516bb9/pasted-text.txt
+8516	session/attachments/95a80033-24c9-4d3c-b2d4-949d70243d9c/pasted-text.txt
+8424	artifacts/stress test/20260811_tp8_dp4_ep4_mf06/server-attempt-1.log
+8101	artifacts/stress test/20260807_064500/server.log
+8012	session/attachments/791f9ace-a345-4424-9b1b-c772d6e23146/pasted-text.txt
+7818	session/attachments/aca945a0-07ec-4540-aa61-e9dc0a01efd8/pasted-text.txt
+7666	artifacts/plan/deepseek-v4-decode-benchmark-and-fixes-script.md
+7665	session/attachments/6194e5dc-3633-4304-a01e-92ae14c9a74f/pasted-text.txt
+7662	session/attachments/f7e3927d-c99f-45bc-a4a3-833bd7ec127a/pasted-text.txt
+7641	metadata/pip-freeze.txt
+7497	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-restart-after-cpu-gpu-xid.log
+7408	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph.log
+7408	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/server-no-cuda-graph-attempt2.log
+7304	session/attachments/11bb0b03-28e5-4ad9-9762-e9559c7e128f/pasted-text.txt
+7244	session/attachments/4b2db8fa-2110-48f3-8a1b-8a3d491faf90/pasted-text.txt
+7220	artifacts/profile/20260819_dsv4_split_ab/build_split_ab.py
+7190	artifacts/profile/20260819_RAW_TRACE_MANIFEST.tsv
+6698	session/attachments/2ed84bf2-2452-4af5-82aa-3961fd6e7eac/pasted-text.txt
+6565	session/attachments/fbe77713-4ec2-4051-9116-29c783661a8c/pasted-text.txt
+6082	artifacts/profile/20260819_dsv4_split_e2e_ab/build_e2e_split_on.py
+6067	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_3_seed_1787127003.log
+5983	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_1_seed_1787127001.log
+5966	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_off/run_2_seed_1787127002.log
+5894	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_3_seed_1787127003.log
+5849	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_1_seed_1787127001.log
+5844	artifacts/profile/20260819_dsv4_split_e2e_ab/summarize_no_profiler.py
+5779	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/raw_logs/split_on/run_2_seed_1787127002.log
+5758	session/attachments/5715f3f2-a775-4dbf-941d-d28705ee74bd/pasted-text.txt
+5660	metadata/constraints.txt
+5317	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003.log
+5313	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_3_seed_1787128003.log
+5271	README.md
+5264	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128003_repeat.log
+5082	artifacts/stress test/20260807_034600/README.md
+5025	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_2_seed_1787128002.log
+5018	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128002.log
+5014	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_off/seed_1787128001.log
+5012	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/raw_logs/split_on/run_1_seed_1787128001.log
+4512	artifacts/stress test/20260807_065608/decode_8k_2k_summary.md
+4488	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps10_8k-c4x4.log
+4428	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_only_no_stack_no_shapes-c4x4.log
+4428	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_by_stage_5_8k-c4x4.log
+4372	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_num_steps1-c1x1.log
+4338	artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-xid.log
+3945	artifacts/profile/20260819_ep8_e2e_torch_profile/diagnostics/cpu_gpu_no_stack_no_shapes-processes.log
+3862	artifacts/profile/20260819_dsv4_split_e2e_ab/RAW_TRACE_MANIFEST.tsv
+3335	artifacts/profile/PROFILE_INDEX.md
+3305	metadata/PROFILE_INVESTIGATION.md
+2875	artifacts/profile/20260819_ep8_e2e_torch_profile/README.md
+2864	artifacts/profile/20260819_dsv4_split_e2e_ab/README.md
+2759	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/README.md
+2638	artifacts/profile/20260819_ep8_e2e_torch_profile/PROFILE_SUMMARY.md
+2602	artifacts/stress test/20260807_063000/vmstat.log
+2565	artifacts/profile/20260819_dsv4_split_e2e_ab/SESSION_HANDOFF.md
+2556	artifacts/profile/20260819_ep8_e2e_torch_profile/logs/cpu_gpu_no_stack_no_shapes-c4x4.log
+2242	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/scripts/make_perfetto_lite.py
+1902	artifacts/profile/20260819_dsv4_split_e2e_ab/compare_e2e.py
+1852	artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/README.md
+1823	artifacts/profile/20260819_dsv4_split_ab/make_perfetto_lite.py
+1736	artifacts/profile/20260819_ep8_e2e_torch_profile/SESSION_HANDOFF.md
+1720	artifacts/profile/20260819_dsv4_ep8_dspark_c8/SESSION_HANDOFF.md
+1633	metadata/CODE_STATE.md
+1572	artifacts/profile/20260819_dsv4_split_ab/SESSION_HANDOFF.md
+1532	source/RESTORE.md
+1498	artifacts/profile/20260819_dsv4_ep8_dspark_formal/SESSION_HANDOFF.md
+1359	artifacts/stress test/20260811_three_path_c512/launch.sh
+1320	artifacts/stress test/20260811_tp8_dp8_ep4_mf06/launch.sh
+1320	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/launch.sh
+1320	artifacts/stress test/20260811_tp8_dp4_ep4_mf06/launch.sh
+1320	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/launch.sh
+1294	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/README.md
+1224	artifacts/stress test/20260807_065608/decode_8k_2k_summary.tsv
+1119	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/README.md
+1070	artifacts/profile/20260819_dsv4_split_ab/delivery/README.md
+976	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/02_summary.csv
+965	artifacts/profile/20260819_ep8_e2e_torch_profile/launch-no-cuda-graph.sh
+954	artifacts/profile/20260819_ep8_e2e_torch_profile/launch.sh
+921	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/BENCHMARK_COMMAND.md
+885	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/BENCHMARK_COMMAND.md
+738	artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/README.md
+637	artifacts/stress test/20260811_tp8_dp4_ep4_mf06/README.md
+627	artifacts/stress test/20260811_tp8_dp8_ep4_mf06/README.md
+614	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/01_runs.csv
+605	artifacts/profile/20260819_dsv4_ep8_dspark_c8/delivery/perfetto_lite/README.md
+585	artifacts/stress test/20260807_122900/README.md
+578	artifacts/stress test/20260807_064500/README.md
+571	artifacts/profile/20260819_dsv4_ep8_dspark_formal/ARCHIVE_NOTE.md
+539	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/03_paired_comparison.csv
+521	source/main-worktree-unstaged.patch.gz
+520	artifacts/profile/20260819_dsv4_split_e2e_ab/no_profiler_e2e_ab/01_runs.csv
+504	artifacts/profile/20260819_dsv4_split_ab/ARCHIVE_NOTE.md
+481	artifacts/profile/20260819_dsv4_ep8_dspark_c8/ARCHIVE_NOTE.md
+467	artifacts/stress test/20260807_065608/README.md
+446	artifacts/stress test/20260807_092330/README.md
+445	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/02_summary.csv
+441	artifacts/profile/20260819_dsv4_split_e2e_ab/no_dspark_e2e_ab/03_paired_comparison.csv
+423	artifacts/stress test/20260807_063000/README.md
+320	artifacts/early-logs/DS_DP8_EP8_vmstat_0807_034028.log
+280	artifacts/profile/20260819_dsv4_split_ab/split_off_profile_request.json
+278	artifacts/profile/20260819_dsv4_split_ab/split_on_profile_request.json
+267	artifacts/profile/20260819_dsv4_split_e2e_ab/split_off_c4_8k64_e2e/profile_request.json
+267	artifacts/profile/20260819_dsv4_ep8_dspark_c8/decode_profile_request.json
+265	artifacts/profile/20260819_dsv4_split_e2e_ab/split_on_c4_8k64_e2e/profile_request.json
+260	artifacts/stress test/20260807_122900/vmstat.log
+153	metadata/runtime-versions.txt
+126	.gitattributes
+87	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/benchmark-c512-exact.log
+86	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/benchmark-c512-randomids-final.log
+65	artifacts/stress test/20260811_tp8_dp8_ep4_c512_fix/benchmark-c512-final.log
+20	source/three-path-unstaged.patch.gz
+20	source/three-path-staged.patch.gz
+20	source/main-worktree-staged.patch.gz
+20	source/kv-only-unstaged.patch.gz
+7	artifacts/stress test/20260807_122900/vmstat.pid
+7	artifacts/stress test/20260807_122900/server.pid
+7	artifacts/stress test/20260807_122900/gpu-dmon.pid
+7	artifacts/stress test/20260807_092330/vmstat.pid
+7	artifacts/stress test/20260807_092330/server.pid
+7	artifacts/stress test/20260807_092330/gpu-dmon.pid
+7	artifacts/stress test/20260807_065608/vmstat.pid
+7	artifacts/stress test/20260807_065608/server.pid
+7	artifacts/stress test/20260807_065608/gpu-dmon.pid
+7	artifacts/stress test/20260807_064500/vmstat.pid
+7	artifacts/stress test/20260807_064500/server.pid
+7	artifacts/stress test/20260807_064500/gpu-dmon.pid
+7	artifacts/stress test/20260807_063000/vmstat.pid
+7	artifacts/stress test/20260807_063000/server.pid
+7	artifacts/stress test/20260807_063000/gpu-dmon.pid
+6	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/vmstat.pid
+6	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/server.pid
+6	artifacts/stress test/20260811_033538_tp8_dp8_ep1_mf06/gpu-monitor.pid
+6	artifacts/stress test/20260810_tcp16_mem07/server-rank0.pid
+0	artifacts/stress test/20260807_122900/server.log
+0	artifacts/stress test/20260807_122900/gpu-dmon.log
+0	artifacts/stress test/20260807_063000/gpu-dmon.log
+0	artifacts/early-logs/DS_DP8_EP8_gpu_dmon_0807_034028.log
+0	artifacts/early-logs/DS_DP8_EP8_DSpark_PR33407_Flashinfer_0807_034028.log

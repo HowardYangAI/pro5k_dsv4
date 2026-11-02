@@ -1,0 +1,97 @@
+{
+  "selected_initial_tmp_files": 42,
+  "supplemental_files": 2,
+  "archived_files": 44,
+  "source_bytes": 12261514,
+  "stored_bytes": 4337303,
+  "gzip_files": 2,
+  "redactions": {
+    "private_key": 0,
+    "github_token": 0,
+    "api_token": 0,
+    "aws_access_key": 0,
+    "jwt": 0
+  },
+  "referenced_path_statuses": {
+    "directory_reference_only": 5,
+    "excluded_clean_public_reference_checkout": 86,
+    "excluded_configuration_or_credential_material": 45,
+    "missing_ephemeral_or_pattern_reference": 27,
+    "excluded_installation_or_runtime_cache": 101,
+    "excluded_binary_tool_or_instruction_material": 7,
+    "owned_by_conversation_exporter": 198,
+    "missing_important_artifact": 9,
+    "archived": 39
+  },
+  "important_missing_artifacts": 9,
+  "metadata_copies": [
+    {
+      "source": "/tmp/pro5k_artifact_audit.json",
+      "source_bytes": 60537,
+      "source_sha256": "97b1821ed3899f805d70d1f21cd532204c01a49efa6c03981ba2b17b0a330fd5",
+      "outputs": [
+        {
+          "path": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/initial_candidates.json",
+          "bytes": 60537,
+          "sha256": "97b1821ed3899f805d70d1f21cd532204c01a49efa6c03981ba2b17b0a330fd5"
+        }
+      ],
+      "compression": null,
+      "redactions": {},
+      "destination": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/initial_candidates.json",
+      "bytes": 60537,
+      "sha256": "97b1821ed3899f805d70d1f21cd532204c01a49efa6c03981ba2b17b0a330fd5"
+    },
+    {
+      "source": "/tmp/pro5k_artifact_audit_report.json",
+      "source_bytes": 7114,
+      "source_sha256": "7e0d3f74d5719fb28eb9b6d4324a66750a79e3e50c5b8ed9326de9739d238637",
+      "outputs": [
+        {
+          "path": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/initial_audit_report.json",
+          "bytes": 7114,
+          "sha256": "7e0d3f74d5719fb28eb9b6d4324a66750a79e3e50c5b8ed9326de9739d238637"
+        }
+      ],
+      "compression": null,
+      "redactions": {},
+      "destination": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/initial_audit_report.json",
+      "bytes": 7114,
+      "sha256": "7e0d3f74d5719fb28eb9b6d4324a66750a79e3e50c5b8ed9326de9739d238637"
+    },
+    {
+      "source": "/tmp/pro5k_export_artifacts.py",
+      "source_bytes": 8393,
+      "source_sha256": "d20d5f2f763ff89a9cfadff2f3ec954e5acac37ebbd4b34c8e8dee24693aa7e3",
+      "outputs": [
+        {
+          "path": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/pro5k_export_artifacts.py",
+          "bytes": 8393,
+          "sha256": "d20d5f2f763ff89a9cfadff2f3ec954e5acac37ebbd4b34c8e8dee24693aa7e3"
+        }
+      ],
+      "compression": null,
+      "redactions": {},
+      "destination": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/pro5k_export_artifacts.py",
+      "bytes": 8393,
+      "sha256": "d20d5f2f763ff89a9cfadff2f3ec954e5acac37ebbd4b34c8e8dee24693aa7e3"
+    },
+    {
+      "source": "/tmp/pro5k_archive_common.py",
+      "source_bytes": 9033,
+      "source_sha256": "4083ae9402cb02b919857076ad498a164d6f1ebebf23de84b077d6314d35e563",
+      "outputs": [
+        {
+          "path": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/pro5k_archive_common.py",
+          "bytes": 9033,
+          "sha256": "4083ae9402cb02b919857076ad498a164d6f1ebebf23de84b077d6314d35e563"
+        }
+      ],
+      "compression": null,
+      "redactions": {},
+      "destination": "/sgl-workspace/pro5k_dsv4/metadata/artifacts/pro5k_archive_common.py",
+      "bytes": 9033,
+      "sha256": "4083ae9402cb02b919857076ad498a164d6f1ebebf23de84b077d6314d35e563"
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+# DeepSeek-V4-Flash PD Decode Retraction 稳定性问题修复
+
+## 1. 摘要
+DeepSeek-V4-Flash 在 PD 分离 Decode 节点发生 KV cache 压力时，会执行decode retraction。原实现默认通过同步 GPU→CPU copy 保存被撤回请求的 KV，
+但 DeepSeek-V4-Flash 使用的分页 SWA/特殊 KV Pool 不支持这套 CPU copy 接口，最终抛出 `NotImplementedError` 并导致整个 Decode scheduler 退出。
+本次修改将 retraction 恢复方式改为按能力选择：
+```text
+KV Pool 支持 CPU copy
+    -> 沿用 CPU 保存/恢复
+
+KV Pool 不支持 CPU copy，且请求可安全重算
+    -> 释放 Decode KV
+    -> 返回 Prefill 重算完整 token 前缀
+    -> KV 重新传回 Decode
+    -> 请求继续生成
+
+KV Pool 不支持 CPU copy，且请求不能安全重算（例如 fake 请求）
+    -> 仅 graceful abort 当前被撤回请求
+    -> Decode 服务继续运行
+```
+双机端到端测试已经证明：修复版真实 PD 请求可以走完
+`retraction -> Prefill recompute -> KV transfer -> Decode commit`；
+修复版 fake请求只会终止受影响的请求，不会使服务崩溃。
+未修复版本在真实 PD 和 fake两种压力下都会稳定复现 `NotImplementedError` 和 scheduler 崩溃。
+## 2. CR 
+CR：[#6625071 - fix: make PD decode retraction KV-pool aware](https://kunpeng.xiaojukeji.com/view/revision/6625071)
+参考的上游方案：[sglang/sglang#32413](https://github.com/sgl-project/sglang/pull/32413)，该 PR 未合入且已关闭
+## 3. 测试环境
+### 3.1 服务拓扑
+```text
+Router:  10.207.193.156:30000
+Prefill: 10.207.193.156:30001
+Decode:  10.207.193.166:30002
+```
+### 3.2 主要配置
+```text
+Model: DeepSeek-V4-Flash-0731
+GPU: 2 台机器，每台 8 x RTX PRO 5000 72GB
+TP=8 / Attention DP=8 / EP=4
+Speculative decoding: DSpark，6 draft tokens
+Decode CUDA Graph: full
+KV cache: FP8，DeepSeek-V4 hybrid Full + SWA pool
+PD transfer: Mooncake TCP
+Decode mem-fraction-static: 0.55
+max-running-requests: 1024
+```
+## 4. 问题
+### 不支持 CPU copy 的 KV Pool 被无条件执行 offload
+原来的 Decode retraction 默认调用：
+```text
+retract_decode
+-> release_req
+-> req.offload_kv_cache
+-> allocator.get_cpu_copy
+```
+但是 DeepSeek-V4-Flash 当前使用的 SWA/特殊 KV Pool 并没有完整的同步CPU save/restore 能力，底层 `get_cpu_copy()` 直接抛出`NotImplementedError`。该异常没有被限制在单个请求内，而是一路退出 scheduler。未修复真实 PD 压力测试的日志证据：
+```text
+[2026-08-27 06:55:47 DP6 TP6 EP3] Decode batch,
+#full token: 836608, full token usage: 0.99,
+#swa token: 83968, swa token usage: 0.99
+
+[2026-08-27 06:55:48 DP6 TP6 EP3] Scheduler hit an exception:
+  File "schedule_batch.py", line 2625, in retract_decode
+    self.release_req(...)
+  File "schedule_batch.py", line 1733, in release_req
+    req.offload_kv_cache(...)
+  File "schedule_batch.py", line 1561, in offload_kv_cache
+    self.kv_cache_cpu = token_to_kv_pool_allocator.get_cpu_copy(...)
+  File "allocator/swa.py", line 402, in get_cpu_copy
+    return self._kvcache.get_cpu_copy(...)
+  File "memory_pool.py", line 1656, in get_cpu_copy
+    raise NotImplementedError()
+NotImplementedError
+
+Subprocess scheduler_0 ... crashed with exit code -3.
+```
+客户端随后出现：
+```text
+503 Service Unavailable - No available servers
+```
+未修复 fake 请求也会使服务崩溃：
+```text
+[2026-08-27 07:13:05 DP3 TP3 EP1] Scheduler hit an exception:
+  ...
+  File "schedule_batch.py", line 1561, in offload_kv_cache
+    self.kv_cache_cpu = token_to_kv_pool_allocator.get_cpu_copy(...)
+  File "allocator/swa.py", line 402, in get_cpu_copy
+    return self._kvcache.get_cpu_copy(...)
+  File "memory_pool.py", line 1656, in get_cpu_copy
+    raise NotImplementedError()
+NotImplementedError
+
+[2026-08-27 07:13:06] Subprocess scheduler_0 ... crashed with exit code -3.
+```
+### 分页 Full/SWA 预分配预算与实际 allocator 计费不一致
+DeepSeek-V4-Flash 同时使用 Full KV Pool 和 SWA KV Pool，且 page size 为 256。Decode 预分配阶段此前按 token 长度估算预算，但 allocator 实际按完整 page分配。如果 Full/SWA 两侧预算没有与 allocator 使用同样的 page alignment，队列可能判断“请求可接纳”，真正分配时却因页对齐后的需求更大而失败。
+SWA Pool 又没有 radix cache eviction，因此不能指望后续通过驱逐 SWA 前缀释放空间，必须在预算阶段直接扣除 page-aligned 的 SWA requirement。
+该问题属于与 rebootstrap 同一预分配链路中的隐藏风险，修复时一并统一了预算和实际分配语义。
+### DSpark + EP CUDA Graph 的手工 ForwardBatch 缺少真实 token 数
+完全未修复基线最初无法进入 retraction 测试：DSpark 手工构造`ForwardBatch`，绕过了 `ForwardBatch.init_new()`，导致`num_token_non_padded=None`。开启 DP/EP CUDA Graph 后，需要用这个字段计算rank-local 的真实 token 数，最终发生 `None - int`。
+日志证据：
+```text
+Scheduler hit an exception:
+  File "cuda_graph_buffer_registry.py", line 652,
+    in _num_token_non_padded_post_fill
+  File "forward_batch_info.py", line 235,
+    in compute_local_num_token_non_padded
+    global_num_token_non_padded - tokens_per_rank * attn_tp_rank
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'
+```
+### 一些小问题
+引入单请求 abort 和异步 KV 流程后，还需要处理以下边界：
+1. Abort 通知可能绕过 detokenizer，先于已经在 detokenizer 管线中的旧 token  batch 到达 TokenizerManager；若不识别这些晚到输出，会产生“请求状态已删除”
+   的错误日志或错误处理。
+2. 请求资源可能已经释放，但异步 offload ACK 尚未返回；此时不能重复释放 GPU、 host pool 或 radix protection，也不能过早删除 ACK 仍需要的 offload 状态。
+3. 即使释放其他请求后最后一个请求仍无法满足 decode 空间，也不能无限保留或使 scheduler 崩溃，应明确 abort 最后一个请求。
+## 5. 复现方法
+### 5.1 未修复真实 PD 复现
+1. 使用未修复基线启动 Router、Prefill 和 Decode。
+2. Decode 使用 `mem-fraction-static=0.55`、`max-running-requests=1024`。
+3. 请求发送至 Router `10.207.193.156:30000`：
+```bash
+python3 bench_serving.py \
+  --backend sglang-oai-chat \
+  --dataset-path /home/luban/ShareGPT_V3_unfiltered_cleaned_split.json \
+  --dataset-name random \
+  --random-input-len 8192 \
+  --random-output-len 8192 \
+  --random-range-ratio 1 \
+  --host 10.207.193.156 \
+  --port 30000 \
+  --model-name DeepSeek-V4-Flash-0731 \
+  --max-concurrency 1024 \
+  --num-prompts 1024 \
+  --request-rate inf \
+  --pd-separated
+```
+预期未修复结果：KV 使用率接近 100% 后触发 retraction，随后`get_cpu_copy -> NotImplementedError`，Decode scheduler 崩溃，Router 返回 503。
+### 5.2 未修复 fake 复现
+fake 请求直接发送到 Decode，不经过 Router/Prefill：
+```bash
+python3 bench_serving.py \
+  --backend sglang-oai-chat \
+  --dataset-path /home/luban/ShareGPT_V3_unfiltered_cleaned_split.json \
+  --dataset-name random \
+  --random-input-len 8192 \
+  --random-output-len 8192 \
+  --random-range-ratio 1 \
+  --host 10.207.193.166 \
+  --port 30002 \
+  --model-name DeepSeek-V4-Flash-0731 \
+  --max-concurrency 1024 \
+  --num-prompts 4096 \
+  --request-rate inf \
+  --enable-test-pd-without-transfer
+```
+`--enable-test-pd-without-transfer` 会写入 fake 标记`bootstrap_host=2.2.2.2` 和 `bootstrap_room`。预期未修复结果：同样进入不支持的 CPU copy，scheduler 退出，客户端连接被拒绝。
+### 5.3 DSpark + EP 问题复现
+使用以下关键组合启动 Decode：
+```text
+TP=8
+DP attention=8
+EP=4
+DSpark enabled
+Decode CUDA Graph=full
+```
+未补齐 `num_token_non_padded` 时，服务在 disaggregation warmup 的 CUDA Graphreplay 阶段即可复现 `NoneType - int`，无需等到 KV 压力测试。
+## 6. 修复思路与关键改动
+
+### 6.1 显式声明 KV Pool 的 CPU-copy 能力
+在 allocator/KV Pool 层增加 `supports_cpu_copy()`，只有`get_cpu_copy/load_cpu_copy` 能完整往返当前布局、K/V 和 scale buffer 时才返回`True`。
+典型判断包括：
+- 普通 token-major NHD 且没有独立 scale buffer：支持；
+- HiSparse、Unified、page-major、FP4/MXFP8 等当前 copy 不完整的布局：不支持；
+- SWA/Hybrid Pool：只有所有子 Pool 都支持时才支持。
+这样 scheduler 不再通过“接口存在”猜测能力，也不会用异常充当运行时能力探测。
+### 6.2 将 retraction 分为三条路径
+`retract_decode()` 根据 allocator 和请求能力分类：
+1. `supports_cpu_copy=True`：保留原 CPU save/restore 路径；
+2. 不支持 CPU copy，但 `req.supports_pd_rebootstrap=True`：释放 KV 并加入`rebootstrap_reqs`；
+3. 两者都不满足：设置 `FINISH_ABORT`，只终止对应请求。
+`supports_pd_rebootstrap()` 会排除 fake transfer、multimodal、input embeds、positional override、token type、LoRA 和 session 等不能仅靠 token IDs 安全复现的请求。
+### 6.3 接通自然 OOM 的 PD rebootstrap
+对于可重算请求：
+```text
+prepare_pd_rebootstrap
+-> 保存并从 output_ids 弹出 decode 边界 token
+-> 标记 pd_rebootstrap_in_progress
+-> 进入 DecodePreallocQueue
+-> Decode 重新预分配 KV 接收页
+-> 向原 Prefill URL 提交 recompute
+-> Prefill 按 origin_input_ids + output_ids 重算
+-> KV 传回 DecodeTransferQueue
+-> commit 时恢复边界 token
+-> 清除 rebootstrap 状态并继续 decode
+```
+弹出并在 commit 时重放边界 token，是为了保持“已向用户输出的 token”、“已经写入 KV 的 token”和“下一次 decode 输入 token”之间的边界不变，避免重复输出或少算一个 KV。
+fake transfer 会在 Prefill recompute dispatch 前被明确拒绝，不能伪造一次成功的真实 PD 重算。
+### 6.4 对齐 Full/SWA 分页预算
+Decode preallocation 的 Full/SWA required tokens 使用与 allocator 相同的`ceil_align(length, page_size)`。SWA 没有 radix eviction，因此直接从
+`swa_allocatable_tokens` 中扣除其 page-aligned requirement。
+### 6.5 完整处理 abort 和异步清理
+
+- `_finalize_retraction_abort()` 统一设置完成原因、trace、完成时间、offload 清理并
+  向 TokenizerManager 返回标准 `AbortReq`；
+- TokenizerManager 使用最多 4096 个 `recently_aborted_rids` tombstone，丢弃
+  abort 之后晚到的旧 token batch；RID 被新请求复用时清除旧 tombstone；
+- 已释放请求跳过非幂等的 GPU/host/radix 资源释放；没有 inflight offload ACK 后
+  再删除 `offloaded_state`；
+- 释放其他请求后仍无法容纳最后一个请求时，明确 abort 该请求，避免 scheduler
+  崩溃。
+
+### 6.6 修复 DSpark + EP metadata
+
+DSpark 手工构造 `ForwardBatch` 后，根据真实 `input_ids.numel()` 补齐：
+
+```python
+forward_batch.num_token_non_padded = torch.tensor(
+    num_tokens, dtype=torch.int32, device=device
+)
+forward_batch.num_token_non_padded_cpu = num_tokens
+```
+
+CUDA Graph/DP/EP 后续即可正确计算每个 rank 的真实 token 数。
+
+## 7. 修复结果
+
+### 7.1 修复版真实 PD：端到端 rebootstrap 成功
+
+测试配置：MF=0.55、concurrency=1024、prompts=2048、input/output=8192/8192。
+
+同一个请求的完整日志链路：
+
+```text
+PD_REBOOTSTRAP_PREPARE
+rid=chatcmpl-iyIq2Uc5iIiNdg7lVYYZtt78-10.207.193.156
+origin_input_len=7986 output_len_before=135
+recompute_prefix_len=8120 boundary_token=680
+
+PD_REBOOTSTRAP_ENQUEUE
+rid=chatcmpl-iyIq2Uc5iIiNdg7lVYYZtt78-10.207.193.156
+recompute_prefix_len=8120
+
+PD_REBOOTSTRAP_DISPATCH
+rid=chatcmpl-iyIq2Uc5iIiNdg7lVYYZtt78-10.207.193.156
+prefill_url=http://10.207.193.156:30001 recompute_prefix_len=8120
+
+PD_REBOOTSTRAP_HTTP_OK
+rid=chatcmpl-iyIq2Uc5iIiNdg7lVYYZtt78-10.207.193.156 status=200
+
+PD_REBOOTSTRAP_COMMIT
+rid=chatcmpl-iyIq2Uc5iIiNdg7lVYYZtt78-10.207.193.156
+replayed_boundary=True committed_output_id=680 output_len=135
+```
+
+汇总计数：
+
+```text
+PD_REBOOTSTRAP_PREPARE  = 356
+PD_REBOOTSTRAP_ENQUEUE  = 356
+PD_REBOOTSTRAP_DISPATCH = 356
+PD_REBOOTSTRAP_HTTP_OK  = 324
+PD_REBOOTSTRAP_COMMIT   = 324
+最终完成且 num_retractions > 0 的请求 = 32
+```
+
+压测停止后仍有部分请求处于排队/重算中，因此 prepare/dispatch 与 HTTP_OK/commit
+计数不完全相等；已经收到 HTTP 200 的 324 个请求均对应 324 次 Decode commit。
+
+结论：
+
+```text
+Decode retraction
+-> 释放 KV
+-> Prefill 重算
+-> KV 回传
+-> Decode commit
+-> 请求继续生成
+```
+
+完整证据见：
+[修复版真实 PD 归档](archives/20260827_0535_mf055_c1024_n2048_8k_8k/README.md)。
+
+### 7.2 修复版 fake：单请求安全失败，服务存活
+
+结果：
+
+```text
+因 OOM retraction 被安全 abort 的 fake 请求 = 343
+正常完成的 fake 请求                      = 196
+fake 请求进入 PD_REBOOTSTRAP_DISPATCH      = 0
+测试后 Decode /health                      = 200
+```
+
+典型日志：
+
+```text
+retract_decode: aborted request ...
+(KV cache does not support synchronous CPU save and restore)
+```
+
+结论：fake 请求没有被错误提交到 Prefill，也没有触发不支持的 CPU copy；只终止
+受影响请求，scheduler 和 Decode 服务保持存活。
+
+完整证据见：
+[修复版 fake 归档](archives/20260827_0551_fake_decode_mf055/README.md)。
+
+### 7.3 修复前后对照
+
+| 版本与场景 | 实际行为 | 最终状态 |
+|---|---|---|
+| 修复版 + 真实 PD | Prefill rebootstrap，KV 回传后继续生成 | 服务存活 |
+| 修复版 + fake | graceful abort 被撤回请求，其他请求继续 | 服务存活 |
+| 未修复 + 真实 PD | `get_cpu_copy -> NotImplementedError` | scheduler 崩溃，Router 503 |
+| 未修复 + fake | `get_cpu_copy -> NotImplementedError` | scheduler 崩溃，连接被拒绝 |
+
+## 8. 自动化测试结果
+
+本次相关单元测试执行结果：
+
+```text
+44 passed, 17 warnings, 13 subtests passed in 12.30s
+15 passed, 15 warnings in 11.14s
+```
+
+测试覆盖包括：
+
+- 不同 KV Pool 的 CPU-copy capability；
+- CPU copy、PD rebootstrap 和 graceful abort 三条 retraction 分支；
+- fake transfer 防御；
+- Decode preallocation 和 SWA page accounting；
+- rebootstrap token 边界与队列状态；
+- abort 后晚到输出清理；
+- DSpark DP/EP `num_token_non_padded` metadata；
+- 已释放请求及异步 offload 状态清理。
+
+测试日志见：[`logs/unit_tests.log`](logs/unit_tests.log)。
+
+## 9. 最终结论
+
+本次修复已经通过修复前后、真实 PD/fake 两个维度的交叉验证。原问题可稳定
+复现，异常栈明确命中不支持的 `get_cpu_copy()`；修复后真实请求能够通过 Prefill
+重算恢复，不能安全重算的请求能够被限制为单请求失败，Decode 服务不会因一次
+KV retraction 退出。
+
+因此，核心目标“无法备份 KV 时返回 Prefill 重算并继续请求，同时保证不可重算
+请求不会拖垮服务”已经得到端到端验证。
+

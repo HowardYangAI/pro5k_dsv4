@@ -1,0 +1,1569 @@
+{% extends "base.html" %}
+{% block title %}新建任务 — LLM Benchmark{% endblock %}
+{% block content %}
+<h1>新建 Benchmark 任务</h1>
+
+<form id="task-form" class="card-form">
+    <fieldset>
+        <legend>模板</legend>
+        <div class="form-row">
+            <div class="form-group" style="flex:2;">
+                <label for="template-select">选择模板</label>
+                <select id="template-select">
+                    <option value="">-- 不使用模板 --</option>
+                </select>
+            </div>
+            <div class="form-group" style="flex:1;">
+                <label for="template-name">模板名称</label>
+                <input type="text" id="template-name" placeholder="例如: DSV4-Performance">
+            </div>
+            <div class="form-group" style="flex:0 0 auto; margin-bottom:0;">
+                <label style="visibility:hidden;">&nbsp;</label>
+                <div style="display:flex; gap:6px; align-items:center;">
+                    <button type="button" class="btn btn-primary" style="font-size:14px;padding:8px 12px;" onclick="saveAsTemplate()">保存为模板</button>
+                    <button type="button" class="btn btn-danger" style="font-size:14px;padding:8px 12px;" onclick="deleteSelectedTemplate()">删除模板</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>基本信息</legend>
+        <div class="form-group">
+            <label for="name">任务名称 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="例如: dsv4-flash-prefill-test">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>连接配置</legend>
+        <div class="form-group">
+            <label for="connection_mode">连接模式</label>
+            <select id="connection_mode" name="connection_mode">
+                <option value="host_port">Host:Port</option>
+                <option value="base_url">Base URL + Token</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Model Name</label>
+            <div class="segmented-toggle" style="margin-bottom:6px;">
+                <input type="radio" id="mn_auto" name="model_name_mode" value="auto" checked onchange="toggleModelNameInput()">
+                <label for="mn_auto">自动获取</label>
+                <input type="radio" id="mn_manual" name="model_name_mode" value="manual" onchange="toggleModelNameInput()">
+                <label for="mn_manual">手动输入</label>
+            </div>
+            <input type="text" id="model_name" name="model_name" placeholder="例如: glm5.1" style="display:none;">
+            <small id="model-name-hint">自动通过 /v1/models 查询，失败则使用 default</small>
+        </div>
+
+        <div id="host-port-group">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="host">Host</label>
+                    <input type="text" id="host" name="host" value="10.93.160.25" placeholder="10.93.160.25">
+                </div>
+                <div class="form-group">
+                    <label for="port">Port</label>
+                    <input type="number" id="port" name="port" value="30000" placeholder="30000">
+                </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <button type="button" id="btn-traffic-check" class="btn-traffic-check" onclick="checkTraffic(false)">
+                    ⚠ 检测服务流量
+                </button>
+                <label style="font-size:13px; color:#666;">
+                    <input type="checkbox" id="skip-traffic-check" style="margin-right:4px;">
+                    跳过流量检测
+                </label>
+            </div>
+        </div>
+
+        <div id="base-url-group" style="display:none">
+            <div class="form-group">
+                <label for="base_url">Base URL</label>
+                <input type="text" id="base_url" name="base_url" placeholder="https://tokenservice.example.com">
+            </div>
+            <div class="form-group">
+                <label for="api_key">API Key</label>
+                <input type="password" id="api_key" name="api_key" placeholder="sk-...">
+            </div>
+            <div class="form-group">
+                <label for="request_model">Request Model Name</label>
+                <input type="text" id="request_model" name="request_model" placeholder="TokenService/GLM-5">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>GPU 系统监控</legend>
+        <label class="monitor-toggle">
+            <input type="checkbox" id="monitor_enabled" name="monitor_enabled" onchange="toggleMonitorConfig()">
+            <span>启用 GPU 监控</span>
+        </label>
+        <div id="monitor-config" style="display:none;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="monitor_port">监控端口</label>
+                    <input type="number" id="monitor_port" name="monitor_port" value="30100" min="1" max="65535">
+                </div>
+                <div class="form-group">
+                    <label for="monitor_devices">GPU</label>
+                    <input type="text" id="monitor_devices" name="monitor_devices" value="auto"
+                           placeholder="auto、0、0-3 或 1,2,4,5">
+                    <small>auto=全部；也可填写单卡、范围或列表。</small>
+                </div>
+                <div class="form-group">
+                    <label for="monitor_interval_ms">采样间隔 (ms)</label>
+                    <input type="number" id="monitor_interval_ms" name="monitor_interval_ms" value="100" min="50">
+                </div>
+                <div class="form-group">
+                    <label for="monitor_max_duration">最长时间 (s)</label>
+                    <input type="number" id="monitor_max_duration" name="monitor_max_duration" value="7200" min="1" max="7200">
+                </div>
+            </div>
+            <div class="monitor-health-row">
+                <button type="button" class="btn btn-secondary" id="btn-monitor-health" onclick="checkMonitorHealth()">检测监控服务</button>
+                <span id="monitor-health-result"></span>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>模型 & 数据集</legend>
+        <div class="form-group">
+            <label for="model_path">模型路径 (tokenizer)</label>
+            <select id="model_path" name="model_path">
+                <option value="">加载中...</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dataset_path">数据集</label>
+            <select id="dataset_path" name="dataset_path">
+                <option value="">加载中...</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <!-- Material Design Tabs -->
+    <div class="tabs-container">
+        <div class="tabs-bar">
+            <button type="button" class="tab-btn active" data-tab="normal">普通性能测试</button>
+            <button type="button" class="tab-btn" data-tab="shared-prefix">公共前缀测试</button>
+            <button type="button" class="tab-btn" data-tab="multi-turn">多轮对话测试</button>
+            <div class="tab-indicator" style="left: 0; width: 33.33%;"></div>
+        </div>
+    </div>
+
+    <!-- 普通性能测试 Tab -->
+    <div id="tab-normal" class="tab-content active">
+        <fieldset>
+            <legend>参数网格</legend>
+            <p class="help-text">点击格子选中/取消，系统将生成所有组合的笛卡尔积。</p>
+            <div id="param-grids"></div>
+            <div class="form-group" style="margin-top: 16px;">
+                <label for="iterations">迭代次数</label>
+                <input type="number" id="iterations" name="iterations" value="1" min="1" max="100" style="width: 80px;">
+                <small>每个参数组合重复运行的次数（用于多次采样取平均）</small>
+            </div>
+        </fieldset>
+    </div>
+
+    <!-- 公共前缀测试 Tab -->
+    <div id="tab-shared-prefix" class="tab-content">
+        <fieldset>
+            <legend>公共前缀测试参数</legend>
+            <p class="help-text">测试 KV Cache 对公共前缀的复用能力，数据集自动使用 generated-shared-prefix。</p>
+
+            <div class="shared-prefix-params">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gsp-num-groups">组数 <span class="required">*</span></label>
+                        <input type="number" id="gsp-num-groups" value="10" min="1" max="100" placeholder="10">
+                        <small>系统提示词分组数量</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="gsp-system-prompt-len">前缀长度 <span class="required">*</span></label>
+                        <input type="number" id="gsp-system-prompt-len" value="2048" min="128" max="65536" placeholder="2048">
+                        <small>每个系统提示词的 token 长度</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gsp-question-len">问题长度 <span class="required">*</span></label>
+                        <input type="number" id="gsp-question-len" value="128" min="32" max="4096" placeholder="128">
+                        <small>每个问题的 token 长度</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="gsp-prompts-per-group">每组请求数 <span class="required">*</span></label>
+                        <input type="number" id="gsp-prompts-per-group" value="512" min="1" max="2048" placeholder="512">
+                        <small>每组的请求数量</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gsp-output-len">输出长度 <span class="required">*</span></label>
+                        <input type="number" id="gsp-output-len" value="256" min="1" max="16384" placeholder="256">
+                        <small>每个请求的输出 token 长度</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="gsp-range-ratio">随机范围</label>
+                        <input type="number" id="gsp-range-ratio" value="0" min="0" max="1" step="0.1" placeholder="0">
+                        <small>长度波动比例 (0-1, 例如 0.2 表示 ±20% 随机波动)</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gsp-request-rate">请求速率</label>
+                        <input type="number" id="gsp-request-rate" value="0" min="0" step="0.01" placeholder="inf">
+                        <small>每秒请求数 (0 = 无限制，支持小数如 0.2)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="gsp-max-concurrency">最大并发</label>
+                        <input type="number" id="gsp-max-concurrency" value="" min="1" max="1024" placeholder="不限制">
+                        <small>同时处理的请求数上限 (留空=不限制)</small>
+                    </div>
+                </div>
+
+                <div class="shared-prefix-info">
+                    💡 总请求数 = 组数 × 每组请求数 (例如: 10组 × 512请求 = 5120个总请求)<br>
+                    📌 并发限制：控制同时发送的请求数，防止服务过载
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <!-- 多轮对话测试 Tab -->
+    <div id="tab-multi-turn" class="tab-content">
+        <fieldset>
+            <legend>负载模式</legend>
+            <div class="form-group">
+                <label for="mt-workload-mode">数据生成方式</label>
+                <select id="mt-workload-mode">
+                    <option value="synthetic" selected>长度合成</option>
+                    <option value="replay">响应驱动历史回放</option>
+                    <option value="timestamp_replay">原始时间戳回放</option>
+                </select>
+                <small id="mt-workload-help">使用 ShareGPT 按配置长度构造多轮对话。</small>
+            </div>
+        </fieldset>
+        <fieldset id="mt-combo-config">
+            <legend id="mt-combo-legend">测试组合（循环测试）</legend>
+            <p class="help-text" id="mt-combo-description">每行一组：<strong>起始长度 (L)</strong>=多轮对话第一轮的输入长度；<strong>每轮新增子长度 (S)</strong>=后续每轮新增的子问题长度（0=用起始长度）；<strong>输出长度 (O)</strong>=每轮生成长度。每组执行一次完整的多轮压测，按序运行。</p>
+            <table class="result-table" style="margin-top: 8px;">
+                <thead>
+                    <tr>
+                        <th class="mt-synthetic-column" style="width: 15%;">起始长度 (L)</th>
+                        <th class="mt-synthetic-column" style="width: 15%;">每轮新增子长度 (S)</th>
+                        <th style="width: 13%;">输出长度 (O)</th>
+                        <th id="mt-client-column-title" style="width: 11%;">客户端数</th>
+                        <th class="mt-request-count-column" style="width: 13%;">请求数</th>
+                        <th style="width: 8%;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="mt-combos-body"></tbody>
+            </table>
+            <p class="help-text" id="mt-combo-help">每行一组：客户端数 = 并发会话数；请求数 = 每组总请求数（0=不限制，跑完轮数即止）。输入框可点下拉选常用值或直接输入。</p>
+            <button type="button" id="mt-combo-add" class="btn btn-primary" style="margin-top: 8px;">+ 添加组合</button>
+            <p class="help-text">💡 点击输入框弹出常用值按钮，点一下即填入；也可直接输入任意值。</p>
+        </fieldset>
+
+        <fieldset id="mt-length-config">
+            <legend>长度配置（每组通用）</legend>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="mt-range-ratio">长度波动幅度</label>
+                    <input type="number" id="mt-range-ratio" value="0.5" min="0" max="1" step="0.1" placeholder="0.5">
+                    <small>0=精确长度（无波动）；0.5=±50% 波动（默认）；1=波动范围最大（±100%）</small>
+                </div>
+                <div class="form-group">
+                    <label for="mt-max-context-length">最大上下文长度</label>
+                    <input type="number" id="mt-max-context-length" value="194560" min="0" max="1048576" placeholder="194560">
+                    <small>超长截断 (keep last N)，0=不限制</small>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>执行配置（每组通用）</legend>
+            <div class="form-row">
+                <div class="form-group" id="mt-rounds-config">
+                    <label for="mt-num-rounds">轮数</label>
+                    <input type="number" id="mt-num-rounds" value="5" min="1" max="100" placeholder="5">
+                    <small>每段对话的轮次数（每组通用）</small>
+                </div>
+                <div class="form-group" id="mt-request-rate-config">
+                    <label for="mt-request-rate">请求速率 (req/s)</label>
+                    <input type="number" id="mt-request-rate" value="0" min="0" step="0.5" placeholder="0">
+                    <small>0=不限制（inf，立即发出）；&gt;0 按指定速率发射</small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group" id="mt-init-interval-config">
+                    <label for="mt-init-interval">首轮错峰间隔 (s)</label>
+                    <input type="number" id="mt-init-interval" value="0.2" min="0" step="0.01" placeholder="0.2">
+                    <small>首批客户端依次启动的固定间隔，0=同时启动；后续补充 Session 立即启动</small>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>高级配置</legend>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="mt-api-format">API 格式</label>
+                    <select id="mt-api-format">
+                        <option value="openai" selected>OpenAI（/v1/chat/completions）</option>
+                        <option value="sglang">SGLang（/generate 原生接口）</option>
+                    </select>
+                    <small>请求使用的 API 格式（默认 OpenAI 兼容）</small>
+                </div>
+                <div class="form-group">
+                    <label for="mt-seed">随机种子</label>
+                    <input type="number" id="mt-seed" min="0" placeholder="纯随机">
+                    <small>留空=纯随机（每次运行随机）；填数字=固定种子，结果可复现</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="display:flex; align-items:center; gap:8px; font-weight:500;">
+                    <input type="checkbox" id="mt-thinking" style="width:16px; height:16px;">
+                    Thinking 模式
+                </label>
+                <small>开=请求体注入 chat_template_kwargs.thinking=true（模型思考模式）；关=false（默认）</small>
+            </div>
+            <div class="form-group" id="mt-round-barrier-config">
+                <label style="display:flex; align-items:center; gap:8px; font-weight:500;">
+                    <input type="checkbox" id="mt-enable-round-barrier" style="width:16px; height:16px;">
+                    轮次屏障
+                </label>
+                <small>开=全部第 i 轮完成后才发第 i+1 轮，展示逐轮数据；关=连续流式压测，只展示汇总数据</small>
+            </div>
+            <div class="form-group" id="mt-replay-sequential-config" style="display:none;">
+                <label style="display:flex; align-items:center; gap:8px; font-weight:500;">
+                    <input type="checkbox" id="mt-replay-sequential-sessions" style="width:16px; height:16px;">
+                    按顺序选择 Session
+                </label>
+                <small>仅响应驱动历史回放生效；按原始开始时间依次领取 Session，不使用随机洗牌，数据集循环后仍保持相同顺序。</small>
+            </div>
+            <div class="form-group">
+                <label for="mt-host-header">Host Header</label>
+                <input type="text" id="mt-host-header" placeholder="k8s-rsv-...-jianshu.serving">
+                <small>LB 虚拟主机路由（可选，留空不设置）</small>
+            </div>
+            <div class="form-group">
+                <label style="display:flex; align-items:center; gap:8px; font-weight:500;">
+                    <input type="checkbox" id="mt-enable-session-key" checked style="width:16px; height:16px;">
+                    启用 Session Key
+                </label>
+                <small>会话路由头 X-Session-Id: &lt;随机前缀&gt;-client-{id}-s{n}（默认开启，session-aware 路由用）；关闭后不发送该头（baseline 测试或路由忽略此头时使用）</small>
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="grid-preview" class="card" style="display:none; margin-bottom: 16px;">
+        <h3>参数网格预览</h3>
+        <p id="grid-count"></p>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">创建任务</button>
+        <a href="/" class="btn btn-secondary">取消</a>
+    </div>
+</form>
+
+<div id="traffic-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <h3 id="traffic-modal-title"></h3>
+        <pre id="traffic-modal-log" class="traffic-log"></pre>
+        <div class="modal-actions">
+            <button type="button" class="btn btn-primary" onclick="closeTrafficModal()">确定</button>
+        </div>
+    </div>
+</div>
+
+<script>
+var STORAGE_KEY = 'benchmark_last_params';
+
+// ── Tab switching logic ─────────────────────────────────────────────
+var currentTab = 'normal';
+
+function initTabs() {
+    var tabs = document.querySelectorAll('.tab-btn');
+    var indicator = document.querySelector('.tab-indicator');
+
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var tabName = this.dataset.tab;
+            switchTab(tabName);
+        });
+    });
+
+    // 初始化：确保只有第一个 tab 显示
+    switchTab('normal');
+}
+
+function switchTab(tabName) {
+    currentTab = tabName;
+
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+
+    // Update indicator position
+    var indicator = document.querySelector('.tab-indicator');
+    var activeBtn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+    if (activeBtn && indicator) {
+        indicator.style.left = activeBtn.offsetLeft + 'px';
+        indicator.style.width = activeBtn.offsetWidth + 'px';
+    }
+
+    // Update tab content - 关键：先全部隐藏，再显示当前 tab
+    document.querySelectorAll('.tab-content').forEach(function(content) {
+        content.style.display = 'none';
+        content.classList.remove('active');
+    });
+
+    var activeContent = document.getElementById('tab-' + tabName);
+    if (activeContent) {
+        activeContent.style.display = 'block';
+        activeContent.classList.add('active');
+    }
+
+    // Update grid preview
+    updatePreview();
+}
+
+// ── Parameter definitions ──────────────────────────────────────────
+var PARAMS = [
+    { key: 'concurrency_list', label: '并发数',
+      candidates: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 768, 1024],
+      defaults:   [1, 2, 4, 8, 16, 32] },
+    { key: 'total_prompts', label: '总请求数',
+      candidates: [1, 32, 64, 128, 256, 512, 1024, 4096],
+      defaults:   [512] },
+    { key: 'input_len_list', label: '输入长度',
+      candidates: [2048, 4096, 8192, 16384, 57344, 65536],
+      defaults:   [8192] },
+    { key: 'output_len_list', label: '输出长度',
+      candidates: [1, 32, 64, 700, 2048],
+      defaults:   [2048] },
+    { key: 'request_rate_list', label: '请求速率',
+      candidates: [0, 0.5, 1, 1.5, 2, 2.5, 3],
+      labels:     ['inf', '0.5', '1', '1.5', '2', '2.5', '3'],
+      defaults:   [0] },
+    { key: 'extra_args', label: '额外参数',
+      candidates: ['--enable-test-pd-without-transfer', '--profile'],
+      multiple: true,
+      defaults:   [] }
+];
+
+// Each param gets: { selected: Set, custom: Set }
+var state = {};
+
+function labelOf(p, v) {
+    if (p.labels) {
+        var idx = p.candidates.indexOf(v);
+        if (idx >= 0) return p.labels[idx];
+    }
+    return String(v);
+}
+
+function renderParam(p, st) {
+    var allVals = p.candidates.concat(Array.from(st[p.key].custom).sort(function(a,b){ return a-b; }));
+    var html = '<div class="param-group"><span class="param-label">' + p.label + '</span><div class="tile-row">';
+    allVals.forEach(function(v) {
+        var sel = st[p.key].selected.has(v) ? ' tile-sel' : '';
+        var extra = p.key === 'extra_args' ? ' tile-extra' : '';
+        html += '<button type="button" class="tile' + sel + extra + '" data-val="' + v + '">' + labelOf(p, v) + '</button>';
+    });
+    html += '</div><div class="tile-actions">';
+    if (p.key !== 'extra_args') {
+        html += '<input type="number" class="tile-add-input" placeholder="自定义" step="any">';
+    } else {
+        html += '<input type="text" class="tile-add-input" placeholder="--自定义参数">';
+    }
+    html += '<button type="button" class="btn-tile-add">+</button>';
+    html += '<button type="button" class="btn-tile-del" title="清除自定义值">-</button>';
+    html += '</div></div>';
+    return html;
+}
+
+function renderAll() {
+    // 渲染参数网格（普通），绑定事件
+    [
+        { container: 'param-grids', params: PARAMS, st: state },
+    ].forEach(function(g) {
+        var el = document.getElementById(g.container);
+        if (!el) return;
+        el.innerHTML = g.params.map(function(p) { return renderParam(p, g.st); }).join('');
+        g.params.forEach(function(p) {
+            // Tile clicks
+            el.querySelectorAll('.tile[data-val]').forEach(function(tile) {
+                // Find which param group this tile belongs to by checking parent
+                if (tile.closest('.param-group').querySelector('.param-label').textContent !== p.label) return;
+                tile.addEventListener('click', function() {
+                    var v = isNaN(Number(this.dataset.val)) ? this.dataset.val : Number(this.dataset.val);
+                    if (g.st[p.key].selected.has(v)) {
+                        if (!p.candidates.includes(v)) {
+                            // Custom value — remove from custom too
+                            g.st[p.key].custom.delete(v);
+                        }
+                        g.st[p.key].selected.delete(v);
+                    } else {
+                        g.st[p.key].selected.add(v);
+                    }
+                    renderAll();
+                    updatePreview();
+                });
+            });
+        });
+        // Add button clicks
+        el.querySelectorAll('.btn-tile-add').forEach(function(btn, i) {
+            btn.onclick = function() {
+                var p = g.params[i];
+                var input = btn.parentElement.querySelector('.tile-add-input');
+                var raw = input.value.trim();
+                if (!raw) return;
+                var v = p.key === 'extra_args' ? raw : Number(raw);
+                if (isNaN(v) && p.key !== 'extra_args') return;
+                if (!g.st[p.key].custom.has(v) && !p.candidates.includes(v)) {
+                    g.st[p.key].custom.add(v);
+                }
+                g.st[p.key].selected.add(v);
+                if (!p.multiple) {
+                    g.st[p.key].selected = new Set([v]);
+                }
+                input.value = '';
+                renderAll();
+                updatePreview();
+            };
+        });
+        // Delete button clicks — remove all custom tiles
+        el.querySelectorAll('.btn-tile-del').forEach(function(btn, i) {
+            btn.onclick = function() {
+                var p = g.params[i];
+                g.st[p.key].custom.forEach(function(v) { g.st[p.key].selected.delete(v); });
+                g.st[p.key].custom.clear();
+                renderAll();
+                updatePreview();
+            };
+        });
+    });
+}
+
+function getSelected(p, st) {
+    return Array.from((st || state)[p.key].selected).sort(function(a,b){ return a-b; });
+}
+
+// ── 多轮对话测试组合（循环测试）──────────────────────────────────
+// 每行一组 [起始长度 L, 每轮新增子长度 S, 输出长度 O]，显式选择，不做笛卡尔积
+var mtCombos = [[20480, 10240, 718, 10, 160]];
+
+function padCombo(c, defC, defT) {
+    // 兼容旧 3 元素 [L,S,O] → 补 [客户端, 请求数]；优先用模板/配置里保存的共享值，
+    // 没有才用默认 10/160；T=0 合法（不限制），不能覆盖
+    var c2 = [c[0], c[1], c[2], c[3], c[4]];
+    if (c2[3] === undefined || c2[3] === null || isNaN(c2[3])) c2[3] = (defC !== undefined && !isNaN(defC)) ? defC : 10;
+    if (c2[4] === undefined || c2[4] === null || isNaN(c2[4])) c2[4] = (defT !== undefined && !isNaN(defT)) ? defT : 160;
+    return c2;
+}
+
+// 常用值（点击输入框弹出选择，也可直接输入）
+var MT_PRESETS = {
+    L: [1024, 2048, 4096, 10240, 20480, 40960, 81920, 102400],
+    S: [0, 128, 512, 1024, 2048, 4096, 10240, 20480],
+    O: [64, 128, 256, 512, 718, 1024, 2048],
+    C: [1, 2, 4, 8, 10, 12, 16, 20, 30, 36, 40, 50, 64],
+    T: [0, 25, 50, 100, 160, 200, 320, 400, 512, 600, 800],
+};
+var MT_FIELD_IDX = { L: 0, S: 1, O: 2, C: 3, T: 4 };
+var mtPresetPop = null;
+
+function showPresets(inp) {
+    if (!mtPresetPop) {
+        mtPresetPop = document.createElement('div');
+        mtPresetPop.style.cssText = 'position:fixed;z-index:1000;background:#fff;border:1px solid #ccc;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.15);padding:8px;display:none;max-width:340px;';
+        document.body.appendChild(mtPresetPop);
+        document.addEventListener('click', function(e) {
+            if (mtPresetPop.style.display !== 'none'
+                && !mtPresetPop.contains(e.target)
+                && !e.target.classList.contains('mt-combo-input')) {
+                mtPresetPop.style.display = 'none';
+            }
+        });
+    }
+    var field = inp.dataset.field;
+    var idx = parseInt(inp.dataset.idx, 10);
+    mtPresetPop.innerHTML = '';
+    MT_PRESETS[field].forEach(function(v) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = v;
+        b.style.cssText = 'margin:2px;padding:4px 10px;font-size:13px;cursor:pointer;border:1px solid #ddd;border-radius:4px;background:#f8f9fa;color:#333;';
+        b.onclick = function() {
+            inp.value = v;
+            mtCombos[idx][MT_FIELD_IDX[field]] = v;
+            mtPresetPop.style.display = 'none';
+            updatePreview();
+        };
+        mtPresetPop.appendChild(b);
+    });
+    var rect = inp.getBoundingClientRect();
+    mtPresetPop.style.left = Math.min(rect.left, window.innerWidth - 350) + 'px';
+    mtPresetPop.style.top = (rect.bottom + 4) + 'px';
+    mtPresetPop.style.display = 'block';
+}
+
+function renderMtCombos() {
+    var body = document.getElementById('mt-combos-body');
+    if (!body) return;
+    body.innerHTML = '';
+    // 输入框内联样式与 .form-group input 完全一致（padding 8px 10px / font 14px / radius 6px）
+    var inputStyle = 'width:100%;padding:8px 10px;border:1px solid #ccc;border-radius:6px;font-size:14px;font-family:inherit;box-sizing:border-box;';
+    var mode = document.getElementById('mt-workload-mode') ? document.getElementById('mt-workload-mode').value : 'synthetic';
+    var replay = mode === 'replay' || mode === 'timestamp_replay';
+    var timestampReplay = mode === 'timestamp_replay';
+    mtCombos.forEach(function(c, i) {
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+            (replay ? '' : '<td><input type="number" class="mt-combo-input" data-idx="' + i + '" data-field="L" value="' + c[0] + '" min="1" style="' + inputStyle + '"></td>') +
+            (replay ? '' : '<td><input type="number" class="mt-combo-input" data-idx="' + i + '" data-field="S" value="' + c[1] + '" min="0" style="' + inputStyle + '"></td>') +
+            '<td><input type="number" class="mt-combo-input" data-idx="' + i + '" data-field="O" value="' + c[2] + '" min="1" style="' + inputStyle + '"></td>' +
+            '<td><input type="number" class="mt-combo-input" data-idx="' + i + '" data-field="C" value="' + c[3] + '" min="1" style="' + inputStyle + '"></td>' +
+            '<td><input type="number" class="mt-combo-input" data-idx="' + i + '" data-field="T" value="' + c[4] + '" min="0" style="' + inputStyle + '"></td>' +
+            '<td><button type="button" class="btn btn-sm btn-danger mt-combo-del" data-idx="' + i + '" style="background:#e74c3c;">删除</button></td>';
+        body.appendChild(tr);
+    });
+    // 绑定输入、常用值弹出与删除
+    body.querySelectorAll('.mt-combo-input').forEach(function(inp) {
+        inp.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showPresets(this);
+        });
+        inp.addEventListener('change', function() {
+            var idx = parseInt(this.dataset.idx, 10);
+            var field = MT_FIELD_IDX[this.dataset.field];
+            var v = parseInt(this.value, 10);
+            if (!isNaN(v)) mtCombos[idx][field] = v;
+        });
+    });
+    body.querySelectorAll('.mt-combo-del').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var idx = parseInt(this.dataset.idx, 10);
+            mtCombos.splice(idx, 1);
+            if (mtCombos.length === 0) mtCombos = [[20480, 10240, 718, 10, 160]];  // 至少保留一行
+            renderMtCombos();
+            updatePreview();
+        });
+    });
+}
+
+function updateMtWorkloadMode() {
+    var mode = document.getElementById('mt-workload-mode').value;
+    var replay = mode === 'replay' || mode === 'timestamp_replay';
+    var timestampReplay = mode === 'timestamp_replay';
+    document.querySelectorAll('.mt-synthetic-column').forEach(function(el) {
+        el.style.display = replay ? 'none' : '';
+    });
+    document.getElementById('mt-length-config').style.display = replay ? 'none' : '';
+    document.getElementById('mt-rounds-config').style.display = replay ? 'none' : '';
+    document.getElementById('mt-round-barrier-config').style.display = replay ? 'none' : '';
+    document.getElementById('mt-replay-sequential-config').style.display = mode === 'replay' ? '' : 'none';
+    document.getElementById('mt-combo-config').style.display = '';
+    document.getElementById('mt-init-interval-config').style.display = '';
+    document.getElementById('mt-request-rate-config').style.display = timestampReplay ? 'none' : '';
+    document.querySelectorAll('.mt-request-count-column').forEach(function(el) {
+        el.style.display = '';
+    });
+    document.getElementById('mt-client-column-title').textContent = '客户端数';
+    var apiFormat = document.getElementById('mt-api-format');
+    if (replay) apiFormat.value = 'openai';
+    apiFormat.disabled = replay;
+    document.getElementById('mt-workload-help').textContent = timestampReplay
+        ? '每个客户端领取 Session 后立即发送首个 Span；后续轮间隔=max(上一轮响应时间, 原始时间戳差值)，不同 Session 并行回放。'
+        : (replay
+            ? '使用内置 GLM-5.1 1000-session 数据集；每个 client 等响应后继续下一轮，session 完成后立即领取新 session。请求速率作为全局发射上限，0=不限制。'
+            : '使用 ShareGPT 按配置长度构造多轮对话。');
+    document.getElementById('mt-combo-description').innerHTML = timestampReplay
+        ? '配置 <strong>最大输出长度 / 客户端数 / 请求数</strong>；客户端数控制同时运行的 Session 数，请求数控制总发射量。'
+        : replay
+        ? '使用新的真实 Session 数据集。每行配置一组 <strong>输出长度 / 客户端数 / 请求数</strong>，按序运行。'
+        : '每行一组：<strong>起始长度 (L)</strong>=第一轮输入长度；<strong>每轮新增子长度 (S)</strong>=后续新增长度；<strong>输出长度 (O)</strong>=每轮生成长度。';
+    document.getElementById('mt-combo-help').textContent = timestampReplay
+        ? 'Session 数是最大活跃会话数；请求数是硬上限，达到后允许截断最后一个 Session。请求数=0时只完整回放首批 Session。'
+        : replay
+        ? '客户端数 = 同时活跃的会话数；请求数 = HTTP 请求总数（0=将默认数据集完整回放一次）。'
+        : '客户端数 = 并发会话数；请求数 = 每组总请求数（0=不限制，跑完配置轮数即止）。';
+    renderMtCombos();
+}
+
+// 添加组合按钮：只绑定一次（renderMtCombos 内部不再绑定）
+// 初始第一行是"默认配置"，不参与占用判断：第一次点添加静默加一行默认组合；
+// 只有用户再次添加相同的组合时才提醒并拦截
+function comboEquals(a, b) {
+    return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4];
+}
+function initMtComboAdd() {
+    var btn = document.getElementById('mt-combo-add');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+        // 复制上一行的配置（L/S/O/客户端/请求数），方便微调；没有上一行才用默认值
+        var last = mtCombos.length > 0 ? mtCombos[mtCombos.length - 1] : null;
+        var newRow = last ? last.slice() : [20480, 10240, 718, 10, 160];
+        // 仅排除新行的来源（最后一行），否则 newRow 必然和自己重复、永远被拦截；
+        // 其余行全部参与判重（含第 1 行默认行），首次添加时集合为空自然放行
+        var dup = mtCombos.slice(0, -1).some(function(c) { return comboEquals(padCombo(c), newRow); });
+        if (dup) {
+            alert('存在完全相同的组合 [' + newRow.join(', ') + ']，请先修改或删除已有行');
+            return;
+        }
+        mtCombos.push(newRow);
+        renderMtCombos();
+        updatePreview();
+    });
+}
+
+function updatePreview() {
+    var preview = document.getElementById('grid-preview');
+
+    if (currentTab === 'multi-turn') {
+        // 多轮对话测试预览：显式组合数
+        var combos = mtCombos.length;
+        if (combos > 0) {
+            preview.style.display = '';
+            document.getElementById('grid-count').textContent = '共 ' + combos + ' 组压测（按序执行，每组可独立配置客户端/请求数）';
+        } else {
+            preview.style.display = 'none';
+        }
+    } else if (currentTab === 'shared-prefix') {
+        // 公共前缀测试预览
+        var numGroups = parseInt(document.getElementById('gsp-num-groups').value) || 0;
+        var promptsPerGroup = parseInt(document.getElementById('gsp-prompts-per-group').value) || 0;
+        var total = numGroups * promptsPerGroup;
+
+        if (total > 0 && total <= 10000) {
+            preview.style.display = '';
+            var text = '共 ' + total + ' 个请求 (' + numGroups + ' 组 × ' + promptsPerGroup + ' 请求/组)';
+            document.getElementById('grid-count').textContent = text;
+        } else if (total > 10000) {
+            preview.style.display = '';
+            document.getElementById('grid-count').textContent = '共 ' + total + ' 个请求 — 超过 10000 上限，请减少参数。';
+        } else {
+            preview.style.display = 'none';
+        }
+    } else {
+        // 普通测试预览（保持原有逻辑）
+        var c = getSelected(PARAMS[0]);
+        var t = getSelected(PARAMS[1]);
+        var i = getSelected(PARAMS[2]);
+        var o = getSelected(PARAMS[3]);
+        var r = getSelected(PARAMS[4]);
+        var combinations = c.length * t.length * i.length * o.length * r.length;
+        var iterations = parseInt(document.getElementById('iterations').value) || 1;
+        var total = combinations * iterations;
+
+        if (total > 0 && total <= 1000) {
+            preview.style.display = '';
+            var text = '共 ' + total + ' 次运行 (' + combinations + ' 个组合';
+            if (iterations > 1) {
+                text += ' × ' + iterations + ' 次迭代';
+            }
+            text += ')';
+            document.getElementById('grid-count').textContent = text;
+        } else if (total > 1000) {
+            preview.style.display = '';
+            document.getElementById('grid-count').textContent = '共 ' + total + ' 次运行 — 超过 1000 上限，请减少参数或迭代次数。';
+        } else {
+            preview.style.display = 'none';
+        }
+    }
+}
+
+// ── localStorage ───────────────────────────────────────────────────
+function saveParams() {
+    var data = {};
+    ['name','connection_mode','host','port','base_url','api_key','request_model','model_name','model_path','dataset_path','monitor_port','monitor_devices','monitor_interval_ms','monitor_max_duration'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) data[id] = el.value;
+    });
+    var modeEl = document.querySelector('input[name="model_name_mode"]:checked');
+    if (modeEl) data['model_name_mode'] = modeEl.value;
+
+    // Save tab state
+    data['test_mode'] = currentTab;
+
+    // Save normal test params
+    PARAMS.forEach(function(p) {
+        data[p.key] = getSelected(p);
+    });
+    data['iterations'] = parseInt(document.getElementById('iterations').value) || 1;
+    // Save shared-prefix test params
+    data['gsp_num_groups'] = document.getElementById('gsp-num-groups').value;
+    data['gsp_system_prompt_len'] = document.getElementById('gsp-system-prompt-len').value;
+    data['gsp_question_len'] = document.getElementById('gsp-question-len').value;
+    data['gsp_prompts_per_group'] = document.getElementById('gsp-prompts-per-group').value;
+    data['gsp_output_len'] = document.getElementById('gsp-output-len').value;
+    data['gsp_range_ratio'] = document.getElementById('gsp-range-ratio').value;
+    data['gsp_request_rate'] = document.getElementById('gsp-request-rate').value;
+    data['gsp_max_concurrency'] = document.getElementById('gsp-max-concurrency').value;
+
+    // Save multi-turn test params（组合 + 通用单值）
+    data['mt_combos'] = mtCombos.map(function(c) { return [c[0], c[1], c[2], c[3], c[4]]; });
+    ['mt-num-rounds','mt-range-ratio','mt-max-context-length','mt-init-interval',
+     'mt-request-rate','mt-seed','mt-host-header'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) data[id.replace(/-/g, '_')] = el.value;
+    });
+    data['mt_api_format'] = document.getElementById('mt-api-format').value;
+    data['mt_thinking'] = document.getElementById('mt-thinking').checked;
+    data['mt_enable_session_key'] = document.getElementById('mt-enable-session-key').checked;
+    data['mt_enable_round_barrier'] = document.getElementById('mt-enable-round-barrier').checked;
+    data['mt_workload_mode'] = document.getElementById('mt-workload-mode').value;
+    data['mt_replay_sequential_sessions'] = document.getElementById('mt-replay-sequential-sessions').checked;
+
+    data['monitor_enabled'] = document.getElementById('monitor_enabled').checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadParams() {
+    try {
+        // Check for rerun config first
+        var rerunRaw = localStorage.getItem('bench_rerun_config');
+        var data = null;
+        if (rerunRaw) {
+            data = JSON.parse(rerunRaw);
+            localStorage.removeItem('bench_rerun_config'); // Clear after use
+        } else {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            data = JSON.parse(raw);
+        }
+        if (data['monitor_devices'] === undefined && data['monitor_device'] !== undefined) {
+            data['monitor_devices'] = String(data['monitor_device']);
+        }
+        // Restore tab state
+        if (data['test_mode']) {
+            // 映射后端值到前端 tab 名称
+            var tabName = data['test_mode'];
+            if (tabName === 'shared_prefix') {
+                tabName = 'shared-prefix';
+            }
+            if (tabName === 'multi_turn') {
+                tabName = 'multi-turn';
+            }
+            switchTab(tabName);
+        }
+
+        ['name','connection_mode','host','port','base_url','api_key','request_model','model_name','model_path','dataset_path','monitor_port','monitor_devices','monitor_interval_ms','monitor_max_duration'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && data[id] !== undefined) el.value = data[id];
+        });
+        document.getElementById('connection_mode').dispatchEvent(new Event('change'));
+        document.getElementById('monitor_enabled').checked = Boolean(data['monitor_enabled']);
+        toggleMonitorConfig();
+        if (data['model_name_mode']) {
+            var radio = document.querySelector('input[name="model_name_mode"][value="' + data['model_name_mode'] + '"]');
+            if (radio) radio.checked = true;
+            toggleModelNameInput();
+        }
+
+        // Restore normal test params
+        PARAMS.forEach(function(p) {
+            var key = p.key;
+            // Handle total_prompts_list -> total_prompts mapping
+            if (key === 'total_prompts' && data['total_prompts_list']) {
+                key = 'total_prompts_list';
+            }
+            if (data[key] && Array.isArray(data[key]) && data[key].length > 0) {
+                var vals = data[key];
+                state[p.key].selected = new Set(vals);
+                vals.forEach(function(v) {
+                    if (!p.candidates.includes(v)) state[p.key].custom.add(v);
+                });
+            }
+        });
+        if (data['iterations']) {
+            document.getElementById('iterations').value = data['iterations'];
+        }
+
+        // Restore shared-prefix test params
+        if (data['gsp_num_groups']) document.getElementById('gsp-num-groups').value = data['gsp_num_groups'];
+        if (data['gsp_system_prompt_len']) document.getElementById('gsp-system-prompt-len').value = data['gsp_system_prompt_len'];
+        if (data['gsp_question_len']) document.getElementById('gsp-question-len').value = data['gsp_question_len'];
+        if (data['gsp_prompts_per_group']) document.getElementById('gsp-prompts-per-group').value = data['gsp_prompts_per_group'];
+        if (data['gsp_output_len']) document.getElementById('gsp-output-len').value = data['gsp_output_len'];
+        if (data['gsp_range_ratio'] !== undefined) document.getElementById('gsp-range-ratio').value = data['gsp_range_ratio'];
+        if (data['gsp_request_rate'] !== undefined) document.getElementById('gsp-request-rate').value = data['gsp_request_rate'];
+        // 并发数：0 表示不限制，需要恢复；undefined/null 才不恢复
+        if (data['gsp_max_concurrency'] !== undefined && data['gsp_max_concurrency'] !== null) {
+            document.getElementById('gsp-max-concurrency').value = data['gsp_max_concurrency'];
+        }
+
+        // Restore multi-turn combos（显式组合）
+        if (data['mt_combos'] && Array.isArray(data['mt_combos']) && data['mt_combos'].length > 0) {
+            // 旧模板可能存的是 3 元组合 + 共享字段：补全时优先用共享字段值，避免覆盖用户配置
+            var defC = parseInt(data['mt_num_clients'], 10);
+            var defT = parseInt(data['mt_total_requests'], 10);
+            mtCombos = data['mt_combos'].map(function(c) {
+                return padCombo(c.map(function(x) { return parseInt(x, 10); }), defC, defT);
+            });
+        } else if (data['mt_request_length_list'] && Array.isArray(data['mt_request_length_list'])) {
+            // 兼容旧网格/标量格式 → 取第一组
+            var L = data['mt_request_length_list'][0] || data['mt_request_length'] || 1024;
+            var S = data['mt_sub_question_input_length_list'] ? data['mt_sub_question_input_length_list'][0] : (data['mt_sub_question_input_length'] || 0);
+            var O = data['mt_output_length_list'] ? data['mt_output_length_list'][0] : (data['mt_output_length'] || 256);
+            mtCombos = [[parseInt(L, 10), parseInt(S, 10), parseInt(O, 10)]];
+        }
+        // Restore multi-turn single-value params
+        ['mt-num-rounds','mt-range-ratio','mt-max-context-length','mt-init-interval',
+         'mt-request-rate','mt-seed','mt-host-header'].forEach(function(id) {
+            var key = id.replace(/-/g, '_');
+            var el = document.getElementById(id);
+            if (el && data[key] !== undefined && data[key] !== null && data[key] !== '') {
+                el.value = data[key];
+            }
+        });
+        if (data['mt_api_format'] !== undefined) document.getElementById('mt-api-format').value = data['mt_api_format'];
+        if (data['mt_thinking'] !== undefined) document.getElementById('mt-thinking').checked = !!data['mt_thinking'];
+        if (data['mt_enable_session_key'] !== undefined) document.getElementById('mt-enable-session-key').checked = !!data['mt_enable_session_key'];
+        if (data['mt_enable_round_barrier'] !== undefined) document.getElementById('mt-enable-round-barrier').checked = !!data['mt_enable_round_barrier'];
+        if (data['mt_workload_mode'] !== undefined) document.getElementById('mt-workload-mode').value = data['mt_workload_mode'];
+        if (data['mt_replay_sequential_sessions'] !== undefined) document.getElementById('mt-replay-sequential-sessions').checked = !!data['mt_replay_sequential_sessions'];
+        updateMtWorkloadMode();
+        renderMtCombos();
+        renderAll();
+        updatePreview();
+    } catch(e) {}
+}
+
+// ── Model select ───────────────────────────────────────────────────
+async function initModelSelect() {
+    var sel = document.getElementById('model_path');
+    var savedValue = null;
+    try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) { var p = JSON.parse(raw); savedValue = p['model_path']; }
+    } catch(e) {}
+
+    try {
+        var resp = await fetch('/api/models');
+        var models = await resp.json();
+        sel.innerHTML = '';
+        models.forEach(function(m) {
+            var opt = document.createElement('option');
+            opt.value = m.path;
+            opt.textContent = m.name;
+            sel.appendChild(opt);
+        });
+        if (savedValue && models.some(function(m) { return m.path === savedValue; })) {
+            sel.value = savedValue;
+        } else if (models.length > 0) {
+            var dsv4 = models.find(function(m) { return m.name.indexOf('DeepSeek-V4-Pro') !== -1; });
+            if (dsv4) sel.value = dsv4.path;
+        }
+    } catch(e) {
+        sel.innerHTML = '<option value="">加载失败，请刷新重试</option>';
+    }
+}
+
+// ── Dataset select ────────────────────────────────────────────────────
+async function initDatasetSelect() {
+    var sel = document.getElementById('dataset_path');
+    var savedValue = null;
+    try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) { var p = JSON.parse(raw); savedValue = p['dataset_path']; }
+    } catch(e) {}
+
+    try {
+        var resp = await fetch('/api/datasets');
+        var datasets = await resp.json();
+        sel.innerHTML = '';
+        datasets.forEach(function(d) {
+            var opt = document.createElement('option');
+            opt.value = d.path;
+            opt.textContent = d.name;
+            sel.appendChild(opt);
+        });
+        if (savedValue && datasets.some(function(d) { return d.path === savedValue; })) {
+            sel.value = savedValue;
+        }
+    } catch(e) {
+        sel.innerHTML = '<option value="">加载失败，请刷新重试</option>';
+    }
+}
+
+// ── Init ───────────────────────────────────────────────────────────
+function toggleModelNameInput() {
+    var manual = document.querySelector('input[name="model_name_mode"]:checked').value === 'manual';
+    var input = document.getElementById('model_name');
+    var hint = document.getElementById('model-name-hint');
+    input.style.display = manual ? '' : 'none';
+    hint.textContent = manual ? '手动指定发送给 API 的模型名称' : '自动通过 /v1/models 接口查询模型名，查询失败则使用 default';
+    if (!manual) input.value = '';
+    saveParams();
+}
+
+document.getElementById('connection_mode').addEventListener('change', function() {
+    var isHost = this.value === 'host_port';
+    document.getElementById('host-port-group').style.display = isHost ? '' : 'none';
+    document.getElementById('base-url-group').style.display = isHost ? 'none' : '';
+    resetMonitorHealthResult();
+});
+
+function resetMonitorHealthResult() {
+    var result = document.getElementById('monitor-health-result');
+    if (!result) return;
+    result.className = '';
+    result.textContent = '';
+}
+
+function toggleMonitorConfig() {
+    var enabled = document.getElementById('monitor_enabled').checked;
+    document.getElementById('monitor-config').style.display = enabled ? '' : 'none';
+    resetMonitorHealthResult();
+    saveParams();
+}
+
+async function checkMonitorHealth() {
+    var btn = document.getElementById('btn-monitor-health');
+    var result = document.getElementById('monitor-health-result');
+    var mode = document.getElementById('connection_mode').value;
+    btn.disabled = true;
+    result.className = 'monitor-health-pending';
+    result.textContent = '检测中...';
+    try {
+        var resp = await fetch('/api/monitor/health', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                connection_mode: mode,
+                host: document.getElementById('host').value.trim(),
+                base_url: document.getElementById('base_url').value.trim(),
+                monitor_port: parseInt(document.getElementById('monitor_port').value) || 30100,
+                monitor_devices: document.getElementById('monitor_devices').value.trim() || 'auto',
+                monitor_interval_ms: parseInt(document.getElementById('monitor_interval_ms').value) || 100,
+                monitor_max_duration: parseInt(document.getElementById('monitor_max_duration').value) || 7200
+            })
+        });
+        var data = await resp.json();
+        result.className = data.ok ? 'monitor-health-ok' : 'monitor-health-error';
+        var devices = data.response && Array.isArray(data.response.devices) ? data.response.devices : [];
+        var deviceText = devices.map(function(device) {
+            var index = device.device !== undefined ? device.device : device.index;
+            var name = device.device_name || device.name || device.chip_name || 'GPU';
+            var failure = device.profiler_available === false
+                ? '（不可用' + (device.message ? '：' + device.message : '') + '）'
+                : '';
+            return 'GPU ' + index + ' ' + name + failure;
+        }).join('；');
+        result.textContent = data.ok
+            ? '可用：' + (deviceText || 'Monitor 正常')
+            : '不可用：' + (deviceText || data.message || (data.response && data.response.message) || '未知错误');
+    } catch (err) {
+        result.className = 'monitor-health-error';
+        result.textContent = '检测失败：' + err.message;
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+['host', 'base_url', 'monitor_port', 'monitor_devices'].forEach(function(id) {
+    document.getElementById(id).addEventListener('input', resetMonitorHealthResult);
+});
+
+// Init state with defaults
+PARAMS.forEach(function(p) {
+    state[p.key] = { selected: new Set(p.defaults), custom: new Set() };
+});
+
+// ── Template system ─────────────────────────────────────────────────
+var templatesCache = [];
+
+async function loadTemplates() {
+    try {
+        var resp = await fetch('/api/templates');
+        templatesCache = await resp.json();
+        var sel = document.getElementById('template-select');
+        sel.innerHTML = '<option value="">-- 不使用模板 --</option>';
+        templatesCache.forEach(function(t) {
+            var opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.name;
+            sel.appendChild(opt);
+        });
+    } catch(e) {
+        console.error('Failed to load templates:', e);
+    }
+}
+
+document.getElementById('template-select').addEventListener('change', function() {
+    var id = parseInt(this.value);
+    if (!id) return;
+    var tmpl = templatesCache.find(function(t) { return t.id === id; });
+    if (!tmpl || !tmpl.config) return;
+    applyTemplateConfig(tmpl.config);
+});
+
+function applyTemplateConfig(config) {
+    if (config['monitor_devices'] === undefined && config['monitor_device'] !== undefined) {
+        config = Object.assign({}, config, {monitor_devices: String(config['monitor_device'])});
+    }
+    ['name','connection_mode','host','port','base_url','api_key',
+     'request_model','model_name','model_path','dataset_path','monitor_port','monitor_devices','monitor_interval_ms','monitor_max_duration'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && config[id] !== undefined) el.value = config[id];
+    });
+    document.getElementById('connection_mode').dispatchEvent(new Event('change'));
+    document.getElementById('monitor_enabled').checked = Boolean(config['monitor_enabled']);
+    toggleMonitorConfig();
+    if (config['model_name_mode']) {
+        var radio = document.querySelector('input[name="model_name_mode"][value="' + config['model_name_mode'] + '"]');
+        if (radio) radio.checked = true;
+        toggleModelNameInput();
+    }
+
+    // Restore test mode
+    if (config['test_mode']) {
+        // 映射后端值到前端 tab 名称
+        var tabName = config['test_mode'];
+        if (tabName === 'shared_prefix') {
+            tabName = 'shared-prefix';
+        }
+        if (tabName === 'multi_turn') {
+            tabName = 'multi-turn';
+        }
+        switchTab(tabName);
+    }
+
+    // Restore normal test params
+    PARAMS.forEach(function(p) {
+        if (config[p.key] && Array.isArray(config[p.key])) {
+            state[p.key].selected = new Set(config[p.key]);
+            state[p.key].custom = new Set(
+                config[p.key].filter(function(v) { return !p.candidates.includes(v); })
+            );
+        }
+    });
+    if (config['iterations']) {
+        document.getElementById('iterations').value = config['iterations'];
+    }
+
+    // Restore shared-prefix test params
+    if (config['gsp_num_groups']) document.getElementById('gsp-num-groups').value = config['gsp_num_groups'];
+    if (config['gsp_system_prompt_len']) document.getElementById('gsp-system-prompt-len').value = config['gsp_system_prompt_len'];
+    if (config['gsp_question_len']) document.getElementById('gsp-question-len').value = config['gsp_question_len'];
+    if (config['gsp_prompts_per_group']) document.getElementById('gsp-prompts-per-group').value = config['gsp_prompts_per_group'];
+    if (config['gsp_output_len']) document.getElementById('gsp-output-len').value = config['gsp_output_len'];
+    if (config['gsp_range_ratio'] !== undefined) document.getElementById('gsp-range-ratio').value = config['gsp_range_ratio'];
+    if (config['gsp_request_rate'] !== undefined) document.getElementById('gsp-request-rate').value = config['gsp_request_rate'];
+    // 并发数：0 表示不限制，需要恢复；undefined/null 才不恢复
+    if (config['gsp_max_concurrency'] !== undefined && config['gsp_max_concurrency'] !== null) {
+        document.getElementById('gsp-max-concurrency').value = config['gsp_max_concurrency'];
+    }
+
+    // Restore multi-turn combos（显式组合）
+    if (config['mt_combos'] && Array.isArray(config['mt_combos']) && config['mt_combos'].length > 0) {
+        // 旧模板可能存的是 3 元组合 + 共享字段：补全时优先用共享字段值，避免覆盖用户配置
+        var defC = parseInt(config['mt_num_clients'], 10);
+        var defT = parseInt(config['mt_total_requests'], 10);
+        mtCombos = config['mt_combos'].map(function(c) {
+            return padCombo(c.map(function(x) { return parseInt(x, 10); }), defC, defT);
+        });
+    } else if (config['mt_request_length_list'] && Array.isArray(config['mt_request_length_list'])) {
+        // 兼容旧网格/标量格式 → 取第一组
+        var L = config['mt_request_length_list'][0] || config['mt_request_length'] || 1024;
+        var S = config['mt_sub_question_input_length_list'] ? config['mt_sub_question_input_length_list'][0] : (config['mt_sub_question_input_length'] || 0);
+        var O = config['mt_output_length_list'] ? config['mt_output_length_list'][0] : (config['mt_output_length'] || 256);
+        mtCombos = [[parseInt(L, 10), parseInt(S, 10), parseInt(O, 10)]];
+    }
+    // Restore multi-turn single-value params
+    ['mt-num-rounds','mt-range-ratio','mt-max-context-length','mt-init-interval',
+     'mt-request-rate','mt-seed','mt-host-header'].forEach(function(id) {
+        var key = id.replace(/-/g, '_');
+        var el = document.getElementById(id);
+        if (el && config[key] !== undefined && config[key] !== null && config[key] !== '') {
+            el.value = config[key];
+        }
+    });
+    if (config['mt_api_format'] !== undefined) document.getElementById('mt-api-format').value = config['mt_api_format'];
+    if (config['mt_thinking'] !== undefined) document.getElementById('mt-thinking').checked = !!config['mt_thinking'];
+    if (config['mt_enable_session_key'] !== undefined) document.getElementById('mt-enable-session-key').checked = !!config['mt_enable_session_key'];
+    if (config['mt_enable_round_barrier'] !== undefined) document.getElementById('mt-enable-round-barrier').checked = !!config['mt_enable_round_barrier'];
+    if (config['mt_workload_mode'] !== undefined) document.getElementById('mt-workload-mode').value = config['mt_workload_mode'];
+    if (config['mt_replay_sequential_sessions'] !== undefined) document.getElementById('mt-replay-sequential-sessions').checked = !!config['mt_replay_sequential_sessions'];
+    updateMtWorkloadMode();
+    renderMtCombos();
+    renderAll();
+    updatePreview();
+}
+
+function getCurrentConfig() {
+    var data = {};
+    ['name','connection_mode','host','port','base_url','api_key',
+     'request_model','model_name','model_path','dataset_path','monitor_port','monitor_devices','monitor_interval_ms','monitor_max_duration'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) data[id] = el.value;
+    });
+    var modeEl = document.querySelector('input[name="model_name_mode"]:checked');
+    if (modeEl) data['model_name_mode'] = modeEl.value;
+
+    // Save test mode
+    data['test_mode'] = currentTab;
+
+    // Save normal test params
+    PARAMS.forEach(function(p) {
+        data[p.key] = getSelected(p);
+    });
+    data['iterations'] = parseInt(document.getElementById('iterations').value) || 1;
+    // Save shared-prefix test params
+    data['gsp_num_groups'] = document.getElementById('gsp-num-groups').value;
+    data['gsp_system_prompt_len'] = document.getElementById('gsp-system-prompt-len').value;
+    data['gsp_question_len'] = document.getElementById('gsp-question-len').value;
+    data['gsp_prompts_per_group'] = document.getElementById('gsp-prompts-per-group').value;
+    data['gsp_output_len'] = document.getElementById('gsp-output-len').value;
+    data['gsp_range_ratio'] = document.getElementById('gsp-range-ratio').value;
+    data['gsp_request_rate'] = document.getElementById('gsp-request-rate').value;
+    data['gsp_max_concurrency'] = document.getElementById('gsp-max-concurrency').value;
+
+    // Save multi-turn test params（组合 + 通用单值）
+    data['mt_combos'] = mtCombos.map(function(c) { return [c[0], c[1], c[2], c[3], c[4]]; });
+    ['mt-num-rounds','mt-range-ratio','mt-max-context-length','mt-init-interval',
+     'mt-request-rate','mt-seed','mt-host-header'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) data[id.replace(/-/g, '_')] = el.value;
+    });
+    data['mt_api_format'] = document.getElementById('mt-api-format').value;
+    data['mt_thinking'] = document.getElementById('mt-thinking').checked;
+    data['mt_enable_session_key'] = document.getElementById('mt-enable-session-key').checked;
+    data['mt_enable_round_barrier'] = document.getElementById('mt-enable-round-barrier').checked;
+    data['mt_workload_mode'] = document.getElementById('mt-workload-mode').value;
+    data['mt_replay_sequential_sessions'] = document.getElementById('mt-replay-sequential-sessions').checked;
+
+    data['monitor_enabled'] = document.getElementById('monitor_enabled').checked;
+    return data;
+}
+
+async function saveAsTemplate() {
+    var name = document.getElementById('template-name').value.trim();
+    if (!name) {
+        alert('请输入模板名称');
+        return;
+    }
+    var config = getCurrentConfig();
+    try {
+        var resp = await fetch('/api/templates', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name: name, config: config}),
+        });
+        var data = await resp.json();
+        if (!resp.ok) {
+            alert('保存失败: ' + (data.detail || resp.statusText));
+            return;
+        }
+        await loadTemplates();
+        document.getElementById('template-select').value = data.id;
+        alert('模板已保存: ' + name);
+    } catch(e) {
+        alert('保存失败: ' + e.message);
+    }
+}
+
+async function deleteSelectedTemplate() {
+    var sel = document.getElementById('template-select');
+    var id = parseInt(sel.value);
+    if (!id) {
+        alert('请先选择一个模板');
+        return;
+    }
+    var name = sel.options[sel.selectedIndex].textContent;
+    if (!confirm('确定删除模板 "' + name + '"？')) return;
+    try {
+        var resp = await fetch('/api/templates/' + id, {method: 'DELETE'});
+        if (!resp.ok) {
+            alert('删除失败');
+            return;
+        }
+        await loadTemplates();
+        sel.value = '';
+    } catch(e) {
+        alert('删除失败: ' + e.message);
+    }
+}
+
+// ── Traffic check ────────────────────────────────────────────────────
+async function checkTraffic(forceSkip) {
+    var skip = forceSkip === true || document.getElementById('skip-traffic-check').checked;
+    var host = document.getElementById('host').value.trim();
+    var port = parseInt(document.getElementById('port').value) || 0;
+    if (!host || !port) {
+        alert('请先填写 Host 和 Port');
+        return;
+    }
+
+    var btn = document.getElementById('btn-traffic-check');
+    var modal = document.getElementById('traffic-modal');
+    var title = document.getElementById('traffic-modal-title');
+    var logEl = document.getElementById('traffic-modal-log');
+
+    btn.disabled = true;
+    btn.textContent = '⏳ 检测中...';
+    title.textContent = '正在检测服务流量...';
+    logEl.textContent = '连接 ' + host + ':' + port + '/metrics ...\n';
+    modal.style.display = '';
+
+    try {
+        var resp = await fetch('/api/check-traffic', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({host: host, port: port, duration: 20, skip: skip}),
+        });
+        var data = await resp.json();
+        logEl.textContent = (data.log || []).join('\n');
+        if (data.ok) {
+            title.textContent = '✅ ' + data.message;
+            title.style.color = '#00b894';
+        } else {
+            title.textContent = '⛔ ' + data.message;
+            title.style.color = '#e74c3c';
+        }
+    } catch (err) {
+        title.textContent = '❌ 检测失败';
+        title.style.color = '#e74c3c';
+        logEl.textContent = '请求失败: ' + err.message;
+    }
+
+    btn.disabled = false;
+    btn.textContent = '⚠ 检测服务流量';
+}
+
+function closeTrafficModal() {
+    document.getElementById('traffic-modal').style.display = 'none';
+}
+
+document.getElementById('task-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var form = this;
+
+    saveParams();
+
+    var body = {
+        name: form.name.value.trim(),
+        connection_mode: form.connection_mode.value,
+        host: form.host.value.trim(),
+        port: parseInt(form.port.value) || 0,
+        base_url: form.base_url.value.trim(),
+        api_key: form.api_key.value.trim(),
+        request_model: form.request_model.value.trim(),
+        model_name: form.model_name.value.trim(),
+        model_path: form.model_path.value,
+        dataset_path: form.dataset_path.value,
+        monitor_enabled: document.getElementById('monitor_enabled').checked,
+        monitor_port: parseInt(document.getElementById('monitor_port').value) || 30100,
+        monitor_devices: document.getElementById('monitor_devices').value.trim() || 'auto',
+        monitor_interval_ms: parseInt(document.getElementById('monitor_interval_ms').value) || 100,
+        monitor_max_duration: parseInt(document.getElementById('monitor_max_duration').value) || 7200,
+    };
+
+    // 根据 tab 构建不同的参数
+    if (currentTab === 'shared-prefix') {
+        // 公共前缀测试
+        var numGroups = parseInt(document.getElementById('gsp-num-groups').value) || 0;
+        var promptsPerGroup = parseInt(document.getElementById('gsp-prompts-per-group').value) || 0;
+        var systemPromptLen = parseInt(document.getElementById('gsp-system-prompt-len').value) || 0;
+        var questionLen = parseInt(document.getElementById('gsp-question-len').value) || 0;
+        var outputLen = parseInt(document.getElementById('gsp-output-len').value) || 0;
+        var rangeRatio = parseFloat(document.getElementById('gsp-range-ratio').value) || 0;
+        var requestRate = parseFloat(document.getElementById('gsp-request-rate').value) || 0;
+        var maxConcurrencyStr = document.getElementById('gsp-max-concurrency').value.trim();
+        var maxConcurrency = maxConcurrencyStr ? parseInt(maxConcurrencyStr) : 0;
+
+        var total = numGroups * promptsPerGroup;
+        if (total <= 0 || total > 10000) {
+            alert('总请求数必须在 1-10000 之间 (当前: ' + total + ')');
+            return;
+        }
+        if (numGroups <= 0 || promptsPerGroup <= 0 || systemPromptLen < 128 || questionLen < 32 || outputLen <= 0) {
+            alert('请填写完整的公共前缀参数，且参数值符合要求');
+            return;
+        }
+        if (rangeRatio < 0 || rangeRatio > 1) {
+            alert('随机范围比例必须在 0-1 之间');
+            return;
+        }
+        if (maxConcurrencyStr && (maxConcurrency <= 0 || maxConcurrency > 1024)) {
+            alert('最大并发数必须在 1-1024 之间');
+            return;
+        }
+
+        body.test_mode = 'shared_prefix';
+        body.gsp_num_groups = numGroups;
+        body.gsp_prompts_per_group = promptsPerGroup;
+        body.gsp_system_prompt_len = systemPromptLen;
+        body.gsp_question_len = questionLen;
+        body.gsp_output_len = outputLen;
+        body.gsp_range_ratio = rangeRatio;
+        body.gsp_request_rate = requestRate;
+        // 必须传递并发值：0表示不限制，>0表示具体限制
+        body.gsp_max_concurrency = maxConcurrency;
+    } else if (currentTab === 'multi-turn') {
+        // 多轮对话测试：显式组合（每组一行 (起始长度, 每轮新增子长度, 输出长度)）
+        var workloadMode = document.getElementById('mt-workload-mode').value;
+        var replayMode = workloadMode === 'replay' || workloadMode === 'timestamp_replay';
+        var timestampReplay = workloadMode === 'timestamp_replay';
+        var validCombos = [];
+        for (var ci = 0; ci < mtCombos.length; ci++) {
+            var c = padCombo(mtCombos[ci]);
+            var L = parseInt(c[0], 10) || 0;
+            var S = parseInt(c[1], 10) || 0;
+            var O = parseInt(c[2], 10) || 0;
+            var C = parseInt(c[3], 10) || 0;
+            var T = parseInt(c[4], 10) || 0;
+            if ((!replayMode && (L <= 0 || S < 0)) || O <= 0 || C <= 0 || T < 0) {
+                alert('第 ' + (ci + 1) + ' 组组合参数无效（起始长度/输出长度/客户端数需 > 0，每轮新增子长度和请求数 ≥ 0）');
+                return;
+            }
+            validCombos.push([L, S, O, C, T]);
+        }
+        if (validCombos.length === 0) {
+            alert('请至少添加一组测试组合');
+            return;
+        }
+        // Timestamp replay has one workload defined only by duration + ratio.
+        // Keep hidden legacy values solely for backward-compatible CLI defaults.
+        if (timestampReplay) validCombos = [validCombos[0]];
+        if (validCombos.length > 200) {
+            alert('组合数超过 200 上限 (' + validCombos.length + ')，请减少组合。');
+            return;
+        }
+        // 相同组合过滤（防编辑后产生重复）
+        var seenCombos = {};
+        for (var si = 0; si < validCombos.length; si++) {
+            var key = validCombos[si].join(',');
+            if (seenCombos[key]) {
+                alert('存在完全相同的测试组合（起始长度/每轮新增子长度/输出长度/客户端数/请求数均相同），请修改后再提交');
+                return;
+            }
+            seenCombos[key] = true;
+        }
+        var rangeRatio = parseFloat(document.getElementById('mt-range-ratio').value);
+        if (isNaN(rangeRatio) || rangeRatio < 0 || rangeRatio > 1) {
+            alert('长度波动幅度必须在 0-1 之间（0=精确，1=最大波动）');
+            return;
+        }
+
+        body.test_mode = 'multi_turn';
+        body.mt_workload_mode = workloadMode;
+        body.mt_combos = validCombos;
+        // 兼容旧字段（取第一行的值）
+        body.mt_num_clients = validCombos[0][3];
+        body.mt_total_requests = validCombos[0][4];
+        body.mt_num_rounds = parseInt(document.getElementById('mt-num-rounds').value) || 5;
+        body.mt_range_ratio = rangeRatio;
+        body.mt_max_context_length = parseInt(document.getElementById('mt-max-context-length').value) || 0;
+        body.mt_init_interval = parseFloat(document.getElementById('mt-init-interval').value) || 0;
+        body.mt_request_rate = timestampReplay ? 0 : (parseFloat(document.getElementById('mt-request-rate').value) || 0);
+        body.mt_seed = parseInt(document.getElementById('mt-seed').value) || 0;
+        body.mt_host_header = document.getElementById('mt-host-header').value.trim();
+        body.mt_api_format = document.getElementById('mt-api-format').value;
+        body.mt_thinking = document.getElementById('mt-thinking').checked;
+        body.mt_enable_session_key = document.getElementById('mt-enable-session-key').checked;
+        body.mt_enable_round_barrier = replayMode ? false : document.getElementById('mt-enable-round-barrier').checked;
+        body.mt_replay_sequential_sessions = workloadMode === 'replay' && document.getElementById('mt-replay-sequential-sessions').checked;
+    } else {
+        // 普通性能测试
+        var concurrency_list = getSelected(PARAMS[0]);
+        var total_prompts_vals = getSelected(PARAMS[1]);
+        var input_len_list = getSelected(PARAMS[2]);
+        var output_len_list = getSelected(PARAMS[3]);
+        var request_rate_list = getSelected(PARAMS[4]);
+        var extra_args = getSelected(PARAMS[5]);
+        var iterations = parseInt(document.getElementById('iterations').value) || 1;
+
+        var combinations = concurrency_list.length * total_prompts_vals.length * input_len_list.length * output_len_list.length * request_rate_list.length;
+        var total = combinations * iterations;
+        if (total > 1000) {
+            alert('总运行数超过 1000 上限 (' + total + ')，请减少参数或迭代次数。');
+            return;
+        }
+        if (combinations === 0) {
+            alert('请至少为每个参数选中一个值。');
+            return;
+        }
+
+        body.test_mode = 'normal';
+        body.concurrency_list = concurrency_list;
+        body.total_prompts = total_prompts_vals[0];
+        body.total_prompts_list = total_prompts_vals;
+        body.input_len_list = input_len_list;
+        body.output_len_list = output_len_list;
+        body.request_rate_list = request_rate_list;
+        body.extra_args = extra_args;
+        body.iterations = iterations;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = '创建中...';
+
+    try {
+        var resp = await fetch('/api/task', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body),
+        });
+        var errMsg = '';
+        try {
+            var data = await resp.json();
+            if (!resp.ok) {
+                errMsg = data.detail || data.message || resp.statusText;
+            } else {
+                window.location.href = '/task/' + data.task_id;
+                return;
+            }
+        } catch (jsonErr) {
+            errMsg = '服务器返回了无效响应 (HTTP ' + resp.status + ')，请检查后端日志';
+        }
+        alert('创建失败: ' + errMsg);
+        btn.disabled = false;
+        btn.textContent = '创建任务';
+    } catch (err) {
+        alert('网络请求失败: ' + err.message);
+        btn.disabled = false;
+        btn.textContent = '创建任务';
+    }
+});
+
+renderAll();
+renderMtCombos();
+initMtComboAdd();
+document.getElementById('mt-workload-mode').addEventListener('change', function() {
+    updateMtWorkloadMode();
+    updatePreview();
+});
+updateMtWorkloadMode();
+updatePreview();
+loadTemplates();
+initTabs();
+
+// 迭代次数变化时更新预览
+document.getElementById('iterations').addEventListener('input', updatePreview);
+
+// 公共前缀参数变化时更新预览
+document.querySelectorAll('#tab-shared-prefix input[type="number"]').forEach(function(input) {
+    input.addEventListener('input', updatePreview);
+});
+
+// 多轮对话参数变化时更新预览（请求个数等）
+document.querySelectorAll('#tab-multi-turn input[type="number"]').forEach(function(input) {
+    input.addEventListener('input', updatePreview);
+});
+
+initDatasetSelect();
+initModelSelect().then(function() { loadParams(); });
+</script>
+{% endblock %}

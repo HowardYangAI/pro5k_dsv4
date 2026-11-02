@@ -1,0 +1,173 @@
+
+def _flash_mla_flashinfer(
+    q,
+    k_cache,
+    indices,
+    topk_length,
+    attn_sink,
+    head_dim_v,
+    softmax_scale,
+    extra_k_cache,
+    extra_indices,
+    extra_topk_length,
+):
+    """FlashInfer SM120 sparse MLA via the paged-attention dispatcher.
+
+    SGLang SWA pool uses page_size=256 (footer format: 256*576 bytes data + 256*8 bytes scale).
+    FlashInfer decode_dsv4 fast path requires page_block_size=64 (footer: 64*576 + 64*8).
+    We split 256-token pages into 4 virtual 64-token pages.
+    Token indices are invariant under page-split (identity mapping).
+    """
+    from flashinfer.mla._sparse_mla_sm120 import (
+        _DECODE_MAX_TOKENS as _FI_DECODE_MAX_TOKENS,
+    )
+    from flashinfer.mla._sparse_mla_sm120 import (
+        _sparse_mla_sm120_paged_attention,
+    )
+
+    B, _, H, D = q.shape  # (batch, 1, num_heads, head_dim)
+    dev = q.device
+
+    # Indices: no remapping needed (page-split preserves token addressing).
+    idx = indices.squeeze(1) if indices.dim() == 3 else indices
+
+    # --- Page-split: convert pbs=N kv_cache to pbs=64 view ---
+    # Only the SWA pages actually referenced by `idx` are copied (the rest of
+    # the persistent dst buffer is left untouched and never read).
+    kv_u8 = k_cache.view(torch.uint8) if k_cache.dtype != torch.uint8 else k_cache
+    src_pbs = k_cache.shape[1] if k_cache.ndim >= 3 else _PBS_SRC
+    kv_64 = (
+        _split_kv_pages_to_64(kv_u8, src_pbs, touched_indices=idx)
+        if src_pbs != _PBS_DST
+        else kv_u8
+    )
+
+    extra_kv_u8 = (
+        extra_k_cache.view(torch.uint8)
+        if extra_k_cache is not None and extra_k_cache.dtype != torch.uint8
+        else extra_k_cache
+    )
+    extra_kv_64 = extra_kv_u8
+
+    extra_idx = (
+        extra_indices.squeeze(1)
+        if extra_indices is not None and extra_indices.dim() == 3
+        else extra_indices
+    )
+
+    # --- Bucket alignment for non-instantiated topk widths ---
+    # The CUTLASS SM120 sparse-MLA kernels are instantiated only for a
+    # fixed set of topk widths (decode: topk in {128, 512, 1024}; prefill
+    # orchestrator: {128, 512, 1024, 2048}), and the prefill kernel
+    # additionally asserts num_tokens > 64. DSPARK's draft indexer emits
+    # topk=192, which is in no bucket on either path, so both the warmup
+    # draft pass and the draft CUDA-graph capture crash the server at boot
+    # ("num_tokens > 64" check fail / "Unsupported sparse-MLA prefill
+    # configuration ... topk=192"). Same failure family as
+    # sgl-project/sglang#33134 (DGX Spark, sm_121).
+    #
+    # Fix: right-pad the index tensor with -1 (the kernels' documented
+    # "skip" sentinel, see flashinfer csrc/sparse_mla_sm120.cu) up to the
+    # next instantiated bucket, and cap the scan via topk_length so the
+    # padding is never read. If a decode-sized batch is still not
+    # dispatchable (e.g. draft head_dim != 512), fall back to the Triton
+    # sparse-decode kernel for that call instead of crashing.
+    global _noted_bucket_pad, _warned_triton_fb
+    _topk = idx.shape[-1]
+    _d_qk = q.shape[-1]
+    if _d_qk == 512 and _topk not in _SUPPORTED_TOPK_WIDTHS:
+        _next_w = _next_topk_bucket(_topk)
+        if _next_w is not None:
+            if topk_length is None:
+                # Cap the scan at the true width so the -1 padding is
+                # never even read.
+                topk_length = torch.full((B,), _topk, dtype=torch.int32, device=dev)
+            idx = torch.nn.functional.pad(idx, (0, _next_w - _topk), value=-1)
+            if not _noted_bucket_pad:
+                _noted_bucket_pad = True
+                logger.info(
+                    "SM120 sparse-MLA: padding topk %d -> %d (next "
+                    "instantiated bucket, -1 skip sentinel; scan capped "
+                    "via topk_length).",
+                    _topk,
+                    _next_w,
+                )
+
+    if B <= _FI_DECODE_MAX_TOKENS:
+        from flashinfer.mla._sparse_mla_sm120 import _decode_dsv4_dispatchable
+
+        _extra_topk = extra_idx.shape[-1] if extra_idx is not None else 0
+        if not _decode_dsv4_dispatchable(
+            B, H, idx.shape[-1], _d_qk, _PBS_DST, _extra_topk
+        ):
+            # Decode-sized but not coverable by the CUTLASS decode kernel
+            # even after bucket padding (e.g. head_dim != 512 or an
+            # uninstantiated head count) — the prefill kernel would reject
+            # num_tokens <= 64, so route to Triton instead of crashing.
+            if not _warned_triton_fb:
+                _warned_triton_fb = True
+                logger.warning(
+                    "SM120 sparse-MLA: decode-sized batch not dispatchable "
+                    "to CUTLASS decode kernel (num_tokens=%d heads=%d "
+                    "topk=%d d_qk=%d) — using Triton fallback for these "
+                    "calls.",
+                    B,
+                    H,
+                    idx.shape[-1],
+                    _d_qk,
+                )
+            from sglang.kernels.ops.attention.flash_mla_sm120_triton import (
+                flash_mla_sparse_decode_triton,
+            )
+
+            out, lse = flash_mla_sparse_decode_triton(
+                q,
+                k_cache,
+                indices,
+                topk_length,
+                attn_sink,
+                head_dim_v,
+                softmax_scale,
+                extra_k_cache,
+                extra_indices,
+                extra_topk_length,
+            )
+            return (out, lse)
+
+    output = torch.empty(B, H, head_dim_v, dtype=torch.bfloat16, device=dev)
+    out_lse = torch.empty(B, H, dtype=torch.float32, device=dev)
+
+    # Use split-K for decode-sized batches and paged attention otherwise.
+    if B <= _FI_DECODE_MAX_TOKENS:
+        topk = idx.shape[-1]
+        extra_topk = extra_idx.shape[-1] if extra_idx is not None else 0
+        _BI = 64
+        num_splits = (topk + _BI - 1) // _BI + (
+            (extra_topk + _BI - 1) // _BI if extra_topk > 0 else 0
+        )
+        mid_out = torch.empty(
+            B, H, num_splits, head_dim_v, dtype=torch.bfloat16, device=dev
+        )
+        mid_lse = torch.empty(B, H, num_splits, dtype=torch.float32, device=dev)
+    else:
+        mid_out = None
+        mid_lse = None
+
+    _sparse_mla_sm120_paged_attention(
+        q.squeeze(1) if q.ndim == 4 else q,
+        kv_64,
+        idx,
+        output,
+        out_lse,
+        softmax_scale,
+        d_v=head_dim_v,
+        topk_length=topk_length,
+        attn_sink=attn_sink,
+        extra_kv_cache=extra_kv_64,
+        extra_indices=extra_idx,
+        extra_topk_length=extra_topk_length,
+        mid_out=mid_out,
+        mid_lse=mid_lse,
+    )
+
+    return (output.unsqueeze(1), None)

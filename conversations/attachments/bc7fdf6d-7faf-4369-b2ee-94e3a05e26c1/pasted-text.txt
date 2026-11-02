@@ -1,0 +1,167 @@
+ith status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+100%|██████████| 4096/4096 [02:16<00:00, 29.99it/s]
+/home/luban/llm-benchmark-online/bench_serving.py:1783: UserWarning: All requests failed. This is likely due to a misconfiguration on the benchmark arguments.
+  metrics, output_lens = calculate_metrics(
+/home/luban/.local/lib/python3.12/site-packages/numpy/core/fromnumeric.py:3504: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/home/luban/.local/lib/python3.12/site-packages/numpy/core/_methods.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/home/luban/.local/lib/python3.12/site-packages/numpy/core/_methods.py:206: RuntimeWarning: Degrees of freedom <= 0 for slice
+  ret = _var(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/luban/.local/lib/python3.12/site-packages/numpy/core/_methods.py:163: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+/home/luban/.local/lib/python3.12/site-packages/numpy/core/_methods.py:198: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+[ERROR] Request failed with status 503: Service Unavailable - No available servers: No available prefill workers (all circuits open or unhealthy)
+Traceback (most recent call last):
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2405, in <module>
+    run_benchmark(args)
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 2106, in run_benchmark
+    return asyncio.run(
+           ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 1783, in benchmark
+    metrics, output_lens = calculate_metrics(
+                           ^^^^^^^^^^^^^^^^^^
+  File "/home/luban/llm-benchmark-online/bench_serving.py", line 1580, in calculate_metrics
+    p99_e2e_latency_ms=np.percentile(e2e_latencies, 99) * 1000,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/numpy/lib/function_base.py", line 4283, in percentile
+    return _quantile_unchecked(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/numpy/lib/function_base.py", line 4555, in _quantile_unchecked
+    return _ureduce(a,
+           ^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/numpy/lib/function_base.py", line 3823, in _ureduce
+    r = func(a, **kwargs)
+        ^^^^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/numpy/lib/function_base.py", line 4722, in _quantile_ureduce_func
+    result = _quantile(arr,
+             ^^^^^^^^^^^^^^
+  File "/home/luban/.local/lib/python3.12/site-packages/numpy/lib/function_base.py", line 4831, in _quantile
+    slices_having_nans = np.isnan(arr[-1, ...])
+                                  ~~~^^^^^^^^^
+IndexError: index -1 is out of bounds for axis 0 with size 0
+All benchmark tests completed!

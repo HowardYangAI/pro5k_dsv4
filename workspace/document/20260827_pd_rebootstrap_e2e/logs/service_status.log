@@ -1,0 +1,18 @@
+LOCAL PREFLIGHT
+REMOTE PREFLIGHT
+2026-08-27T04:13:00Z prefill attempt1 exited: metrics_port 30238 self-conflict; retry without --enable-metrics
+2026-08-27T04:16:41Z decode startup complete: disaggregation warmup finished; server ready
+2026-08-27T04:17:15Z prefill tmux alive; HTTP /health=200 at 10.207.193.156:30001
+2026-08-27T04:17:15Z decode tmux alive; HTTP /health=200 at 10.207.193.166:30002
+2026-08-27T04:17:15Z startup log scan: no scheduler exception, NotImplementedError, get_cpu_copy failure, OOM, CUDA error, or fatal error in active attempts
+2026-08-27T04:17:15Z phase A ready: real PD smoke; forced retraction is disabled
+2026-08-27T04:21:52Z benchmark warmup was sent directly to prefill :30001 without bootstrap_room; prefill rejected it by assertion and exited; no real request reached decode
+2026-08-27T04:24:00Z prefill restart launched with the original configuration
+2026-08-27T04:28:44Z prefill restart complete; HTTP /health=200
+2026-08-27T04:29:00Z PD router launched on 10.207.193.156:30000; prefill=10.207.193.156:30001 bootstrap=8998; decode=10.207.193.166:30002
+2026-08-27T04:29:57Z router/prefill/decode HTTP /health=200; router /v1/models returns DeepSeek-V4-Flash-0731
+2026-08-27T04:49:00Z archived MF=0.7 Decode log as logs/decode_mf07_phase_a.log; stopped Decode for MF=0.5 restart
+2026-08-27T04:50:16Z Decode MF=0.5 attempt1 exited before model load: --enable-metrics caused rpc_port 30238 self-conflict
+2026-08-27T04:50:30Z Decode MF=0.5 retry launched without --enable-metrics
+2026-08-27T04:52:22Z Decode MF=0.5 ready; max_total_num_tokens=439040 per DP rank (was 2075136 at MF=0.7)
+2026-08-27T04:54:36Z router health recovered after consecutive worker checks; router/prefill/decode HTTP /health=200

@@ -1,0 +1,1220 @@
+[
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/PD_DECODE_RETRACTION_FIX_REPORT.md",
+    "size": 7570,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "57d23f95fd2243263c0a61162aeb7f3b8b805ec61ec9d33fbb4d79c93daec581"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/README.md",
+    "size": 6348,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e2a0b405ddeaadeeb2a7d05c4ecbc84b3f7bb40671816c2abfe52a56455168d5"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/README.md",
+    "size": 1383,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "12496b1f2beb4657aee7c59537456c6e358ee52e8d2febf32ade52c1e35ddd4f"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/benchmark_output.txt",
+    "size": 6902,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "d77caf8ec74f9b4d016e328232adba23fd23ff40ac617f26285229e12f86511e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode_mf055_trace.log",
+    "size": 4288764,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "40969bd22bb35176e0c517e132f9a97973fae1b58fc4e3dc6597afc8f03e821d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/decode_mf055_trace_post_drain.log",
+    "size": 4494161,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "0fed092da92071dc2c3ae84aaf1d0a6522fd3bc985a8e65ee5504a51f451209b"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/prefill.log",
+    "size": 56649282,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "3339761bc08fa0fcf8f3cc3c21c5944c92fcb2677d57ab2d58b4e6e306048942"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0535_mf055_c1024_n2048_8k_8k/router.log",
+    "size": 446707,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "ec7571b5961d16802e06491e8080fe6af53ddda7a371ceddfa7b019b5e6a0452"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0551_fake_decode_mf055/README.md",
+    "size": 1019,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "14e6176dc7151d7801e34f902ca52cca94aab84c5a07b6261ce7a54400a7236e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0551_fake_decode_mf055/decode_fake_full.log",
+    "size": 6359677,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "00da2b95a85c4efdc6508ecfa07aad238c492a2bee2abf4fcd80a0efa58d046f"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0604_unfixed_baseline_startup_crash/README.md",
+    "size": 906,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "8499306ebae8c5c07d0c6936c3ed2d822780bf41b932e03006e446f588bfb2f8"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0604_unfixed_baseline_startup_crash/decode_unfixed_startup.log",
+    "size": 140927,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "44cff6df4221f802f4a49003a5289c99d5faf1ac49f41be117307e857fc63c26"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/README.md",
+    "size": 1157,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "be67e39ff80ceb735ccfae536bd4c0eb5f7b0feded0ec383ecec9ed47d7c263a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/benchmark_output.txt",
+    "size": 139871,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6457e8618853aa1faee02b486453999a6c4bf705aefe73e9ff3b827f5124f0a6"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0655_unfixed_retraction_crash/decode_unfixed_retraction_mf055.log",
+    "size": 3742380,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "4f8f7a931729a8e27ca0b466b5b834acae7d48d33140b90515f40b202fbe8ef5"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/README.md",
+    "size": 1218,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "bc852d9c85cdd97364f39b2e6d2275e1c0a8a15d59476f75ee939a4bf290dd35"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/benchmark_output.txt",
+    "size": 10339,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "2f0ea1abea082549e7689efd53f96f00cc055d78f0bfaf4497102980fc935471"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/archives/20260827_0713_unfixed_fake_retraction_crash/decode_unfixed_fake_mf055.log",
+    "size": 53686811,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "c024ca5909670b48906cebc43bd9946e75a6d710dc69c3b4d6f7c6baecc82f26"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/code_prepare.log",
+    "size": 3757,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "376800ed447db129382935c9fe58c28730546a22ae6885a758909889572cb217"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode.log",
+    "size": 159256,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "115a28ec45bfb295c8af14636313144067ace2b62d3d2a6629bbfdf221df453d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf05.log",
+    "size": 149351,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "556be740eaa90d4285472a7a2061df1f510bc9169d2190fe1667c53de58cfbf5"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf05_pressure.log",
+    "size": 5125034,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "9fb18a47285dabdd1ca0cfc7998273bdd5b07ad171fdb82ccd945680dc17bcca"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/decode_mf07_phase_a.log",
+    "size": 8590848,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "a80da1a933af3730942a4f4a21a90b9b3ca6acdc1fd9094e2d402958e70d6f3e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/model_sync.log",
+    "size": 714,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "39108a39e753e6161ddbb76a53b74006e239e8287cd3db25986bf2979296f33a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/prefill.log",
+    "size": 69208826,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "c6fe24c872bc9a7b6f568b8a69719e3b48ca223c07122871e72b3471e88df238"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/router.log",
+    "size": 2089634,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "b1e0c8640a553d9d2addd0afc367bf9fc948622624cabc4a14d96d88373c1302"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/service_status.log",
+    "size": 1736,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "3e4e294bac52abc54d0808f547300831cdf4c619eee6b0b7df0abbe83b367a1f"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260827_pd_rebootstrap_e2e/logs/unit_tests.log",
+    "size": 2162,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "4f71d4d3d2bdca03ed293971c9d21064ec301917434c502871e98feb865217a2"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/README.md",
+    "size": 746,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "8ecfbc87532a3353e06465447734a65a9200c74545de7ba1fefa99138556b2f4"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_bootstrap_port_race.log",
+    "size": 81509,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "547d4412063c2089bebde89cdf7d5a5d867fab067cf178094f81139eb5ac4733"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_cuda_enumeration_retry.log",
+    "size": 9674,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6c06f7f4db918588f49164f78c29554788d47f2d7950dd4b93d4c76fc84590de"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_cuda_enumeration_retry_2.log",
+    "size": 9674,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6c06f7f4db918588f49164f78c29554788d47f2d7950dd4b93d4c76fc84590de"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_direct_health_assert.log",
+    "size": 149576,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "b6038e9fa03df9e64ac0057162cde3297462c1ed63a2b6afd85c869b3fa4493d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_external_health_assert.log",
+    "size": 145096,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7ab8c52d613dc4a6f09740c99b39bd882f4e24af999b66453cd9e3f707fea960"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_first_start_num_token_crash.log",
+    "size": 161841,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "0ec5122fa66a01ef2e87551e3d8c44ecc386e015e6b99796ec15fcf62530bc41"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_fixed.log",
+    "size": 13547588,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "d1916db306d8bead0e8fb86fa8c01c7460b77515ccbd94a3b8ba4fbad42bdd7e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_fixed_health_assert_2.log",
+    "size": 150871,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "119e4372cf23a5d29f11df8d1367beb40942f3debe9a65dadb32cf478142fff3"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_loopback_bootstrap_not_used.log",
+    "size": 84941,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "42baaa335bfe0ca341f7f4110aa338c46f0705720f4b4305889408f9c57299d2"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/prefill_mooncake_bind_retry.log",
+    "size": 43815,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "1a3d4bbd55061b43383e223c217dc66b8212224e8f5d3493b11bfa2d7f69ab4a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/router_fixed.log",
+    "size": 6128675,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "3a8e13defc243cad401a2e43d6f97428af848bc61ee1790ad5adc1b55856b396"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260829_swa_eviction_e2e/router_fixed_previous.log",
+    "size": 0,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/README.md",
+    "size": 1771,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "8b09ab6d70ed257f9b5de4ea49abc69e13f14b42c32414747b89d45ce0dea708"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/health_watch.log",
+    "size": 34692,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "459710a368c707dcf5d3f60923f58e9763d6c7ba587f09a8f02717d3e2d66b73"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/prefill.log",
+    "size": 9011398,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "0105cd168bc7ad4f1b8544ea8826c48996905a11b9e25310eb54e06fc48bccd1"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_e2e/router.log",
+    "size": 6002751,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "b7c80c79ea4e9cd32c03d7ff95e6e2b8ff29ce4dd870293b64de448d667a4e37"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/health_watch.log",
+    "size": 88805,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "f02bbe51cec04bbeb287b1f434173c7442072ac143057980bb5c2be07991e78d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/prefill.log",
+    "size": 9151391,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7d4a1466c4cd5d86b54e34a35597846a32f1f3b7a7cbefd22511816e1fd5a1f6"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_healthfix_c1024/router.log",
+    "size": 3817560,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6fd7c3c8da8a98bc6aed654b0fee114cd32cc73f1ca2dae62c297013d660b7a6"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/README.md",
+    "size": 2822,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "80a1f2f3bdc9039cfc3f1db7484cbb4d761285e61c9ab8d6ed777662df901fcd"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/benchmark_client.txt",
+    "size": 11685,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "15c4f47c92977b47ecf884bb49e339881d332d50e11fbe92942a0d56c0453e19"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/decode.log",
+    "size": 15489976,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "41d156c64298dfe39f1c2f5d961b41f8830ca5a97473af67796e197f82c07c89"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/health_watch.log",
+    "size": 10615,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6511284aaa38bdd2c72d5a6fb42be546afaf65ee78ee1279171fa8d05a40dbe3"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/prefill.log",
+    "size": 10850984,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "3d2120b6577d6c094abceeb39cbd574906235bf717929fc64d76ec176dc58d87"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_c1024/router.log",
+    "size": 240780,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "f4bd95210c45c22316d63213031e8d55d06e5f8e06862bd3e0f65217f932bbce"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/README.md",
+    "size": 963,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "ee43f9e47bbd78ba1f488a2467dc776dbfd446737b913ba6309345cd2d844906"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/benchmark_client.txt",
+    "size": 42062,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7c78ca51ebff5a018b7d54b5c0324f4e57f14432828a3fd3c9058e47fd847ed2"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_abort_only_pagealigned_fake_c1024/decode.log",
+    "size": 11097803,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e18d8e501a6aba8f529da6b5adbcb72e89c9b2b4e7098142968899c8422a2a63"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/README.md",
+    "size": 5691,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "eb7112f58f37cf0fcf487a17c32754183fadff3f5f05e5566fb4dbbb466b62af"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/decode.log",
+    "size": 261845,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "df2c1203fdfcfb802f53da71f71e42841dcadbfd7481daaeb51553db650b0489"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/prefill.log",
+    "size": 2738452,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "4ac9ed70669599f903720e9a5eb733a5716cbfaec32a83827a5f53943bedb7a8"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_full_kv_retraction_repro/router.log",
+    "size": 6919128,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "d502d5492baca9983cf3e7e573b3959202d240bd23e933581deda698d6e0ad3a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_official_pr36185_e2e/README.md",
+    "size": 1190,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "efd46cf030e7631b50dea6329f7af24828a8445f264736f7dc50b9deaf2789d7"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_official_pr36185_e2e/baseline_prefill.log",
+    "size": 2633,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "f6682365cfafbc50a4b65fb6ac0af7470c489a5b37b8f0ec29053f6ee0111995"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/CR_DESCRIPTION.md",
+    "size": 11528,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "992aa63e6bae02203480fec5330b5f08d235e50c50f6a1c545f5d54da45ff365"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/README.md",
+    "size": 3932,
+    "category": "test_document",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "b3823609eea74dda784a1cfff85e369da03f901b16efbbb32694a9bd362f6042"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/benchmark_fake_snapshot.txt",
+    "size": 38765,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "904101ced379266330ba787172da5e81621b405d31d212cbe8a17d935b31e006"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/benchmark_real_snapshot.txt",
+    "size": 18692,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7a7c8306f8d78198a9eacae7def4e6cb88bfd09bb88fe8a98f5934154d276729"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_fake_snapshot.log",
+    "size": 17149972,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "1f9c2c7fe4cf6d32de79c7b072526e371b7093e62ae07a4360699d1678ddac18"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/decode_real_snapshot.log",
+    "size": 15228048,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "4b9e8a463c16dbc03773cd9cecc89ca8c1a55f017fafd4de3a39ceb70c59acc5"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/health_real_snapshot.log",
+    "size": 30470,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "3fa390cd7431a1ebb8d3c6a0fd969d306458b4379076fcbaf1880fac9bce136c"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/health_watch.log",
+    "size": 79420,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "55d55065c08bb572dee81abcce0cf95ae9ac7f38889778bcee8b5da686c27b1e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/prefill.log",
+    "size": 11221417,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7e8da58d034675161fe4173e0185220f792a6afbfc083916ec18a0261ac9213a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/prefill_real_snapshot.log",
+    "size": 11090577,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7d280e3c2b7df539a4faecdf73d96fbc5ada27a32a1155973cafe0da6a063a05"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/router.log",
+    "size": 257614,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "f333df25f7f77563f4a1f6edc51a1d679c5a7374856e3ff2fc2f802917ac319d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260830_swa_common_force_e2e/router_real_snapshot.log",
+    "size": 237565,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6c53ccceaf6e97f96946e8c57054d14c8b23a5a8302b7062c7034f6b3de0ac46"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/prefill.log",
+    "size": 98209,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6d01d25396f0436a3eb77bb238b60d092af37f5c4b3e1e3d8d4df3da5e1603f4"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/prefill_restart_20260902.log",
+    "size": 24986728,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "c585987bf31f29f62240f91dd16f38e3da22eb01e8c52a3b361f22d16da1bbfe"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/prefill_runnable.log",
+    "size": 9692,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "5f98dafa2c7d6fdd5c50b01e1407318ca4e5bb8e903058458b63c909a2f0c5c3"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/prefill_runnable_retry.log",
+    "size": 85140,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "958e63de9a6ec1ea837c7ab7014d8c178cdd1e8d1bde771d75f9fbefd711543e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/prefill_runnable_retry2.log",
+    "size": 104508,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "f133c4b64999722c51fe6ab5c58f79b5b72e394a976fc6d9f852ac2c6886ca0a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/router_restart_20260902.log",
+    "size": 327,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "71e4e6a2c84bfcd6d7e5833d34e93f8fbfef2b1e93839edb7120a26d67d38c21"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/baseline_without_fix/router_runnable.log",
+    "size": 0,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/prefill.log",
+    "size": 11103469,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6e6134dd48fb96edf7ee9923bdfbc8da4d352a88e87b1af277969300a821a30b"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/prefill_startup_misconfigured.log",
+    "size": 2302,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "40f8c1e05deec07bbf3a6b2f26803176cbc66a513540e0e93a6dc60024365bd1"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/prefill_startup_unpinned_defaults.log",
+    "size": 0,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/router.log",
+    "size": 3504,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6c606d0ec74961f3b7d1b171fa69c972c513da355dacc79fb606ab128f20d7b4"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed/smoke_response.json",
+    "size": 388,
+    "category": "test_result",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "dbe873937d573e7f94a2a78114f2d252949319c3d2af493606ff32e3fc799d4d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed_with_parsers/prefill.log",
+    "size": 9960685,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "9dff681a2e81aa3ade40a5be6d0b9546a5fbda583e2a74013429cac4c0b951aa"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260901_cr6647271_perf_accuracy/fixed_with_parsers/router.log",
+    "size": 382,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6f6f32120c818931ebd16763099030687953a3e2049a97a138f7723784616825"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/prefill.log",
+    "size": 2567133,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "c9697330495213a4005da62bf565e36d86151d4b7a0e13e68c2821238541d0ae"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260902_accuracy_investigation/baseline_no_ep_no_dspark_no_fix/router.log",
+    "size": 0,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260902_cr6647271_perf_accuracy/baseline_no_ep_no_fix/prefill.log",
+    "size": 116908,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "d3ad24051e9db34e833a0dd17f0265e529eba7e4c8fb43881975fec8edb6a1f1"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_compat_with_parsers/prefill.log",
+    "size": 1324936,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "808fab8ef1bbd5c90d7889409a65e4a5556905fdb160ef77d61665401cedffcd"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_compat_with_parsers/router.log",
+    "size": 4522824,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "ac610cbbbee4cc0b4f80d9d2330d3f39176e4427dc4536d0e417bafa91eade92"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_ep4_with_parsers/prefill.log",
+    "size": 82939,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "3d7f8d04cd2640eb71b0348bb0eacab7386f84bd7d57d98d8656f0a2cf7ba7fa"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_no_ep_with_parsers/prefill.log",
+    "size": 1246849,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "d9f96fe4a2e5473ca3d041f9bbc20cd5461ba94fb1514c73b2b160dcdfd6afc7"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_dspark_no_ep_with_parsers/router.log",
+    "size": 4575859,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "dcd7a4c494078464f30f29cfb07673996cc4e42196ac3a5ad705d8c94a771a88"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults/prefill.log",
+    "size": 720943,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "96c7303b2b0803a8af469915cccbb11454262875c6616e18b7f0a9ea9e549bb1"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults/router.log",
+    "size": 2993137,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "ab3c88c4bc4db98ea431859c67c67d409a75fd7ef0632fa1e3d9be20bedacbc8"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults_with_parsers/prefill.log",
+    "size": 1370937,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "eb23df1cfc6d948107400fcee142525a500c4e5c6f35986cbc864621cf054a61"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/baseline_model_defaults_with_parsers/router.log",
+    "size": 4634961,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "52b3f4c9cec4290be66cce0bc02baa1a5de2ced157968976aa983bf7372dec54"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_forced_temp0_with_parsers/prefill.log",
+    "size": 1383801,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "68c252dbceec7990cbd638d32e315e7215bf1544a45e4510b07f73aeb4d1d145"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_forced_temp0_with_parsers/router.log",
+    "size": 4505774,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "1348eff3df61fe6c42611104223cb5bf3ad7e75469c98a48edf2aae55c7f681f"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_with_parsers/prefill.log",
+    "size": 1320218,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "b800c87feb7910969a2473f872da5aaf5ac1f0b318fe8eb6450cc9297db8d9ab"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_ep4_with_parsers/router.log",
+    "size": 4608135,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "a3f058e746c6fa9a32fc3699428e33f7ea1bece18927470c76eee3453698fc65"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_no_ep_with_parsers/prefill.log",
+    "size": 1300672,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "88b40aed48ecdfce8d278059cab5d0e758f74bd396394d89a5f38c66cd6a4dd9"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_dspark_no_ep_with_parsers/router.log",
+    "size": 4604774,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "58967722c9be4e6cc4347a30370cff46cf5522e6a97909262181aefefd1b2902"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_no_ep_no_dspark_with_parsers/prefill.log",
+    "size": 1307392,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "84d2898ca4210a6edcb8607bf08e0217d158aedfb1130e4c9dff3bee91d5ca87"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_no_ep_no_dspark_with_parsers/router.log",
+    "size": 4545733,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "f662cb9d47d1b61725003aeebf915f90629a1297102476858c6aea7346cc77dd"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/prefill.log",
+    "size": 12075439,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "821e606c7234f5344213b88c9557cf9666f1ee052a772ed3e2d99c13d76b0a5d"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260903_accuracy_investigation/fixed_original_config_with_parsers/router.log",
+    "size": 5029071,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "56056b2f03c6a49bee717bbd173551b41eaeac27221e9c11d32e370d2e958880"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/prefill.log",
+    "size": 6280138,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "7ee92bb88d935bf3b32e28283da41ec8715cffa0861cbc280433d820e55a9522"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk4096_with_parsers/router.log",
+    "size": 4432433,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "1eaafa788ebe7d4fb3104b92d27968d91927b7eb03e6533c23929373aca26941"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/prefill.log",
+    "size": 3148241,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "ab7acf2644e459391d8334986382508b8b1568b32fcfc78484b822aba7477c8f"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/fixed_original_chunk8192_with_parsers/router.log",
+    "size": 4442715,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "e6cec3e17928ab3f181746592f9e8e1dadd3fa9e9f4049ead615026971150262"
+  },
+  {
+    "source": "/sgl-workspace/workspace/document/20260905_accuracy_investigation/repro_6647_exact_defaults/prefill.log",
+    "size": 87611,
+    "category": "test_log",
+    "reason": "PD rebootstrap, SWA eviction, CR6647271, full KV abort/retraction or accuracy investigation evidence",
+    "sha256": "6f65511530ecfe64dfeed94c8b3e9d7a61d9aa8713cb7e4af04404d1fe892ac8"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c1-attention-flow.excalidraw",
+    "size": 24300,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "0b7ae85edfdbedcc3f5509236ada3edaf31e8bea210c0ae542e24e62fdb40152"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c1-attention-flow.png",
+    "size": 1115499,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "4f3b03578ce1fc0b2de4f107b83fd159a6b2b9c1fc8a28aeeef8433ede56e5e2"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c128-attention-flow.excalidraw",
+    "size": 22103,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "4509d05a6c0183fca4bb5349946adc24483e3d6874902a94abec444ccde94eb9"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c128-attention-flow.png",
+    "size": 1199073,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "8c997a3f4a68bbe27c13ddb1092ade54192a7cb3f26e82845668fa8d492e05dd"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c128-concrete-example.excalidraw",
+    "size": 25226,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "43e06e56fb5648ae3d64b78c048b5b9ccb69cca98fbfc0126404370ac74f0854"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c128-concrete-example.png",
+    "size": 1379590,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "5722cc9614c4ecdbeab9a7c7f788c3381c88328cf53bdb17abb208450d508187"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c4-attention-flow.excalidraw",
+    "size": 23660,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "220013678972f04a01c957d1b15a7911b652eb7c8db81aab2be0f8d9e1223d09"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-c4-attention-flow.png",
+    "size": 1201757,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "0e25f008fc12d01f1db12bfa36af56f0db64c9aa98a96630917f5ba60c1ff98e"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-flash-single-request-shapes.excalidraw",
+    "size": 65787,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "8c93c8925f7a7b37087c373a98b79e09df140441cc34836b2e71f62dde98648b"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-flash-single-request-shapes.png",
+    "size": 2804993,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "68ff0c20383862bdab573460f20f989a39f764f50ee1b0c972a82de758fbc936"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-swa-page-split-optimization-01-problem.excalidraw",
+    "size": 24283,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "71231535741d7338cb8e628fb733ece52208d4a36b1edfca4643461556556553"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-swa-page-split-optimization-01-problem.png",
+    "size": 1056050,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "157a7371e2f8ae7b2afb59a422629d93a670cd82b94ea23b7e08bea86d2ed5e8"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-swa-page-split-optimization-02-solution.excalidraw",
+    "size": 19818,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "6ada85204081cec89f605a0f00a68d6b4622572a216282bf61c470991706f91a"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-swa-page-split-optimization-02-solution.png",
+    "size": 1085600,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "4425b75d1683ffd2fa4405847cae240f882c77927d4a9b15ece08a2738b3f779"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-swa-page-split-optimization-03-kernel.excalidraw",
+    "size": 19096,
+    "category": "diagram_source",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "6eececc75c60df0f05565c768b20a0d0c2d4ebb9511dc032fb672278801ae5c3"
+  },
+  {
+    "source": "/sgl-workspace/workspace/graph/deepseek-v4-swa-page-split-optimization-03-kernel.png",
+    "size": 1109722,
+    "category": "diagram_render",
+    "reason": "DeepSeek V4 attention/shape/SWA design diagram",
+    "sha256": "ef037499fe3e5edcbcbf10250c4b1c4b5116c9fa2f11a2c92de8fa16af30b5da"
+  },
+  {
+    "source": "/tmp/cr6647271_current_decode.log",
+    "size": 43540,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "a8957cec93b39e0eafccf1595ed0c32975a50b89311444d55d4d68ffbde0ed19"
+  },
+  {
+    "source": "/tmp/cr6647271_local_source.sha256",
+    "size": 1607,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "00547b196f2636834949e419d27948a923979dbf55f3313232ab0ba3f89aad13"
+  },
+  {
+    "source": "/tmp/cr6647271_remote_check.txt",
+    "size": 2523,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "9211fd8da8bfc6e7f06bfbac121c090b0a3c985db960e158284fb411796aa330"
+  },
+  {
+    "source": "/tmp/cr6647271_remote_source.sha256",
+    "size": 1669,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "38ab65b6a2765f6f9ee9cf18254fd0f53413a7787e6961a5b1d47fe2ac101b3e"
+  },
+  {
+    "source": "/tmp/dcl-6565881.patch",
+    "size": 67151,
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e"
+  },
+  {
+    "source": "/tmp/default_router_health.out",
+    "size": 19,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+  },
+  {
+    "source": "/tmp/default_smoke.json",
+    "size": 465,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "6a4ef98390b496892a3e941caa335a33d492afc53b8acb22ad2739a5c8fb7aa3"
+  },
+  {
+    "source": "/tmp/dsv4_local_sizes.txt",
+    "size": 2297,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "e39c62bf12eabc79de411c8c091fbd429aec896a7f71bf551d44531b909e7677"
+  },
+  {
+    "source": "/tmp/dsv4_official_0.json",
+    "size": 25349,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "ac77d8a67e9dad34477c3115124e519a534da3bf71ce523b5b3720f7b7972a86"
+  },
+  {
+    "source": "/tmp/dsv4_official_1.json",
+    "size": 25349,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "4c9838a357b336c14097b0cccfbc590e3be2e38ec931be9b483e191213b698e0"
+  },
+  {
+    "source": "/tmp/dsv4_official_2.json",
+    "size": 18474,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "16a9d0abadd778028208c0c213a7e218eb0bda635648e07c5809cbc25bc0affc"
+  },
+  {
+    "source": "/tmp/flash_mla_sm120-main.py",
+    "size": 21774,
+    "category": "source_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "39f0f98151a7cfd750b987d82cf05fafe80e8e972ef53a2b78352ce9b472e9b5"
+  },
+  {
+    "source": "/tmp/flash_mla_sm120-pr32320.py",
+    "size": 23086,
+    "category": "source_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "6286406db40cf72efaa704e757bf20ccc2cc0c36493adb67d8f85001dc346310"
+  },
+  {
+    "source": "/tmp/glm53_hf.json",
+    "size": 561785,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "8c42ba1c60de67eb950f0abdc5812bf4effbd9095049df797d20052b3d57df82"
+  },
+  {
+    "source": "/tmp/issue1854.json",
+    "size": 30068,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "0f31f2dc9655483eb0fe3c2c38f9c891b537366167639a9ff7672352a63c025c"
+  },
+  {
+    "source": "/tmp/kv-only-staged.patch",
+    "size": 67151,
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "547bda159c832f1ded8412c6fa00559e68b55d0523a0fdb9fc3c8104f7f9224e"
+  },
+  {
+    "source": "/tmp/minimax_h3_hf.json",
+    "size": 53905,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "8f6620c34fb2a4563fae2eb8c3a8c0dc25dd0cdba09de8be7562db7191ec0a51"
+  },
+  {
+    "source": "/tmp/mooncake_tree.json",
+    "size": 740436,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "1671f5fd52f922b0f0ffc43f435d38f9de2af09bf9b272cb07349780f0bde546"
+  },
+  {
+    "source": "/tmp/openai-chatgpt-gallery.json",
+    "size": 5352422,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "b7cb108e865d2066c5dfda77cda89668565087445c344c76590497de0bb8a9b2"
+  },
+  {
+    "source": "/tmp/openai-chatgpt-url",
+    "size": 135,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "55d22d4432408ec0a254b2131bc42022ec97b4cd8123ee600dfe6636012c2f9e"
+  },
+  {
+    "source": "/tmp/openai-chatgpt-version",
+    "size": 13,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "31fbbf184d99589b10af9d36210a29ad595e49b2cde6b16ee21e4970c28f9b4f"
+  },
+  {
+    "source": "/tmp/pr32320-only.patch",
+    "size": 12705,
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b"
+  },
+  {
+    "source": "/tmp/pr32320.patch",
+    "size": 12705,
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "3d3615315f7e08c0cef2e50e3fe7324e6854b97d16d7cb6d7462c391d0eb6e1b"
+  },
+  {
+    "source": "/tmp/pr739.patch",
+    "size": 21241,
+    "category": "source_patch",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "b7a2bb1f79b5cc53c1b84e244fe0b49c5a594e16295435975cac5e02306b6c45"
+  },
+  {
+    "source": "/tmp/prefill_server_info.out",
+    "size": 137912,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "e8feb10269669155bd3bef1595bbb48c2e21fa73ebff9383a92ab8e40ce0a9e7"
+  },
+  {
+    "source": "/tmp/router_health",
+    "size": 19,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+  },
+  {
+    "source": "/tmp/router_health.out",
+    "size": 19,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+  },
+  {
+    "source": "/tmp/router_health_20260902.out",
+    "size": 19,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "51ee14620b43a32ca435ef7db21b131fb42a43fb3a2bf78d1ee2afdece9e7f5d"
+  },
+  {
+    "source": "/tmp/router_help.out",
+    "size": 12031,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "a1cff58fd37a491059a9c6a5cb508159814fcb14ccdd496eddd04f907073b4db"
+  },
+  {
+    "source": "/tmp/router_models.out",
+    "size": 185,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "8227b2df8a8f128bd8316c841ba35879b625ce0100111f2210e74d77ad3c6553"
+  },
+  {
+    "source": "/tmp/router_probe.out",
+    "size": 138913,
+    "category": "test_result",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "2fa970db8f130aa4d0009821967109c86d13a6d6f025b4b27294b97243cd927d"
+  },
+  {
+    "source": "/tmp/sglang-main-tree.json",
+    "size": 3133738,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "9a372f8298eb55b39d43afefdc914fd4a41174e9cf7f9e6fbf2891f0a1f15653"
+  },
+  {
+    "source": "/tmp/vllm_omni_2645_comments.json",
+    "size": 158672,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "215daec380a91313a8f82ce16329aaa97f5e125fadacd7dd27b4dfb801b77991"
+  },
+  {
+    "source": "/tmp/vllm_omni_4901_comments.json",
+    "size": 36643,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "6e8cb7cca1da9db2d0f5fee16c5a773e830fdab75193ea7bc71fefd1c5be4201"
+  },
+  {
+    "source": "/tmp/vllm_omni_4901_issue.json",
+    "size": 15244,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "d3daf88d95172d8b661137eb756e6f9de6a1d0520f3301a73169f89395b3b19d"
+  },
+  {
+    "source": "/tmp/vllm_omni_5700_comments.json",
+    "size": 88648,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "db379a80e235ba6913feb42a5aca2f506728c540e749b3280091d40a164eea50"
+  },
+  {
+    "source": "/tmp/vllm_omni_5700_issue.json",
+    "size": 41474,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "9e45378701ba723bc3ca63d9fc3111b49f7cdfbe2c63c5fba002e62c87941be6"
+  },
+  {
+    "source": "/tmp/vllm_omni_6496_comments.json",
+    "size": 17237,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "0c9ebaf41096bf831a07c328acba3d710bd934018c0cc3f418d73e53d9c4ec53"
+  },
+  {
+    "source": "/tmp/vllm_omni_6496_issue.json",
+    "size": 19158,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "b2faf2a24ea0c512ae9c802f1b11189baa029e7bbe28be5786ed8b070f75abc4"
+  },
+  {
+    "source": "/tmp/vllm_omni_tree.json",
+    "size": 1233517,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "12f081fd08bcd1aec27574a82fca144fb58396be338965b81ff2d0e91a3e49b7"
+  },
+  {
+    "source": "/tmp/vllm_recipe_prs.json",
+    "size": 142115,
+    "category": "research_reference",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "37ebb41cc309d12c18441857ba9f8a12f2d29bcdf9b70d414c8b58fe07fec8f3"
+  },
+  {
+    "source": "/tmp/worktree-add.log",
+    "size": 101,
+    "category": "source_provenance",
+    "reason": "Temporary research, source comparison or service/test artifact retained from Codex work",
+    "sha256": "76bb3d5c58a9969908af992273f98d2eb12c85a25b8360877ec6f3201094dc70"
+  }
+]

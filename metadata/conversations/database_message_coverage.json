@@ -1,0 +1,34 @@
+{
+  "stats": [
+    {
+      "role": "user",
+      "comparison": "total",
+      "count": 664
+    },
+    {
+      "role": "user",
+      "comparison": "same_thread_text_match",
+      "count": 664
+    },
+    {
+      "role": "assistant",
+      "comparison": "total",
+      "count": 1368
+    },
+    {
+      "role": "assistant",
+      "comparison": "same_thread_text_match",
+      "count": 1368
+    }
+  ],
+  "unmatched_items": [],
+  "compared_at_utc": "2026-11-02T10:44:35.366408+00:00",
+  "sources": [
+    "conversations/raw/sessions/**/*.jsonl.gz",
+    "conversations/raw/archived_sessions/*.jsonl.gz",
+    "conversations/databases/thread_history_1/thread_items.jsonl.gz"
+  ],
+  "method": "Compare user/assistant text SHA256 within the same physical thread, normalizing CRLF to LF and stripping leading/trailing whitespace. No live source data was reread.",
+  "database_only_user_or_assistant_text_count": 0,
+  "readable_merge": "All 2032 cached user/assistant messages already occur in snapshot JSONL and are therefore represented by existing per-thread Markdown. No duplicate append was performed."
+}

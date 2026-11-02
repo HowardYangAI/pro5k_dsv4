@@ -1,0 +1,239 @@
+表号	CFG-001 修复后																
+机器	2台 8 × NVIDIA RTX PRO 5000 72GB Blackwell，共16卡；1台Prefill、1台Decode																
+代码版本	基线：ifx/upstream_0.5.16（d07dd66fb7）修复提交：2984ac56eb、5a1b58fedf CR：6647271																
+模型	/data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731																
+备注	修复后真实PD链路；Prefill、Decode分布在两台机器；Mooncake TCP传输；关闭Radix Cache；非fake请求																
+配置	Prefill：TP8、Attention DP8、EP4、MF=0.70、关闭CUDA Graph。
+Decode：TP8、Attention DP8、EP4、MF=0.55、Decode CUDA Graph full、max BS=128。
+DSpark：6 draft tokens；max-running-requests=1024，即每个DP Rank 128；Context=131072；Page Size=256；Router最大并发4096																
+显存	[P/D] Target权重：26.87GB/GPU，加载后可用43.66GB；DSpark权重：2.05GB/GPU，加载后可用41.61GB。
+[Prefill] Pool：swa=207360、c4=518784、c128=16212、c4_state=25920、c128_state=33024；Target Verify Graph=2.51GB；Capture后可用18.16GB；max_total_num_tokens=2075136。
+[Decode] Pool：swa=84736、c4=212032、c128=6626、c4_state=10592、c128_state=33024；Target Verify Graph=2.51GB；Draft Verify Graph=1.46GB；Capture后可用27.38GB；max_total_num_tokens=848128。																
+																	
+Traffic request
+rate	Successful
+requests	Max request
+concurrency	Mean TTFT
+(ms)	Median TTFT
+(ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT
+(ms)	Median TPOT
+(ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request
+throughput
+(req/s)	Input token
+throughput
+(tok/s)	Output token
+throughput
+(tok/s)	Concurrency	Accept length	DSpark accept
+rate	
+input 8k
+output 2k																	
+INF	10	1	3354.22	3347.07	3462.59	3477.01	12.89	13	15.65	16.04	0.03	275.23	68.81	1	3.95	59.0%	
+INF	40	4	3909.17	3814.52	4620.44	5651.01	14.09	13.47	20.21	22.07	0.12	947.0	236.76	3.79	3.72	54.4%	
+INF	80	8	4229.12	3907.32	5923.32	8914.04	13.07	12.72	18.07	19.34	0.24	1,997.5	499.38	7.56	4.07	61.4%	
+INF	160	16	4,881.2	4257.14	9,993.3	14,567.0	13.77	13.44	16.72	18.09	0.46	3,737.1	934.26	15.08	4.3	66.0%	
+INF	320	32	7,131.0	5,402.3	15,502.3	22,122.7	12.63	12.52	15.14	16.45	0.89	7,258.2	1,814.6	29.23	4.35	67.0%	
+																	
+Dataset	Accuracy	Limit	Batch Size	Duration													
+mmlu	0.893	20	128	139s													
+gsm8k	0.955	800	128	161s													
+bfcl_v3	0.5412	10	10	1117s													
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+表号	CFG-002 修复前																
+机器	2 台 8 × NVIDIA RTX PRO 5000 72GB Blackwell，共 16 卡；1 台 Prefill、1 台 Decode																
+代码版本	基线：ifx/upstream_0.5.16（d07dd66fb7）。未包含 KV/SWA/retraction 修复提交 2984ac56eb、5a1b58fedf（CR 6647271）；仅保留 num_token_non_padded 的 DSpark DP/EP 启动兼容代码，否则基线无法启动。																
+模型	/data/modelscope_models/deepseek-ai/DeepSeek-V4-Flash-0731																
+备注	修复前真实 PD 链路；Prefill、Decode 分布在两台机器；Mooncake TCP 传输；关闭 Radix Cache；非 fake 请求。配置 --tool-call-parser deepseekv4、--reasoning-parser deepseek-v4；精度请求使用 temperature=0。																
+配置	Prefill：TP8、Attention DP8、EP4、MF=0.70，关闭 Prefill CUDA Graph。
+Decode：TP8、Attention DP8、EP4、MF=0.55，Decode CUDA Graph=full，最大 BS=128。
+DSpark：6 draft tokens；max-running-requests=1024，即每个 DP Rank 128；Context=131072；Page Size=256；Router 最大并发 4096。
+chunked-prefill-size 配置为 2048，开启 DP Attention 后运行时自动调整为 256																
+显存	[P/D] Target 权重：26.87 GB/GPU，加载后可用 43.66 GB；DSpark 权重：2.05 GB/GPU，加载后可用 41.61 GB。
+[Prefill] Pool：full=2075136、swa=207360、c4=518784、c128=16212、c4_state=25920、c128_state(fixed)=33024；Target Verify Graph=2.51 GB；Capture 后可用 18.16 GB；max_total_num_tokens=2075136。
+[Decode] Pool：full=848128、swa=84736、c4=212032、c128=6626、c4_state=10592、c128_state(fixed)=33024；Target Verify Graph=2.51 GB；Draft Verify Graph=1.46 GB；Capture 后可用 27.38 GB；max_total_num_tokens=848128。																
+																	
+Traffic request
+rate	Successful
+requests	Max request
+concurrency	Mean TTFT
+(ms)	Median TTFT
+(ms)	P95 TTFT (ms)	P99 TTFT (ms)	Mean TPOT
+(ms)	Median TPOT
+(ms)	P95 TPOT (ms)	P99 TPOT (ms)	Request
+throughput
+(req/s)	Input token
+throughput
+(tok/s)	Output token
+throughput
+(tok/s)	Concurrency	Accept length	DSpark accept
+rate	
+input 8k
+output 2k																	
+INF	10	1	3331.03	3322.62	3430.61	3439.58	13.56	13.08	17.92	20.2	0.03	263.31	65.83	1	3.66	53.2%	
+INF	40	4	3847.91	3801.92	4582.19	4643.12	13.8	12.86	20.45	21.58	0.12	982.2	245.55	3.85	4.59	71.8%	
+INF	80	8	4315.46	3983.88	5708	8894.89	13.48	12.78	19.13	24.2	0.24	1,925.7	481.42	7.5	3.75	55.0%	
+INF	160	16	4,869.2	4205.17	9,987.3	13,338.6	13.95	13.79	16.96	18.18	0.46	3,767.3	941.84	15.37	3.88	57.6%	
+INF	320	32	7,858.0	5,793.2	17,834.1	26,469.3	12.42	12.3	14.69	17.2	0.88	7,211.6	1,802.9	29.3	4.06	61.2%	
+																	
+Dataset	Accuracy	Limit	Batch Size	Duration													
+mmlu	0.8904	20	128	140s													
+gsm8k	0.9425	800	128	124s													
+bfcl_v3	0.5706	10	10	1619s													
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	

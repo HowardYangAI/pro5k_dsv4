@@ -1,0 +1,273 @@
+2026-09-01 20:17:55 - evalscope - [32mINFO[0m: Args: Task config is provided with TaskConfig type.[0m
+2026-09-01 20:17:55 - evalscope - [32mINFO[0m: Running with native backend[0m
+2026-09-01 20:17:55 - evalscope - [32mINFO[0m: Dump task config to /tmp-data/ifx-llm-cache/eval_outputs/20260901_201755/configs/task_config.yaml[0m
+2026-09-01 20:17:55 - evalscope - [32mINFO[0m: {
+    "model": "/data1/deepseek-ai/DeepSeek-V4-Flash-0731/",
+    "model_id": "untitled",
+    "model_args": {},
+    "model_task": "text_generation",
+    "chat_template": null,
+    "datasets": [
+        "gsm8k"
+    ],
+    "dataset_args": {
+        "gsm8k": {
+            "name": "gsm8k",
+            "dataset_id": "AI-ModelScope/gsm8k",
+            "output_types": [
+                "generation"
+            ],
+            "subset_list": [
+                "main"
+            ],
+            "default_subset": "default",
+            "few_shot_num": 8,
+            "few_shot_random": false,
+            "train_split": "train",
+            "eval_split": "test",
+            "prompt_template": "{question}\nPlease reason step by step, and put your final answer within \\boxed{{}}.",
+            "few_shot_prompt_template": "Here are some examples of how to solve similar problems:\n\n{fewshot}\n\n{question}\nPlease reason step by step, and put your final answer within \\boxed{{}}.",
+            "system_prompt": null,
+            "query_template": null,
+            "pretty_name": "GSM8K",
+            "description": "\n## Overview\n\nGSM8K (Grade School Math 8K) is a high-quality dataset of 8.5K linguistically diverse grade school math word problems created by human problem writers. The dataset is specifically designed to evaluate and improve the multi-step mathematical reasoning capabilities of language models.\n\n## Task Description\n\n- **Task Type**: Mathematical Word Problem Solving\n- **Input**: Natural language math word problem\n- **Output**: Numerical answer derived through step-by-step reasoning\n- **Difficulty**: Grade school level (2-8 reasoning steps required)\n\n## Key Features\n\n- Problems require basic arithmetic operations (addition, subtraction, multiplication, division)\n- Solutions involve 2 to 8 sequential reasoning steps\n- High linguistic diversity in problem formulations\n- Human-written problems ensuring natural language quality\n- Clear numerical answers for objective evaluation\n\n## Evaluation Notes\n\n- Default configuration uses **4-shot** examples with Chain-of-Thought (CoT) prompting\n- Answers should be formatted within `\\boxed{}` for proper extraction\n- The metric extracts numerical values for accuracy comparison\n- Supports both zero-shot and few-shot evaluation modes\n",
+            "paper_url": "https://arxiv.org/abs/2110.14168",
+            "data_statistics": null,
+            "sample_example": null,
+            "tags": [
+                "Math",
+                "Reasoning"
+            ],
+            "filters": null,
+            "metric_list": [
+                {
+                    "acc": {
+                        "numeric": true
+                    }
+                }
+            ],
+            "aggregation": "mean",
+            "shuffle": false,
+            "shuffle_choices": false,
+            "force_redownload": false,
+            "review_timeout": null,
+            "extra_params": {},
+            "sandbox_config": {}
+        }
+    },
+    "dataset_dir": "/home/luban/ifx_llm_dist_auto_test/dataset",
+    "dataset_hub": "modelscope",
+    "repeats": 1,
+    "generation_config": {
+        "batch_size": 128,
+        "max_tokens": 8192,
+        "temperature": 0.0
+    },
+    "eval_type": "openai_api",
+    "eval_backend": "Native",
+    "eval_config": null,
+    "limit": null,
+    "eval_batch_size": 128,
+    "use_cache": null,
+    "rerun_review": false,
+    "work_dir": "/tmp-data/ifx-llm-cache/eval_outputs/20260901_201755",
+    "no_timestamp": false,
+    "enable_progress_tracker": false,
+    "ignore_errors": true,
+    "debug": false,
+    "seed": 42,
+    "api_url": "http://10.93.165.26:8030/v1/chat/completions",
+    "timeout": null,
+    "stream": null,
+    "judge_strategy": "auto",
+    "judge_worker_num": null,
+    "judge_model_args": {},
+    "analysis_report": false,
+    "collect_perf": true,
+    "use_sandbox": false,
+    "sandbox_type": "docker",
+    "sandbox_manager_config": {},
+    "evalscope_version": "1.7.0"
+}[0m
+
+============================================================
+Starting eval: datasets=['gsm8k'], model=/data1/deepseek-ai/DeepSeek-V4-Flash-0731/
+api_url=http://10.93.165.26:8030/v1/chat/completions, limit=None, batch_size=128
+============================================================
+
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:55 - evalscope - [32mINFO[0m: Start loading benchmark dataset: gsm8k[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Processing records:   0%|          | 0/1319 [00:00<?, ?it/s][A
+Processing records: 100%|██████████| 1319/1319 [00:00<00:00, 172808.36it/s]
+
+
+Processing records:   0%|          | 0/8 [00:00<?, ?it/s][A
+Processing records: 100%|██████████| 8/8 [00:00<00:00, 80273.76it/s]
+
+                                                           
+2026-09-01 20:17:56 - evalscope - [32mINFO[0m: Start evaluating 1 subsets of gsm8k: ['main'][0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+                                                           
+2026-09-01 20:17:56 - evalscope - [32mINFO[0m: Unified pool: 1319 items to process, 0 already fully cached (1319 total across all subsets).[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Evaluating[gsm8k]:   0%|          | 0/1319 [00:00<?, ?it/s][A
+                                                           
+
+                                                           
+[A2026-09-01 20:17:56 - evalscope - [32mINFO[0m: Loading model for prediction...[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Evaluating[gsm8k]:   0%|          | 0/1319 [00:00<?, ?it/s][A
+                                                           
+
+                                                           
+[A2026-09-01 20:17:56 - evalscope - [32mINFO[0m: Creating model /data1/deepseek-ai/DeepSeek-V4-Flash-0731/ with eval_type=openai_api base_url=http://10.93.165.26:8030/v1/chat/completions, config={'retries': 5, 'retry_interval': 10, 'batch_size': 128, 'max_tokens': 8192, 'temperature': 0.0}, model_args={}[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Evaluating[gsm8k]:   0%|          | 0/1319 [00:00<?, ?it/s][A
+                                                           
+
+                                                           
+[A2026-09-01 20:17:56 - evalscope - [32mINFO[0m: Model loaded successfully.[0m
+
+Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
+
+Evaluating[gsm8k]:   0%|          | 0/1319 [00:00<?, ?it/s][A
+
+Evaluating[gsm8k]:   0%|          | 1/1319 [00:05<1:51:46,  5.09s/it][A
+
+Evaluating[gsm8k]:   8%|▊         | 110/1319 [00:06<00:54, 22.29it/s][A
+
+Evaluating[gsm8k]:  12%|█▏        | 158/1319 [00:07<00:42, 27.03it/s][A
+
+Evaluating[gsm8k]:  16%|█▋        | 217/1319 [00:08<00:33, 33.35it/s][A
+
+Evaluating[gsm8k]:  20%|██        | 264/1319 [00:09<00:29, 35.61it/s][A
+
+Evaluating[gsm8k]:  26%|██▌       | 341/1319 [00:11<00:22, 43.78it/s][A
+
+Evaluating[gsm8k]:  30%|██▉       | 393/1319 [00:12<00:20, 44.32it/s][A
+
+Evaluating[gsm8k]:  35%|███▍      | 460/1319 [00:13<00:17, 48.03it/s][A
+
+Evaluating[gsm8k]:  39%|███▉      | 516/1319 [00:14<00:17, 45.72it/s][A
+
+Evaluating[gsm8k]:  44%|████▍     | 580/1319 [00:15<00:15, 48.28it/s][A
+
+Evaluating[gsm8k]:  49%|████▉     | 645/1319 [00:17<00:13, 50.41it/s][A
+
+Evaluating[gsm8k]:  54%|█████▎    | 708/1319 [00:18<00:11, 51.46it/s][A
+
+Evaluating[gsm8k]:  59%|█████▊    | 772/1319 [00:19<00:10, 52.41it/s][A
+
+Evaluating[gsm8k]:  63%|██████▎   | 831/1319 [00:20<00:09, 52.10it/s][A
+
+Evaluating[gsm8k]:  68%|██████▊   | 897/1319 [00:21<00:07, 53.28it/s][A
+
+Evaluating[gsm8k]:  72%|███████▏  | 953/1319 [00:22<00:07, 51.99it/s][A
+
+Evaluating[gsm8k]:  77%|███████▋  | 1017/1319 [00:24<00:05, 52.85it/s][A
+
+Evaluating[gsm8k]:  82%|████████▏ | 1078/1319 [00:25<00:04, 52.65it/s][A
+
+Evaluating[gsm8k]:  86%|████████▋ | 1139/1319 [00:26<00:03, 52.60it/s][A
+
+Evaluating[gsm8k]:  91%|█████████ | 1200/1319 [00:27<00:02, 52.75it/s][A
+
+Evaluating[gsm8k]:  96%|█████████▌| 1266/1319 [00:28<00:00, 55.50it/s][A
+                                                           
+
+                                                                      
+[A2026-09-01 20:18:24 - evalscope - [32mINFO[0m: Evaluating[gsm8k] 100%| 1319/1319 [Elapsed: 00:28 < Remaining: 00:00, 55.50it/s][0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+
+Evaluating[gsm8k]: 100%|██████████| 1319/1319 [00:28<00:00, 55.50it/s][A
+Evaluating[gsm8k]: 100%|██████████| 1319/1319 [00:28<00:00, 45.88it/s]
+
+                                                           
+2026-09-01 20:18:24 - evalscope - [32mINFO[0m: Unified pool finished for gsm8k.[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:24 - evalscope - [32mINFO[0m: Aggregating scores for subset: main[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:24 - evalscope - [32mINFO[0m: Generating report...[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:24 - evalscope - [32mINFO[0m: 
+gsm8k report table:
+┌──────────┬───────────┬──────────┬──────────┬───────┬─────────┬─────────┐
+│ Model    │ Dataset   │ Metric   │ Subset   │   Num │   Score │ Cat.0   │
+├──────────┼───────────┼──────────┼──────────┼───────┼─────────┼─────────┤
+│ untitled │ gsm8k     │ mean_acc │ main     │  1319 │  0.9674 │ default │
+└──────────┴───────────┴──────────┴──────────┴───────┴─────────┴─────────┘ 
+[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:24 - evalscope - [32mINFO[0m: Skipping report analysis (`analysis_report=False`).[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Dump report to: /tmp-data/ifx-llm-cache/eval_outputs/20260901_201755/reports/untitled/gsm8k.json 
+[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: 
+gsm8k perf table:
+Model     Dataset      Num    Avg Lat  Avg TTFT    Avg TPOT      Avg Thpt    Avg In    Avg Out
+                                  (s)  (ms)        (ms)           (tok/s)       Tok        Tok
+--------  ---------  -----  ---------  ----------  ----------  ----------  --------  ---------
+untitled  gsm8k       1319     1.9821  -           -                60.42   1249.95    119.751
+[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+                                                           
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Benchmark gsm8k evaluation finished.[0m
+
+Running[eval]:   0%|          | 0/1 [00:29<?, ?benchmark/s]
+Running[eval]: 100%|██████████| 1/1 [00:29<00:00, 29.62s/benchmark]
+                                                                   
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Running[eval] 100%| 1/1 [Elapsed: 00:29 < Remaining: 00:00, 29.62s/benchmark][0m
+
+Running[eval]: 100%|██████████| 1/1 [00:29<00:00, 29.62s/benchmark]
+Running[eval]: 100%|██████████| 1/1 [00:29<00:00, 29.62s/benchmark]
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Overall report table: 
+┌──────────┬───────────┬──────────┬──────────┬───────┬─────────┬─────────┐
+│ Model    │ Dataset   │ Metric   │ Subset   │   Num │   Score │ Cat.0   │
+├──────────┼───────────┼──────────┼──────────┼───────┼─────────┼─────────┤
+│ untitled │ gsm8k     │ mean_acc │ main     │  1319 │  0.9674 │ default │
+└──────────┴───────────┴──────────┴──────────┴───────┴─────────┴─────────┘ 
+[0m
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Overall perf table: 
+Model     Dataset      Num    Avg Lat  Avg TTFT    Avg TPOT      Avg Thpt    Avg In    Avg Out
+                                  (s)  (ms)        (ms)           (tok/s)       Tok        Tok
+--------  ---------  -----  ---------  ----------  ----------  ----------  --------  ---------
+untitled  gsm8k       1319     1.9821  -           -                60.42   1249.95    119.751 
+[0m
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: HTML report generated: /tmp-data/ifx-llm-cache/eval_outputs/20260901_201755/reports/report.html[0m
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Finished evaluation for untitled on ['gsm8k'][0m
+2026-09-01 20:18:25 - evalscope - [32mINFO[0m: Output directory: /tmp-data/ifx-llm-cache/eval_outputs/20260901_201755[0m
+
+============================================================
+Evaluation completed in 30.5s
+============================================================
+
+===EVAL_RESULT===
+{"model_id": "/data1/deepseek-ai/DeepSeek-V4-Flash-0731/", "duration_sec": 30.5, "datasets": {"gsm8k": {"score": 0.9674, "metric_name": "mean_acc", "categories": [{"name": "default", "score": 0.9674, "num": 1319}]}}}
+===EVAL_RESULT_END===
